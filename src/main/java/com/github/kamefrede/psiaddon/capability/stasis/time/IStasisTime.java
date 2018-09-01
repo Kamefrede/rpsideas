@@ -8,4 +8,6 @@ public interface IStasisTime {
     void setStasisTime(double time);
 
     void remStasisTime(double time);
+
+    void entTimeCounter(double time);
 }

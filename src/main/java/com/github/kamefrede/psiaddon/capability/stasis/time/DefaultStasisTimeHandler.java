@@ -23,4 +23,9 @@ public class DefaultStasisTimeHandler implements IStasisTime {
     public void setStasisTime(double time) {
         this.time = time;
     }
+
+    @Override
+    public void entTimeCounter(double time) {
+        this.time = this.time - 1;
+    }
 }

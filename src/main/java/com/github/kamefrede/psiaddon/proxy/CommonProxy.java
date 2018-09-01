@@ -14,6 +14,8 @@ import com.github.kamefrede.psiaddon.util.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.item.*;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
@@ -79,6 +81,9 @@ public class CommonProxy {
             event.addCapability(new ResourceLocation(Reference.MODID, "stasis.damage.capability"), new StasisDamageProvider());
             event.addCapability(new ResourceLocation(Reference.MODID, "stasis.time.capability"), new StasisTimeProvider());
             System.out.println("attached capability to " + event.getObject());
+        }
+        if (event.getObject() instanceof EntityFallingBlock || event.getObject() instanceof EntityMinecart || event.getObject() instanceof EntityBoat || event.getObject() instanceof EntityArrow || event.getObject() instanceof EntityTNTPrimed || event.getObject() instanceof EntityItem){
+            event.addCapability(new ResourceLocation(Reference.MODID, "stasis.time.capability"), new StasisTimeProvider());
         }
 
     }

@@ -3,7 +3,12 @@ package com.github.kamefrede.psiaddon.spells.trick;
 import com.github.kamefrede.psiaddon.capability.stasis.damage.IStasisDamage;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.item.EntityBoat;
+import net.minecraft.entity.item.EntityFallingBlock;
+import net.minecraft.entity.item.EntityMinecart;
+import net.minecraft.entity.item.EntityMinecartChest;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.potion.PotionEffect;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamEntity;
@@ -12,9 +17,7 @@ import vazkii.psi.api.spell.piece.PieceTrick;
 
 import static com.github.kamefrede.psiaddon.capability.stasis.damage.LibDamage.requireStasisDamage;
 import static com.github.kamefrede.psiaddon.capability.stasis.damage.StasisDamageStorage.CAPABILITY_STASIS_DAMAGE;
-import static com.github.kamefrede.psiaddon.capability.stasis.time.LibTime.addTimeFromEvent;
-import static com.github.kamefrede.psiaddon.util.LibPotions.stasisPotionEffect;
-import static com.github.kamefrede.psiaddon.capability.stasis.time.LibTime.requireStasisTime;
+import static com.github.kamefrede.psiaddon.capability.stasis.time.LibTime.*;
 
 
 public class PieceTrickEidosSuspend extends PieceTrick {
@@ -55,33 +58,32 @@ public class PieceTrickEidosSuspend extends PieceTrick {
             EntityLiving ent = ((EntityLiving)targetVal);
             requireStasisTime(ent);
             requireStasisDamage(ent);
+            ent.setNoAI(true);
+            ent.setNoGravity(true);
+            ent.setVelocity(0D,0D,0D);
+            ent.velocityChanged = true;
             if(!ent.isNonBoss()){
-                // code for bosses
                 addTimeFromEvent(ent, Math.floor(timeVal * 20 * 0.3));
-                ent.setNoAI(true);
-                ent.setNoGravity(true);
-                ent.setVelocity(0D,0D,0D);
-                ent.velocityChanged = true;
             } else {
                 if(ent.getHealth() > 40){
                     addTimeFromEvent(ent, Math.floor(timeVal * 20 * 0.7));
-                    ent.setNoAI(true);
-                    ent.setNoGravity(true);
-                    ent.setVelocity(0D,0D,0D);
-                    ent.velocityChanged = true;
                 } else {
                     addTimeFromEvent(ent, (timeVal * 20));
-                    ent.setNoAI(true);
-                    ent.setNoGravity(true);
-                    ent.setVelocity(0D,0D,0D);
-                    ent.velocityChanged = true;
                 }
             }
 
 
         } else {
-            // eventually code for boats
-        }
+            if(targetVal instanceof EntityMinecart || targetVal instanceof EntityFallingBlock || targetVal instanceof EntityBoat || targetVal instanceof EntityArrow){
+                targetVal.setNoGravity(true);
+                targetVal.setVelocity(0D,0D,0D);
+                targetVal.velocityChanged = true;
+                addTimeMiscEnt(targetVal, timeVal * 20);
+
+
+            }
+                    }
+
 
         return null;
     }
