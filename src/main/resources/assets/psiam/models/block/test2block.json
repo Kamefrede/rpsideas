@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "psiam:blocks/blocktexture",
+    "down": "psiam:blocks/blocktexture",
+    "up": "psiam:blocks/blocktexture",
+    "east": "psiam:blocks/blocktexture",
+    "west": "psiam:blocks/blocktexture",
+    "north": "psiam:blocks/test2blocktexture",
+    "south": "psiam:blocks/blocktexture"
+  }
+}

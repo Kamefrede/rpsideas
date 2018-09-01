@@ -1,0 +1,6 @@
+tile.psiam.testblock.name= Debug Block
+tile.psiam.test2block.name= Counter Block
+tile.psiam.test3block.name= Blinking Block
+item.psiam.testitem.name= Debug Item
+
+message.psiam.counter_par=Counter: %d
