@@ -1,14 +1,14 @@
-# psitestaddon
+# Random PSIdeas
 An attempt at a PSI addon
 1.12
 
 Features
 ============
-* Trick: Conjure Block Direction
-* Trick: Eidos Suspend
+* Trick: Conjure Block Direction (Conjures a block with a direction that the user chooses)
+* Trick: Conjure Ethereal Block
+* Trick: Conjure Ethereal Block Sequence
+* Selector: Nearby Players
 
 Unfeatures
 ============
-* No proper localized names
-* No proper textures
-* Eidos Suspend is still WIP 
+* None for now

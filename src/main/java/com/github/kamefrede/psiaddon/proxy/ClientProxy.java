@@ -20,6 +20,6 @@ public class ClientProxy extends CommonProxy {
 
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event){
-        LibItems.initModels();
+        LibBlocks.initModels();
     }
 }
