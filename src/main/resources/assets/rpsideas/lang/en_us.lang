@@ -2,9 +2,31 @@ psi.spellpiece.rpsideas.trick_conjure_ethereal_block=Trick: Conjure Ethereal Blo
 psi.spellpiece.rpsideas.trick_conjure_ethereal_block_sequence=Trick: Conjure Ethereal Block Sequence
 psi.spellpiece.rpsideas.selector_nearby_players=Selector: Nearby Players
 psi.spellpiece.rpsideas.trick_direction_place_block=Trick: Place Block(Direction)
-
+psi.spellpiece.rpsideas.operator_extract_sign=Operator: Signum
+psi.spellpiece.rpsideas.operator_root=Operator: Root
+psi.spellpiece.rpsideas.operator_to_radians=Operator: To Radians
+psi.spellpiece.rpsideas.operator_to_degrees=Operator: To Degrees
+psi.spellpiece.rpsideas.trick_plant=Trick: Plant
+psi.spellpiece.rpsideas.trick_plant_sequence=Trick: Plant Sequence
+psi.spellpiece.rpsideas.trick_till=Trick: Till
+psi.spellpiece.rpsideas.trick:till_sequence=Trick: Till Sequence
 
 psi.spellpiece.rpsideas.trick_conjure_ethereal_block.desc=Conjures an ethereal block at the given position
 psi.spellpiece.rpsideas.trick_conjure_ethereal_block_sequence.desc=Conjures an ethereal block sequence
 psi.spellpiece.rpsideas.selector_nearby_players.desc=Selects players near the given position
 psi.spellpiece.rpsideas.trick_direction_place_block.desc=Places a block with a user defined direction(the block to the right of the cad)
+psi.spellpiece.rpsideas.operator_extract_sign.desc=Extracts the sign from the input(1 for a positive input, -1 for a negative input, 0 for 0)
+psi.spellpiece.rpsideas.operator_root.desc=Nth root of the specified number
+psi.spellpiece.rpsideas.operator_to_radians.desc=Converts degrees to radians
+psi.spellpiece.rpsideas.operator_to_degrees.desc=Converts radians to degrees
+psi.spellpiece.rpsideas.trick_plant.desc=Plants(the item to the right of the cad) at the given position
+psi.spellpiece.rpsideas.trick_plant_sequence.desc=Plants a sequence of items
+psi.spellpiece.rpsideas.trick_till.desc=Tills a block at the given position
+psi.spellpiece.rpsideas.trick_till_sequence.dick=Tills blocks starting at the given position
+
+
+rpsideas.spellerror.nthroot=Even numbered roots don't accept negative numbers
+
+rpsideas.spellparam.root=Root
+rpsideas.spellparam.degree=Degrees
+rpsideas.spellparam.radian=Radians
