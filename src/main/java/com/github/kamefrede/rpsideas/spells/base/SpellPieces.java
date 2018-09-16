@@ -1,7 +1,10 @@
 package com.github.kamefrede.rpsideas.spells.base;
 
 
-import com.github.kamefrede.rpsideas.spells.operator.*;
+import com.github.kamefrede.rpsideas.spells.operator.PieceOperatorExtractSign;
+import com.github.kamefrede.rpsideas.spells.operator.PieceOperatorRoot;
+import com.github.kamefrede.rpsideas.spells.operator.PieceOperatorToDegrees;
+import com.github.kamefrede.rpsideas.spells.operator.PieceOperatorToRadians;
 import com.github.kamefrede.rpsideas.spells.selector.PieceSelectorNearbyPlayers;
 import com.github.kamefrede.rpsideas.spells.trick.*;
 import com.github.kamefrede.rpsideas.util.LibPieces;
@@ -26,19 +29,6 @@ public class SpellPieces  {
         register(PieceTrickPlantSequence.class, LibPieces.TRICK_PLANT_SEQUENCE, LibPieceGroups.BLOCK_WORKS);
         register(PieceTrickTill.class, LibPieces.TRICK_TILL, LibPieceGroups.BLOCK_WORKS);
         register(PieceTrickTillSequence.class, LibPieces.TRICK_TILL_SEQUENCE, LibPieceGroups.BLOCK_WORKS);
-        register(PieceOperatorListSize.class, LibPieces.OPERATOR_LIST_SIZE, LibPieceGroups.ENTITIES_INTRO);
-        register(PieceOperatorEquality.class, LibPieces.OPERATOR_EQUALITY, LibPieceGroups.BLOCK_WORKS);
-        register(PieceOperatorGetBlockHardness.class, LibPieces.OPERATOR_GET_BLOCK_HARDNESS, LibPieceGroups.BLOCK_WORKS);
-        register(PieceOperatorGetBlockLight.class, LibPieces.OPERATOR_GET_BLOCK_LIGHT, LibPieceGroups.BLOCK_WORKS);
-        register(PieceOperatorGetBlockComparatorStrength.class, LibPieces.OPERATOR_GET_COMPARATOR_STRENGTH, LibPieceGroups.BLOCK_WORKS);
-        register(PieceOperatorGetBlockSolidity.class, LibPieces.OPERATOR_GET_BLOCK_SOLIDITY, LibPieceGroups.BLOCK_WORKS);
-        register(PieceOperatorGetBlockProperties.class, LibPieces.OPERATOR_GET_BLOCK_PROPERTIES, LibPieceGroups.BLOCK_WORKS);
-        register(PieceOperatorVectorRotate.class, LibPieces.OPERATOR_VECTOR_ROTATE, LibPieceGroups.SECONDARY_OPERATORS);
-        register(PieceOperatorVectorFallback.class, LibPieces.OPERATOR_VECTOR_FALLBACK, LibPieceGroups.SECONDARY_OPERATORS);
-        register(PieceOperatorVectorStrongRaycast.class, LibPieces.OPERATOR_VECTOR_STRONG_RAYCAST, LibPieceGroups.SECONDARY_OPERATORS);
-        register(PiecePieceOperatorVectorStrongRaycastAxis.class, LibPieces.OPERATOR_STRONG_VECTOR_RAYCAST_AXIS, LibPieceGroups.SECONDARY_OPERATORS);
-        register(PieceOperatorPlanarNormalVector.class, LibPieces.OPERATOR_PLANAR_NORMAL_VECTOR, LibPieceGroups.SECONDARY_OPERATORS);
-
 
     }
 

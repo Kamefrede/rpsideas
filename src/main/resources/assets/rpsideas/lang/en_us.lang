@@ -4,25 +4,12 @@ psi.spellpiece.rpsideas.selector_nearby_players=Selector: Nearby Players
 psi.spellpiece.rpsideas.trick_direction_place_block=Trick: Place Block(Direction)
 psi.spellpiece.rpsideas.operator_extract_sign=Operator: Signum
 psi.spellpiece.rpsideas.operator_root=Operator: Root
-psi.spellpiece.rpsideas.operator_to_radians=Operator: Degrees To Radians
-psi.spellpiece.rpsideas.operator_to_degrees=Operator: Radians To Degrees
+psi.spellpiece.rpsideas.operator_to_radians=Operator: To Radians
+psi.spellpiece.rpsideas.operator_to_degrees=Operator: To Degrees
 psi.spellpiece.rpsideas.trick_plant=Trick: Plant
 psi.spellpiece.rpsideas.trick_plant_sequence=Trick: Plant Sequence
 psi.spellpiece.rpsideas.trick_till=Trick: Till
 psi.spellpiece.rpsideas.trick:till_sequence=Trick: Till Sequence
-psi.spellpiece.rpsideas.planar_norm=Operator: Planar Normal Vector
-psi.spellpiece.rpsideas.vector_rotate=Operator: Rotate Vector
-psi.spellpiece.rpsideas.strong_vector_raycast=Operator: Vector Strong Raycast
-psi.spellpiece.rpsideas.strong_vector_raycast_axis=Operator: Vector Axis Strong Raycast
-psi.spellpiece.rpsideas.vector_fallback=Operator: Vector Fallback
-psi.spellpiece.rpsideas.list_size=Operator: List Size
-psi.spellpiece.rpsideas.get_properties=Operator: Block Properties
-psi.spellpiece.rpsideas.get_light=Operator: Block Light
-psi.spellpiece.rpsideas.get_hardness=Operator: Block Hardness
-psi.spellpiece.rpsideas.get_solidity=Operator: Block Side Solidity
-psi.spellpiece.rpsideas.get_comparator=Operator: Block Comparator
-psi.spellpiece.rpsideas.operator_equality=Operator: Raw Equality
-
 
 psi.spellpiece.rpsideas.trick_conjure_ethereal_block.desc=Conjures an ethereal block at the given position
 psi.spellpiece.rpsideas.trick_conjure_ethereal_block_sequence.desc=Conjures an ethereal block sequence
@@ -36,36 +23,10 @@ psi.spellpiece.rpsideas.trick_plant.desc=Plants(the item to the right of the cad
 psi.spellpiece.rpsideas.trick_plant_sequence.desc=Plants a sequence of items
 psi.spellpiece.rpsideas.trick_till.desc=Tills a block at the given position
 psi.spellpiece.rpsideas.trick_till_sequence.dick=Tills blocks starting at the given position
-psi.spellpiece.rpsideas.planar_norm.desc=Creates a perpendicular vector to an axial vector
-psi.spellpiece.rpsideas.vector_rotate.desc=Rotates a vector around an axis
-psi.spellpiece.rpsideas.strong_vector_raycast.desc=Gets a raycast result, ignoring nonsolids (max 32)
-psi.spellpiece.rpsideas.strong_vector_raycast_axis.desc=Gets a raycast side, ignoring nonsolids (max 32)
-psi.spellpiece.rpsideas.vector_fallback.desc=Uses the fallback vector if the target has 0 length or doesn't exist
-psi.spellpiece.rpsideas.list_size.desc=Gets the number of entities in a list
-psi.spellpiece.rpsideas.get_properties.desc=Gets a data holder for a block
-psi.spellpiece.rpsideas.get_light.desc=Gets the light value of a block
-psi.spellpiece.rpsideas.get_hardness.desc=Gets the hardness value of a block
-psi.spellpiece.rpsideas.get_solidity.desc=Gets whether the side of a block is solid
-psi.spellpiece.rpsideas.get_comparator.desc=Gets the comparator strength a block has
-psi.spellpiece.rpsideas.operator_equality.desc=If its two inputs are equal, 1, else 0
 
 
 rpsideas.spellerror.nthroot=Even numbered roots don't accept negative numbers
-rpsideas.spellerror.length=Lengths can't be negative
-rpsideas.spellerror.nonaxial=Vector cannot be non-axial
-
 
 rpsideas.spellparam.root=Root
 rpsideas.spellparam.degree=Degrees
 rpsideas.spellparam.radian=Radians
-rpsideas.spellparam.list=Entity List
-rpsideas.spellparam.vector=Vector
-rpsideas.spellparam.axis=Axis Vector
-rpsideas.spellparam.angle=Angle to rotate
-rpsideas.spellparam.fallback=Fallback vector
-rpsideas.spellparam.target1=Target 1
-rpsideas.spellparam.target2=Target 2
-
-tile.rpsideas:conjuredblock.name=Ethereal Conjured Block
-
-

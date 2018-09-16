@@ -10,7 +10,6 @@ import vazkii.arl.block.BlockMod;
 public class ModBlocks {
 
     public static BlockMod conjuredEthereal;
-    public static BlockMod cadCase;
 
     public static void preInit(){
         conjuredEthereal = new ConjuredEtherealBlock();
@@ -21,9 +20,7 @@ public class ModBlocks {
     private static void initTileEntities(){
         registerTile(TileEthereal.class, LibBlocks.CONJURED_ETHEREAL_BLOCK);
 
-
     }
-
 
     private static void registerTile(Class<? extends TileEntity> clazz, String key) {
         GameRegistry.registerTileEntity(clazz, Reference.MODID + ":" + key);
