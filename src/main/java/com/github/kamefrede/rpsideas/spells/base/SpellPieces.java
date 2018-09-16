@@ -27,7 +27,6 @@ public class SpellPieces  {
         register(PieceTrickTill.class, LibPieces.TRICK_TILL, LibPieceGroups.BLOCK_WORKS);
         register(PieceTrickTillSequence.class, LibPieces.TRICK_TILL_SEQUENCE, LibPieceGroups.BLOCK_WORKS);
         register(PieceOperatorListSize.class, LibPieces.OPERATOR_LIST_SIZE, LibPieceGroups.ENTITIES_INTRO);
-        register(PieceOperatorEquality.class, LibPieces.OPERATOR_EQUALITY, LibPieceGroups.BLOCK_WORKS);
         register(PieceOperatorGetBlockHardness.class, LibPieces.OPERATOR_GET_BLOCK_HARDNESS, LibPieceGroups.BLOCK_WORKS);
         register(PieceOperatorGetBlockLight.class, LibPieces.OPERATOR_GET_BLOCK_LIGHT, LibPieceGroups.BLOCK_WORKS);
         register(PieceOperatorGetBlockComparatorStrength.class, LibPieces.OPERATOR_GET_COMPARATOR_STRENGTH, LibPieceGroups.BLOCK_WORKS);

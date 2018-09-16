@@ -21,7 +21,6 @@ psi.spellpiece.rpsideas.get_light=Operator: Block Light
 psi.spellpiece.rpsideas.get_hardness=Operator: Block Hardness
 psi.spellpiece.rpsideas.get_solidity=Operator: Block Side Solidity
 psi.spellpiece.rpsideas.get_comparator=Operator: Block Comparator
-psi.spellpiece.rpsideas.operator_equality=Operator: Raw Equality
 
 
 psi.spellpiece.rpsideas.trick_conjure_ethereal_block.desc=Conjures an ethereal block at the given position
@@ -47,7 +46,6 @@ psi.spellpiece.rpsideas.get_light.desc=Gets the light value of a block
 psi.spellpiece.rpsideas.get_hardness.desc=Gets the hardness value of a block
 psi.spellpiece.rpsideas.get_solidity.desc=Gets whether the side of a block is solid
 psi.spellpiece.rpsideas.get_comparator.desc=Gets the comparator strength a block has
-psi.spellpiece.rpsideas.operator_equality.desc=If its two inputs are equal, 1, else 0
 
 
 rpsideas.spellerror.nthroot=Even numbered roots don't accept negative numbers

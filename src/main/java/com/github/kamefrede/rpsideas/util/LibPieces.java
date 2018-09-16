@@ -15,7 +15,6 @@ public class LibPieces {
     public static final String TRICK_TILL = "trick_till";
     public static final String TRICK_TILL_SEQUENCE = "trick_till_sequence";
     public static final String OPERATOR_LIST_SIZE = "list_size";
-    public static final String OPERATOR_EQUALITY = "operator_equality";
     public static final String OPERATOR_GET_COMPARATOR_STRENGTH = "get_comparator";
     public static final String OPERATOR_GET_BLOCK_HARDNESS = "get_hardness";
     public static final String OPERATOR_GET_BLOCK_LIGHT = "get_light";
