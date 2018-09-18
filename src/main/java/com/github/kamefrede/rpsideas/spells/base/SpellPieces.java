@@ -10,6 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.spell.SpellPiece;
 import vazkii.psi.common.lib.LibPieceGroups;
+import vazkii.psi.common.spell.trick.block.PieceTrickConjureLight;
 
 public class SpellPieces  {
 
@@ -37,6 +38,13 @@ public class SpellPieces  {
         register(PieceOperatorVectorStrongRaycast.class, LibPieces.OPERATOR_VECTOR_STRONG_RAYCAST, LibPieceGroups.SECONDARY_OPERATORS);
         register(PiecePieceOperatorVectorStrongRaycastAxis.class, LibPieces.OPERATOR_STRONG_VECTOR_RAYCAST_AXIS, LibPieceGroups.SECONDARY_OPERATORS);
         register(PieceOperatorPlanarNormalVector.class, LibPieces.OPERATOR_PLANAR_NORMAL_VECTOR, LibPieceGroups.SECONDARY_OPERATORS);
+        register(PieceTrickConjurePulsar.class, LibPieces.TRICK_PULSAR, LibPieceGroups.BLOCK_WORKS);
+        register(PieceTrickConjurePulsarSequence.class, LibPieces.TRICK_PULSAR_SEQUENCE, LibPieceGroups.BLOCK_WORKS);
+        register(PieceTrickPulsarLight.class, LibPieces.TRICK_PULSAR_LIGHT, LibPieceGroups.BLOCK_WORKS);
+        register(PieceTrickParticleTrail.class, LibPieces.TRICK_PARTICLE_TRAIL, LibPieceGroups.BLOCK_WORKS);
+        register(PieceTrickDebugSpamless.class, LibPieces.TRICK_DEBUG_SPAMLESS, LibPieceGroups.TUTORIAL_1);
+        register(PieceTrickConjureStar.class, LibPieces.TRICK_CONJURE_STAR, LibPieceGroups.BLOCK_WORKS);
+        register(PieceTrickBreakLoop.class, LibPieces.TRICK_BREAK_LOOP, LibPieceGroups.FLOW_CONTROL);
 
 
     }

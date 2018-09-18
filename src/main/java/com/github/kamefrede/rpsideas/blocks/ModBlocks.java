@@ -1,5 +1,7 @@
 package com.github.kamefrede.rpsideas.blocks;
 
+import com.github.kamefrede.rpsideas.tiles.TileConjuredPulsar;
+import com.github.kamefrede.rpsideas.tiles.TileCracklingStar;
 import com.github.kamefrede.rpsideas.tiles.TileEthereal;
 import com.github.kamefrede.rpsideas.util.LibBlocks;
 import com.github.kamefrede.rpsideas.util.Reference;
@@ -11,15 +13,23 @@ public class ModBlocks {
 
     public static BlockMod conjuredEthereal;
     public static BlockMod cadCase;
+    public static BlockMod conjuredPulsar;
+    public static BlockMod conjuredPulsarLight;
+    public static BlockMod conjuredStar;
 
     public static void preInit(){
         conjuredEthereal = new ConjuredEtherealBlock();
+        conjuredPulsar = new BlockConjuredPulsar();
+        conjuredPulsarLight = new BlockPulsarLight();
+        conjuredStar = new BlockConjuredStar();
 
         initTileEntities();
     }
 
     private static void initTileEntities(){
         registerTile(TileEthereal.class, LibBlocks.CONJURED_ETHEREAL_BLOCK);
+        registerTile(TileConjuredPulsar.class, LibBlocks.CONJURED_PULSAR_BLOCK);
+        registerTile(TileCracklingStar.class, LibBlocks.CONJURED_STAR_BLOCK);
 
 
     }

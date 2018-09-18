@@ -1,6 +1,7 @@
 package com.github.kamefrede.rpsideas.proxy;
 
 import com.github.kamefrede.rpsideas.blocks.ModBlocks;
+import com.github.kamefrede.rpsideas.network.RPSPacketHandler;
 import com.github.kamefrede.rpsideas.spells.base.SpellPieces;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -20,6 +21,7 @@ public class CommonProxy {
 
     public void preInit(FMLPreInitializationEvent e){
         SpellPieces.init();
+        RPSPacketHandler.initPackets();
 
 
     }

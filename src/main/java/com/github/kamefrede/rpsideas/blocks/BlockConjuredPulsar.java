@@ -1,42 +1,43 @@
 package com.github.kamefrede.rpsideas.blocks;
 
+import com.github.kamefrede.rpsideas.blocks.IPsiamBlock;
 import com.github.kamefrede.rpsideas.tiles.TileEthereal;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import vazkii.arl.block.BlockModContainer;
-import vazkii.psi.common.block.BlockConjured;
 
 import java.util.List;
 import java.util.Random;
 
-public class ConjuredEtherealBlock extends BlockModContainer implements IPsiamBlock {
+public class BlockConjuredPulsar extends BlockModContainer implements IPsiamBlock {
 
-    public ConjuredEtherealBlock() {
-        super("conjuredblock", Material.GLASS);
+    public BlockConjuredPulsar() {
+        super("conjuredpulsar", Material.GLASS);
         setDefaultState(makeDefaultState());
         setLightOpacity(0);
 
     }
 
 
-    public static final PropertyBool SOLID = PropertyBool.create("solid");
-    public static final PropertyBool BLOCK_UP = PropertyBool.create("block_up");
-    public static final PropertyBool BLOCK_DOWN = PropertyBool.create("block_down");
-    public static final PropertyBool BLOCK_NORTH = PropertyBool.create("block_north");
-    public static final PropertyBool BLOCK_SOUTH = PropertyBool.create("block_south");
-    public static final PropertyBool BLOCK_WEST = PropertyBool.create("block_west");
-    public static final PropertyBool BLOCK_EAST = PropertyBool.create("block_east");
+    public static final PropertyBool SOLID = ConjuredEtherealBlock.SOLID;
+    public static final PropertyBool BLOCK_UP = ConjuredEtherealBlock.BLOCK_UP;
+    public static final PropertyBool BLOCK_DOWN = ConjuredEtherealBlock.BLOCK_DOWN;
+    public static final PropertyBool BLOCK_NORTH = ConjuredEtherealBlock.BLOCK_NORTH;
+    public static final PropertyBool BLOCK_SOUTH = ConjuredEtherealBlock.BLOCK_SOUTH;
+    public static final PropertyBool BLOCK_WEST = ConjuredEtherealBlock.BLOCK_WEST;
+    public static final PropertyBool BLOCK_EAST = ConjuredEtherealBlock.BLOCK_EAST;
 
     public IBlockState makeDefaultState() {
         return getStateFromMeta(0);
@@ -53,7 +54,7 @@ public class ConjuredEtherealBlock extends BlockModContainer implements IPsiamBl
     }
 
     public IProperty[] getAllProperties() {
-        return new IProperty[] { SOLID, BLOCK_UP, BLOCK_DOWN, BLOCK_NORTH, BLOCK_SOUTH, BLOCK_WEST, BLOCK_EAST };
+        return new IProperty[]{SOLID, BLOCK_UP, BLOCK_DOWN, BLOCK_NORTH, BLOCK_SOUTH, BLOCK_WEST, BLOCK_EAST};
     }
 
     @Override
@@ -117,8 +118,8 @@ public class ConjuredEtherealBlock extends BlockModContainer implements IPsiamBl
 
     @Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB aabb, List<AxisAlignedBB> list, Entity entity, boolean blarg) {
-        if(state.getValue(SOLID))
-            addCollisionBoxToList(pos, null, list, null);
+        if (state.getValue(SOLID))
+            addCollisionBoxToList(pos, aabb, list, new AxisAlignedBB(0, 0, 0, 1, 1, 1));
     }
 
     @Override
@@ -146,5 +147,13 @@ public class ConjuredEtherealBlock extends BlockModContainer implements IPsiamBl
         return null;
     }
 
+    public boolean canProvidePower(IBlockState state)
+    {
+        return true;
+    }
 
+    public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+    {
+        return 15;
+    }
 }

@@ -1,0 +1,15 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "minecraft:cube_all",
+		"transform": "forge:default-block",
+		"textures": {
+			"particle": "rpsideas:blocks/conjuredblock",
+			"all": "rpsideas:blocks/conjuredblock"
+		}
+	}, 
+	"variants": {
+		"normal": [{ "textures": { "all": "rpsideas:blocks/conjuredblock" } }],
+		"inventory": [{ "textures": { "all": "rpsideas:blocks/conjuredblock" } }]
+	}
+}

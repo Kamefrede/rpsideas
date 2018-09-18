@@ -30,6 +30,13 @@ Ported from PSIonic Upgrades
 * Operator: Vector Strong Raycast
 * Operator: Vector Axis Strong Raycast
 * Operator: Vector Fallback
+* Trick: Spamless Debug
+* Trick: Break Loop
+* Trick: Conjure Star
+* Trick: Particle Trail
+* Trick: Conjure Pulsar
+* Trick: Conjure Pulsar Light
+* Trick: Conjure Pulsar Sequence
 
 Unfeatures
 ============

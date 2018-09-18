@@ -25,5 +25,12 @@ public class LibPieces {
     public static final String OPERATOR_VECTOR_STRONG_RAYCAST = "strong_vector_raycast";
     public static final String OPERATOR_STRONG_VECTOR_RAYCAST_AXIS = "strong_vector_raycast_axis";
     public static final String OPERATOR_PLANAR_NORMAL_VECTOR = "planar_norm";
+    public static final String TRICK_PULSAR = "trick_pulsar";
+    public static final String TRICK_PULSAR_LIGHT = "trick_pulsar_light";
+    public static final String TRICK_PULSAR_SEQUENCE = "trick_pulsar_sequence";
+    public static final String TRICK_DEBUG_SPAMLESS = "trick_debug_spamless";
+    public static final String TRICK_CONJURE_STAR = "trick_conjure_star";
+    public static final String TRICK_PARTICLE_TRAIL = "trick_particle_trail";
+    public static final String TRICK_BREAK_LOOP = "trick_break_loop";
 
 }

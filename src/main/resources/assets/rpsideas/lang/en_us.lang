@@ -9,7 +9,7 @@ psi.spellpiece.rpsideas.operator_to_degrees=Operator: Radians To Degrees
 psi.spellpiece.rpsideas.trick_plant=Trick: Plant
 psi.spellpiece.rpsideas.trick_plant_sequence=Trick: Plant Sequence
 psi.spellpiece.rpsideas.trick_till=Trick: Till
-psi.spellpiece.rpsideas.trick:till_sequence=Trick: Till Sequence
+psi.spellpiece.rpsideas.trick_till_sequence=Trick: Till Sequence
 psi.spellpiece.rpsideas.planar_norm=Operator: Planar Normal Vector
 psi.spellpiece.rpsideas.vector_rotate=Operator: Rotate Vector
 psi.spellpiece.rpsideas.strong_vector_raycast=Operator: Vector Strong Raycast
@@ -21,6 +21,13 @@ psi.spellpiece.rpsideas.get_light=Operator: Block Light
 psi.spellpiece.rpsideas.get_hardness=Operator: Block Hardness
 psi.spellpiece.rpsideas.get_solidity=Operator: Block Side Solidity
 psi.spellpiece.rpsideas.get_comparator=Operator: Block Comparator
+psi.spellpiece.rpsideas.trick_pulsar=Trick: Conjure Pulsar
+psi.spellpiece.rpsideas.trick_pulsar_sequence=Trick: Conjure Pulsar Sequence
+psi.spellpiece.rpsideas.trick_pulsar_light=Trick: Conjure Pulsar Light
+psi.spellpiece.rpsideas.trick_debug_spamless=Trick: Channeled Debug
+psi.spellpiece.rpsideas.trick_conjure_star=Trick: Conjure Star
+psi.spellpiece.rpsideas.trick_break_loop=Trick: Break Loop
+psi.spellpiece.rpsideas.trick_particle_trail=Trick: Particle Trail
 
 
 psi.spellpiece.rpsideas.trick_conjure_ethereal_block.desc=Conjures an ethereal block at the given position
@@ -34,7 +41,7 @@ psi.spellpiece.rpsideas.operator_to_degrees.desc=Converts radians to degrees
 psi.spellpiece.rpsideas.trick_plant.desc=Plants(the item to the right of the cad) at the given position
 psi.spellpiece.rpsideas.trick_plant_sequence.desc=Plants a sequence of items
 psi.spellpiece.rpsideas.trick_till.desc=Tills a block at the given position
-psi.spellpiece.rpsideas.trick_till_sequence.dick=Tills blocks starting at the given position
+psi.spellpiece.rpsideas.trick_till_sequence.desc=Tills blocks starting at the given position
 psi.spellpiece.rpsideas.planar_norm.desc=Creates a perpendicular vector to an axial vector
 psi.spellpiece.rpsideas.vector_rotate.desc=Rotates a vector around an axis
 psi.spellpiece.rpsideas.strong_vector_raycast.desc=Gets a raycast result, ignoring nonsolids (max 32)
@@ -46,6 +53,12 @@ psi.spellpiece.rpsideas.get_light.desc=Gets the light value of a block
 psi.spellpiece.rpsideas.get_hardness.desc=Gets the hardness value of a block
 psi.spellpiece.rpsideas.get_solidity.desc=Gets whether the side of a block is solid
 psi.spellpiece.rpsideas.get_comparator.desc=Gets the comparator strength a block has
+psi.spellpiece.rpsideas.trick_pulsar.desc=Conjures a redstone emitting block in the given position
+psi.spellpiece.rpsideas.trick_pulsar_light.desc=Conjures a redstone emitting light in the given position
+psi.spellpiece.rpsideas.trick_debug_spamless.desc=Prints out the target, replacing any previous prints with the same number
+psi.spellpiece.rpsideas.trick_conjure_star.desc=Conjures a light that emits particles along the given ray
+psi.spellpiece.rpsideas.trick_break_loop.desc=Stops loop if target is within ]-1, 1[
+psi.spellpiece.rpsideas.trick_particle_trail.desc=Makes a particle trail from a position along a ray
 
 
 rpsideas.spellerror.nthroot=Even numbered roots don't accept negative numbers
@@ -63,7 +76,11 @@ rpsideas.spellparam.angle=Angle to rotate
 rpsideas.spellparam.fallback=Fallback vector
 rpsideas.spellparam.target1=Target 1
 rpsideas.spellparam.target2=Target 2
+rpsideas.spellparma.vazkii_ray= Ray
 
 tile.rpsideas:conjuredblock.name=Ethereal Conjured Block
+tile.rpsideas:conjured_pulsar_block.name=Conjured Pulsar Light Block
+tile.rpsideas:conjured_star_block.name=Conjured Crackling Star
 
 
+rpsideas.channelid=Channel %d

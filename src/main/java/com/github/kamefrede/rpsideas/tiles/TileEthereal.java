@@ -8,6 +8,7 @@ import net.minecraft.util.ITickable;
 import vazkii.arl.block.tile.TileMod;
 import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.common.Psi;
+import vazkii.psi.common.block.BlockConjured;
 
 import java.awt.*;
 import java.util.Arrays;
