@@ -4,12 +4,12 @@
 		"model": "minecraft:cube_all",
 		"transform": "forge:default-block",
 		"textures": {
-			"particle": "rpsideas:blocks/conjuredblock",
-			"all": "rpsideas:blocks/conjuredblock"
+			"particle": "rpsideas:blocks/conjuredpulsar",
+			"all": "rpsideas:blocks/conjuredpulsar"
 		}
 	}, 
 	"variants": {
-		"normal": [{ "textures": { "all": "rpsideas:blocks/conjuredblock" } }],
-		"inventory": [{ "textures": { "all": "rpsideas:blocks/conjuredblock" } }]
+		"normal": [{ "textures": { "all": "rpsideas:blocks/conjuredpulsar" } }],
+		"inventory": [{ "textures": { "all": "rpsideas:blocks/conjuredpulsar" } }]
 	}
 }
