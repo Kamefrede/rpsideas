@@ -47,7 +47,6 @@ public class SpellPieces  {
         register(PieceTrickDebugSpamless.class, LibPieces.TRICK_DEBUG_SPAMLESS, LibPieceGroups.TUTORIAL_1);
         register(PieceTrickConjureStar.class, LibPieces.TRICK_CONJURE_STAR, LibPieceGroups.BLOCK_WORKS);
         register(PieceTrickBreakLoop.class, LibPieces.TRICK_BREAK_LOOP, LibPieceGroups.FLOW_CONTROL);
-        register(PieceTrickSpinChamber.class, LibPieces.TRICK_SPIN_CHAMBER, LibPieceGroups.FLOW_CONTROL);
         register(PieceSelectorCasterBattery.class, LibPieces.SELECTOR_CASTER_BATTERY, LibPieceGroups.MEMORY_MANAGEMENT);
         register(PieceSelectorCasterEnergy.class, LibPieces.SELECTOR_CASTER_ENERGY, LibPieceGroups.MEMORY_MANAGEMENT);
 
