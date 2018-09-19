@@ -65,7 +65,7 @@ public class PieceTrickPulsarLight extends PieceTrick {
     }
 
     public IBlockState getStateToSet() {
-        return ModBlocks.conjuredPulsarLight.getDefaultState().withProperty(BlockPulsarLight.LIGHT, true).withProperty(BlockPulsarLight.SOLID, false);
+        return ModBlocks.conjuredPulsarLight.getDefaultState().withProperty(BlockPulsarLight.SOLID, false);
     }
 
     protected void postSet(SpellContext context, World world, BlockPos pos, int time) {

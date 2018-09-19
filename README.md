@@ -16,6 +16,9 @@ Features
 * Operator: Degrees to Radians
 * Operator: Radians to Degrees
 * Operator: Root
+* Operator: Caster Energy
+* Operator: Caster Battery
+* Trick: Spin Chamber
 
 Ported from PSIonic Upgrades
 =============

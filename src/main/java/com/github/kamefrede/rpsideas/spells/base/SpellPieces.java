@@ -9,6 +9,7 @@ import com.github.kamefrede.rpsideas.util.Reference;
 import net.minecraft.util.ResourceLocation;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.spell.SpellPiece;
+import vazkii.psi.api.spell.piece.PieceOperator;
 import vazkii.psi.common.lib.LibPieceGroups;
 import vazkii.psi.common.spell.trick.block.PieceTrickConjureLight;
 
@@ -45,6 +46,9 @@ public class SpellPieces  {
         register(PieceTrickDebugSpamless.class, LibPieces.TRICK_DEBUG_SPAMLESS, LibPieceGroups.TUTORIAL_1);
         register(PieceTrickConjureStar.class, LibPieces.TRICK_CONJURE_STAR, LibPieceGroups.BLOCK_WORKS);
         register(PieceTrickBreakLoop.class, LibPieces.TRICK_BREAK_LOOP, LibPieceGroups.FLOW_CONTROL);
+        register(PieceTrickSpinChamber.class, LibPieces.TRICK_SPIN_CHAMBER, LibPieceGroups.FLOW_CONTROL);
+        register(OperatorCasterBattery.class, LibPieces.OPERATOR_CASTER_BATTERY, LibPieceGroups.MEMORY_MANAGEMENT);
+        register(OperatorCasterEnergy.class, LibPieces.OPERATOR_CASTER_ENERGY, LibPieceGroups.MEMORY_MANAGEMENT);
 
 
     }

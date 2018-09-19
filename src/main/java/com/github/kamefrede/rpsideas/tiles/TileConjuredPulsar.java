@@ -54,50 +54,7 @@ public class TileConjuredPulsar extends TileMod implements ITickable {
             if(state.getBlock() != ModBlocks.conjuredPulsarLight) return;
 
             if(state.getValue(BlockPulsarLight.SOLID)) {
-                boolean[] edges = new boolean[12];
-                Arrays.fill(edges, false);
 
-                //The fun part
-                if(state.getValue(BlockConjured.BLOCK_DOWN)) {
-                    removeEdges(edges, 0, 1, 2, 3);
-                }
-
-                if(state.getValue(BlockConjured.BLOCK_UP)) {
-                    removeEdges(edges, 4, 5, 6, 7);
-                }
-
-                if(state.getValue(BlockConjured.BLOCK_NORTH)) {
-                    removeEdges(edges, 3, 7, 8, 11);
-                }
-
-                if(state.getValue(BlockConjured.BLOCK_SOUTH)) {
-                    removeEdges(edges, 1, 5, 9, 10);
-                }
-
-                if(state.getValue(BlockConjured.BLOCK_EAST)) {
-                    removeEdges(edges, 2, 6, 10, 11);
-                }
-
-                if(state.getValue(BlockConjured.BLOCK_WEST)) {
-                    removeEdges(edges, 0, 4, 8, 9);
-                }
-
-                int x = pos.getX();
-                int y = pos.getY();
-                int z = pos.getZ();
-
-                doSolidParticle(edges[0], red, green, blue, x + 0, y + 0, z + 0, 0f, 0f, 1f);
-                doSolidParticle(edges[1], red, green, blue, x + 0, y + 0, z + 1, 1f, 0f, 0f);
-                doSolidParticle(edges[2], red, green, blue, x + 1, y + 0, z + 0, 0f, 0f, 1f);
-                doSolidParticle(edges[3], red, green, blue, x + 0, y + 0, z + 0, 1f, 0f, 0f);
-                doSolidParticle(edges[4], red, green, blue, x + 0, y + 1, z + 0, 0f, 0f, 1f);
-                doSolidParticle(edges[5], red, green, blue, x + 0, y + 1, z + 1, 1f, 0f, 0f);
-                doSolidParticle(edges[6], red, green, blue, x + 1, y + 1, z + 0, 0f, 0f, 1f);
-                doSolidParticle(edges[7], red, green, blue, x + 0, y + 1, z + 0, 1f, 0f, 0f);
-                doSolidParticle(edges[8], red, green, blue, x + 0, y + 0, z + 0, 0f, 1f, 0f);
-                doSolidParticle(edges[9], red, green, blue, x + 0, y + 0, z + 1, 0f, 1f, 0f);
-                doSolidParticle(edges[10], red, green, blue, x + 1, y + 0, z + 1, 0f, 1f, 0f);
-                doSolidParticle(edges[11], red, green, blue, x + 1, y + 0, z + 0, 0f, 1f, 0f);
             } else if(Math.random() < 0.5) {
                 doNonSolidParticle(red, green, blue);
             }
@@ -120,11 +77,6 @@ public class TileConjuredPulsar extends TileMod implements ITickable {
         edges[edge4] = false;
     }
 
-    private void doSolidParticle(boolean doIt, float red, float green, float blue, double x, double y, double z, float xv, float yv, float zv) {
-        if(!doIt || Math.random() > 0.3) return;
-
-        Psi.proxy.sparkleFX(world, x, y, z, red, green, blue, xv * 0.1f, yv * 0.1f, zv * 0.1f, 1.25f, 20);
-    }
 
     private void doNonSolidParticle(float red, float green, float blue) {
         double w = 0.15f;

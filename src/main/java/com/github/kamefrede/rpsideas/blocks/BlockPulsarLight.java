@@ -21,7 +21,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.arl.block.BlockModContainer;
 import vazkii.psi.common.block.BlockConjured;
-import vazkii.psi.common.block.tile.TileConjured;
 
 import javax.annotation.Nullable;
 import java.util.EnumMap;
@@ -33,65 +32,40 @@ public class BlockPulsarLight extends BlockModContainer implements IPsiamBlock  
     public BlockPulsarLight() {
         super("conjuredpulsarlight", Material.GLASS);
         setLightOpacity(0);
-        disableStats();
-        translucent = true;
+        setDefaultState(makeDefaultState());
 
     }
 
-    public static final PropertyBool SOLID = BlockConjured.SOLID;
-    public static final PropertyBool LIGHT = BlockConjured.LIGHT;
-    public static final PropertyBool BLOCK_UP = BlockConjured.BLOCK_UP;
-    public static final PropertyBool BLOCK_DOWN = BlockConjured.BLOCK_DOWN;
-    public static final PropertyBool BLOCK_NORTH = BlockConjured.BLOCK_NORTH;
-    public static final PropertyBool BLOCK_EAST = BlockConjured.BLOCK_EAST;
-    public static final PropertyBool BLOCK_SOUTH = BlockConjured.BLOCK_SOUTH;
-    public static final PropertyBool BLOCK_WEST = BlockConjured.BLOCK_WEST;
+    public static final PropertyBool SOLID = ConjuredEtherealBlock.SOLID;
+    public static final PropertyBool BLOCK_UP = ConjuredEtherealBlock.BLOCK_UP;
+    public static final PropertyBool BLOCK_DOWN = ConjuredEtherealBlock.BLOCK_DOWN;
+    public static final PropertyBool BLOCK_NORTH = ConjuredEtherealBlock.BLOCK_NORTH;
+    public static final PropertyBool BLOCK_SOUTH = ConjuredEtherealBlock.BLOCK_SOUTH;
+    public static final PropertyBool BLOCK_WEST = ConjuredEtherealBlock.BLOCK_WEST;
+    public static final PropertyBool BLOCK_EAST = ConjuredEtherealBlock.BLOCK_EAST;
 
-    private static final EnumMap<EnumFacing, PropertyBool> FACING_MAP = new EnumMap<>(EnumFacing.class);
-
-    static {
-        FACING_MAP.put(EnumFacing.UP, BLOCK_UP);
-        FACING_MAP.put(EnumFacing.DOWN, BLOCK_DOWN);
-        FACING_MAP.put(EnumFacing.NORTH, BLOCK_NORTH);
-        FACING_MAP.put(EnumFacing.EAST, BLOCK_EAST);
-        FACING_MAP.put(EnumFacing.SOUTH, BLOCK_SOUTH);
-        FACING_MAP.put(EnumFacing.WEST, BLOCK_WEST);
+    public IBlockState makeDefaultState() {
+        return getStateFromMeta(0);
     }
-
-    //Blockstate
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, SOLID, LIGHT, BLOCK_UP, BLOCK_DOWN, BLOCK_NORTH, BLOCK_SOUTH, BLOCK_EAST, BLOCK_WEST);
+        return new BlockStateContainer(this, getAllProperties());
+    }
+
+
+    public IProperty[] getIgnoredProperties() {
+        return getAllProperties();
+    }
+
+    public IProperty[] getAllProperties() {
+        return new IProperty[]{SOLID, BLOCK_UP, BLOCK_DOWN, BLOCK_NORTH, BLOCK_SOUTH, BLOCK_WEST, BLOCK_EAST};
     }
 
     @Override
-    public int getMetaFromState(IBlockState state) {
-        return (state.getValue(SOLID) ? 1 : 0) | (state.getValue(LIGHT) ? 2 : 0);
+    public BlockRenderLayer getBlockLayer() {
+        return BlockRenderLayer.TRANSLUCENT;
     }
-
-    @Override
-    public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(SOLID, (meta & 1) != 0).withProperty(LIGHT, (meta & 2) != 0);
-    }
-
-    @Override
-    public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
-        IBlockState ret = state;
-        for(Map.Entry<EnumFacing, PropertyBool> entry : FACING_MAP.entrySet()) {
-            EnumFacing whichWay = entry.getKey();
-            PropertyBool prop = entry.getValue();
-            ret = state.withProperty(prop, checkBlock(world, pos.offset(whichWay), state));
-        }
-        return ret;
-    }
-
-    private static boolean checkBlock(IBlockAccess world, BlockPos checkPos, IBlockState matchedState) {
-        IBlockState checkedState = world.getBlockState(checkPos);
-        return checkedState.getBlock() == matchedState.getBlock() && checkedState.getValue(SOLID);
-    }
-
-    //block properties
 
     @Override
     public boolean isFullCube(IBlockState state) {
@@ -108,73 +82,74 @@ public class BlockPulsarLight extends BlockModContainer implements IPsiamBlock  
         return false;
     }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public float getAmbientOcclusionLightValue(IBlockState state) {
-        return 1f;
-    }
-
     @Override
     public int quantityDropped(Random random) {
         return 0;
     }
 
     @Override
-    protected boolean canSilkHarvest() {
+    public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
         return false;
     }
 
     @Override
-    public EnumBlockRenderType getRenderType(IBlockState state) {
-        return EnumBlockRenderType.INVISIBLE;
+    public IBlockState getStateFromMeta(int meta) {
+        IBlockState state = getDefaultState();
+        return state.withProperty(SOLID, (meta & 1) > 0);
     }
 
     @Override
-    public int getLightValue(IBlockState state) {
-        return state.getValue(LIGHT) ? 15 : 0;
+    public int getMetaFromState(IBlockState state) {
+        return (state.getValue(SOLID) ? 1 : 0);
     }
 
-	/*
-	@Override
-	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
-		if(state.getValue(SOLID)) {
-			addCollisionBoxToList(pos, entityBox, collidingBoxes, FULL_BLOCK_AABB);
-		}
-		//TODO Can I override getCollisionBoundingBox instead? Or is that like, cached somewhere
-	}*/
-
-    @Nullable
     @Override
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
-        return state.getValue(SOLID) ? FULL_BLOCK_AABB : NULL_AABB;
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+        IBlockState origState = state;
+        state = state.withProperty(BLOCK_UP, worldIn.getBlockState(pos.up()).equals(origState));
+        state = state.withProperty(BLOCK_DOWN, worldIn.getBlockState(pos.down()).equals(origState));
+        state = state.withProperty(BLOCK_NORTH, worldIn.getBlockState(pos.north()).equals(origState));
+        state = state.withProperty(BLOCK_SOUTH, worldIn.getBlockState(pos.south()).equals(origState));
+        state = state.withProperty(BLOCK_WEST, worldIn.getBlockState(pos.west()).equals(origState));
+        state = state.withProperty(BLOCK_EAST, worldIn.getBlockState(pos.east()).equals(origState));
+
+        return state;
     }
 
-    @SideOnly(Side.CLIENT)
     @Override
-    public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos) {
+    public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return 0;
+    }
+
+    @Override
+    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB aabb, List<AxisAlignedBB> list, Entity entity, boolean blarg) {
+        if (state.getValue(SOLID))
+            addCollisionBoxToList(pos, null, list, null);
+    }
+
+    @Override
+    public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World world, BlockPos pos) {
         boolean solid = state.getValue(SOLID);
-        double radius = solid ? 1 : 0.75;
+        float f = solid ? 0F : 0.25F;
 
-        return new AxisAlignedBB(1 - radius, 1 - radius, 1 - radius, radius, radius, radius).offset(pos);
+        double minX = f;
+        double minY = f;
+        double minZ = f;
+        double maxX = 1F - f;
+        double maxY = 1F - f;
+        double maxZ = 1F - f;
+
+        return new AxisAlignedBB(pos.getX() + minX, pos.getY() + minY, pos.getZ() + minZ, pos.getX() + maxX, pos.getY() + maxY, pos.getZ() + maxZ);
     }
-
-    //tile
-
-    @Override
-    public boolean hasTileEntity() {
-        return true;
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return null;
-    }
-
 
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
         return new TileConjuredPulsar();
+    }
+
+    @Override
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
+        return null;
     }
 
     public boolean canProvidePower(IBlockState state)

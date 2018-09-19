@@ -32,5 +32,8 @@ public class LibPieces {
     public static final String TRICK_CONJURE_STAR = "trick_conjure_star";
     public static final String TRICK_PARTICLE_TRAIL = "trick_particle_trail";
     public static final String TRICK_BREAK_LOOP = "trick_break_loop";
+    public static final String OPERATOR_CASTER_ENERGY = "operator_caster_energy";
+    public static final String OPERATOR_CASTER_BATTERY = "operator_caster_battery";
+    public static final String TRICK_SPIN_CHAMBER = "trick_spin_chamber";
 
 }
