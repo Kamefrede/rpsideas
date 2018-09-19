@@ -2,6 +2,9 @@ package com.github.kamefrede.rpsideas.spells.base;
 
 
 import com.github.kamefrede.rpsideas.spells.operator.*;
+import com.github.kamefrede.rpsideas.spells.selector.PieceSelectorCasterBattery;
+import com.github.kamefrede.rpsideas.spells.selector.PieceSelectorCasterEnergy;
+import com.github.kamefrede.rpsideas.spells.selector.PieceSelectorCasterEnergy;
 import com.github.kamefrede.rpsideas.spells.selector.PieceSelectorNearbyPlayers;
 import com.github.kamefrede.rpsideas.spells.trick.*;
 import com.github.kamefrede.rpsideas.util.LibPieces;
@@ -9,9 +12,7 @@ import com.github.kamefrede.rpsideas.util.Reference;
 import net.minecraft.util.ResourceLocation;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.spell.SpellPiece;
-import vazkii.psi.api.spell.piece.PieceOperator;
 import vazkii.psi.common.lib.LibPieceGroups;
-import vazkii.psi.common.spell.trick.block.PieceTrickConjureLight;
 
 public class SpellPieces  {
 
@@ -47,8 +48,8 @@ public class SpellPieces  {
         register(PieceTrickConjureStar.class, LibPieces.TRICK_CONJURE_STAR, LibPieceGroups.BLOCK_WORKS);
         register(PieceTrickBreakLoop.class, LibPieces.TRICK_BREAK_LOOP, LibPieceGroups.FLOW_CONTROL);
         register(PieceTrickSpinChamber.class, LibPieces.TRICK_SPIN_CHAMBER, LibPieceGroups.FLOW_CONTROL);
-        register(OperatorCasterBattery.class, LibPieces.OPERATOR_CASTER_BATTERY, LibPieceGroups.MEMORY_MANAGEMENT);
-        register(OperatorCasterEnergy.class, LibPieces.OPERATOR_CASTER_ENERGY, LibPieceGroups.MEMORY_MANAGEMENT);
+        register(PieceSelectorCasterBattery.class, LibPieces.SELECTOR_CASTER_BATTERY, LibPieceGroups.MEMORY_MANAGEMENT);
+        register(PieceSelectorCasterEnergy.class, LibPieces.SELECTOR_CASTER_ENERGY, LibPieceGroups.MEMORY_MANAGEMENT);
 
 
     }

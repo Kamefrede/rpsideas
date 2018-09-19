@@ -1,12 +1,13 @@
-package com.github.kamefrede.rpsideas.spells.operator;
+package com.github.kamefrede.rpsideas.spells.selector;
 
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.piece.PieceOperator;
+import vazkii.psi.api.spell.piece.PieceSelector;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 
-public class OperatorCasterEnergy extends PieceOperator {
+public class PieceSelectorCasterEnergy extends PieceSelector {
 
-    public OperatorCasterEnergy(Spell spell){
+    public PieceSelectorCasterEnergy(Spell spell){
         super(spell);
     }
 

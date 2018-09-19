@@ -1,4 +1,4 @@
-package com.github.kamefrede.rpsideas.spells.operator;
+package com.github.kamefrede.rpsideas.spells.selector;
 
 import net.minecraft.item.ItemStack;
 import vazkii.psi.api.PsiAPI;
@@ -6,11 +6,12 @@ import vazkii.psi.api.cad.EnumCADStat;
 import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.piece.PieceOperator;
+import vazkii.psi.api.spell.piece.PieceSelector;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 
-public class OperatorCasterBattery extends PieceOperator {
+public class PieceSelectorCasterBattery extends PieceSelector {
 
-    public OperatorCasterBattery(Spell spell){
+    public PieceSelectorCasterBattery(Spell spell){
         super(spell);
     }
 

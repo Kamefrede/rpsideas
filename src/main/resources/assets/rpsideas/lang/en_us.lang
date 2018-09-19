@@ -29,8 +29,8 @@ psi.spellpiece.rpsideas.trick_conjure_star=Trick: Conjure Star
 psi.spellpiece.rpsideas.trick_break_loop=Trick: Break Loop
 psi.spellpiece.rpsideas.trick_particle_trail=Trick: Particle Trail
 psi.spellpiece.rpsideas.trick_spin_chamber=Trick: Spin Chamber
-psi.spellpiece.rpsideas.operator_caster_energy=Operator: Caster Energy
-psi.spellpiece.rpsideas.operator_caster_battery=Operator: Caster Battery
+psi.spellpiece.rpsideas.selector_caster_energy=Selector: Caster Energy
+psi.spellpiece.rpsideas.selector_caster_battery=Selector: Caster Battery
 
 
 psi.spellpiece.rpsideas.trick_conjure_ethereal_block.desc=Conjures an ethereal block at the given position
@@ -63,8 +63,8 @@ psi.spellpiece.rpsideas.trick_conjure_star.desc=Conjures a light that emits part
 psi.spellpiece.rpsideas.trick_break_loop.desc=Stops loop if target is within ]-1, 1[
 psi.spellpiece.rpsideas.trick_particle_trail.desc=Makes a particle trail from a position along a ray
 psi.spellpiece.rpsideas.trick_spin_chamber.desc=Sets and executes the next spell bullet if a positive input is provided, or the previous spell bullet if a negative input is provided instead
-psi.spellpiece.rpsideas.operator_caster_energy.desc=Gets the caster's currently available PSI energy
-psi.spellpiece.rpsideas.operator_caster_battery.desc=Gets the caster's currently available Overflow value
+psi.spellpiece.rpsideas.selector_caster_energy.desc=Gets the caster's currently available PSI energy
+psi.spellpiece.rpsideas.selector_caster_battery.desc=Gets the caster's currently available Overflow value
 
 
 rpsideas.spellerror.nthroot=Even numbered roots don't accept negative numbers
