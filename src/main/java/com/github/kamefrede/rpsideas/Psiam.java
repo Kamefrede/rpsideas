@@ -7,23 +7,23 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION, dependencies = "required-after:psi", useMetadata = true)
 public class Psiam {
 
-    @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
+    @SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.COMMON_PROXY_CLASS)
     public static CommonProxy proxy;
 
     @Mod.Instance
-    public static Psiam instance;
+    public static Psiam INSTANCE = null;
 
-    public static Logger logger;
+    public static final Logger LOGGER = LogManager.getLogger(Reference.MODID);
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event){
-        logger = event.getModLog();
         proxy.preInit(event);
 
     }

@@ -7,6 +7,9 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.*;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import vazkii.arl.network.NetworkMessage;
 import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.common.Psi;
 import com.github.kamefrede.rpsideas.util.NetworkHelpers;
@@ -51,6 +54,7 @@ public class MessageParticleTrail implements IMessage {
 
     public static class Handler implements IMessageHandler<MessageParticleTrail, IMessage> {
         @Override
+        @SideOnly(Side.CLIENT)
         public IMessage onMessage(MessageParticleTrail m, MessageContext ctx) {
             Minecraft.getMinecraft().addScheduledTask(() -> {
                 World world = Minecraft.getMinecraft().world;
@@ -78,4 +82,5 @@ public class MessageParticleTrail implements IMessage {
             return null;
         }
     }
+
 }

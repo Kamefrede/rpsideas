@@ -1,6 +1,8 @@
 package com.github.kamefrede.rpsideas.network;
 
 //taken from psionic upgrades like most of their features merged into psideas
+import com.github.kamefrede.rpsideas.Psiam;
+import com.github.kamefrede.rpsideas.gui.GuiHandler;
 import com.github.kamefrede.rpsideas.util.Reference;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;
@@ -9,22 +11,28 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import vazkii.arl.network.NetworkHandler;
+import vazkii.arl.network.NetworkMessage;
 
 public class RPSPacketHandler {
+
+
     public static SimpleNetworkWrapper NET;
+
 
     public static void initPackets() {
         NET = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.MODID);
-
         int id = 0;
+        RPSPacketHandler.NET.registerMessage(MessageSpamlessChat.Handler.class, MessageSpamlessChat.class, id++, Side.CLIENT);
+        RPSPacketHandler.NET.registerMessage(MessageParticleTrail.Handler.class, MessageParticleTrail.class, id++, Side.CLIENT);
 
-        //NET.registerMessage(MessageFlashSync.Handler.class, MessageFlashSync.class, id++, Side.SERVER);
-        NET.registerMessage(MessageParticleTrail.Handler.class, MessageParticleTrail.class, id++, Side.CLIENT);
-      //  NET.registerMessage(MessageSparkleSphere.Handler.class, MessageSparkleSphere.class, id++, Side.CLIENT);
+       NET.registerMessage(MessageFlashSync.Handler.class, MessageFlashSync.class, id++, Side.SERVER);
 
-        NET.registerMessage(MessageSpamlessChat.Handler.class, MessageSpamlessChat.class, id++, Side.CLIENT);
+        //NET.registerMessage(MessageSparkleSphere.Handler.class, MessageSparkleSphere.class, id++, Side.CLIENT);
 
-      //  NetworkRegistry.INSTANCE.registerGuiHandler(PsionicUpgrades.INSTANCE, new GuiHandler());
+
+        NetworkRegistry.INSTANCE.registerGuiHandler(Psiam.INSTANCE, new GuiHandler());
     }
 
     public static void sendToAllWithinRange(IMessage message, World world, BlockPos point, double range) {
@@ -42,4 +50,5 @@ public class RPSPacketHandler {
     public static void sendToServer(IMessage message) {
         NET.sendToServer(message);
     }
+
 }

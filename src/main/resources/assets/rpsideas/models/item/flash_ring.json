@@ -1,0 +1,14 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "rpsideas:items/flash_ring_inactive"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "rpsideas:active": 1
+      },
+      "model": "rpsideas:item/flash_ring_active"
+    }
+  ]
+}

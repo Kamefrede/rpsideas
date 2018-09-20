@@ -5,6 +5,7 @@ import com.github.kamefrede.rpsideas.network.RPSPacketHandler;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
+import vazkii.arl.network.NetworkHandler;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamAny;
 import vazkii.psi.api.spell.param.ParamNumber;
@@ -56,7 +57,7 @@ public class PieceTrickDebugSpamless extends PieceTrick {
 
         TextComponentString component = new TextComponentString(s);
         MessageSpamlessChat message = new MessageSpamlessChat(component);
-        RPSPacketHandler.sendTo(message, (EntityPlayerMP) context.caster);
+        RPSPacketHandler.NET.sendTo(message, (EntityPlayerMP) context.caster);
 
         return null;
     }

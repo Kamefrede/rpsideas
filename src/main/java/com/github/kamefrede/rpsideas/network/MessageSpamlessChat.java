@@ -7,6 +7,9 @@ import net.minecraft.client.gui.GuiNewChat;
 import net.minecraft.util.text.*;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.*;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import vazkii.arl.network.NetworkMessage;
 
 public class MessageSpamlessChat implements IMessage {
     public MessageSpamlessChat() {
@@ -33,6 +36,7 @@ public class MessageSpamlessChat implements IMessage {
         private static int MAGIC = 69696969;
 
         @Override
+        @SideOnly(Side.CLIENT)
         public IMessage onMessage(MessageSpamlessChat m, MessageContext ctx) {
             Minecraft.getMinecraft().addScheduledTask(() -> {
                 GuiNewChat chat = Minecraft.getMinecraft().ingameGUI.getChatGUI();
@@ -43,4 +47,5 @@ public class MessageSpamlessChat implements IMessage {
             return null;
         }
     }
+
 }

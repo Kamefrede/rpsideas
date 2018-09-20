@@ -83,11 +83,15 @@ rpsideas.spellparam.angle=Angle to rotate
 rpsideas.spellparam.fallback=Fallback vector
 rpsideas.spellparam.target1=Target 1
 rpsideas.spellparam.target2=Target 2
-rpsideas.spellparma.vazkii_ray= Ray
+rpsideas.spellparma.vazkii= Ray
 
 tile.rpsideas:conjuredblock.name=Ethereal Conjured Block
 tile.rpsideas:conjured_pulsar_block.name=Conjured Pulsar Light Block
 tile.rpsideas:conjured_star_block.name=Conjured Crackling Star
+
+
+
+item.rpsideas.flash_ring.name=Flash Ring
 
 
 rpsideas.channelid=Channel %d
