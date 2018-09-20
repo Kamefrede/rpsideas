@@ -1,16 +1,27 @@
 package com.github.kamefrede.rpsideas.proxy;
 
+import com.github.kamefrede.rpsideas.blocks.BlockCADCase;
+import com.github.kamefrede.rpsideas.blocks.PsionicBlocksCompat;
 import com.github.kamefrede.rpsideas.items.ModItems;
 import com.github.kamefrede.rpsideas.network.MessageParticleTrail;
 import com.github.kamefrede.rpsideas.network.MessageSpamlessChat;
 import com.github.kamefrede.rpsideas.network.RPSPacketHandler;
+import com.github.kamefrede.rpsideas.render.RenderTileCADCase;
+import com.github.kamefrede.rpsideas.tiles.TileCADCase;
 import com.github.kamefrede.rpsideas.util.Reference;
+import com.github.kamefrede.rpsideas.util.helpers.ClientHelpers;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMap;
+import net.minecraft.client.renderer.color.BlockColors;
+import net.minecraft.client.renderer.color.ItemColors;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -31,12 +42,18 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void init(FMLInitializationEvent e){
         super.init(e);
+        ClientRegistry.bindTileEntitySpecialRenderer(TileCADCase.class, new RenderTileCADCase());
 
     }
 
     @SubscribeEvent
     public static void models(ModelRegistryEvent e) {
         setDefaultModel(ModItems.flashRing);
+        setDefaultModel(ModItems.inlineCaster);
+        ModelLoader.setCustomStateMapper(PsionicBlocksCompat.cadCase, new StateMap.Builder().ignore(BlockCADCase.COLOR).build());
+        for(int i = 0; i < 16; i++) {
+            setDefaultModel(ModItems.cadCaseItem, i);
+        }
 
     }
 
@@ -48,5 +65,40 @@ public class ClientProxy extends CommonProxy {
         ModelResourceLocation mrl = new ModelResourceLocation(i.getRegistryName(), "inventory");
         ModelLoader.setCustomModelResourceLocation(i, damage, mrl);
     }
+
+    @SubscribeEvent
+    public static void blockColors(ColorHandlerEvent.Block e) {
+        BlockColors bc = e.getBlockColors();
+
+
+
+        bc.registerBlockColorHandler((state, world, pos, layer) -> {
+            if(layer == 1 && world != null && pos != null) {
+                return world.getBlockState(pos).getActualState(world, pos).getValue(BlockCADCase.COLOR).getColorValue();
+            } else return 0xFFFFFF;
+        }, PsionicBlocksCompat.cadCase);
+    }
+
+    @SubscribeEvent
+    public static void itemColors(ColorHandlerEvent.Item e) {
+        ItemColors ic = e.getItemColors();
+
+        ic.registerItemColorHandler((stack, layer) -> {
+            if (layer == 1) {
+                return EnumDyeColor.byMetadata(stack.getMetadata()).getColorValue();
+            } else return 0xFFFFFF;
+        }, ModItems.cadCaseItem);
+
+        ic.registerItemColorHandler((stack, layer) -> {
+                    if(layer == 1) {
+                        return ClientHelpers.getFlowColor(stack);
+                    } else return 0xFFFFFF;
+                },
+                ModItems.inlineCaster
+        );
+    }
+
+
+
 
 }

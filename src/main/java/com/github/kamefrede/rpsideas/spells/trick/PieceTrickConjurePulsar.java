@@ -2,9 +2,8 @@ package com.github.kamefrede.rpsideas.spells.trick;
 
 import com.github.kamefrede.rpsideas.blocks.BlockConjuredPulsar;
 import com.github.kamefrede.rpsideas.blocks.ModBlocks;
-import com.github.kamefrede.rpsideas.tiles.TileConjuredPulsar;
 import com.github.kamefrede.rpsideas.tiles.TileEthereal;
-import com.github.kamefrede.rpsideas.util.SpellHelpers;
+import com.github.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -17,8 +16,6 @@ import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceTrick;
-import vazkii.psi.api.cad.EnumCADComponent;
-import vazkii.psi.api.cad.ICAD;
 
 public class PieceTrickConjurePulsar extends PieceTrick {
     public PieceTrickConjurePulsar(Spell spell) {

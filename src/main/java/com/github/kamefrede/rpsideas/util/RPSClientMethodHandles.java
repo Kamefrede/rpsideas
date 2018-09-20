@@ -1,6 +1,7 @@
 package com.github.kamefrede.rpsideas.util;
 
 import com.github.kamefrede.rpsideas.Psiam;
+import com.github.kamefrede.rpsideas.util.libs.LibObfuscation;
 import com.google.common.base.Throwables;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.gui.GuiTextField;

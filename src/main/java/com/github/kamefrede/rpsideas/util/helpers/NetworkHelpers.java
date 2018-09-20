@@ -1,4 +1,4 @@
-package com.github.kamefrede.rpsideas.util;
+package com.github.kamefrede.rpsideas.util.helpers;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.util.math.Vec3d;

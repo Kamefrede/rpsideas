@@ -9,10 +9,9 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.*;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import vazkii.arl.network.NetworkMessage;
 import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.common.Psi;
-import com.github.kamefrede.rpsideas.util.NetworkHelpers;
+import com.github.kamefrede.rpsideas.util.helpers.NetworkHelpers;
 
 import java.awt.*;
 

@@ -3,7 +3,7 @@ package com.github.kamefrede.rpsideas.blocks;
 import com.github.kamefrede.rpsideas.tiles.TileConjuredPulsar;
 import com.github.kamefrede.rpsideas.tiles.TileCracklingStar;
 import com.github.kamefrede.rpsideas.tiles.TileEthereal;
-import com.github.kamefrede.rpsideas.util.LibBlocks;
+import com.github.kamefrede.rpsideas.util.libs.LibBlocks;
 import com.github.kamefrede.rpsideas.util.Reference;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.common.registry.GameRegistry;

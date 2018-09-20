@@ -1,4 +1,4 @@
-package com.github.kamefrede.rpsideas.util;
+package com.github.kamefrede.rpsideas.util.libs;
 
 public class LibObfuscation {
     public static final String[] ITEMRENDERER_PREVEQUIPPEDPROGRESSMAINHAND = new String[] {"g", "field_187470_g", "prevEquippedProgressMainHand"};

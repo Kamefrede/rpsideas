@@ -1,4 +1,4 @@
-package com.github.kamefrede.rpsideas.util;
+package com.github.kamefrede.rpsideas.util.libs;
 
 public class LibPieces {
 

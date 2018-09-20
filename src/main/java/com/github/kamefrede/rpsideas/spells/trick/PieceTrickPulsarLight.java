@@ -1,11 +1,9 @@
 package com.github.kamefrede.rpsideas.spells.trick;
 
-import com.github.kamefrede.rpsideas.blocks.BlockConjuredPulsar;
 import com.github.kamefrede.rpsideas.blocks.BlockPulsarLight;
 import com.github.kamefrede.rpsideas.blocks.ModBlocks;
 import com.github.kamefrede.rpsideas.tiles.TileConjuredPulsar;
-import com.github.kamefrede.rpsideas.tiles.TileEthereal;
-import com.github.kamefrede.rpsideas.util.SpellHelpers;
+import com.github.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;

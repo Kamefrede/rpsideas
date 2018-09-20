@@ -88,10 +88,36 @@ rpsideas.spellparma.vazkii= Ray
 tile.rpsideas:conjuredblock.name=Ethereal Conjured Block
 tile.rpsideas:conjured_pulsar_block.name=Conjured Pulsar Light Block
 tile.rpsideas:conjured_star_block.name=Conjured Crackling Star
+tile.rpsideas.cad_case.white.name=White CAD Case
+tile.rpsideas.cad_case.orange.name=Orange CAD Case
+tile.rpsideas.cad_case.magenta.name=Magenta CAD Case
+tile.rpsideas.cad_case.lightBlue.name=Light Blue CAD Case
+tile.rpsideas.cad_case.yellow.name=Yellow CAD Case
+tile.rpsideas.cad_case.lime.name=Lime CAD Case
+tile.rpsideas.cad_case.pink.name=Pink CAD Case
+tile.rpsideas.cad_case.gray.name=Gray CAD Case
+tile.rpsideas.cad_case.silver.name=Light Gray CAD Case
+tile.rpsideas.cad_case.cyan.name=Cyan CAD Case
+tile.rpsideas.cad_case.purple.name=Purple CAD Case
+tile.rpsideas.cad_case.blue.name=Blue CAD Case
+tile.rpsideas.cad_case.brown.name=Brown CAD Case
+tile.rpsideas.cad_case.green.name=Green CAD Case
+tile.rpsideas.cad_case.red.name=Red CAD Case
+tile.rpsideas.cad_case.black.name=Black CAD Case
 
 
 
 item.rpsideas.flash_ring.name=Flash Ring
+item.rpsideas.magazine.name=Spell Magazine
+item.rpsideas.inline_caster.name=Inline Caster
 
+
+rpsideas.misc.too_complex=This spell is too large for the socket in your Spell Magazine.
+rpsideas.misc.too_complex_bullet=This spell is too large for the socket in your Spell Magazine to transfer.
+
+
+itemGroup.rpsideas=Random PSIdeas
+
+rpsideas.subtitle.thwack=Metal thwacks
 
 rpsideas.channelid=Channel %d

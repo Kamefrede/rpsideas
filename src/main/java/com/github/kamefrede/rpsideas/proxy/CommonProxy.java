@@ -1,6 +1,7 @@
 package com.github.kamefrede.rpsideas.proxy;
 
 import com.github.kamefrede.rpsideas.blocks.ModBlocks;
+import com.github.kamefrede.rpsideas.blocks.PsionicBlocksCompat;
 import com.github.kamefrede.rpsideas.items.ModItems;
 import com.github.kamefrede.rpsideas.network.RPSPacketHandler;
 import com.github.kamefrede.rpsideas.spells.base.SpellPieces;
@@ -44,10 +45,6 @@ public class CommonProxy {
 
     }
 
-    @SubscribeEvent
-    public static void registerItems(RegistryEvent.Register<Item> event){
-        ModItems.register(event.getRegistry());
-    }
 
 
 
