@@ -110,10 +110,14 @@ tile.rpsideas.cad_case.black.name=Black CAD Case
 item.rpsideas.flash_ring.name=Flash Ring
 item.rpsideas.magazine.name=Spell Magazine
 item.rpsideas.inline_caster.name=Inline Caster
+item.rpsideas.wide_socket.name=Wide Band Socket
 
+rpsideas.componentType=Component Type:
+rpsideas.misc.cost=Cost Multiplier:
+rpsideas.misc.hold=Hold 
+rpsideas.misc.shift=SHIFT
+rpsideas.misc.info= for more info
 
-rpsideas.misc.too_complex=This spell is too large for the socket in your Spell Magazine.
-rpsideas.misc.too_complex_bullet=This spell is too large for the socket in your Spell Magazine to transfer.
 
 
 itemGroup.rpsideas=Random PSIdeas

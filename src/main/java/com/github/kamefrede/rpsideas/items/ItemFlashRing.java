@@ -11,6 +11,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -59,7 +60,7 @@ public class ItemFlashRing extends Item implements ISpellContainer {
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag mistake) {
-        String cost = I18n.translateToLocalFormatted("psimisc.bulletCost", (int) (getCostModifier(stack) * 100));
+        String cost = TextFormatting.AQUA + I18n.translateToLocal("rpsideas.misc.cost") + " " + TextFormatting.GRAY +  (int) (getCostModifier(stack) * 100) + "%";
         tooltip.add(cost);
     }
 

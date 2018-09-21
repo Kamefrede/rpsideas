@@ -1,0 +1,29 @@
+{
+  "conditions": [
+    {
+      "type": "inline_caster_enabled"
+    }
+  ],
+  "result": {
+    "item": "rpsideas:inline_caster"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "MMG",
+    "MS ",
+    "   "
+  ],
+  "key": {
+    "M": {
+      "item": "psi:material",
+      "data": 1
+    },
+    "S": {
+      "item": "rpsideas:wide_socket"
+    },
+    "G": {
+      "item": "psi:material",
+      "data": 2
+    }
+  }
+}

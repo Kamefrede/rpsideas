@@ -2,7 +2,7 @@
 An attempt at a PSI addon
 1.12
 
-Features
+Spell Pieces
 ============
 * Trick: Conjure Block Direction (Conjures a block with a direction that the user chooses)
 * Trick: Conjure Ethereal Block
@@ -20,7 +20,14 @@ Features
 * Selector: Caster Battery
 
 
-Ported from PSIonic Upgrades
+Items from PSIonic Upgrades
+=============
+* Wide Band Socket
+* Flash Ring
+* CAD Case
+* Inline Caster
+
+Spell Pieces from PSIonic Upgrades
 =============
 * Operator: List Size
 * Operator: Get Block Properties

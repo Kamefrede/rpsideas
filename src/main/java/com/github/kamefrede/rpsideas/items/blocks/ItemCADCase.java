@@ -51,7 +51,7 @@ public class ItemCADCase extends Item16Colors {
     @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
         target.knockBack(attacker, 1f, Math.sin(attacker.rotationYaw * Math.PI / 180d), -Math.cos(attacker.rotationYaw * Math.PI / 180d));
-        //QuatMiscHelpers.emitSoundFromEntity(attacker.world, attacker, PsionicSoundEvents.THWACK);
+        MiscHelpers.emitSoundFromEntity(attacker.world, attacker, RPSSoundHandler.THWACK);
         return false;
     }
 

@@ -1,0 +1,24 @@
+{
+  "result": {
+    "item": "rpsideas:wide_socket",
+    "count": 1
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " GI",
+    "DI ",
+    "I  "
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "D": {
+      "item": "psi:material",
+      "data": 0
+    },
+    "G": {
+      "item": "minecraft:glowstone_dust"
+    }
+  }
+}

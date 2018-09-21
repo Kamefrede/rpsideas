@@ -14,6 +14,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.ICAD;
+import vazkii.psi.common.item.base.ModItems;
 
 @Mod.EventBusSubscriber(modid = Reference.MODID)
 public class FlowColorsHelper {
@@ -29,9 +30,8 @@ public class FlowColorsHelper {
                 clearColorizer(player);
             } else {
                 ItemStack colorizer = ((ICAD)cad.getItem()).getComponentInSlot(cad, EnumCADComponent.DYE);
-
-               // if(colorizer.isEmpty()) colorizer = new ItemStack(ModItems.liquidColorizer);
-               // applyColorizer(player, colorizer);
+               if(colorizer.isEmpty()) colorizer = new ItemStack(ModItems.cadColorizer);
+               applyColorizer(player, colorizer);
             }
         }
     }

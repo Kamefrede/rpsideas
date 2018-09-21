@@ -157,7 +157,7 @@ public class BlockCADCase extends Block {
             for(int i=0; i < handler.getSlots(); i++){
                 handler.insertItem(i, tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).getStackInSlot(i), false);
             }
-            if(cadCase.getName() != null){
+            if(cadCase.getDisplayName() != null){
                 itemstack.setStackDisplayName(cadCase.getName());
             }
             spawnAsEntity(worldIn, pos, itemstack);
@@ -253,6 +253,7 @@ public class BlockCADCase extends Block {
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
         IItemHandler stackHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 
+
         boolean shifting = GuiScreen.isShiftKeyDown();
 
         if(stackHandler != null) {
@@ -268,7 +269,7 @@ public class BlockCADCase extends Block {
                     if(shifting) {
                         for(String line : slotTooltip) tooltip.add("|   " + line);
                     } else {
-                        tooltip.add("|   " + I18n.translateToLocal("psimisc.shiftForInfo"));
+                        tooltip.add("|   " + I18n.translateToLocal("rpsideas.misc.hold") + TextFormatting.AQUA + I18n.translateToLocal("rpsideas.misc.shift") + TextFormatting.RESET + I18n.translateToLocal("rpsideas.misc.info") );
                     }
                 }
             }

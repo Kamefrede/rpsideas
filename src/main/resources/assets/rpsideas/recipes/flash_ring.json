@@ -1,0 +1,29 @@
+{
+  "conditions": [
+    {
+      "type": "flash_ring_enabled"
+    }
+  ],
+  "result": {
+    "item": "rpsideas:flash_ring"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " E ",
+    "EGE",
+    " P "
+  ],
+  "key": {
+    "E": {
+      "item": "psi:material",
+      "data": 3
+    },
+    "G": {
+      "item": "minecraft:glowstone_dust"
+    },
+    "P": {
+      "item": "psi:material",
+      "data": 2
+    }
+  }
+}

@@ -12,11 +12,16 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
 public class ModItems {
+
+    @GameRegistry.ObjectHolder(Reference.MODID + ":" + "wide_socket")
+    public static final Item wideBandSocket = Items.AIR;
+
     @GameRegistry.ObjectHolder(Reference.MODID + ":" + "flash_ring")
     public static final Item flashRing = Items.AIR;
 
     @GameRegistry.ObjectHolder(Reference.MODID + ":" + "cad_case")
     public static final Item cadCaseItem = Items.AIR;
+
 
     @GameRegistry.ObjectHolder(Reference.MODID + ":" + "inline_caster")
     public static final Item inlineCaster = Items.AIR;
@@ -24,6 +29,7 @@ public class ModItems {
     public static void register(IForgeRegistry<Item> reg) {
         reg.register(createItem(new ItemFlashRing(), "flash_ring"));
         reg.register(createItem(new ItemInlineCaster(), "inline_caster"));
+        reg.register(createItem(new ItemWideCADSocket(), "wide_socket"));
 
         reg.register(createItemBlock(new ItemCADCase(PsionicBlocksCompat.cadCase)));
     }

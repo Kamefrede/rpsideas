@@ -1,0 +1,1 @@
+{"conditions": [{"type": "cad_case_enabled"}], "result": {"item": "rpsideas:cad_case", "data": 2}, "type": "forge:ore_shaped", "pattern": [" B ", "GWG", "MMM"], "key": {"B": {"item": "minecraft:wool", "data": 15}, "G": {"item": "psi:material", "data": 2}, "W": {"item": "minecraft:wool", "data": 2}, "M": {"item": "psi:material", "data": 1}}}

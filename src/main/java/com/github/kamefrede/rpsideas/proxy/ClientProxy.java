@@ -50,6 +50,7 @@ public class ClientProxy extends CommonProxy {
     public static void models(ModelRegistryEvent e) {
         setDefaultModel(ModItems.flashRing);
         setDefaultModel(ModItems.inlineCaster);
+        setDefaultModel(ModItems.wideBandSocket);
         ModelLoader.setCustomStateMapper(PsionicBlocksCompat.cadCase, new StateMap.Builder().ignore(BlockCADCase.COLOR).build());
         for(int i = 0; i < 16; i++) {
             setDefaultModel(ModItems.cadCaseItem, i);
