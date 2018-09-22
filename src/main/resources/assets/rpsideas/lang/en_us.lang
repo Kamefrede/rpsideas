@@ -57,6 +57,7 @@ psi.spellpiece.rpsideas.get_hardness.desc=Gets the hardness value of a block
 psi.spellpiece.rpsideas.get_solidity.desc=Gets whether the side of a block is solid
 psi.spellpiece.rpsideas.get_comparator.desc=Gets the comparator strength a block has
 psi.spellpiece.rpsideas.trick_pulsar.desc=Conjures a redstone emitting block in the given position
+psi.spellpiece.rpsideas.trick_pulsar_sequence.desc=Conjures a sequence of redstone emitting blocks
 psi.spellpiece.rpsideas.trick_pulsar_light.desc=Conjures a redstone emitting light in the given position
 psi.spellpiece.rpsideas.trick_debug_spamless.desc=Prints out the target, replacing any previous prints with the same number
 psi.spellpiece.rpsideas.trick_conjure_star.desc=Conjures a light that emits particles along the given ray
@@ -66,7 +67,7 @@ psi.spellpiece.rpsideas.trick_spin_chamber.desc=Sets and executes the next spell
 psi.spellpiece.rpsideas.selector_caster_energy.desc=Gets the caster's currently available PSI energy
 psi.spellpiece.rpsideas.selector_caster_battery.desc=Gets the caster's currently available Overflow value
 
-
+rpsideas.datatype.BlockProperties=Properties
 rpsideas.spellerror.nthroot=Even numbered roots don't accept negative numbers
 rpsideas.spellerror.length=Lengths can't be negative
 rpsideas.spellerror.nonaxial=Vector cannot be non-axial
