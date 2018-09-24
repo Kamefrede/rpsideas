@@ -1,6 +1,7 @@
 package com.github.kamefrede.rpsideas.spells.operator;
 
 import com.github.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
+import com.github.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import vazkii.psi.api.internal.Vector3;
@@ -13,7 +14,9 @@ public class PieceOperatorVectorStrongRaycast extends PieceOperator {
 
     SpellParam origin;
     SpellParam ray;
-    SpellParam max;
+    SpellParam maxParam;
+
+    private static final double MAX_MAX = 32d;
 
 
 
@@ -25,7 +28,7 @@ public class PieceOperatorVectorStrongRaycast extends PieceOperator {
     public void initParams() {
         addParam(origin = new ParamVector(SpellParam.GENERIC_NAME_POSITION, SpellParam.BLUE, false, false));
         addParam(ray = new ParamVector("psi.spellparam.ray", SpellParam.GREEN, false, false));
-        addParam(max = new ParamNumber(SpellParam.GENERIC_NAME_MAX, SpellParam.PURPLE, true, false));
+        addParam(maxParam = new ParamNumber(SpellParam.GENERIC_NAME_MAX, SpellParam.PURPLE, true, false));
     }
 
     @Override
@@ -35,21 +38,17 @@ public class PieceOperatorVectorStrongRaycast extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
+        if(context.caster.world.isRemote) return null;
         Vector3 originVec = this.<Vector3>getParamValue(context, origin);
         Vector3 rayVec = this.<Vector3>getParamValue(context, ray);
-        Double maxVal = this.<Double>getParamValue(context, max);
         if(originVec == null || rayVec == null) {
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
         }
-        Double maxLen = 32.0;
-        if(maxVal > 0){
-            maxLen = maxVal;
-        } else throw new SpellRuntimeException(SpellRuntimeExceptions.NEGATIVE_LENGTH);
+        double max = SpellHelpers.Runtime.getNumber(this, context, maxParam, MAX_MAX);
+        max = Math.min(max, MAX_MAX);
+        if(max < 0) throw new SpellRuntimeException(SpellRuntimeExceptions.NEGATIVE_LENGTH);
 
-
-        maxLen = Math.min(32.0, maxLen);
-
-        Vector3 endVec = originVec.copy().add(rayVec.copy().normalize().multiply(maxLen));
+        Vector3 endVec = originVec.copy().add(rayVec.copy().normalize().multiply(max));
         RayTraceResult res = context.caster.world.rayTraceBlocks(originVec.toVec3D(), endVec.toVec3D(), false, true, false);
 
         if(res != null && res.getBlockPos() != null) {

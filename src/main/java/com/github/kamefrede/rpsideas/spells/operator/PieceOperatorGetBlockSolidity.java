@@ -11,31 +11,28 @@ import vazkii.psi.api.spell.param.ParamVector;
 
 
 public class PieceOperatorGetBlockSolidity extends BasePieceOperatorBlockProperties<Double> {
-
-    SpellParam axis;
-
-    public PieceOperatorGetBlockSolidity(Spell spell){
+    public PieceOperatorGetBlockSolidity(Spell spell) {
         super(spell);
     }
 
-    @Override
-    public void initParams() {
-        addParam(axis = new ParamVector(SpellParams.GENERIC_NAME_AXIS, SpellParam.BLUE, false, false));
-    }
+    private SpellParam axisParam;
 
     @Override
-    public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
-        super.addToMetadata(meta);
+    public void initParams() {
+        super.initParams();
+
+        axisParam = new ParamVector(SpellParams.GENERIC_VAZKII_RAY, SpellParam.BLUE, false, false);
+        addParam(axisParam);
     }
 
     @Override
     Double getData(SpellContext context, BlockProperties props) throws SpellRuntimeException {
-        Vector3 ax = this.<Vector3>getParamValue(context, axis);
-        if(!ax.isAxial()){
+        Vector3 axis = getParamValue(context, axisParam);
+        if(!axis.isAxial()) {
             throw new SpellRuntimeException(SpellRuntimeExceptions.NON_AXIAL_VECTOR);
         }
 
-        EnumFacing facing = EnumFacing.getFacingFromVector((float) ax.x, (float) ax.y, (float) ax.z);
+        EnumFacing facing = EnumFacing.getFacingFromVector((float) axis.x, (float) axis.y, (float) axis.z);
         return props.sideSolid(facing) ? 1d : 0d;
     }
 

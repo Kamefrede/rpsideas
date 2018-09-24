@@ -84,7 +84,9 @@ rpsideas.spellparam.angle=Angle to rotate
 rpsideas.spellparam.fallback=Fallback vector
 rpsideas.spellparam.target1=Target 1
 rpsideas.spellparam.target2=Target 2
-rpsideas.spellparma.vazkii= Ray
+rpsideas.spellparam.vazkii=Axis Vector
+psi.datatype.BlockProperties=Block Properties
+
 
 tile.rpsideas:conjuredblock.name=Ethereal Conjured Block
 tile.rpsideas:conjured_pulsar_block.name=Conjured Pulsar Light Block

@@ -5,6 +5,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -16,6 +17,7 @@ import vazkii.arl.block.BlockMod;
 import vazkii.arl.block.BlockModContainer;
 
 import javax.annotation.Nullable;
+import java.util.Random;
 
 public class BlockConjuredStar extends BlockModContainer implements IPsiamBlock {
     public BlockConjuredStar() {
@@ -43,6 +45,16 @@ public class BlockConjuredStar extends BlockModContainer implements IPsiamBlock 
 
     @Override
     public boolean isFullBlock(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public int quantityDropped(Random random) {
+        return 0;
+    }
+
+    @Override
+    public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
         return false;
     }
 
