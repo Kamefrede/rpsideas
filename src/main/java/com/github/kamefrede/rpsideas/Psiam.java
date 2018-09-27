@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -31,8 +32,11 @@ public class Psiam {
 
     public static final Logger LOGGER = LogManager.getLogger(Reference.MODID);
 
+    public static boolean avaritia;
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event){
+        avaritia = Loader.isModLoaded("avaritia");
         proxy.preInit(event);
 
     }
@@ -67,6 +71,7 @@ public class Psiam {
         public static void sounds(RegistryEvent.Register<SoundEvent> e) {
             RPSSoundHandler.registerSounds(e.getRegistry());
         }
+
     }
 
 }

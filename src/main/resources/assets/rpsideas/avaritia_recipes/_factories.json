@@ -1,0 +1,6 @@
+{
+	"conditions": {
+		"creative_cad_enabled": "com.github.kamefrede.rpsideas.compat.avaritia.CreativeCADConditionFactory"
+
+	}
+}

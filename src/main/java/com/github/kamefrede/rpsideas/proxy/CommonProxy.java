@@ -1,12 +1,16 @@
 package com.github.kamefrede.rpsideas.proxy;
 
 import com.github.kamefrede.rpsideas.blocks.ModBlocks;
+import com.github.kamefrede.rpsideas.compat.avaritia.AvaritiaRecipeManager;
+import com.github.kamefrede.rpsideas.items.components.botania.ItemBlasterAssembly;
 import com.github.kamefrede.rpsideas.network.RPSPacketHandler;
 import com.github.kamefrede.rpsideas.spells.base.SpellPieces;
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -40,6 +44,14 @@ public class CommonProxy {
     public static void registerBlocks(RegistryEvent.Register<Block> event){
         ModBlocks.preInit();
 
+
+    }
+    @SubscribeEvent
+    public static void registerItems(RegistryEvent.Register<Item> event) {
+    }
+
+    @SubscribeEvent
+    public void registerRecipes(RegistryEvent.Register<IRecipe> event) {
 
     }
 

@@ -1,0 +1,114 @@
+{
+	"conditions": [{
+		"type": "creative_cad_enabled"
+	}],
+	"type": "avaritia:shaped",
+	"result": {
+		"item": "psi:cad_assembly",
+		"data": 5,
+		"count": 1
+	},
+	"pattern": [
+		"IIIIIIIII",
+		"ICCCCCCCI",
+		"IPPPPPPPI",
+		"IWLISUYTI",
+		"IIAJDFGII",
+		"IIHBIKNII",
+		"IPPPPPPPI",
+		"ICCCCCCCI",
+		"IIIIIIIII"
+	],
+	"key": {
+		"I": {
+			"type": "minecraft:item",
+			"item": "#infinity_block"
+		},
+		"P": {
+			"type": "minecraft:item",
+			"item": "#endest_pearl"
+		},
+		"C": {
+			"type": "minecraft:item",
+			"item": "#infinity_ingot"
+		},
+		"H": {
+			"type": "minecraft:item",
+			"item": "avaritia:infinity_helmet",
+			"data": 0
+		},
+		"B": {
+			"type": "minecraft:item",
+			"item": "avaritia:infinity_chestplate",
+			"data": 0
+		},
+		"K": {
+			"type": "minecraft:item",
+			"item": "avaritia:infinity_pants",
+			"data": 0
+		},
+		"N": {
+			"type": "minecraft:item",
+			"item": "avaritia:infinity_boots",
+			"data": 0
+		},
+		"A": {
+			"type": "minecraft:item",
+			"item": "psi:cad_assembly",
+			"data": 0
+		},
+		"J": {
+			"type": "minecraft:item",
+			"item": "psi:cad_assembly",
+			"data": 1
+		},
+		"D": {
+			"type": "minecraft:item",
+			"item": "psi:cad_assembly",
+			"data": 2
+		},
+		"F": {
+			"type": "minecraft:item",
+			"item": "psi:cad_assembly",
+			"data": 3
+		},
+		"G": {
+			"type": "minecraft:item",
+			"item": "psi:cad_assembly",
+			"data": 4
+		},
+		"W": {
+			"type": "minecraft:item",
+			"item": "avaritia:infinity_axe",
+			"data": 0
+		},
+		"L": {
+			"type": "minecraft:item",
+			"item": "avaritia:infinity_bow",
+			"data": 0
+		},
+		"S": {
+			"type": "minecraft:item",
+			"item": "avaritia:infinity_hoe",
+			"data": 0
+		},
+		"U": {
+			"type": "minecraft:item",
+			"item": "avaritia:infinity_shovel",
+			"data": 0
+		},
+		"T": {
+			"type": "minecraft:item",
+			"item": "avaritia:skullfire_sword"
+		},
+		"Y": {
+			"type": "minecraft:item",
+			"item": "avaritia:infinity_sword",
+			"data": 0
+		}
+
+
+
+
+	}
+}

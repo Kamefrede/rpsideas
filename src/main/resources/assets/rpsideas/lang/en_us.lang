@@ -114,6 +114,61 @@ item.rpsideas.flash_ring.name=Flash Ring
 item.rpsideas.magazine.name=Spell Magazine
 item.rpsideas.inline_caster.name=Inline Caster
 item.rpsideas.wide_socket.name=Wide Band Socket
+item.rpsideas.liquid_colorizer.name=Liquid-Ink CAD Colorizer
+item.rpsideas.empty_colorizer.name=Drained CAD Colorizer
+item.rpsideas.cad_assembly_mana_blaster.name=Blaster CAD Assembly
+
+item.rpsideas.unstable_battery.name=Unstable CAD Battery
+item.rpsideas.twinflow_battery.name=Hybrid Flow CAD Battery
+item.rpsideas.biotic_sensor.name=Exosuit Biotic Sensor
+
+psi.spellpiece.rpsideas.make_mana_burst=Trick: Form Burst
+psi.spellpiece.rpsideas.make_mana_burst.desc=Makes a mana burst from a position along a ray
+
+psi.spellpiece.rpsideas.drum_of_the_wild=Trick: Wild Pulse
+psi.spellpiece.rpsideas.drum_of_the_wild.desc=Pulses with the sound of the Drum of the Wild
+
+psi.spellpiece.rpsideas.drum_of_the_canopy=Trick: Canopy Pulse
+psi.spellpiece.rpsideas.drum_of_the_canopy.desc=Pulses with the sound of the Drum of the Canopy
+
+psi.spellpiece.rpsideas.horn_of_the_covering=Trick: Covering Pulse
+psi.spellpiece.rpsideas.horn_of_the_covering.desc=Pulses with the sound of the Horn of the Covering
+
+psi.spellpiece.rpsideas.drum_of_the_gathering=Trick: Gathering Pulse
+psi.spellpiece.rpsideas.drum_of_the_gathering.desc=Pulses with the sound of the Drum of the Gathering
+
+rpsideas.requirement.form_burst=Blaster CAD Assembly
+
+rpsideas.requirement.base=&bMana Flow Enabler
+rpsideas.requirement.alfheim=&aElven&b Mana Flow Enabler
+rpsideas.requirement.gaia=&dGaian&b Mana Flow Enabler
+rpsideas.requirement.relic=&6Reliquary&b Mana Flow Enabler
+
+rpsideas.cadstat.extra=Extra
+rpsideas.cadstat.downside=Drawback
+rpsideas.downsides.on_damage=Drains entire Psi reserves on damage
+rpsideas.upsides.boost_regen=+%d to Psi regen rate
+rpsideas.upsides.fills_last=Dumps its contents into the main reserve
+
+rpsideas.cadstat.enables=Enables
+rpsideas.requirement.mana_cad=&bMana&7 Flow
+
+rpsideas.misc.lens=Lens&7: %s
+rpsideas.misc.color=Color
+rpsideas.misc.color_inheritance=Color Inheritance
+
+psi.piecegroup.rpsideas.secondary_vectors=Vector Operators II
+psi.piecegroup.rpsideas.secondary_vectors.desc=As the name implies, this group includes nonessential vector operators. The pieces can be separated into three sets.<br><br>The first set is rotation. The red piece, Planar Norm, will get a perpendicular vector to any axial vector, without needing Operator: Vector Cross Product. Vector Rotate will rotate a vector around another, by an angle (in radians).<br><br>The second set is strong raycasts. These act exactly like their regular counterparts, except they ignore nonsolid blocks such as tall grass.<br><br>The final piece is Trick: Particle Trail, which displays a ray in particles for up to twenty seconds, based on the Time parameter.<br>The last set is safety. The single safety piece is Operator: Vector Fallback. If a nonexistent or 0-length vector is given to it as a target, it will pass its fallback along. Otherwise, it will pass the target along.
+
+psi.piecegroup.rpsideas.block_properties=Block Properties
+psi.piecegroup.rpsideas.block_properties.desc=The tricks in this group allow you to test various properties of a block in the world. By getting a block property object, you can then test for its light value, its redstone strength via the comparator function, as well as a few others.<br><br>You can use Operator: Raw Equality to check if two block properties are carrying the same state of a block.<br><br>The final pieces in this category work similarly to Trick: Place Sequence and Trick: Break Sequence. By using Block Properties to mask, you can only break specific blocks, or place specific blocks.
+
+psi.piecegroup.rpsideas.redstone_conjuration=Alternate Conjuration
+psi.piecegroup.rpsideas.redstone_conjuration.desc=These pieces are quite similar to those of the previous group, Block Conjuration. The first type of alternate conjuration is Pulsar. The singular difference between these and the previous group is that conjured Pulsars have a red flare at their center, and emit redstone. The second type is Trick: Conjure Star. It creates a small ball of light that emits a ray of particles. Subsequent casts on the same position will add more rays, but not change the color.
+
+psi.piecegroup.rpsideas.mana_psionics=Mana Manipulation
+psi.piecegroup.rpsideas.mana_psionics.desc=What is elemental magic worth without its most base counterpart?<br><br>This group allows the caster to manipulate the power of Mana. Specifically, making a burst of Mana from your inventory, similar to a Mana Blaster. This requires a special CAD assembly to function, as Psionic materials cannot carry Mana naturally. A CAD made with a Blaster CAD Assembly can store a lens, just like a regular Blaster. Anything a blaster can accept, the Blaster CAD can too. This CAD can enable Mana Flow, allowing any mana trick to fire.<br><br>The other tricks in the category mimic various drums, with a Pulse instead of a drum. The only strange trick is the Gathering Pulse, which requires an Alfen Flow Enabler. This can be achieved by slotting a Lens Clip onto your Blaster CAD.
+
 
 rpsideas.componentType=Component Type:
 rpsideas.misc.cost=Cost Multiplier:

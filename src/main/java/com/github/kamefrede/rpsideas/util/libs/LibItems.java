@@ -10,4 +10,7 @@ public class LibItems {
     public static void initModels(){
     }
 
+    public static final String LIVINGWOOD_CAD = "cad_assembly_mana_blaster";
+    public static final String LIVINGWOOD_CAD_MODEL = "cad_mana_blaster";
+
 }

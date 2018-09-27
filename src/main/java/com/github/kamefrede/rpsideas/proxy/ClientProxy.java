@@ -2,7 +2,11 @@ package com.github.kamefrede.rpsideas.proxy;
 
 import com.github.kamefrede.rpsideas.blocks.BlockCADCase;
 import com.github.kamefrede.rpsideas.blocks.PsionicBlocksCompat;
+import com.github.kamefrede.rpsideas.compat.botania.BotaniaCompatItems;
 import com.github.kamefrede.rpsideas.items.ModItems;
+import com.github.kamefrede.rpsideas.items.components.ItemBioticSensor;
+import com.github.kamefrede.rpsideas.items.components.ItemLiquidColorizer;
+import com.github.kamefrede.rpsideas.items.components.botania.ItemBlasterAssembly;
 import com.github.kamefrede.rpsideas.network.MessageParticleTrail;
 import com.github.kamefrede.rpsideas.network.MessageSpamlessChat;
 import com.github.kamefrede.rpsideas.network.RPSPacketHandler;
@@ -21,7 +25,9 @@ import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.world.ChunkEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -51,6 +57,14 @@ public class ClientProxy extends CommonProxy {
         setDefaultModel(ModItems.flashRing);
         setDefaultModel(ModItems.inlineCaster);
         setDefaultModel(ModItems.wideBandSocket);
+        setDefaultModel(ModItems.liquidColorizer);
+        setDefaultModel(ModItems.drainedColorizer);
+        setDefaultModel(ModItems.unstableBattery);
+        setDefaultModel(ModItems.twinflowBattery);
+        setDefaultModel(ModItems.bioticSensor);
+        if(Loader.isModLoaded("botania")){
+            setDefaultModel(BotaniaCompatItems.blaster);
+        }
         ModelLoader.setCustomStateMapper(PsionicBlocksCompat.cadCase, new StateMap.Builder().ignore(BlockCADCase.COLOR).build());
         for(int i = 0; i < 16; i++) {
             setDefaultModel(ModItems.cadCaseItem, i);
@@ -83,6 +97,18 @@ public class ClientProxy extends CommonProxy {
     @SubscribeEvent
     public static void itemColors(ColorHandlerEvent.Item e) {
         ItemColors ic = e.getItemColors();
+
+        ic.registerItemColorHandler((stack, layer) -> {
+            if(layer == 1) {
+                return ((ItemBioticSensor)ModItems.bioticSensor).getColor(stack);
+            } else return 0xFFFFFF;
+        }, ModItems.bioticSensor);
+
+        ic.registerItemColorHandler((stack, layer) -> {
+            if(layer == 1) {
+                return ((ItemLiquidColorizer)ModItems.liquidColorizer).getColor(stack);
+            } else return 0xFFFFFF;
+        }, ModItems.liquidColorizer);
 
         ic.registerItemColorHandler((stack, layer) -> {
             if (layer == 1) {

@@ -1,5 +1,7 @@
 package com.github.kamefrede.rpsideas.util.libs;
 
+import com.github.kamefrede.rpsideas.util.Reference;
+
 public class LibPieces {
 
     public static final String TRICK_DIRECTION_PLACE_BLOCK = "trick_direction_place_block";
@@ -34,6 +36,16 @@ public class LibPieces {
     public static final String TRICK_BREAK_LOOP = "trick_break_loop";
     public static final String SELECTOR_CASTER_ENERGY = "selector_caster_energy";
     public static final String SELECTOR_CASTER_BATTERY = "selector_caster_battery";
-    public static final String TRICK_SPIN_CHAMBER = "trick_spin_chamber";
+
+    public static final String ALTERNATE_CONJURATION = Reference.MODID + ".redstone_conjuration";
+    public static final String SECONDARY_VECTOR_OPERATORS = Reference.MODID + ".secondary_vectors";
+    public static final String BLOCK_PROPERTIES = Reference.MODID + ".block_properties";
+
+    public static final String MANA_PSIONICS = Reference.MODID + ".mana_psionics";
+    public static final String MAKE_BURST = "make_mana_burst";
+    public static final String WILD_DRUM = "drum_of_the_wild";
+    public static final String CANOPY_DRUM = "drum_of_the_canopy";
+    public static final String COVERING_HORN = "horn_of_the_covering";
+    public static final String GATHERING_DRUM = "drum_of_the_gathering";
 
 }
