@@ -75,8 +75,8 @@ public interface IComponentPiece {
         }
 
         if (flag)
-            throw new SpellRuntimeException("psionup.spellerror.trickdisabled");
-        throw new SpellRuntimeException("psionup.spellerror.tricknotenabled");
+            throw new SpellRuntimeException("rpsideas.spellerror.trickdisabled");
+        throw new SpellRuntimeException("rpsideas.spellerror.tricknotenabled");
     }
 
     static void addToTooltip(SpellPiece piece, List<String> tooltip) {
@@ -87,7 +87,7 @@ public interface IComponentPiece {
         TooltipHelper.addToTooltip(tooltip, TextFormatting.GRAY + "%s", piece.getUnlocalizedDesc());
 
         for (String obj : componentPiece.requiredObjects())
-            TooltipHelper.addToTooltip(tooltip, "psionup.spelldesc.requires", obj);
+            TooltipHelper.addToTooltip(tooltip, "rpsideas.spelldesc.requires", obj);
 
         TooltipHelper.addToTooltip(tooltip, "");
         String eval = piece.getEvaluationTypeString();
