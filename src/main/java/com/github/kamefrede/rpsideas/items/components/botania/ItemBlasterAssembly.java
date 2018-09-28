@@ -1,5 +1,6 @@
 package com.github.kamefrede.rpsideas.items.components.botania;
 
+import com.github.kamefrede.rpsideas.compat.botania.RecipeBlasterCADClipp;
 import com.github.kamefrede.rpsideas.items.base.ItemComponent;
 import com.github.kamefrede.rpsideas.util.botania.EnumManaTier;
 import com.github.kamefrede.rpsideas.util.botania.IBlasterComponent;
@@ -21,10 +22,13 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.RecipeSorter;
 import vazkii.arl.util.ModelHandler;
 import vazkii.botania.api.mana.ManaItemHandler;
 import vazkii.botania.client.core.handler.ItemsRemainingRenderHandler;
@@ -40,12 +44,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+
+@Mod.EventBusSubscriber(Side.CLIENT)
 public class ItemBlasterAssembly extends ItemComponent implements IBlasterComponent {
 
     public ItemBlasterAssembly() {
-        //TODO find a home for those recipes.
-        MinecraftForge.EVENT_BUS.register(this.getClass());
-
         vazkii.psi.common.item.base.ModItems.cad.addPropertyOverride(new ResourceLocation(Reference.MODID, "clip"), ((stack, world, ent) -> ItemManaGun.hasClip(stack) ? 1f : 0f));
     }
 

@@ -28,15 +28,9 @@ public class ModItems {
     @GameRegistry.ObjectHolder(Reference.MODID + ":" + "cad_case")
     public static final Item cadCaseItem = Items.AIR;
 
-
     @GameRegistry.ObjectHolder(Reference.MODID + ":" + "inline_caster")
     public static final Item inlineCaster = Items.AIR;
 
-    @GameRegistry.ObjectHolder(Reference.MODID + ":" + "liquid_colorizer")
-    public static final Item liquidColorizer = Items.AIR;
-
-    @GameRegistry.ObjectHolder(Reference.MODID + ":" + "empty_colorizer")
-    public static final Item drainedColorizer = Items.AIR;
 
     @GameRegistry.ObjectHolder(Reference.MODID + ":" + "biotic_sensor")
     public static final Item bioticSensor = Items.AIR;
@@ -46,6 +40,15 @@ public class ModItems {
 
     @GameRegistry.ObjectHolder(Reference.MODID + ":" + "twinflow_battery")
     public static final Item twinflowBattery = Items.AIR;
+
+    @GameRegistry.ObjectHolder(Reference.MODID + ":" + "creative_battery")
+    public static final Item creativeBattery = Items.AIR;
+
+    @GameRegistry.ObjectHolder(Reference.MODID + ":" + "creative_core")
+    public static final Item creativeCore = Items.AIR;
+
+    @GameRegistry.ObjectHolder(Reference.MODID + ":" + "creative_socket")
+    public static final Item creativeSocket = Items.AIR;
 
 
 
@@ -58,11 +61,12 @@ public class ModItems {
         reg.register(createItem(new ItemFlashRing(), "flash_ring"));
         reg.register(createItem(new ItemInlineCaster(), "inline_caster"));
         reg.register(createItem(new ItemWideCADSocket(), "wide_socket"));
-        reg.register(createItem(new ItemLiquidColorizer(), "liquid_colorizer"));
-        reg.register(createItem(new ItemEmptyColorizer(), "empty_colorizer"));
         reg.register(createItem(new ItemBioticSensor(), "biotic_sensor"));
         reg.register(createItem(new ItemUnstableBattery(), "unstable_battery"));
         reg.register(createItem(new ItemTwinflowBattery(), "twinflow_battery"));
+        reg.register(createItem(new ItemCreativeBattery(), "creative_battery"));
+        reg.register(createItem(new ItemCreativeCore(), "creative_core"));
+        reg.register(createItem(new ItemCreativeSocket(), "creative_socket"));
 
         reg.register(createItemBlock(new ItemCADCase(PsionicBlocksCompat.cadCase)));
         if(Loader.isModLoaded("botania")){ BotaniaCompatItems.register(reg);

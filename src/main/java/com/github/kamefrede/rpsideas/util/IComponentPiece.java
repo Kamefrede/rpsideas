@@ -87,7 +87,7 @@ public interface IComponentPiece {
         TooltipHelper.addToTooltip(tooltip, TextFormatting.GRAY + "%s", piece.getUnlocalizedDesc());
 
         for (String obj : componentPiece.requiredObjects())
-            TooltipHelper.addToTooltip(tooltip, "rpsideas.spelldesc.requires", obj);
+            TooltipHelper.addToTooltip(tooltip, TextFormatting.GRAY + "rpsideas.spelldesc.requires" + TextFormatting.DARK_PURPLE, obj);
 
         TooltipHelper.addToTooltip(tooltip, "");
         String eval = piece.getEvaluationTypeString();

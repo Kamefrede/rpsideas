@@ -116,7 +116,10 @@ item.rpsideas.inline_caster.name=Inline Caster
 item.rpsideas.wide_socket.name=Wide Band Socket
 item.rpsideas.liquid_colorizer.name=Liquid-Ink CAD Colorizer
 item.rpsideas.empty_colorizer.name=Drained CAD Colorizer
-item.rpsideas.cad_assembly_mana_blaster.name=Blaster CAD Assembly
+item.rpsideas.cad_blaster.name=Mana Blaster CAD
+item.rpsideas.creative_core.name=Creative CAD Core
+item.rpsideas.creative_battery.name=Creative CAD Battery
+item.rpsideas.creative_socket.name=Creative CAD Socket
 
 item.rpsideas.unstable_battery.name=Unstable CAD Battery
 item.rpsideas.twinflow_battery.name=Hybrid Flow CAD Battery
@@ -151,9 +154,9 @@ rpsideas.upsides.boost_regen=+%d to Psi regen rate
 rpsideas.upsides.fills_last=Dumps its contents into the main reserve
 
 rpsideas.cadstat.enables=Enables
-rpsideas.requirement.mana_cad=&bMana&7 Flow
+rpsideas.requirement.mana_cad=Mana Flow
 
-rpsideas.misc.lens=Lens&7: %s
+rpsideas.misc.lens=Lens: %s
 rpsideas.misc.color=Color
 rpsideas.misc.color_inheritance=Color Inheritance
 
@@ -175,7 +178,7 @@ rpsideas.misc.cost=Cost Multiplier:
 rpsideas.misc.hold=Hold 
 rpsideas.misc.shift=SHIFT
 rpsideas.misc.info= for more info
-rpsideas.spelldesc.requires=&7Requires: &5%s
+rpsideas.spelldesc.requires=Requires: %s
 rpsideas.spellerror.tricknotenabled=ERROR: Trick doesn't have an enabling component.
 rpsideas.spellerror.trickdisabled=ERROR: Trick's enabling component doesn't have its requirements met.
 
