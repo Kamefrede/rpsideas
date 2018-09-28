@@ -2,6 +2,20 @@
 An attempt at a PSI addon
 1.12
 
+
+
+
+Items
+===========
+* Creative CAD Socket
+* Creative CAD Core
+* Creative CAD Battery
+
+Mod Integrations
+===========
+* Avaritia
+* Botania
+
 Spell Pieces
 ============
 * Trick: Conjure Block Direction (Conjures a block with a direction that the user chooses)
@@ -26,6 +40,7 @@ Items from PSIonic Upgrades
 * Flash Ring
 * CAD Case
 * Inline Caster
+* Blaster CAD
 
 Spell Pieces from PSIonic Upgrades
 =============
@@ -47,6 +62,7 @@ Spell Pieces from PSIonic Upgrades
 * Trick: Conjure Pulsar
 * Trick: Conjure Pulsar Light
 * Trick: Conjure Pulsar Sequence
+* The Mana Tricks
 
 Unfeatures
 ============
