@@ -36,6 +36,15 @@ public class LibPieces {
     public static final String TRICK_BREAK_LOOP = "trick_break_loop";
     public static final String SELECTOR_CASTER_ENERGY = "selector_caster_energy";
     public static final String SELECTOR_CASTER_BATTERY = "selector_caster_battery";
+    public static final String SELECTOR_EMPTY_LIST = "selector_empty_list";
+    public static final String OPERATOR_LIST_UNION = "operator_list_union";
+    public static final String OPERATOR_LIST_INTERSECTION = "operator_list_intersection";
+    public static final String OPERATOR_LIST_EXCLUSION = "operator_list_exclusion";
+    public static final String PIECE_TRICK_NAUSEA = "trick_nausea";
+    public static final String PIECE_TRICK_BLINDNESS = "trick_blindness";
+    public static final String PIECE_SELECTOR_EIDOS_TIMESTAMP = "selector_eidos_timestamp";
+    public static final String SELECTOR_NEARBY_VECHICLES = "selector_nearby_vehicles";
+    public static final String SELECTOR_NEARBY_FALLING_BLOCKS = "selector_nearby_falling_blocks";
 
     public static final String ALTERNATE_CONJURATION = Reference.MODID + ".redstone_conjuration";
     public static final String SECONDARY_VECTOR_OPERATORS = Reference.MODID + ".secondary_vectors";

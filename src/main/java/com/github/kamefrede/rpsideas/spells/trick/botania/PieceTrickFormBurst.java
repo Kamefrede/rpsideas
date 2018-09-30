@@ -16,10 +16,12 @@ import vazkii.botania.common.core.handler.ModSounds;
 import vazkii.botania.common.entity.EntityManaBurst;
 import vazkii.botania.common.item.ItemManaGun;
 import vazkii.psi.api.PsiAPI;
+import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamVector;
+import vazkii.psi.common.core.handler.PlayerDataHandler;
 
 public class PieceTrickFormBurst extends PieceComponentTrick {
     public PieceTrickFormBurst(Spell spell) {
@@ -49,8 +51,10 @@ public class PieceTrickFormBurst extends PieceComponentTrick {
 
     @Override
     public ITrickEnablerComponent.EnableResult acceptsPiece(ItemStack component, ItemStack cad, SpellContext context, Spell spell, int x, int y) {
-        if(component.getItem() instanceof IBlasterComponent) {
-            return ITrickEnablerComponent.EnableResult.fromBoolean(ManaItemHandler.requestManaExact(cad, context.caster, MANA_PER_BURST, true));
+        System.out.println("no ladd");
+        if(((ICAD) cad.getItem()).getComponentInSlot(cad, EnumCADComponent.ASSEMBLY).getItem() instanceof IBlasterComponent) {
+            System.out.println("yes laddd");
+            return ITrickEnablerComponent.EnableResult.fromBoolean(true);
         } else return ITrickEnablerComponent.EnableResult.NOT_ENABLED;
     }
 

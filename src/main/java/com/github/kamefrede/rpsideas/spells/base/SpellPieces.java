@@ -3,9 +3,7 @@ package com.github.kamefrede.rpsideas.spells.base;
 
 import com.github.kamefrede.rpsideas.compat.botania.BotaniaCompatPieces;
 import com.github.kamefrede.rpsideas.spells.operator.*;
-import com.github.kamefrede.rpsideas.spells.selector.PieceSelectorCasterBattery;
-import com.github.kamefrede.rpsideas.spells.selector.PieceSelectorCasterEnergy;
-import com.github.kamefrede.rpsideas.spells.selector.PieceSelectorNearbyPlayers;
+import com.github.kamefrede.rpsideas.spells.selector.*;
 import com.github.kamefrede.rpsideas.spells.trick.*;
 import com.github.kamefrede.rpsideas.util.libs.LibPieces;
 import com.github.kamefrede.rpsideas.util.Reference;
@@ -13,6 +11,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.spell.SpellPiece;
+import vazkii.psi.api.spell.piece.PieceSelector;
 import vazkii.psi.common.lib.LibPieceGroups;
 
 public class SpellPieces  {
@@ -56,6 +55,15 @@ public class SpellPieces  {
         register(PieceTrickBreakLoop.class, LibPieces.TRICK_BREAK_LOOP, LibPieceGroups.FLOW_CONTROL);
         register(PieceSelectorCasterBattery.class, LibPieces.SELECTOR_CASTER_BATTERY, LibPieceGroups.MEMORY_MANAGEMENT);
         register(PieceSelectorCasterEnergy.class, LibPieces.SELECTOR_CASTER_ENERGY, LibPieceGroups.MEMORY_MANAGEMENT);
+        register(PieceSelectorEmptyList.class, LibPieces.SELECTOR_EMPTY_LIST, LibPieceGroups.ENTITIES_INTRO);
+        register(PieceOperatorListUnion.class, LibPieces.OPERATOR_LIST_UNION, LibPieceGroups.ENTITIES_INTRO);
+        register(PieceOperatorListIntersection.class, LibPieces.OPERATOR_LIST_INTERSECTION, LibPieceGroups.ENTITIES_INTRO);
+        register(PieceOperatorListExclusion.class, LibPieces.OPERATOR_LIST_EXCLUSION, LibPieceGroups.ENTITIES_INTRO);
+        register(PieceTrickNausea.class, LibPieces.PIECE_TRICK_NAUSEA, LibPieceGroups.NEGATIVE_EFFECTS);
+        register(PieceTrickBlindness.class, LibPieces.PIECE_TRICK_BLINDNESS, LibPieceGroups.NEGATIVE_EFFECTS);
+        register(PieceSelectorEidosTimestamp.class, LibPieces.PIECE_SELECTOR_EIDOS_TIMESTAMP, LibPieceGroups.EIDOS_REVERSAL);
+        register(PieceSelectorNearbyVehicles.class, LibPieces.SELECTOR_NEARBY_VECHICLES, LibPieceGroups.ENTITIES_INTRO);
+        register(PieceSelectorFallingBlocks.class, LibPieces.SELECTOR_NEARBY_FALLING_BLOCKS, LibPieceGroups.ENTITIES_INTRO);
         if(Loader.isModLoaded("botania")) {
             BotaniaCompatPieces.init();
         }

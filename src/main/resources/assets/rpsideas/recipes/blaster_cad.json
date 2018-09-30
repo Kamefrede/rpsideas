@@ -1,0 +1,35 @@
+{
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "botania"
+    }
+  ],
+  "result": {
+    "item": "rpsideas:cad_blaster"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "MPS",
+    "L  ",
+    "   "
+  ],
+  "key": {
+    "M": {
+      "item": "botania:rune",
+      "data": 8
+    },
+    "L": {
+      "item": "botania:manaresource",
+      "data": 0
+    },
+    "P": {
+      "item": "psi:material",
+      "data": 2
+    },
+    "S":{
+      "item": "botania:spreader",
+      "data": 1
+    }
+  }
+}

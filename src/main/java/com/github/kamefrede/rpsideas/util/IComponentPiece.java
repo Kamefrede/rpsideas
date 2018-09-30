@@ -1,8 +1,13 @@
 package com.github.kamefrede.rpsideas.util;
 
+import com.github.kamefrede.rpsideas.util.botania.EnumManaTier;
+import com.github.kamefrede.rpsideas.util.botania.IBlasterComponent;
+import com.github.kamefrede.rpsideas.util.botania.IManaTrick;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
+import vazkii.botania.api.mana.ManaItemHandler;
+import vazkii.botania.common.item.ItemManaGun;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.*;
 import vazkii.psi.api.internal.TooltipHelper;
@@ -50,26 +55,33 @@ public interface IComponentPiece {
                 if (compItem.getCADStatValue(component, EnumCADStat.POTENCY) < 0)
                     return componentPiece.executeIfAllowed(context);
 
+
+
                 ITrickEnablerComponent.EnableResult result = componentPiece.acceptsPiece(component, cad, context, piece.spell, piece.x, piece.y);
-                switch (result) {
-                    case MISSING_REQUIREMENT:
-                        flag = true;
-                        break;
-                    case SUCCESS:
-                        return componentPiece.executeIfAllowed(context);
-                    case NOT_ENABLED:
-                        if (component.getItem() instanceof ITrickEnablerComponent) {
-                            ITrickEnablerComponent compEnablerItem = (ITrickEnablerComponent) component.getItem();
-                            result = compEnablerItem.enablePiece(context.caster, component, cad, context, piece.spell, piece.x, piece.y);
-                            switch (result) {
-                                case MISSING_REQUIREMENT:
-                                    flag = true;
-                                    break;
-                                case SUCCESS:
-                                    return componentPiece.executeIfAllowed(context);
-                            }
+                if(result == ITrickEnablerComponent.EnableResult.MISSING_REQUIREMENT){
+                    flag = true;
+                    break;
+                } else if(result == ITrickEnablerComponent.EnableResult.SUCCESS){
+                    return componentPiece.executeIfAllowed(context);
+                } else if(result == ITrickEnablerComponent.EnableResult.NOT_ENABLED){
+                    boolean isElven = ItemManaGun.hasClip(cad);
+                    EnumManaTier cadTier = isElven ? EnumManaTier.ALFHEIM : EnumManaTier.BASE;
+
+                    if(piece instanceof IManaTrick){
+                        IManaTrick manaPiece = (IManaTrick) piece;
+                        if(EnumManaTier.allowed(cadTier, manaPiece.tier())) {
+                            int manaDrain = manaPiece.manaDrain(context, piece.x, piece.y);
+                            ManaItemHandler.requestManaExact(cad, context.caster, manaDrain, true);
+                            return componentPiece.executeIfAllowed(context);
                         }
+
+                    } else if (((ICAD) cad.getItem()).getComponentInSlot(cad, EnumCADComponent.ASSEMBLY).getItem() instanceof IBlasterComponent) {
+                        return componentPiece.executeIfAllowed(context);
+
+                        } else{
+                        flag= true;
                         break;
+                    }
                 }
             }
         }
@@ -87,7 +99,8 @@ public interface IComponentPiece {
         TooltipHelper.addToTooltip(tooltip, TextFormatting.GRAY + "%s", piece.getUnlocalizedDesc());
 
         for (String obj : componentPiece.requiredObjects())
-            TooltipHelper.addToTooltip(tooltip, TextFormatting.GRAY + "rpsideas.spelldesc.requires" + TextFormatting.DARK_PURPLE, obj);
+            TooltipHelper.addToTooltip(tooltip,"rpsideas.spelldesc.requires", obj);
+
 
         TooltipHelper.addToTooltip(tooltip, "");
         String eval = piece.getEvaluationTypeString();

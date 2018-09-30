@@ -25,6 +25,8 @@ Spell Pieces
 * Trick: Plant Sequence
 * Trick: Till
 * Trick: Till Sequence
+* Trick: Blindness
+* Trick: Nausea
 * Selector: Nearby Players
 * Operator: Signum
 * Operator: Degrees to Radians
@@ -32,6 +34,9 @@ Spell Pieces
 * Operator: Root
 * Selector: Caster Energy
 * Selector: Caster Battery
+* Selector: Nearby Falling Blocks
+* Selector: Nearby Vehicles
+
 
 
 Items from PSIonic Upgrades
@@ -64,9 +69,17 @@ Spell Pieces from PSIonic Upgrades
 * Trick: Conjure Pulsar Sequence
 * The Mana Tricks
 
-Unfeatures
+May get removed
 ============
-* None for now
+* Selector: Eidos Timestamp
+* Selector: Empty List
+* Operator: List Intersection
+* Operator: List Exclusion
+* Operator: List Union
+
+Known bugs
+=========
+* Issue #6
 
 Thank yous
 ============

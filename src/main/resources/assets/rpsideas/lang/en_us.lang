@@ -31,6 +31,16 @@ psi.spellpiece.rpsideas.trick_particle_trail=Trick: Particle Trail
 psi.spellpiece.rpsideas.trick_spin_chamber=Trick: Spin Chamber
 psi.spellpiece.rpsideas.selector_caster_energy=Selector: Caster Energy
 psi.spellpiece.rpsideas.selector_caster_battery=Selector: Caster Battery
+psi.spellpiece.rpsideas.trick_blindness=Trick: Blindness
+psi.spellpiece.rpsideas.trick_nausea=Trick: Nausea
+psi.spellpiece.rpsideas.operator_list_union=Operator: List Union
+psi.spellpiece.rpsideas.operator_list_intersection=Operator: List Intersection
+psi.spellpiece.rpsideas.operator_list_exclusion=Operator: List Exclusion
+psi.spellpiece.rpsideas.selector_empty_list=Selector: Empty List
+psi.spellpiece.rpsideas.selector_eidos_timestamp=Selector: Eidos Timestamp
+psi.spellpiece.rpsideas.selector_nearby_vehicles=Selector:Nearby Vehicles
+psi.spellpiece.rpsideas.selector_nearby_falling_blocks=Selector: Nearby Falling Blocks
+
 
 
 psi.spellpiece.rpsideas.trick_conjure_ethereal_block.desc=Conjures an ethereal block at the given position
@@ -66,6 +76,16 @@ psi.spellpiece.rpsideas.trick_particle_trail.desc=Makes a particle trail from a 
 psi.spellpiece.rpsideas.trick_spin_chamber.desc=Sets and executes the next spell bullet if a positive input is provided, or the previous spell bullet if a negative input is provided instead
 psi.spellpiece.rpsideas.selector_caster_energy.desc=Gets the caster's currently available PSI energy
 psi.spellpiece.rpsideas.selector_caster_battery.desc=Gets the caster's currently available Overflow value
+psi.spellpiece.rpsideas.trick_blindness.desc=Applies the potion effect blindness to an entity
+psi.spellpiece.rpsideas.trick_nausea.desc=Apllies the potion effect nausea to an entity
+psi.spellpiece.rpsideas.operator_list_union.desc=Joins two lists
+psi.spellpiece.rpsideas.operator_list_intersection.desc=Intersects two lists
+psi.spellpiece.rpsideas.operator_list_exclusion.desc=Gets all elements from the 1st List that are not in the 2nd
+psi.spellpiece.rpsideas.selector_empty_list.desc=Returns an empty list
+psi.spellpiece.rpsideas.selector_eidos_timestamp.desc=Gets the time since the world began
+psi.spellpiece.rpsideas.selector_nearby_vehicles.desc=Selects any nearby vehicles
+psi.spellpiece.rpsideas.selector_nearby_falling_blocks.desc=Selects any nearby falling blocks
+
 
 rpsideas.datatype.BlockProperties=Properties
 rpsideas.spellerror.nthroot=Even numbered roots don't accept negative numbers
@@ -85,6 +105,8 @@ rpsideas.spellparam.fallback=Fallback vector
 rpsideas.spellparam.target1=Target 1
 rpsideas.spellparam.target2=Target 2
 rpsideas.spellparam.vazkii=Axis Vector
+rpsideas.spellparam.list1=List 1
+rpsideas.spellparam.list2=List 2
 psi.datatype.BlockProperties=Block Properties
 
 

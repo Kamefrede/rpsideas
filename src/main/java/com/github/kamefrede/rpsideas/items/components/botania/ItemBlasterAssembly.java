@@ -24,6 +24,7 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -107,19 +108,18 @@ public class ItemBlasterAssembly extends ItemComponent implements IBlasterCompon
         if(!lens.isEmpty()) {
             String itemName = e.getToolTip().get(0);
 
-            //Wtf is going on
-            if(e.getFlags().isAdvanced()) {
-                StringBuilder joined = new StringBuilder();
-                String[] match = advancedMatcher.split(itemName);
-                if(match.length > 1) {
-                    for(int i = 1; i < match.length; i++) {
-                        if(i != 1) joined.append(' ');
-                        joined.append(match[i]);
-                    }
-                }
 
-                itemName = match[0].trim() + ' ' + TextFormatting.RESET + '(' + TextFormatting.GREEN + lens.getDisplayName() + TextFormatting.RESET + ' ' + joined.toString();
+            //Wtf is going on
+            StringBuilder joined = new StringBuilder();
+            String[] match = advancedMatcher.split(itemName);
+            if(match.length > 1) {
+                for(int i = 1; i < match.length; i++) {
+                    if(i != 1) joined.append(' ');
+                    joined.append(match[i]);
+                }
             }
+
+            itemName = match[0].trim() + ' ' + TextFormatting.RESET + '(' + TextFormatting.GREEN + lens.getDisplayName() + TextFormatting.RESET + ')' + joined.toString();
 
             if(GuiScreen.isShiftKeyDown()) {
                 List<String> gunTooltip = new ArrayList<>();
