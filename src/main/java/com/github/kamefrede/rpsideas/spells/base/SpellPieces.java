@@ -40,13 +40,13 @@ public class SpellPieces  {
         register(PieceOperatorGetBlockLight.class, LibPieces.OPERATOR_GET_BLOCK_LIGHT, LibPieces.BLOCK_PROPERTIES);
         register(PieceOperatorGetBlockComparatorStrength.class, LibPieces.OPERATOR_GET_COMPARATOR_STRENGTH, LibPieces.BLOCK_PROPERTIES);
         register(PieceOperatorGetBlockSolidity.class, LibPieces.OPERATOR_GET_BLOCK_SOLIDITY, LibPieces.BLOCK_PROPERTIES);
-        register(PieceOperatorGetBlockProperties.class, LibPieces.OPERATOR_GET_BLOCK_PROPERTIES, LibPieces.BLOCK_PROPERTIES);
+        register(PieceOperatorGetBlockProperties.class, LibPieces.OPERATOR_GET_BLOCK_PROPERTIES, LibPieces.BLOCK_PROPERTIES, true);
         register(PieceOperatorVectorRotate.class, LibPieces.OPERATOR_VECTOR_ROTATE, LibPieces.SECONDARY_VECTOR_OPERATORS);
         register(PieceOperatorVectorFallback.class, LibPieces.OPERATOR_VECTOR_FALLBACK, LibPieces.SECONDARY_VECTOR_OPERATORS);
         register(PieceOperatorVectorStrongRaycast.class, LibPieces.OPERATOR_VECTOR_STRONG_RAYCAST, LibPieces.SECONDARY_VECTOR_OPERATORS);
         register(PiecePieceOperatorVectorStrongRaycastAxis.class, LibPieces.OPERATOR_STRONG_VECTOR_RAYCAST_AXIS, LibPieces.SECONDARY_VECTOR_OPERATORS);
-        register(PieceOperatorPlanarNormalVector.class, LibPieces.OPERATOR_PLANAR_NORMAL_VECTOR, LibPieces.SECONDARY_VECTOR_OPERATORS);
-        register(PieceTrickConjurePulsar.class, LibPieces.TRICK_PULSAR, LibPieces.ALTERNATE_CONJURATION);
+        register(PieceOperatorPlanarNormalVector.class, LibPieces.OPERATOR_PLANAR_NORMAL_VECTOR, LibPieces.SECONDARY_VECTOR_OPERATORS, true);
+        register(PieceTrickConjurePulsar.class, LibPieces.TRICK_PULSAR, LibPieces.ALTERNATE_CONJURATION, true);
         register(PieceTrickConjurePulsarSequence.class, LibPieces.TRICK_PULSAR_SEQUENCE, LibPieces.ALTERNATE_CONJURATION);
         register(PieceTrickPulsarLight.class, LibPieces.TRICK_PULSAR_LIGHT, LibPieces.ALTERNATE_CONJURATION);
         register(PieceTrickParticleTrail.class, LibPieces.TRICK_PARTICLE_TRAIL, LibPieces.ALTERNATE_CONJURATION);

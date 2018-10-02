@@ -1,7 +1,6 @@
 package com.github.kamefrede.rpsideas.spells.operator;
 
 import com.github.kamefrede.rpsideas.spells.base.SpellParams;
-import com.sun.xml.internal.ws.binding.FeatureListUtil;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellParam;
