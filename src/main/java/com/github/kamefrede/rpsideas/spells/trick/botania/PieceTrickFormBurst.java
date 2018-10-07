@@ -51,9 +51,7 @@ public class PieceTrickFormBurst extends PieceComponentTrick {
 
     @Override
     public ITrickEnablerComponent.EnableResult acceptsPiece(ItemStack component, ItemStack cad, SpellContext context, Spell spell, int x, int y) {
-        System.out.println("no ladd");
         if(((ICAD) cad.getItem()).getComponentInSlot(cad, EnumCADComponent.ASSEMBLY).getItem() instanceof IBlasterComponent) {
-            System.out.println("yes laddd");
             return ITrickEnablerComponent.EnableResult.fromBoolean(true);
         } else return ITrickEnablerComponent.EnableResult.NOT_ENABLED;
     }

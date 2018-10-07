@@ -1,8 +1,6 @@
 package com.github.kamefrede.rpsideas.proxy;
 
 import com.github.kamefrede.rpsideas.blocks.ModBlocks;
-import com.github.kamefrede.rpsideas.compat.avaritia.AvaritiaRecipeManager;
-import com.github.kamefrede.rpsideas.items.components.botania.ItemBlasterAssembly;
 import com.github.kamefrede.rpsideas.network.RPSPacketHandler;
 import com.github.kamefrede.rpsideas.spells.base.SpellPieces;
 import net.minecraft.block.Block;

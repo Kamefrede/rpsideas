@@ -63,9 +63,6 @@ public class Psiam {
             ModItems.register(e.getRegistry());
         }
 
-        @SubscribeEvent
-        public static void entities(RegistryEvent.Register<EntityEntry> e) {
-        }
 
         @SubscribeEvent
         public static void sounds(RegistryEvent.Register<SoundEvent> e) {

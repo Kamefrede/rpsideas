@@ -45,6 +45,7 @@ public class LibPieces {
     public static final String PIECE_SELECTOR_EIDOS_TIMESTAMP = "selector_eidos_timestamp";
     public static final String SELECTOR_NEARBY_VECHICLES = "selector_nearby_vehicles";
     public static final String SELECTOR_NEARBY_FALLING_BLOCKS = "selector_nearby_falling_blocks";
+    public static final String OPERATOR_GET_SIGN_TEXT = "operator_get_sign_text";
 
     public static final String ALTERNATE_CONJURATION = Reference.MODID + ".redstone_conjuration";
     public static final String SECONDARY_VECTOR_OPERATORS = Reference.MODID + ".secondary_vectors";

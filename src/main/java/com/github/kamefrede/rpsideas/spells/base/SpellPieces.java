@@ -11,6 +11,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.spell.SpellPiece;
+import vazkii.psi.api.spell.piece.PieceOperator;
 import vazkii.psi.api.spell.piece.PieceSelector;
 import vazkii.psi.common.lib.LibPieceGroups;
 
@@ -64,6 +65,7 @@ public class SpellPieces  {
         register(PieceSelectorEidosTimestamp.class, LibPieces.PIECE_SELECTOR_EIDOS_TIMESTAMP, LibPieceGroups.EIDOS_REVERSAL);
         register(PieceSelectorNearbyVehicles.class, LibPieces.SELECTOR_NEARBY_VECHICLES, LibPieceGroups.ENTITIES_INTRO);
         register(PieceSelectorFallingBlocks.class, LibPieces.SELECTOR_NEARBY_FALLING_BLOCKS, LibPieceGroups.ENTITIES_INTRO);
+        register(PieceOperatorGetSignText.class, LibPieces.OPERATOR_GET_SIGN_TEXT, LibPieceGroups.MEMORY_MANAGEMENT);
         if(Loader.isModLoaded("botania")) {
             BotaniaCompatPieces.init();
         }
