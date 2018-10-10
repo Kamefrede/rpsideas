@@ -12,16 +12,18 @@ import vazkii.arl.block.BlockMod;
 public class ModBlocks {
 
     public static BlockMod conjuredEthereal;
-    public static BlockMod cadCase;
+    public static BlockMod conjuredGravityBlock;
     public static BlockMod conjuredPulsar;
     public static BlockMod conjuredPulsarLight;
     public static BlockMod conjuredStar;
+
 
     public static void preInit(){
         conjuredEthereal = new ConjuredEtherealBlock();
         conjuredPulsar = new BlockConjuredPulsar();
         conjuredPulsarLight = new BlockPulsarLight();
         conjuredStar = new BlockConjuredStar();
+        conjuredGravityBlock = new BlockConjuredGravityBlock();
 
         initTileEntities();
     }

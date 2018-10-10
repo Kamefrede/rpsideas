@@ -66,6 +66,8 @@ public class SpellPieces  {
         register(PieceSelectorNearbyVehicles.class, LibPieces.SELECTOR_NEARBY_VECHICLES, LibPieceGroups.ENTITIES_INTRO);
         register(PieceSelectorFallingBlocks.class, LibPieces.SELECTOR_NEARBY_FALLING_BLOCKS, LibPieceGroups.ENTITIES_INTRO);
         register(PieceOperatorGetSignText.class, LibPieces.OPERATOR_GET_SIGN_TEXT, LibPieceGroups.MEMORY_MANAGEMENT);
+        register(PieceTrickMoveBlockSequence.class, LibPieces.TRICK_MOVE_BLOCK_SEQUENCE, LibPieceGroups.BLOCK_MOVEMENT);
+        register(PieceOperatorGetComment.class, LibPieces.OPERATOR_GET_COMMENT, LibPieceGroups.MEMORY_MANAGEMENT);
         if(Loader.isModLoaded("botania")) {
             BotaniaCompatPieces.init();
         }

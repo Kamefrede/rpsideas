@@ -1,6 +1,7 @@
 package com.github.kamefrede.rpsideas.proxy;
 
 import com.github.kamefrede.rpsideas.blocks.BlockCADCase;
+import com.github.kamefrede.rpsideas.blocks.BlockConjuredGravityBlock;
 import com.github.kamefrede.rpsideas.blocks.PsionicBlocksCompat;
 import com.github.kamefrede.rpsideas.compat.botania.BotaniaCompatItems;
 import com.github.kamefrede.rpsideas.items.ModItems;

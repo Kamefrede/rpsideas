@@ -117,24 +117,9 @@ public class ConjuredEtherealBlock extends BlockModContainer implements IPsiamBl
 
     @Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB aabb, List<AxisAlignedBB> list, Entity entity, boolean blarg) {
-        if(state.getValue(SOLID))
             addCollisionBoxToList(pos, null, list, null);
     }
 
-    @Override
-    public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World world, BlockPos pos) {
-        boolean solid = state.getValue(SOLID);
-        float f = solid ? 0F : 0.25F;
-
-        double minX = f;
-        double minY = f;
-        double minZ = f;
-        double maxX = 1F - f;
-        double maxY = 1F - f;
-        double maxZ = 1F - f;
-
-        return new AxisAlignedBB(pos.getX() + minX, pos.getY() + minY, pos.getZ() + minZ, pos.getX() + maxX, pos.getY() + maxY, pos.getZ() + maxZ);
-    }
 
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
