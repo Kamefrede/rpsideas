@@ -14,4 +14,6 @@ public abstract class SpellParams {
     public static final String GENERIC_VAZKII_RAY = "rpsideas.spellparam.vazkii";
     public static final String GENERIC_NAME_LIST1 = "rpsideas.spellparam.list1";
     public static final String GENERIC_NAME_LIST2 = "rpsideas.spellparam.list2";
+    public static final String GENERIC_NAME_ENTITY1 = "rpisdeas.spellparam.entity1";
+    public static final String GENERIC_NAME_ENTITY2 = "rpsideas.spellparam.entity2";
 }

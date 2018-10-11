@@ -49,6 +49,10 @@ public class LibPieces {
     public static final String TRICK_MOVE_BLOCK_SEQUENCE = "trick_move_block_sequence";
     public static final String OPERATOR_GET_COMMENT = "operator_get_comment";
     public static final String OPERATOR_GET_DISTANCE_FROM_GROUND = "operator_distance_from_ground";
+    public static final String SELECTOR_GLOWING = "selector_glowing";
+    public static final String SELECTOR_LIST_FILTER = "selector_list_filter";
+    public static final String SELECTOR_VISIBLE_ENTITY = "selector_visible_entity";
+    public static final String SELECTOR_AFFECTED_BY_POTIONS = "selector_affected_by_potions";
 
     public static final String ALTERNATE_CONJURATION = Reference.MODID + ".redstone_conjuration";
     public static final String SECONDARY_VECTOR_OPERATORS = Reference.MODID + ".secondary_vectors";

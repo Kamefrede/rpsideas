@@ -68,6 +68,10 @@ public class SpellPieces  {
         register(PieceOperatorGetSignText.class, LibPieces.OPERATOR_GET_SIGN_TEXT, LibPieceGroups.MEMORY_MANAGEMENT);
         register(PieceTrickMoveBlockSequence.class, LibPieces.TRICK_MOVE_BLOCK_SEQUENCE, LibPieceGroups.BLOCK_MOVEMENT);
         register(PieceOperatorGetComment.class, LibPieces.OPERATOR_GET_COMMENT, LibPieceGroups.MEMORY_MANAGEMENT);
+        register(PieceSelectorGlowing.class, LibPieces.SELECTOR_GLOWING, LibPieceGroups.ENTITIES_INTRO);
+        register(PieceSelectorListFilter.class, LibPieces.SELECTOR_LIST_FILTER, LibPieceGroups.ENTITIES_INTRO);
+        register(PieceSelectorVisibleToEntity.class, LibPieces.SELECTOR_VISIBLE_ENTITY, LibPieceGroups.DETECTION_DYNAMICS);
+        register(PieceSelectorAffectedByPotions.class, LibPieces.SELECTOR_AFFECTED_BY_POTIONS, LibPieceGroups.ENTITIES_INTRO);
         if(Loader.isModLoaded("botania")) {
             BotaniaCompatPieces.init();
         }

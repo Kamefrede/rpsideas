@@ -38,7 +38,7 @@ psi.spellpiece.rpsideas.operator_list_intersection=Operator: List Intersection
 psi.spellpiece.rpsideas.operator_list_exclusion=Operator: List Exclusion
 psi.spellpiece.rpsideas.selector_empty_list=Selector: Empty List
 psi.spellpiece.rpsideas.selector_eidos_timestamp=Selector: Eidos Timestamp
-psi.spellpiece.rpsideas.selector_nearby_vehicles=Selector:Nearby Vehicles
+psi.spellpiece.rpsideas.selector_nearby_vehicles=Selector:Nearby Ridables
 psi.spellpiece.rpsideas.selector_nearby_falling_blocks=Selector: Nearby Falling Blocks
 
 
@@ -83,7 +83,7 @@ psi.spellpiece.rpsideas.operator_list_intersection.desc=Intersects two lists
 psi.spellpiece.rpsideas.operator_list_exclusion.desc=Gets all elements from the 1st List that are not in the 2nd
 psi.spellpiece.rpsideas.selector_empty_list.desc=Returns an empty list
 psi.spellpiece.rpsideas.selector_eidos_timestamp.desc=Gets the time since the world began
-psi.spellpiece.rpsideas.selector_nearby_vehicles.desc=Selects any nearby vehicles
+psi.spellpiece.rpsideas.selector_nearby_vehicles.desc=Selects any nearby rideable entities
 psi.spellpiece.rpsideas.selector_nearby_falling_blocks.desc=Selects any nearby falling blocks
 
 
@@ -99,7 +99,7 @@ rpsideas.spellparam.degree=Degrees
 rpsideas.spellparam.radian=Radians
 rpsideas.spellparam.list=Entity List
 rpsideas.spellparam.vector=Vector
-rpsideas.spellparam.axis=Axis Vector
+rpsideas.spellparam.axis=Ray
 rpsideas.spellparam.angle=Angle to rotate
 rpsideas.spellparam.fallback=Fallback vector
 rpsideas.spellparam.target1=Target 1
