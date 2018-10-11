@@ -11,8 +11,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.spell.SpellPiece;
-import vazkii.psi.api.spell.piece.PieceOperator;
-import vazkii.psi.api.spell.piece.PieceSelector;
 import vazkii.psi.common.lib.LibPieceGroups;
 
 public class SpellPieces  {
@@ -70,8 +68,9 @@ public class SpellPieces  {
         register(PieceOperatorGetComment.class, LibPieces.OPERATOR_GET_COMMENT, LibPieceGroups.MEMORY_MANAGEMENT);
         register(PieceSelectorGlowing.class, LibPieces.SELECTOR_GLOWING, LibPieceGroups.ENTITIES_INTRO);
         register(PieceSelectorListFilter.class, LibPieces.SELECTOR_LIST_FILTER, LibPieceGroups.ENTITIES_INTRO);
-        register(PieceSelectorVisibleToEntity.class, LibPieces.SELECTOR_VISIBLE_ENTITY, LibPieceGroups.DETECTION_DYNAMICS);
+        register(PieceOperatorVisibleToEntity.class, LibPieces.OPERATOR_IS_VISIBLE, LibPieceGroups.DETECTION_DYNAMICS);
         register(PieceSelectorAffectedByPotions.class, LibPieces.SELECTOR_AFFECTED_BY_POTIONS, LibPieceGroups.ENTITIES_INTRO);
+        register(PieceSelectorVisibleEntities.class, LibPieces.SELECTOR_VISIBLE_ENTITIES, LibPieceGroups.ENTITIES_INTRO);
         if(Loader.isModLoaded("botania")) {
             BotaniaCompatPieces.init();
         }

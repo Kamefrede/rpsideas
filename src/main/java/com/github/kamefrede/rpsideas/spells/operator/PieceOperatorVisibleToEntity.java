@@ -1,17 +1,18 @@
-package com.github.kamefrede.rpsideas.spells.selector;
+package com.github.kamefrede.rpsideas.spells.operator;
 
 import com.github.kamefrede.rpsideas.spells.base.SpellParams;
 import com.github.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellParam;
 import vazkii.psi.api.spell.SpellRuntimeException;
 import vazkii.psi.api.spell.param.ParamEntity;
-import vazkii.psi.api.spell.piece.PieceSelector;
+import vazkii.psi.api.spell.piece.PieceOperator;
 
-public class PieceSelectorVisibleToEntity extends PieceSelector {
+public class PieceOperatorVisibleToEntity extends PieceOperator {
 
     SpellParam entity1;
     SpellParam entity2;
@@ -19,7 +20,7 @@ public class PieceSelectorVisibleToEntity extends PieceSelector {
 
 
 
-    public PieceSelectorVisibleToEntity(Spell spell) {
+    public PieceOperatorVisibleToEntity(Spell spell) {
         super(spell);
     }
 
@@ -36,8 +37,8 @@ public class PieceSelectorVisibleToEntity extends PieceSelector {
         Entity entval1 = this.<Entity>getParamValue(context, entity1);
         Entity entval2 = this.<Entity>getParamValue(context, entity2);
         if(entval1 == null || entval2 == null) throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
-        if(entval1 instanceof EntityLiving){
-           if(((EntityLiving) entval1).canEntityBeSeen(entval2)){
+        if(entval1 instanceof EntityLivingBase){
+           if(((EntityLivingBase) entval1).canEntityBeSeen(entval2)){
                return 1;
            } else {
                return 0;

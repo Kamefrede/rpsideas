@@ -3,6 +3,7 @@ package com.github.kamefrede.rpsideas.spells.selector;
 import com.github.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellParam;
@@ -30,8 +31,8 @@ public class PieceSelectorAffectedByPotions extends PieceSelector {
         if(entVal == null){
             throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
         }
-        if(entVal instanceof EntityLiving){
-            if(((EntityLiving) entVal).getActivePotionEffects().size() > 0){
+        if(entVal instanceof EntityLivingBase){
+            if(((EntityLivingBase) entVal).getActivePotionEffects().size() > 0){
                 return 1;
             } else {
                 return 0;
