@@ -12,6 +12,6 @@ public class PiecePieceOperatorVectorStrongRaycastAxis extends PieceOperatorVect
 
     @Override
     protected Vector3 createResult(RayTraceResult res) {
-        return new Vector3(res.sideHit.getFrontOffsetX(), res.sideHit.getFrontOffsetY(), res.sideHit.getFrontOffsetZ());
+        return new Vector3(res.sideHit.getXOffset(), res.sideHit.getYOffset(), res.sideHit.getZOffset());
     }
 }

@@ -30,8 +30,10 @@ public class Item16Colors extends ItemBlock {
         }
     }
 
+
     @Override
-    public String getUnlocalizedName(ItemStack stack) {
-        return super.getUnlocalizedName(stack) + "." + EnumDyeColor.byMetadata(stack.getMetadata()).getUnlocalizedName();
+    public String getUnlocalizedNameInefficiently(ItemStack stack) {
+        return super.getUnlocalizedNameInefficiently(stack)+ "." + EnumDyeColor.byMetadata(stack.getMetadata()).getTranslationKey();
     }
+
 }

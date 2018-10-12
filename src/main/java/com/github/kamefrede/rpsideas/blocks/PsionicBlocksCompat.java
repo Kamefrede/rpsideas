@@ -25,7 +25,8 @@ public class PsionicBlocksCompat {
         ResourceLocation res = new ResourceLocation(Reference.MODID, name);
 
         block.setRegistryName(res);
-        block.setUnlocalizedName(res.getResourceDomain() + "." + res.getResourcePath());
+        block.setTranslationKey(res.getNamespace() + "." + res.getPath());
+
 
         return block;
     }

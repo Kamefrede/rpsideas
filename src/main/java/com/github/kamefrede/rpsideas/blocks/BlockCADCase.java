@@ -68,7 +68,7 @@ public class BlockCADCase extends Block {
     public IBlockState getStateFromMeta(int meta) {
         int horizontalIndex = meta & 3;
         boolean isOpen = (meta & 4) != 0;
-        return getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(horizontalIndex)).withProperty(OPEN, isOpen);
+        return getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(horizontalIndex)).withProperty(OPEN, isOpen);
     }
 
     @Override

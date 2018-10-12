@@ -58,9 +58,10 @@ public class BlockConjuredPulsar extends BlockModContainer implements IPsiamBloc
     }
 
     @Override
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.TRANSLUCENT;
     }
+
 
     @Override
     public boolean isFullCube(IBlockState state) {

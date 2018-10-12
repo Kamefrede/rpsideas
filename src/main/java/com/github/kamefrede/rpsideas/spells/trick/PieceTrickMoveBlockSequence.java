@@ -77,7 +77,7 @@ public class PieceTrickMoveBlockSequence extends PieceTrick {
             if(event.isCanceled())
                 return null;
 
-            if(world.getTileEntity(pos) != null || block.getMobilityFlag(state) != EnumPushReaction.NORMAL || !block.canSilkHarvest(world, pos, state, context.caster) || block.getPlayerRelativeBlockHardness(state, context.caster, world, pos) <= 0 || !ForgeHooks.canHarvestBlock(block, context.caster, world, pos))
+            if(world.getTileEntity(pos) != null || block.getPushReaction(state) != EnumPushReaction.NORMAL || !block.canSilkHarvest(world, pos, state, context.caster) || block.getPlayerRelativeBlockHardness(state, context.caster, world, pos) <= 0 || !ForgeHooks.canHarvestBlock(block, context.caster, world, pos))
                 return null;
 
             Vector3 axis = targetVal.normalize();

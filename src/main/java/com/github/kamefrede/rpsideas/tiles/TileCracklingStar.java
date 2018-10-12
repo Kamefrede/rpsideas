@@ -62,7 +62,7 @@ public class TileCracklingStar extends TileMod implements ITickable {
         Vector3 start = Vector3.fromBlockPos(pos).add(.5 + (Math.random() - .5) * 0.05, .5 + (Math.random() - .5) * 0.05, .5 + (Math.random() - .5) * 0.05);
         double stepsPer = (Math.random() * 6d) + 0.0001;
 
-        double length = vec.lengthVector();
+        double length = vec.length();
         if(length == 0) length = 0.0001; //will this really happen? ¯\_(ツ)_/¯
         Vec3d ray = vec.scale(1 / length);
         int stepCount = (int) (length * stepsPer);

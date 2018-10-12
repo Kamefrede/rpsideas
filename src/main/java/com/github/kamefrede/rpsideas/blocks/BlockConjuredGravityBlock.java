@@ -65,10 +65,12 @@ public class BlockConjuredGravityBlock extends BlockModContainer implements IPsi
         return new IProperty[] { SOLID, BLOCK_UP, BLOCK_DOWN, BLOCK_NORTH, BLOCK_SOUTH, BLOCK_WEST, BLOCK_EAST };
     }
 
+
     @Override
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.TRANSLUCENT;
     }
+    
 
     @Override
     public boolean isFullCube(IBlockState state) {

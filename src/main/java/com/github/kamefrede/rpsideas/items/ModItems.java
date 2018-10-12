@@ -82,7 +82,7 @@ public class ModItems {
         ResourceLocation res = new ResourceLocation(Reference.MODID, name);
 
         item.setRegistryName(res);
-        item.setUnlocalizedName(res.getResourceDomain() + "." + res.getResourcePath());
+        item.setTranslationKey(res.getNamespace() + "." + res.getPath());
 
         if(showInCreative) item.setCreativeTab(RPSCreativeTab.INST);
 

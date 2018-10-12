@@ -14,10 +14,11 @@ public class RPSCreativeTab extends CreativeTabs {
         setNoTitle();
         setBackgroundImageName("psideas.png");
     }
+    
 
     @SideOnly(Side.CLIENT)
     @Override
-    public ItemStack getTabIconItem() {
+    public ItemStack createIcon() {
         return new ItemStack(ModItems.flashRing);
     }
 
