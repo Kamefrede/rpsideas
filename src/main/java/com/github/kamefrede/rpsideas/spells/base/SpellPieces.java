@@ -71,6 +71,8 @@ public class SpellPieces  {
         register(PieceOperatorVisibleToEntity.class, LibPieces.OPERATOR_IS_VISIBLE, LibPieceGroups.DETECTION_DYNAMICS);
         register(PieceSelectorAffectedByPotions.class, LibPieces.SELECTOR_AFFECTED_BY_POTIONS, LibPieceGroups.ENTITIES_INTRO);
         register(PieceSelectorVisibleEntities.class, LibPieces.SELECTOR_VISIBLE_ENTITIES, LibPieceGroups.ENTITIES_INTRO);
+        register(PieceOperatorVectorAbsolute.class, LibPieces.OPERATOR_VECTOR_ABSOLUTE, LibPieceGroups.VECTORS_INTRO);
+        register(OperatorDistanceFromGround.class, LibPieces.OPERATOR_GET_DISTANCE_FROM_GROUND, LibPieceGroups.SECONDARY_OPERATORS);
         if(Loader.isModLoaded("botania")) {
             BotaniaCompatPieces.init();
         }

@@ -25,7 +25,7 @@ public class OperatorDistanceFromGround extends PieceOperator {
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if(context.caster.world.isRemote) return null;
         Entity targetVal = this.<Entity>getParamValue(context, target);
-        if(targetVal == null) return null;
+        if(targetVal == null) throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
         return (double)targetVal.fallDistance;
 
     }

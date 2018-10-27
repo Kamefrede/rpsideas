@@ -54,6 +54,7 @@ public class LibPieces {
     public static final String OPERATOR_IS_VISIBLE = "operator_is_visible";
     public static final String SELECTOR_AFFECTED_BY_POTIONS = "selector_affected_by_potions";
     public static final String SELECTOR_VISIBLE_ENTITIES = "selector_visible_entities";
+    public static final String OPERATOR_VECTOR_ABSOLUTE = "operator_vector_absolute";
 
     public static final String ALTERNATE_CONJURATION = Reference.MODID + ".redstone_conjuration";
     public static final String SECONDARY_VECTOR_OPERATORS = Reference.MODID + ".secondary_vectors";
