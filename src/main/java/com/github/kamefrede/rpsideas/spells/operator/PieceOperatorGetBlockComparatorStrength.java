@@ -17,6 +17,7 @@ public class PieceOperatorGetBlockComparatorStrength extends BasePieceOperatorBl
 
     @Override
     public void initParams() {
+        super.initParams();
         addParam(axis = new ParamVector(SpellParams.GENERIC_NAME_AXIS, SpellParam.BLUE, true, false));
     }
 

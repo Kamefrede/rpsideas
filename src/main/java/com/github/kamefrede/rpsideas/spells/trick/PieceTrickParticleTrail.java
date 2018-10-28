@@ -1,6 +1,7 @@
 package com.github.kamefrede.rpsideas.spells.trick;
 
 import com.github.kamefrede.rpsideas.network.MessageParticleTrail;
+import com.github.kamefrede.rpsideas.network.RPSPacketHandler;
 import com.github.kamefrede.rpsideas.spells.base.SpellParams;
 import com.github.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import vazkii.arl.network.NetworkHandler;
@@ -47,6 +48,7 @@ public class PieceTrickParticleTrail extends PieceTrick {
         Vector3 dir = getParamValue(context, rayParam);
         double length = SpellHelpers.Runtime.getNumber(this, context, lengthParam, 0);
         double time = Math.min(SpellHelpers.Runtime.getNumber(this, context, timeParam, 20), 400);
+        if(context.caster.world.isRemote) return null;
 
         if(time < 0d) throw new SpellRuntimeException(SpellRuntimeException.NEGATIVE_NUMBER);
 
@@ -59,7 +61,7 @@ public class PieceTrickParticleTrail extends PieceTrick {
         }
 
         if(!context.caster.world.isRemote) {
-            NetworkHandler.INSTANCE.sendToDimension(new MessageParticleTrail(pos.toVec3D(), dir.toVec3D(), length, (int) time, PsiAPI.getPlayerCAD(context.caster)), context.caster.world.provider.getDimension());
+            RPSPacketHandler.NET.sendToDimension(new MessageParticleTrail(pos.toVec3D(), dir.toVec3D(), length, (int) time, PsiAPI.getPlayerCAD(context.caster)), context.caster.world.provider.getDimension());
         }
 
         return null;
