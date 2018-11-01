@@ -74,6 +74,8 @@ public class SpellPieces  {
         register(PieceOperatorVectorAbsolute.class, LibPieces.OPERATOR_VECTOR_ABSOLUTE, LibPieceGroups.VECTORS_INTRO);
         register(OperatorDistanceFromGround.class, LibPieces.OPERATOR_GET_DISTANCE_FROM_GROUND, LibPieceGroups.SECONDARY_OPERATORS);
         register(PieceOperatorEntityRaycast.class, LibPieces.OPERATOR_ENTITY_RAYCAST, LibPieceGroups.SECONDARY_OPERATORS);
+        register(PieceTrickConjureGravityBlock.class, LibPieces.TRICK_CONJURE_GRAVITY, LibPieceGroups.BLOCK_CONJURATION);
+        register(PieceTrickConjureGravityBlockSequence.class, LibPieces.TRICK_CONJURE_GRAVITY_SEQUENCE, LibPieceGroups.BLOCK_CONJURATION);
         if(Loader.isModLoaded("botania")) {
             BotaniaCompatPieces.init();
         }

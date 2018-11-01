@@ -40,6 +40,18 @@ psi.spellpiece.rpsideas.selector_empty_list=Selector: Empty List
 psi.spellpiece.rpsideas.selector_eidos_timestamp=Selector: Eidos Timestamp
 psi.spellpiece.rpsideas.selector_nearby_vehicles=Selector:Nearby Ridables
 psi.spellpiece.rpsideas.selector_nearby_falling_blocks=Selector: Nearby Falling Blocks
+psi.spellpiece.rpsideas.operator_get_sign_text=Operator: Get Sign Text
+psi.spellpiece.rpsideas.trick_move_block_sequence=Trick: Move Block Sequence
+psi.spellpiece.rpsideas.operator_get_comment=Operator: Get Comment
+psi.spellpiece.rpsideas.operator_distance_from_ground=Operator: Distance From Ground
+psi.spellpiece.rpsideas.selector_glowing=Selector: Glowing
+psi.spellpiece.rpsideas.selector_list_filter=Selector: List Filter
+psi.spellpiece.rpsideas.operator_is_visible=Operator: Is Visible
+psi.spellpiece.rpsideas.selector_affected_by_potions=Selector: Affected by Potions
+psi.spellpiece.rpsideas.selector_visible_entities=Selector: Visible Entities
+psi.spellpiece.rpsideas.operator_vector_absolute=Operator: Vector Absolute
+psi.spellpiece.rpsideas.trick_conjure_gravity=Trick: Conjure Gravity Block
+psi.spellpiece.rpsideas.trick_conjure_gravity_sequence=Trick: Conjure Gravity Block Sequence
 
 
 
@@ -85,6 +97,20 @@ psi.spellpiece.rpsideas.selector_empty_list.desc=Returns an empty list
 psi.spellpiece.rpsideas.selector_eidos_timestamp.desc=Gets the time since the world began
 psi.spellpiece.rpsideas.selector_nearby_vehicles.desc=Selects any nearby rideable entities
 psi.spellpiece.rpsideas.selector_nearby_falling_blocks.desc=Selects any nearby falling blocks
+psi.spellpiece.rpsideas.operator_get_sign_text.desc=Gets the text of a sign at a given position
+psi.spellpiece.rpsideas.trick_move_block_sequence.desc=Moves a sequence of blocks starting at a given position
+psi.spellpiece.rpsideas.operator_get_comment.desc=Gets the comment for this piece
+psi.spellpiece.rpsideas.operator_distance_from_ground.desc=Gets the distance from an entity to the ground
+psi.spellpiece.rpsideas.selector_glowing.desc=Selects every entity with the glowing effect
+psi.spellpiece.rpsideas.selector_list_filter.desc=Selects an entity from an entity list with a given index
+psi.spellpiece.rpsideas.operator_is_visible.desc=Checks if an entity has line of sight to another entity(Omnidirectional)
+psi.spellpiece.rpsideas.selector_affected_by_potions.desc=Selects any entity affected by potions
+psi.spellpiece.rpsideas.selector_visible_entities.desc=Selects all entities that an entity has line of sight to(Omnidirectional)
+psi.spellpiece.rpsideas.operator_vector_absolute.desc=It's what it says on the tin
+psi.spellpiece.rpsideas.trick_conjure_gravity.desc=Conjures a conjured block that obeys gravity
+psi.spellpiece.rpsideas.trick_conjure_gravity_sequence.desc=Conjures a conjured block sequence that obey gravity
+
+
 
 
 rpsideas.datatype.BlockProperties=Properties
