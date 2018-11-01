@@ -36,6 +36,19 @@ Spell Pieces
 * Selector: Caster Battery
 * Selector: Nearby Falling Blocks
 * Selector: Nearby Vehicles
+* Operator: Get Sign Text
+* Trick: Move Block Sequence
+* Operator: Get Comment
+* Operator: Distance From Ground
+* Selector: Glowing
+* Selector: List Filter
+* Operator: Is Visible
+* Selector: Affected by Potions
+* Selector: Visible Entities
+* Operator: Vector Absolute
+* Operator: Entity Raycast
+* Trick: Conjure Gravity Block
+* Trick: Conjure Gravity Block Sequence
 
 
 
