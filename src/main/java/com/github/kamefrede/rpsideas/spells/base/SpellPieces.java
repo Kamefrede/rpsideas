@@ -73,6 +73,7 @@ public class SpellPieces  {
         register(PieceSelectorVisibleEntities.class, LibPieces.SELECTOR_VISIBLE_ENTITIES, LibPieceGroups.ENTITIES_INTRO);
         register(PieceOperatorVectorAbsolute.class, LibPieces.OPERATOR_VECTOR_ABSOLUTE, LibPieceGroups.VECTORS_INTRO);
         register(OperatorDistanceFromGround.class, LibPieces.OPERATOR_GET_DISTANCE_FROM_GROUND, LibPieceGroups.SECONDARY_OPERATORS);
+        register(PieceOperatorEntityRaycast.class, LibPieces.OPERATOR_ENTITY_RAYCAST, LibPieceGroups.SECONDARY_OPERATORS);
         if(Loader.isModLoaded("botania")) {
             BotaniaCompatPieces.init();
         }

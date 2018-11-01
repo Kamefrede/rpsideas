@@ -64,7 +64,6 @@ public class PieceTrickFormBurst extends PieceComponentTrick {
         if(posVec == null || rayVec == null) {
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
         }
-
         if(!context.isInRadius(posVec)) {
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
         }

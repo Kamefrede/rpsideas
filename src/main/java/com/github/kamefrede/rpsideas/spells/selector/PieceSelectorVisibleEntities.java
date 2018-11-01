@@ -59,11 +59,9 @@ public class PieceSelectorVisibleEntities extends PieceSelector {
         if (!context.isInRadius(entpos)) {
             throw new SpellRuntimeException("psi.spellerror.outsideradius");
         } else {
-            AxisAlignedBB axis = new AxisAlignedBB(entpos.x - radiusVal, entpos.y - radiusVal, entpos.z - radiusVal, entpos.x + radiusVal, entpos.y + radiusVal, entpos.z + radiusVal);
+            AxisAlignedBB axis = new AxisAlignedBB(entpos.x, entpos.y - radiusVal, entpos.z - radiusVal, entpos.x + radiusVal, entpos.y + radiusVal, entpos.z + radiusVal);
             Predicate<Entity> pred = this.getTargetPredicate();
-            List<Entity> list = context.caster.getEntityWorld().getEntitiesWithinAABB(Entity.class, axis, (e) -> {
-                return e != null && pred.apply(e) && e != context.caster && e != context.focalPoint && context.isInRadius(e) && entliv.canEntityBeSeen(e);
-            });
+            List<Entity> list = context.caster.getEntityWorld().getEntitiesWithinAABB(Entity.class, axis, (e) -> e != null && pred.apply(e) && e != context.caster && e != context.focalPoint && context.isInRadius(e) && entliv.canEntityBeSeen(e) && e != entliv);
             return new EntityListWrapper(list);
         }
     }
