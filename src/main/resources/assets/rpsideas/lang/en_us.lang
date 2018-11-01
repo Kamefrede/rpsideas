@@ -52,6 +52,7 @@ psi.spellpiece.rpsideas.selector_visible_entities=Selector: Visible Entities
 psi.spellpiece.rpsideas.operator_vector_absolute=Operator: Vector Absolute
 psi.spellpiece.rpsideas.trick_conjure_gravity=Trick: Conjure Gravity Block
 psi.spellpiece.rpsideas.trick_conjure_gravity_sequence=Trick: Conjure Gravity Block Sequence
+psi.spellpiece.rpisdeas.operator_entity_raycast=Operator: Entity Raycast
 
 
 
@@ -109,7 +110,7 @@ psi.spellpiece.rpsideas.selector_visible_entities.desc=Selects all entities that
 psi.spellpiece.rpsideas.operator_vector_absolute.desc=It's what it says on the tin
 psi.spellpiece.rpsideas.trick_conjure_gravity.desc=Conjures a conjured block that obeys gravity
 psi.spellpiece.rpsideas.trick_conjure_gravity_sequence.desc=Conjures a conjured block sequence that obey gravity
-
+psi.spellpiece.rpsideas.operator_entity_raycast.dec=Raycasts from a given entity and returns the first entity it finds
 
 
 
