@@ -28,9 +28,9 @@ public class PieceOperatorOnGround extends PieceOperator {
         Entity targetVal = this.<Entity>getParamValue(context, target);
         if(targetVal == null) return null;
         if(targetVal.onGround){
-            return (double) 1;
+            return 1.0D;
         } else {
-            return (double) 0;
+            return 0.D;
         }
 
     }

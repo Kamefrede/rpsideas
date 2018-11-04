@@ -22,13 +22,12 @@ public class PieceSelectorCasterBattery extends PieceSelector {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if(context.caster.getEntityWorld().isRemote) return null;
+        if(context.caster == null) return null;
         ItemStack cad = PsiAPI.getPlayerCAD(context.caster);
         if (cad != null){
-            Double battery =(double) ((ICAD) cad.getItem()).getStatValue(cad, EnumCADStat.OVERFLOW);
-            return battery;
+            return (double) ((ICAD) cad.getItem()).getStatValue(cad, EnumCADStat.OVERFLOW);
         }
-        return null;
+        return 0.0D;
     }
 
     @Override

@@ -25,11 +25,11 @@ public class PieceOperatorIsAirborne extends PieceOperator {
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if(context.caster.world.isRemote) return null;
         Entity targetVal = this.<Entity>getParamValue(context, target);
-        if(targetVal == null) return null;
+        if(targetVal == null) throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
         if(targetVal.isAirBorne){
-            return (double) 1;
+            return 1.0D;
         } else {
-            return (double) 0;
+            return 0.D;
         }
 
     }

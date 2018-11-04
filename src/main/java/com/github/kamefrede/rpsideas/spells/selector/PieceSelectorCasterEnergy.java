@@ -1,9 +1,12 @@
 package com.github.kamefrede.rpsideas.spells.selector;
 
+import net.minecraft.nbt.NBTTagCompound;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.piece.PieceOperator;
 import vazkii.psi.api.spell.piece.PieceSelector;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
+
+import static vazkii.psi.common.core.handler.PlayerDataHandler.getDataCompoundForPlayer;
 
 public class PieceSelectorCasterEnergy extends PieceSelector {
 
@@ -18,8 +21,11 @@ public class PieceSelectorCasterEnergy extends PieceSelector {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (context.caster.getEntityWorld().isRemote) return null;
-        return (double) PlayerDataHandler.get(context.caster).getAvailablePsi();
+        if(context.caster == null) return null;
+        NBTTagCompound cmp = PlayerDataHandler.getDataCompoundForPlayer(context.caster);
+        int energy = cmp.getInteger("availablePsi");
+
+        return 1.0D * energy;
     }
 
     @Override
