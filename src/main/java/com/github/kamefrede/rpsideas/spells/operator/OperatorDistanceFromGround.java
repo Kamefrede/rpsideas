@@ -1,5 +1,6 @@
 package com.github.kamefrede.rpsideas.spells.operator;
 
+import com.github.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
@@ -33,7 +34,7 @@ public class OperatorDistanceFromGround extends PieceOperator {
         if(context.caster.posY < 256) maxheight = context.caster.posY;
 
         RayTraceResult distancefromground = context.caster.world.rayTraceBlocks(new Vec3d(context.caster.posX, maxheight, context.caster.posY), new Vec3d(0,-1,0), false, true, false);
-        if(distancefromground == null) return context.caster.posY;
+        if(distancefromground == null) throw new SpellRuntimeException(SpellRuntimeExceptions.NO_GROUND);
         return context.caster.posY - distancefromground.getBlockPos().getY();
 
 

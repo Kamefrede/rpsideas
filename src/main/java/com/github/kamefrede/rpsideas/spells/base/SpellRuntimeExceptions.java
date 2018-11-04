@@ -9,7 +9,7 @@ public class SpellRuntimeExceptions extends Exception {
     public static final String OUT_OF_BOUNDS = "rpsideas.spellerror.outofbounds";
     public static final String NULL_LIST = "rpsideas.spellerror.nulllist";
     public static final String ENTITY_NOT_LIVING = "rpsideas.spellerror.notliving";
-
+    public static final String NO_GROUND = "rpsideas.spellerror.noground";
 
     public SpellRuntimeExceptions(String s){
         super(s);

@@ -119,6 +119,10 @@ rpsideas.spellerror.nthroot=Even numbered roots don't accept negative numbers
 rpsideas.spellerror.length=Lengths can't be negative
 rpsideas.spellerror.nonaxial=Vector cannot be non-axial
 rpsideas.spellerror.movement=Movement cannot be null, it is either positive or negative
+rpsideas.spellerror.outofbounds=The provided index is not within the range of the list
+rpsideas.spellerror.notliving=The selected entity must be a living entity(Player, mob, etc..)
+rpsideas.spellerror.nulllist=The provided list cannot be empty.
+rpsideas.spellerror.noground=No ground below found.
 
 
 rpsideas.spellparam.root=Root
@@ -134,6 +138,8 @@ rpsideas.spellparam.target2=Target 2
 rpsideas.spellparam.vazkii=Axis Vector
 rpsideas.spellparam.list1=List 1
 rpsideas.spellparam.list2=List 2
+rpsideas.spellparam.entity1=Entity 1
+rpsideas.spellparam.entity2=Entity 2
 psi.datatype.BlockProperties=Block Properties
 
 
