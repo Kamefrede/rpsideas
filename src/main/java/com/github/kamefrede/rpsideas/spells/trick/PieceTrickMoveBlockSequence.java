@@ -74,30 +74,21 @@ public class PieceTrickMoveBlockSequence extends PieceTrick {
             BlockEvent.BreakEvent event = new BlockEvent.BreakEvent(world, pos, state, context.caster);
             MinecraftForge.EVENT_BUS.post(event);
 
-            if(event.isCanceled())
-                return null;
 
-            if(world.getTileEntity(pos) != null || block.getPushReaction(state) != EnumPushReaction.NORMAL || !block.canSilkHarvest(world, pos, state, context.caster) || block.getPlayerRelativeBlockHardness(state, context.caster, world, pos) <= 0 || !ForgeHooks.canHarvestBlock(block, context.caster, world, pos))
-                return null;
-
-            Vector3 axis = targetVal.normalize();
-            int x = pos.getX() + (int) axis.x;
-            int y = pos.getY() + (int) axis.y;
-            int z = pos.getZ() + (int) axis.z;
+            int x = pos.getX() + (int) targetNorm.x;
+            int y = pos.getY() + (int) targetNorm.y;
+            int z = pos.getZ() + (int) targetNorm.z;
 
             BlockPos pos1 = new BlockPos(x, y, z);
             IBlockState state1 = world.getBlockState(pos1);
-
-            if(!world.isBlockModifiable(context.caster, pos) || !world.isBlockModifiable(context.caster, pos1))
-                return null;
 
             if(world.isAirBlock(pos1) || state1.getBlock().isReplaceable(world, pos1)) {
                 world.setBlockState(pos1, state, 1 | 2);
                 world.setBlockToAir(pos);
                 world.playEvent(2001, pos, Block.getIdFromBlock(block) + (block.getMetaFromState(state) << 12));
             }
+            context.delay = context.delay + 1;
 
-            return null;
         }
         return null;
     }

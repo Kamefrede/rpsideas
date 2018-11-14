@@ -206,7 +206,7 @@ rpsideas.cadstat.extra=Extra
 rpsideas.cadstat.downside=Drawback
 rpsideas.downsides.on_damage=Drains entire Psi reserves on damage
 rpsideas.upsides.boost_regen=+%d to Psi regen rate
-rpsideas.upsides.fills_last=Dumps its contents into the main reserve
+rpsideas.upsides.fills_last=Removes Psi loss on damage but locks the regen for 50 ticks
 
 rpsideas.cadstat.enables=Enables
 rpsideas.requirement.mana_cad=Mana Flow

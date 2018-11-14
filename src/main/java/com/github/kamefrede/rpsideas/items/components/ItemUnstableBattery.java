@@ -32,7 +32,7 @@ public class ItemUnstableBattery extends ItemComponent {
 
     @Override
     protected void addTooltipTags(List<String> tooltip) {
-        addTooltipTag(true, tooltip, Reference.MODID + ".cadstat.boost_regen", PSI_REGEN_BONUS);
+        addTooltipTag(true, tooltip, Reference.MODID + ".upsides.boost_regen", PSI_REGEN_BONUS);
         addTooltipTag(false, tooltip, Reference.MODID + ".downsides.on_damage");
     }
 

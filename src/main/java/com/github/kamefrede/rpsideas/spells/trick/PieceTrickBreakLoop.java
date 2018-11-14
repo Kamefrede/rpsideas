@@ -44,6 +44,7 @@ public class PieceTrickBreakLoop extends PieceTrick {
             } else {
                 //Casting from loopcast or something
                 PlayerDataHandler.get(context.caster).stopLoopcast();
+                context.focalPoint.setDead();
             }
 
             context.stopped = true;
