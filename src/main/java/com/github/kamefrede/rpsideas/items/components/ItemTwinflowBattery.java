@@ -5,17 +5,20 @@ import com.github.kamefrede.rpsideas.util.Reference;
 import com.github.kamefrede.rpsideas.util.helpers.PsiChangeHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import vazkii.arl.network.NetworkHandler;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.EnumCADStat;
 import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
+import vazkii.psi.common.network.message.MessageDataSync;
 
 import java.util.List;
 
@@ -25,7 +28,7 @@ public class ItemTwinflowBattery extends ItemComponent {
 
     @Override
     protected void registerStats() {
-        addStat(EnumCADStat.OVERFLOW, 500);
+        addStat(EnumCADStat.OVERFLOW,500);
     }
 
     @Override
@@ -59,10 +62,12 @@ public class ItemTwinflowBattery extends ItemComponent {
                 PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
                 int psi = (int) (data.getTotalPsi() * 0.02D * (double) e.getAmount());
                 if (psi > 0 && data.availablePsi > 0) {
+                    int cd = psi /( data.getRegenPerTick() + 5);
+                    if(cd > 50) cd = 50;
+                    if(cd < 10) cd = 10;
                     psi = Math.min(psi, data.availablePsi);
                     data.regenCooldown = 0;
-                    data.deductPsi(-psi, 50, true);
-                    System.out.println("this worked");
+                    data.deductPsi(-psi, cd, true);
                 }
             }
         }
@@ -83,7 +88,9 @@ public class ItemTwinflowBattery extends ItemComponent {
                 PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
 
                 if(data.regenCooldown == 0 && data.availablePsi != data.getTotalPsi()) {
-                    PsiChangeHelper.changePsi(player, PSI_REGEN_BONUS, true);
+                    data.availablePsi = Math.min(data.getTotalPsi(), data.availablePsi + PSI_REGEN_BONUS);
+                    data.save();
+                    NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP)player);
                 }
 
 

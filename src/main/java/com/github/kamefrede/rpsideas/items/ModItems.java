@@ -39,7 +39,7 @@ public class ModItems {
     @GameRegistry.ObjectHolder(Reference.MODID + ":" + "unstable_battery")
     public static final Item unstableBattery = Items.AIR;
 
-    @GameRegistry.ObjectHolder(Reference.MODID + ":" + "twinflow_battery")
+    @GameRegistry.ObjectHolder(Reference.MODID + ":" + "shielded_battery")
     public static final Item twinflowBattery = Items.AIR;
 
     @GameRegistry.ObjectHolder(Reference.MODID + ":" + "creative_battery")
@@ -64,7 +64,7 @@ public class ModItems {
         reg.register(createItem(new ItemWideCADSocket(), "wide_socket"));
         reg.register(createItem(new ItemBioticSensor(), "biotic_sensor"));
         reg.register(createItem(new ItemUnstableBattery(), "unstable_battery"));
-        reg.register(createItem(new ItemTwinflowBattery(), "twinflow_battery"));
+        reg.register(createItem(new ItemTwinflowBattery(), "shielded_battery"));
         reg.register(createItem(new ItemCreativeBattery(), "creative_battery"));
         reg.register(createItem(new ItemCreativeCore(), "creative_core"));
         reg.register(createItem(new ItemCreativeSocket(), "creative_socket"));

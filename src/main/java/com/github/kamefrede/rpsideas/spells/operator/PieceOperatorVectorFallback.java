@@ -27,30 +27,14 @@ public class PieceOperatorVectorFallback extends PieceOperator {
 
     }
 
-
-    public SpellParam getFallback() {
-        return fallback;
-    }
-
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        SpellParam.Side side = this.paramSides.get(vector);
-        SpellPiece piece = context.cspell.sourceSpell.grid.getPieceAtSideSafely(this.x, this.y, side);
-        context.actions.remove(context.cspell.actionMap.get(piece));
         Vector3 vec = this.<Vector3>getParamValue(context, vector);
         Vector3 fall = this.<Vector3>getParamValue(context, fallback);
-        try{
-            piece.execute(context);
-        } catch (SpellRuntimeException ex){
-            if(vec == null || vec.isZero() ){
-                if(fall == null || fall.isZero()){
-                    throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-                }
-                return fall;
-            } else return vec;
-        }
+        if(vec == null || vec.isZero()){
+            return fall;
+        } else return vec;
 
-        return vec;
 
 
     }

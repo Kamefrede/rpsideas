@@ -1,5 +1,7 @@
 package com.github.kamefrede.rpsideas.util;
 
+import com.github.kamefrede.rpsideas.util.botania.EnumManaTier;
+import com.github.kamefrede.rpsideas.util.botania.IManaTrick;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellRuntimeException;
@@ -7,10 +9,12 @@ import vazkii.psi.api.spell.piece.PieceTrick;
 
 import java.util.List;
 
-public abstract class PieceComponentTrick extends PieceTrick implements IComponentPiece {
+public abstract class PieceComponentTrick extends PieceTrick implements IManaTrick {
     public PieceComponentTrick(Spell spell) {
         super(spell);
     }
+
+
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {

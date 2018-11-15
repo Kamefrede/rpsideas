@@ -1,5 +1,6 @@
 package com.github.kamefrede.rpsideas.util;
 
+import com.github.kamefrede.rpsideas.items.components.botania.ItemBlasterAssembly;
 import com.github.kamefrede.rpsideas.util.botania.EnumManaTier;
 import com.github.kamefrede.rpsideas.util.botania.IBlasterComponent;
 import com.github.kamefrede.rpsideas.util.botania.IManaTrick;
@@ -18,20 +19,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public interface IComponentPiece {
-    static
-    @Nullable
-    ItemStack firstMatchingPiece(ItemStack cad, Predicate<ItemStack> pred) {
-        if (!(cad.getItem() instanceof ICAD))
-            return null;
-        ICAD cadItem = (ICAD) cad.getItem();
-        for (EnumCADComponent component : EnumCADComponent.values()) {
-            ItemStack compStack = cadItem.getComponentInSlot(cad, component);
-            if (compStack != null) {
-                if (pred.test(compStack)) return compStack;
-            }
-        }
-        return null;
-    }
 
     static
     @Nullable
@@ -47,6 +34,10 @@ public interface IComponentPiece {
 
         boolean flag = false;
 
+        boolean mana = false;
+
+
+
         for (EnumCADComponent type : EnumCADComponent.values()) {
             ItemStack component = item.getComponentInSlot(cad, type);
 
@@ -55,36 +46,27 @@ public interface IComponentPiece {
                 if (compItem.getCADStatValue(component, EnumCADStat.POTENCY) < 0)
                     return componentPiece.executeIfAllowed(context);
 
-
-
-                ITrickEnablerComponent.EnableResult result = componentPiece.acceptsPiece(component, cad, context, piece.spell, piece.x, piece.y);
-                if(result == ITrickEnablerComponent.EnableResult.MISSING_REQUIREMENT){
-                    flag = true;
-                    break;
-                } else if(result == ITrickEnablerComponent.EnableResult.SUCCESS){
-                    return componentPiece.executeIfAllowed(context);
-                } else if(result == ITrickEnablerComponent.EnableResult.NOT_ENABLED){
+                if(compItem instanceof ItemBlasterAssembly && piece instanceof IManaTrick){
                     boolean isElven = ItemManaGun.hasClip(cad);
                     EnumManaTier cadTier = isElven ? EnumManaTier.ALFHEIM : EnumManaTier.BASE;
-
-                    if(piece instanceof IManaTrick){
-                        IManaTrick manaPiece = (IManaTrick) piece;
-                        if(EnumManaTier.allowed(cadTier, manaPiece.tier())) {
-                            int manaDrain = manaPiece.manaDrain(context, piece.x, piece.y);
+                    IManaTrick manapiece = (IManaTrick) piece;
+                    if(EnumManaTier.allowed(cadTier, manapiece.tier())){
+                        int manaDrain = manapiece.manaDrain(context, piece.x, piece.y);
+                        if(ManaItemHandler.requestManaExact(cad, context.caster, manaDrain, false)){
                             ManaItemHandler.requestManaExact(cad, context.caster, manaDrain, true);
                             return componentPiece.executeIfAllowed(context);
                         }
-
-                    } else if (((ICAD) cad.getItem()).getComponentInSlot(cad, EnumCADComponent.ASSEMBLY).getItem() instanceof IBlasterComponent) {
-                        return componentPiece.executeIfAllowed(context);
-
-                        } else{
-                        flag= true;
+                        mana = true;
                         break;
                     }
+                    flag = true;
+                    break;
+
                 }
             }
         }
+
+        if(mana) throw new SpellRuntimeException("rpsideas.spellerror.nomana");
 
         if (flag)
             throw new SpellRuntimeException("rpsideas.spellerror.trickdisabled");
@@ -119,6 +101,6 @@ public interface IComponentPiece {
     String[] requiredObjects();
 
     default ITrickEnablerComponent.EnableResult acceptsPiece(ItemStack component, ItemStack cad, SpellContext context, Spell spell, int x, int y) {
-        return ITrickEnablerComponent.EnableResult.NOT_ENABLED;
+        return ITrickEnablerComponent.EnableResult.SUCCESS;
     }
 }

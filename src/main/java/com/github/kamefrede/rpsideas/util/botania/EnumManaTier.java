@@ -2,9 +2,7 @@ package com.github.kamefrede.rpsideas.util.botania;
 
 public enum EnumManaTier {
     BASE,
-    ALFHEIM,
-    GAIA,
-    RELICS;
+    ALFHEIM;
 
     public static boolean allowed(EnumManaTier cadTier, EnumManaTier pieceTier) {
         return cadTier.ordinal() >= pieceTier.ordinal();

@@ -2,6 +2,7 @@ package com.github.kamefrede.rpsideas.items.components.botania;
 
 import com.github.kamefrede.rpsideas.compat.botania.RecipeBlasterCADClipp;
 import com.github.kamefrede.rpsideas.items.base.ItemComponent;
+import com.github.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
 import com.github.kamefrede.rpsideas.util.botania.EnumManaTier;
 import com.github.kamefrede.rpsideas.util.botania.IBlasterComponent;
 import com.github.kamefrede.rpsideas.util.ITrickEnablerComponent;
@@ -40,6 +41,7 @@ import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellPiece;
+import vazkii.psi.api.spell.SpellRuntimeException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,23 +75,6 @@ public class ItemBlasterAssembly extends ItemComponent implements IBlasterCompon
         addStat(EnumCADStat.POTENCY, 250);
     }
 
-    @Override
-    public EnableResult enablePiece(EntityPlayer player, ItemStack component, ItemStack cad, SpellContext context, Spell spell, int x, int y) {
-        boolean isElven = ItemManaGun.hasClip(cad);
-        EnumManaTier cadTier = isElven ? EnumManaTier.ALFHEIM : EnumManaTier.BASE;
-
-        SpellPiece piece = spell.grid.gridData[x][y];
-
-        if(piece instanceof IManaTrick) {
-            IManaTrick manaPiece = (IManaTrick) piece;
-            if(EnumManaTier.allowed(cadTier, manaPiece.tier())) {
-                int manaDrain = manaPiece.manaDrain(context, x, y);
-                return ITrickEnablerComponent.EnableResult.fromBoolean(ManaItemHandler.requestManaExact(cad, context.caster, manaDrain, true));
-            }
-        }
-
-        return EnableResult.NOT_ENABLED;
-    }
 
     private static final Pattern advancedMatcher = Pattern.compile("\\s+(?=\\(#\\d+\\))");
 
@@ -155,4 +140,6 @@ public class ItemBlasterAssembly extends ItemComponent implements IBlasterCompon
             }
         }
     }
+
+
 }

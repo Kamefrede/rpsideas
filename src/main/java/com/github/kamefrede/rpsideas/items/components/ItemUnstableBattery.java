@@ -5,14 +5,17 @@ import com.github.kamefrede.rpsideas.util.Reference;
 import com.github.kamefrede.rpsideas.util.helpers.PsiChangeHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import vazkii.arl.network.NetworkHandler;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.*;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
+import vazkii.psi.common.network.message.MessageDataSync;
 
 import java.util.List;
 
@@ -52,7 +55,9 @@ public class ItemUnstableBattery extends ItemComponent {
             ItemStack battery = icad.getComponentInSlot(cad, EnumCADComponent.BATTERY);
             if(!battery.isEmpty() && battery.getItem() instanceof ItemUnstableBattery) {
                 PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
-                data.deductPsi(data.availablePsi + icad.getStoredPsi(cad), 50, true, true);
+                data.availablePsi  = 0;
+                data.save();
+                NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP)player);
             }
         }
     }
@@ -71,7 +76,9 @@ public class ItemUnstableBattery extends ItemComponent {
             if(!battery.isEmpty() && battery.getItem() instanceof ItemUnstableBattery) {
                 PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
                 if(data.regenCooldown == 0 && data.availablePsi != data.getTotalPsi()) {
-                    PsiChangeHelper.changePsi(player, PSI_REGEN_BONUS, true);
+                    data.availablePsi = Math.min(data.getTotalPsi(), data.availablePsi + PSI_REGEN_BONUS);
+                    data.save();
+                    NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP)player);
                 }
             }
         }

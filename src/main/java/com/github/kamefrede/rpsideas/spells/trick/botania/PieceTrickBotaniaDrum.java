@@ -31,6 +31,7 @@ public abstract class PieceTrickBotaniaDrum extends PieceComponentTrick implemen
         super(spell);
     }
 
+
     private SpellParam positionParam;
 
     @Override

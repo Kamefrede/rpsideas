@@ -22,10 +22,9 @@ public class PieceSelectorCasterEnergy extends PieceSelector {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if(context.caster == null) return null;
-        NBTTagCompound cmp = PlayerDataHandler.getDataCompoundForPlayer(context.caster);
-        int energy = cmp.getInteger("availablePsi");
 
-        return 1.0D * energy;
+
+        return 1.0D * PlayerDataHandler.get(context.caster).availablePsi;
     }
 
     @Override
