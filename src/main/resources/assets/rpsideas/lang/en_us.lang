@@ -178,7 +178,7 @@ item.rpsideas.creative_battery.name=Creative CAD Battery
 item.rpsideas.creative_socket.name=Creative CAD Socket
 
 item.rpsideas.unstable_battery.name=Unstable CAD Battery
-item.rpsideas.shielded_battery.name=Shielded CAD Battery
+item.rpsideas.twinflow_battery.name=Shielded CAD Battery
 item.rpsideas.biotic_sensor.name=Exosuit Biotic Sensor
 
 psi.spellpiece.rpsideas.make_mana_burst=Trick: Form Burst
