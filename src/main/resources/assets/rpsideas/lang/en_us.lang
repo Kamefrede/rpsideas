@@ -54,6 +54,12 @@ psi.spellpiece.rpsideas.trick_conjure_gravity=Trick: Conjure Gravity Block
 psi.spellpiece.rpsideas.trick_conjure_gravity_sequence=Trick: Conjure Gravity Block Sequence
 psi.spellpiece.rpsideas.operator_entity_raycast=Operator: Entity Raycast
 psi.spellpiece.rpsideas.trick_rotate_block=Trick: Rotate Block
+psi.spellpiece.rpsideas.operator_can_extract_energy=Operator: Can Extract Energy
+psi.spellpiece.rpsideas.operator_can_receive_energy=Operator: Can Receive Energy
+psi.spellpiece.rpsideas.operator_max_energy_stored=Operator: Max Energy Stored
+psi.spellpiece.rpsideas.operator_max_input=Operator: Max Input
+psi.spellpiece.rpsideas.operator_max_output=Operator: Max Output
+psi.spellpiece.rpsideas.operator_stored_energy=Operator: Stored Energy
 
 
 
@@ -113,6 +119,12 @@ psi.spellpiece.rpsideas.trick_conjure_gravity.desc=Conjures a conjured block tha
 psi.spellpiece.rpsideas.trick_conjure_gravity_sequence.desc=Conjures a conjured block sequence that obey gravity
 psi.spellpiece.rpsideas.operator_entity_raycast.desc=Raycasts from a given entity and returns the first entity it finds
 psi.spellpiece.rpsideas.trick_rotate_block.desc=Trick: Rotate Block
+psi.spellpiece.rpsideas.operator_can_extract_energy.desc=Checks you can extract FE from a block
+psi.spellpiece.rpsideas.operator_can_receive_energy.desc=Checks you can input FE to a block
+psi.spellpiece.rpsideas.operator_max_energy_stored.desc=Checks the max FE a block can store
+psi.spellpiece.rpsideas.operator_max_input.desc=Checks the max FE/t a block can receive
+psi.spellpiece.rpsideas.operator_max_output.desc=Checks the max FE/t a block can output
+psi.spellpiece.rpsideas.operator_stored_energy.desc=Checks the current FE stored in a block
 
 
 psi.datatype.String=String

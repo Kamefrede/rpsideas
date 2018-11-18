@@ -3,6 +3,7 @@ package com.github.kamefrede.rpsideas.spells.base;
 
 import com.github.kamefrede.rpsideas.compat.botania.BotaniaCompatPieces;
 import com.github.kamefrede.rpsideas.spells.operator.*;
+import com.github.kamefrede.rpsideas.spells.operator.fe.*;
 import com.github.kamefrede.rpsideas.spells.selector.*;
 import com.github.kamefrede.rpsideas.spells.trick.*;
 import com.github.kamefrede.rpsideas.util.libs.LibPieces;
@@ -77,6 +78,12 @@ public class SpellPieces  {
         register(PieceTrickConjureGravityBlock.class, LibPieces.TRICK_CONJURE_GRAVITY, LibPieceGroups.BLOCK_CONJURATION);
         register(PieceTrickConjureGravityBlockSequence.class, LibPieces.TRICK_CONJURE_GRAVITY_SEQUENCE, LibPieceGroups.BLOCK_CONJURATION);
         register(PieceTrickRotateBlock.class, LibPieces.TRICK_ROTATE_BLOCK, LibPieceGroups.BLOCK_MOVEMENT);
+        register(OperatorCanExtractEnergy.class, LibPieces.OPERATOR_CAN_EXTRACT_ENERGY, LibPieces.BLOCK_PROPERTIES);
+        register(OperatorCanReceiveEnergy.class, LibPieces.OPERATOR_CAN_RECEIVE_ENERGY, LibPieces.BLOCK_PROPERTIES);
+        register(OperatorMaxEnergyStored.class, LibPieces.OPERATOR_MAX_ENERGY_STORED, LibPieces.BLOCK_PROPERTIES);
+        register(OperatorMaxInput.class, LibPieces.OPERATOR_MAX_INPUT, LibPieces.BLOCK_PROPERTIES);
+        register(OperatorMaxOutput.class, LibPieces.OPERATOR_MAX_OUTPUT, LibPieces.BLOCK_PROPERTIES);
+        register(OperatorStoredEnergy.class, LibPieces.OPERATOR_STORED_ENERGY, LibPieces.BLOCK_PROPERTIES);
         if(Loader.isModLoaded("botania")) {
             BotaniaCompatPieces.init();
         }

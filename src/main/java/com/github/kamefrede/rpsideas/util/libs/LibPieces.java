@@ -59,6 +59,12 @@ public class LibPieces {
     public static final String TRICK_CONJURE_GRAVITY = "trick_conjure_gravity";
     public static final String TRICK_CONJURE_GRAVITY_SEQUENCE = "trick_conjure_gravity_sequence";
     public static final String TRICK_ROTATE_BLOCK = "trick_rotate_block";
+    public static final String OPERATOR_STORED_ENERGY = "operator_stored_energy";
+    public static final String OPERATOR_MAX_OUTPUT = "operator_max_output";
+    public static final String OPERATOR_MAX_INPUT = "operator_max_input";
+    public static final String OPERATOR_MAX_ENERGY_STORED = "operator_max_energy_stored";
+    public static final String OPERATOR_CAN_RECEIVE_ENERGY = "operator_can_receive_energy";
+    public static final String OPERATOR_CAN_EXTRACT_ENERGY = "operator_can_extract_energy";
 
     public static final String ALTERNATE_CONJURATION = Reference.MODID + ".redstone_conjuration";
     public static final String SECONDARY_VECTOR_OPERATORS = Reference.MODID + ".secondary_vectors";
