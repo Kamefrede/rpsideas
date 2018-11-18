@@ -58,6 +58,7 @@ public class LibPieces {
     public static final String OPERATOR_ENTITY_RAYCAST = "operator_entity_raycast";
     public static final String TRICK_CONJURE_GRAVITY = "trick_conjure_gravity";
     public static final String TRICK_CONJURE_GRAVITY_SEQUENCE = "trick_conjure_gravity_sequence";
+    public static final String TRICK_ROTATE_BLOCK = "trick_rotate_block";
 
     public static final String ALTERNATE_CONJURATION = Reference.MODID + ".redstone_conjuration";
     public static final String SECONDARY_VECTOR_OPERATORS = Reference.MODID + ".secondary_vectors";

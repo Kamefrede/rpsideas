@@ -53,6 +53,7 @@ psi.spellpiece.rpsideas.operator_vector_absolute=Operator: Vector Absolute
 psi.spellpiece.rpsideas.trick_conjure_gravity=Trick: Conjure Gravity Block
 psi.spellpiece.rpsideas.trick_conjure_gravity_sequence=Trick: Conjure Gravity Block Sequence
 psi.spellpiece.rpsideas.operator_entity_raycast=Operator: Entity Raycast
+psi.spellpiece.rpsideas.trick_rotate_block=Trick: Rotate Block
 
 
 
@@ -111,10 +112,11 @@ psi.spellpiece.rpsideas.operator_vector_absolute.desc=It's what it says on the t
 psi.spellpiece.rpsideas.trick_conjure_gravity.desc=Conjures a conjured block that obeys gravity
 psi.spellpiece.rpsideas.trick_conjure_gravity_sequence.desc=Conjures a conjured block sequence that obey gravity
 psi.spellpiece.rpsideas.operator_entity_raycast.desc=Raycasts from a given entity and returns the first entity it finds
+psi.spellpiece.rpsideas.trick_rotate_block.desc=Trick: Rotate Block
 
 
-psi.datatype.String = String
-rpsideas.datatype.String= String
+psi.datatype.String=String
+rpsideas.datatype.String=String
 rpsideas.datatype.BlockProperties=Properties
 rpsideas.spellerror.nthroot=Even numbered roots don't accept negative numbers
 rpsideas.spellerror.length=Lengths can't be negative

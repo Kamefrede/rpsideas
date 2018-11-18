@@ -76,6 +76,7 @@ public class SpellPieces  {
         register(PieceOperatorEntityRaycast.class, LibPieces.OPERATOR_ENTITY_RAYCAST, LibPieceGroups.SECONDARY_OPERATORS);
         register(PieceTrickConjureGravityBlock.class, LibPieces.TRICK_CONJURE_GRAVITY, LibPieceGroups.BLOCK_CONJURATION);
         register(PieceTrickConjureGravityBlockSequence.class, LibPieces.TRICK_CONJURE_GRAVITY_SEQUENCE, LibPieceGroups.BLOCK_CONJURATION);
+        register(PieceTrickRotateBlock.class, LibPieces.TRICK_ROTATE_BLOCK, LibPieceGroups.BLOCK_MOVEMENT);
         if(Loader.isModLoaded("botania")) {
             BotaniaCompatPieces.init();
         }
