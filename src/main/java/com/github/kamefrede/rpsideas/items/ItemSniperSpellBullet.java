@@ -1,6 +1,8 @@
 package com.github.kamefrede.rpsideas.items;
 
 import com.github.kamefrede.rpsideas.blocks.IPsiamBlock;
+import com.github.kamefrede.rpsideas.entity.EntitySniperProjectile;
+import com.github.kamefrede.rpsideas.util.IRPSIdeasItem;
 import com.github.kamefrede.rpsideas.util.RPSCreativeTab;
 import com.github.kamefrede.rpsideas.util.libs.LibItems;
 import net.minecraft.client.util.ITooltipFlag;
@@ -27,7 +29,7 @@ import vazkii.psi.common.item.base.IPsiItem;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemSniperSpellBullet extends ItemMod implements ISpellContainer,IPsiItem {
+public class ItemSniperSpellBullet extends ItemMod implements ISpellContainer,IRPSIdeasItem {
 
     private static final String TAG_SPELL = "spell";
 
@@ -47,6 +49,7 @@ public class ItemSniperSpellBullet extends ItemMod implements ISpellContainer,IP
     public ItemStack getContainerItem(ItemStack itemStack) {
         return itemStack.copy();
     }
+
 
     @Override
     public String getItemStackDisplayName(ItemStack stack) {
@@ -72,7 +75,7 @@ public class ItemSniperSpellBullet extends ItemMod implements ISpellContainer,IP
     @Override
     public void castSpell(ItemStack stack, SpellContext context) {
         if (!context.caster.getEntityWorld().isRemote) {
-            EntitySpellProjectile proj = new EntitySpellProjectile(context.caster.getEntityWorld(), context.caster);
+            EntitySniperProjectile proj = new EntitySniperProjectile(context.caster.getEntityWorld(), context.caster);
             ItemStack cad = PsiAPI.getPlayerCAD(context.caster);
             ItemStack colorizer = ((ICAD) cad.getItem()).getComponentInSlot(cad, EnumCADComponent.DYE);
             proj.setInfo(context.caster, colorizer, stack);

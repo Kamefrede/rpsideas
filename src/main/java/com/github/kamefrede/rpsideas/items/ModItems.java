@@ -16,6 +16,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
+import vazkii.arl.item.ItemMod;
 import vazkii.arl.item.ItemModTool;
 
 public class ModItems {
@@ -53,7 +54,11 @@ public class ModItems {
     
 
 
+    public static ItemMod sniperBullet;
 
+    public static void preInit(){
+        sniperBullet = new ItemSniperSpellBullet();
+    }
 
 
 

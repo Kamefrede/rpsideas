@@ -1,6 +1,8 @@
 package com.github.kamefrede.rpsideas.proxy;
 
 import com.github.kamefrede.rpsideas.blocks.ModBlocks;
+import com.github.kamefrede.rpsideas.entity.ModEntities;
+import com.github.kamefrede.rpsideas.items.ModItems;
 import com.github.kamefrede.rpsideas.network.RPSPacketHandler;
 import com.github.kamefrede.rpsideas.spells.base.SpellPieces;
 import net.minecraft.block.Block;
@@ -25,6 +27,8 @@ public class CommonProxy {
         ConfigHandler.initConfig(e.getSuggestedConfigurationFile());
         SpellPieces.init();
         RPSPacketHandler.initPackets();
+        ModEntities.init();
+        ModItems.preInit();
 
 
     }
