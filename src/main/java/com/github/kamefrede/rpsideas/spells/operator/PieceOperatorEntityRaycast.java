@@ -4,6 +4,7 @@ import com.github.kamefrede.rpsideas.spells.base.SpellParams;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
@@ -12,6 +13,7 @@ import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceOperator;
 import vazkii.psi.api.spell.wrapper.EntityListWrapper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
@@ -43,7 +45,10 @@ public class PieceOperatorEntityRaycast extends PieceOperator {
         if(context.caster.world.isRemote) return null;
         if(ent == null) throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
         if(vec == null || vec.isZero()) throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        return getFirstRaycastedEntity(ent, vec);
+        if(getFirstRaycastedEntity(ent, vec) == null){
+            throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
+        } else return getFirstRaycastedEntity(ent, vec);
+
     }
 
 
@@ -59,15 +64,13 @@ public class PieceOperatorEntityRaycast extends PieceOperator {
 
         AxisAlignedBB raycastAABB = new AxisAlignedBB(positionVector.x, positionVector.y, positionVector.z, positionVector.x + raycastVec.x, positionVector.y + raycastVec.y, positionVector.z + raycastVec.z);
         List<Entity> allEntities = e.getEntityWorld().getEntitiesWithinAABBExcludingEntity(e, raycastAABB);
-        Predicate<Entity> pred = getTargetPredicate();
         double d0 = -1.0D;
 
         for (int j2 = 0; j2 < allEntities.size(); ++j2)
         {
             Entity ent1 = allEntities.get(j2);
 
-            if (((com.google.common.base.Predicate<Entity>) pred).apply(ent1))
-            {
+
                 double d1 = ent1.getDistanceSq(e.posX, e.posY, e.posZ);
 
                 if ((dist < 0.0D || d1 < dist * dist) && (d0 == -1.0D || d1 < d0))
@@ -75,7 +78,6 @@ public class PieceOperatorEntityRaycast extends PieceOperator {
                     d0 = d1;
                     found = ent1;
                 }
-            }
         }
 
         return found;
@@ -85,9 +87,6 @@ public class PieceOperatorEntityRaycast extends PieceOperator {
     }
 
 
-    public Predicate<Entity> getTargetPredicate() {
-        return Objects::nonNull;
-    }
 
     @Override
     public Class<?> getEvaluationType() {
