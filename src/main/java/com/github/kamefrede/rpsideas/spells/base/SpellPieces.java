@@ -3,6 +3,7 @@ package com.github.kamefrede.rpsideas.spells.base;
 
 import com.github.kamefrede.rpsideas.compat.botania.BotaniaCompatPieces;
 import com.github.kamefrede.rpsideas.spells.operator.*;
+import com.github.kamefrede.rpsideas.spells.operator.block.*;
 import com.github.kamefrede.rpsideas.spells.operator.fe.*;
 import com.github.kamefrede.rpsideas.spells.selector.*;
 import com.github.kamefrede.rpsideas.spells.trick.*;
@@ -37,10 +38,9 @@ public class SpellPieces  {
         register(PieceTrickTillSequence.class, LibPieces.TRICK_TILL_SEQUENCE, LibPieceGroups.BLOCK_WORKS);
         register(PieceOperatorListSize.class, LibPieces.OPERATOR_LIST_SIZE, LibPieceGroups.ENTITIES_INTRO);
         register(PieceOperatorGetBlockHardness.class, LibPieces.OPERATOR_GET_BLOCK_HARDNESS, LibPieces.BLOCK_PROPERTIES);
-        register(PieceOperatorGetBlockLight.class, LibPieces.OPERATOR_GET_BLOCK_LIGHT, LibPieces.BLOCK_PROPERTIES);
+        register(PieceOperatorGetBlockLight.class, LibPieces.OPERATOR_GET_BLOCK_LIGHT, LibPieces.BLOCK_PROPERTIES, true);
         register(PieceOperatorGetBlockComparatorStrength.class, LibPieces.OPERATOR_GET_COMPARATOR_STRENGTH, LibPieces.BLOCK_PROPERTIES);
         register(PieceOperatorGetBlockSolidity.class, LibPieces.OPERATOR_GET_BLOCK_SOLIDITY, LibPieces.BLOCK_PROPERTIES);
-        register(PieceOperatorGetBlockProperties.class, LibPieces.OPERATOR_GET_BLOCK_PROPERTIES, LibPieces.BLOCK_PROPERTIES, true);
         register(PieceOperatorVectorRotate.class, LibPieces.OPERATOR_VECTOR_ROTATE, LibPieces.SECONDARY_VECTOR_OPERATORS);
         register(PieceOperatorVectorFallback.class, LibPieces.OPERATOR_VECTOR_FALLBACK, LibPieces.SECONDARY_VECTOR_OPERATORS);
         register(PieceOperatorVectorStrongRaycast.class, LibPieces.OPERATOR_VECTOR_STRONG_RAYCAST, LibPieces.SECONDARY_VECTOR_OPERATORS);

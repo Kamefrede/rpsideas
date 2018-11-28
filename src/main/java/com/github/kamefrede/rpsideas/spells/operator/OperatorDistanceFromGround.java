@@ -31,7 +31,7 @@ public class OperatorDistanceFromGround extends PieceOperator {
         Entity targetVal = this.<Entity>getParamValue(context, target);
         if(targetVal == null) throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
         if(targetVal.onGround) return 0.0D;
-        if(context.caster.posY < 256) maxheight = context.caster.posY;
+        if(context.caster.posY <= 256) maxheight = context.caster.posY - context.caster.getYOffset();
 
         RayTraceResult distancefromground = context.caster.world.rayTraceBlocks(new Vec3d(context.caster.posX, maxheight, context.caster.posY), new Vec3d(0,-1,0), false, true, false);
         if(distancefromground == null) throw new SpellRuntimeException(SpellRuntimeExceptions.NO_GROUND);
