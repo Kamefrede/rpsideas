@@ -65,7 +65,6 @@ public class PieceOperatorGetBlockComparatorStrength extends PieceOperator {
         BlockPos pos = new BlockPos(vec.x, vec.y, vec.z);
         IBlockState state = context.caster.world.getBlockState(pos);
 
-        Double comparatorValue = 0D;
 
 
         return calculateOutput(context.caster.world, pos, state, whichWay);
@@ -76,7 +75,7 @@ public class PieceOperatorGetBlockComparatorStrength extends PieceOperator {
         return  calculateInputStrength(worldIn, pos, state, facing);
     }
 
-    protected int calc1(World worldIn, BlockPos pos, IBlockState state,EnumFacing enumfacing)
+    private int calc1(World worldIn, BlockPos pos, IBlockState state, EnumFacing enumfacing)
     {
         int i = worldIn.getRedstonePower(pos, enumfacing);
 
@@ -86,11 +85,11 @@ public class PieceOperatorGetBlockComparatorStrength extends PieceOperator {
         }
         else
         {
-            return Math.max(i, state.getBlock() == Blocks.REDSTONE_WIRE ? ((Integer) state.getValue(BlockRedstoneWire.POWER)).intValue() : 0);
+            return Math.max(i, state.getBlock() == Blocks.REDSTONE_WIRE ? state.getValue(BlockRedstoneWire.POWER) : 0);
         }
     }
 
-    protected int calculateInputStrength(World worldIn, BlockPos pos, IBlockState state,EnumFacing enumfacing)
+    private int calculateInputStrength(World worldIn, BlockPos pos, IBlockState state, EnumFacing enumfacing)
     {
         int i = calc1(worldIn, pos, state, enumfacing);
 
