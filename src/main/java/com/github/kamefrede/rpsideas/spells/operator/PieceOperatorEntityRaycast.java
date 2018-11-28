@@ -29,7 +29,7 @@ public class PieceOperatorEntityRaycast extends PieceOperator {
 
     @Override
     public void initParams() {
-        addParam(target = new ParamEntity(SpellParam.GENERIC_NAME_TARGET, SpellParam.RED, false, false));
+        addParam(target = new ParamVector(SpellParam.GENERIC_NAME_TARGET, SpellParam.RED, false, false));
         addParam(vector = new ParamVector(SpellParams.GENERIC_NAME_VECTOR, SpellParam.BLUE, false, false));
     }
 
