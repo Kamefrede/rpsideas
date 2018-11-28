@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamEntity;
@@ -40,30 +41,29 @@ public class PieceOperatorEntityRaycast extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Entity ent = this.<Entity>getParamValue(context, target);
+        Vector3 ent = this.<Vector3>getParamValue(context, target);
         Vector3 vec = this.<Vector3>getParamValue(context, vector);
         if(context.caster.world.isRemote) return null;
-        if(ent == null) throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
+        if(ent == null || ent.isZero()) throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
         if(vec == null || vec.isZero()) throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        if(getFirstRaycastedEntity(ent, vec) == null){
+        if(getFirstRaycastedEntity(context, vec, ent) == null){
             throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
-        } else return getFirstRaycastedEntity(ent, vec);
+        } else return getFirstRaycastedEntity(context, vec, ent);
 
     }
 
 
-    public Entity getFirstRaycastedEntity(Entity e, Vector3 vector) throws SpellRuntimeException{
+    public Entity getFirstRaycastedEntity(SpellContext context, Vector3 vector, Vector3 target) throws SpellRuntimeException{
         final double maxDist = 32;
         double dist = maxDist;
-        Vec3d positionVector = e.getPositionVector();
+        World world = context.caster.world;
+        Vec3d positionVector = new Vec3d(target.x, target.y, target.z);
         Vec3d raycastVec = new Vec3d(vector.x * 32 , vector.y * 32, vector.z * 32);
         Entity found = null;
-        if(e instanceof EntityPlayer)
-            positionVector = positionVector.add(0, e.getEyeHeight(), 0);
 
 
         AxisAlignedBB raycastAABB = new AxisAlignedBB(positionVector.x, positionVector.y, positionVector.z, positionVector.x + raycastVec.x, positionVector.y + raycastVec.y, positionVector.z + raycastVec.z);
-        List<Entity> allEntities = e.getEntityWorld().getEntitiesWithinAABBExcludingEntity(e, raycastAABB);
+        List<Entity> allEntities = world.getEntitiesWithinAABBExcludingEntity(context.caster, raycastAABB);
         double d0 = -1.0D;
 
         for (int j2 = 0; j2 < allEntities.size(); ++j2)
@@ -71,7 +71,7 @@ public class PieceOperatorEntityRaycast extends PieceOperator {
             Entity ent1 = allEntities.get(j2);
 
 
-                double d1 = ent1.getDistanceSq(e.posX, e.posY, e.posZ);
+                double d1 = ent1.getDistanceSq(positionVector.x, positionVector.y, positionVector.z);
 
                 if ((dist < 0.0D || d1 < dist * dist) && (d0 == -1.0D || d1 < d0))
                 {
