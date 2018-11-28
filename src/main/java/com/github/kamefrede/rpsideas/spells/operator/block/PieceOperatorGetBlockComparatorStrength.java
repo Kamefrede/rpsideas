@@ -14,6 +14,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
@@ -64,19 +65,20 @@ public class PieceOperatorGetBlockComparatorStrength extends PieceOperator {
         BlockPos pos = new BlockPos(vec.x, vec.y, vec.z);
         IBlockState state = context.caster.world.getBlockState(pos);
 
+        Double comparatorValue = 0D;
+
 
         return calculateOutput(context.caster.world, pos, state, whichWay);
     }
 
     private int calculateOutput(World worldIn, BlockPos pos, IBlockState state, EnumFacing facing)
     {
-        return  this.calculateInputStrength(worldIn, pos, state, facing);
+        return  calculateInputStrength(worldIn, pos, state, facing);
     }
 
     protected int calc1(World worldIn, BlockPos pos, IBlockState state,EnumFacing enumfacing)
     {
-        BlockPos blockpos = pos.offset(enumfacing);
-        int i = worldIn.getRedstonePower(blockpos, enumfacing);
+        int i = worldIn.getRedstonePower(pos, enumfacing);
 
         if (i >= 15)
         {
@@ -84,33 +86,29 @@ public class PieceOperatorGetBlockComparatorStrength extends PieceOperator {
         }
         else
         {
-            IBlockState iblockstate = worldIn.getBlockState(blockpos);
-            return Math.max(i, iblockstate.getBlock() == Blocks.REDSTONE_WIRE ? ((Integer)iblockstate.getValue(BlockRedstoneWire.POWER)).intValue() : 0);
+            return Math.max(i, state.getBlock() == Blocks.REDSTONE_WIRE ? ((Integer) state.getValue(BlockRedstoneWire.POWER)).intValue() : 0);
         }
     }
 
     protected int calculateInputStrength(World worldIn, BlockPos pos, IBlockState state,EnumFacing enumfacing)
     {
         int i = calc1(worldIn, pos, state, enumfacing);
-        BlockPos blockpos = pos.offset(enumfacing);
-        IBlockState iblockstate = worldIn.getBlockState(blockpos);
 
-        if (iblockstate.hasComparatorInputOverride())
+
+        if (state.hasComparatorInputOverride())
         {
-            i = iblockstate.getComparatorInputOverride(worldIn, blockpos);
+            i = state.getComparatorInputOverride(worldIn, pos);
         }
-        else if (i < 15 && iblockstate.isNormalCube())
+        else if (i < 15 && state.isNormalCube())
         {
-            blockpos = blockpos.offset(enumfacing);
-            iblockstate = worldIn.getBlockState(blockpos);
 
-            if (iblockstate.hasComparatorInputOverride())
+            if (state.hasComparatorInputOverride())
             {
-                i = iblockstate.getComparatorInputOverride(worldIn, blockpos);
+                i = state.getComparatorInputOverride(worldIn, pos);
             }
-            else if (iblockstate.getMaterial() == Material.AIR)
+            else if (state.getMaterial() == Material.AIR)
             {
-                EntityItemFrame entityitemframe = this.findItemFrame(worldIn, enumfacing, blockpos);
+                EntityItemFrame entityitemframe = this.findItemFrame(worldIn, enumfacing, pos);
 
                 if (entityitemframe != null)
                 {
