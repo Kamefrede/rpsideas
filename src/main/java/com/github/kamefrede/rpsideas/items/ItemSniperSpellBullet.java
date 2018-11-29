@@ -5,12 +5,15 @@ import com.github.kamefrede.rpsideas.entity.EntitySniperProjectile;
 import com.github.kamefrede.rpsideas.util.IRPSIdeasItem;
 import com.github.kamefrede.rpsideas.util.RPSCreativeTab;
 import com.github.kamefrede.rpsideas.util.libs.LibItems;
+import com.google.common.collect.ImmutableSet;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -33,8 +36,13 @@ public class ItemSniperSpellBullet extends ItemMod implements ISpellContainer,IR
 
     private static final String TAG_SPELL = "spell";
 
+    public static final String[] VARIANTS = {
+            "spell_bullet_projectile",
+            "spell_bullet_projectile_active",
+    };
+
     public ItemSniperSpellBullet(){
-        super(LibItems.SNIPER_BULLET);
+        super(LibItems.SNIPER_BULLET, VARIANTS);
         setMaxStackSize(1);
         setCreativeTab(RPSCreativeTab.INST);
     }
@@ -63,6 +71,14 @@ public class ItemSniperSpellBullet extends ItemMod implements ISpellContainer,IR
     }
 
     @Override
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
+        if(isInCreativeTab(tab))
+            for(int i = 0; i < getVariants().length; i++)
+                if(i % 2 == 0)
+                    subItems.add(new ItemStack(this, 1, i));
+    }
+
+    @Override
     public Spell getSpell(ItemStack itemStack) {
         return ItemSpellDrive.getSpell(itemStack);
     }
@@ -74,14 +90,17 @@ public class ItemSniperSpellBullet extends ItemMod implements ISpellContainer,IR
 
     @Override
     public void castSpell(ItemStack stack, SpellContext context) {
-        if (!context.caster.getEntityWorld().isRemote) {
-            EntitySniperProjectile proj = new EntitySniperProjectile(context.caster.getEntityWorld(), context.caster);
-            ItemStack cad = PsiAPI.getPlayerCAD(context.caster);
-            ItemStack colorizer = ((ICAD) cad.getItem()).getComponentInSlot(cad, EnumCADComponent.DYE);
-            proj.setInfo(context.caster, colorizer, stack);
-            proj.context = context;
-            proj.getEntityWorld().spawnEntity(proj);
+        switch (stack.getItemDamage()){
+            case 1:
+                if (!context.caster.getEntityWorld().isRemote) {
+                    EntitySniperProjectile proj = new EntitySniperProjectile(context.caster.getEntityWorld(), context.caster);
+                    ItemStack cad = PsiAPI.getPlayerCAD(context.caster);
+                    ItemStack colorizer = ((ICAD) cad.getItem()).getComponentInSlot(cad, EnumCADComponent.DYE);
+                    proj.setInfo(context.caster, colorizer, stack);
+                    proj.context = context;
+                    proj.getEntityWorld().spawnEntity(proj);
 
+                }
         }
     }
 
@@ -105,7 +124,7 @@ public class ItemSniperSpellBullet extends ItemMod implements ISpellContainer,IR
     }
 
     @Override
-    public boolean isCADOnlyContainer(ItemStack itemStack) {
+    public boolean isCADOnlyContainer(ItemStack stack) {
         return true;
     }
 
