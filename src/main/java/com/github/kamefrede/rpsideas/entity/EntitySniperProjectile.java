@@ -17,9 +17,11 @@ import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.ISpellContainer;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
+import vazkii.psi.api.spell.SpellRuntimeException;
 import vazkii.psi.common.Psi;
 import vazkii.psi.common.entity.EntitySpellGrenade;
 import vazkii.psi.common.entity.EntitySpellProjectile;
+import vazkii.psi.common.spell.trick.entity.PieceTrickAddMotion;
 
 import java.awt.*;
 import java.util.function.Consumer;
@@ -110,12 +112,6 @@ public class EntitySniperProjectile extends EntityThrowable {
 
         timeAlive = tagCompound.getInteger(TAG_TIME_ALIVE);
 
-        double lastMotionX = tagCompound.getDouble(TAG_LAST_MOTION_X);
-        double lastMotionY = tagCompound.getDouble(TAG_LAST_MOTION_Y);
-        double lastMotionZ = tagCompound.getDouble(TAG_LAST_MOTION_Z);
-        motionX = lastMotionX;
-        motionY = lastMotionY;
-        motionZ = lastMotionZ;
     }
 
     @Override
@@ -155,6 +151,39 @@ public class EntitySniperProjectile extends EntityThrowable {
 
             Psi.proxy.sparkleFX(getEntityWorld(), x, y, z, r, g, b, (float) look.x, (float) look.y, (float) look.z, 1.2F, 12);
         }
+        if(timeAlive > 0){
+            addMotion(lookOrig, (43.299 * Math.log(timeAlive) -29.311));
+        }
+
+
+    }
+
+    public void addMotion(Vector3 dir, double speed){
+
+        dir = dir.copy().normalize().multiply(speed);
+
+        boolean added = false;
+
+        if(Math.abs(dir.x) > 0.0001) {
+                motionX += dir.x;
+                added = true;
+        }
+
+        if(Math.abs(dir.y) > 0.0001) {
+                motionY += dir.y;
+                added = true;
+            if(motionY >= 0)
+                fallDistance = 0;
+            }
+
+
+        if(Math.abs(dir.z) > 0.0001) {
+                motionZ += dir.z;
+                added = true;
+        }
+
+        if(added)
+            velocityChanged = true;
     }
 
     public int getLiveTime() {
@@ -162,7 +191,7 @@ public class EntitySniperProjectile extends EntityThrowable {
     }
 
     public int getParticleCount() {
-        return 5;
+        return 12;
     }
 
     @Override

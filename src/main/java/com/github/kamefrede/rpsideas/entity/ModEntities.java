@@ -10,7 +10,7 @@ public class ModEntities {
     public static void init() {
         int id = 0;
 
-        registerModEntity(EntitySniperProjectile.class, LibEntities.ENTITY_SNIPER_BULLET, id++, Psiam.INSTANCE, 256, 10, true);
+        registerModEntity(EntitySniperProjectile.class, LibEntities.ENTITY_SNIPER_BULLET, id++, Psiam.INSTANCE, 256, 1, true);
     }
 
     private static void registerModEntity(Class<? extends Entity> entityClass, String entityName, int id, Object mod, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates) {

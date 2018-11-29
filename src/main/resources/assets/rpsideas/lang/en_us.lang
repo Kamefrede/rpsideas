@@ -137,7 +137,7 @@ rpsideas.spellerror.movement=Movement cannot be null, it is either positive or n
 rpsideas.spellerror.outofbounds=The provided index is not within the range of the list
 rpsideas.spellerror.notliving=The selected entity must be a living entity(Player, mob, etc..)
 rpsideas.spellerror.nulllist=The provided list cannot be empty.
-rpsideas.spellerror.noground=No ground below found or is already on ground.
+rpsideas.spellerror.noground=No ground below found.
 
 
 rpsideas.spellparam.root=Root
