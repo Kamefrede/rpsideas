@@ -1,9 +1,6 @@
-package com.github.kamefrede.rpsideas.util;
+package com.github.kamefrede.rpsideas.util.botania;
 
 import com.github.kamefrede.rpsideas.items.components.botania.ItemBlasterAssembly;
-import com.github.kamefrede.rpsideas.util.botania.EnumManaTier;
-import com.github.kamefrede.rpsideas.util.botania.IBlasterComponent;
-import com.github.kamefrede.rpsideas.util.botania.IManaTrick;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
@@ -16,7 +13,6 @@ import vazkii.psi.api.spell.*;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.function.Predicate;
 
 public interface IComponentPiece {
 

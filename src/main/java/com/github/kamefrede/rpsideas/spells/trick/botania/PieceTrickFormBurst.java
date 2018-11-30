@@ -1,29 +1,23 @@
 package com.github.kamefrede.rpsideas.spells.trick.botania;
 
 import com.github.kamefrede.rpsideas.spells.base.SpellParams;
-import com.github.kamefrede.rpsideas.util.ITrickEnablerComponent;
-import com.github.kamefrede.rpsideas.util.PieceComponentTrick;
+import com.github.kamefrede.rpsideas.util.botania.PieceComponentTrick;
 import com.github.kamefrede.rpsideas.util.Reference;
-import com.github.kamefrede.rpsideas.util.botania.EnumManaTier;
-import com.github.kamefrede.rpsideas.util.botania.IBlasterComponent;
 import com.github.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import vazkii.botania.api.mana.*;
 import vazkii.botania.common.core.handler.ModSounds;
 import vazkii.botania.common.entity.EntityManaBurst;
 import vazkii.botania.common.item.ItemManaGun;
 import vazkii.psi.api.PsiAPI;
-import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamVector;
-import vazkii.psi.common.core.handler.PlayerDataHandler;
 
 public class PieceTrickFormBurst extends PieceComponentTrick {
     public PieceTrickFormBurst(Spell spell) {

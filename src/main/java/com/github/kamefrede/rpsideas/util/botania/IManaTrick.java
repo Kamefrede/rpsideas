@@ -1,6 +1,5 @@
 package com.github.kamefrede.rpsideas.util.botania;
 
-import com.github.kamefrede.rpsideas.util.IComponentPiece;
 import net.minecraft.client.resources.I18n;
 import vazkii.psi.api.spell.SpellContext;
 

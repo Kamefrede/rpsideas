@@ -1,6 +1,6 @@
 package com.github.kamefrede.rpsideas.spells.trick.botania;
 
-import com.github.kamefrede.rpsideas.util.PieceComponentTrick;
+import com.github.kamefrede.rpsideas.util.botania.PieceComponentTrick;
 import com.github.kamefrede.rpsideas.util.botania.EnumManaTier;
 import com.github.kamefrede.rpsideas.util.botania.IManaTrick;
 import net.minecraft.entity.EntityLiving;

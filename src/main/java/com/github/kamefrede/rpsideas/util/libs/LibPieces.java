@@ -21,7 +21,6 @@ public class LibPieces {
     public static final String OPERATOR_GET_BLOCK_HARDNESS = "get_hardness";
     public static final String OPERATOR_GET_BLOCK_LIGHT = "get_light";
     public static final String OPERATOR_GET_BLOCK_SOLIDITY = "get_solidity";
-    public static final String OPERATOR_GET_BLOCK_PROPERTIES = "get_properties";
     public static final String OPERATOR_VECTOR_ROTATE = "vector_rotate";
     public static final String OPERATOR_VECTOR_FALLBACK = "vector_fallback";
     public static final String OPERATOR_VECTOR_STRONG_RAYCAST = "strong_vector_raycast";

@@ -1,4 +1,4 @@
-package com.github.kamefrede.rpsideas.util;
+package com.github.kamefrede.rpsideas.util.botania;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
