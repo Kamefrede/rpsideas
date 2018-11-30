@@ -66,8 +66,9 @@ public class ItemTwinflowBattery extends ItemComponent {
                     if(cd > 50) cd = 50;
                     if(cd < 10) cd = 10;
                     psi = Math.min(psi, data.availablePsi);
-                    data.regenCooldown = 0;
                     data.deductPsi(-psi, cd, true);
+                    data.save();
+                    NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP)player);
                 }
             }
         }

@@ -56,6 +56,7 @@ public class ItemUnstableBattery extends ItemComponent {
             if(!battery.isEmpty() && battery.getItem() instanceof ItemUnstableBattery) {
                 PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
                 data.availablePsi  = 0;
+                data.regenCooldown = 20;
                 data.save();
                 NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP)player);
             }
