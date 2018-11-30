@@ -5,8 +5,8 @@ import com.github.kamefrede.rpsideas.util.Reference;
 public class LibPieces {
 
     public static final String TRICK_DIRECTION_PLACE_BLOCK = "trick_direction_place_block";
-    public static final String  TRICK_CONJURE_ETHEREAL_BLOCK_SEQUENCE = "trick_conjure_ethereal_block_sequence";
-    public static final String  SELECTOR_NEARBY_PLAYERS = "selector_nearby_players";
+    public static final String TRICK_CONJURE_ETHEREAL_BLOCK_SEQUENCE = "trick_conjure_ethereal_block_sequence";
+    public static final String SELECTOR_NEARBY_PLAYERS = "selector_nearby_players";
     public static final String TRICK_CONJURE_ETHEREAL_BLOCK = "trick_conjure_ethereal_block";
     public static final String OPERATOR_EXTRACT_SIGN = "operator_extract_sign";
     public static final String OPERATOR_ROOT = "operator_root";
@@ -70,6 +70,7 @@ public class LibPieces {
     public static final String OPERATOR_GET_METADATA = "operator_get_metadata";
     public static final String OPERATOR_GET_DAMAGE = "operator_get_damage";
     public static final String TRICK_SMELT_BLOCK_SEQUENCE = "trick_smelt_block_sequence";
+    public static final String TRICK_REPAIR = "trick_repair";
 
     public static final String ALTERNATE_CONJURATION = Reference.MODID + ".redstone_conjuration";
     public static final String SECONDARY_VECTOR_OPERATORS = Reference.MODID + ".secondary_vectors";
