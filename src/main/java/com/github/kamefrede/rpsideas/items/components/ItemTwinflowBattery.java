@@ -88,7 +88,7 @@ public class ItemTwinflowBattery extends ItemComponent {
             if(!battery.isEmpty() && battery.getItem() instanceof ItemTwinflowBattery) {
                 PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
 
-                if(data.regenCooldown == 0 && data.availablePsi != data.getTotalPsi()) {
+                if(data.regenCooldown < 1 && data.availablePsi != data.getTotalPsi()) {
                     data.availablePsi = Math.min(data.getTotalPsi(), data.availablePsi + PSI_REGEN_BONUS);
                     data.save();
                     NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP)player);
