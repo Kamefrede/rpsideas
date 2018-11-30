@@ -4,7 +4,6 @@ import com.github.kamefrede.rpsideas.network.MessageParticleTrail;
 import com.github.kamefrede.rpsideas.network.RPSPacketHandler;
 import com.github.kamefrede.rpsideas.spells.base.SpellParams;
 import com.github.kamefrede.rpsideas.util.helpers.SpellHelpers;
-import vazkii.arl.network.NetworkHandler;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
