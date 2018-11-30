@@ -106,6 +106,9 @@ public class SpellPieces  {
         register(PieceTrickCloseElytra.class, LibPieces.TRICK_CLOSE_ELYTRA, LibPieceGroups.MOVEMENT);
         register(PieceTrickOpenElytra.class, LibPieces.TRICK_OPEN_ELYTRA, LibPieceGroups.MOVEMENT);
         register(PieceOperatorIsElytraFlying.class, LibPieces.OPERATOR_IS_ELYTRA_FLYING, LibPieceGroups.MOVEMENT);
+        register(PieceOperatorGetDamage.class, LibPieces.OPERATOR_GET_DAMAGE, LibPieces.BLOCK_PROPERTIES);
+        register(PieceOperatorGetMetadata.class, LibPieces.OPERATOR_GET_METADATA, LibPieces.BLOCK_PROPERTIES);
+        register(PieceTrickSmeltBlockSequence.class, LibPieces.TRICK_SMELT_BLOCK_SEQUENCE, LibPieceGroups.SMELTERY);
         if(Loader.isModLoaded("botania")) {
             BotaniaCompatPieces.init();
         }
