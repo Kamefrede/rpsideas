@@ -66,6 +66,7 @@ public class LibPieces {
     public static final String OPERATOR_CAN_EXTRACT_ENERGY = "operator_can_extract_energy";
     public static final String TRICK_CLOSE_ELYTRA = "trick_close_elytra";
     public static final String TRICK_OPEN_ELYTRA = "trick_open_elytra";
+    public static final String OPERATOR_IS_ELYTRA_FLYING = "operator_is_elytra_flying";
 
     public static final String ALTERNATE_CONJURATION = Reference.MODID + ".redstone_conjuration";
     public static final String SECONDARY_VECTOR_OPERATORS = Reference.MODID + ".secondary_vectors";

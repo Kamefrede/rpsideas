@@ -5,6 +5,7 @@ import com.github.kamefrede.rpsideas.compat.botania.BotaniaCompatPieces;
 import com.github.kamefrede.rpsideas.spells.operator.*;
 import com.github.kamefrede.rpsideas.spells.operator.block.*;
 import com.github.kamefrede.rpsideas.spells.operator.entity.OperatorDistanceFromGround;
+import com.github.kamefrede.rpsideas.spells.operator.entity.PieceOperatorIsElytraFlying;
 import com.github.kamefrede.rpsideas.spells.operator.entity.PieceOperatorVisibleToEntity;
 import com.github.kamefrede.rpsideas.spells.operator.fe.*;
 import com.github.kamefrede.rpsideas.spells.operator.list.PieceOperatorListExclusion;
@@ -104,6 +105,7 @@ public class SpellPieces  {
         register(OperatorStoredEnergy.class, LibPieces.OPERATOR_STORED_ENERGY, LibPieces.BLOCK_PROPERTIES);
         register(PieceTrickCloseElytra.class, LibPieces.TRICK_CLOSE_ELYTRA, LibPieceGroups.MOVEMENT);
         register(PieceTrickOpenElytra.class, LibPieces.TRICK_OPEN_ELYTRA, LibPieceGroups.MOVEMENT);
+        register(PieceOperatorIsElytraFlying.class, LibPieces.OPERATOR_IS_ELYTRA_FLYING, LibPieceGroups.MOVEMENT);
         if(Loader.isModLoaded("botania")) {
             BotaniaCompatPieces.init();
         }
