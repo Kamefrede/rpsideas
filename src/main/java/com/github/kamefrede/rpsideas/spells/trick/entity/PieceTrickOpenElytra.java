@@ -1,6 +1,5 @@
 package com.github.kamefrede.rpsideas.spells.trick.entity;
 
-
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemElytra;
 import net.minecraft.item.ItemStack;
@@ -12,16 +11,16 @@ import vazkii.psi.api.spell.piece.PieceTrick;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-
-public class PieceTrickCloseElytra extends PieceTrick {
+public class PieceTrickOpenElytra extends PieceTrick {
 
     SpellParam num;
 
-    public PieceTrickCloseElytra(Spell spell) {
+    public PieceTrickOpenElytra(Spell spell) {
         super(spell);
     }
 
     Method setFlag = ReflectionHelper.findMethod(Entity.class, "setFlag", "func_70052_a", int.class, boolean.class);
+
 
 
     @Override
@@ -30,7 +29,7 @@ public class PieceTrickCloseElytra extends PieceTrick {
     }
 
     @Override
-    public void addToMetadata(SpellMetadata meta) throws SpellCompilationException{
+    public void addToMetadata(SpellMetadata meta) throws SpellCompilationException, ArithmeticException {
         super.addToMetadata(meta);
 
         meta.addStat(EnumSpellStat.COMPLEXITY, 1);
@@ -47,7 +46,7 @@ public class PieceTrickCloseElytra extends PieceTrick {
                 for (ItemStack stack : it) {
                     if (stack.getItem() instanceof ItemElytra) {
                         try {
-                            setFlag.invoke((Entity)context.caster, 7, false);
+                            setFlag.invoke((Entity)context.caster, 7, true);
                         } catch (IllegalAccessException | InvocationTargetException e) {
                             System.out.println("pls contact kamefrede#4501 asap");
                         }
@@ -61,8 +60,4 @@ public class PieceTrickCloseElytra extends PieceTrick {
 
         return false;
     }
-
-
-
-
 }

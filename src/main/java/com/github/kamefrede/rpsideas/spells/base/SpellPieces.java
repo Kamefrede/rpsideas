@@ -18,6 +18,8 @@ import com.github.kamefrede.rpsideas.spells.operator.math.PieceOperatorToRadians
 import com.github.kamefrede.rpsideas.spells.operator.vector.*;
 import com.github.kamefrede.rpsideas.spells.selector.*;
 import com.github.kamefrede.rpsideas.spells.trick.block.*;
+import com.github.kamefrede.rpsideas.spells.trick.entity.PieceTrickCloseElytra;
+import com.github.kamefrede.rpsideas.spells.trick.entity.PieceTrickOpenElytra;
 import com.github.kamefrede.rpsideas.spells.trick.misc.PieceTrickBreakLoop;
 import com.github.kamefrede.rpsideas.spells.trick.misc.PieceTrickDebugSpamless;
 import com.github.kamefrede.rpsideas.spells.trick.misc.PieceTrickParticleTrail;
@@ -100,6 +102,8 @@ public class SpellPieces  {
         register(OperatorMaxInput.class, LibPieces.OPERATOR_MAX_INPUT, LibPieces.BLOCK_PROPERTIES);
         register(OperatorMaxOutput.class, LibPieces.OPERATOR_MAX_OUTPUT, LibPieces.BLOCK_PROPERTIES);
         register(OperatorStoredEnergy.class, LibPieces.OPERATOR_STORED_ENERGY, LibPieces.BLOCK_PROPERTIES);
+        register(PieceTrickCloseElytra.class, LibPieces.TRICK_CLOSE_ELYTRA, LibPieceGroups.MOVEMENT);
+        register(PieceTrickOpenElytra.class, LibPieces.TRICK_OPEN_ELYTRA, LibPieceGroups.MOVEMENT);
         if(Loader.isModLoaded("botania")) {
             BotaniaCompatPieces.init();
         }
