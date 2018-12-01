@@ -10,6 +10,7 @@ Items
 * Creative CAD Socket
 * Creative CAD Core
 * Creative CAD Battery
+* Psimetal Hoe
 
 Mod Integrations
 ===========
@@ -49,6 +50,20 @@ Spell Pieces
 * Operator: Entity Raycast
 * Trick: Conjure Gravity Block
 * Trick: Conjure Gravity Block Sequence
+* Trick: Deploy Elytra
+* Trick: Undeploy Elytra
+* Trick: Repair
+* Trick: Smelt Block Sequence
+* Trick: Rotate Block
+* Operator: Is Elytra Flying
+* Operator: Can Extract Energy
+* Operator: Can Receive Energy
+* Operator: Max Energy Stored
+* Operator: Energy Stored
+* Operator: Max Energy Input
+* Operator: Max Energy Output
+* Operator: Get Damage
+* Operator: Get Metadata
 
 
 
