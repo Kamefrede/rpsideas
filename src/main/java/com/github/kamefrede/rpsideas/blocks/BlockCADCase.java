@@ -3,6 +3,7 @@ package com.github.kamefrede.rpsideas.blocks;
 import com.github.kamefrede.rpsideas.items.ModItems;
 import com.github.kamefrede.rpsideas.tiles.TileCADCase;
 import com.github.kamefrede.rpsideas.util.RPSSoundHandler;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.*;
@@ -13,6 +14,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -28,9 +30,12 @@ import net.minecraftforge.items.*;
 import net.minecraft.block.Block;
 
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 
 public class BlockCADCase extends Block {
@@ -71,6 +76,7 @@ public class BlockCADCase extends Block {
         return getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(horizontalIndex)).withProperty(OPEN, isOpen);
     }
 
+    @ParametersAreNonnullByDefault
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
         TileEntity tile;
@@ -85,6 +91,7 @@ public class BlockCADCase extends Block {
             return state.withProperty(COLOR, cadCase.getDyeColor());
         } else return state;
     }
+
 
     @Override
     public boolean isFullBlock(IBlockState state) {
@@ -101,6 +108,7 @@ public class BlockCADCase extends Block {
         return false;
     }
 
+    @MethodsReturnNonnullByDefault
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         switch(state.getValue(FACING)) {
@@ -114,10 +122,27 @@ public class BlockCADCase extends Block {
 
     //Item form
 
+    @ParametersAreNonnullByDefault
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-        return new ItemStack(this, 1, getActualState(state, world, pos).getValue(COLOR).getMetadata());
+        TileEntity tileentity = world.getTileEntity(pos);
+        if (tileentity instanceof TileCADCase) {
+            TileCADCase cadCase = (TileCADCase) tileentity;
+            ItemStack itemstack = new ItemStack(ModItems.cadCaseItem, 1, getActualState(state, world, pos).getValue(COLOR).getMetadata());
+            IItemHandler handler = itemstack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+            if (handler != null) {
+                for(int i=0; i < handler.getSlots(); i++){
+                    handler.insertItem(i, Objects.requireNonNull(tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)).getStackInSlot(i), false);
+                }
+            }
+            if(cadCase.getDisplayName() != null){
+                itemstack.setStackDisplayName(cadCase.getName());
+            }
+            return itemstack;
+        }
+        return new ItemStack(Items.AIR);
     }
+
 
     //Tile Entity
     @Override
@@ -125,7 +150,7 @@ public class BlockCADCase extends Block {
         return true;
     }
 
-    @Nullable
+    @ParametersAreNonnullByDefault
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
         return new TileCADCase();
@@ -147,6 +172,7 @@ public class BlockCADCase extends Block {
         } else return 0;
     }
 
+    @ParametersAreNonnullByDefault
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
         TileEntity tileentity = worldIn.getTileEntity(pos);
@@ -154,8 +180,10 @@ public class BlockCADCase extends Block {
             TileCADCase cadCase = (TileCADCase) tileentity;
             ItemStack itemstack = new ItemStack(ModItems.cadCaseItem, 1, getActualState(state, worldIn, pos).getValue(COLOR).getMetadata());
             IItemHandler handler = itemstack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-            for(int i=0; i < handler.getSlots(); i++){
-                handler.insertItem(i, tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).getStackInSlot(i), false);
+            if (handler != null) {
+                for(int i=0; i < handler.getSlots(); i++){
+                    handler.insertItem(i, Objects.requireNonNull(tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)).getStackInSlot(i), false);
+                }
             }
             if(cadCase.getDisplayName() != null){
                 itemstack.setStackDisplayName(cadCase.getName());
@@ -176,12 +204,14 @@ public class BlockCADCase extends Block {
 
     //Events
 
+    @ParametersAreNonnullByDefault
     @Override
     public boolean canPlaceBlockAt(World world, BlockPos pos) {
         IBlockState belowState = world.getBlockState(pos.down());
         return belowState.getBlockFaceShape(world, pos, EnumFacing.UP) == BlockFaceShape.SOLID || belowState.getBlock() == Blocks.GLOWSTONE;
     }
 
+    @MethodsReturnNonnullByDefault
     @Override
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
         return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()).withProperty(OPEN, false);

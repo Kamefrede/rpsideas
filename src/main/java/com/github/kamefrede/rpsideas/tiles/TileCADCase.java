@@ -1,6 +1,7 @@
 package com.github.kamefrede.rpsideas.tiles;
 
 import com.github.kamefrede.rpsideas.blocks.BlockCADCase;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.*;
@@ -31,7 +32,7 @@ public class TileCADCase extends TileEntity {
         }
     };
 
-    EnumDyeColor color;
+    EnumDyeColor color = EnumDyeColor.WHITE;
     String name = "";
 
     public EnumDyeColor getDyeColor() {
@@ -122,6 +123,7 @@ public class TileCADCase extends TileEntity {
         else return super.getCapability(cap, facing);
     }
 
+    @Nonnull
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         nbt.setTag("Items", itemHandler.serializeNBT());
@@ -138,12 +140,13 @@ public class TileCADCase extends TileEntity {
         color = EnumDyeColor.byMetadata(nbt.getInteger("Color"));
     }
 
-    @Nullable
+
     @Override
     public SPacketUpdateTileEntity getUpdatePacket() {
         return new SPacketUpdateTileEntity(pos, 0, getUpdateTag());
     }
 
+    @MethodsReturnNonnullByDefault
     @Override
     public NBTTagCompound getUpdateTag() {
         return writeToNBT(new NBTTagCompound());

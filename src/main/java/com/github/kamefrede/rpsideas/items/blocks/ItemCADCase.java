@@ -20,6 +20,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 
 public class ItemCADCase extends Item16Colors {
@@ -29,6 +30,7 @@ public class ItemCADCase extends Item16Colors {
         setMaxStackSize(1);
     }
 
+    @ParametersAreNonnullByDefault
     @Override
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
         if(!world.isRemote) {
