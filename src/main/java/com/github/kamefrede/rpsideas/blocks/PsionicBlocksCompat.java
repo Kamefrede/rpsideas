@@ -2,6 +2,7 @@ package com.github.kamefrede.rpsideas.blocks;
 
 import com.github.kamefrede.rpsideas.tiles.TileCADCase;
 import com.github.kamefrede.rpsideas.util.Reference;
+import com.github.kamefrede.rpsideas.util.libs.LibBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
@@ -10,13 +11,13 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 public class PsionicBlocksCompat {
 
-    @GameRegistry.ObjectHolder(Reference.MODID + ":" + "cad_case")
+    @GameRegistry.ObjectHolder(Reference.MODID + ":" + LibBlocks.CAD_CASE)
     public static final Block cadCase = Blocks.AIR;
 
 
     public static void register(IForgeRegistry<Block> reg) {
 
-        reg.register(createBlock(new BlockCADCase(), "cad_case"));
+        reg.register(createBlock(new BlockCADCase(), LibBlocks.CAD_CASE));
         GameRegistry.registerTileEntity(TileCADCase.class, Reference.MODID + ":case");
 
     }

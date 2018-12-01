@@ -2,12 +2,10 @@ package com.github.kamefrede.rpsideas.items.components;
 
 import com.github.kamefrede.rpsideas.items.base.ItemComponent;
 import com.github.kamefrede.rpsideas.util.Reference;
-import com.github.kamefrede.rpsideas.util.helpers.PsiChangeHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

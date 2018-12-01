@@ -2,7 +2,6 @@ package com.github.kamefrede.rpsideas.items.components;
 
 import com.github.kamefrede.rpsideas.items.base.ItemComponent;
 import com.github.kamefrede.rpsideas.util.Reference;
-import com.github.kamefrede.rpsideas.util.helpers.PsiChangeHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;

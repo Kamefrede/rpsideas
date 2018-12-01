@@ -1,23 +1,15 @@
 package com.github.kamefrede.rpsideas.proxy;
 
 import com.github.kamefrede.rpsideas.blocks.BlockCADCase;
-import com.github.kamefrede.rpsideas.blocks.BlockConjuredGravityBlock;
 import com.github.kamefrede.rpsideas.blocks.PsionicBlocksCompat;
 import com.github.kamefrede.rpsideas.compat.botania.BotaniaCompatItems;
 import com.github.kamefrede.rpsideas.items.ModItems;
-import com.github.kamefrede.rpsideas.items.components.ItemBioticSensor;
-import com.github.kamefrede.rpsideas.items.components.botania.ItemBlasterAssembly;
 import com.github.kamefrede.rpsideas.render.RenderTileCADCase;
 import com.github.kamefrede.rpsideas.tiles.TileCADCase;
 import com.github.kamefrede.rpsideas.util.Reference;
-import com.github.kamefrede.rpsideas.util.helpers.ClientHelpers;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
-import net.minecraft.client.renderer.color.BlockColors;
-import net.minecraft.client.renderer.color.ItemColors;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
-import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.model.obj.OBJLoader;

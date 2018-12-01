@@ -42,7 +42,7 @@ import java.util.regex.Pattern;
 public class ItemBlasterAssembly extends ItemCADComponent implements IBlasterComponent,IExtraVariantHolder {
 
     public ItemBlasterAssembly() {
-        super(LibItems.CAD_ASSEMBLY, VARIANTS);
+        super(LibItems.CAD_ASSEMBLY);
         vazkii.psi.common.item.base.ModItems.cad.addPropertyOverride(new ResourceLocation(Reference.MODID, "clip"), ((stack, world, ent) -> ItemManaGun.hasClip(stack) ? 1f : 0f));
         setCreativeTab(RPSCreativeTab.INST);
     }

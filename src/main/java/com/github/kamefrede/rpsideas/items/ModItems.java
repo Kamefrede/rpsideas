@@ -7,6 +7,7 @@ import com.github.kamefrede.rpsideas.items.components.*;
 import com.github.kamefrede.rpsideas.items.components.botania.ItemBlasterAssembly;
 import com.github.kamefrede.rpsideas.util.RPSCreativeTab;
 import com.github.kamefrede.rpsideas.util.Reference;
+import com.github.kamefrede.rpsideas.util.libs.LibItems;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -21,35 +22,35 @@ import vazkii.arl.item.ItemModTool;
 
 public class ModItems {
 
-    @GameRegistry.ObjectHolder(Reference.MODID + ":" + "wide_socket")
+    @GameRegistry.ObjectHolder(Reference.MODID + ":" + LibItems.WIDE_SOCKET)
     public static final Item wideBandSocket = Items.AIR;
 
-    @GameRegistry.ObjectHolder(Reference.MODID + ":" + "flash_ring")
+    @GameRegistry.ObjectHolder(Reference.MODID + ":" + LibItems.FLASH_RING)
     public static final Item flashRing = Items.AIR;
 
-    @GameRegistry.ObjectHolder(Reference.MODID + ":" + "cad_case")
+    @GameRegistry.ObjectHolder(Reference.MODID + ":" + LibItems.CAD_CASE)
     public static final Item cadCaseItem = Items.AIR;
 
-    @GameRegistry.ObjectHolder(Reference.MODID + ":" + "inline_caster")
+    @GameRegistry.ObjectHolder(Reference.MODID + ":" + LibItems.INLINE_CASTER)
     public static final Item inlineCaster = Items.AIR;
 
 
-    @GameRegistry.ObjectHolder(Reference.MODID + ":" + "biotic_sensor")
+    @GameRegistry.ObjectHolder(Reference.MODID + ":" + LibItems.BIOTIC_SENSOR)
     public static final Item bioticSensor = Items.AIR;
 
-    @GameRegistry.ObjectHolder(Reference.MODID + ":" + "unstable_battery")
+    @GameRegistry.ObjectHolder(Reference.MODID + ":" + LibItems.UNSTABLE_BATTERY)
     public static final Item unstableBattery = Items.AIR;
 
-    @GameRegistry.ObjectHolder(Reference.MODID + ":" + "twinflow_battery")
+    @GameRegistry.ObjectHolder(Reference.MODID + ":" + LibItems.TWINFLOW_BATTERY)
     public static final Item twinflowBattery = Items.AIR;
 
-    @GameRegistry.ObjectHolder(Reference.MODID + ":" + "creative_battery")
+    @GameRegistry.ObjectHolder(Reference.MODID + ":" + LibItems.CREATIVE_BATTERY)
     public static final Item creativeBattery = Items.AIR;
 
-    @GameRegistry.ObjectHolder(Reference.MODID + ":" + "creative_core")
+    @GameRegistry.ObjectHolder(Reference.MODID + ":" + LibItems.CREATIVE_CORE)
     public static final Item creativeCore = Items.AIR;
 
-    @GameRegistry.ObjectHolder(Reference.MODID + ":" + "creative_socket")
+    @GameRegistry.ObjectHolder(Reference.MODID + ":" + LibItems.CREATIVE_SOCKET)
     public static final Item creativeSocket = Items.AIR;
     
 
@@ -57,6 +58,7 @@ public class ModItems {
     public static ItemMod sniperBullet;
 
     public static ItemModTool psimetalHoe;
+
 
     public static void preInit(){
         sniperBullet = new ItemSniperSpellBullet();
@@ -67,15 +69,15 @@ public class ModItems {
 
 
     public static void register(IForgeRegistry<Item> reg) {
-        reg.register(createItem(new ItemFlashRing(), "flash_ring"));
-        reg.register(createItem(new ItemInlineCaster(), "inline_caster"));
-        reg.register(createItem(new ItemWideCADSocket(), "wide_socket"));
-        reg.register(createItem(new ItemBioticSensor(), "biotic_sensor"));
-        reg.register(createItem(new ItemUnstableBattery(), "unstable_battery"));
-        reg.register(createItem(new ItemTwinflowBattery(), "twinflow_battery"));
-        reg.register(createItem(new ItemCreativeBattery(), "creative_battery"));
-        reg.register(createItem(new ItemCreativeCore(), "creative_core"));
-        reg.register(createItem(new ItemCreativeSocket(), "creative_socket"));
+        reg.register(createItem(new ItemFlashRing(), LibItems.FLASH_RING));
+        reg.register(createItem(new ItemInlineCaster(), LibItems.INLINE_CASTER));
+        reg.register(createItem(new ItemWideCADSocket(), LibItems.WIDE_SOCKET));
+        reg.register(createItem(new ItemBioticSensor(), LibItems.BIOTIC_SENSOR));
+        reg.register(createItem(new ItemUnstableBattery(), LibItems.UNSTABLE_BATTERY));
+        reg.register(createItem(new ItemTwinflowBattery(), LibItems.TWINFLOW_BATTERY));
+        reg.register(createItem(new ItemCreativeBattery(), LibItems.CREATIVE_BATTERY));
+        reg.register(createItem(new ItemCreativeCore(), LibItems.CREATIVE_CORE));
+        reg.register(createItem(new ItemCreativeSocket(), LibItems.CREATIVE_SOCKET));
 
         reg.register(createItemBlock(new ItemCADCase(PsionicBlocksCompat.cadCase)));
         if(Loader.isModLoaded("botania")){

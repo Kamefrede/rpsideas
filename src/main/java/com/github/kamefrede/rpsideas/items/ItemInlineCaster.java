@@ -1,8 +1,12 @@
 package com.github.kamefrede.rpsideas.items;
 
 import com.github.kamefrede.rpsideas.items.base.IPsiAddonTool;
+import com.github.kamefrede.rpsideas.util.RPSCreativeTab;
+import com.github.kamefrede.rpsideas.util.Reference;
 import com.github.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
 import com.github.kamefrede.rpsideas.util.helpers.MiscHelpers;
+import com.github.kamefrede.rpsideas.util.libs.LibItems;
+import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -12,13 +16,15 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
+import vazkii.arl.item.ItemMod;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.core.handler.PsiSoundHandler;
 import vazkii.psi.common.item.ItemCAD;
 import vazkii.psi.common.item.base.ModItems;
+import vazkii.psi.common.item.tool.IPsimetalTool;
 
-public class ItemInlineCaster extends Item implements IPsiAddonTool {
+public class ItemInlineCaster extends Item implements IPsimetalTool {
     public ItemInlineCaster() {
         setMaxStackSize(1);
     }
@@ -70,5 +76,20 @@ public class ItemInlineCaster extends Item implements IPsiAddonTool {
     public boolean onEntityItemUpdate(EntityItem ent) {
         FlowColorsHelper.clearColorizer(ent.getItem());
         return super.onEntityItemUpdate(ent);
+    }
+
+    @Override
+    public String[] getVariants() {
+        return new String[0];
+    }
+
+    @Override
+    public ItemMeshDefinition getCustomMeshDefinition() {
+        return null;
+    }
+
+    @Override
+    public String getModNamespace() {
+        return Reference.MODID;
     }
 }

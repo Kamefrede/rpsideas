@@ -12,17 +12,17 @@ public class LibItems {
 
     public static final String SNIPER_BULLET = "sniper_bullet";
     public static final String PSIMETAL_HOE = "psimetal_hoe";
-    public static final String CAD_ASSEMBLY = "cad_assembly";
+    public static final String CAD_ASSEMBLY = "cad_assembly_mana_blaster";
+    public static final String WIDE_SOCKET = "wide_socket";
+    public static final String FLASH_RING = "flash_ring";
+    public static final String CAD_CASE = "cad_case";
+    public static final String BIOTIC_SENSOR = "biotic_sensor";
+    public static final String TWINFLOW_BATTERY = "twinflow_battery";
+    public static final String UNSTABLE_BATTERY = "unstable_battery";
+    public static final String CREATIVE_CORE = "creative_core";
+    public static final String CREATIVE_SOCKET = "creative_socket";
+    public static final String CREATIVE_BATTERY = "creative_battery";
+    public static final String INLINE_CASTER = "inline_caster";
 
-    public static final String PSISHOCK = "psishock";
-    public static final String PSISHOCK_STRONG = "psishock_strong";
-    public static final String PSISHOCK_LONG = "psishock_long";
-
-    public static final String PSIPULSE = "psipulse";
-    public static final String PSIPULSE_STRONG = "psipulse_strong";
-    public static final String PSIPULSE_LONG = "psipulse_long";
-
-    public static final String LIVINGWOOD_CAD = "cad_assembly_mana_blaster";
-    public static final String LIVINGWOOD_CAD_MODEL = "cad_mana_blaster";
 
 }
