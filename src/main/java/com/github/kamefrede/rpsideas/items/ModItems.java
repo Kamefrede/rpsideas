@@ -78,7 +78,8 @@ public class ModItems {
         reg.register(createItem(new ItemCreativeSocket(), "creative_socket"));
 
         reg.register(createItemBlock(new ItemCADCase(PsionicBlocksCompat.cadCase)));
-        if(Loader.isModLoaded("botania")){ BotaniaCompatItems.register(reg);
+        if(Loader.isModLoaded("botania")){
+            BotaniaCompatItems.botaniaPreInit();
         }
     }
 

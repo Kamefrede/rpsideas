@@ -12,17 +12,16 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
+import vazkii.arl.item.ItemMod;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 
 @Mod.EventBusSubscriber
 public class BotaniaCompatItems {
-    public static ItemBlasterAssembly blaster;
+    public static ItemMod blaster;
 
-    public static void register(IForgeRegistry<Item> reg) {
-        blaster = ModItems.createItem(new ItemBlasterAssembly(), "cad_blaster");
-        reg.register(blaster);
-
+    public static void botaniaPreInit(){
+        blaster = new ItemBlasterAssembly();
     }
 
     @SubscribeEvent
