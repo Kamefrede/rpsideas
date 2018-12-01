@@ -229,7 +229,7 @@ public class EntitySniperProjectile extends EntityThrowable implements ISpellImm
     }
 
     public int getParticleCount() {
-        return 12;
+        return 6;
     }
 
     @Override

@@ -120,7 +120,7 @@ public class ItemSniperSpellBullet extends ItemMod implements ISpellContainer,IR
 
     @Override
     public double getCostModifier(ItemStack itemStack) {
-        return 1.3;
+        return 1.25;
     }
 
     @Override
