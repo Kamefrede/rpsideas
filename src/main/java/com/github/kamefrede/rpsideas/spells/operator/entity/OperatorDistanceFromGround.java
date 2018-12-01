@@ -44,7 +44,7 @@ public class OperatorDistanceFromGround extends PieceOperator {
         if(res == null || res.getBlockPos() == null)
             throw new SpellRuntimeException(SpellRuntimeExceptions.NO_GROUND);
 
-        return maxheight - res.getBlockPos().getY() - 1.0D;
+        return (double) maxheight - res.getBlockPos().getY() - 1.0D * 1.0D;
 
         //rip all the precision
       //  return getDistance(pos, context) - 2D * 1.0D;

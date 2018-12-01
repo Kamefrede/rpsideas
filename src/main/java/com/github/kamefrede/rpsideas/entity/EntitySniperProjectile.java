@@ -195,17 +195,17 @@ public class EntitySniperProjectile extends EntityThrowable implements ISpellImm
 
     public void addMotion(Vector3 dir, double speed){
 
-        dir = dir.copy().normalize().multiply(speed);
+        dir = dir.copy().normalize().multiply(0.3* speed);
 
         boolean added = false;
 
         if(Math.abs(dir.x) > 0.0001) {
-                motionX += dir.x;
+                motionX = dir.x;
                 added = true;
         }
 
         if(Math.abs(dir.y) > 0.0001) {
-                motionY += dir.y;
+                motionY = dir.y;
                 added = true;
             if(motionY >= 0)
                 fallDistance = 0;
@@ -213,7 +213,7 @@ public class EntitySniperProjectile extends EntityThrowable implements ISpellImm
 
 
         if(Math.abs(dir.z) > 0.0001) {
-                motionZ += dir.z;
+                motionZ = dir.z;
                 added = true;
         }
 
