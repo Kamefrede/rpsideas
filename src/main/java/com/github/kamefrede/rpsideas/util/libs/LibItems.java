@@ -11,6 +11,7 @@ public class LibItems {
     }
 
     public static final String SNIPER_BULLET = "sniper_bullet";
+    public static final String PSIMETAL_HOE = "psimetal_hoe";
 
     public static final String PSISHOCK = "psishock";
     public static final String PSISHOCK_STRONG = "psishock_strong";

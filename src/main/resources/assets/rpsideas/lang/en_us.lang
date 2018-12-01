@@ -60,6 +60,13 @@ psi.spellpiece.rpsideas.operator_max_energy_stored=Operator: Max Energy Stored
 psi.spellpiece.rpsideas.operator_max_input=Operator: Max Input
 psi.spellpiece.rpsideas.operator_max_output=Operator: Max Output
 psi.spellpiece.rpsideas.operator_stored_energy=Operator: Stored Energy
+psi.spellpiece.rpsideas.operator_get_damage=Operator: Get Damage
+psi.spellpiece.rpsideas.operator_get_metadata=Operator: Get Metadata
+psi.spellpiece.rpsideas.operator_is_elytra_flying=Operator:Is Elytra Flying
+psi.spellpiece.rpsideas.trick_close_elytra=Trick: Close Elytra
+psi.spellpiece.rpsideas.trick_open_elytra=Trick: Open Elytra
+psi.spellpiece.rpsideas.trick_repair=Trick: Repair
+psi.spellpiece.rpsideas.trick_smelt_block_sequence=Trick: Smelt Block Sequence
 
 
 
@@ -125,6 +132,13 @@ psi.spellpiece.rpsideas.operator_max_energy_stored.desc=Checks the max FE a bloc
 psi.spellpiece.rpsideas.operator_max_input.desc=Checks the max FE/t a block can receive
 psi.spellpiece.rpsideas.operator_max_output.desc=Checks the max FE/t a block can output
 psi.spellpiece.rpsideas.operator_stored_energy.desc=Checks the current FE stored in a block
+psi.spellpiece.rpsideas.operator_get_damage.desc=Gets the focused item's current damage value
+psi.spellpiece.rpsideas.operator_get_metadata.desc=Gets the focused item's current metadata value
+psi.spellpiece.rpsideas.operator_is_elytra_flying.desc=Returns 1 if the user is flying in an elytra 0 if not
+psi.spellpiece.rpsideas.trick_close_elytra.desc=Closes an open elytra
+psi.spellpiece.rpsideas.trick_open_elytra.desc=Opens an elytra
+psi.spellpiece.rpsideas.trick_repair.desc=Imbues Psimetal tools and armor with your PSI energy
+psi.spellpiece.rpsideas.trick_smelt_block_sequence.desc=Smelts blocks in a defined direction starting in a given position
 
 
 psi.datatype.String=String
@@ -190,7 +204,9 @@ item.rpsideas.cad_blaster.name=Mana Blaster CAD
 item.rpsideas.creative_core.name=Creative CAD Core
 item.rpsideas.creative_battery.name=Creative CAD Battery
 item.rpsideas.creative_socket.name=Creative CAD Socket
-item.rpsideas.sniper_bullet.name=Sniper Spell Bullet
+item.rpsideas:spell_bullet_sniper.name=Sniper Spell Bullet
+item.rpsideas:spell_bullet_sniper_active.name=Programmed Sniper Spell Bullet
+item.rpsideas:psimetal_hoe.name=Psimetal Hoe
 
 item.rpsideas.unstable_battery.name=Unstable CAD Battery
 item.rpsideas.twinflow_battery.name=Shielded CAD Battery

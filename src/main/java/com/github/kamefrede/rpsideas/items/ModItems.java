@@ -56,8 +56,11 @@ public class ModItems {
 
     public static ItemMod sniperBullet;
 
+    public static ItemModTool psimetalHoe;
+
     public static void preInit(){
         sniperBullet = new ItemSniperSpellBullet();
+        psimetalHoe = new ItemPsionicHoe();
     }
 
 

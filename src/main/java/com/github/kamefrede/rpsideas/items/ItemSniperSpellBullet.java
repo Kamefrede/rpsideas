@@ -37,8 +37,8 @@ public class ItemSniperSpellBullet extends ItemMod implements ISpellContainer,IR
     private static final String TAG_SPELL = "spell";
 
     public static final String[] VARIANTS = {
-            "spell_bullet_projectile",
-            "spell_bullet_projectile_active",
+            "spell_bullet_sniper",
+            "spell_bullet_sniper_active",
     };
 
     public ItemSniperSpellBullet(){
