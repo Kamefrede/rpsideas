@@ -33,7 +33,7 @@ public class PieceOperatorGetBlockComparatorStrength extends PieceOperator {
 
     @Override
     public void initParams() {
-        addParam(target = new ParamVector(SpellParam.GENERIC_NAME_TARGET, SpellParam.RED, false, false));
+        addParam(target = new ParamVector(SpellParam.GENERIC_NAME_TARGET, SpellParam.RED, true, false));
         addParam(axisParam = new ParamVector(SpellParams.GENERIC_NAME_VECTOR, SpellParam.BLUE, false, false));
     }
 

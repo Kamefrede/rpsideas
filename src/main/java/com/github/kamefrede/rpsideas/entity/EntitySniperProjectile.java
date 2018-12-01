@@ -11,13 +11,11 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.api.internal.Vector3;
-import vazkii.psi.api.spell.ISpellContainer;
-import vazkii.psi.api.spell.Spell;
-import vazkii.psi.api.spell.SpellContext;
-import vazkii.psi.api.spell.SpellRuntimeException;
+import vazkii.psi.api.spell.*;
 import vazkii.psi.common.Psi;
 import vazkii.psi.common.entity.EntitySpellGrenade;
 import vazkii.psi.common.entity.EntitySpellProjectile;
@@ -26,7 +24,7 @@ import vazkii.psi.common.spell.trick.entity.PieceTrickAddMotion;
 import java.awt.*;
 import java.util.function.Consumer;
 
-public class EntitySniperProjectile extends EntityThrowable {
+public class EntitySniperProjectile extends EntityThrowable implements ISpellImmune {
     private static final String TAG_COLORIZER = "colorizer";
     private static final String TAG_BULLET = "bullet";
     private static final String TAG_TIME_ALIVE = "timeAlive";
@@ -35,9 +33,17 @@ public class EntitySniperProjectile extends EntityThrowable {
     private static final String TAG_LAST_MOTION_Y = "lastMotionY";
     private static final String TAG_LAST_MOTION_Z = "lastMotionZ";
 
+    private static final String TAG_LOOK_X = "savedLookX";
+    private static final String TAG_LOOK_Y = "savedLookY";
+    private static final String TAG_LOOK_Z = "savedLookZ";
+
     private static final DataParameter<ItemStack> COLORIZER_DATA = EntityDataManager.createKey(EntitySniperProjectile.class, DataSerializers.ITEM_STACK);
     private static final DataParameter<ItemStack> BULLET_DATA = EntityDataManager.createKey(EntitySniperProjectile.class, DataSerializers.ITEM_STACK);
     private static final DataParameter<String> CASTER_NAME = EntityDataManager.createKey(EntitySniperProjectile.class, DataSerializers.STRING);
+
+    private static final DataParameter LOOK_X = EntityDataManager.createKey(EntitySniperProjectile.class, DataSerializers.FLOAT);
+    private static final DataParameter LOOK_Y = EntityDataManager.createKey(EntitySniperProjectile.class, DataSerializers.FLOAT);
+    private static final DataParameter LOOK_Z = EntityDataManager.createKey(EntitySniperProjectile.class, DataSerializers.FLOAT);
 
     public SpellContext context;
     public int timeAlive;
@@ -61,6 +67,11 @@ public class EntitySniperProjectile extends EntityThrowable {
         dataManager.set(COLORIZER_DATA, colorizer);
         dataManager.set(BULLET_DATA, bullet);
         dataManager.set(CASTER_NAME, player.getName());
+
+        Vec3d lookVec = player.getLook(1F);
+        dataManager.set(LOOK_X, (float) lookVec.x);
+        dataManager.set(LOOK_Y, (float) lookVec.y);
+        dataManager.set(LOOK_Z, (float) lookVec.z);
         return this;
     }
 
@@ -69,6 +80,9 @@ public class EntitySniperProjectile extends EntityThrowable {
         dataManager.register(COLORIZER_DATA, new ItemStack(Blocks.STONE));
         dataManager.register(BULLET_DATA, new ItemStack(Blocks.STONE));
         dataManager.register(CASTER_NAME, "");
+        dataManager.register(LOOK_X, 0F);
+        dataManager.register(LOOK_Y, 0F);
+        dataManager.register(LOOK_Z, 0F);
     }
 
     @Override
@@ -92,6 +106,10 @@ public class EntitySniperProjectile extends EntityThrowable {
         tagCompound.setDouble(TAG_LAST_MOTION_X, motionX);
         tagCompound.setDouble(TAG_LAST_MOTION_Y, motionY);
         tagCompound.setDouble(TAG_LAST_MOTION_Z, motionZ);
+
+        tagCompound.setFloat(TAG_LOOK_X, (float) dataManager.get(LOOK_X));
+        tagCompound.setFloat(TAG_LOOK_Y, (float) dataManager.get(LOOK_Y));
+        tagCompound.setFloat(TAG_LOOK_Z, (float) dataManager.get(LOOK_Z));
     }
 
     @Override
@@ -111,6 +129,10 @@ public class EntitySniperProjectile extends EntityThrowable {
             dataManager.set(CASTER_NAME, ((EntityPlayer) thrower).getName());
 
         timeAlive = tagCompound.getInteger(TAG_TIME_ALIVE);
+
+        dataManager.set(LOOK_X, tagCompound.getFloat(TAG_LOOK_X));
+        dataManager.set(LOOK_Y, tagCompound.getFloat(TAG_LOOK_Y));
+        dataManager.set(LOOK_Z, tagCompound.getFloat(TAG_LOOK_Z));
 
     }
 
@@ -137,6 +159,9 @@ public class EntitySniperProjectile extends EntityThrowable {
         double y = posY;
         double z = posZ;
 
+        Vec3d lookie = getLook(1F);
+        Vector3 entLook = new Vector3(lookie.x, lookie.y, lookie.z);
+
         Vector3 lookOrig = new Vector3(motionX, motionY, motionZ).normalize();
         for(int i = 0; i < getParticleCount(); i++) {
             Vector3 look = lookOrig.copy();
@@ -152,10 +177,20 @@ public class EntitySniperProjectile extends EntityThrowable {
             Psi.proxy.sparkleFX(getEntityWorld(), x, y, z, r, g, b, (float) look.x, (float) look.y, (float) look.z, 1.2F, 12);
         }
         if(timeAlive > 0){
-            addMotion(lookOrig, (43.299 * Math.log(timeAlive) -29.311));
+            addMotion(entLook, (43.299 * Math.log(timeAlive) -29.311));
         }
 
 
+
+
+    }
+
+    @Override
+    public Vec3d getLook(float f) {
+        float x = (float) dataManager.get(LOOK_X);
+        float y = (float) dataManager.get(LOOK_Y);
+        float z = (float) dataManager.get(LOOK_Z);
+        return new Vec3d(x, y, z);
     }
 
     public void addMotion(Vector3 dir, double speed){
@@ -250,5 +285,10 @@ public class EntitySniperProjectile extends EntityThrowable {
     @Override
     protected float getGravityVelocity() {
         return 0F;
+    }
+
+    @Override
+    public boolean isImmune() {
+        return true;
     }
 }
