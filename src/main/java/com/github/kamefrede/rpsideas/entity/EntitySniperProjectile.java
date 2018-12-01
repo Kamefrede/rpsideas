@@ -56,7 +56,7 @@ public class EntitySniperProjectile extends EntityThrowable implements ISpellImm
     public EntitySniperProjectile(World worldIn, EntityLivingBase throwerIn) {
         super(worldIn, throwerIn);
 
-        shoot(throwerIn, throwerIn.rotationPitch, throwerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
+        shoot(throwerIn, throwerIn.rotationPitch, throwerIn.rotationYaw, 0.0F, 2.7F, 0.0F);
         double speed = 1.5;
         motionX *= speed;
         motionY *= speed;
@@ -134,6 +134,14 @@ public class EntitySniperProjectile extends EntityThrowable implements ISpellImm
         dataManager.set(LOOK_Y, tagCompound.getFloat(TAG_LOOK_Y));
         dataManager.set(LOOK_Z, tagCompound.getFloat(TAG_LOOK_Z));
 
+        double lastMotionX = tagCompound.getDouble(TAG_LAST_MOTION_X);
+        double lastMotionY = tagCompound.getDouble(TAG_LAST_MOTION_Y);
+        double lastMotionZ = tagCompound.getDouble(TAG_LAST_MOTION_Z);
+
+        motionX = lastMotionX;
+        motionY = lastMotionY;
+        motionZ = lastMotionZ;
+
     }
 
     @Override
@@ -176,11 +184,6 @@ public class EntitySniperProjectile extends EntityThrowable implements ISpellImm
 
             Psi.proxy.sparkleFX(getEntityWorld(), x, y, z, r, g, b, (float) look.x, (float) look.y, (float) look.z, 1.2F, 12);
         }
-        if(timeAlive > 0){
-            addMotion(entLook, (43.299 * Math.log(timeAlive) -29.311));
-        }
-
-
 
 
     }
@@ -200,20 +203,20 @@ public class EntitySniperProjectile extends EntityThrowable implements ISpellImm
         boolean added = false;
 
         if(Math.abs(dir.x) > 0.0001) {
-                motionX = dir.x;
+                motionX += dir.x;
                 added = true;
         }
 
         if(Math.abs(dir.y) > 0.0001) {
-                motionY = dir.y;
+                //motionY += dir.y;
                 added = true;
-            if(motionY >= 0)
-                fallDistance = 0;
+            //if(motionY >= 0)
+                //fallDistance = 0;
             }
 
 
         if(Math.abs(dir.z) > 0.0001) {
-                motionZ = dir.z;
+                motionZ += dir.z;
                 added = true;
         }
 
@@ -231,6 +234,7 @@ public class EntitySniperProjectile extends EntityThrowable implements ISpellImm
 
     @Override
     protected void onImpact(RayTraceResult pos) {
+        System.out.println(timeAlive);
         if(pos.entityHit != null && pos.entityHit instanceof EntityLivingBase) {
             EntityLivingBase e = (EntityLivingBase) pos.entityHit;
             cast((SpellContext context) -> {

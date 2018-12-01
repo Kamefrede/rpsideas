@@ -18,6 +18,8 @@ import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.network.message.MessageDataSync;
 
+import javax.annotation.Nonnull;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 
 @Mod.EventBusSubscriber
@@ -72,6 +74,7 @@ public class ItemTwinflowBattery extends ItemComponent {
         }
     }
 
+    @Nonnull
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent e) {
         if(!e.side.isServer()) return;
@@ -84,13 +87,18 @@ public class ItemTwinflowBattery extends ItemComponent {
             ItemStack battery = icad.getComponentInSlot(cad, EnumCADComponent.BATTERY);
 
             if(!battery.isEmpty() && battery.getItem() instanceof ItemTwinflowBattery) {
-                PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
-
-                if(data.regenCooldown < 1 && data.availablePsi != data.getTotalPsi()) {
-                    data.availablePsi = Math.min(data.getTotalPsi(), data.availablePsi + PSI_REGEN_BONUS);
-                    data.save();
-                    NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP)player);
+                try{
+                    PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
+                    if(data.regenCooldown < 1 && data.availablePsi != data.getTotalPsi()) {
+                        data.availablePsi = Math.min(data.getTotalPsi(), data.availablePsi + PSI_REGEN_BONUS);
+                        data.save();
+                        NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP)player);
+                    }
+                } catch (ConcurrentModificationException except){
+                    //this is probably one of the hackiest things i've done
                 }
+
+
 
 
             }

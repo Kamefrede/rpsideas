@@ -16,6 +16,7 @@ import vazkii.psi.api.cad.*;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.network.message.MessageDataSync;
 
+import java.util.ConcurrentModificationException;
 import java.util.List;
 
 @Mod.EventBusSubscriber
@@ -53,11 +54,16 @@ public class ItemUnstableBattery extends ItemComponent {
 
             ItemStack battery = icad.getComponentInSlot(cad, EnumCADComponent.BATTERY);
             if(!battery.isEmpty() && battery.getItem() instanceof ItemUnstableBattery) {
-                PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
-                data.availablePsi  = 0;
-                data.regenCooldown = 20;
-                data.save();
-                NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP)player);
+                try{
+                    PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
+                    data.availablePsi  = 0;
+                    data.regenCooldown = 20;
+                    data.save();
+                    NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP)player);
+                } catch (ConcurrentModificationException except) {
+                    //same as the twinflow
+                }
+
             }
         }
     }
