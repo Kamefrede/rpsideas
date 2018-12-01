@@ -76,44 +76,6 @@ public class ClientProxy extends CommonProxy {
         ModelLoader.setCustomModelResourceLocation(i, damage, mrl);
     }
 
-    @SubscribeEvent
-    public static void blockColors(ColorHandlerEvent.Block e) {
-        BlockColors bc = e.getBlockColors();
-
-
-
-        bc.registerBlockColorHandler((state, world, pos, layer) -> {
-            if(layer == 1 && world != null && pos != null) {
-                return world.getBlockState(pos).getActualState(world, pos).getValue(BlockCADCase.COLOR).getColorValue();
-            } else return 0xFFFFFF;
-        }, PsionicBlocksCompat.cadCase);
-    }
-
-    @SubscribeEvent
-    public static void itemColors(ColorHandlerEvent.Item e) {
-        ItemColors ic = e.getItemColors();
-
-        ic.registerItemColorHandler((stack, layer) -> {
-            if(layer == 1) {
-                return ((ItemBioticSensor)ModItems.bioticSensor).getColor(stack);
-            } else return 0xFFFFFF;
-        }, ModItems.bioticSensor);
-
-
-        ic.registerItemColorHandler((stack, layer) -> {
-            if (layer == 1) {
-                return EnumDyeColor.byMetadata(stack.getMetadata()).getColorValue();
-            } else return 0xFFFFFF;
-        }, ModItems.cadCaseItem);
-
-        ic.registerItemColorHandler((stack, layer) -> {
-                    if(layer == 1) {
-                        return ClientHelpers.getFlowColor(stack);
-                    } else return 0xFFFFFF;
-                },
-                ModItems.inlineCaster
-        );
-    }
 
 
 
