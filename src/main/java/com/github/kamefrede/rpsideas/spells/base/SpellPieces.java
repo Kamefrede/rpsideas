@@ -111,6 +111,7 @@ public class SpellPieces  {
         register(PieceOperatorGetMetadata.class, LibPieces.OPERATOR_GET_METADATA, LibPieces.BLOCK_PROPERTIES);
         register(PieceTrickSmeltBlockSequence.class, LibPieces.TRICK_SMELT_BLOCK_SEQUENCE, LibPieceGroups.SMELTERY);
         register(PieceTrickRepair.class, LibPieces.TRICK_REPAIR, LibPieceGroups.SMELTERY);
+        register(TestPiecePleaseIgnore.class, "fuck_you", LibPieceGroups.SMELTERY);
         if(Loader.isModLoaded("botania")) {
             BotaniaCompatPieces.init();
         }

@@ -74,7 +74,7 @@ public class MessageParticleTrail implements IMessage {
                     double y = m.position.y + extended.y;
                     double z = m.position.z + extended.z;
 
-                    Psi.proxy.sparkleFX(world, x, y, z, red, green, blue, 0, 0, 0, .25f, m.time);
+                    Psi.proxy.sparkleFX(world, x, y, z, red, green, blue, 0, 0, 0, .40f, m.time);
                 }
             });
 

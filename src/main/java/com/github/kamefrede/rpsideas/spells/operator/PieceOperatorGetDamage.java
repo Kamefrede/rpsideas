@@ -20,8 +20,9 @@ public class PieceOperatorGetDamage extends PieceOperator {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if(!context.caster.world.isRemote){
-            if(context.targetSlot != 0 && !context.caster.inventory.getStackInSlot(context.targetSlot).isEmpty()){
-                return context.caster.inventory.getStackInSlot(context.targetSlot).getItemDamage() * 1D;
+            int slot = context.getTargetSlot();
+            if(!context.caster.inventory.getStackInSlot(slot).isEmpty()){
+                return context.caster.inventory.getStackInSlot(slot).getItemDamage() * 1D;
             }
         }
         return 0D;

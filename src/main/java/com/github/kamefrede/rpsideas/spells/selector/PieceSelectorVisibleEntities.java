@@ -1,11 +1,8 @@
 package com.github.kamefrede.rpsideas.spells.selector;
 
 import com.github.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
-import com.google.common.base.Predicate;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
@@ -13,10 +10,10 @@ import vazkii.psi.api.spell.param.ParamEntity;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.piece.PieceSelector;
 import vazkii.psi.api.spell.wrapper.EntityListWrapper;
-import vazkii.psi.common.spell.selector.entity.PieceSelectorNearby;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 public class PieceSelectorVisibleEntities extends PieceSelector {
 
@@ -61,7 +58,7 @@ public class PieceSelectorVisibleEntities extends PieceSelector {
         } else {
             AxisAlignedBB axis = new AxisAlignedBB(entpos.x, entpos.y - radiusVal, entpos.z - radiusVal, entpos.x + radiusVal, entpos.y + radiusVal, entpos.z + radiusVal);
             Predicate<Entity> pred = this.getTargetPredicate();
-            List<Entity> list = context.caster.getEntityWorld().getEntitiesWithinAABB(Entity.class, axis, (e) -> e != null && pred.apply(e) && e != context.caster && e != context.focalPoint && context.isInRadius(e) && entliv.canEntityBeSeen(e) && e != entliv);
+            List<Entity> list = context.caster.getEntityWorld().getEntitiesWithinAABB(Entity.class, axis, (e) -> e != null && pred.test(e) && e != context.caster && e != context.focalPoint && context.isInRadius(e) && entliv.canEntityBeSeen(e) && e != entliv);
             return new EntityListWrapper(list);
         }
     }

@@ -1,13 +1,19 @@
 package com.github.kamefrede.rpsideas.spells.trick.block;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockBed;
+import net.minecraft.block.BlockLog;
+import net.minecraft.block.BlockPistonExtension;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BlockEvent;
+import org.lwjgl.Sys;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamVector;
@@ -37,6 +43,7 @@ public class PieceTrickRotateBlock extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
+        System.out.println("no way");
         if(context.caster.world.isRemote) return null;
         Vector3 positionVal = this.<Vector3>getParamValue(context, position);
         Vector3 directionVal = this.<Vector3>getParamValue(context, direction);
@@ -54,17 +61,66 @@ public class PieceTrickRotateBlock extends PieceTrick {
         IBlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
 
-        if(world.isAirBlock(pos) || !world.isBlockModifiable(context.caster, pos)) return null;
+        System.out.println("bruh");
+        System.out.println(block);
+        if(world.isAirBlock(pos)) return null;
         BlockEvent.BreakEvent event = new BlockEvent.BreakEvent(world, pos, state, context.caster);
         MinecraftForge.EVENT_BUS.post(event);
 
         if(event.isCanceled())
             return null;
 
-        IBlockState newState = block.getStateForPlacement(world, pos, EnumFacing.getFacingFromVector((float)directionVal.x, (float)directionVal.y, (float)directionVal.z), 0, 0, 0, block.getMetaFromState(state), context.caster);
-        world.setBlockState(pos, newState);
 
+        System.out.println("what");
+        EnumFacing facing = EnumFacing.getFacingFromVector((float)directionVal.x, (float)directionVal.y, (float)directionVal.z);
+        rotateBlock(world, pos, facing);
         return true;
 
+    }
+
+    public static boolean rotateBlock(World world, BlockPos pos, EnumFacing axis)
+    {
+        IBlockState state = world.getBlockState(pos);
+        for (IProperty<?> prop : state.getProperties().keySet())
+        {
+            if ((prop.getName().equalsIgnoreCase("facing") || prop.getName().equalsIgnoreCase("rotation") || prop.getName().equalsIgnoreCase("axis")) && (prop.getValueClass() == EnumFacing.class || prop.getValueClass() == BlockLog.EnumAxis.class))
+            {
+                Block block = state.getBlock();
+                if(prop.getValueClass() == BlockLog.EnumAxis.class) {
+                    System.out.println("here3");
+
+                    if (!(block instanceof BlockBed) && !(block instanceof BlockPistonExtension)) {
+                        System.out.println("here4");
+                        IBlockState axState;
+                        IProperty<BlockLog.EnumAxis> axisProp = (IProperty<BlockLog.EnumAxis>) prop;
+                        BlockLog.EnumAxis axis1 = state.getValue(axisProp);
+                        axState = state.withProperty(axisProp, BlockLog.EnumAxis.fromFacingAxis(axis.getAxis()));
+                        world.setBlockState(pos, axState);
+                        return true;
+
+                    }
+                }
+                if (!(block instanceof BlockBed) && !(block instanceof BlockPistonExtension))
+                {
+                    IBlockState newState;
+                    //noinspection unchecked
+                    IProperty<EnumFacing> facingProperty = (IProperty<EnumFacing>) prop;
+                    EnumFacing facing = state.getValue(facingProperty);
+                    java.util.Collection<EnumFacing> validFacings = facingProperty.getAllowedValues();
+
+                    // rotate horizontal facings clockwise
+                    if(validFacings.contains(axis)){
+                        newState = state.withProperty(facingProperty, axis);
+                        world.setBlockState(pos, newState);
+                        return true;
+                    } else newState = state;
+
+
+                    world.setBlockState(pos, newState);
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

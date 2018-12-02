@@ -1,6 +1,7 @@
 package com.github.kamefrede.rpsideas.spells.operator.list;
 
 import com.github.kamefrede.rpsideas.spells.base.SpellParams;
+import com.github.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellParam;
@@ -32,6 +33,7 @@ public class PieceOperatorListExclusion extends PieceOperator {
     public Object execute(SpellContext context) throws SpellRuntimeException {
         EntityListWrapper l1 = this.<EntityListWrapper>getParamValue(context, list1);
         EntityListWrapper l2 = this.<EntityListWrapper>getParamValue(context, list2);
+        if(l1 == null || l2 == null) throw new SpellRuntimeException(SpellRuntimeExceptions.NULL_LIST);
         EntityListWrapper l3 = new EntityListWrapper(l1.unwrap().stream().filter(x -> !l2.unwrap().contains(x)).collect(Collectors.toList()));
 
         return l3;

@@ -2,8 +2,12 @@ package com.github.kamefrede.rpsideas.spells.operator.vector;
 
 import com.github.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
 import com.github.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
@@ -38,26 +42,41 @@ public class PieceOperatorVectorStrongRaycast extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if(context.caster.world.isRemote) return null;
-        Vector3 originVec = this.<Vector3>getParamValue(context, origin);
-        Vector3 rayVec = this.<Vector3>getParamValue(context, ray);
-        if(originVec == null || rayVec == null) {
+        Vector3 originVal = this.<Vector3>getParamValue(context, origin);
+        Vector3 rayVal = this.<Vector3>getParamValue(context, ray);
+
+        if(originVal == null || rayVal == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        }
-        double max = SpellHelpers.Runtime.getNumber(this, context, maxParam, MAX_MAX);
-        max = Math.min(max, MAX_MAX);
-        if(max < 0) throw new SpellRuntimeException(SpellRuntimeExceptions.NEGATIVE_LENGTH);
 
-        Vector3 endVec = originVec.copy().add(rayVec.copy().normalize().multiply(max));
-        RayTraceResult res = context.caster.world.rayTraceBlocks(originVec.toVec3D(), endVec.toVec3D(), false, true, false);
+        double maxLen = SpellContext.MAX_DISTANCE;
+        Double numberVal = this.<Double>getParamValue(context, maxParam);
+        if(numberVal != null)
+            maxLen = numberVal.doubleValue();
+        maxLen = Math.min(SpellContext.MAX_DISTANCE, maxLen);
 
-        if(res != null && res.getBlockPos() != null) {
-            return createResult(res);
-        } else throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
+        RayTraceResult pos = raycast(context.caster.getEntityWorld(), originVal, rayVal, maxLen);
+        if(pos == null || pos.getBlockPos() == null)
+            throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
+
+        return new Vector3(pos.getBlockPos().getX(), pos.getBlockPos().getY(), pos.getBlockPos().getZ());
     }
 
-    protected Vector3 createResult(RayTraceResult res) {
-        return Vector3.fromBlockPos(res.getBlockPos());
+    public static RayTraceResult raycast(Entity e, double len) throws SpellRuntimeException {
+        Vector3 vec = Vector3.fromEntity(e);
+        if(e instanceof EntityPlayer)
+            vec.add(0, e.getEyeHeight(), 0);
+
+        Vec3d look = e.getLookVec();
+        if(look == null)
+            throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
+
+        return raycast(e.getEntityWorld(), vec, new Vector3(look), len);
+    }
+
+    public static RayTraceResult raycast(World world, Vector3 origin, Vector3 ray, double len) {
+        Vector3 end = origin.copy().add(ray.copy().normalize().multiply(len));
+        RayTraceResult pos = world.rayTraceBlocks(origin.toVec3D(), end.toVec3D(), false, true, false);
+        return pos;
     }
 
     @Override

@@ -1,11 +1,16 @@
 package com.github.kamefrede.rpsideas.spells.trick.block;
 
+import com.github.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockBed;
+import net.minecraft.block.BlockPistonExtension;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import vazkii.psi.api.internal.Vector3;
@@ -49,9 +54,11 @@ public class PieceTrickDirectionPlaceBlock extends PieceTrick {
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
         }
 
-        if(directionVal == null){
+        if(directionVal == null || directionVal.isZero()){
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
         }
+
+        if(!directionVal.isAxial()) throw new SpellRuntimeException(SpellRuntimeExceptions.NON_AXIAL_VECTOR);
 
         if(!context.isInRadius(positionVal)){
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
@@ -62,21 +69,25 @@ public class PieceTrickDirectionPlaceBlock extends PieceTrick {
         float vectorZ = (float)directionVal.z;
         float vectorY = (float)directionVal.y;
         float vectorX = (float)directionVal.x;
+        EnumFacing facing = EnumFacing.getFacingFromVector(vectorX, vectorY, vectorZ);
 
-        placeBlock(context.caster, context.caster.getEntityWorld(), pos, context.getTargetSlot(), false, false, vectorZ,vectorY, vectorX);
+        placeBlock(context.caster, context.caster.getEntityWorld(), pos, context.getTargetSlot(), false, false,facing);
+
         return null;
     }
+
 
     public static void placeBlock(EntityPlayer player, World world, BlockPos pos, int slot, boolean particles){
         placeBlock(player, world, pos, slot, false);
     }
 
-    public static void placeBlock(EntityPlayer player, World world, BlockPos pos, int slot, boolean particles, boolean conjure, float vectorZ, float vectorY, float vectorX){
+    public static void placeBlock(EntityPlayer player, World world, BlockPos pos, int slot, boolean particles, boolean conjure, EnumFacing facing){
         if(!world.isBlockLoaded(pos) || !world.isBlockModifiable(player, pos)){
             return;
         }
         IBlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
+
 
         if(block == null || block.isAir(state, world, pos) || block.isReplaceable(world, pos)){
             if(conjure){
@@ -91,8 +102,9 @@ public class PieceTrickDirectionPlaceBlock extends PieceTrick {
 
                     Block blockToPlace = Block.getBlockFromItem(rem.getItem());
                     if(!world.isRemote){
-                       IBlockState newState = blockToPlace.getStateForPlacement(world, pos, EnumFacing.getFacingFromVector(vectorX, vectorY, vectorZ), 0, 0, 0, rem.getItemDamage(), player);
-                        iblock.placeBlockAt(stack, player, world, pos, EnumFacing.getFacingFromVector(vectorX,vectorY,vectorZ), 0, 0, 0, newState);
+                        IBlockState newState = blockToPlace.getStateForPlacement(world, pos, facing, 0, 0, 0, rem.getItemDamage(), player);
+                        iblock.placeBlockAt(stack, player, world, pos, facing, 0, 0, 0, newState);
+                        PieceTrickRotateBlock.rotateBlock(world, pos, facing);
                     }
 
                     if(player.capabilities.isCreativeMode){

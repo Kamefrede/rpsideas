@@ -29,8 +29,9 @@ public class PieceTrickRepair extends PieceTrick {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if(!context.caster.world.isRemote){
-            if(context.targetSlot != 0 && !context.caster.inventory.getStackInSlot(context.targetSlot).isEmpty()){
-                ItemStack stack = context.caster.inventory.getStackInSlot(context.targetSlot);
+            int slot = context.getTargetSlot();
+            if(!context.caster.inventory.getStackInSlot(slot).isEmpty()){
+                ItemStack stack = context.caster.inventory.getStackInSlot(slot);
                 Item item = stack.getItem();
                 if(item.isRepairable() && item.getDamage(stack) > 0 && (item instanceof ItemPsimetalTool || item instanceof ItemPsimetalArmor)){
                     item.setDamage(stack, item.getDamage(stack) - 1);

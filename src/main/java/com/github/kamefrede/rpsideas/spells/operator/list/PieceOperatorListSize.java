@@ -1,6 +1,7 @@
 package com.github.kamefrede.rpsideas.spells.operator.list;
 
 import com.github.kamefrede.rpsideas.spells.base.SpellParams;
+import com.github.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamEntityListWrapper;
 import vazkii.psi.api.spell.piece.PieceOperator;
@@ -29,6 +30,9 @@ public class PieceOperatorListSize extends PieceOperator {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         EntityListWrapper l = this.<EntityListWrapper>getParamValue(context, list);
+        if(l == null ){
+            throw new SpellRuntimeException(SpellRuntimeExceptions.NULL_LIST);
+        }
         return (double)l.unwrap().size();
     }
 
