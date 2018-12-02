@@ -90,6 +90,7 @@ public class PieceTrickRotateBlock extends PieceTrick {
                         BlockLog.EnumAxis axis1 = state.getValue(axisProp);
                         axState = state.withProperty(axisProp, BlockLog.EnumAxis.fromFacingAxis(axis.getAxis()));
                         world.setBlockState(pos, axState);
+                        world.updateBlockTick(pos, axState.getBlock(), 2, -1);
                         return true;
 
                     }
@@ -104,11 +105,13 @@ public class PieceTrickRotateBlock extends PieceTrick {
                     if(validFacings.contains(axis)){
                         newState = state.withProperty(facingProperty, axis);
                         world.setBlockState(pos, newState);
+                        world.updateBlockTick(pos, newState.getBlock(), 2, -1);
                         return true;
                     } else newState = state;
 
 
                     world.setBlockState(pos, newState);
+                    world.updateBlockTick(pos, newState.getBlock(), 2, -1);
                     return true;
                 }
             }
