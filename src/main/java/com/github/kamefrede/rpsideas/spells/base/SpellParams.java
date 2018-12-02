@@ -16,4 +16,7 @@ public abstract class SpellParams {
     public static final String GENERIC_NAME_LIST2 = "rpsideas.spellparam.list2";
     public static final String GENERIC_NAME_ENTITY1 = "rpsideas.spellparam.entity1";
     public static final String GENERIC_NAME_ENTITY2 = "rpsideas.spellparam.entity2";
+    public static final String GENERIC_NAME_PITCH = "rpsideas.spellparam.pitch";
+    public static final String GENERIC_NAME_INSTRUMENT = "rpsideas.spellparam.instrument";
+    public static final String GENERIC_NAME_VOLUME = "rpsideas.spellparam.volume";
 }
