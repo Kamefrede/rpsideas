@@ -72,9 +72,12 @@ public class LibPieces {
     public static final String TRICK_SMELT_BLOCK_SEQUENCE = "trick_smelt_block_sequence";
     public static final String TRICK_REPAIR = "trick_repair";
 
+    public static final String MACRO_CASTER_RAYCAST = "macro_caster_raycast";
+
     public static final String ALTERNATE_CONJURATION = Reference.MODID + ".redstone_conjuration";
     public static final String SECONDARY_VECTOR_OPERATORS = Reference.MODID + ".secondary_vectors";
     public static final String BLOCK_PROPERTIES = Reference.MODID + ".block_properties";
+    public static final String MACROS = Reference.MODID + ".macros";
 
     public static final String MANA_PSIONICS = Reference.MODID + ".mana_psionics";
     public static final String MAKE_BURST = "make_mana_burst";

@@ -2,6 +2,7 @@ package com.github.kamefrede.rpsideas.spells.base;
 
 
 import com.github.kamefrede.rpsideas.compat.botania.BotaniaCompatPieces;
+import com.github.kamefrede.rpsideas.spells.macro.PieceMacroCasterRaycast;
 import com.github.kamefrede.rpsideas.spells.operator.*;
 import com.github.kamefrede.rpsideas.spells.operator.block.*;
 import com.github.kamefrede.rpsideas.spells.operator.entity.OperatorDistanceFromGround;
@@ -43,6 +44,7 @@ public class SpellPieces  {
         PsiAPI.setGroupRequirements(LibPieces.SECONDARY_VECTOR_OPERATORS, 21, LibPieceGroups.TRIGNOMETRY);
         PsiAPI.setGroupRequirements(LibPieces.SECONDARY_VECTOR_OPERATORS, 21, LibPieceGroups.TRIGNOMETRY);
         PsiAPI.setGroupRequirements(LibPieces.BLOCK_PROPERTIES, 21, LibPieceGroups.BLOCK_CONJURATION);
+        PsiAPI.setGroupRequirements(LibPieces.MACROS,21, LibPieceGroups.BLOCK_WORKS);
 
         register(PieceTrickConjureEtherealBlock.class, LibPieces.TRICK_CONJURE_ETHEREAL_BLOCK, LibPieceGroups.BLOCK_CONJURATION);
         register(PieceTrickConjureEtherealBlockSequence.class, LibPieces.TRICK_CONJURE_ETHEREAL_BLOCK_SEQUENCE, LibPieceGroups.BLOCK_CONJURATION);
@@ -111,6 +113,7 @@ public class SpellPieces  {
         register(PieceOperatorGetMetadata.class, LibPieces.OPERATOR_GET_METADATA, LibPieces.BLOCK_PROPERTIES);
         register(PieceTrickSmeltBlockSequence.class, LibPieces.TRICK_SMELT_BLOCK_SEQUENCE, LibPieceGroups.SMELTERY);
         register(PieceTrickRepair.class, LibPieces.TRICK_REPAIR, LibPieceGroups.SMELTERY);
+        register(PieceMacroCasterRaycast.class, LibPieces.MACRO_CASTER_RAYCAST, LibPieces.MACROS);
         if(Loader.isModLoaded("botania")) {
             BotaniaCompatPieces.init();
         }
