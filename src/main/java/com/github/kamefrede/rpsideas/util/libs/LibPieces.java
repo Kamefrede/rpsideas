@@ -71,6 +71,10 @@ public class LibPieces {
     public static final String OPERATOR_GET_DAMAGE = "operator_get_damage";
     public static final String TRICK_SMELT_BLOCK_SEQUENCE = "trick_smelt_block_sequence";
     public static final String TRICK_REPAIR = "trick_repair";
+    public static final String SELECTOR_NUMBER_CHARGES = "selector_number_charges";
+    public static final String TRICK_DETONATE = "trick_detonate";
+
+    public static final String CONSTANT_TAU = "constant_tau";
 
     public static final String MACRO_CASTER_RAYCAST = "macro_caster_raycast";
 
