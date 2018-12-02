@@ -234,7 +234,6 @@ public class EntitySniperProjectile extends EntityThrowable implements ISpellImm
 
     @Override
     protected void onImpact(RayTraceResult pos) {
-        System.out.println(timeAlive);
         if(pos.entityHit != null && pos.entityHit instanceof EntityLivingBase) {
             EntityLivingBase e = (EntityLivingBase) pos.entityHit;
             cast((SpellContext context) -> {

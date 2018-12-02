@@ -7,8 +7,10 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -24,9 +26,11 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
+import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.arl.item.ItemModTool;
+import vazkii.botania.common.item.equipment.tool.ToolCommons;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.common.block.BlockProgrammer;
@@ -88,22 +92,21 @@ public class ItemPsionicHoe extends ItemPsimetalTool {
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack stack = player.getHeldItem(hand);
-        Block block = worldIn.getBlockState(pos).getBlock();
-        if(block == ModBlocks.programmer){
-            return block == ModBlocks.programmer ? ((BlockProgrammer) block).setSpell(worldIn, pos, player, stack) : EnumActionResult.PASS;
-        }
-
-        if(Items.IRON_HOE.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ) == EnumActionResult.SUCCESS){
+        if (Items.IRON_HOE.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ) == EnumActionResult.SUCCESS) {
             PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
-
-            ItemStack bullet = getBulletInSocket(stack, getSelectedSlot(stack));
-            boolean did = cast(worldIn, player, data, bullet, stack, 40, 25, 0.5F, null);
-            if(did){
-                return EnumActionResult.SUCCESS;
-            } return EnumActionResult.PASS;
-
+            ItemStack playerCad = PsiAPI.getPlayerCAD(player);
+            if (!playerCad.isEmpty()) {
+                ItemStack bullet = getBulletInSocket(stack, getSelectedSlot(stack));
+                ItemCAD.cast(player.getEntityWorld(), player, data, bullet, playerCad, 5, 10, 0.05F, (SpellContext context) -> {
+                    context.tool = stack;
+                    context.positionBroken = raytraceFromEntity(player.getEntityWorld(), player, false, 5);
+                });
+            }
+            Block block = worldIn.getBlockState(pos).getBlock();
+            worldIn.notifyNeighborsOfStateChange(pos, block, true);
+            return Items.IRON_HOE.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
         }
-        return Items.IRON_HOE.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+        return EnumActionResult.PASS;
     }
 
     @SideOnly(Side.CLIENT)

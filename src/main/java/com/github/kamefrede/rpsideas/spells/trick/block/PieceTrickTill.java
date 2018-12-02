@@ -5,9 +5,13 @@ import net.minecraft.block.BlockDirt;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
@@ -45,30 +49,17 @@ public class PieceTrickTill extends PieceTrick {
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
 
         BlockPos pos = new BlockPos(positionVal.x, positionVal.y, positionVal.z);
-        tillBlock(context.caster, context.caster.getEntityWorld(), pos);
 
-        return null;
+
+        return tillBlock(context.caster, context.caster.world, pos);
 
     }
 
-    public static void tillBlock(EntityPlayer player, World world, BlockPos pos){
+    public static EnumActionResult tillBlock(EntityPlayer player, World world, BlockPos pos){
         if (!world.isBlockLoaded(pos) || !world.isBlockModifiable(player, pos)) {
-            return;
+            return EnumActionResult.PASS;
         }
-        IBlockState state = world.getBlockState(pos);
-        Block block = state.getBlock();
-        if (block == Blocks.GRASS || block == Blocks.GRASS_PATH)
-        {
-            world.setBlockState(pos, Blocks.FARMLAND.getDefaultState());
-        }
-
-        if (block == Blocks.DIRT){
-            if(state.getValue(BlockDirt.VARIANT) == BlockDirt.DirtType.COARSE_DIRT){
-                world.setBlockState(pos, Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT));
-            } else {
-                world.setBlockState(pos, Blocks.FARMLAND.getDefaultState());
-            }
-        }
+        return Items.IRON_HOE.onItemUse(player, world, pos, EnumHand.MAIN_HAND, EnumFacing.UP,0,0,0 );
 
 
 

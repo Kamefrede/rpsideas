@@ -38,7 +38,6 @@ public class PieceOperatorGetSignText extends PieceOperator {
         IBlockState state = context.caster.world.getBlockState(pos);
         Block block = state.getBlock();
         if(block instanceof BlockSign && context.caster.world.getTileEntity(pos) instanceof TileEntitySign){
-            System.out.println("here");
             TileEntitySign sign = (TileEntitySign)context.caster.world.getTileEntity(pos);
             StringBuilder s = new StringBuilder();
             for (int ii=0; ii<4; ii++){

@@ -43,7 +43,6 @@ public class PieceTrickRotateBlock extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        System.out.println("no way");
         if(context.caster.world.isRemote) return null;
         Vector3 positionVal = this.<Vector3>getParamValue(context, position);
         Vector3 directionVal = this.<Vector3>getParamValue(context, direction);
@@ -61,8 +60,6 @@ public class PieceTrickRotateBlock extends PieceTrick {
         IBlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
 
-        System.out.println("bruh");
-        System.out.println(block);
         if(world.isAirBlock(pos)) return null;
         BlockEvent.BreakEvent event = new BlockEvent.BreakEvent(world, pos, state, context.caster);
         MinecraftForge.EVENT_BUS.post(event);
@@ -71,7 +68,6 @@ public class PieceTrickRotateBlock extends PieceTrick {
             return null;
 
 
-        System.out.println("what");
         EnumFacing facing = EnumFacing.getFacingFromVector((float)directionVal.x, (float)directionVal.y, (float)directionVal.z);
         rotateBlock(world, pos, facing);
         return true;
@@ -87,10 +83,8 @@ public class PieceTrickRotateBlock extends PieceTrick {
             {
                 Block block = state.getBlock();
                 if(prop.getValueClass() == BlockLog.EnumAxis.class) {
-                    System.out.println("here3");
 
                     if (!(block instanceof BlockBed) && !(block instanceof BlockPistonExtension)) {
-                        System.out.println("here4");
                         IBlockState axState;
                         IProperty<BlockLog.EnumAxis> axisProp = (IProperty<BlockLog.EnumAxis>) prop;
                         BlockLog.EnumAxis axis1 = state.getValue(axisProp);
@@ -103,12 +97,10 @@ public class PieceTrickRotateBlock extends PieceTrick {
                 if (!(block instanceof BlockBed) && !(block instanceof BlockPistonExtension))
                 {
                     IBlockState newState;
-                    //noinspection unchecked
                     IProperty<EnumFacing> facingProperty = (IProperty<EnumFacing>) prop;
                     EnumFacing facing = state.getValue(facingProperty);
                     java.util.Collection<EnumFacing> validFacings = facingProperty.getAllowedValues();
 
-                    // rotate horizontal facings clockwise
                     if(validFacings.contains(axis)){
                         newState = state.withProperty(facingProperty, axis);
                         world.setBlockState(pos, newState);

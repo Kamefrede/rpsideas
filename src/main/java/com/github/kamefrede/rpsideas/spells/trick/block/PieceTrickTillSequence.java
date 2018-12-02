@@ -1,5 +1,6 @@
 package com.github.kamefrede.rpsideas.spells.trick.block;
 
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.math.BlockPos;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
@@ -7,7 +8,6 @@ import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceTrick;
 
-import static com.github.kamefrede.rpsideas.spells.trick.block.PieceTrickTill.tillBlock;
 
 public class PieceTrickTillSequence extends PieceTrick {
     SpellParam position;
@@ -56,7 +56,7 @@ public class PieceTrickTillSequence extends PieceTrick {
                 throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
 
             BlockPos pos = new BlockPos(blockVec.x, blockVec.y, blockVec.z);
-            tillBlock(context.caster, context.caster.getEntityWorld(), pos);
+           PieceTrickTill.tillBlock(context.caster, context.caster.world, pos);
         }
 
         return null;
