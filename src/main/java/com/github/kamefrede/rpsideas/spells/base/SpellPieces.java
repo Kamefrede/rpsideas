@@ -23,10 +23,7 @@ import com.github.kamefrede.rpsideas.spells.selector.*;
 import com.github.kamefrede.rpsideas.spells.trick.block.*;
 import com.github.kamefrede.rpsideas.spells.trick.entity.PieceTrickCloseElytra;
 import com.github.kamefrede.rpsideas.spells.trick.entity.PieceTrickOpenElytra;
-import com.github.kamefrede.rpsideas.spells.trick.misc.PieceTrickBreakLoop;
-import com.github.kamefrede.rpsideas.spells.trick.misc.PieceTrickDebugSpamless;
-import com.github.kamefrede.rpsideas.spells.trick.misc.PieceTrickParticleTrail;
-import com.github.kamefrede.rpsideas.spells.trick.misc.PieceTrickRepair;
+import com.github.kamefrede.rpsideas.spells.trick.misc.*;
 import com.github.kamefrede.rpsideas.spells.trick.potion.PieceTrickBlindness;
 import com.github.kamefrede.rpsideas.spells.trick.potion.PieceTrickNausea;
 import com.github.kamefrede.rpsideas.util.libs.LibPieces;
@@ -116,6 +113,7 @@ public class SpellPieces  {
         register(PieceTrickRepair.class, LibPieces.TRICK_REPAIR, LibPieceGroups.SMELTERY);
         register(PieceMacroCasterRaycast.class, LibPieces.MACRO_CASTER_RAYCAST, LibPieces.MACROS, true);
         register(PieceConstantTau.class, LibPieces.CONSTANT_TAU, LibPieceGroups.TRIGNOMETRY);
+        register(TrickSound.class, "trick_sound", LibPieceGroups.TRIGNOMETRY);
         if(Loader.isModLoaded("botania")) {
             BotaniaCompatPieces.init();
         }

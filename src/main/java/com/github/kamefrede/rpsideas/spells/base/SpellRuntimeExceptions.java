@@ -12,6 +12,7 @@ public class SpellRuntimeExceptions extends Exception {
     public static final String NO_GROUND = "rpsideas.spellerror.noground";
     public static final String VOLUME = "rpsideas.spellerror.volume";
     public static final String INSTRUMENTS = "rpsideas.spellerror.instruments";
+    public static final String PITCH = "rpsideas.spellerror.pitch";
 
     public SpellRuntimeExceptions(String s){
         super(s);
