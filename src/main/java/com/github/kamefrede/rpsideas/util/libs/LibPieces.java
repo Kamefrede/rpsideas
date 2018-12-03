@@ -76,6 +76,8 @@ public class LibPieces {
     public static final String TRICK_SLOT_MATCH = "trick_slot_match";
     public static final String CONSTANT_TAU = "constant_tau";
     public static final String MACRO_CASTER_RAYCAST = "macro_caster_raycast";
+    public static final String TRICK_SOUND = "trick_sound";
+    public static final String SELECTOR_SUCESSION_COUNTER = "selector_sucession_counter";
 
     public static final String ALTERNATE_CONJURATION = Reference.MODID + ".redstone_conjuration";
     public static final String SECONDARY_VECTOR_OPERATORS = Reference.MODID + ".secondary_vectors";

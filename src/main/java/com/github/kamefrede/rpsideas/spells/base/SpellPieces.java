@@ -113,7 +113,8 @@ public class SpellPieces  {
         register(PieceTrickRepair.class, LibPieces.TRICK_REPAIR, LibPieceGroups.SMELTERY);
         register(PieceMacroCasterRaycast.class, LibPieces.MACRO_CASTER_RAYCAST, LibPieces.MACROS, true);
         register(PieceConstantTau.class, LibPieces.CONSTANT_TAU, LibPieceGroups.TRIGNOMETRY);
-        register(TrickSound.class, "trick_sound", LibPieceGroups.TRIGNOMETRY);
+        register(TrickSound.class, LibPieces.TRICK_SOUND, LibPieceGroups.TRIGNOMETRY);
+        register(PieceSelectorSucessionCounter.class, LibPieces.SELECTOR_SUCESSION_COUNTER, LibPieceGroups.LOOPCASTING);
         if(Loader.isModLoaded("botania")) {
             BotaniaCompatPieces.init();
         }
