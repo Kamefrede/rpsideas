@@ -18,7 +18,7 @@ public class PieceSelectorSucessionCounter extends PieceSelector {
         if(!(context.tool.getItem() instanceof ItemPsimetalArmor))
             throw new SpellRuntimeException(SpellRuntimeExceptions.ARMOR);
         if (context.tool.getTagCompound() != null) {
-            return context.tool.getTagCompound().getInteger("TAG_TIMES_CAST") * 1.0D;
+            return context.tool.getTagCompound().getInteger("timesCast") * 1.0D;
         }
         return 0.0D;
     }
