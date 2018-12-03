@@ -22,6 +22,7 @@ import com.github.kamefrede.rpsideas.spells.operator.vector.*;
 import com.github.kamefrede.rpsideas.spells.selector.*;
 import com.github.kamefrede.rpsideas.spells.trick.block.*;
 import com.github.kamefrede.rpsideas.spells.trick.entity.PieceTrickCloseElytra;
+import com.github.kamefrede.rpsideas.spells.trick.entity.PieceTrickNumBroadcast;
 import com.github.kamefrede.rpsideas.spells.trick.entity.PieceTrickOpenElytra;
 import com.github.kamefrede.rpsideas.spells.trick.misc.*;
 import com.github.kamefrede.rpsideas.spells.trick.potion.PieceTrickBlindness;
@@ -39,7 +40,6 @@ public class SpellPieces  {
     public static void init(){
 
         PsiAPI.setGroupRequirements(LibPieces.ALTERNATE_CONJURATION, 21, LibPieceGroups.BLOCK_CONJURATION);
-        PsiAPI.setGroupRequirements(LibPieces.SECONDARY_VECTOR_OPERATORS, 21, LibPieceGroups.TRIGNOMETRY);
         PsiAPI.setGroupRequirements(LibPieces.SECONDARY_VECTOR_OPERATORS, 21, LibPieceGroups.TRIGNOMETRY);
         PsiAPI.setGroupRequirements(LibPieces.BLOCK_PROPERTIES, 21, LibPieceGroups.BLOCK_CONJURATION);
         PsiAPI.setGroupRequirements(LibPieces.MACROS,21, LibPieceGroups.BLOCK_WORKS);
@@ -115,6 +115,7 @@ public class SpellPieces  {
         register(PieceConstantTau.class, LibPieces.CONSTANT_TAU, LibPieceGroups.TRIGNOMETRY);
         register(TrickSound.class, LibPieces.TRICK_SOUND, LibPieceGroups.TRIGNOMETRY);
         register(PieceSelectorSucessionCounter.class, LibPieces.SELECTOR_SUCESSION_COUNTER, LibPieceGroups.LOOPCASTING);
+        register(PieceTrickSupressNextTrick.class, LibPieces.TRICK_SUPRESS_NEXT_TRICK, LibPieceGroups.DETECTION_DYNAMICS);
         if(Loader.isModLoaded("botania")) {
             BotaniaCompatPieces.init();
         }

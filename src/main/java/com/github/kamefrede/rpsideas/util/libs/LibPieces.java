@@ -81,6 +81,7 @@ public class LibPieces {
     public static final String TRICK_SPIN_CHAMBER = "trick_spin_chamber";
     public static final String TRICK_SUPRESS_NEXT_TRICK = "trick_supress_next_trick";
     public static final String TRICK_FIREWORK = "trick_firework";
+    public static final String TRICK_NUM_BROADCAST = "trick_num_broadcast";
 
     public static final String ALTERNATE_CONJURATION = Reference.MODID + ".redstone_conjuration";
     public static final String SECONDARY_VECTOR_OPERATORS = Reference.MODID + ".secondary_vectors";

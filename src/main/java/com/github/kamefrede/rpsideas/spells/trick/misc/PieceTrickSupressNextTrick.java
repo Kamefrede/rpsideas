@@ -4,6 +4,8 @@ import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.piece.PieceTrick;
 
+import java.util.Stack;
+
 public class PieceTrickSupressNextTrick extends PieceTrick {
 
     SpellParam target;
@@ -28,9 +30,12 @@ public class PieceTrickSupressNextTrick extends PieceTrick {
         Double timeVal = this.<Double>getParamValue(context, target);
         if(Math.abs(timeVal) < 1){
             int index = context.actions.indexOf(context.cspell.currentAction);
-            for(int i = index; i < context.actions.size(); i++){
-                if(context.actions.get(i).piece instanceof PieceTrick ){
-                    context.actions.remove(i);
+            Stack<CompiledSpell.Action> stack = (Stack<CompiledSpell.Action>) context.actions.clone();
+
+            while (!stack.isEmpty()){
+                CompiledSpell.Action a = stack.pop();
+                if(a.piece instanceof PieceTrick && a != context.cspell.currentAction){
+                    context.actions.remove(a);
                     break;
                 }
             }

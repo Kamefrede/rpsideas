@@ -19,4 +19,5 @@ public abstract class SpellParams {
     public static final String GENERIC_NAME_PITCH = "rpsideas.spellparam.pitch";
     public static final String GENERIC_NAME_INSTRUMENT = "rpsideas.spellparam.instrument";
     public static final String GENERIC_NAME_VOLUME = "rpsideas.spellparam.volume";
+    public static final String GENERIC_NAME_CHANNEL = "rpsideas.spellparam.channel";
 }
