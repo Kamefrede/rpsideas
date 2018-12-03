@@ -59,9 +59,11 @@ public class PieceTrickFirework extends PieceTrick {
         EntityFireworkRocket rocket = new EntityFireworkRocket(context.caster.world, positionVal.x, positionVal.y, positionVal.z, fireworkStack);
         context.caster.world.spawnEntity(rocket);
 
-        return super.execute(context);
+        return true;
     }
 
+
+    //thanks u botania
     public ItemStack generateFirework(int color, int time) {
         ItemStack stack = new ItemStack(Items.FIREWORKS);
         NBTTagCompound explosion = new NBTTagCompound();
