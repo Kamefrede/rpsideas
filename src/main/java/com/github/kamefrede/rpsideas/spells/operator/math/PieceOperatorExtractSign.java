@@ -24,10 +24,10 @@ public class PieceOperatorExtractSign extends PieceOperator {
     public Object execute(SpellContext context) throws SpellRuntimeException{
         Double number = this.<Double>getParamValue(context, num);
 
-        if(number > 1){
+        if(number > 0){
             return 1.0D;
-        } else if(number < 1) {
-            return 1.0D;
+        } else if(number < 0) {
+            return -1.0D;
         } else {
             return 0.0D;
         }
