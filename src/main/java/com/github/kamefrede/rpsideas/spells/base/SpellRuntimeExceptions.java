@@ -14,6 +14,7 @@ public class SpellRuntimeExceptions extends Exception {
     public static final String INSTRUMENTS = "rpsideas.spellerror.instruments";
     public static final String PITCH = "rpsideas.spellerror.pitch";
     public static final String ARMOR = "rpsideas.spellerror.armor";
+    public static final String NO_MESSAGE = "rpsideas.spellerror.no_message";
 
     public SpellRuntimeExceptions(String s){
         super(s);
