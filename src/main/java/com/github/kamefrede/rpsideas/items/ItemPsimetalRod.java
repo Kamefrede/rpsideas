@@ -11,6 +11,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityFishHook;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemFishingRod;
@@ -40,7 +41,6 @@ import vazkii.psi.common.item.base.ModItems;
 import javax.annotation.Nullable;
 import java.util.List;
 
-import static com.github.kamefrede.rpsideas.items.ItemPsimetalShears.raytraceFromEntity;
 
 @Mod.EventBusSubscriber
 public class ItemPsimetalRod extends ItemMod implements IPsiAddonTool {
@@ -64,7 +64,7 @@ public class ItemPsimetalRod extends ItemMod implements IPsiAddonTool {
                     boolean flag = entityIn.getHeldItemMainhand() == stack;
                     boolean flag1 = entityIn.getHeldItemOffhand() == stack;
 
-                    if (entityIn.getHeldItemMainhand().getItem() instanceof ItemPsimetalRod)
+                    if (entityIn.getHeldItemMainhand().getItem() instanceof ItemFishingRod)
                     {
                         flag1 = false;
                     }
@@ -95,44 +95,7 @@ public class ItemPsimetalRod extends ItemMod implements IPsiAddonTool {
 
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
-        ItemStack itemstack = playerIn.getHeldItem(handIn);
-
-        if (playerIn.fishEntity != null)
-        {
-            int i = playerIn.fishEntity.handleHookRetraction();
-            itemstack.damageItem(i, playerIn);
-            playerIn.swingArm(handIn);
-            worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_BOBBER_RETRIEVE, SoundCategory.NEUTRAL, 1.0F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-        }
-        else
-        {
-            worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_BOBBER_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-
-            if (!worldIn.isRemote)
-            {
-                EntityFishHook entityfishhook = new EntityFishHook(worldIn, playerIn);
-                int j = EnchantmentHelper.getFishingSpeedBonus(itemstack);
-
-                if (j > 0)
-                {
-                    entityfishhook.setLureSpeed(j);
-                }
-
-                int k = EnchantmentHelper.getFishingLuckBonus(itemstack);
-
-                if (k > 0)
-                {
-                    entityfishhook.setLuck(k);
-                }
-
-                worldIn.spawnEntity(entityfishhook);
-            }
-
-            playerIn.swingArm(handIn);
-            playerIn.addStat(StatList.getObjectUseStats(this));
-        }
-
-        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
+        return Items.FISHING_ROD.onItemRightClick(worldIn, playerIn, handIn);
     }
 
 
@@ -156,10 +119,6 @@ public class ItemPsimetalRod extends ItemMod implements IPsiAddonTool {
         }
     }
 
-    @Override
-    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
-        return slotChanged;
-    }
 
     @Override
     public void addInformation(ItemStack stack, World playerIn, List<String> tooltip, ITooltipFlag advanced) {
@@ -190,16 +149,4 @@ public class ItemPsimetalRod extends ItemMod implements IPsiAddonTool {
 
 
 
-    @Mod.EventBusSubscriber
-    public static class Handler{
-        @SubscribeEvent
-        public void fishEvent(ItemFishedEvent event){
-            EntityPlayer player = event.getEntityPlayer();
-            ItemStack stack = player.inventory.getCurrentItem();
-            Vec3d pos = new Vec3d(event.getHookEntity().posX, event.getHookEntity().posY, event.getHookEntity().posZ);
-            SpellHelpers help = new SpellHelpers();
-            help.castSpell(player, stack, pos);
-
-        }
-    }
 }
