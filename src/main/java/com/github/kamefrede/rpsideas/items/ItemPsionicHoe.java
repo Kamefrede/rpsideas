@@ -99,7 +99,7 @@ public class ItemPsionicHoe extends ItemPsimetalTool {
                 ItemStack bullet = getBulletInSocket(stack, getSelectedSlot(stack));
                 ItemCAD.cast(player.getEntityWorld(), player, data, bullet, playerCad, 5, 10, 0.05F, (SpellContext context) -> {
                     context.tool = stack;
-                    context.positionBroken = raytraceFromEntity(player.getEntityWorld(), player, false, 5);
+                    context.positionBroken = raytraceFromEntity(player.getEntityWorld(), player, false, player.getAttributeMap().getAttributeInstance(EntityPlayer.REACH_DISTANCE).getAttributeValue());
                 });
             }
             Block block = worldIn.getBlockState(pos).getBlock();

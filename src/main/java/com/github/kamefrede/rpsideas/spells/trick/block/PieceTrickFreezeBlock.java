@@ -68,4 +68,6 @@ public class PieceTrickFreezeBlock extends PieceTrick {
         }
 
     }
+
+
 }
