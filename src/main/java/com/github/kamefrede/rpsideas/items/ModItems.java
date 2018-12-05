@@ -61,11 +61,15 @@ public class ModItems {
 
     public static ItemMod psimetalShears;
 
+    public static  ItemMod psimetalRod;
+
 
     public static void preInit(){
         sniperBullet = new ItemSniperSpellBullet();
         psimetalHoe = new ItemPsionicHoe();
         psimetalShears = new ItemPsimetalShears();
+        psimetalRod = new ItemPsimetalRod();
+
     }
 
 

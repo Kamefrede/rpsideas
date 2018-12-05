@@ -24,6 +24,7 @@ public class LibItems {
     public static final String CREATIVE_BATTERY = "creative_battery";
     public static final String INLINE_CASTER = "inline_caster";
     public static final String PSIMETAL_SHEARS = "psimetal_shears";
+    public static final String PSIMETAL_ROD = "psimetal_rod";
 
 
 }

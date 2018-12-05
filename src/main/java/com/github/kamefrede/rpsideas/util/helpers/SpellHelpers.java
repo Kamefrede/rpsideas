@@ -1,10 +1,19 @@
 package com.github.kamefrede.rpsideas.util.helpers;
+import com.github.kamefrede.rpsideas.items.ItemPsimetalRod;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
+import vazkii.psi.common.core.handler.PlayerDataHandler;
+import vazkii.psi.common.item.ItemCAD;
 import vazkii.psi.common.spell.trick.block.PieceTrickBreakBlock;
 import vazkii.psi.common.spell.trick.block.PieceTrickPlaceBlock;
 
@@ -16,6 +25,22 @@ public class SpellHelpers {
                 piece.addParam(param);
             }
         }
+    }
+
+    public void castSpell(EntityPlayer player, ItemStack stack, Vec3d pos){
+        PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
+        ItemStack playerCad = PsiAPI.getPlayerCAD(player);
+        if(stack.getItem() instanceof ItemPsimetalRod){
+            ItemPsimetalRod rod = (ItemPsimetalRod) stack.getItem();
+            if(!playerCad.isEmpty()) {
+                ItemStack bullet = rod.getBulletInSocket(stack, rod.getSelectedSlot(stack));
+                ItemCAD.cast(player.getEntityWorld(), player, data, bullet, playerCad, 5, 10, 0.05F, (SpellContext context) -> {
+                    context.tool = stack;
+                    context.positionBroken = new RayTraceResult(pos, EnumFacing.UP);
+                });
+            }
+        }
+
     }
 
     public static class Compilation {
