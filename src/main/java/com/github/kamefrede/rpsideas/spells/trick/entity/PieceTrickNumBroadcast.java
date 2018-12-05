@@ -16,6 +16,7 @@ import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceTrick;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PieceTrickNumBroadcast extends PieceTrick {
@@ -68,7 +69,11 @@ public class PieceTrickNumBroadcast extends PieceTrick {
         if(!context.isInRadius(positionVal))
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
 
-        Pair<Integer, Double> pair = Pair.of(chanInt, signalVal);
+
+
+        List<Pair<EntityPlayer, Integer>> pllist = new ArrayList<>();
+
+        String key2 = "rpsideas:Entity" + context.caster.getEntityId() + "Broadcasted";
 
 
 
@@ -79,19 +84,43 @@ public class PieceTrickNumBroadcast extends PieceTrick {
             return e != null && e instanceof EntityPlayer && e != context.caster && e != context.focalPoint && context.isInRadius(e);
         });
         if(list.size() > 0 && list != null){
+
+            // checks if the player has broadcasted anything
+            if(context.customData.containsKey(key2)){
+                List<Pair<EntityPlayer, Integer>> security = (List<Pair<EntityPlayer, Integer>>) context.customData.get(key2);
+                for(Pair<EntityPlayer, Integer> pairr : security){
+                    EntityPlayer secPlayer = pairr.getLeft();
+                    int secChan = pairr.getRight();
+                    String key3 = "rpsideas:Entity" + secPlayer.getEntityId() + "NumBroadcast" + secChan;
+                    if(context.customData.containsKey(key3)){
+                        context.customData.remove(key3);
+                    }
+                }
+                context.customData.remove(key2);
+            }
+
+            //actually broadcasts it!
             for(Entity ent: list){
 
                 EntityPlayer pl = (EntityPlayer) ent;
-                String key = "rpsideas:Entity" + pl.getEntityId() + "NumBroadcast";
+                String key = "rpsideas:Entity" + pl.getEntityId() + "NumBroadcast" + chanInt;
                 if(PsiAPI.getPlayerCAD(pl) != null){
                     if(context.customData.containsKey(key)){
-                        context.customData.replace(key, pair);
+                        context.customData.replace(key, signalVal);
                     } else{
-                        context.customData.put(key, pair);
+                        context.customData.put(key, signalVal);
                     }
+                    Pair<EntityPlayer, Integer> pair = Pair.of(pl, chanInt);
+                    pllist.add(pair);
                 }
             }
         }
+
+        //no more than one broadcast per player
+
+        context.customData.put(key2, pllist);
+
+        //check for other instances of num broadcast
         int index = context.actions.indexOf(context.cspell.currentAction);
         for(int i = index + 1; i < context.actions.size(); i++) {
             if (context.actions.get(i).piece instanceof PieceTrickNumBroadcast) {

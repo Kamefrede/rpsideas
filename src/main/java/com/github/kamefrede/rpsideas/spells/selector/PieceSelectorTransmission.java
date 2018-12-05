@@ -37,12 +37,12 @@ public class PieceSelectorTransmission extends PieceSelector {
         if(channelVal == null) channelVal = 0D;
         int chanInt = channelVal.intValue();
 
-        String key = "rpsideas:Entity" + context.caster.getEntityId() + "NumBroadcast";
+        String key = "rpsideas:Entity" + context.caster.getEntityId() + "NumBroadcast" + chanInt;
 
         if(context.customData.containsKey(key)){
 
-            Pair<Integer, Double> pair = (Pair<Integer, Double>) context.customData.get(key);
-            return pair.getRight();
+            Double signal = (Double) context.customData.get(key);
+            return key;
         }
 
         throw new SpellRuntimeException(SpellRuntimeExceptions.NO_MESSAGE);
