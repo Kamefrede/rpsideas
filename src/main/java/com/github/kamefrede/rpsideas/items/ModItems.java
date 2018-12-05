@@ -52,7 +52,9 @@ public class ModItems {
 
     @GameRegistry.ObjectHolder(Reference.MODID + ":" + LibItems.CREATIVE_SOCKET)
     public static final Item creativeSocket = Items.AIR;
-    
+
+    @GameRegistry.ObjectHolder(Reference.MODID + ":" + LibItems.PSIMETAL_ROD)
+    public static final Item psimetalRod = Items.AIR;
 
 
     public static ItemMod sniperBullet;
@@ -61,14 +63,12 @@ public class ModItems {
 
     public static ItemMod psimetalShears;
 
-    public static  ItemMod psimetalRod;
 
 
     public static void preInit(){
         sniperBullet = new ItemSniperSpellBullet();
         psimetalHoe = new ItemPsionicHoe();
         psimetalShears = new ItemPsimetalShears();
-        psimetalRod = new ItemPsimetalRod();
 
     }
 
@@ -85,6 +85,7 @@ public class ModItems {
         reg.register(createItem(new ItemCreativeBattery(), LibItems.CREATIVE_BATTERY));
         reg.register(createItem(new ItemCreativeCore(), LibItems.CREATIVE_CORE));
         reg.register(createItem(new ItemCreativeSocket(), LibItems.CREATIVE_SOCKET));
+        reg.register(createItem(new ItemPsimetalRod(), LibItems.PSIMETAL_ROD));
 
         reg.register(createItemBlock(new ItemCADCase(PsionicBlocksCompat.cadCase)));
         if(Loader.isModLoaded("botania")){

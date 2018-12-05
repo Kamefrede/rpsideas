@@ -43,60 +43,17 @@ import java.util.List;
 
 
 @Mod.EventBusSubscriber
-public class ItemPsimetalRod extends ItemMod implements IPsiAddonTool {
+public class ItemPsimetalRod extends ItemFishingRod implements IPsiAddonTool {
 
     protected ItemPsimetalRod() {
-        super(LibItems.PSIMETAL_ROD);
+        super();
         setCreativeTab(RPSCreativeTab.INST);
         setMaxStackSize(1);
         setMaxDamage(900);
-        addPropertyOverride(new ResourceLocation(Reference.MODID, "cast"), new IItemPropertyGetter()
-        {
-            @SideOnly(Side.CLIENT)
-            public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
-            {
-                if (entityIn == null)
-                {
-                    return 0.0F;
-                }
-                else
-                {
-                    boolean flag = entityIn.getHeldItemMainhand() == stack;
-                    boolean flag1 = entityIn.getHeldItemOffhand() == stack;
-
-                    if (entityIn.getHeldItemMainhand().getItem() instanceof ItemFishingRod)
-                    {
-                        flag1 = false;
-                    }
-
-                    return (flag || flag1) && entityIn instanceof EntityPlayer && ((EntityPlayer)entityIn).fishEntity != null ? 1.0F : 0.0F;
-                }
-            }
-        });
     }
     private static final String TAG_REGEN_TIME = "regenTime";
 
 
-
-    @SideOnly(Side.CLIENT)
-    public boolean isFull3D()
-    {
-        return true;
-    }
-
-
-
-    @SideOnly(Side.CLIENT)
-    public boolean shouldRotateAroundWhenRendering()
-    {
-        return true;
-    }
-
-
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
-    {
-        return Items.FISHING_ROD.onItemRightClick(worldIn, playerIn, handIn);
-    }
 
 
 
@@ -119,6 +76,22 @@ public class ItemPsimetalRod extends ItemMod implements IPsiAddonTool {
         }
     }
 
+    public static void castSpell(EntityPlayer player, ItemStack stack, Vec3d pos){
+        PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
+        ItemStack playerCad = PsiAPI.getPlayerCAD(player);
+        if(stack.getItem() instanceof ItemPsimetalRod){
+            ItemPsimetalRod rod = (ItemPsimetalRod) stack.getItem();
+            if(!playerCad.isEmpty()) {
+                ItemStack bullet = rod.getBulletInSocket(stack, rod.getSelectedSlot(stack));
+                ItemCAD.cast(player.getEntityWorld(), player, data, bullet, playerCad, 5, 10, 0.05F, (SpellContext context) -> {
+                    context.tool = stack;
+                    context.positionBroken = new RayTraceResult(pos, EnumFacing.UP);
+                });
+            }
+        }
+
+    }
+
 
     @Override
     public void addInformation(ItemStack stack, World playerIn, List<String> tooltip, ITooltipFlag advanced) {
@@ -139,11 +112,6 @@ public class ItemPsimetalRod extends ItemMod implements IPsiAddonTool {
     public int getItemEnchantability()
     {
         return 1;
-    }
-
-    @Override
-    public String getModNamespace() {
-        return Reference.MODID;
     }
 
 

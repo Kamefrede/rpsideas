@@ -27,21 +27,7 @@ public class SpellHelpers {
         }
     }
 
-    public void castSpell(EntityPlayer player, ItemStack stack, Vec3d pos){
-        PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
-        ItemStack playerCad = PsiAPI.getPlayerCAD(player);
-        if(stack.getItem() instanceof ItemPsimetalRod){
-            ItemPsimetalRod rod = (ItemPsimetalRod) stack.getItem();
-            if(!playerCad.isEmpty()) {
-                ItemStack bullet = rod.getBulletInSocket(stack, rod.getSelectedSlot(stack));
-                ItemCAD.cast(player.getEntityWorld(), player, data, bullet, playerCad, 5, 10, 0.05F, (SpellContext context) -> {
-                    context.tool = stack;
-                    context.positionBroken = new RayTraceResult(pos, EnumFacing.UP);
-                });
-            }
-        }
 
-    }
 
     public static class Compilation {
         public static double ensurePositiveAndNonzero(SpellPiece piece, SpellParam param) throws SpellCompilationException {
