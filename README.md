@@ -11,6 +11,8 @@ Items
 * Creative CAD Core
 * Creative CAD Battery
 * Psimetal Hoe
+* Psimetal Shears
+* Psimetal Fishing Rod
 
 Mod Integrations
 ===========
@@ -64,6 +66,19 @@ Spell Pieces
 * Operator: Max Energy Output
 * Operator: Get Damage
 * Operator: Get Metadata
+* Trick: Detonate
+* Trick: Freeze Block
+* Trick: Broadcast
+* Trick: Spin Chamber
+* Trick: Note Block Sound
+* Trick: Firework
+* Trick: Supress Next Trick
+* Trick: Slot Match
+* Macro: Caster Raycast
+* Selector: Transmission
+* Selector: Number of Charges
+* Selector: Sucession Counter
+* Constant: Tau
 
 
 
