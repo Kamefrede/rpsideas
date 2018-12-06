@@ -49,7 +49,7 @@ public class PieceTrickNumBroadcast extends PieceTrick {
             throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_VALUE, x, y);
         if(radiusVal == null || radiusVal <= 0)
             throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_VALUE, x, y);
-        meta.addStat(EnumSpellStat.COST, radiusVal.intValue() * 75);
+        meta.addStat(EnumSpellStat.COST, radiusVal.intValue() * 5);
         meta.addStat(EnumSpellStat.POTENCY, 5);
     }
 

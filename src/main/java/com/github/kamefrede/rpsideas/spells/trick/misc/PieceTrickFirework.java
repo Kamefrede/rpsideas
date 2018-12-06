@@ -37,7 +37,7 @@ public class PieceTrickFirework extends PieceTrick {
         if(timeVal == null || timeVal <= 0)
             throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_VALUE, x, y);
 
-        meta.addStat(EnumSpellStat.COST, timeVal.intValue() * 20);
+        meta.addStat(EnumSpellStat.COST, timeVal.intValue() * 10);
         meta.addStat(EnumSpellStat.POTENCY, timeVal.intValue() * 2);
     }
 
