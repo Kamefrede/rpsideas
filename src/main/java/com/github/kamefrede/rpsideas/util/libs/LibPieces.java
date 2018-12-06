@@ -89,6 +89,9 @@ public class LibPieces {
     public static final String SECONDARY_VECTOR_OPERATORS = Reference.MODID + ".secondary_vectors";
     public static final String BLOCK_PROPERTIES = Reference.MODID + ".block_properties";
     public static final String MACROS = Reference.MODID + ".macros";
+    public static final String VISUAL_AUDITIVE = Reference.MODID + ".visual_auditive";
+    public static final String ADVANCED_LOOPCAST_CONTROL = Reference.MODID + ".advanced_loopcast_control";
+    public static final String INTER_CAD = Reference.MODID + ".inter_cad";
 
     public static final String MANA_PSIONICS = Reference.MODID + ".mana_psionics";
     public static final String MAKE_BURST = "make_mana_burst";
