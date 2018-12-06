@@ -53,6 +53,60 @@ public class ItemPsimetalRod extends ItemFishingRod implements IPsiAddonTool {
     }
     private static final String TAG_REGEN_TIME = "regenTime";
 
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+    {
+        ItemStack itemstack = playerIn.getHeldItem(handIn);
+
+        if (playerIn.fishEntity != null)
+        {
+            if(playerIn.fishEntity.caughtEntity != null && playerIn.fishEntity.caughtEntity instanceof EntityLivingBase){
+                PlayerDataHandler.PlayerData data = PlayerDataHandler.get(playerIn);
+                ItemStack playerCad = PsiAPI.getPlayerCAD(playerIn);
+
+                if(!playerCad.isEmpty()) {
+                    ItemStack bullet = getBulletInSocket(itemstack, getSelectedSlot(itemstack));
+                    ItemCAD.cast(playerIn.getEntityWorld(), playerIn, data, bullet, playerCad, 5, 10, 0.05F, (SpellContext context) -> {
+                        context.attackedEntity = (EntityLivingBase) playerIn.fishEntity.caughtEntity;
+                    });
+                }
+            }
+            int i = playerIn.fishEntity.handleHookRetraction();
+            itemstack.damageItem(i, playerIn);
+            playerIn.swingArm(handIn);
+            worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_BOBBER_RETRIEVE, SoundCategory.NEUTRAL, 1.0F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+        }
+        else
+        {
+            worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_BOBBER_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+
+            if (!worldIn.isRemote)
+            {
+                EntityFishHook entityfishhook = new EntityFishHook(worldIn, playerIn);
+                int j = EnchantmentHelper.getFishingSpeedBonus(itemstack);
+
+                if (j > 0)
+                {
+                    entityfishhook.setLureSpeed(j);
+                }
+
+                int k = EnchantmentHelper.getFishingLuckBonus(itemstack);
+
+                if (k > 0)
+                {
+                    entityfishhook.setLuck(k);
+                }
+
+                worldIn.spawnEntity(entityfishhook);
+            }
+
+            playerIn.swingArm(handIn);
+            playerIn.addStat(StatList.getObjectUseStats(this));
+        }
+
+        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
+    }
+
 
 
 

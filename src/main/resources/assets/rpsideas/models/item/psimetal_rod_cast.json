@@ -1,0 +1,6 @@
+{
+    "parent": "rpsideas:item/psimetal_rod",
+    "textures": {
+        "layer0": "rpsideas:items/psimetal_rod_cast"
+    }
+}
