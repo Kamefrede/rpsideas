@@ -125,7 +125,7 @@ public class SpellPieces  {
         register(PieceSelectorNumberCharges.class, LibPieces.SELECTOR_NUMBER_CHARGES, LibPieces.ADVANCED_LOOPCAST_CONTROL);
         register(PieceTrickSpinChamber.class, LibPieces.TRICK_SPIN_CHAMBER, LibPieces.ADVANCED_LOOPCAST_CONTROL);
         register(PieceTrickFirework.class, LibPieces.TRICK_FIREWORK, LibPieces.VISUAL_AUDITIVE);
-        register(PieceTrickNumBroadcast.class, LibPieces.TRICK_NUM_BROADCAST, LibPieces.INTER_CAD);
+        register(PieceTrickNumBroadcast.class, LibPieces.TRICK_NUM_BROADCAST, LibPieces.INTER_CAD, true);
         register(PieceSelectorTransmission.class, LibPieces.SELECTOR_TRANSMISSION, LibPieces.INTER_CAD);
         register(PieceTrickFreezeBlock.class, LibPieces.TRICK_FREEZE_BLOCK, LibPieces.ALTERNATE_CONJURATION);
         if(Loader.isModLoaded("botania")) {
