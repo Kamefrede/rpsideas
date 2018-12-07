@@ -19,6 +19,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.arl.item.ItemMod;
 import vazkii.arl.item.ItemModTool;
 import vazkii.arl.util.ItemNBTHelper;
@@ -191,6 +193,7 @@ public class ItemPsimetalShears extends ItemMod implements IPsiAddonTool {
         return slotChanged;
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, World playerIn, List<String> tooltip, ITooltipFlag advanced) {
         String componentName = ItemMod.local(ISocketable.getSocketedItemName(stack, "psimisc.none"));

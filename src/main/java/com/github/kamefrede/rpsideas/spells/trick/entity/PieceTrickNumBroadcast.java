@@ -6,6 +6,8 @@ import com.google.common.base.Predicate;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import org.apache.commons.lang3.tuple.Pair;
@@ -73,7 +75,7 @@ public class PieceTrickNumBroadcast extends PieceTrick {
 
         List<Pair<EntityPlayer, Integer>> pllist = new ArrayList<>();
 
-        String key2 = "rpsideas:Entity" + context.caster.getEntityId() + "Broadcasted";
+        String key2 = "Broadcasted";
 
 
 
@@ -101,7 +103,6 @@ public class PieceTrickNumBroadcast extends PieceTrick {
 
             //actually broadcasts it!
             for(Entity ent: list){
-
                 EntityPlayer pl = (EntityPlayer) ent;
                 String key = "rpsideas:Entity" + pl.getEntityId() + "NumBroadcast" + chanInt;
                 if(PsiAPI.getPlayerCAD(pl) != null){

@@ -147,6 +147,7 @@ public class ItemPsimetalRod extends ItemFishingRod implements IPsiAddonTool {
     }
 
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, World playerIn, List<String> tooltip, ITooltipFlag advanced) {
         String componentName = ItemMod.local(ISocketable.getSocketedItemName(stack, "psimisc.none"));

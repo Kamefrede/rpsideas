@@ -11,13 +11,17 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandler;
 import com.github.kamefrede.rpsideas.tiles.TileCADCase;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 
+import static com.github.kamefrede.rpsideas.tiles.TileCADCase.ITEM_HANDLER_CAPABILITY;
+
+@SideOnly(Side.CLIENT)
 public class RenderTileCADCase extends TileEntitySpecialRenderer<TileCADCase> {
-    @CapabilityInject(IItemHandler.class)
-    public static final Capability<IItemHandler> ITEM_HANDLER_CAPABILITY = null;
+
 
     @Override
     public void render(TileCADCase cadCase, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {

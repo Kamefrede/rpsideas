@@ -46,7 +46,7 @@ public class SpellPieces  {
         PsiAPI.setGroupRequirements(LibPieces.MACROS,21, LibPieceGroups.BLOCK_WORKS);
         PsiAPI.setGroupRequirements(LibPieces.VISUAL_AUDITIVE, 21, LibPieceGroups.GREATER_INFUSION);
         PsiAPI.setGroupRequirements(LibPieces.ADVANCED_LOOPCAST_CONTROL, 21, LibPieceGroups.LOOPCASTING);
-        PsiAPI.setGroupRequirements(LibPieces.INTER_CAD, 21, LibPieceGroups.MEMORY_MANAGEMENT);
+        //PsiAPI.setGroupRequirements(LibPieces.INTER_CAD, 21, LibPieceGroups.MEMORY_MANAGEMENT);
 
         register(PieceTrickConjureEtherealBlock.class, LibPieces.TRICK_CONJURE_ETHEREAL_BLOCK, LibPieceGroups.BLOCK_CONJURATION);
         register(PieceTrickConjureEtherealBlockSequence.class, LibPieces.TRICK_CONJURE_ETHEREAL_BLOCK_SEQUENCE, LibPieceGroups.BLOCK_CONJURATION);
@@ -125,8 +125,8 @@ public class SpellPieces  {
         register(PieceSelectorNumberCharges.class, LibPieces.SELECTOR_NUMBER_CHARGES, LibPieces.ADVANCED_LOOPCAST_CONTROL);
         register(PieceTrickSpinChamber.class, LibPieces.TRICK_SPIN_CHAMBER, LibPieces.ADVANCED_LOOPCAST_CONTROL);
         register(PieceTrickFirework.class, LibPieces.TRICK_FIREWORK, LibPieces.VISUAL_AUDITIVE);
-        register(PieceTrickNumBroadcast.class, LibPieces.TRICK_NUM_BROADCAST, LibPieces.INTER_CAD, true);
-        register(PieceSelectorTransmission.class, LibPieces.SELECTOR_TRANSMISSION, LibPieces.INTER_CAD);
+        //register(PieceTrickNumBroadcast.class, LibPieces.TRICK_NUM_BROADCAST, LibPieces.INTER_CAD, true);
+        //register(PieceSelectorTransmission.class, LibPieces.SELECTOR_TRANSMISSION, LibPieces.INTER_CAD);
         register(PieceTrickFreezeBlock.class, LibPieces.TRICK_FREEZE_BLOCK, LibPieces.ALTERNATE_CONJURATION);
         if(Loader.isModLoaded("botania")) {
             BotaniaCompatPieces.init();
