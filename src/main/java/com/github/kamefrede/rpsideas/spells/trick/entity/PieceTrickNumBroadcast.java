@@ -45,7 +45,7 @@ public class PieceTrickNumBroadcast extends PieceTrick {
         Double radiusVal = this.<Double>getParamEvaluation(radius);
         Double channelVal = this.<Double>getParamEvaluation(channel);
 
-        if(channelVal <= 0)
+        if(channelVal != null & & channelVal <= 0)
             throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_VALUE, x, y);
         if(radiusVal == null || radiusVal <= 0)
             throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_VALUE, x, y);
