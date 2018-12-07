@@ -10,6 +10,7 @@ import vazkii.psi.api.spell.piece.PieceTrick;
 import vazkii.psi.common.entity.EntitySpellCharge;
 
 import java.util.List;
+import java.util.Objects;
 
 public class PieceTrickDetonate extends PieceTrick {
 
@@ -48,7 +49,7 @@ public class PieceTrickDetonate extends PieceTrick {
 
 
         List<Entity> list = context.caster.getEntityWorld().getEntitiesWithinAABB(Entity.class, axis, (Entity e) -> {
-            return e != null  && e != context.caster && e != context.focalPoint && context.isInRadius(e) && e instanceof EntitySpellCharge && ((EntitySpellCharge)(e)).getEntityData().getString("CASTER_NAME").equals(context.caster.getName());
+            return e != null  && e != context.caster && e != context.focalPoint && context.isInRadius(e) && e instanceof EntitySpellCharge && (Objects.requireNonNull(((EntitySpellCharge) e).getThrower()).getName().equals(context.caster.getName()));
         });
 
 

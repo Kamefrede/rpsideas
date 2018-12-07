@@ -11,6 +11,7 @@ import vazkii.psi.api.spell.wrapper.EntityListWrapper;
 import vazkii.psi.common.entity.EntitySpellCharge;
 
 import java.util.List;
+import java.util.Objects;
 
 public class PieceSelectorNumberCharges extends PieceSelector {
 
@@ -48,7 +49,7 @@ public class PieceSelectorNumberCharges extends PieceSelector {
 
 
         List<Entity> list = context.caster.getEntityWorld().getEntitiesWithinAABB(Entity.class, axis, (Entity e) -> {
-            return e != null  && e != context.caster && e != context.focalPoint && context.isInRadius(e) && e instanceof EntitySpellCharge && ((EntitySpellCharge)(e)).getEntityData().getString("CASTER_NAME").equalsIgnoreCase(context.caster.getName());
+            return e != null  && e != context.caster && e != context.focalPoint && context.isInRadius(e) && e instanceof EntitySpellCharge && (Objects.requireNonNull(((EntitySpellCharge) e).getThrower()).getName().equals(context.caster.getName()));
         });
 
 

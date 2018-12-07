@@ -1,0 +1,25 @@
+{
+  "result": {
+    "item": "rpsideas:psimetal_rod",
+    "count": 1
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "  I",
+    " ID",
+    "I G"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "D": {
+      "item": "psi:material",
+      "data": 2
+    },
+    "G": {
+      "item": "psi:material",
+      "data": 1
+    }
+  }
+}

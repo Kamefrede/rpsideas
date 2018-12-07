@@ -1,0 +1,25 @@
+{
+  "result": {
+    "item": "rpsideas:psimetal_hoe",
+    "count": 1
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "DG ",
+    " I ",
+    " I "
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "D": {
+      "item": "psi:material",
+      "data": 1
+    },
+    "G": {
+      "item": "psi:material",
+      "data": 2
+    }
+  }
+}

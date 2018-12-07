@@ -1,0 +1,22 @@
+{
+  "result": {
+    "item": "rpsideas:psimetal_shears",
+    "count": 1
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " G ",
+    "D  ",
+    "   "
+  ],
+  "key": {
+    "D": {
+      "item": "psi:material",
+      "data": 2
+    },
+    "G": {
+      "item": "psi:material",
+      "data": 1
+    }
+  }
+}
