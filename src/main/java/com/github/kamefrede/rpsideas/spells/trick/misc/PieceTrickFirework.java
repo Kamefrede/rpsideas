@@ -47,7 +47,7 @@ public class PieceTrickFirework extends PieceTrick {
         Vector3 positionVal = this.<Vector3>getParamValue(context, position);
         Double timeVal = this.<Double>getParamValue(context, time);
         int timeR = timeVal.intValue();
-        if(timeR == 0) timeR = 60;
+
         ItemStack cad = PsiAPI.getPlayerCAD(context.caster);
         int color = ((ICAD)cad.getItem()).getSpellColor(cad) | 0xf000000;
 
