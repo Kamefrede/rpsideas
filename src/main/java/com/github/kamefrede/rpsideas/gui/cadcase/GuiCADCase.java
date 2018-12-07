@@ -2,7 +2,6 @@ package com.github.kamefrede.rpsideas.gui.cadcase;
 
 import com.github.kamefrede.rpsideas.util.Reference;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

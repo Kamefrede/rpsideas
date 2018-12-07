@@ -1,7 +1,6 @@
 package com.github.kamefrede.rpsideas.spells.trick.block;
 
 import com.github.kamefrede.rpsideas.blocks.BlockConjuredGravityBlock;
-import com.github.kamefrede.rpsideas.blocks.ConjuredEtherealBlock;
 import com.github.kamefrede.rpsideas.blocks.ModBlocks;
 import com.github.kamefrede.rpsideas.tiles.TileEthereal;
 import net.minecraft.block.Block;

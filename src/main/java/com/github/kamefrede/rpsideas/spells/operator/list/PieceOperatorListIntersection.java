@@ -2,7 +2,6 @@ package com.github.kamefrede.rpsideas.spells.operator.list;
 
 import com.github.kamefrede.rpsideas.spells.base.SpellParams;
 import com.github.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
-import org.codehaus.plexus.util.CollectionUtils;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellParam;
@@ -12,7 +11,6 @@ import vazkii.psi.api.spell.piece.PieceOperator;
 import vazkii.psi.api.spell.wrapper.EntityListWrapper;
 
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class PieceOperatorListIntersection extends PieceOperator {
 

@@ -1,6 +1,5 @@
 package com.github.kamefrede.rpsideas.items.base;
 
-import vazkii.psi.api.cad.ISocketable;
 import vazkii.psi.api.spell.ISpellSettable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

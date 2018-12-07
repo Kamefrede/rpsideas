@@ -17,9 +17,6 @@ import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.common.Psi;
-import vazkii.psi.common.entity.EntitySpellGrenade;
-import vazkii.psi.common.entity.EntitySpellProjectile;
-import vazkii.psi.common.spell.trick.entity.PieceTrickAddMotion;
 
 import java.awt.*;
 import java.util.function.Consumer;

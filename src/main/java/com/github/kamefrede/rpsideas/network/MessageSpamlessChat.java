@@ -9,7 +9,6 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.*;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import vazkii.arl.network.NetworkMessage;
 
 public class MessageSpamlessChat implements IMessage {
     public MessageSpamlessChat() {

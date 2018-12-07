@@ -1,8 +1,5 @@
 package com.github.kamefrede.rpsideas.util.libs;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
 public class LibBlocks {
 
     public final static String CONJURED_ETHEREAL_BLOCK = "conjured_ethereal_block";

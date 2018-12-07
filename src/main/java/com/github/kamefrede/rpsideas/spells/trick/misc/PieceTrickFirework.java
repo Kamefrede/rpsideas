@@ -13,7 +13,6 @@ import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceTrick;
-import vazkii.psi.common.item.ItemCAD;
 
 public class PieceTrickFirework extends PieceTrick {
 

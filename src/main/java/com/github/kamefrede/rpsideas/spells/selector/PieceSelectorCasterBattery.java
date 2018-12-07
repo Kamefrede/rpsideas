@@ -5,9 +5,7 @@ import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.EnumCADStat;
 import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.api.spell.*;
-import vazkii.psi.api.spell.piece.PieceOperator;
 import vazkii.psi.api.spell.piece.PieceSelector;
-import vazkii.psi.common.core.handler.PlayerDataHandler;
 
 public class PieceSelectorCasterBattery extends PieceSelector {
 

@@ -2,11 +2,9 @@ package com.github.kamefrede.rpsideas.spells.trick.misc;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTool;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.piece.PieceTrick;
 import vazkii.psi.common.item.armor.ItemPsimetalArmor;
-import vazkii.psi.common.item.tool.ItemPsimetalSword;
 import vazkii.psi.common.item.tool.ItemPsimetalTool;
 
 public class PieceTrickRepair extends PieceTrick {

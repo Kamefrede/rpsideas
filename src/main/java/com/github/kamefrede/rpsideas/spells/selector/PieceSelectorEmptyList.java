@@ -7,10 +7,8 @@ import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellRuntimeException;
 import vazkii.psi.api.spell.piece.PieceSelector;
 import vazkii.psi.api.spell.wrapper.EntityListWrapper;
-import vazkii.psi.common.spell.selector.entity.PieceSelectorNearby;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 public class PieceSelectorEmptyList extends PieceSelector {
     public PieceSelectorEmptyList(Spell spell) {

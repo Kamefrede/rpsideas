@@ -2,11 +2,8 @@ package com.github.kamefrede.rpsideas.spells.operator.entity;
 
 import com.github.kamefrede.rpsideas.spells.base.SpellParams;
 import com.github.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
-import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellParam;

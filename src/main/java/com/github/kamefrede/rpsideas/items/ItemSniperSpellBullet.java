@@ -1,16 +1,13 @@
 package com.github.kamefrede.rpsideas.items;
 
-import com.github.kamefrede.rpsideas.blocks.IPsiamBlock;
 import com.github.kamefrede.rpsideas.entity.EntitySniperProjectile;
 import com.github.kamefrede.rpsideas.util.IRPSIdeasItem;
 import com.github.kamefrede.rpsideas.util.RPSCreativeTab;
 import com.github.kamefrede.rpsideas.util.libs.LibItems;
-import com.google.common.collect.ImmutableSet;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
@@ -25,9 +22,7 @@ import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.api.spell.ISpellContainer;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
-import vazkii.psi.common.entity.EntitySpellProjectile;
 import vazkii.psi.common.item.ItemSpellDrive;
-import vazkii.psi.common.item.base.IPsiItem;
 
 import javax.annotation.Nullable;
 import java.util.List;

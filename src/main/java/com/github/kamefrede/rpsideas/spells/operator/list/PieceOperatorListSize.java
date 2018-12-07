@@ -7,8 +7,6 @@ import vazkii.psi.api.spell.param.ParamEntityListWrapper;
 import vazkii.psi.api.spell.piece.PieceOperator;
 import vazkii.psi.api.spell.wrapper.EntityListWrapper;
 
-import java.util.List;
-
 public class PieceOperatorListSize extends PieceOperator {
 
     SpellParam list;

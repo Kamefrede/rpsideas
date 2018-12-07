@@ -1,11 +1,8 @@
 package com.github.kamefrede.rpsideas.items;
 
-import com.github.kamefrede.rpsideas.items.base.IPsiAddonTool;
-import com.github.kamefrede.rpsideas.util.RPSCreativeTab;
 import com.github.kamefrede.rpsideas.util.Reference;
 import com.github.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
 import com.github.kamefrede.rpsideas.util.helpers.MiscHelpers;
-import com.github.kamefrede.rpsideas.util.libs.LibItems;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,7 +13,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
-import vazkii.arl.item.ItemMod;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.core.handler.PsiSoundHandler;

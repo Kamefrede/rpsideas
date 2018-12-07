@@ -1,7 +1,6 @@
 package com.github.kamefrede.rpsideas.spells.selector;
 
 import com.github.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
-import com.github.kamefrede.rpsideas.util.helpers.ItemNBTHelpers;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellRuntimeException;

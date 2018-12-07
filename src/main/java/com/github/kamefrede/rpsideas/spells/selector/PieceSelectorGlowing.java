@@ -3,7 +3,6 @@ package com.github.kamefrede.rpsideas.spells.selector;
 import com.google.common.base.Predicate;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.player.EntityPlayer;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.common.spell.selector.entity.PieceSelectorNearby;
 

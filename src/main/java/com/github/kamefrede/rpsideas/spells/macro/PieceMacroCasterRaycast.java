@@ -8,7 +8,6 @@ import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellParam;
 import vazkii.psi.api.spell.SpellRuntimeException;
 import vazkii.psi.api.spell.param.ParamNumber;
-import vazkii.psi.api.spell.piece.PieceOperator;
 import vazkii.psi.common.spell.operator.vector.PieceOperatorVectorRaycast;
 
 public class PieceMacroCasterRaycast extends PieceMacro {

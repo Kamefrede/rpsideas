@@ -1,7 +1,6 @@
 package com.github.kamefrede.rpsideas.blocks;
 
 import com.github.kamefrede.rpsideas.tiles.TileConjuredPulsar;
-import com.github.kamefrede.rpsideas.tiles.TileEthereal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
@@ -12,21 +11,14 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.arl.block.BlockModContainer;
-import vazkii.psi.common.block.BlockConjured;
 
-import javax.annotation.Nullable;
-import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 public class BlockPulsarLight extends BlockModContainer implements IPsiamBlock  {

@@ -2,7 +2,6 @@ package com.github.kamefrede.rpsideas.spells.selector;
 
 import com.github.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;

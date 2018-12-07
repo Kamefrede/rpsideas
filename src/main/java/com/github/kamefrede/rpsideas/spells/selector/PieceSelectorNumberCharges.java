@@ -7,7 +7,6 @@ import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceSelector;
-import vazkii.psi.api.spell.wrapper.EntityListWrapper;
 import vazkii.psi.common.entity.EntitySpellCharge;
 
 import java.util.List;

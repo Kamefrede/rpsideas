@@ -1,9 +1,6 @@
 package com.github.kamefrede.rpsideas.items.base;
 
 import com.github.kamefrede.rpsideas.util.Reference;
-import net.minecraft.client.Minecraft;
-import net.minecraft.item.Item;
-import vazkii.psi.api.cad.ICADComponent;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;

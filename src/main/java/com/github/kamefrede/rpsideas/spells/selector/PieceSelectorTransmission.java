@@ -2,7 +2,6 @@ package com.github.kamefrede.rpsideas.spells.selector;
 
 import com.github.kamefrede.rpsideas.spells.base.SpellParams;
 import com.github.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
-import org.apache.commons.lang3.tuple.Pair;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.piece.PieceSelector;

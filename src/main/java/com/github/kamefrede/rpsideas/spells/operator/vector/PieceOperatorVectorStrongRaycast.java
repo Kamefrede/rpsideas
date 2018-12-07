@@ -1,10 +1,7 @@
 package com.github.kamefrede.rpsideas.spells.operator.vector;
 
-import com.github.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
-import com.github.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;

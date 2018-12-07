@@ -6,7 +6,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.EnumCADStat;
-import vazkii.psi.common.item.component.ItemCADComponent;
 
 import javax.annotation.Nullable;
 import java.util.List;

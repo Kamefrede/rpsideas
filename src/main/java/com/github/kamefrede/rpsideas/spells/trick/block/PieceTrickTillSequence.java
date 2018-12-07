@@ -1,6 +1,5 @@
 package com.github.kamefrede.rpsideas.spells.trick.block;
 
-import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.math.BlockPos;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;

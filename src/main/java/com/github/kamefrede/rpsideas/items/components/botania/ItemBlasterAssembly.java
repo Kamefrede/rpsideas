@@ -1,13 +1,11 @@
 package com.github.kamefrede.rpsideas.items.components.botania;
 
-import com.github.kamefrede.rpsideas.items.base.ItemComponent;
 import com.github.kamefrede.rpsideas.util.RPSCreativeTab;
 import com.github.kamefrede.rpsideas.util.botania.IBlasterComponent;
 import com.github.kamefrede.rpsideas.util.Reference;
 import com.github.kamefrede.rpsideas.util.helpers.MiscHelpers;
 import com.github.kamefrede.rpsideas.util.libs.LibItems;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.init.SoundEvents;

@@ -3,48 +3,26 @@ package com.github.kamefrede.rpsideas.items;
 import com.github.kamefrede.rpsideas.util.RPSCreativeTab;
 import com.github.kamefrede.rpsideas.util.Reference;
 import com.github.kamefrede.rpsideas.util.libs.LibItems;
-import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AbstractAttributeMap;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.UseHoeEvent;
-import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import vazkii.arl.item.ItemModTool;
-import vazkii.botania.common.item.equipment.tool.ToolCommons;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.spell.SpellContext;
-import vazkii.psi.common.block.BlockProgrammer;
-import vazkii.psi.common.block.base.ModBlocks;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
-import vazkii.psi.common.core.handler.PsiSoundHandler;
 import vazkii.psi.common.item.ItemCAD;
-import vazkii.psi.common.item.base.ModItems;
 import vazkii.psi.common.item.tool.ItemPsimetalTool;
 
 import java.util.Set;
 
 import static vazkii.psi.common.item.ItemCAD.cast;
-import static vazkii.psi.common.item.ItemCAD.craft;
 
 public class ItemPsionicHoe extends ItemPsimetalTool {
     protected ItemPsionicHoe() {

@@ -1,7 +1,6 @@
 package com.github.kamefrede.rpsideas.util;
 
 import com.github.kamefrede.rpsideas.items.ItemPsimetalRod;
-import com.github.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Vec3d;

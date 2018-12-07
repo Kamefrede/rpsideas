@@ -30,7 +30,6 @@ import net.minecraftforge.items.*;
 import net.minecraft.block.Block;
 
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.Arrays;

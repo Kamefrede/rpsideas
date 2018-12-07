@@ -1,24 +1,16 @@
 package com.github.kamefrede.rpsideas.tiles;
 
-import com.github.kamefrede.rpsideas.blocks.BlockConjuredPulsar;
 import com.github.kamefrede.rpsideas.blocks.BlockPulsarLight;
 import com.github.kamefrede.rpsideas.blocks.ModBlocks;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ITickable;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import vazkii.arl.block.tile.TileMod;
 import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.common.Psi;
-import vazkii.psi.common.block.BlockConjured;
-
-import java.awt.*;
-import java.util.Arrays;
 
 
 public class TileConjuredPulsar extends TileMod implements ITickable {
