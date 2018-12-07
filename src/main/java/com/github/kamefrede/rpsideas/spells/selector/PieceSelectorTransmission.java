@@ -26,7 +26,7 @@ public class PieceSelectorTransmission extends PieceSelector {
 
         Double channelVal = this.<Double>getParamEvaluation(channel);
 
-        if(channelVal <= 0)
+        if(channelVal != null && channelVal <= 0)
             throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_VALUE, x, y);
     }
 
