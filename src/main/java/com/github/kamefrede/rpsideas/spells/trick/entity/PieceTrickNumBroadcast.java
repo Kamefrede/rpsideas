@@ -3,23 +3,30 @@ package com.github.kamefrede.rpsideas.spells.trick.entity;
 import com.github.kamefrede.rpsideas.spells.base.SpellParams;
 import com.github.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
 import com.google.common.base.Predicate;
+import com.sun.deploy.util.ArrayUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.common.util.INBTSerializable;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.tuple.Triple;
+import vazkii.arl.util.ItemNBTHelper;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceTrick;
+import vazkii.psi.common.core.handler.PlayerDataHandler;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class PieceTrickNumBroadcast extends PieceTrick {
 
@@ -66,16 +73,23 @@ public class PieceTrickNumBroadcast extends PieceTrick {
             throw new SpellRuntimeException(SpellRuntimeExceptions.NULL_NUMBER);
 
         if(channelVal == null) channelVal = 0D;
-        int chanInt = channelVal.intValue();
+        Integer chanInt = channelVal.intValue();
 
         if(!context.isInRadius(positionVal))
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
 
 
 
-        List<Pair<EntityPlayer, Integer>> pllist = new ArrayList<>();
 
-        String key2 = "Broadcasted";
+        List<EntityPlayer> sec = new ArrayList<>();
+
+        final String secSignalKey = "rpsideas:BroadcastedSignal";
+        final String secChannelKey = "rpsideas:BroadcastedChannel";
+        final String secPlayerKey  = "rpsideas:BroadcastedToWhat";
+
+        final String channelKey = "rpsideas:" + chanInt.toString();
+
+
 
 
 
@@ -87,39 +101,28 @@ public class PieceTrickNumBroadcast extends PieceTrick {
         });
         if(list.size() > 0 && list != null){
 
-            // checks if the player has broadcasted anything
-            if(context.customData.containsKey(key2)){
-                List<Pair<EntityPlayer, Integer>> security = (List<Pair<EntityPlayer, Integer>>) context.customData.get(key2);
-                for(Pair<EntityPlayer, Integer> pairr : security){
-                    EntityPlayer secPlayer = pairr.getLeft();
-                    int secChan = pairr.getRight();
-                    String key3 = "rpsideas:Entity" + secPlayer.getEntityId() + "NumBroadcast" + secChan;
-                    if(context.customData.containsKey(key3)){
-                        context.customData.remove(key3);
-                    }
-                }
-                context.customData.remove(key2);
-            }
-
             //actually broadcasts it!
             for(Entity ent: list){
                 EntityPlayer pl = (EntityPlayer) ent;
-                String key = "rpsideas:Entity" + pl.getEntityId() + "NumBroadcast" + chanInt;
                 if(PsiAPI.getPlayerCAD(pl) != null){
-                    if(context.customData.containsKey(key)){
-                        context.customData.replace(key, signalVal);
-                    } else{
-                        context.customData.put(key, signalVal);
+                    sec.add(pl);
+                }
+            }
+            writeSecurity(sec, chanInt, signalVal, context.caster, secPlayerKey, secChannelKey, secSignalKey, context.caster.world);
+
+            for(Entity ent: list){
+                EntityPlayer pl = (EntityPlayer) ent;
+                if(PsiAPI.getPlayerCAD(pl) != null && pl != null){
+                    PlayerDataHandler.PlayerData temp = PlayerDataHandler.get(pl);
+                    if(temp !=  null && temp.getCustomData() != null){
+                        temp.getCustomData().setDouble(channelKey, signalVal);
+                        temp.save();
                     }
-                    Pair<EntityPlayer, Integer> pair = Pair.of(pl, chanInt);
-                    pllist.add(pair);
                 }
             }
         }
 
-        //no more than one broadcast per player
 
-        context.customData.put(key2, pllist);
 
         //check for other instances of num broadcast
         int index = context.actions.indexOf(context.cspell.currentAction);
@@ -130,4 +133,43 @@ public class PieceTrickNumBroadcast extends PieceTrick {
         }
         return true;
     }
+
+    private void writeSecurity(List<EntityPlayer> list,Integer secChannel, Double secSignal, EntityPlayer player, String playerKey, String channelKey, String signalKey, World world){
+        PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
+        if(data.getCustomData().hasKey(playerKey) && data.getCustomData().hasKey(channelKey) && data.getCustomData().hasKey(signalKey) ){
+            NBTTagList list1 = (NBTTagList) data.getCustomData().getTag(playerKey);
+            Integer channel = data.getCustomData().getInteger(channelKey);
+            Double signal = data.getCustomData().getDouble(signalKey);
+            String key = "rpsideas:" + channel.toString();
+            for(NBTBase cmp : list1){
+                NBTTagCompound rcmp = (NBTTagCompound) cmp;
+                EntityPlayer pl = world.getPlayerEntityByUUID(Objects.requireNonNull(rcmp.getUniqueId(playerKey)));
+                if (pl != null) {
+                    PlayerDataHandler.PlayerData pldata = PlayerDataHandler.get(pl);
+                    if(pldata != null && pldata.getCustomData() != null){
+                        if(pldata.getCustomData().hasKey(key) && pldata.getCustomData().getDouble(key) == signal){
+                            pldata.getCustomData().removeTag(key);
+                            pldata.save();
+                        }
+                    }
+                }
+            }
+        }
+
+
+        NBTTagList list1 = new NBTTagList();
+        for (EntityPlayer pl : list){
+            NBTTagCompound nbt = new NBTTagCompound();
+            nbt.setUniqueId(playerKey, pl.getUniqueID());
+            list1.appendTag(nbt);
+        }
+        data.getCustomData().setTag(playerKey, list1);
+        data.getCustomData().setInteger(channelKey, secChannel);
+        data.getCustomData().setDouble(signalKey, secSignal);
+        data.save();
+    }
+
+
+
+
 }

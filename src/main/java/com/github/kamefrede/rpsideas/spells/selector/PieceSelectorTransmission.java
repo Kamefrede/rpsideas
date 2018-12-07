@@ -6,6 +6,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.piece.PieceSelector;
+import vazkii.psi.common.core.handler.PlayerDataHandler;
 
 public class PieceSelectorTransmission extends PieceSelector {
 
@@ -35,14 +36,14 @@ public class PieceSelectorTransmission extends PieceSelector {
         if(context.caster.world.isRemote) return null;
         Double channelVal = this.<Double>getParamValue(context, channel);
         if(channelVal == null) channelVal = 0D;
-        int chanInt = channelVal.intValue();
+        Integer chanInt = channelVal.intValue();
 
-        String key = "rpsideas:Entity" + context.caster.getEntityId() + "NumBroadcast" + chanInt;
+        String key = "rpsideas:" + chanInt.toString();
 
-        if(context.customData.containsKey(key)){
+        PlayerDataHandler.PlayerData data = PlayerDataHandler.get(context.caster);
 
-            Double signal = (Double) context.customData.get(key);
-            return key;
+        if(data.getCustomData().hasKey(key)){
+            return data.getCustomData().getDouble(key);
         }
 
         throw new SpellRuntimeException(SpellRuntimeExceptions.NO_MESSAGE);
