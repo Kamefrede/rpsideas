@@ -48,7 +48,7 @@ public class PieceTrickDetonate extends PieceTrick {
 
 
         List<Entity> list = context.caster.getEntityWorld().getEntitiesWithinAABB(Entity.class, axis, (Entity e) -> {
-            return e != null  && e != context.caster && e != context.focalPoint && context.isInRadius(e) && e instanceof EntitySpellCharge && ((EntitySpellCharge)(e)).getEntityData().getString("CASTER_NAME").equalsIgnoreCase(context.caster.getName());
+            return e != null  && e != context.caster && e != context.focalPoint && context.isInRadius(e) && e instanceof EntitySpellCharge && ((EntitySpellCharge)(e)).getEntityData().getString("CASTER_NAME").equals(context.caster.getName());
         });
 
 
