@@ -42,7 +42,7 @@ public class PieceSelectorTransmission extends PieceSelector {
 
         PlayerDataHandler.PlayerData data = PlayerDataHandler.get(context.caster);
 
-        if(data.getCustomData().hasKey(key)){
+        if(data != null && data.getCustomData() != null && data.getCustomData().hasKey(key)){
             return data.getCustomData().getDouble(key);
         }
 
