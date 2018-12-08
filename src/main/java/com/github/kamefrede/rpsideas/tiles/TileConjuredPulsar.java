@@ -12,6 +12,8 @@ import vazkii.arl.block.tile.TileMod;
 import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.common.Psi;
 
+import java.awt.*;
+
 
 public class TileConjuredPulsar extends TileMod implements ITickable {
     private int time = -1;
@@ -30,16 +32,13 @@ public class TileConjuredPulsar extends TileMod implements ITickable {
     @Override
     public void update() {
         if(world.isRemote) {
-            int color;
-            if(colorizer.isEmpty()) {
-                color = ICADColorizer.DEFAULT_SPELL_COLOR;
-            } else {
-                color = ((ICADColorizer)colorizer.getItem()).getColor(colorizer);
-            }
+            Color color = new Color(ICADColorizer.DEFAULT_SPELL_COLOR);
+            if(!colorizer.isEmpty())
+                color = Psi.proxy.getColorizerColor(colorizer);
 
-            float red = ((color & 0xFF0000) >> 16) / 255f;
-            float green = ((color & 0x00FF00) >> 8) / 255f;
-            float blue = (color & 0x0000FF) / 255f;
+            float red = color.getRed() / 255F;
+            float green = color.getGreen() / 255F;
+            float blue = color.getBlue() / 255F;
 
             IBlockState state = world.getBlockState(pos);
             state = state.getBlock().getActualState(state, world, pos);

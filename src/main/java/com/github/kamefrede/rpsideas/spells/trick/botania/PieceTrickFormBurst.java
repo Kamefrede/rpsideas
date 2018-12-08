@@ -15,13 +15,18 @@ import vazkii.botania.common.core.handler.ModSounds;
 import vazkii.botania.common.entity.EntityManaBurst;
 import vazkii.botania.common.item.ItemManaGun;
 import vazkii.psi.api.PsiAPI;
+import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamVector;
+import vazkii.psi.client.core.handler.ClientTickHandler;
 import vazkii.psi.common.spell.trick.entity.PieceTrickAddMotion;
 
 import javax.annotation.Nonnull;
+import java.awt.*;
+
+import static vazkii.psi.common.item.component.ItemCADColorizer.colorTable;
 
 public class PieceTrickFormBurst extends PieceComponentTrick {
     public PieceTrickFormBurst(Spell spell) {
@@ -100,7 +105,17 @@ public class PieceTrickFormBurst extends PieceComponentTrick {
             ((ILens)lens.getItem()).apply(lens, props);
         }
 
-        int color = ((ICAD)cad.getItem()).getSpellColor(cad) | 0xf000000;
+
+        ICAD icad = (ICAD) cad.getItem();
+        ItemStack colorizer = icad.getComponentInSlot(cad, EnumCADComponent.DYE);
+        int color;
+        if(!colorizer.isEmpty()){
+            color = getColor(colorizer);
+        } else{
+            color = 0xFFFFFF;
+        }
+
+
 
         double yaw = -Math.atan2(rayIn.x, rayIn.z) * 180 / Math.PI - 180;
         double pitch =  Math.asin(rayIn.y) * 180 / Math.PI;
@@ -135,5 +150,28 @@ public class PieceTrickFormBurst extends PieceComponentTrick {
     @Override
     public String[] requiredObjects() {
         return req;
+    }
+
+
+    public int getColor(ItemStack stack) {
+        if(stack.getItemDamage() < 16)
+            return colorTable[15 - stack.getItemDamage()];
+
+        switch(stack.getItemDamage()) {
+            case 16: {
+                float time = ClientTickHandler.total;
+                return Color.HSBtoRGB(time * 0.005F, 1F, 1F);
+            }
+            case 17:
+                float time = ClientTickHandler.total;
+                float w = (float) (Math.sin(time * 0.4) * 0.5 + 0.5) * 0.1F;
+                float r = (float) (Math.sin(time * 0.1) * 0.5 + 0.5) * 0.5F + 0.25F + w;
+                float g = 0.5F + w;
+                float b = 1F;
+
+                return new Color((int) (r * 255), (int) (g * 255), (int) (b * 255)).getRGB();
+        }
+
+        return 0xFFFFFF;
     }
 }

@@ -68,12 +68,15 @@ public class PieceTrickMoveBlockSequence extends PieceTrick {
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
         if(!context.isInRadius(positionVal))
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
-        int len = (int) targetVal.mag();
+        int len = (int) targetVal.copy().mag();
+
         Vector3 directNorm = directionVal.copy().normalize();
         Vector3 targetNorm = targetVal.copy().normalize();
         if(!directionVal.isAxial() || directionVal.isZero())
             throw new SpellRuntimeException(SpellRuntimeExceptions.NON_AXIAL_VECTOR);
-        for(int i = 0; i < Math.min(len, maxBlocksInt); ++i){
+
+
+        for(int i = 0; i < Math.min(len, maxBlocksInt) + 1; i++){
             Vector3 blockVec = positionVal.copy().add(targetNorm.copy().multiply(i));
             if(!context.isInRadius(blockVec))
                 throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
@@ -88,28 +91,27 @@ public class PieceTrickMoveBlockSequence extends PieceTrick {
             if(event.isCanceled())
                 continue;
 
-            if(world.getTileEntity(pos) != null || block.getPushReaction(state) != EnumPushReaction.NORMAL || !block.canSilkHarvest(world, pos, state, context.caster) || block.getPlayerRelativeBlockHardness(state, context.caster, world, pos) <= 0 || !ForgeHooks.canHarvestBlock(block, context.caster, world, pos))
+            if(world.getTileEntity(pos) != null || state.getPushReaction() != EnumPushReaction.NORMAL || !block.canSilkHarvest(world, pos, state, context.caster) || block.getPlayerRelativeBlockHardness(state, context.caster, world, pos) <= 0 || !ForgeHooks.canHarvestBlock(block, context.caster, world, pos))
                 continue;
 
-            Vector3 axis = directionVal.normalize();
-            int x = pos.getX() + (int) axis.x;
-            int y = pos.getY() + (int) axis.y;
-            int z = pos.getZ() + (int) axis.z;
+            int x = pos.getX() + (int) directNorm.x;
+            int y = pos.getY() + (int) directNorm.y;
+            int z = pos.getZ() + (int) directNorm.z;
 
             BlockPos pos1 = new BlockPos(x, y, z);
+            Vector3 vecc = new Vector3(x, y, z);
             IBlockState state1 = world.getBlockState(pos1);
 
-            if(!world.isBlockModifiable(context.caster, pos) || (new Vector3(x, y ,z) == positionVal.copy().add(targetNorm.copy()).multiply(i + 1) && (i + 1) < Math.min(len, maxBlocksInt)))
+            if(!world.isBlockModifiable(context.caster, pos) || !world.isBlockModifiable(context.caster, pos1))
                 continue;
 
             if(y > 256 || y < 1) continue;
 
-            if(world.isAirBlock(pos1) || (new Vector3(x, y ,z) == positionVal.copy().add(targetNorm.copy()).multiply(i + 1) && (i + 1) < Math.min(len, maxBlocksInt)) ) {
+            if(world.isAirBlock(pos1) || (vecc == positionVal.copy().add(targetNorm.copy().multiply(i + 1)) && (i + 1) < Math.min(len, maxBlocksInt) + 1) || state1.getBlock().isReplaceable(world, pos1) ) {
                 world.setBlockToAir(pos);
                 world.playEvent(2001, pos, Block.getIdFromBlock(block) + (block.getMetaFromState(state) << 12));
                 Pair<IBlockState, BlockPos> pair = Pair.of(state, pos1);
                 toset.add(pair);
-
             }
         }
 

@@ -17,6 +17,7 @@ import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.common.Psi;
 
 import javax.annotation.Nullable;
+import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -40,16 +41,14 @@ public class TileCracklingStar extends TileMod implements ITickable {
     @Override
     public void update() {
         if(world.isRemote) {
-            int color;
-            if(colorizer.isEmpty()) {
-                color = ICADColorizer.DEFAULT_SPELL_COLOR;
-            } else {
-                color = ((ICADColorizer)colorizer.getItem()).getColor(colorizer);
-            }
+            Color color = new Color(ICADColorizer.DEFAULT_SPELL_COLOR);
+            if(!colorizer.isEmpty())
+                color = Psi.proxy.getColorizerColor(colorizer);
 
-            float red = ((color & 0xFF0000) >> 16) / 255f;
-            float green = ((color & 0x00FF00) >> 8) / 255f;
-            float blue = (color & 0x0000FF) / 255f;
+            float red = color.getRed() / 255F;
+            float green = color.getGreen() / 255F;
+            float blue = color.getBlue() / 255F;
+
 
             for(Vec3d ray : rays) {
                 makeLine(ray, red, green, blue);
