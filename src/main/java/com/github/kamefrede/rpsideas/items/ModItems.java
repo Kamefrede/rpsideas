@@ -56,7 +56,7 @@ public class ModItems {
 
     public static ItemMod sniperBullet;
 
-    public static ItemModTool psimetalHoe;
+    public static ItemMod psimetalHoe;
 
     public static ItemMod psimetalShears;
 
