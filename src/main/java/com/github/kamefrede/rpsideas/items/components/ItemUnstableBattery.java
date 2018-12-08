@@ -16,6 +16,7 @@ import vazkii.psi.api.cad.*;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.network.message.MessageDataSync;
 
+import javax.annotation.Nonnull;
 import java.util.ConcurrentModificationException;
 import java.util.List;
 
@@ -68,25 +69,5 @@ public class ItemUnstableBattery extends ItemComponent {
         }
     }
 
-    @SubscribeEvent
-    public static void onPlayerTick(TickEvent.PlayerTickEvent e) {
-        if(!e.side.isServer()) return;
 
-        EntityPlayer player = e.player;
-        ItemStack cad = PsiAPI.getPlayerCAD(player);
-
-        if(!cad.isEmpty()) {
-            ICAD icad = (ICAD) cad.getItem();
-            ItemStack battery = icad.getComponentInSlot(cad, EnumCADComponent.BATTERY);
-
-            if(!battery.isEmpty() && battery.getItem() instanceof ItemUnstableBattery) {
-                PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
-                if(data.regenCooldown < 1 && data.availablePsi != data.getTotalPsi()) {
-                    data.availablePsi = Math.min(data.getTotalPsi(), data.availablePsi + PSI_REGEN_BONUS);
-                    data.save();
-                    NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP)player);
-                }
-            }
-        }
-    }
 }
