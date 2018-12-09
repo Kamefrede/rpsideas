@@ -53,6 +53,12 @@ public class ModItems {
     @GameRegistry.ObjectHolder(Reference.MODID + ":" + LibItems.PSIMETAL_ROD)
     public static final Item psimetalRod = Items.AIR;
 
+    @GameRegistry.ObjectHolder(Reference.MODID + ":" + LibItems.EMPTY_COLORIZER)
+    public static final Item drainedColorizer = Items.AIR;
+
+    @GameRegistry.ObjectHolder(Reference.MODID + ":" + LibItems.LIQUID_COLORIZER)
+    public static final Item liquidColorizer = Items.AIR;
+
 
     public static ItemMod sniperBullet;
 
@@ -83,6 +89,8 @@ public class ModItems {
         reg.register(createItem(new ItemCreativeCore(), LibItems.CREATIVE_CORE));
         reg.register(createItem(new ItemCreativeSocket(), LibItems.CREATIVE_SOCKET));
         reg.register(createItem(new ItemPsimetalRod(), LibItems.PSIMETAL_ROD));
+        reg.register(createItem(new ItemLiquidColorizer(), LibItems.LIQUID_COLORIZER));
+        reg.register(createItem(new ItemEmptyColorizer(), LibItems.EMPTY_COLORIZER));
 
         reg.register(createItemBlock(new ItemCADCase(PsionicBlocksCompat.cadCase)));
         if(Loader.isModLoaded("botania")){

@@ -25,6 +25,8 @@ public class LibItems {
     public static final String INLINE_CASTER = "inline_caster";
     public static final String PSIMETAL_SHEARS = "psimetal_shears";
     public static final String PSIMETAL_ROD = "psimetal_rod";
+    public static final String EMPTY_COLORIZER = "empty_colorizer";
+    public static final String LIQUID_COLORIZER = "liquid_colorizer";
 
 
 }
