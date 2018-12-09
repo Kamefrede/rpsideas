@@ -17,10 +17,13 @@ import vazkii.botania.common.item.ItemManaGun;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.ICAD;
+import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.client.core.handler.ClientTickHandler;
+import vazkii.psi.common.Psi;
+import vazkii.psi.common.item.component.ItemCADColorizer;
 import vazkii.psi.common.spell.trick.entity.PieceTrickAddMotion;
 
 import javax.annotation.Nonnull;
@@ -110,7 +113,7 @@ public class PieceTrickFormBurst extends PieceComponentTrick {
         ItemStack colorizer = icad.getComponentInSlot(cad, EnumCADComponent.DYE);
         int color;
         if(!colorizer.isEmpty()){
-            color = getColor(colorizer);
+            color = Psi.proxy.getColorizerColor(colorizer).getRGB();
         } else{
             color = 0xFFFFFF;
         }

@@ -58,10 +58,10 @@ public class RecipeLiquidColorizer extends net.minecraftforge.registries.IForgeR
     public ItemStack getCraftingResult(InventoryCrafting inv)
     {
         ItemStack itemstack = ItemStack.EMPTY;
-        float r = 0;
-        float g = 0;
-        float b = 0;
-        float colors = 0;
+        int r = 0;
+        int g = 0;
+        int b = 0;
+        int colors = 0;
         ItemLiquidColorizer itemcolorizer;
 
         for (int k = 0; k < inv.getSizeInventory(); ++k)
@@ -82,9 +82,9 @@ public class RecipeLiquidColorizer extends net.minecraftforge.registries.IForgeR
                     itemstack = itemstack1.copy();
                     itemstack.setCount(1);
 
-                    if (itemcolorizer.getColor(itemstack1) != Integer.MAX_VALUE)
+                    if (ItemLiquidColorizer.Companion.getColorFromStack(itemstack1) != Integer.MAX_VALUE)
                     {
-                        Color color = new Color(itemcolorizer.getColor(itemstack1));
+                        Color color = new Color(ItemLiquidColorizer.Companion.getColorFromStack(itemstack1));
                         r += color.getRed();
                         b += color.getBlue();
                         g += color.getGreen();
@@ -97,10 +97,11 @@ public class RecipeLiquidColorizer extends net.minecraftforge.registries.IForgeR
                     {
                         return ItemStack.EMPTY;
                     }
-                    Color color  = new Color(DyeUtils.colorFromStack(itemstack1).get().getColorValue());
-                    r += color.getRed();
-                    g += color.getGreen();
-                    b += color.getBlue();
+                    float[] color  = DyeUtils.colorFromStack(itemstack1).get().getColorComponentValues();
+
+                    r += (int)(color[0] * 255);
+                    g += (int)(color[1] * 255);
+                    b += (int)(color[2] * 255);
                     colors++;
                 }
             }

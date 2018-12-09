@@ -74,7 +74,7 @@ public class PieceTrickFreezeBlock extends PieceTrick {
 
         }
         else{
-            if((world.getBlockState(pos1).getBlock() == Blocks.AIR || world.getBlockState(pos1).getBlock().isReplaceable(world, pos1) )&& i != -1){
+            if((world.getBlockState(pos1).getBlock() == Blocks.AIR || world.getBlockState(pos1).getBlock().isReplaceable(world, pos1) )&& i != -1 && world.getBlockState(pos).getBlock() != Blocks.AIR){
                 world.setBlockState(pos1, Blocks.SNOW_LAYER.getDefaultState());
             }
         }
