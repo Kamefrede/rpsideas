@@ -2,7 +2,10 @@ package com.github.kamefrede.rpsideas.spells.trick.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDynamicLiquid;
+import net.minecraft.block.BlockSnow;
 import net.minecraft.block.BlockStaticLiquid;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -28,8 +31,8 @@ public class PieceTrickFreezeBlock extends PieceTrick {
     @Override
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException, ArithmeticException {
         super.addToMetadata(meta);
-        meta.addStat(EnumSpellStat.POTENCY, 2);
-        meta.addStat(EnumSpellStat.COST, 20);
+        meta.addStat(EnumSpellStat.POTENCY, 9);
+        meta.addStat(EnumSpellStat.COST, 30);
     }
 
     @Override
@@ -48,11 +51,11 @@ public class PieceTrickFreezeBlock extends PieceTrick {
         BlockPos pos1 = pos.up();
         IBlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
-        freezeBlock(world, pos, pos1, state, block);
+        freezeBlock(world, pos, pos1, state, block, context.caster.dimension);
         return null;
     }
 
-    static void freezeBlock(World world, BlockPos pos, BlockPos pos1, IBlockState state, Block block) {
+    static void freezeBlock(World world, BlockPos pos, BlockPos pos1, IBlockState state, Block block, int i) {
         if(block instanceof BlockStaticLiquid && block == Blocks.WATER){
             world.setBlockState(pos, Blocks.ICE.getDefaultState());
         }
@@ -60,10 +63,19 @@ public class PieceTrickFreezeBlock extends PieceTrick {
             world.setBlockState(pos, Blocks.OBSIDIAN.getDefaultState());
         } else if(block instanceof BlockDynamicLiquid && block == Blocks.FLOWING_LAVA){
             world.setBlockState(pos, Blocks.COBBLESTONE.getDefaultState());
+        } else if(world.getBlockState(pos).getBlock() instanceof BlockSnow){
+            IBlockState state1 = world.getBlockState(pos);
+            IProperty prop = (IProperty)BlockSnow.LAYERS;
+            int layer = ((Integer) state1.getValue(prop)).intValue();
+            if(layer < 8){
+                state1 = state1.withProperty(prop, Integer.valueOf(layer + 1));
+                world.setBlockState(pos, state1);
+            }
+
         }
         else{
-            if(world.getBlockState(pos1).getBlock() == Blocks.AIR || world.getBlockState(pos1).getBlock().isReplaceable(world, pos1)){
-                world.setBlockState(pos, Blocks.SNOW_LAYER.getDefaultState());
+            if((world.getBlockState(pos1).getBlock() == Blocks.AIR || world.getBlockState(pos1).getBlock().isReplaceable(world, pos1) )&& i != -1){
+                world.setBlockState(pos1, Blocks.SNOW_LAYER.getDefaultState());
             }
         }
 

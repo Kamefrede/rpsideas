@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Vec3d;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.ItemFishedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -26,9 +27,11 @@ public class RPSEventHandler {
 
     public static class Handler{
 
-        public int defaultRegen = 25;
+        public  int defaultRegen = 25;
         public final String regenKey = "rpsideasRegen";
         public final String regenBefore = "rpsideasRegenBefore";
+        public  int unstableRegen = 10;
+        public  int shieldedRegen = 5;
         @SubscribeEvent
         public void fishEvent(ItemFishedEvent event){
             EntityPlayer player = event.getEntityPlayer();
@@ -39,51 +42,50 @@ public class RPSEventHandler {
         }
 
         @SubscribeEvent
-        public void onPlayerTick(TickEvent.PlayerTickEvent ev){
-            if(!ev.side.isServer()) return;
+        public void onPlayerTick(LivingEvent.LivingUpdateEvent ev){
             try{
-                EntityPlayer player = ev.player;
-                ItemStack cad = PsiAPI.getPlayerCAD(player);
-                PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
-                if(data != null && data.getCustomData() != null){
-                    Integer currExtraRegen = data.getCustomData().getInteger(regenKey);
-                    data.getCustomData().setInteger(regenBefore, data.regen);
-                    Integer regenb4 = data.getCustomData().getInteger(regenBefore);
-                    if(regenb4 == 0 || regenb4 == null) regenb4 = defaultRegen;
-                    Integer regenNow = 0;
-                    if(regenb4 == currExtraRegen + defaultRegen){
-                        data.regen = defaultRegen;
-                        regenNow = defaultRegen;
-                    }
-                    if(regenb4 != currExtraRegen + defaultRegen){
-                        data.regen = regenb4 - currExtraRegen;
-                        regenNow = regenb4 - currExtraRegen;
-                    }
-                    data.getCustomData().setInteger(regenKey, 0);
-                    currExtraRegen = 0;
-                    if(!cad.isEmpty()) {
-                        ICAD icad = (ICAD) cad.getItem();
-                        ItemStack battery = icad.getComponentInSlot(cad, EnumCADComponent.BATTERY);
-
-                        if(battery.getItem() instanceof ItemTwinflowBattery){
-                            data.getCustomData().setInteger(regenKey, 5);
-                            currExtraRegen = 5;
+                if(ev.getEntityLiving() instanceof EntityPlayer){
+                    EntityPlayer player = (EntityPlayer) ev.getEntityLiving();
+                    ItemStack cad = PsiAPI.getPlayerCAD(player);
+                    PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
+                    if(data != null && data.getCustomData() != null){
+                        Integer currExtraRegen = data.getCustomData().getInteger(regenKey);
+                        data.getCustomData().setInteger(regenBefore, data.regen);
+                        Integer regenb4 = data.getCustomData().getInteger(regenBefore);
+                        if(regenb4 == 0 || regenb4 == null) regenb4 = defaultRegen;
+                        Integer regenNow = 0;
+                        if(regenb4 == currExtraRegen + defaultRegen){
+                            regenNow = defaultRegen;
                         }
-                        else if(battery.getItem() instanceof ItemUnstableBattery){
-                            data.getCustomData().setInteger(regenKey, 10);
-                            currExtraRegen = 10;
+                        if(regenb4 != currExtraRegen + defaultRegen){
+                            regenNow = regenb4 - currExtraRegen;
+                        } else {
+                            regenNow = defaultRegen;
                         }
 
+
+                        currExtraRegen = 0;
+                        if(!cad.isEmpty()) {
+                            ICAD icad = (ICAD) cad.getItem();
+                            ItemStack battery = icad.getComponentInSlot(cad, EnumCADComponent.BATTERY);
+                            if(battery.getItem() instanceof ItemTwinflowBattery){
+                                currExtraRegen = shieldedRegen;
+                            }
+                            else if(battery.getItem() instanceof ItemUnstableBattery){
+                                currExtraRegen = unstableRegen;
+                            }
+                        }
+
+                        if(regenNow + currExtraRegen ==  data.regen) return;
+                        data.getCustomData().setInteger(regenKey, currExtraRegen);
+                        data.regen = Math.max(defaultRegen, regenNow + currExtraRegen);
+                        data.save();
+                        if(player instanceof EntityPlayerMP){
+                            NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP)player);
+                        }
                     }
-                    data.regen = Math.max(defaultRegen, regenNow + currExtraRegen);
-                    data.save();
-                    if(player instanceof EntityPlayerMP){
-                        NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP)player);
                     }
 
-
-
-                }
             } catch (ConcurrentModificationException except){
                 //huge meme
             }
