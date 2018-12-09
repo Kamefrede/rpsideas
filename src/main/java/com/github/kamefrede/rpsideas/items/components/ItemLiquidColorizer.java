@@ -85,15 +85,18 @@ public class ItemLiquidColorizer extends ItemComponent implements  ICADColorizer
         int itemcolor = ItemNBTHelper.getInt(stack, "color", Integer.MAX_VALUE);
         if(!stack.isEmpty()){
             ItemStack inheriting = Companion.getInheriting(stack);
-            int inheritcolor = ((ICADColorizer)inheriting.getItem()).getColor(inheriting);
-            if(itemcolor == Integer.MAX_VALUE)
-                itemcolor = inheritcolor;
-            else{
-                Color it = new Color(itemcolor);
-                Color inh = new Color(inheritcolor);
-                itemcolor = new Color((it.getRed() + inh.getRed()) / 2, (it.getGreen() + inh.getGreen())  / 2, (it.getBlue() + inh.getBlue()) / 2).getRGB();
+            if(!inheriting.isEmpty() && inheriting.getItem() instanceof ICADColorizer){
+                int inheritcolor = ((ICADColorizer)inheriting.getItem()).getColor(inheriting);
+                if(itemcolor == Integer.MAX_VALUE)
+                    itemcolor = inheritcolor;
+                else{
+                    Color it = new Color(itemcolor);
+                    Color inh = new Color(inheritcolor);
+                    itemcolor = new Color((it.getRed() + inh.getRed()) / 2, (it.getGreen() + inh.getGreen())  / 2, (it.getBlue() + inh.getBlue()) / 2).getRGB();
 
+                }
             }
+
         }
         return  (itemcolor == Integer.MAX_VALUE) ? ICADColorizer.DEFAULT_SPELL_COLOR : itemcolor;
     }

@@ -5,6 +5,7 @@ import com.github.kamefrede.rpsideas.blocks.PsionicBlocksCompat;
 import com.github.kamefrede.rpsideas.compat.botania.BotaniaCompatItems;
 import com.github.kamefrede.rpsideas.items.ModItems;
 import com.github.kamefrede.rpsideas.items.components.ItemBioticSensor;
+import com.github.kamefrede.rpsideas.items.components.ItemLiquidColorizer;
 import com.github.kamefrede.rpsideas.render.RenderTileCADCase;
 import com.github.kamefrede.rpsideas.tiles.TileCADCase;
 import com.github.kamefrede.rpsideas.util.Reference;
@@ -58,6 +59,8 @@ public class ClientProxy extends CommonProxy {
         setDefaultModel(ModItems.creativeCore);
         setDefaultModel(ModItems.creativeSocket);
         setDefaultModel(ModItems.psimetalRod);
+        setDefaultModel(ModItems.drainedColorizer);
+        setDefaultModel(ModItems.liquidColorizer);
         if(Loader.isModLoaded("botania")) setDefaultModel(BotaniaCompatItems.blaster);
         ModelLoader.setCustomStateMapper(PsionicBlocksCompat.cadCase, new StateMap.Builder().ignore(BlockCADCase.COLOR).build());
         for(int i = 0; i < 16; i++) {
@@ -97,6 +100,11 @@ public class ClientProxy extends CommonProxy {
                 return EnumDyeColor.byMetadata(stack.getMetadata()).getColorValue();
             } else return 0xFFFFFF;
         }, ModItems.cadCaseItem);
+        ic.registerItemColorHandler((stack, layer) -> {
+            if(layer == 1) {
+                return ((ItemLiquidColorizer)ModItems.liquidColorizer).getColor(stack);
+            } else return 0xFFFFFF;
+        }, ModItems.liquidColorizer);
         ic.registerItemColorHandler((stack, layer) -> {
                     if (layer == 1) {
                         return ClientHelpers.getFlowColor(stack);

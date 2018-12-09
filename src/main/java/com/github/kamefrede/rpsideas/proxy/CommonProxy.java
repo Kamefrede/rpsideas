@@ -1,6 +1,7 @@
 package com.github.kamefrede.rpsideas.proxy;
 
 import com.github.kamefrede.rpsideas.blocks.ModBlocks;
+import com.github.kamefrede.rpsideas.crafting.factory.ModRecipes;
 import com.github.kamefrede.rpsideas.entity.ModEntities;
 import com.github.kamefrede.rpsideas.items.ModItems;
 import com.github.kamefrede.rpsideas.network.RPSPacketHandler;
@@ -31,6 +32,7 @@ public class CommonProxy {
         ModEntities.init();
         ModItems.preInit();
         MinecraftForge.EVENT_BUS.register(new RPSEventHandler.Handler());
+        ModRecipes.init();
 
 
     }
