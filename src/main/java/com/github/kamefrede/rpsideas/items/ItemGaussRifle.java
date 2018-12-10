@@ -23,7 +23,7 @@ import static com.github.kamefrede.rpsideas.util.helpers.ClientHelpers.pulseColo
 
 public class ItemGaussRifle extends ItemMod implements IItemColorProvider, IFlowColorAcceptor {
     protected ItemGaussRifle() {
-        super(LibItems.ITEM_GAUSS_BULLET);
+        super(LibItems.ITEM_GAUSS_RIFLE);
         setCreativeTab(RPSCreativeTab.INST);
         setMaxStackSize(1);
     }

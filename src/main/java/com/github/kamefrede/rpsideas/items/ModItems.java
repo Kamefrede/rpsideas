@@ -127,6 +127,7 @@ public class ModItems {
         psimetalShears = new ItemPsimetalShears();
         gaussRifle = new ItemGaussRifle();
         gaussBullet = new ItemGaussBullet();
+
     }
 
 

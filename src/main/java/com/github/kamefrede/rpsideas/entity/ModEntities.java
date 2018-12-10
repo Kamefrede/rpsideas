@@ -11,6 +11,7 @@ public class ModEntities {
         int id = 0;
 
         registerModEntity(EntitySniperProjectile.class, LibEntities.ENTITY_SNIPER_BULLET, id++, Psiam.INSTANCE, 256, 1, true);
+        registerModEntity(EntityGaussPulse.class, LibEntities.ENTITY_GAUSS_PULSER, id++, Psiam.INSTANCE, 256, 10, true);
     }
 
     private static void registerModEntity(Class<? extends Entity> entityClass, String entityName, int id, Object mod, int trackingRange, int updateFrequency, boolean sendsVelocityUpdates) {
