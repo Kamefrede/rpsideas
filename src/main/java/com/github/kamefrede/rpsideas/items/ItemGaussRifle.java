@@ -1,5 +1,6 @@
 package com.github.kamefrede.rpsideas.items;
 
+import com.github.kamefrede.rpsideas.entity.EntityGaussPulse;
 import com.github.kamefrede.rpsideas.util.RPSCreativeTab;
 import com.github.kamefrede.rpsideas.util.Reference;
 import com.github.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
@@ -11,6 +12,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import vazkii.arl.interf.IItemColorProvider;
 import vazkii.arl.item.ItemMod;
@@ -18,6 +21,7 @@ import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.common.Psi;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
+import vazkii.psi.common.core.handler.PsiSoundHandler;
 
 import static com.github.kamefrede.rpsideas.util.helpers.ClientHelpers.pulseColor;
 
@@ -66,30 +70,27 @@ public class ItemGaussRifle extends ItemMod implements IItemColorProvider, IFlow
                 }
             }
             playerIn.swingArm(handIn);
-            /*
-
-
-            val status = if (!wasEmpty) {
-                if (playerIn.capabilities.isCreativeMode)
-                    EntityGaussPulse.AmmoStatus.DEPLETED
+            EntityGaussPulse.AmmoStatus status;
+            if(!wasEmpty){
+                if(playerIn.capabilities.isCreativeMode)
+                    status =EntityGaussPulse.AmmoStatus.DEPLETED;
                 else
-                    EntityGaussPulse.AmmoStatus.AMMO
-            } else if (noneLeft)
-                EntityGaussPulse.AmmoStatus.BLOOD
+                    status =EntityGaussPulse.AmmoStatus.AMMO;
+            } else if(noneLeft)
+                status = EntityGaussPulse.AmmoStatus.BLOOD;
             else
-                EntityGaussPulse.AmmoStatus.NOTAMMO
-
-            val proj = EntityGaussPulse(worldIn, playerIn, status)
-            if (!worldIn.isRemote) worldIn.spawnEntity(proj)
-            val look = playerIn.lookVec
-            playerIn.motionX -= 0.5 * look.xCoord
-            playerIn.motionY -= 0.25 * look.yCoord
-            playerIn.motionZ -= 0.5 * look.zCoord
+                status = EntityGaussPulse.AmmoStatus.NOTAMMO;
+            EntityGaussPulse proj =  new EntityGaussPulse(worldIn, playerIn, status);
+            if (!worldIn.isRemote) worldIn.spawnEntity(proj);
+            Vec3d look = playerIn.getLookVec();
+            playerIn.motionX -= 0.5 * look.x;
+            playerIn.motionY -= 0.25 * look.y;
+            playerIn.motionZ -= 0.5 * look.z;
             worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ,
-                    if (status == EntityGaussPulse.AmmoStatus.BLOOD) PsiSoundHandler.compileError else PsiSoundHandler.cadShoot,
-                    SoundCategory.PLAYERS, 1f, 1f)
+                    status == EntityGaussPulse.AmmoStatus.BLOOD ? PsiSoundHandler.compileError : PsiSoundHandler.cadShoot,
+                    SoundCategory.PLAYERS, 1f, 1f);
 
-             */
+
             if (!playerIn.capabilities.isCreativeMode)
                 playerIn.getCooldownTracker().setCooldown(this, (int)(3 * playerIn.getCooldownPeriod()));
         }
