@@ -21,6 +21,7 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import vazkii.arl.item.ItemMod;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.ISocketable;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
@@ -104,10 +105,9 @@ public class ItemFlowTool extends ItemTool implements IPsiAddonTool, IFlowColorA
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
-        //TODO this is wack
-        String socketedName = I18n.translateToLocal(ISocketable.getSocketedItemName(stack, "psimisc.none"));
-        tooltip.add(I18n.translateToLocalFormatted("psimisc.spellSelected", socketedName));
+    public void addInformation(ItemStack stack, World playerIn, List<String> tooltip, ITooltipFlag advanced) {
+        String componentName = ItemMod.local(ISocketable.getSocketedItemName(stack, "psimisc.none"));
+        ItemMod.addToTooltip(tooltip, "psimisc.spellSelected", componentName);
     }
 
     @Override
