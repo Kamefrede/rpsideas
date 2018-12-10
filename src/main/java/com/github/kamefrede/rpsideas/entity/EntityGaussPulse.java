@@ -85,7 +85,7 @@ public class EntityGaussPulse extends EntityThrowable {
         tagCompound.setDouble(TAG_LAST_MOTION_X, this.motionX);
         tagCompound.setDouble(TAG_LAST_MOTION_Y, this.motionY);
         tagCompound.setDouble(TAG_LAST_MOTION_Z, this.motionZ);
-        tagCompound.setInteger(TAG_AMMO, this.getAmmo().ordinal());
+        tagCompound.setInteger(TAG_AMMO, (byte)this.getAmmo().ordinal());
     }
 
     @Override
@@ -100,7 +100,7 @@ public class EntityGaussPulse extends EntityThrowable {
     }
 
     public AmmoStatus getAmmo() {
-        return AmmoStatus.values()[(int)dataManager.get(AMMO_STATUS) % AmmoStatus.values().length];
+        return AmmoStatus.values()[(byte)dataManager.get(AMMO_STATUS) % (byte)AmmoStatus.values().length];
     }
 
     public void setAmmoStatus(AmmoStatus status) {
