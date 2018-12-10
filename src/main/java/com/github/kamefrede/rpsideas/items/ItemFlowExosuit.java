@@ -19,12 +19,16 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import vazkii.arl.item.ItemMod;
+import vazkii.arl.util.ItemNBTHelper;
 import vazkii.psi.api.PsiAPI;
+import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.api.cad.ISocketable;
 import vazkii.psi.api.exosuit.IExosuitSensor;
 import vazkii.psi.api.exosuit.IPsiEventArmor;
 import vazkii.psi.api.exosuit.ISensorHoldable;
 import vazkii.psi.api.exosuit.PsiArmorEvent;
+import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.client.model.ModelPsimetalExosuit;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.item.ItemCAD;
@@ -55,34 +59,39 @@ public abstract class ItemFlowExosuit extends ItemArmor implements IPsiAddonTool
         }
         return models[index];
     }
+    private static final String TAG_TIMES_CAST = "timesCast";
+
 
     @Override
-    public void onArmorTick(World world, EntityPlayer player, ItemStack armorPiece) {
-        ItemPsimetalTool.regen(armorPiece, player, false);
+    public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
+        ItemPsimetalTool.regen(itemStack, player, false);
     }
 
-    public void cast(ItemStack armorPiece, PsiArmorEvent event) {
-        EntityPlayer player = event.getEntityPlayer();
+    public void cast(ItemStack stack, PsiArmorEvent event) {
+        PlayerDataHandler.PlayerData data = PlayerDataHandler.get(event.getEntityPlayer());
+        ItemStack playerCad = PsiAPI.getPlayerCAD(event.getEntityPlayer());
 
-        PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
-        ItemStack cad = PsiAPI.getPlayerCAD(player);
+        if(!playerCad.isEmpty()) {
+            int timesCast = ItemNBTHelper.getInt(stack, TAG_TIMES_CAST, 0);
 
-        if(!cad.isEmpty()) {
-            ItemStack bullet = getBulletInSocket(armorPiece, getSelectedSlot(armorPiece));
-            ItemCAD.cast(player.world, player, data, bullet, cad, getCastCooldown(armorPiece), 0, getCastVolume(), spellContext -> {
-                spellContext.tool = armorPiece;
-                spellContext.attackingEntity = event.attacker;
-                spellContext.damageTaken = event.damage;
+            ItemStack bullet = getBulletInSocket(stack, getSelectedSlot(stack));
+            ItemCAD.cast(event.getEntityPlayer().getEntityWorld(), event.getEntityPlayer(), data, bullet, playerCad, getCastCooldown(stack), 0, getCastVolume(), (SpellContext context) -> {
+                context.tool = stack;
+                context.attackingEntity = event.attacker;
+                context.damageTaken = event.damage;
+                context.loopcastIndex = timesCast;
             });
+
+            ItemNBTHelper.setInt(stack, TAG_TIMES_CAST, timesCast + 1);
         }
     }
 
     @Override
-    public void onEvent(ItemStack armorPiece, PsiArmorEvent event) {
-        if(event.type == getEvent(armorPiece)) {
-            cast(armorPiece, event);
-        }
+    public void onEvent(ItemStack stack, PsiArmorEvent event) {
+        if(event.type.equals(getEvent(stack)))
+            cast(stack, event);
     }
+
 
     protected float getCastVolume() {
         return 0.025f;
@@ -93,13 +102,18 @@ public abstract class ItemFlowExosuit extends ItemArmor implements IPsiAddonTool
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack armorPiece, @Nullable World world, List<String> tooltip, ITooltipFlag mistake) {
-        if(GuiScreen.isShiftKeyDown()) {
-            String socketedName = I18n.translateToLocal(ISocketable.getSocketedItemName(armorPiece, "psimisc.none"));
-            tooltip.add(I18n.translateToLocalFormatted("psimisc.spellSelected", socketedName));
+    public void addInformation(ItemStack stack, World playerIn, List<String> tooltip, ITooltipFlag advanced) {
+        ItemMod.tooltipIfShift(tooltip, () -> {
+            String componentName = ItemMod.local(ISocketable.getSocketedItemName(stack, "psimisc.none"));
+            ItemMod.addToTooltip(tooltip, "psimisc.spellSelected", componentName);
+            ItemMod.addToTooltip(tooltip, getEvent(stack));
+        });
+    }
 
-            tooltip.add(I18n.translateToLocal(getEvent(armorPiece)));
-        }
+
+    @Override
+    public int getColor(ItemStack stack) {
+        return ICADColorizer.DEFAULT_SPELL_COLOR;
     }
 
     @Override
@@ -116,7 +130,11 @@ public abstract class ItemFlowExosuit extends ItemArmor implements IPsiAddonTool
         return super.onEntityItemUpdate(ent);
     }
 
-    @Nullable
+    @Override
+    public boolean hasColor(ItemStack stack) {
+        return true;
+    }
+
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
         if(type != null && type.equals("overlay")) {
@@ -134,7 +152,6 @@ public abstract class ItemFlowExosuit extends ItemArmor implements IPsiAddonTool
     }
 
     @SideOnly(Side.CLIENT)
-    @Nullable
     @Override
     public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped _default) {
         return getModel(armorSlot.ordinal() - 2);
@@ -146,7 +163,7 @@ public abstract class ItemFlowExosuit extends ItemArmor implements IPsiAddonTool
         }
 
         @Override
-        int getCastCooldown(ItemStack armorPiece) {
+        public int getCastCooldown(ItemStack armorPiece) {
             return 40;
         }
 
@@ -193,7 +210,7 @@ public abstract class ItemFlowExosuit extends ItemArmor implements IPsiAddonTool
         }
 
         @Override
-        int getCastCooldown(ItemStack armorPiece) {
+        public int getCastCooldown(ItemStack armorPiece) {
             return 5;
         }
 
@@ -209,7 +226,7 @@ public abstract class ItemFlowExosuit extends ItemArmor implements IPsiAddonTool
         }
 
         @Override
-        int getCastCooldown(ItemStack armorPiece) {
+        public int getCastCooldown(ItemStack armorPiece) {
             return 0;
         }
 
@@ -230,7 +247,7 @@ public abstract class ItemFlowExosuit extends ItemArmor implements IPsiAddonTool
         }
 
         @Override
-        int getCastCooldown(ItemStack armorPiece) {
+        public int getCastCooldown(ItemStack armorPiece) {
             return 5;
         }
 
