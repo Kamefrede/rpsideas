@@ -4,6 +4,7 @@ import com.github.kamefrede.rpsideas.util.Reference;
 import com.github.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
 import com.github.kamefrede.rpsideas.util.helpers.MiscHelpers;
 import net.minecraft.client.renderer.ItemMeshDefinition;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -13,12 +14,18 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import vazkii.arl.item.ItemMod;
 import vazkii.psi.api.PsiAPI;
+import vazkii.psi.api.cad.ISocketable;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.core.handler.PsiSoundHandler;
 import vazkii.psi.common.item.ItemCAD;
 import vazkii.psi.common.item.base.ModItems;
 import vazkii.psi.common.item.tool.IPsimetalTool;
+
+import java.util.List;
 
 public class ItemInlineCaster extends Item implements IPsimetalTool {
     public ItemInlineCaster() {
@@ -87,5 +94,14 @@ public class ItemInlineCaster extends Item implements IPsimetalTool {
     @Override
     public String getModNamespace() {
         return Reference.MODID;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addInformation(ItemStack stack, World playerIn, List<String> tooltip, ITooltipFlag advanced) {
+        ItemMod.tooltipIfShift(tooltip, () -> {
+            String componentName = ItemMod.local(ISocketable.getSocketedItemName(stack, "psimisc.none"));
+            ItemMod.addToTooltip(tooltip, "psimisc.spellSelected", componentName);
+        });
     }
 }
