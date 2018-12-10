@@ -28,6 +28,9 @@ public class LibItems {
     public static final String EMPTY_COLORIZER = "empty_colorizer";
     public static final String LIQUID_COLORIZER = "liquid_colorizer";
 
+    public static final String ITEM_GAUSS_RIFLE = "gauss_rifle";
+    public static final String ITEM_GAUSS_BULLET = "gauss_bullet";
+
 
     public static final String EBONY_HELMET = "ebony_helmet";
     public static final String EBONY_CHEST = "ebony_chestplate";

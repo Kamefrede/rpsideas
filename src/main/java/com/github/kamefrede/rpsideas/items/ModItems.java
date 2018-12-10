@@ -7,6 +7,7 @@ import com.github.kamefrede.rpsideas.items.components.*;
 import com.github.kamefrede.rpsideas.util.RPSCreativeTab;
 import com.github.kamefrede.rpsideas.util.Reference;
 import com.github.kamefrede.rpsideas.util.libs.LibItems;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -114,13 +115,18 @@ public class ModItems {
 
     public static ItemMod psimetalShears;
 
+    public static ItemMod gaussRifle;
+
+    public static ItemMod gaussBullet;
+
 
 
     public static void preInit(){
         sniperBullet = new ItemSniperSpellBullet();
         psimetalHoe = new ItemPsionicHoe();
         psimetalShears = new ItemPsimetalShears();
-
+        gaussRifle = new ItemGaussRifle();
+        gaussBullet = new ItemGaussBullet();
     }
 
 

@@ -25,7 +25,7 @@ public class RPSPacketHandler {
         RPSPacketHandler.NET.registerMessage(MessageParticleTrail.Handler.class, MessageParticleTrail.class, id++, Side.CLIENT);
         RPSPacketHandler.NET.registerMessage(MessageFlashSync.Handler.class, MessageFlashSync.class, id++, Side.SERVER);
 
-       //NET.registerMessage(MessageSparkleSphere.Handler.class, MessageSparkleSphere.class, id++, Side.CLIENT);
+        RPSPacketHandler.NET.registerMessage(MessageSparkleSphere.Handler.class, MessageSparkleSphere.class, id++, Side.CLIENT);
 
 
         NetworkRegistry.INSTANCE.registerGuiHandler(Psiam.INSTANCE, new GuiHandler());
