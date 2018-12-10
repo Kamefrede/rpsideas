@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "color=white": { "model": "rpsideas:dark_plate" },
+    "color=orange": { "model": "rpsideas:dark_plate" },
+    "color=magenta": { "model": "rpsideas:dark_plate" },
+    "color=light_blue": { "model": "rpsideas:dark_plate" },
+    "color=yellow": { "model": "rpsideas:dark_plate" },
+    "color=lime": { "model": "rpsideas:dark_plate" },
+    "color=pink": { "model": "rpsideas:dark_plate" },
+    "color=gray": { "model": "rpsideas:dark_plate" },
+    "color=silver": { "model": "rpsideas:dark_plate" },
+    "color=cyan": { "model": "rpsideas:dark_plate" },
+    "color=purple": { "model": "rpsideas:dark_plate" },
+    "color=blue": { "model": "rpsideas:dark_plate" },
+    "color=brown": { "model": "rpsideas:dark_plate" },
+    "color=green": { "model": "rpsideas:dark_plate" },
+    "color=red": { "model": "rpsideas:dark_plate" },
+    "color=black": { "model": "rpsideas:dark_plate" }
+  }
+}
