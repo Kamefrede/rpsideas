@@ -3,6 +3,7 @@ package com.github.kamefrede.rpsideas.proxy;
 import com.github.kamefrede.rpsideas.blocks.BlockCADCase;
 import com.github.kamefrede.rpsideas.blocks.PsionicBlocksCompat;
 import com.github.kamefrede.rpsideas.compat.botania.BotaniaCompatItems;
+import com.github.kamefrede.rpsideas.items.ItemFlowExosuit;
 import com.github.kamefrede.rpsideas.items.ModItems;
 import com.github.kamefrede.rpsideas.items.components.ItemBioticSensor;
 import com.github.kamefrede.rpsideas.items.components.ItemLiquidColorizer;
@@ -69,6 +70,14 @@ public class ClientProxy extends CommonProxy {
         setDefaultModel(ModItems.ivoryShovel);
         setDefaultModel(ModItems.ivoryAxe);
         setDefaultModel(ModItems.ivorySword);
+        setDefaultModel(ModItems.ebonyHelmet);
+        setDefaultModel(ModItems.ebonyChest);
+        setDefaultModel(ModItems.ebonyLegs);
+        setDefaultModel(ModItems.ebonyBoots);
+        setDefaultModel(ModItems.ivoryHelmet);
+        setDefaultModel(ModItems.ivoryChest);
+        setDefaultModel(ModItems.ivoryLegs);
+        setDefaultModel(ModItems.ivoryBoots);
         if(Loader.isModLoaded("botania")) setDefaultModel(BotaniaCompatItems.blaster);
         ModelLoader.setCustomStateMapper(PsionicBlocksCompat.cadCase, new StateMap.Builder().ignore(BlockCADCase.COLOR).build());
         for(int i = 0; i < 16; i++) {
@@ -135,6 +144,38 @@ public class ClientProxy extends CommonProxy {
                 ModItems.ebonyAxe,
                 ModItems.ebonyShovel
         );
+        ic.registerItemColorHandler((stack, layer) -> {
+            return ((ItemFlowExosuit.Helmet) ModItems.ivoryHelmet).getColor(stack);
+        }, ModItems.ivoryHelmet);
+
+        ic.registerItemColorHandler((stack, layer) -> {
+            return ((ItemFlowExosuit.Helmet) ModItems.ebonyHelmet).getColor(stack);
+        }, ModItems.ebonyHelmet);
+
+        ic.registerItemColorHandler((stack, layer) -> {
+            return ((ItemFlowExosuit.Chestplate) ModItems.ivoryChest).getColor(stack);
+        }, ModItems.ivoryChest);
+
+        ic.registerItemColorHandler((stack, layer) -> {
+            return ((ItemFlowExosuit.Chestplate) ModItems.ebonyChest).getColor(stack);
+        }, ModItems.ebonyChest);
+
+        ic.registerItemColorHandler((stack, layer) -> {
+            return ((ItemFlowExosuit.Leggings) ModItems.ivoryLegs).getColor(stack);
+        }, ModItems.ivoryLegs);
+
+        ic.registerItemColorHandler((stack, layer) -> {
+            return ((ItemFlowExosuit.Leggings) ModItems.ebonyLegs).getColor(stack);
+        }, ModItems.ebonyLegs);
+
+        ic.registerItemColorHandler((stack, layer) -> {
+            return ((ItemFlowExosuit.Boots) ModItems.ivoryBoots).getColor(stack);
+        }, ModItems.ivoryBoots);
+
+        ic.registerItemColorHandler((stack, layer) -> {
+            return ((ItemFlowExosuit.Boots) ModItems.ebonyBoots).getColor(stack);
+        }, ModItems.ebonyBoots);
+
     }
 
 

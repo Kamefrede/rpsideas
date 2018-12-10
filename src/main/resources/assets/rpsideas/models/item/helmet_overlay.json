@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "psi:blocks/empty",
+    "layer1": "rpsideas:items/helmet_overlay"
+  }
+}

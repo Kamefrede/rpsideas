@@ -28,6 +28,17 @@ public class LibItems {
     public static final String EMPTY_COLORIZER = "empty_colorizer";
     public static final String LIQUID_COLORIZER = "liquid_colorizer";
 
+
+    public static final String EBONY_HELMET = "ebony_helmet";
+    public static final String EBONY_CHEST = "ebony_chestplate";
+    public static final String EBONY_LEGS = "ebony_leggings";
+    public static final String EBONY_BOOTS = "ebony_boots";
+
+    public static final String IVORY_HELMET = "ivory_helmet";
+    public static final String IVORY_CHEST = "ivory_chestplate";
+    public static final String IVORY_LEGS = "ivory_leggings";
+    public static final String IVORY_BOOTS = "ivory_boots";
+
     public static final String EBONY_PICKAXE = "ebony_pickaxe";
     public static final String EBONY_SHOVEL = "ebony_shovel";
     public static final String EBONY_AXE = "ebony_axe";

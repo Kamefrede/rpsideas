@@ -83,6 +83,30 @@ public class ModItems {
     @GameRegistry.ObjectHolder(Reference.MODID + ":" + LibItems.IVORY_SWORD)
     public static final Item ivorySword = Items.AIR;
 
+    @GameRegistry.ObjectHolder(Reference.MODID + ":" + LibItems.EBONY_HELMET)
+    public static final Item ebonyHelmet = Items.AIR;
+
+    @GameRegistry.ObjectHolder(Reference.MODID + ":" + LibItems.EBONY_CHEST)
+    public static final Item ebonyChest = Items.AIR;
+
+    @GameRegistry.ObjectHolder(Reference.MODID + ":" + LibItems.EBONY_LEGS)
+    public static final Item ebonyLegs = Items.AIR;
+
+    @GameRegistry.ObjectHolder(Reference.MODID + ":" + LibItems.EBONY_BOOTS)
+    public static final Item ebonyBoots = Items.AIR;
+
+    @GameRegistry.ObjectHolder(Reference.MODID + ":" + LibItems.IVORY_HELMET)
+    public static final Item ivoryHelmet = Items.AIR;
+
+    @GameRegistry.ObjectHolder(Reference.MODID + ":" + LibItems.IVORY_CHEST)
+    public static final Item ivoryChest = Items.AIR;
+
+    @GameRegistry.ObjectHolder(Reference.MODID + ":" + LibItems.IVORY_LEGS)
+    public static final Item ivoryLegs = Items.AIR;
+
+    @GameRegistry.ObjectHolder(Reference.MODID + ":" + LibItems.IVORY_BOOTS)
+    public static final Item ivoryBoots = Items.AIR;
+
 
     public static ItemMod sniperBullet;
 
@@ -124,6 +148,16 @@ public class ModItems {
         reg.register(createItem(new ItemFlowTool.Shovel(false), LibItems.IVORY_SHOVEL));
         reg.register(createItem(new ItemFlowTool.Axe(false), LibItems.IVORY_AXE));
         reg.register(createItem(new ItemFlowSword(false), LibItems.IVORY_SWORD));
+
+        reg.register(createItem(new ItemFlowExosuit.Helmet(true), LibItems.EBONY_HELMET));
+        reg.register(createItem(new ItemFlowExosuit.Chestplate(true), LibItems.EBONY_CHEST));
+        reg.register(createItem(new ItemFlowExosuit.Leggings(true), LibItems.EBONY_LEGS));
+        reg.register(createItem(new ItemFlowExosuit.Boots(true), LibItems.EBONY_BOOTS));
+
+        reg.register(createItem(new ItemFlowExosuit.Helmet(false), LibItems.IVORY_HELMET));
+        reg.register(createItem(new ItemFlowExosuit.Chestplate(false), LibItems.IVORY_CHEST));
+        reg.register(createItem(new ItemFlowExosuit.Leggings(false), LibItems.IVORY_LEGS));
+        reg.register(createItem(new ItemFlowExosuit.Boots(false), LibItems.IVORY_BOOTS));
 
         reg.register(createItemBlock(new ItemCADCase(PsionicBlocksCompat.cadCase)));
         if(Loader.isModLoaded("botania")){
