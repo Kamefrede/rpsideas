@@ -3,6 +3,11 @@ package com.github.kamefrede.rpsideas.util.libs;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class LibItems {
 
 
@@ -51,6 +56,11 @@ public class LibItems {
     public static final String IVORY_SHOVEL = "ivory_shovel";
     public static final String IVORY_AXE = "ivory_axe";
     public static final String IVORY_SWORD = "ivory_sword";
+
+    public static final List<String> colors =  new ArrayList<>(Arrays.asList("White", "Orange", "Magenta", "LightBlue",
+            "Yellow", "Lime", "Pink", "Gray",
+            "LightGray", "Cyan", "Purple", "Blue",
+            "Brown", "Green", "Red", "Black"));
 
 
 }

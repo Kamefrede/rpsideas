@@ -16,6 +16,8 @@ public class ModBlocks {
     public static BlockMod conjuredPulsar;
     public static BlockMod conjuredPulsarLight;
     public static BlockMod conjuredStar;
+    public static BlockMod brightPlate;
+    public static BlockMod darkPlate;
 
 
     public static void preInit(){
@@ -24,6 +26,8 @@ public class ModBlocks {
         conjuredPulsarLight = new BlockPulsarLight();
         conjuredStar = new BlockConjuredStar();
         conjuredGravityBlock = new BlockConjuredGravityBlock();
+        brightPlate = new BlockPlate(LibBlocks.BRIGHT_PLATE);
+        darkPlate = new BlockPlate(LibBlocks.DARK_PLATE);
 
         initTileEntities();
     }
