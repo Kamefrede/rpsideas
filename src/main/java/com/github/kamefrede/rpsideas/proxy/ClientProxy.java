@@ -61,6 +61,14 @@ public class ClientProxy extends CommonProxy {
         setDefaultModel(ModItems.psimetalRod);
         setDefaultModel(ModItems.drainedColorizer);
         setDefaultModel(ModItems.liquidColorizer);
+        setDefaultModel(ModItems.ebonyPickaxe);
+        setDefaultModel(ModItems.ebonyShovel);
+        setDefaultModel(ModItems.ebonyAxe);
+        setDefaultModel(ModItems.ebonySword);
+        setDefaultModel(ModItems.ivoryPickaxe);
+        setDefaultModel(ModItems.ivoryShovel);
+        setDefaultModel(ModItems.ivoryAxe);
+        setDefaultModel(ModItems.ivorySword);
         if(Loader.isModLoaded("botania")) setDefaultModel(BotaniaCompatItems.blaster);
         ModelLoader.setCustomStateMapper(PsionicBlocksCompat.cadCase, new StateMap.Builder().ignore(BlockCADCase.COLOR).build());
         for(int i = 0; i < 16; i++) {
@@ -111,6 +119,21 @@ public class ClientProxy extends CommonProxy {
                     } else return 0xFFFFFF;
                 },
                 ModItems.inlineCaster
+        );
+        ic.registerItemColorHandler((stack, layer) -> {
+                    if(layer == 1) {
+                        return ClientHelpers.getFlowColor(stack);
+                    } else return 0xFFFFFF;
+                },
+                ModItems.inlineCaster,
+                ModItems.ivorySword,
+                ModItems.ivoryPickaxe,
+                ModItems.ivoryAxe,
+                ModItems.ivoryShovel,
+                ModItems.ebonySword,
+                ModItems.ebonyPickaxe,
+                ModItems.ebonyAxe,
+                ModItems.ebonyShovel
         );
     }
 

@@ -244,6 +244,14 @@ item.rpsideas.creative_socket.name=Creative CAD Socket
 item.rpsideas:spell_bullet_sniper.name=Sniper Spell Bullet
 item.rpsideas:spell_bullet_sniper_active.name=Programmed Sniper Spell Bullet
 item.rpsideas:psimetal_hoe.name=Psimetal Hoe
+item.rpsideas.ivory_pickaxe.name=Ivory Flowpick
+item.rpsideas.ivory_shovel.name=Ivory Flowspade
+item.rpsideas.ivory_axe.name=Ivory Flowaxe
+item.rpsideas.ivory_sword.name=Ivory Flowblade
+item.rpsideas.ebony_pickaxe.name=Ebony Flowpick
+item.rpsideas.ebony_shovel.name=Ebony Flowspade
+item.rpsideas.ebony_axe.name=Ebony Flowaxe
+item.rpsideas.ebony_sword.name=Ebony Flowblade
 
 item.rpsideas.unstable_battery.name=Unstable CAD Battery
 item.rpsideas.twinflow_battery.name=Shielded CAD Battery

@@ -28,5 +28,15 @@ public class LibItems {
     public static final String EMPTY_COLORIZER = "empty_colorizer";
     public static final String LIQUID_COLORIZER = "liquid_colorizer";
 
+    public static final String EBONY_PICKAXE = "ebony_pickaxe";
+    public static final String EBONY_SHOVEL = "ebony_shovel";
+    public static final String EBONY_AXE = "ebony_axe";
+    public static final String EBONY_SWORD = "ebony_sword";
+
+    public static final String IVORY_PICKAXE = "ivory_pickaxe";
+    public static final String IVORY_SHOVEL = "ivory_shovel";
+    public static final String IVORY_AXE = "ivory_axe";
+    public static final String IVORY_SWORD = "ivory_sword";
+
 
 }

@@ -1,0 +1,11 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "rpsideas:items/ivory_axe",
+    "layer1": "rpsideas:items/axe_overlay"
+  },
+  "overrides": [{
+    "predicate": { "rpsideas:overlay": 1 },
+    "model": "rpsideas:item/axe_overlay"
+  }]
+}

@@ -1,0 +1,11 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "rpsideas:items/ebony_sword",
+    "layer1": "rpsideas:items/sword_overlay"
+  },
+  "overrides": [{
+    "predicate": { "rpsideas:overlay": 1 },
+    "model": "rpsideas:item/sword_overlay"
+  }]
+}
