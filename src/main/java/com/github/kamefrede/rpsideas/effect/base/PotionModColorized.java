@@ -49,6 +49,14 @@ public class PotionModColorized extends Potion {
             setBeneficial();
     }
 
+    public boolean hasEffect(EntityLivingBase ent){
+        return Companion.hasEffect(ent, this);
+    }
+
+    public PotionEffect getEffect(EntityLivingBase ent){
+        return Companion.getEffect(ent, this);
+    }
+
     @SideOnly(Side.CLIENT)
     @Override
     public void renderHUDEffect(int x, int y, PotionEffect effect, Minecraft mc, float alpha) {

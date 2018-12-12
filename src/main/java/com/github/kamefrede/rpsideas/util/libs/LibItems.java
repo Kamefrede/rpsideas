@@ -33,6 +33,9 @@ public class LibItems {
     public static final String EMPTY_COLORIZER = "empty_colorizer";
     public static final String LIQUID_COLORIZER = "liquid_colorizer";
 
+    public static final String PSISHOCK = ".psishock";
+    public static final String PSIPULSE = ".psipulse";
+
     public static final String ITEM_GAUSS_RIFLE = "gauss_rifle";
     public static final String ITEM_GAUSS_BULLET = "gauss_bullet";
 
@@ -56,6 +59,8 @@ public class LibItems {
     public static final String IVORY_SHOVEL = "ivory_shovel";
     public static final String IVORY_AXE = "ivory_axe";
     public static final String IVORY_SWORD = "ivory_sword";
+
+
 
     public static final List<String> colors =  new ArrayList<>(Arrays.asList("White", "Orange", "Magenta", "LightBlue",
             "Yellow", "Lime", "Pink", "Gray",
