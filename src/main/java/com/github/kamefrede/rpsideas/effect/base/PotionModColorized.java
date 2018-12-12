@@ -25,22 +25,20 @@ public class PotionModColorized extends Potion {
     private static final String modid = Reference.MODID;
     private static final ResourceLocation resource = new ResourceLocation(modid, "textures/gui/potions.png");
 
-    public static class Companion{
-        private static HashMap iconIndexByModId = new HashMap();
+    private static HashMap<String, Integer> iconIndexByModId = new HashMap<String, Integer>();
 
-        public static boolean hasEffect(EntityLivingBase entityLivingBase, Potion potion){
-            return entityLivingBase.getActivePotionEffect(potion) != null;
-        }
+    public static boolean hasEffect(EntityLivingBase entityLivingBase, Potion potion){
+        return entityLivingBase.getActivePotionEffect(potion) != null;
+    }
 
-        public static PotionEffect getEffect(EntityLivingBase entityLivingBase, Potion potion){
-            return entityLivingBase.getActivePotionEffect(potion);
-        }
+    public static PotionEffect getEffect(EntityLivingBase entityLivingBase, Potion potion){
+        return entityLivingBase.getActivePotionEffect(potion);
     }
 
     protected PotionModColorized(String name, boolean badEffect, int color) {
         super(badEffect, color);
-        int iconIndex =  Companion.iconIndexByModId.get(modid) == null ? 0 : (int)Companion.iconIndexByModId.get(modid) ;
-        Companion.iconIndexByModId.put(modid, iconIndex + 1);
+        int iconIndex =  iconIndexByModId.get(modid) == null ? 0 : (int)iconIndexByModId.get(modid) ;
+        iconIndexByModId.put(modid, iconIndex + 1);
         int iconX = iconIndex % 8;
         int iconY = iconIndex / 8;
 
@@ -49,13 +47,6 @@ public class PotionModColorized extends Potion {
             setBeneficial();
     }
 
-    public boolean hasEffect(EntityLivingBase ent){
-        return Companion.hasEffect(ent, this);
-    }
-
-    public PotionEffect getEffect(EntityLivingBase ent){
-        return Companion.getEffect(ent, this);
-    }
 
     @SideOnly(Side.CLIENT)
     @Override

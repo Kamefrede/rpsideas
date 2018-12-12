@@ -35,6 +35,10 @@ public class LibItems {
 
     public static final String PSISHOCK = ".psishock";
     public static final String PSIPULSE = ".psipulse";
+    public static final String PSISHOCK_LONG = ".psishock_long";
+    public static final String PSISHOCK_STRONG = ".psishock_strong";
+    public static final String PSIPULSE_LONG = ".psipulse_long";
+    public static final String PSIPULSE_STRONG = ".psipulse_strong";
 
     public static final String ITEM_GAUSS_RIFLE = "gauss_rifle";
     public static final String ITEM_GAUSS_BULLET = "gauss_bullet";

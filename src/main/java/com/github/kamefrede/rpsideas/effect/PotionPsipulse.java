@@ -13,10 +13,12 @@ public class PotionPsipulse extends PotionPsiChange {
 
     @Override
     public void performEffect(EntityLivingBase entityLivingBaseIn, int amplifier) {
-        PotionEffect shockeffect = ModPotions.psishock.getEffect()
+        PotionEffect shockeffect = getEffect(entityLivingBaseIn, ModPotions.psishock);
         if(shockeffect != null){
-            PotionEffect thisEffect = getEffect(entityLivingBaseIn);
-
+            PotionEffect thisEffect = getEffect(entityLivingBaseIn, this);
+            PotionEffect newEffect = new PotionEffect(ModPotions.psishock, shockeffect.getDuration() + thisEffect.getDuration(), Math.min(shockeffect.getAmplifier() + thisEffect.getAmplifier() + 1, 127));
+            shockeffect.combine(newEffect);
+            shockeffect.combine(new PotionEffect(this, 0, amplifier + 1));
         } else
             super.performEffect(entityLivingBaseIn, amplifier);
     }
