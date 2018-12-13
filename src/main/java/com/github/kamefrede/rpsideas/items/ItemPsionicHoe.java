@@ -46,7 +46,7 @@ public class ItemPsionicHoe extends ItemMod implements IPsimetalTool {
     protected Item.ToolMaterial toolMaterial;
 
     protected ItemPsionicHoe(String name) {
-        super(name, variants);
+        super(name);
         setCreativeTab(RPSCreativeTab.INST);
         this.speed = 4.0F;
         this.setMaxDamage(900);

@@ -33,7 +33,7 @@ import java.util.List;
 
 public class ItemPsimetalShears extends ItemMod implements IPsiAddonTool {
     protected ItemPsimetalShears(String name) {
-        super(name, variants);
+        super(name);
         setCreativeTab(RPSCreativeTab.INST);
         setMaxStackSize(1);
         setMaxDamage(900);
