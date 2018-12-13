@@ -32,12 +32,14 @@ import vazkii.psi.common.item.base.ModItems;
 import java.util.List;
 
 public class ItemPsimetalShears extends ItemMod implements IPsiAddonTool {
-    protected ItemPsimetalShears() {
-        super(LibItems.PSIMETAL_SHEARS);
+    protected ItemPsimetalShears(String name) {
+        super(name, variants);
         setCreativeTab(RPSCreativeTab.INST);
         setMaxStackSize(1);
         setMaxDamage(900);
     }
+
+    public static String[] variants = {LibItems.PSIMETAL_SHEARS, LibItems.IVORY_SHEARS, LibItems.EBONY_SHEARS};
 
     private static final String TAG_REGEN_TIME = "regenTime";
 

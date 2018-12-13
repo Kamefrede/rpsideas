@@ -1,19 +1,13 @@
 package com.github.kamefrede.rpsideas.util.libs;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class LibItems {
 
 
-    @SideOnly(Side.CLIENT)
-    public static void initModels(){
-    }
 
     public static final String SNIPER_BULLET = "sniper_bullet";
     public static final String PSIMETAL_HOE = "psimetal_hoe";
@@ -33,6 +27,7 @@ public class LibItems {
     public static final String EMPTY_COLORIZER = "empty_colorizer";
     public static final String LIQUID_COLORIZER = "liquid_colorizer";
     public static final String SPELL_MAGAZINE = "magazine";
+
 
     public static final String PSISHOCK = ".psishock";
     public static final String PSIPULSE = ".psipulse";
@@ -61,11 +56,17 @@ public class LibItems {
     public static final String EBONY_SHOVEL = "ebony_shovel";
     public static final String EBONY_AXE = "ebony_axe";
     public static final String EBONY_SWORD = "ebony_sword";
+    public static final String EBONY_SHEARS = "ebony_shears";
+    public static final String EBONY_ROD = "ebony_rod";
+    public static final String EBONY_HOE = "ebony_hoe";
 
     public static final String IVORY_PICKAXE = "ivory_pickaxe";
     public static final String IVORY_SHOVEL = "ivory_shovel";
     public static final String IVORY_AXE = "ivory_axe";
     public static final String IVORY_SWORD = "ivory_sword";
+    public static final String IVORY_SHEARS = "ivory_shears";
+    public static final String IVORY_ROD = "ivory_rod";
+    public static final String IVORY_HOE = "ivory_hoe";
 
 
 

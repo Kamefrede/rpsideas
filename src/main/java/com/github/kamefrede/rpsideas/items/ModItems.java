@@ -108,28 +108,37 @@ public class ModItems {
     @GameRegistry.ObjectHolder(Reference.MODID + ":" + LibItems.IVORY_BOOTS)
     public static final Item ivoryBoots = Items.AIR;
 
+    @GameRegistry.ObjectHolder(Reference.MODID + ":" + LibItems.EBONY_ROD)
+    public static final Item ebonyRod = Items.AIR;
+
+    @GameRegistry.ObjectHolder(Reference.MODID + ":" + LibItems.IVORY_ROD)
+    public static final Item ivoryRod = Items.AIR;
+
 
     public static ItemMod sniperBullet;
-
     public static ItemMod psimetalHoe;
-
     public static ItemMod psimetalShears;
-
     public static ItemMod gaussRifle;
-
     public static ItemMod gaussBullet;
-
     public static ItemMod cadMagazine;
+    public static ItemMod ebonyHoe;
+    public static ItemMod ebonyShears;
+    public static ItemMod ivoryHoe;
+    public static ItemMod ivoryShears;
 
 
 
     public static void preInit(){
         sniperBullet = new ItemSniperSpellBullet();
-        psimetalHoe = new ItemPsionicHoe();
-        psimetalShears = new ItemPsimetalShears();
+        psimetalHoe = new ItemPsionicHoe(LibItems.PSIMETAL_HOE);
+        psimetalShears = new ItemPsimetalShears(LibItems.PSIMETAL_SHEARS);
         gaussRifle = new ItemGaussRifle();
         gaussBullet = new ItemGaussBullet();
         cadMagazine = new ItemCADMagazine(LibItems.SPELL_MAGAZINE);
+        ivoryShears = new ItemPsimetalShears(LibItems.IVORY_SHEARS);
+        ivoryHoe = new ItemPsionicHoe(LibItems.IVORY_HOE);
+        ebonyHoe = new ItemPsionicHoe(LibItems.EBONY_HOE);
+        ebonyShears = new ItemPsimetalShears(LibItems.EBONY_SHEARS);
 
     }
 
@@ -153,6 +162,8 @@ public class ModItems {
         reg.register(createItem(new ItemFlowTool.Shovel(true), LibItems.EBONY_SHOVEL));
         reg.register(createItem(new ItemFlowTool.Axe(true), LibItems.EBONY_AXE));
         reg.register(createItem(new ItemFlowSword(true), LibItems.EBONY_SWORD));
+        reg.register(createItem(new ItemPsimetalRod(), LibItems.EBONY_ROD));
+        reg.register(createItem(new ItemPsimetalRod(), LibItems.IVORY_ROD));
 
         reg.register(createItem(new ItemFlowTool.Pickaxe(false), LibItems.IVORY_PICKAXE));
         reg.register(createItem(new ItemFlowTool.Shovel(false), LibItems.IVORY_SHOVEL));

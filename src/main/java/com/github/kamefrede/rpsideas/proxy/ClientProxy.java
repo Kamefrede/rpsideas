@@ -78,6 +78,8 @@ public class ClientProxy extends CommonProxy {
         setDefaultModel(ModItems.ivoryChest);
         setDefaultModel(ModItems.ivoryLegs);
         setDefaultModel(ModItems.ivoryBoots);
+        setDefaultModel(ModItems.ebonyRod);
+        setDefaultModel(ModItems.ivoryRod);
         if(Loader.isModLoaded("botania")) setDefaultModel(BotaniaCompatItems.blaster);
         ModelLoader.setCustomStateMapper(PsionicBlocksCompat.cadCase, new StateMap.Builder().ignore(BlockCADCase.COLOR).build());
         for(int i = 0; i < 16; i++) {

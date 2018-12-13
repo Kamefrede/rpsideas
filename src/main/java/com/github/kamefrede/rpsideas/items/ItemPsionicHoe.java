@@ -45,13 +45,15 @@ public class ItemPsionicHoe extends ItemMod implements IPsimetalTool {
     private final float speed;
     protected Item.ToolMaterial toolMaterial;
 
-    protected ItemPsionicHoe() {
-        super(LibItems.PSIMETAL_HOE);
+    protected ItemPsionicHoe(String name) {
+        super(name, variants);
         setCreativeTab(RPSCreativeTab.INST);
         this.speed = 4.0F;
         this.setMaxDamage(900);
 
     }
+
+    public static String[] variants = {LibItems.PSIMETAL_HOE, LibItems.IVORY_HOE, LibItems.EBONY_HOE};
 
     private static final String TAG_REGEN_TIME = "regenTime";
 
