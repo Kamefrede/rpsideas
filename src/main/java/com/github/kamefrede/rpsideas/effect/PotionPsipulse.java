@@ -9,6 +9,7 @@ import vazkii.psi.api.cad.ICADColorizer;
 public class PotionPsipulse extends PotionPsiChange {
     protected PotionPsipulse() {
         super(LibItems.PSIPULSE, false, ICADColorizer.DEFAULT_SPELL_COLOR);
+        setRegistryName(LibItems.PSIPULSE);
     }
 
     @Override

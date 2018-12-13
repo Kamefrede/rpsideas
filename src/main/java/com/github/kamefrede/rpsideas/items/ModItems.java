@@ -119,6 +119,8 @@ public class ModItems {
 
     public static ItemMod gaussBullet;
 
+    public static ItemMod cadMagazine;
+
 
 
     public static void preInit(){
@@ -127,6 +129,7 @@ public class ModItems {
         psimetalShears = new ItemPsimetalShears();
         gaussRifle = new ItemGaussRifle();
         gaussBullet = new ItemGaussBullet();
+        cadMagazine = new ItemCADMagazine(LibItems.SPELL_MAGAZINE);
 
     }
 

@@ -34,6 +34,12 @@ public class ModPotions {
 
     @SubscribeEvent
     public static void registerPotionType(RegistryEvent.Register<PotionType> evt){
+        psishockType.setRegistryName(LibItems.PSISHOCK);
+        psishockLongType.setRegistryName(LibItems.PSISHOCK_LONG);
+        psishockStrongType.setRegistryName(LibItems.PSISHOCK_STRONG);
+        psipulseType.setRegistryName(LibItems.PSIPULSE);
+        psipulseLongType.setRegistryName(LibItems.PSIPULSE_LONG);
+        psipulseStrongType.setRegistryName(LibItems.PSIPULSE_STRONG);
         evt.getRegistry().register(psishockType);
         evt.getRegistry().register(psishockLongType);
         evt.getRegistry().register(psishockStrongType);

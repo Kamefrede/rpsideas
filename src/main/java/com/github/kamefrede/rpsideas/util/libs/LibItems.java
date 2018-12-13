@@ -32,6 +32,7 @@ public class LibItems {
     public static final String PSIMETAL_ROD = "psimetal_rod";
     public static final String EMPTY_COLORIZER = "empty_colorizer";
     public static final String LIQUID_COLORIZER = "liquid_colorizer";
+    public static final String SPELL_MAGAZINE = "magazine";
 
     public static final String PSISHOCK = ".psishock";
     public static final String PSIPULSE = ".psipulse";
@@ -39,6 +40,8 @@ public class LibItems {
     public static final String PSISHOCK_STRONG = ".psishock_strong";
     public static final String PSIPULSE_LONG = ".psipulse_long";
     public static final String PSIPULSE_STRONG = ".psipulse_strong";
+
+
 
     public static final String ITEM_GAUSS_RIFLE = "gauss_rifle";
     public static final String ITEM_GAUSS_BULLET = "gauss_bullet";

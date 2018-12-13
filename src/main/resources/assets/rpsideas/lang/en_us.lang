@@ -333,3 +333,6 @@ itemGroup.rpsideas=Random PSIdeas
 rpsideas.subtitle.thwack=Metal thwacks
 
 rpsideas.channelid=Channel %d
+
+rpsideas.misc.too_complex=This spell is too large for the socket in your Spell Magazine.
+rpsideas.misc.too_complex_bullet=This spell is too large for the socket in your Spell Magazine to transfer.

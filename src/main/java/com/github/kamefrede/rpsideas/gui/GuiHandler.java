@@ -2,6 +2,9 @@ package com.github.kamefrede.rpsideas.gui;
 
 import com.github.kamefrede.rpsideas.gui.cadcase.ContainerCADCase;
 import com.github.kamefrede.rpsideas.gui.cadcase.GuiCADCase;
+import com.github.kamefrede.rpsideas.gui.magazine.ContainerCADMagazine;
+import com.github.kamefrede.rpsideas.gui.magazine.GUICADMagazine;
+import com.github.kamefrede.rpsideas.items.ItemCADMagazine;
 import com.github.kamefrede.rpsideas.items.blocks.ItemCADCase;
 import com.github.kamefrede.rpsideas.items.ItemFlashRing;
 import net.minecraftforge.fml.common.network.IGuiHandler;
@@ -16,6 +19,7 @@ import javax.annotation.Nullable;
 public class GuiHandler implements IGuiHandler {
     public static final int GUI_CASE = 0;
     public static final int GUI_FLASH_RING = 1;
+    public static final int GUI_MAGAZINE = 2;
 
     @Nullable
     @Override
@@ -25,6 +29,10 @@ public class GuiHandler implements IGuiHandler {
                ItemStack stack = getStack(player, ItemCADCase.class);
                 if(!stack.isEmpty()) return new ContainerCADCase(player, stack);
                 break;
+            }
+            case GUI_MAGAZINE: {
+                ItemStack stack = getStack(player, ItemCADMagazine.class);
+                if(!stack.isEmpty()) return new ContainerCADMagazine(player, stack);
             }
 
         }
@@ -46,6 +54,10 @@ public class GuiHandler implements IGuiHandler {
             case GUI_FLASH_RING: {
                 ItemStack stack = getStack(player, ItemFlashRing.class);
                 if(!stack.isEmpty()) return new GuiFlashRing(player, stack);
+            }
+            case GUI_MAGAZINE: {
+                ItemStack stack = getStack(player, ItemCADMagazine.class);
+                if(!stack.isEmpty()) return new GUICADMagazine(player, stack);
             }
         }
 
