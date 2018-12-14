@@ -27,6 +27,7 @@ public class LibItems {
     public static final String EMPTY_COLORIZER = "empty_colorizer";
     public static final String LIQUID_COLORIZER = "liquid_colorizer";
     public static final String SPELL_MAGAZINE = "magazine";
+    public static final String BRACELET_CAD = "bracelet_cad";
 
 
     public static final String PSISHOCK = ".psishock";

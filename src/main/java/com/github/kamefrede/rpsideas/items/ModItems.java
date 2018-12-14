@@ -125,6 +125,7 @@ public class ModItems {
     public static ItemMod ebonyShears;
     public static ItemMod ivoryHoe;
     public static ItemMod ivoryShears;
+    public static ItemMod bracelet_cad;
 
 
 
@@ -139,6 +140,7 @@ public class ModItems {
         ivoryHoe = new ItemPsionicHoe(LibItems.IVORY_HOE);
         ebonyHoe = new ItemPsionicHoe(LibItems.EBONY_HOE);
         ebonyShears = new ItemPsimetalShears(LibItems.EBONY_SHEARS);
+        bracelet_cad = new ItemBraceletCAD();
 
     }
 
