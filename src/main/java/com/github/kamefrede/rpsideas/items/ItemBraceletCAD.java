@@ -12,6 +12,8 @@ public class ItemBraceletCAD extends ItemMod {
         setCreativeTab(RPSCreativeTab.INST);
     }
 
+
+
     @Override
     public boolean isFull3D() {
         return true;
