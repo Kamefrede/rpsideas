@@ -8,10 +8,10 @@ import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceTrick;
 
 
-public class PieceTrickTillSequence extends PieceTrick {// TODO: 12/15/18 look at
-    SpellParam position;
-    SpellParam target;
-    SpellParam maxBlocks;
+public class PieceTrickTillSequence extends PieceTrick {
+    private SpellParam position;
+    private SpellParam target;
+    private SpellParam maxBlocks;
 
     public PieceTrickTillSequence(Spell spell) {
         super(spell);

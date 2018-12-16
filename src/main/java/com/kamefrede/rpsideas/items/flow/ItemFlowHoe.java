@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.items.flow;
 
 import com.kamefrede.rpsideas.items.ItemPsimetalHoe;
+import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -14,7 +15,7 @@ import java.util.Calendar;
  * Created at 10:59 AM on 12/16/18.
  */
 @Mod.EventBusSubscriber
-public class ItemFlowHoe extends ItemPsimetalHoe {
+public class ItemFlowHoe extends ItemPsimetalHoe implements IFlowColorAcceptor {
     public ItemFlowHoe(String name) {
         super(name);
     }

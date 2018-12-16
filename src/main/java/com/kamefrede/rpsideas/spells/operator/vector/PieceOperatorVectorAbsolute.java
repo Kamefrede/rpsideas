@@ -6,7 +6,7 @@ import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceOperator;
 
-public class PieceOperatorVectorAbsolute extends PieceOperator {// TODO: 12/15/18 look at
+public class PieceOperatorVectorAbsolute extends PieceOperator {
 
     public SpellParam vec;
 
@@ -17,11 +17,6 @@ public class PieceOperatorVectorAbsolute extends PieceOperator {// TODO: 12/15/1
     @Override
     public void initParams() {
         addParam(vec = new ParamVector(SpellParams.GENERIC_NAME_VECTOR, SpellParam.RED, false, false));
-    }
-
-    @Override
-    public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
-        super.addToMetadata(meta);
     }
 
     @Override

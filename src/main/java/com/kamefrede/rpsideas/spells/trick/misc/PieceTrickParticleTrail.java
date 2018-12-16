@@ -12,7 +12,7 @@ import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceTrick;
 
 
-public class PieceTrickParticleTrail extends PieceTrick {// TODO: 12/15/18 look at
+public class PieceTrickParticleTrail extends PieceTrick {
 
     private SpellParam positionParam;
     private SpellParam rayParam;

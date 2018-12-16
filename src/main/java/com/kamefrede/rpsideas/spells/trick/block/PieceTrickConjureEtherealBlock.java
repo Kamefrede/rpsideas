@@ -17,27 +17,23 @@ import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceTrick;
 
-public class PieceTrickConjureEtherealBlock extends PieceTrick {// TODO: 12/15/18 look at
+public class PieceTrickConjureEtherealBlock extends PieceTrick {
 
-    SpellParam position;
-    SpellParam time;
+    private SpellParam position;
+    private SpellParam time;
 
     public PieceTrickConjureEtherealBlock(Spell spell) {
         super(spell);
     }
 
-    public static void placeBlock(EntityPlayer player, World world, BlockPos pos, int slot, boolean particles, boolean conjure) {
+    public static void placeBlock(EntityPlayer player, World world, BlockPos pos, boolean conjure) {
         if (!world.isBlockLoaded(pos) || !world.isBlockModifiable(player, pos))
             return;
 
         IBlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
-        if (block == null || block.isAir(state, world, pos) || block.isReplaceable(world, pos)) {
-            if (conjure) {
-                if (!world.isRemote)
-                    world.setBlockState(pos, RPSBlocks.conjuredEthereal.getDefaultState());
-            }
-        }
+        if (block.isReplaceable(world, pos) && conjure && !world.isRemote)
+            world.setBlockState(pos, RPSBlocks.conjuredEthereal.getDefaultState());
 
     }
 
@@ -75,27 +71,30 @@ public class PieceTrickConjureEtherealBlock extends PieceTrick {// TODO: 12/15/1
 
         IBlockState state = context.caster.getEntityWorld().getBlockState(pos);
         if (state.getBlock() != RPSBlocks.conjuredEthereal) {
-            placeBlock(context.caster, context.caster.getEntityWorld(), pos, context.getTargetSlot(), false, true);
+            placeBlock(context.caster, context.caster.getEntityWorld(), pos, true);
 
             state = context.caster.getEntityWorld().getBlockState(pos);
 
-            if (!context.caster.getEntityWorld().isRemote && state.getBlock() == RPSBlocks.conjuredEthereal) {
-                context.caster.getEntityWorld().setBlockState(pos, state);
-                TileEthereal tile = (TileEthereal) context.caster.getEntityWorld().getTileEntity(pos);
-
-
-                if (timeVal != null && timeVal.intValue() > 0) {
-                    int val = timeVal.intValue();
-                    tile.time = val;
-                }
-
-                ItemStack cad = PsiAPI.getPlayerCAD(context.caster);
-                if (cad != null)
-                    tile.colorizer = ((ICAD) cad.getItem()).getComponentInSlot(cad, EnumCADComponent.DYE);
-            }
+            if (!context.caster.getEntityWorld().isRemote && state.getBlock() == RPSBlocks.conjuredEthereal)
+                setColorAndTime(context, timeVal, pos, state);
         }
 
         return null;
+    }
+
+    public static void setColorAndTime(SpellContext context, Double timeVal, BlockPos pos, IBlockState state) {
+        context.caster.getEntityWorld().setBlockState(pos, state);
+        TileEthereal tile = (TileEthereal) context.caster.getEntityWorld().getTileEntity(pos);
+
+        if (tile != null) {
+            if (timeVal != null && timeVal.intValue() > 0) {
+                tile.time = timeVal.intValue();
+            }
+
+            ItemStack cad = PsiAPI.getPlayerCAD(context.caster);
+            if (cad != null)
+                tile.colorizer = ((ICAD) cad.getItem()).getComponentInSlot(cad, EnumCADComponent.DYE);
+        }
     }
 
 

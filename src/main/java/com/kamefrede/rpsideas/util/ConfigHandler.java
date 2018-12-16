@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.proxy;
+package com.kamefrede.rpsideas.util;
 
 import com.kamefrede.rpsideas.RPSIdeas;
 import net.minecraftforge.common.config.Config;

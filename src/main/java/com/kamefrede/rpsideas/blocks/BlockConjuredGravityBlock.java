@@ -6,12 +6,10 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.init.Blocks;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
@@ -57,18 +55,24 @@ public class BlockConjuredGravityBlock extends BlockConjuredDirectional {
 
     @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-        if (!worldIn.isRemote) {
-            this.checkFallable(worldIn, pos);
-        }
+        if (!worldIn.isRemote)
+            this.checkCanFall(worldIn, pos);
     }
 
-    private void checkFallable(World worldIn, BlockPos pos) {
+    private void checkCanFall(World worldIn, BlockPos pos) {
         if ((worldIn.isAirBlock(pos.down()) || canFallThrough(worldIn.getBlockState(pos.down()))) && pos.getY() >= 0) {
             if (worldIn.isAreaLoaded(pos.add(-32, -32, -32), pos.add(32, 32, 32))) {
                 if (!worldIn.isRemote) {
-                    EntityFallingBlock entityfallingblock = new EntityFallingBlock(worldIn, (double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, worldIn.getBlockState(pos));
-                    entityfallingblock.shouldDropItem = false;
-                    worldIn.spawnEntity(entityfallingblock);
+                    EntityFallingBlock sand = new EntityFallingBlock(worldIn, (double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, worldIn.getBlockState(pos));
+                    sand.shouldDropItem = false;
+
+                    TileEntity here = worldIn.getTileEntity(pos);
+                    if (here != null) {
+                        NBTTagCompound data = here.writeToNBT(new NBTTagCompound());
+                        data.setLong("FellAt", worldIn.getTotalWorldTime());
+                        sand.tileEntityData = data;
+                    }
+                    worldIn.spawnEntity(sand);
                 }
             } else {
                 IBlockState state = worldIn.getBlockState(pos);
@@ -86,19 +90,5 @@ public class BlockConjuredGravityBlock extends BlockConjuredDirectional {
 
     public int tickRate(World worldIn) {
         return 2;
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-        if (rand.nextInt(16) == 0) {
-            BlockPos blockpos = pos.down();
-
-            if (canFallThrough(worldIn.getBlockState(blockpos))) {
-                double d0 = pos.getX() + rand.nextFloat();
-                double d1 = pos.getY() - 0.05D;
-                double d2 = pos.getZ() + rand.nextFloat();
-                worldIn.spawnParticle(EnumParticleTypes.FALLING_DUST, d0, d1, d2, 0.0D, 0.0D, 0.0D, Block.getStateId(stateIn));
-            }
-        }
     }
 }

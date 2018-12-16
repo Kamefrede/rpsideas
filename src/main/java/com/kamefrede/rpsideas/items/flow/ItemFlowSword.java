@@ -3,6 +3,7 @@ package com.kamefrede.rpsideas.items.flow;
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
 import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
+import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -25,7 +26,7 @@ import vazkii.psi.common.item.tool.ItemPsimetalTool;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class ItemFlowSword extends ItemModSword implements IPsiAddonTool {
+public class ItemFlowSword extends ItemModSword implements IPsiAddonTool, IFlowColorAcceptor {
     private final boolean ebony;
 
     public ItemFlowSword(String name, boolean ebony) {

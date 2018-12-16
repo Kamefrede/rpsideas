@@ -15,12 +15,12 @@ import vazkii.psi.api.spell.piece.PieceTrick;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrickSound extends PieceTrick {// TODO: 12/15/18 look at
+public class TrickSound extends PieceTrick {
 
-    SpellParam position;
-    SpellParam pitch;
-    SpellParam volume;
-    SpellParam instrument;
+    private SpellParam position;
+    private SpellParam pitch;
+    private SpellParam volume;
+    private SpellParam instrument;
 
     public TrickSound(Spell spell) {
         super(spell);
@@ -75,7 +75,7 @@ public class TrickSound extends PieceTrick {// TODO: 12/15/18 look at
         Double instrumentVal = this.<Double>getParamValue(context, instrument);
         Double volVal = this.<Double>getParamValue(context, volume);
         Double pitchVal = this.<Double>getParamValue(context, pitch);
-        Integer instrVal = instrumentVal.intValue();
+        int instrVal = instrumentVal.intValue();
 
 
         if (context.caster.world.isRemote) return null;

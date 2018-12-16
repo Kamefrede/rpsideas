@@ -12,9 +12,9 @@ import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceTrick;
 
-public class PieceTrickTill extends PieceTrick {// TODO: 12/15/18 look at
+public class PieceTrickTill extends PieceTrick {
 
-    SpellParam position;
+    private SpellParam position;
 
     public PieceTrickTill(Spell spell) {
         super(spell);
@@ -25,8 +25,6 @@ public class PieceTrickTill extends PieceTrick {// TODO: 12/15/18 look at
             return EnumActionResult.PASS;
         }
         return Items.IRON_HOE.onItemUse(player, world, pos, EnumHand.MAIN_HAND, EnumFacing.UP, 0, 0, 0);
-
-
     }
 
     @Override

@@ -4,9 +4,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockDynamicLiquid;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.block.BlockStaticLiquid;
-import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import vazkii.psi.api.internal.Vector3;
@@ -14,34 +16,39 @@ import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceTrick;
 
-public class PieceTrickFreezeBlock extends PieceTrick {// TODO: 12/15/18 look at
+public class PieceTrickFreezeBlock extends PieceTrick {
 
-    SpellParam position;
+    private SpellParam position;
 
     public PieceTrickFreezeBlock(Spell spell) {
         super(spell);
     }
 
-    static void freezeBlock(World world, BlockPos pos, BlockPos pos1, IBlockState state, Block block, int i) {
-        if (block instanceof BlockStaticLiquid && block == Blocks.WATER) {
+    private static void freezeBlock(World world, BlockPos pos) {
+        boolean doesWaterVaporize = world.provider.doesWaterVaporize();
+        IBlockState state = world.getBlockState(pos);
+        Block block = state.getBlock();
+
+        if (block instanceof BlockStaticLiquid && block == Blocks.WATER)
             world.setBlockState(pos, Blocks.ICE.getDefaultState());
-        } else if (block instanceof BlockStaticLiquid && block == Blocks.LAVA) {
+        else if (block instanceof BlockStaticLiquid && block == Blocks.LAVA)
             world.setBlockState(pos, Blocks.OBSIDIAN.getDefaultState());
-        } else if (block instanceof BlockDynamicLiquid && block == Blocks.FLOWING_LAVA) {
+        else if (block instanceof BlockDynamicLiquid && block == Blocks.FLOWING_LAVA)
             world.setBlockState(pos, Blocks.COBBLESTONE.getDefaultState());
-        } else if (world.getBlockState(pos).getBlock() instanceof BlockSnow) {
-            IBlockState state1 = world.getBlockState(pos);
-            IProperty prop = (IProperty) BlockSnow.LAYERS;
-            int layer = ((Integer) state1.getValue(prop)).intValue();
+        else if (world.getBlockState(pos).getBlock() instanceof BlockSnow) {
+            PropertyInteger layers = BlockSnow.LAYERS;
+            int layer = state.getValue(layers);
             if (layer < 8) {
-                state1 = state1.withProperty(prop, Integer.valueOf(layer + 1));
-                world.setBlockState(pos, state1);
+                world.setBlockState(pos, state.cycleProperty(layers));
             }
 
         } else {
-            if ((world.getBlockState(pos1).getBlock() == Blocks.AIR || world.getBlockState(pos1).getBlock().isReplaceable(world, pos1)) && i != -1 && world.getBlockState(pos).getBlock() != Blocks.AIR) {
-                world.setBlockState(pos1, Blocks.SNOW_LAYER.getDefaultState());
-            }
+            BlockPos up = pos.up();
+            IBlockState stateAbove = world.getBlockState(up);
+            Block blockAbove = stateAbove.getBlock();
+
+            if (blockAbove.isReplaceable(world, up) && !doesWaterVaporize && state.getBlockFaceShape(world, pos, EnumFacing.UP) == BlockFaceShape.SOLID)
+                world.setBlockState(up, Blocks.SNOW_LAYER.getDefaultState());
         }
 
     }
@@ -62,19 +69,15 @@ public class PieceTrickFreezeBlock extends PieceTrick {// TODO: 12/15/18 look at
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster.getEntityWorld().isRemote)
             return null;
-        Vector3 positionVal = this.<Vector3>getParamValue(context, position);
+        Vector3 pos = this.<Vector3>getParamValue(context, position);
 
-        if (positionVal == null)
+        if (pos == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        if (!context.isInRadius(positionVal))
+        if (!context.isInRadius(pos))
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
 
         World world = context.caster.world;
-        BlockPos pos = new BlockPos(positionVal.x, positionVal.y, positionVal.z);
-        BlockPos pos1 = pos.up();
-        IBlockState state = world.getBlockState(pos);
-        Block block = state.getBlock();
-        freezeBlock(world, pos, pos1, state, block, context.caster.dimension);
+        freezeBlock(world, pos.toBlockPos());
         return null;
     }
 

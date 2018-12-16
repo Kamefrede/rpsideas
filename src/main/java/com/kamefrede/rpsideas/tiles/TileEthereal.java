@@ -17,6 +17,8 @@ public class TileEthereal extends TileMod implements ITickable {
     private static final String TAG_TIME = "time";
     private static final String TAG_COLORIZER = "colorizer";
 
+    private long fellAt = -1;
+
     public int time = -1;
     public ItemStack colorizer = ItemStack.EMPTY;
 
@@ -74,8 +76,16 @@ public class TileEthereal extends TileMod implements ITickable {
 
         }
 
+
         if (time < 0)
             return;
+
+        if (fellAt >= 0) {
+            long now = world.getTotalWorldTime();
+            long missed = now - fellAt;
+            time -= Math.min(time, missed);
+            fellAt = -1;
+        }
 
         if (time == 0)
             getWorld().setBlockToAir(getPos());
@@ -114,6 +124,8 @@ public class TileEthereal extends TileMod implements ITickable {
     @Override
     public void readSharedNBT(NBTTagCompound cmp) {
         time = cmp.getInteger(TAG_TIME);
+        if (cmp.hasKey("FellAt"))
+            fellAt = cmp.getLong("FellAt");
 
         NBTTagCompound stackCmp = cmp.getCompoundTag(TAG_COLORIZER);
         colorizer = new ItemStack(stackCmp);

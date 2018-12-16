@@ -1,10 +1,9 @@
 package com.kamefrede.rpsideas.spells.base;
 
-public class SpellRuntimeExceptions extends Exception {// TODO: 12/15/18 look at
+public class SpellRuntimeExceptions {
 
     public static final String EVEN_ROOT_NEGATIVE_NUMBER = "rpsideas.spellerror.nthroot";
     public static final String NON_AXIAL_VECTOR = "rpsideas.spellerror.nonaxial";
-    public static final String NEGATIVE_LENGTH = "rpsideas.spellerror.length";
     public static final String NULL_NUMBER = "rpsideas.spellerror.movement";
     public static final String OUT_OF_BOUNDS = "rpsideas.spellerror.outofbounds";
     public static final String NULL_LIST = "rpsideas.spellerror.nulllist";
@@ -16,8 +15,6 @@ public class SpellRuntimeExceptions extends Exception {// TODO: 12/15/18 look at
     public static final String ARMOR = "rpsideas.spellerror.armor";
     public static final String NO_MESSAGE = "rpsideas.spellerror.no_message";
     public static final String CAD = "rpsideas.spellerror.cad";
+    public static final String NAN = "rpsideas.spellerror.nan";
 
-    public SpellRuntimeExceptions(String s) {
-        super(s);
-    }
 }

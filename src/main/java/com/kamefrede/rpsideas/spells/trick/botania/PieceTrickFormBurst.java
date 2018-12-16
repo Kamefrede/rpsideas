@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import vazkii.botania.api.mana.BurstProperties;
 import vazkii.botania.api.mana.ILens;
 import vazkii.botania.api.mana.ManaItemHandler;
@@ -22,16 +21,12 @@ import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamVector;
-import vazkii.psi.client.core.handler.ClientTickHandler;
 import vazkii.psi.common.Psi;
 import vazkii.psi.common.spell.trick.entity.PieceTrickAddMotion;
 
 import javax.annotation.Nonnull;
-import java.awt.*;
 
-import static vazkii.psi.common.item.component.ItemCADColorizer.colorTable;
-
-public class PieceTrickFormBurst extends PieceComponentTrick {// TODO: 12/15/18 look at
+public class PieceTrickFormBurst extends PieceComponentTrick {
 
     private static final String[] req = new String[]{RPSIdeas.MODID + ".requirement.form_burst"};
     private static int MANA_PER_BURST = 120;
@@ -72,7 +67,7 @@ public class PieceTrickFormBurst extends PieceComponentTrick {// TODO: 12/15/18 
 
         EntityPlayer player = context.caster;
 
-        EntityManaBurst burst = formBurst(posVec, rayVec, context.caster.world, PsiAPI.getPlayerCAD(context.caster), context);
+        EntityManaBurst burst = formBurst(posVec, rayVec, PsiAPI.getPlayerCAD(context.caster), context);
 
         if (!player.world.isRemote) {
             player.world.playSound(null, player.posX, player.posY, player.posZ, ModSounds.manaBlaster, SoundCategory.PLAYERS, .6f, 1f);
@@ -83,22 +78,21 @@ public class PieceTrickFormBurst extends PieceComponentTrick {// TODO: 12/15/18 
         return null;
     }
 
+    // TODO: 12/16/18 packet shit
     @Nonnull
-    public BurstProperties getBurstProps(EntityPlayer player, ItemStack stack, boolean request, EnumHand hand) {
+    public BurstProperties getBurstProps() {
         int maxMana = 120;
         int color = 0x20FF20;
         int ticksBeforeManaLoss = 60;
         float manaLossPerTick = 4F;
         float motionModifier = 5F;
         float gravity = 0F;
-        BurstProperties props = new BurstProperties(maxMana, ticksBeforeManaLoss, manaLossPerTick, gravity, motionModifier, color);
-
-        return props;
+        return new BurstProperties(maxMana, ticksBeforeManaLoss, manaLossPerTick, gravity, motionModifier, color);
     }
 
-    public EntityManaBurst formBurst(Vector3 pos, Vector3 rayIn, World world, ItemStack cad, SpellContext context) {
+    public EntityManaBurst formBurst(Vector3 pos, Vector3 rayIn, ItemStack cad, SpellContext context) {
         EntityManaBurst burst = new EntityManaBurst(context.caster, EnumHand.MAIN_HAND);
-        BurstProperties props = getBurstProps(context.caster, cad, true, EnumHand.MAIN_HAND);
+        BurstProperties props = getBurstProps();
 
 
         ItemStack lens = ItemManaGun.getLens(cad);
@@ -113,7 +107,7 @@ public class PieceTrickFormBurst extends PieceComponentTrick {// TODO: 12/15/18 
         if (!colorizer.isEmpty()) {
             color = Psi.proxy.getColorizerColor(colorizer).getRGB();
         } else {
-            color = 0xFFFFFF;
+            color = -1;
         }
 
 
@@ -142,34 +136,11 @@ public class PieceTrickFormBurst extends PieceComponentTrick {// TODO: 12/15/18 
 
     @Override
     public int manaDrain(SpellContext context, int x, int y) {
-        return 120;
+        return MANA_PER_BURST;
     }
 
     @Override
     public String[] requiredObjects() {
         return req;
-    }
-
-
-    public int getColor(ItemStack stack) {
-        if (stack.getItemDamage() < 16)
-            return colorTable[15 - stack.getItemDamage()];
-
-        switch (stack.getItemDamage()) {
-            case 16: {
-                float time = ClientTickHandler.total;
-                return Color.HSBtoRGB(time * 0.005F, 1F, 1F);
-            }
-            case 17:
-                float time = ClientTickHandler.total;
-                float w = (float) (Math.sin(time * 0.4) * 0.5 + 0.5) * 0.1F;
-                float r = (float) (Math.sin(time * 0.1) * 0.5 + 0.5) * 0.5F + 0.25F + w;
-                float g = 0.5F + w;
-                float b = 1F;
-
-                return new Color((int) (r * 255), (int) (g * 255), (int) (b * 255)).getRGB();
-        }
-
-        return 0xFFFFFF;
     }
 }

@@ -6,9 +6,9 @@ import vazkii.psi.api.spell.piece.PieceTrick;
 
 import java.util.Stack;
 
-public class PieceTrickSupressNextTrick extends PieceTrick {// TODO: 12/15/18 look at
+public class PieceTrickSupressNextTrick extends PieceTrick {
 
-    SpellParam target;
+    private SpellParam target;
 
     public PieceTrickSupressNextTrick(Spell spell) {
         super(spell);
@@ -26,10 +26,10 @@ public class PieceTrickSupressNextTrick extends PieceTrick {// TODO: 12/15/18 lo
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Object execute(SpellContext context) throws SpellRuntimeException {
         Double timeVal = this.<Double>getParamValue(context, target);
         if (Math.abs(timeVal) < 1) {
-            int index = context.actions.indexOf(context.cspell.currentAction);
             Stack<CompiledSpell.Action> stack = (Stack<CompiledSpell.Action>) context.actions.clone();
 
             while (!stack.isEmpty()) {

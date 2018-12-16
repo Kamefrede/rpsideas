@@ -6,10 +6,10 @@ import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.piece.PieceOperator;
 
-public class PieceOperatorRoot extends PieceOperator {// TODO: 12/15/18 look at
+public class PieceOperatorRoot extends PieceOperator {
 
-    SpellParam num;
-    SpellParam root;
+    private SpellParam num;
+    private SpellParam root;
 
     public PieceOperatorRoot(Spell spell) {
         super(spell);
@@ -22,21 +22,12 @@ public class PieceOperatorRoot extends PieceOperator {// TODO: 12/15/18 look at
     }
 
     @Override
-    public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
-        super.addToMetadata(meta);
-    }
-
-    @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Double base = this.<Double>getParamValue(context, num);
-        Double r = this.<Double>getParamValue(context, root);
-        int nth = r.intValue();
-        if (base < 0) {
-            if (nth % 2 == 1) {
-                throw new SpellRuntimeException(SpellRuntimeExceptions.EVEN_ROOT_NEGATIVE_NUMBER);
-            }
-        }
-        return Math.pow(base, 1.0 / nth);
+        double base = this.<Double>getParamValue(context, num);
+        double r = this.<Double>getParamValue(context, root);
+        if (base < 0 && r % 2 != 0)
+            throw new SpellRuntimeException(SpellRuntimeExceptions.EVEN_ROOT_NEGATIVE_NUMBER);
+        return Math.pow(base, 1.0 / r);
 
     }
 

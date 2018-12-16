@@ -36,7 +36,7 @@ public class MessageSpamlessChat implements IMessage {// TODO: 12/15/18 look at
     }
 
     public static class Handler implements IMessageHandler<MessageSpamlessChat, IMessage> {
-        private static int MAGIC = 69696969;
+        private static int MAGIC = "rps spamless".hashCode();
 
         @Override
         @SideOnly(Side.CLIENT)

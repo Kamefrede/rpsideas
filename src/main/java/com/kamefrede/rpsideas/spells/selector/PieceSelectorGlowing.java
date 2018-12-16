@@ -6,13 +6,14 @@ import net.minecraft.entity.EntityLiving;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.common.spell.selector.entity.PieceSelectorNearby;
 
-public class PieceSelectorGlowing extends PieceSelectorNearby {// TODO: 12/15/18 look at
+public class PieceSelectorGlowing extends PieceSelectorNearby {
 
     public PieceSelectorGlowing(Spell spell) {
         super(spell);
     }
 
     @Override
+    @SuppressWarnings("Guava")
     public Predicate<Entity> getTargetPredicate() {
         return (Entity e) -> e instanceof EntityLiving && e.isGlowing();
     }

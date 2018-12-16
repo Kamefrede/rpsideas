@@ -7,8 +7,7 @@ import vazkii.psi.api.spell.piece.PieceTrick;
 import vazkii.psi.common.item.armor.ItemPsimetalArmor;
 import vazkii.psi.common.item.tool.ItemPsimetalTool;
 
-public class PieceTrickRepair extends PieceTrick {// TODO: 12/15/18 look at
-
+public class PieceTrickRepair extends PieceTrick {
 
     public PieceTrickRepair(Spell spell) {
         super(spell);
@@ -21,7 +20,6 @@ public class PieceTrickRepair extends PieceTrick {// TODO: 12/15/18 look at
         meta.addStat(EnumSpellStat.COMPLEXITY, 1);
         meta.addStat(EnumSpellStat.POTENCY, 1);
         meta.addStat(EnumSpellStat.COST, 600);
-
     }
 
     @Override

@@ -7,11 +7,11 @@ import vazkii.psi.api.spell.SpellRuntimeException;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.piece.PieceOperator;
 
-public class PieceOperatorExtractSign extends PieceOperator {// TODO: 12/15/18 look at
+public class PieceOperatorSignum extends PieceOperator {
 
-    SpellParam num;
+    private SpellParam num;
 
-    public PieceOperatorExtractSign(Spell spell) {
+    public PieceOperatorSignum(Spell spell) {
         super(spell);
     }
 
@@ -24,13 +24,10 @@ public class PieceOperatorExtractSign extends PieceOperator {// TODO: 12/15/18 l
     public Object execute(SpellContext context) throws SpellRuntimeException {
         Double number = this.<Double>getParamValue(context, num);
 
-        if (number > 0) {
-            return 1.0D;
-        } else if (number < 0) {
-            return -1.0D;
-        } else {
-            return 0.0D;
-        }
+        if (number == null)
+            return 0.0;
+
+        return Math.signum(number);
     }
 
     @Override

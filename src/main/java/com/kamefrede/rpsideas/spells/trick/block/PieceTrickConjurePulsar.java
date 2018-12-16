@@ -17,10 +17,11 @@ import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceTrick;
 
-public class PieceTrickConjurePulsar extends PieceTrick {// TODO: 12/15/18 look at
+public class PieceTrickConjurePulsar extends PieceTrick implements IPulsarConjuration {
 
     protected SpellParam positionParam;
     private SpellParam timeParam;
+
     public PieceTrickConjurePulsar(Spell spell) {
         super(spell);
     }
@@ -46,26 +47,17 @@ public class PieceTrickConjurePulsar extends PieceTrick {// TODO: 12/15/18 look 
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (context.caster.world.isRemote) return null;
-
-        BlockPos pos = SpellHelpers.getBlockPosFromVectorParam(this, context, positionParam);
-        SpellHelpers.checkPos(context, pos);
-
-        int time = (int) SpellHelpers.getNumber(this, context, timeParam, 0);
-        World world = context.caster.world;
-
-        if (SpellHelpers.placeBlock(world, pos, getStateToSet(), false)) {
-            postSet(context, world, pos, time);
-        }
-
+        conjurePulsar(context, positionParam, timeParam);
         return null;
     }
 
+    @Override
     public IBlockState getStateToSet() {
         return RPSBlocks.conjuredPulsar.getDefaultState().withProperty(BlockConjuredPulsar.SOLID, true);
     }
 
-    protected void postSet(SpellContext context, World world, BlockPos pos, int time) {
+    @Override
+    public void postSet(SpellContext context, World world, BlockPos pos, int time) {
         TileEntity tile = world.getTileEntity(pos);
         if (tile instanceof TileEthereal) {
             TileEthereal pulsar = (TileEthereal) tile;

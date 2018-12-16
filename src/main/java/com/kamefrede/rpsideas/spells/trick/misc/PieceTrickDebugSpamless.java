@@ -10,10 +10,10 @@ import vazkii.psi.api.spell.param.ParamAny;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.piece.PieceTrick;
 
-public class PieceTrickDebugSpamless extends PieceTrick {// TODO: 12/15/18 look at
+public class PieceTrickDebugSpamless extends PieceTrick {
 
-    SpellParam targetParam;
-    SpellParam numParam;
+    private SpellParam targetParam;
+    private SpellParam numParam;
     public PieceTrickDebugSpamless(Spell spell) {
         super(spell);
     }
@@ -26,14 +26,13 @@ public class PieceTrickDebugSpamless extends PieceTrick {// TODO: 12/15/18 look 
 
     @Override
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException, ArithmeticException {
-
+        // NO-OP
     }
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster.world.isRemote || !(context.caster instanceof EntityPlayerMP)) return null;
 
-        //Copypasteroo from PieceTrickDebug
         Double numberVal = this.<Double>getParamValue(context, numParam);
         Object targetVal = getParamValue(context, targetParam);
 

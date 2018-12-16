@@ -47,6 +47,7 @@ public class LibPieceNames {
     public static final String OPERATOR_GET_SIGN_TEXT = "operator_get_sign_text";
     public static final String TRICK_MOVE_BLOCK_SEQUENCE = "trick_move_block_sequence";
     public static final String OPERATOR_GET_COMMENT = "operator_get_comment";
+    public static final String OPERATOR_PARSE_NUMBER = "operator_parse_number";
     public static final String OPERATOR_GET_DISTANCE_FROM_GROUND = "operator_distance_from_ground";
     public static final String SELECTOR_GLOWING = "selector_glowing";
     public static final String SELECTOR_LIST_FILTER = "selector_list_filter";

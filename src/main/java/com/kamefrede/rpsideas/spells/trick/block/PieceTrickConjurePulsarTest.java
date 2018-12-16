@@ -17,7 +17,7 @@ import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceTrick;
 
-public class PieceTrickConjurePulsarTest extends PieceTrick {// TODO: 12/15/18 look at
+public class PieceTrickConjurePulsarTest extends PieceTrick {
 
     protected SpellParam positionParam;
     private SpellParam timeParam;

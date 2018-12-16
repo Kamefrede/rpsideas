@@ -22,12 +22,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class PieceTrickNumBroadcast extends PieceTrick {// TODO: 12/15/18 look at
+public class PieceTrickNumBroadcast extends PieceTrick {
 
-    SpellParam radius;
-    SpellParam channel;
-    SpellParam position;
-    SpellParam signal;
+    private SpellParam radius;
+    private SpellParam channel;
+    private SpellParam position;
+    private SpellParam signal;
 
     public PieceTrickNumBroadcast(Spell spell) {
         super(spell);
@@ -63,6 +63,11 @@ public class PieceTrickNumBroadcast extends PieceTrick {// TODO: 12/15/18 look a
         Double channelVal = this.<Double>getParamValue(context, channel);
         Double signalVal = this.<Double>getParamValue(context, signal);
 
+        if (context.customData.get("rpsideas:BroadcastAny") != null)
+            return null;
+
+        context.customData.put("rpsideas:BroadcastAny", true);
+
         if (signalVal == null)
             throw new SpellRuntimeException(SpellRuntimeExceptions.NULL_NUMBER);
 
@@ -85,10 +90,9 @@ public class PieceTrickNumBroadcast extends PieceTrick {// TODO: 12/15/18 look a
         AxisAlignedBB axis = new AxisAlignedBB(positionVal.x - radiusVal, positionVal.y - radiusVal, positionVal.z - radiusVal, positionVal.x + radiusVal, positionVal.y + radiusVal, positionVal.z + radiusVal);
 
 
-        List<Entity> list = context.caster.getEntityWorld().getEntitiesWithinAABB(Entity.class, axis, (Entity e) -> {
-            return e != null && e instanceof EntityPlayer && e != context.caster && e != context.focalPoint && context.isInRadius(e);
-        });
-        if (list.size() > 0 && list != null) {
+        List<EntityPlayer> list = context.caster.getEntityWorld().getEntitiesWithinAABB(EntityPlayer.class, axis,
+                (EntityPlayer e) -> e != null && e != context.caster && e != context.focalPoint && context.isInRadius(e));
+        if (list.size() > 0) {
 
             //actually broadcasts it!
             for (Entity ent : list) {
@@ -97,6 +101,7 @@ public class PieceTrickNumBroadcast extends PieceTrick {// TODO: 12/15/18 look a
                     sec.add(pl);
                 }
             }
+
             writeSecurity(sec, chanInt, signalVal, context.caster, secPlayerKey, secChannelKey, secSignalKey, context.caster.world);
 
             for (Entity ent : list) {
@@ -111,23 +116,18 @@ public class PieceTrickNumBroadcast extends PieceTrick {// TODO: 12/15/18 look a
             }
         }
 
-
-        //check for other instances of num broadcast
-        int index = context.actions.indexOf(context.cspell.currentAction);
-        for (int i = index + 1; i < context.actions.size(); i++) {
-            if (context.actions.get(i).piece instanceof PieceTrickNumBroadcast) {
-                context.actions.remove(i);
-            }
-        }
-        return true;
+        return null;
     }
 
     private void writeSecurity(List<EntityPlayer> list, Integer secChannel, Double secSignal, EntityPlayer player, String playerKey, String channelKey, String signalKey, World world) {
         PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(player);
+        if (data == null)
+            return;
+
         if (data.getCustomData().hasKey(playerKey) && data.getCustomData().hasKey(channelKey) && data.getCustomData().hasKey(signalKey)) {
             NBTTagList list1 = (NBTTagList) data.getCustomData().getTag(playerKey);
             Integer channel = data.getCustomData().getInteger(channelKey);
-            Double signal = data.getCustomData().getDouble(signalKey);
+            double signal = data.getCustomData().getDouble(signalKey);
             String key = "rpsideas:" + channel.toString();
             for (NBTBase cmp : list1) {
                 NBTTagCompound rcmp = (NBTTagCompound) cmp;

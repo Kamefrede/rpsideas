@@ -7,11 +7,11 @@ import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceOperator;
 
-public class PieceOperatorVectorRotate extends PieceOperator {// TODO: 12/15/18 look at
+public class PieceOperatorVectorRotate extends PieceOperator {
 
-    SpellParam vector;
-    SpellParam axis;
-    SpellParam angle;
+    private SpellParam vector;
+    private SpellParam axis;
+    private SpellParam angle;
 
     public PieceOperatorVectorRotate(Spell spell) {
         super(spell);
@@ -34,10 +34,9 @@ public class PieceOperatorVectorRotate extends PieceOperator {// TODO: 12/15/18 
         Vector3 v = this.<Vector3>getParamValue(context, vector);
         Vector3 a = this.<Vector3>getParamValue(context, axis);
         Double an = this.<Double>getParamValue(context, angle);
-        if (v == null || axis == null) {
+        if (v == null || axis == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        }
-        return v.rotate(an, a);
+        return v.copy().rotate(an, a);
     }
 
     @Override

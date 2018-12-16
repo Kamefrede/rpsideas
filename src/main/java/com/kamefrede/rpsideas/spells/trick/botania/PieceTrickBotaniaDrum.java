@@ -26,10 +26,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public abstract class PieceTrickBotaniaDrum extends PieceComponentTrick implements IManaTrick {// TODO: 12/15/18 look at
+public abstract class PieceTrickBotaniaDrum extends PieceComponentTrick implements IManaTrick {
 
     private SpellParam positionParam;
-
 
     public PieceTrickBotaniaDrum(Spell spell) {
         super(spell);
@@ -75,7 +74,7 @@ public abstract class PieceTrickBotaniaDrum extends PieceComponentTrick implemen
         return null;
     }
 
-    abstract void doEffect(SpellContext context, BlockPos pos);
+    public abstract void doEffect(SpellContext context, BlockPos pos);
 
     public static class DootGrass extends PieceTrickBotaniaDrum {
         public DootGrass(Spell spell) {
@@ -83,7 +82,7 @@ public abstract class PieceTrickBotaniaDrum extends PieceComponentTrick implemen
         }
 
         @Override
-        void doEffect(SpellContext context, BlockPos pos) {
+        public void doEffect(SpellContext context, BlockPos pos) {
             ItemGrassHorn.breakGrass(context.caster.world, ItemStack.EMPTY, 0, pos);
         }
     }
@@ -94,25 +93,22 @@ public abstract class PieceTrickBotaniaDrum extends PieceComponentTrick implemen
         }
 
         @Override
-        void doEffect(SpellContext context, BlockPos pos) {
+        public void doEffect(SpellContext context, BlockPos pos) {
             ItemGrassHorn.breakGrass(context.caster.world, ItemStack.EMPTY, 1, pos);
         }
     }
 
-    //This is actually technically new, Psionic upgrades didn't have this one.
-    //Might as well complete the set, though.
     public static class DootSnow extends PieceTrickBotaniaDrum {
         public DootSnow(Spell spell) {
             super(spell);
         }
 
         @Override
-        void doEffect(SpellContext context, BlockPos pos) {
+        public void doEffect(SpellContext context, BlockPos pos) {
             ItemGrassHorn.breakGrass(context.caster.world, ItemStack.EMPTY, 2, pos);
         }
     }
 
-    //This is the harder one.
     public static class ShearDrum extends PieceTrickBotaniaDrum {
         static final int RANGE = 10;
         static final AxisAlignedBB RANGE_AABB = new AxisAlignedBB(-RANGE, -RANGE, -RANGE, RANGE, RANGE, RANGE);
@@ -121,13 +117,15 @@ public abstract class PieceTrickBotaniaDrum extends PieceComponentTrick implemen
         }
 
         private static void nudgeItem(EntityItem ent, Random rand) {
-            ent.motionX += (rand.nextFloat() - rand.nextFloat()) * 0.1f;
-            ent.motionY += rand.nextFloat() * 0.05f;
-            ent.motionZ += (rand.nextFloat() - rand.nextFloat()) * 0.1f;
+            if (ent != null) {
+                ent.motionX += (rand.nextFloat() - rand.nextFloat()) * 0.1f;
+                ent.motionY += rand.nextFloat() * 0.05f;
+                ent.motionZ += (rand.nextFloat() - rand.nextFloat()) * 0.1f;
+            }
         }
 
         @Override
-        void doEffect(SpellContext context, BlockPos pos) {
+        public void doEffect(SpellContext context, BlockPos pos) {
             World world = context.caster.world;
             if (world.isRemote) return;
 
@@ -139,9 +137,14 @@ public abstract class PieceTrickBotaniaDrum extends PieceComponentTrick implemen
                 if (living instanceof IShearable && ((IShearable) living).isShearable(cad, world, new BlockPos(living))) {
                     nearbyShearables.add(living);
                 } else if (living instanceof EntityCow) {
-                    //TODO: This feels sketch, like there's some directional bias to it. Test this
-                    List<EntityItem> nearbyEmptyBuckets = world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(living.posX, living.posY, living.posZ, living.posX + living.width, living.posY + living.height, living.posZ + living.width), itemEnt -> {
-                        if (itemEnt == null) return false; //idk
+                    List<EntityItem> nearbyEmptyBuckets = world.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(
+                            living.posX - living.width / 2,
+                            living.posY,
+                            living.posZ - living.width / 2,
+                            living.posX + living.width / 2,
+                            living.posY + living.height,
+                            living.posZ + living.width / 2), itemEnt -> {
+                        if (itemEnt == null) return false;
                         ItemStack stack = itemEnt.getItem();
                         return !stack.isEmpty() && stack.getItem() == Items.BUCKET;
                     });
@@ -161,7 +164,6 @@ public abstract class PieceTrickBotaniaDrum extends PieceComponentTrick implemen
                 }
             }
 
-            //Ok now on to shearing the shearable things.
             if (nearbyShearables.isEmpty()) return;
 
             Collections.shuffle(nearbyShearables);

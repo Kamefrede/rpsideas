@@ -1,6 +1,5 @@
 package com.kamefrede.rpsideas.spells.trick.entity;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.util.math.AxisAlignedBB;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
@@ -9,11 +8,10 @@ import vazkii.psi.api.spell.piece.PieceTrick;
 import vazkii.psi.common.entity.EntitySpellCharge;
 
 import java.util.List;
-import java.util.Objects;
 
-public class PieceTrickDetonate extends PieceTrick {// TODO: 12/15/18 look at
+public class PieceTrickDetonate extends PieceTrick {
 
-    SpellParam radius;
+    private SpellParam radius;
 
     public PieceTrickDetonate(Spell spell) {
         super(spell);
@@ -47,19 +45,12 @@ public class PieceTrickDetonate extends PieceTrick {// TODO: 12/15/18 look at
         AxisAlignedBB axis = new AxisAlignedBB(positionVal.x - radiusVal, positionVal.y - radiusVal, positionVal.z - radiusVal, positionVal.x + radiusVal, positionVal.y + radiusVal, positionVal.z + radiusVal);
 
 
-        List<Entity> list = context.caster.getEntityWorld().getEntitiesWithinAABB(Entity.class, axis, (Entity e) -> {
-            return e != null && e != context.caster && e != context.focalPoint && context.isInRadius(e) && e instanceof EntitySpellCharge && (Objects.requireNonNull(((EntitySpellCharge) e).getThrower()).getName().equals(context.caster.getName()));
-        });
+        List<EntitySpellCharge> list = context.caster.getEntityWorld().getEntitiesWithinAABB(EntitySpellCharge.class, axis,
+                (EntitySpellCharge e) -> e != null && e != context.focalPoint && context.isInRadius(e) && e.getThrower() != context.caster);
 
 
-        if (list != null && list.size() > 0) {
-            for (Entity ent : list) {
-                EntitySpellCharge charge = (EntitySpellCharge) ent;
-                charge.doExplosion();
-
-            }
-            return true;
-        }
-        return false;
+        for (EntitySpellCharge ent : list)
+            ent.doExplosion();
+        return !list.isEmpty();
     }
 }

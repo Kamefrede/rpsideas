@@ -2,8 +2,7 @@ package com.kamefrede.rpsideas.gui;
 
 import com.kamefrede.rpsideas.network.MessageFlashSync;
 import com.kamefrede.rpsideas.network.RPSPacketHandler;
-import com.kamefrede.rpsideas.util.RPSClientMethodHandles;
-import net.minecraft.client.gui.GuiTextField;
+import com.kamefrede.rpsideas.util.RPSProgrammerMethodHandles;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import vazkii.psi.api.spell.SpellCompilationException;
@@ -18,32 +17,19 @@ public class GuiFlashRing extends GuiProgrammer {// TODO: 12/15/18 look at
         super(new FlashRingProgrammingWrapper(player, stack));
     }
 
-    //Work around private fields
-    private GuiTextField getTextField() {
-        return RPSClientMethodHandles.getSpellNameField(this);
-    }
-
-    private SpellCompiler getSpellCompiler() {
-        return RPSClientMethodHandles.getSpellCompiler(this);
-    }
-
-    private void setSpellCompiler(SpellCompiler compiler) {
-        RPSClientMethodHandles.setSpellCompiler(this, compiler);
-    }
-
     @Override
     public void onSpellChanged(boolean nameOnly) {
-        //A bunch of misc shxt
         programmer.spell.uuid = UUID.randomUUID();
         RPSPacketHandler.sendToServer(new MessageFlashSync(programmer.spell));
         onSelectedChanged();
-        getTextField().setFocused(nameOnly);
+        RPSProgrammerMethodHandles.getSpellNameField(this).setFocused(nameOnly);
 
-        SpellCompiler compiler = getSpellCompiler();
+        SpellCompiler compiler = RPSProgrammerMethodHandles.getSpellCompiler(this);
 
-        //This is... Very strange. But super does it too so ¯\_(ツ)_/¯
-        if (!nameOnly || compiler.getError() != null && compiler.getError() == SpellCompilationException.NO_NAME || programmer.spell.name.isEmpty()) {
-            setSpellCompiler(new SpellCompiler(programmer.spell));
+        if (!nameOnly ||
+                (compiler.getError() != null && compiler.getError().equals(SpellCompilationException.NO_NAME)) ||
+                programmer.spell.name.isEmpty()) {
+            RPSProgrammerMethodHandles.setSpellCompiler(this, new SpellCompiler(programmer.spell));
         }
     }
 }

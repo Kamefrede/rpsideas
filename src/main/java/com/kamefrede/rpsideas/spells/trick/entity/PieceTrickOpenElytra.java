@@ -1,20 +1,14 @@
 package com.kamefrede.rpsideas.spells.trick.entity;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemElytra;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.piece.PieceTrick;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+public class PieceTrickOpenElytra extends PieceTrick {
 
-public class PieceTrickOpenElytra extends PieceTrick {// TODO: 12/15/18 look at
-
-    SpellParam num;
-    Method setFlag = ReflectionHelper.findMethod(Entity.class, "setFlag", "func_70052_a", int.class, boolean.class);
+    private SpellParam num;
 
     public PieceTrickOpenElytra(Spell spell) {
         super(spell);
@@ -36,22 +30,14 @@ public class PieceTrickOpenElytra extends PieceTrick {// TODO: 12/15/18 look at
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         double value = this.<Double>getParamValue(context, num);
-        if ((!context.caster.world.isRemote) && context.caster != null) {
-            if (Math.abs(value) < 1.0) {
-                context.caster.getArmorInventoryList();
-                Iterable<ItemStack> it = context.caster.getArmorInventoryList();
-                for (ItemStack stack : it) {
-                    if (stack.getItem() instanceof ItemElytra) {
-                        try {
-                            setFlag.invoke((Entity) context.caster, 7, true);
-                        } catch (IllegalAccessException | InvocationTargetException e) {
-                            System.out.println("pls contact kamefrede#4501 asap");
-                        }
+        if (Math.abs(value) < 1.0) {
+            Iterable<ItemStack> it = context.caster.getArmorInventoryList();
+            for (ItemStack stack : it) {
+                if (stack.getItem() instanceof ItemElytra) {
+                    context.caster.setFlag(7, true);
 
-                        return true;
-                    }
+                    return true;
                 }
-
             }
         }
 

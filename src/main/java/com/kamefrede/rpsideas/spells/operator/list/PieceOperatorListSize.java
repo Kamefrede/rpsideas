@@ -7,9 +7,9 @@ import vazkii.psi.api.spell.param.ParamEntityListWrapper;
 import vazkii.psi.api.spell.piece.PieceOperator;
 import vazkii.psi.api.spell.wrapper.EntityListWrapper;
 
-public class PieceOperatorListSize extends PieceOperator {// TODO: 12/15/18 look at
+public class PieceOperatorListSize extends PieceOperator {
 
-    SpellParam list;
+    private SpellParam list;
 
     public PieceOperatorListSize(Spell spell) {
         super(spell);
@@ -28,10 +28,9 @@ public class PieceOperatorListSize extends PieceOperator {// TODO: 12/15/18 look
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         EntityListWrapper l = this.<EntityListWrapper>getParamValue(context, list);
-        if (l == null) {
+        if (l == null)
             throw new SpellRuntimeException(SpellRuntimeExceptions.NULL_LIST);
-        }
-        return (double) l.unwrap().size();
+        return l.unwrap().size();
     }
 
     @Override

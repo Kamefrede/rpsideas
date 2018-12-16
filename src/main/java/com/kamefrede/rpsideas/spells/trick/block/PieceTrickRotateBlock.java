@@ -16,16 +16,20 @@ import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceTrick;
 
-public class PieceTrickRotateBlock extends PieceTrick {// TODO: 12/15/18 look at
+import java.util.Collection;
 
-    SpellParam position;
-    SpellParam direction;
+public class PieceTrickRotateBlock extends PieceTrick {
+
+    private SpellParam position;
+    private SpellParam direction;
 
     public PieceTrickRotateBlock(Spell spell) {
         super(spell);
     }
 
-    public static boolean rotateBlock(World world, BlockPos pos, EnumFacing axis) {
+    // I don't like this. - Wire
+    @SuppressWarnings("unchecked")
+    public static void rotateBlock(World world, BlockPos pos, EnumFacing axis) {
         IBlockState state = world.getBlockState(pos);
         for (IProperty<?> prop : state.getProperties().keySet()) {
             if ((prop.getName().equalsIgnoreCase("facing") || prop.getName().equalsIgnoreCase("rotation") || prop.getName().equalsIgnoreCase("axis")) && (prop.getValueClass() == EnumFacing.class || prop.getValueClass() == BlockLog.EnumAxis.class)) {
@@ -35,35 +39,32 @@ public class PieceTrickRotateBlock extends PieceTrick {// TODO: 12/15/18 look at
                     if (!(block instanceof BlockBed) && !(block instanceof BlockPistonExtension)) {
                         IBlockState axState;
                         IProperty<BlockLog.EnumAxis> axisProp = (IProperty<BlockLog.EnumAxis>) prop;
-                        BlockLog.EnumAxis axis1 = state.getValue(axisProp);
                         axState = state.withProperty(axisProp, BlockLog.EnumAxis.fromFacingAxis(axis.getAxis()));
                         world.setBlockState(pos, axState);
                         world.updateBlockTick(pos, axState.getBlock(), 2, -1);
-                        return true;
+                        return;
 
                     }
                 }
                 if (!(block instanceof BlockBed) && !(block instanceof BlockPistonExtension)) {
                     IBlockState newState;
                     IProperty<EnumFacing> facingProperty = (IProperty<EnumFacing>) prop;
-                    EnumFacing facing = state.getValue(facingProperty);
-                    java.util.Collection<EnumFacing> validFacings = facingProperty.getAllowedValues();
+                    Collection<EnumFacing> validFacings = facingProperty.getAllowedValues();
 
                     if (validFacings.contains(axis)) {
                         newState = state.withProperty(facingProperty, axis);
                         world.setBlockState(pos, newState);
                         world.updateBlockTick(pos, newState.getBlock(), 2, -1);
-                        return true;
+                        return;
                     } else newState = state;
 
 
                     world.setBlockState(pos, newState);
                     world.updateBlockTick(pos, newState.getBlock(), 2, -1);
-                    return true;
+                    return;
                 }
             }
         }
-        return false;
     }
 
     @Override
@@ -96,7 +97,6 @@ public class PieceTrickRotateBlock extends PieceTrick {// TODO: 12/15/18 look at
         World world = context.caster.world;
         BlockPos pos = new BlockPos(positionVal.x, positionVal.y, positionVal.z);
         IBlockState state = world.getBlockState(pos);
-        Block block = state.getBlock();
 
         if (world.isAirBlock(pos)) return null;
         BlockEvent.BreakEvent event = new BlockEvent.BreakEvent(world, pos, state, context.caster);

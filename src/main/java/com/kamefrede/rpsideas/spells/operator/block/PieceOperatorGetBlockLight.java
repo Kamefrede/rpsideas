@@ -10,9 +10,9 @@ import vazkii.psi.api.spell.SpellRuntimeException;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceOperator;
 
-public class PieceOperatorGetBlockLight extends PieceOperator {// TODO: 12/15/18 look at
+public class PieceOperatorGetBlockLight extends PieceOperator {
 
-    SpellParam target;
+    private SpellParam target;
 
     public PieceOperatorGetBlockLight(Spell spell) {
         super(spell);
@@ -30,7 +30,7 @@ public class PieceOperatorGetBlockLight extends PieceOperator {// TODO: 12/15/18
 
         BlockPos pos = new BlockPos(vec.x, vec.y, vec.z);
         IBlockState state = context.caster.world.getBlockState(pos);
-        return state.getLightValue(context.caster.world, pos) * 1.0D;
+        return state.getLightValue(context.caster.world, pos) * 1.0;
     }
 
     @Override

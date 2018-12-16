@@ -4,20 +4,22 @@ package com.kamefrede.rpsideas.spells.base;
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.compat.botania.BotaniaCompatPieces;
 import com.kamefrede.rpsideas.spells.constant.PieceConstantTau;
-import com.kamefrede.rpsideas.spells.macro.PieceMacroCasterRaycast;
-import com.kamefrede.rpsideas.spells.operator.PieceOperatorGetComment;
+import com.kamefrede.rpsideas.spells.operator.entity.PieceOperatorAffectedByPotions;
+import com.kamefrede.rpsideas.spells.operator.string.PieceOperatorParseNumber;
+import com.kamefrede.rpsideas.spells.selector.PieceMacroCasterRaycast;
+import com.kamefrede.rpsideas.spells.operator.string.PieceOperatorGetComment;
 import com.kamefrede.rpsideas.spells.operator.PieceOperatorGetDamage;
 import com.kamefrede.rpsideas.spells.operator.PieceOperatorGetMetadata;
 import com.kamefrede.rpsideas.spells.operator.block.*;
 import com.kamefrede.rpsideas.spells.operator.entity.OperatorDistanceFromGround;
 import com.kamefrede.rpsideas.spells.operator.entity.PieceOperatorIsElytraFlying;
 import com.kamefrede.rpsideas.spells.operator.entity.PieceOperatorVisibleToEntity;
-import com.kamefrede.rpsideas.spells.operator.fe.*;
+import com.kamefrede.rpsideas.spells.operator.energy.*;
 import com.kamefrede.rpsideas.spells.operator.list.PieceOperatorListExclusion;
 import com.kamefrede.rpsideas.spells.operator.list.PieceOperatorListIntersection;
 import com.kamefrede.rpsideas.spells.operator.list.PieceOperatorListSize;
 import com.kamefrede.rpsideas.spells.operator.list.PieceOperatorListUnion;
-import com.kamefrede.rpsideas.spells.operator.math.PieceOperatorExtractSign;
+import com.kamefrede.rpsideas.spells.operator.math.PieceOperatorSignum;
 import com.kamefrede.rpsideas.spells.operator.math.PieceOperatorRoot;
 import com.kamefrede.rpsideas.spells.operator.math.PieceOperatorToDegrees;
 import com.kamefrede.rpsideas.spells.operator.math.PieceOperatorToRadians;
@@ -36,7 +38,7 @@ import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.spell.SpellPiece;
 import vazkii.psi.common.lib.LibPieceGroups;
 
-public class SpellPieces {// TODO: 12/15/18 look at
+public class SpellPieces {
 
     public static void init() {
 
@@ -52,7 +54,7 @@ public class SpellPieces {// TODO: 12/15/18 look at
         register(PieceTrickConjureEtherealBlockSequence.class, LibPieceNames.TRICK_CONJURE_ETHEREAL_BLOCK_SEQUENCE, LibPieceGroups.BLOCK_CONJURATION);
         register(PieceSelectorNearbyPlayers.class, LibPieceNames.SELECTOR_NEARBY_PLAYERS, LibPieceGroups.ENTITIES_INTRO);
         register(PieceTrickDirectionPlaceBlock.class, LibPieceNames.TRICK_DIRECTION_PLACE_BLOCK, LibPieceGroups.BLOCK_WORKS);
-        register(PieceOperatorExtractSign.class, LibPieceNames.OPERATOR_EXTRACT_SIGN, LibPieceGroups.TRIGNOMETRY);
+        register(PieceOperatorSignum.class, LibPieceNames.OPERATOR_EXTRACT_SIGN, LibPieceGroups.TRIGNOMETRY);
         register(PieceOperatorToDegrees.class, LibPieceNames.OPERATOR_TO_DEGREES, LibPieceGroups.TRIGNOMETRY);
         register(PieceOperatorToRadians.class, LibPieceNames.OPERATOR_TO_RADIANS, LibPieceGroups.TRIGNOMETRY);
         register(PieceOperatorRoot.class, LibPieceNames.OPERATOR_ROOT, LibPieceGroups.TRIGNOMETRY);
@@ -89,10 +91,11 @@ public class SpellPieces {// TODO: 12/15/18 look at
         register(PieceOperatorGetSignText.class, LibPieceNames.OPERATOR_GET_SIGN_TEXT, LibPieceGroups.MEMORY_MANAGEMENT);
         register(PieceTrickMoveBlockSequence.class, LibPieceNames.TRICK_MOVE_BLOCK_SEQUENCE, LibPieceGroups.BLOCK_MOVEMENT);
         register(PieceOperatorGetComment.class, LibPieceNames.OPERATOR_GET_COMMENT, LibPieceGroups.MEMORY_MANAGEMENT);
+        register(PieceOperatorParseNumber.class, LibPieceNames.OPERATOR_PARSE_NUMBER, LibPieceGroups.MEMORY_MANAGEMENT);
         register(PieceSelectorGlowing.class, LibPieceNames.SELECTOR_GLOWING, LibPieceGroups.ENTITIES_INTRO);
         register(PieceSelectorListFilter.class, LibPieceNames.SELECTOR_LIST_FILTER, LibPieceGroups.ENTITIES_INTRO);
         register(PieceOperatorVisibleToEntity.class, LibPieceNames.OPERATOR_IS_VISIBLE, LibPieceGroups.DETECTION_DYNAMICS);
-        register(PieceSelectorAffectedByPotions.class, LibPieceNames.SELECTOR_AFFECTED_BY_POTIONS, LibPieceGroups.ENTITIES_INTRO);
+        register(PieceOperatorAffectedByPotions.class, LibPieceNames.SELECTOR_AFFECTED_BY_POTIONS, LibPieceGroups.ENTITIES_INTRO);
         register(PieceSelectorVisibleEntities.class, LibPieceNames.SELECTOR_VISIBLE_ENTITIES, LibPieceGroups.ENTITIES_INTRO);
         register(PieceOperatorVectorAbsolute.class, LibPieceNames.OPERATOR_VECTOR_ABSOLUTE, LibPieceGroups.VECTORS_INTRO);
         register(OperatorDistanceFromGround.class, LibPieceNames.OPERATOR_GET_DISTANCE_FROM_GROUND, LibPieceGroups.SECONDARY_OPERATORS);
@@ -116,7 +119,7 @@ public class SpellPieces {// TODO: 12/15/18 look at
         register(PieceMacroCasterRaycast.class, LibPieceNames.MACRO_CASTER_RAYCAST, LibPieceNames.MACROS, true);
         register(PieceConstantTau.class, LibPieceNames.CONSTANT_TAU, LibPieceGroups.TRIGNOMETRY);
         register(TrickSound.class, LibPieceNames.TRICK_SOUND, LibPieceNames.VISUAL_AUDITIVE, true);
-        register(PieceSelectorSucessionCounter.class, LibPieceNames.SELECTOR_SUCESSION_COUNTER, LibPieceNames.ADVANCED_LOOPCAST_CONTROL, true);
+        register(PieceSelectorSuccessCounter.class, LibPieceNames.SELECTOR_SUCESSION_COUNTER, LibPieceNames.ADVANCED_LOOPCAST_CONTROL, true);
         register(PieceTrickSupressNextTrick.class, LibPieceNames.TRICK_SUPRESS_NEXT_TRICK, LibPieceNames.ADVANCED_LOOPCAST_CONTROL);
         register(PieceTrickDetonate.class, LibPieceNames.TRICK_DETONATE, LibPieceNames.ADVANCED_LOOPCAST_CONTROL);
         register(PieceTrickSlotMatch.class, LibPieceNames.TRICK_SLOT_MATCH, LibPieceNames.ALTERNATE_CONJURATION);
@@ -126,11 +129,7 @@ public class SpellPieces {// TODO: 12/15/18 look at
         register(PieceTrickNumBroadcast.class, LibPieceNames.TRICK_NUM_BROADCAST, LibPieceNames.INTER_CAD, true);
         register(PieceSelectorTransmission.class, LibPieceNames.SELECTOR_TRANSMISSION, LibPieceNames.INTER_CAD);
         register(PieceTrickFreezeBlock.class, LibPieceNames.TRICK_FREEZE_BLOCK, LibPieceNames.ALTERNATE_CONJURATION);
-        if (Loader.isModLoaded("botania")) {
-            BotaniaCompatPieces.init();
-        }
-
-
+        if (Loader.isModLoaded("botania")) BotaniaCompatPieces.init();
     }
 
     public static void register(Class<? extends SpellPiece> pieceClass, String name, String group) {

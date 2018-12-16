@@ -10,9 +10,9 @@ import vazkii.psi.api.spell.SpellRuntimeException;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceOperator;
 
-public class PieceOperatorGetBlockHardness extends PieceOperator {// TODO: 12/15/18 look at
+public class PieceOperatorGetBlockHardness extends PieceOperator {
 
-    SpellParam target;
+    private SpellParam target;
 
     public PieceOperatorGetBlockHardness(Spell spell) {
         super(spell);

@@ -9,14 +9,13 @@ import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceOperator;
-import vazkii.psi.api.spell.wrapper.EntityListWrapper;
 
 import java.util.List;
 
-public class PieceOperatorEntityRaycast extends PieceOperator {// TODO: 12/15/18 look at
+public class PieceOperatorEntityRaycast extends PieceOperator {
 
-    SpellParam target;
-    SpellParam vector;
+    private SpellParam target;
+    private SpellParam vector;
 
     public PieceOperatorEntityRaycast(Spell spell) {
         super(spell);
@@ -40,16 +39,15 @@ public class PieceOperatorEntityRaycast extends PieceOperator {// TODO: 12/15/18
         if (context.caster.world.isRemote) return null;
         if (ent == null || ent.isZero()) throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
         if (vec == null || vec.isZero()) throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        if (getFirstRaycastedEntity(context, vec, ent) == null) {
+        if (getFirstRaycastEntity(context, vec, ent) == null) {
             throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
-        } else return getFirstRaycastedEntity(context, vec, ent);
+        } else return getFirstRaycastEntity(context, vec, ent);
 
     }
 
 
-    public Entity getFirstRaycastedEntity(SpellContext context, Vector3 vector, Vector3 target) throws SpellRuntimeException {
-        final double maxDist = 32;
-        double dist = maxDist;
+    public Entity getFirstRaycastEntity(SpellContext context, Vector3 vector, Vector3 target) {
+        double dist = 32;
         World world = context.caster.world;
         Vec3d positionVector = new Vec3d(target.x, target.y, target.z);
         Vec3d raycastVec = new Vec3d(vector.x * 32, vector.y * 32, vector.z * 32);
@@ -60,27 +58,21 @@ public class PieceOperatorEntityRaycast extends PieceOperator {// TODO: 12/15/18
         List<Entity> allEntities = world.getEntitiesWithinAABBExcludingEntity(context.caster, raycastAABB);
         double d0 = -1.0D;
 
-        for (int j2 = 0; j2 < allEntities.size(); ++j2) {
-            Entity ent1 = allEntities.get(j2);
-
-
+        for (Entity ent1 : allEntities) {
             double d1 = ent1.getDistanceSq(positionVector.x, positionVector.y, positionVector.z);
 
-            if ((dist < 0.0D || d1 < dist * dist) && (d0 == -1.0D || d1 < d0)) {
+            if (d1 < dist * dist && (d0 == -1.0D || d1 < d0)) {
                 d0 = d1;
                 found = ent1;
             }
         }
 
         return found;
-
-
     }
-
 
     @Override
     public Class<?> getEvaluationType() {
-        return EntityListWrapper.class;
+        return Entity.class;
     }
 }
 

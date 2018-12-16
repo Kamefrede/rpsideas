@@ -15,6 +15,8 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
@@ -39,6 +41,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
+import vazkii.arl.interf.IBlockColorProvider;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -46,7 +49,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class BlockCADCase extends BlockRPS {
+public class BlockCADCase extends BlockRPS implements IBlockColorProvider {
     public static final PropertyBool OPEN = PropertyBool.create("open");
     public static final PropertyDirection FACING = PropertyDirection.create("facing", Arrays.asList(EnumFacing.HORIZONTALS));
     public static final PropertyEnum<EnumDyeColor> COLOR = PropertyEnum.create("color", EnumDyeColor.class);
@@ -316,5 +319,25 @@ public class BlockCADCase extends BlockRPS {
             }
         }
 
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public IBlockColor getBlockColor() {
+        return (state, world, pos, layer) -> {
+            if (layer == 1 && world != null && pos != null && state.getBlock() instanceof BlockCADCase) {
+                return world.getBlockState(pos).getActualState(world, pos).getValue(BlockCADCase.COLOR).getColorValue();
+            } else return -1;
+        };
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public IItemColor getItemColor() {
+        return (stack, tintIndex) -> {
+            if (tintIndex == 1) {
+                return EnumDyeColor.byMetadata(stack.getMetadata()).getColorValue();
+            } else return -1;
+        };
     }
 }

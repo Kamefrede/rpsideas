@@ -14,10 +14,11 @@ import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceOperator;
 
 
-public class PieceOperatorGetBlockSolidity extends PieceOperator {// TODO: 12/15/18 look at
+public class PieceOperatorGetBlockSolidity extends PieceOperator {
 
-    SpellParam axisParam;
-    SpellParam target;
+    private SpellParam axisParam;
+    private SpellParam target;
+
     public PieceOperatorGetBlockSolidity(Spell spell) {
         super(spell);
     }
@@ -32,10 +33,10 @@ public class PieceOperatorGetBlockSolidity extends PieceOperator {// TODO: 12/15
     public Object execute(SpellContext context) throws SpellRuntimeException {
         Vector3 vec = this.<Vector3>getParamValue(context, target);
         Vector3 axis = this.<Vector3>getParamValue(context, axisParam);
-        if (vec == null || vec.isZero()) throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
-        if (!axis.isAxial() || axis.isZero() || axis == null) {
+        if (vec == null || vec.isZero())
+            throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
+        if (axis == null || !axis.isAxial() || axis.isZero())
             throw new SpellRuntimeException(SpellRuntimeExceptions.NON_AXIAL_VECTOR);
-        }
 
         BlockPos pos = new BlockPos(vec.x, vec.y, vec.z);
         IBlockState state = context.caster.world.getBlockState(pos);

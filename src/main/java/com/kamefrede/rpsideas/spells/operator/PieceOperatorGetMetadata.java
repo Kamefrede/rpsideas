@@ -3,7 +3,7 @@ package com.kamefrede.rpsideas.spells.operator;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.piece.PieceOperator;
 
-public class PieceOperatorGetMetadata extends PieceOperator {// TODO: 12/15/18 look at
+public class PieceOperatorGetMetadata extends PieceOperator {
 
     public PieceOperatorGetMetadata(Spell spell) {
         super(spell);
@@ -11,9 +11,7 @@ public class PieceOperatorGetMetadata extends PieceOperator {// TODO: 12/15/18 l
 
     @Override
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
-        super.addToMetadata(meta);
-
-        meta.addStat(EnumSpellStat.COMPLEXITY, 1);
+        meta.addStat(EnumSpellStat.COMPLEXITY, 2);
 
     }
 
@@ -22,10 +20,10 @@ public class PieceOperatorGetMetadata extends PieceOperator {// TODO: 12/15/18 l
         if (!context.caster.world.isRemote) {
             int slot = context.getTargetSlot();
             if (!context.caster.inventory.getStackInSlot(slot).isEmpty()) {
-                return context.caster.inventory.getStackInSlot(slot).getMetadata() * 1D;
+                return context.caster.inventory.getStackInSlot(slot).getMetadata();
             }
         }
-        return 0D;
+        return 0.0;
     }
 
     @Override

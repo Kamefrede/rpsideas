@@ -8,9 +8,9 @@ import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.piece.PieceSelector;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 
-public class PieceSelectorTransmission extends PieceSelector {// TODO: 12/15/18 look at
+public class PieceSelectorTransmission extends PieceSelector {
 
-    SpellParam channel;
+    private SpellParam channel;
 
     public PieceSelectorTransmission(Spell spell) {
         super(spell);
@@ -35,10 +35,10 @@ public class PieceSelectorTransmission extends PieceSelector {// TODO: 12/15/18 
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster.world.isRemote) return null;
         Double channelVal = this.<Double>getParamValue(context, channel);
-        if (channelVal == null) channelVal = 0D;
-        Integer chanInt = channelVal.intValue();
+        if (channelVal == null) channelVal = 0.0;
+        int channel = channelVal.intValue();
 
-        String key = "rpsideas:" + chanInt.toString();
+        String key = "rpsideas:" + channel;
 
         PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(context.caster);
 

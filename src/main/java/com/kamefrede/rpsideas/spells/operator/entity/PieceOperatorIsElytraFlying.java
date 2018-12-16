@@ -5,7 +5,7 @@ import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellRuntimeException;
 import vazkii.psi.api.spell.piece.PieceOperator;
 
-public class PieceOperatorIsElytraFlying extends PieceOperator {// TODO: 12/15/18 look at
+public class PieceOperatorIsElytraFlying extends PieceOperator {
 
     public PieceOperatorIsElytraFlying(Spell spell) {
         super(spell);

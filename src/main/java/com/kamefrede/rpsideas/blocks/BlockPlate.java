@@ -67,7 +67,7 @@ public class BlockPlate extends BlockRPS implements IBlockColorProvider {
 
     @Override
     public IBlockColor getBlockColor() {
-        return (IBlockState iBlockState, IBlockAccess access, BlockPos pos, int i) -> i == 1 ? MapColor.getBlockColor(iBlockState.getValue(COLOR)).colorValue : 0xFFFFFF;
+        return (IBlockState iBlockState, IBlockAccess access, BlockPos pos, int i) -> i == 1 ? MapColor.getBlockColor(iBlockState.getValue(COLOR)).colorValue : -1;
     }
 
     @Override

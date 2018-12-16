@@ -9,10 +9,10 @@ import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.piece.PieceSelector;
 import vazkii.psi.api.spell.wrapper.EntityListWrapper;
 
-public class PieceSelectorListFilter extends PieceSelector {// TODO: 12/15/18 look at
+public class PieceSelectorListFilter extends PieceSelector {
 
-    SpellParam list;
-    SpellParam num;
+    private SpellParam list;
+    private SpellParam num;
 
     public PieceSelectorListFilter(Spell spell) {
         super(spell);
@@ -34,7 +34,7 @@ public class PieceSelectorListFilter extends PieceSelector {// TODO: 12/15/18 lo
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster.world.isRemote) return null;
         Double numVal = this.<Double>getParamValue(context, num);
-        EntityListWrapper listVal = this.<EntityListWrapper>getParamValue(context, list);
+        EntityListWrapper listVal = this.getParamValue(context, list);
         int val = numVal.intValue();
         if (listVal == null) throw new SpellRuntimeException(SpellRuntimeExceptions.NULL_LIST);
         if (listVal.unwrap().isEmpty()) {

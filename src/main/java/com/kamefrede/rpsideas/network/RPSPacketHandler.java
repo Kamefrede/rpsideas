@@ -1,7 +1,5 @@
 package com.kamefrede.rpsideas.network;
 
-//taken from psionic upgrades like most of their features merged into psideas
-
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.gui.GuiHandler;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -14,13 +12,12 @@ import net.minecraftforge.fml.relauncher.Side;
 
 public class RPSPacketHandler {// TODO: 12/15/18 look at
 
+    private static int id;
 
-    public static SimpleNetworkWrapper NET;
+    public static SimpleNetworkWrapper NET = NetworkRegistry.INSTANCE.newSimpleChannel(RPSIdeas.MODID);
 
 
     public static void initPackets() {
-        NET = NetworkRegistry.INSTANCE.newSimpleChannel(RPSIdeas.MODID);
-        int id = 0;
         RPSPacketHandler.NET.registerMessage(MessageSpamlessChat.Handler.class, MessageSpamlessChat.class, id++, Side.CLIENT);
         RPSPacketHandler.NET.registerMessage(MessageParticleTrail.Handler.class, MessageParticleTrail.class, id++, Side.CLIENT);
         RPSPacketHandler.NET.registerMessage(MessageFlashSync.Handler.class, MessageFlashSync.class, id++, Side.SERVER);

@@ -9,17 +9,15 @@ import net.minecraft.entity.passive.EntityPig;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.common.spell.selector.entity.PieceSelectorNearby;
 
-public class PieceSelectorNearbyVehicles extends PieceSelectorNearby {// TODO: 12/15/18 look at
+public class PieceSelectorNearbyVehicles extends PieceSelectorNearby {
 
     public PieceSelectorNearbyVehicles(Spell spell) {
         super(spell);
     }
 
     @Override
+    @SuppressWarnings("Guava")
     public Predicate<Entity> getTargetPredicate() {
-        return (Entity e) -> {
-            assert e != null;
-            return e instanceof EntityMinecart || e instanceof EntityBoat || (e instanceof AbstractHorse && ((AbstractHorse) e).isHorseSaddled()) || (e instanceof EntityPig && ((EntityPig) e).getSaddled());
-        };
+        return (Entity e) -> e instanceof EntityMinecart || e instanceof EntityBoat || (e instanceof AbstractHorse && ((AbstractHorse) e).isHorseSaddled()) || (e instanceof EntityPig && ((EntityPig) e).getSaddled());
     }
 }

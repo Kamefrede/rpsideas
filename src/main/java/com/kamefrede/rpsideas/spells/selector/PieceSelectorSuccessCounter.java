@@ -7,9 +7,9 @@ import vazkii.psi.api.spell.SpellRuntimeException;
 import vazkii.psi.api.spell.piece.PieceSelector;
 import vazkii.psi.common.item.armor.ItemPsimetalArmor;
 
-public class PieceSelectorSucessionCounter extends PieceSelector {// TODO: 12/15/18 look at
+public class PieceSelectorSuccessCounter extends PieceSelector {
 
-    public PieceSelectorSucessionCounter(Spell spell) {
+    public PieceSelectorSuccessCounter(Spell spell) {
         super(spell);
     }
 
@@ -17,10 +17,9 @@ public class PieceSelectorSucessionCounter extends PieceSelector {// TODO: 12/15
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (!(context.tool.getItem() instanceof ItemPsimetalArmor))
             throw new SpellRuntimeException(SpellRuntimeExceptions.ARMOR);
-        if (context.tool.getTagCompound() != null) {
-            return context.tool.getTagCompound().getInteger("timesCast") * 1.0D;
-        }
-        return 0.0D;
+        if (context.tool.getTagCompound() != null)
+            return context.tool.getTagCompound().getInteger("timesCast") * 1.0;
+        return 0.0;
     }
 
     @Override

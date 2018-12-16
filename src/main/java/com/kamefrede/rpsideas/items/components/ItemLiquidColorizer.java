@@ -78,7 +78,11 @@ public class ItemLiquidColorizer extends ItemComponent implements ICADColorizer,
     @SideOnly(Side.CLIENT)
     @Override
     public IItemColor getItemColor() {
-        return (stack, tintindex) -> tintindex == 1 ? getColor(stack) : -1;
+        return (stack, layer) -> {
+            if (layer == 1) {
+                return getColor(stack);
+            } else return -1;
+        };
     }
 
     @SideOnly(Side.CLIENT)

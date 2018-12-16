@@ -2,6 +2,7 @@ package com.kamefrede.rpsideas.spells.trick.misc;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
@@ -14,9 +15,9 @@ import vazkii.psi.api.spell.SpellRuntimeException;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceTrick;
 
-public class PieceTrickSlotMatch extends PieceTrick {// TODO: 12/15/18 look at
+public class PieceTrickSlotMatch extends PieceTrick {
 
-    SpellParam position;
+    private SpellParam position;
 
     public PieceTrickSlotMatch(Spell spell) {
         super(spell);
@@ -43,7 +44,7 @@ public class PieceTrickSlotMatch extends PieceTrick {// TODO: 12/15/18 look at
         NonNullList<ItemStack> allInvs = context.caster.inventory.mainInventory;
         allInvs.addAll(context.caster.inventory.offHandInventory);
         for (ItemStack stack : allInvs) {
-            if (stack == block.getItem(world, pos, state)) {
+            if (Item.getItemFromBlock(block) == stack.getItem() && block.damageDropped(state) == stack.getItemDamage()) {
                 context.targetSlot = context.caster.inventory.getSlotFor(stack);
                 return true;
             }

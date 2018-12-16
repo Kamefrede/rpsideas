@@ -12,10 +12,10 @@ import vazkii.psi.common.entity.EntitySpellCharge;
 import java.util.List;
 import java.util.Objects;
 
-public class PieceSelectorNumberCharges extends PieceSelector {// TODO: 12/15/18 look at
+public class PieceSelectorNumberCharges extends PieceSelector {
 
-    SpellParam position;
-    SpellParam radius;
+    private SpellParam position;
+    private SpellParam radius;
 
     public PieceSelectorNumberCharges(Spell spell) {
         super(spell);
@@ -38,7 +38,7 @@ public class PieceSelectorNumberCharges extends PieceSelector {// TODO: 12/15/18
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 positionVal = this.<Vector3>getParamValue(context, position);
+        Vector3 positionVal = this.getParamValue(context, position);
         Double radiusVal = this.<Double>getParamValue(context, radius);
 
         if (!context.isInRadius(positionVal))
@@ -46,19 +46,12 @@ public class PieceSelectorNumberCharges extends PieceSelector {// TODO: 12/15/18
 
         AxisAlignedBB axis = new AxisAlignedBB(positionVal.x - radiusVal, positionVal.y - radiusVal, positionVal.z - radiusVal, positionVal.x + radiusVal, positionVal.y + radiusVal, positionVal.z + radiusVal);
 
+        List<Entity> list = context.caster.getEntityWorld().getEntitiesWithinAABB(Entity.class, axis,
+                (Entity e) -> e != null && e != context.caster && e != context.focalPoint && context.isInRadius(e) && e instanceof EntitySpellCharge && (Objects.requireNonNull(((EntitySpellCharge) e).getThrower()).getName().equals(context.caster.getName())));
 
-        List<Entity> list = context.caster.getEntityWorld().getEntitiesWithinAABB(Entity.class, axis, (Entity e) -> {
-            return e != null && e != context.caster && e != context.focalPoint && context.isInRadius(e) && e instanceof EntitySpellCharge && (Objects.requireNonNull(((EntitySpellCharge) e).getThrower()).getName().equals(context.caster.getName()));
-        });
-
-
-        if (list != null) {
-            return list.size() * 1D;
-        }
-        return 0.D;
+        return list.size() * 1.0;
 
     }
-
 
     @Override
     public Class<?> getEvaluationType() {

@@ -5,11 +5,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.piece.PieceTrick;
+import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.entity.EntitySpellCircle;
 
-public class PieceTrickBreakLoop extends PieceTrick {// TODO: 12/15/18 look at
+public class PieceTrickBreakLoop extends PieceTrick {
 
-    SpellParam valueParam;
+    private SpellParam valueParam;
 
     public PieceTrickBreakLoop(Spell spell) {
         super(spell);
@@ -32,19 +33,17 @@ public class PieceTrickBreakLoop extends PieceTrick {// TODO: 12/15/18 look at
         if (Math.abs(value) < 1.0) {
             if (context.focalPoint != context.caster) {
                 if (context.focalPoint instanceof EntitySpellCircle) {
-                    //Cause the spell circle to finish early
                     EntitySpellCircle circle = (EntitySpellCircle) context.focalPoint;
                     NBTTagCompound circleNBT = circle.writeToNBT(new NBTTagCompound());
                     circleNBT.setInteger("timesCast", 20);
                     circleNBT.setInteger("timesAlive", 100);
                     circle.readFromNBT(circleNBT);
-                } else {
-                    //I dunno what's casting this spell, just get rid of it
+                } else
                     context.focalPoint.setDead();
-                }
             } else {
-                //Casting from loopcast or something
-                SpellHelpers.getPlayerData(context.caster).stopLoopcast();
+                PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(context.caster);
+                if (data != null)
+                    data.stopLoopcast();
             }
 
             context.stopped = true;

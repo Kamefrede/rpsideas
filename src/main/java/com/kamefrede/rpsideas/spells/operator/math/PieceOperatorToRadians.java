@@ -8,9 +8,9 @@ import vazkii.psi.api.spell.SpellRuntimeException;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.piece.PieceOperator;
 
-public class PieceOperatorToRadians extends PieceOperator {// TODO: 12/15/18 look at
+public class PieceOperatorToRadians extends PieceOperator {
 
-    SpellParam num;
+    private SpellParam num;
 
     public PieceOperatorToRadians(Spell spell) {
         super(spell);
@@ -23,8 +23,7 @@ public class PieceOperatorToRadians extends PieceOperator {// TODO: 12/15/18 loo
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Double n = this.<Double>getParamValue(context, num);
-
+        double n = this.<Double>getParamValue(context, num);
         return Math.toRadians(n);
     }
 

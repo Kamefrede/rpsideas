@@ -4,6 +4,7 @@ import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.base.RPSItem;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.kamefrede.rpsideas.util.libs.LibItemNames;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -12,6 +13,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import vazkii.arl.interf.IItemColorProvider;
 import vazkii.psi.api.exosuit.IExosuitSensor;
 import vazkii.psi.api.exosuit.PsiArmorEvent;
 import vazkii.psi.client.core.handler.ClientTickHandler;
@@ -22,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
-public class ItemBioticSensor extends RPSItem implements IExosuitSensor {
+public class ItemBioticSensor extends RPSItem implements IExosuitSensor, IItemColorProvider {
     public static final String EVENT_BIOTIC = RPSIdeas.MODID + ".event.nearby_entities";
     private static final double RANGE = 10d;
     private static final double RANGE_SQ = RANGE * RANGE;
@@ -68,8 +72,19 @@ public class ItemBioticSensor extends RPSItem implements IExosuitSensor {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public int getColor(ItemStack stack) {
         byte add = (byte) Math.max(Math.sin(ClientTickHandler.ticksInGame * 0.1d) * 96, 0);
         return (add << 16) | (add << 8) | add;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public IItemColor getItemColor() {
+        return (stack, tintIndex) -> {
+            if (tintIndex == 1)
+                return getColor(stack);
+            else return -1;
+        };
     }
 }

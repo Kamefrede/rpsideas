@@ -6,16 +6,15 @@ import net.minecraft.entity.item.EntityFallingBlock;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.common.spell.selector.entity.PieceSelectorNearby;
 
-public class PieceSelectorFallingBlocks extends PieceSelectorNearby {// TODO: 12/15/18 look at
+public class PieceSelectorFallingBlocks extends PieceSelectorNearby {
 
     public PieceSelectorFallingBlocks(Spell spell) {
         super(spell);
     }
 
     @Override
+    @SuppressWarnings("Guava")
     public Predicate<Entity> getTargetPredicate() {
-        return (Entity e) -> {
-            return e instanceof EntityFallingBlock;
-        };
+        return (Entity e) -> e instanceof EntityFallingBlock;
     }
 }

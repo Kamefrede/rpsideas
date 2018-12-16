@@ -1,7 +1,7 @@
 package com.kamefrede.rpsideas.compat.avaritia;
 
 import com.google.gson.JsonObject;
-import com.kamefrede.rpsideas.proxy.ConfigHandler;
+import com.kamefrede.rpsideas.util.ConfigHandler;
 import net.minecraft.util.JsonUtils;
 import net.minecraftforge.common.crafting.IConditionFactory;
 import net.minecraftforge.common.crafting.JsonContext;

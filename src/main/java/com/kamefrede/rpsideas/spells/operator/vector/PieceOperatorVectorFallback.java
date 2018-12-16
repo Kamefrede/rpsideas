@@ -6,10 +6,10 @@ import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceOperator;
 
-public class PieceOperatorVectorFallback extends PieceOperator {// TODO: 12/15/18 look at
+public class PieceOperatorVectorFallback extends PieceOperator {
 
-    SpellParam vector;
-    SpellParam fallback;
+    private SpellParam vector;
+    private SpellParam fallback;
 
     public PieceOperatorVectorFallback(Spell spell) {
         super(spell);

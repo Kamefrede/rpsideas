@@ -2,6 +2,7 @@ package com.kamefrede.rpsideas.spells.operator.list;
 
 import com.kamefrede.rpsideas.spells.base.SpellParams;
 import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
+import net.minecraft.entity.Entity;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellParam;
@@ -10,13 +11,14 @@ import vazkii.psi.api.spell.param.ParamEntityListWrapper;
 import vazkii.psi.api.spell.piece.PieceOperator;
 import vazkii.psi.api.spell.wrapper.EntityListWrapper;
 
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
 
-public class PieceOperatorListUnion extends PieceOperator {// TODO: 12/15/18 look at
+public class PieceOperatorListUnion extends PieceOperator {
 
-    SpellParam list1;
-    SpellParam list2;
+    private SpellParam list1;
+    private SpellParam list2;
 
     public PieceOperatorListUnion(Spell spell) {
         super(spell);
@@ -33,11 +35,11 @@ public class PieceOperatorListUnion extends PieceOperator {// TODO: 12/15/18 loo
         EntityListWrapper l1 = this.<EntityListWrapper>getParamValue(context, list1);
         EntityListWrapper l2 = this.<EntityListWrapper>getParamValue(context, list2);
         if (l1 == null || l2 == null) throw new SpellRuntimeException(SpellRuntimeExceptions.NULL_LIST);
-        EntityListWrapper l3 = new EntityListWrapper(Stream.concat(l1.unwrap().stream(), l2.unwrap().stream()).collect(Collectors.toList()));
 
-        return l3;
-
-
+        List<Entity> entities = new ArrayList<>(l1.unwrap());
+        entities.addAll(l2.unwrap());
+        entities = new ArrayList<>(new LinkedHashSet<>(entities));
+        return new EntityListWrapper(entities);
     }
 
     @Override

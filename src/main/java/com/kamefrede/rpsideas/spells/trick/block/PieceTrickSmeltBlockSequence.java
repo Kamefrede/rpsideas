@@ -13,11 +13,11 @@ import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceTrick;
 
-public class PieceTrickSmeltBlockSequence extends PieceTrick {// TODO: 12/15/18 look at
+public class PieceTrickSmeltBlockSequence extends PieceTrick {
 
-    SpellParam position;
-    SpellParam direction;
-    SpellParam maxBlocks;
+    private SpellParam position;
+    private SpellParam direction;
+    private SpellParam maxBlocks;
 
     public PieceTrickSmeltBlockSequence(Spell spell) {
         super(spell);

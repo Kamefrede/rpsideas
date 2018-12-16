@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.spells.selector;
+package com.kamefrede.rpsideas.spells.operator.entity;
 
 import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
 import net.minecraft.entity.Entity;
@@ -8,13 +8,13 @@ import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellParam;
 import vazkii.psi.api.spell.SpellRuntimeException;
 import vazkii.psi.api.spell.param.ParamEntity;
-import vazkii.psi.api.spell.piece.PieceSelector;
+import vazkii.psi.api.spell.piece.PieceOperator;
 
-public class PieceSelectorAffectedByPotions extends PieceSelector {// TODO: 12/15/18 look at
+public class PieceOperatorAffectedByPotions extends PieceOperator {
 
-    SpellParam entity;
+    private SpellParam entity;
 
-    public PieceSelectorAffectedByPotions(Spell spell) {
+    public PieceOperatorAffectedByPotions(Spell spell) {
         super(spell);
     }
 
@@ -27,18 +27,12 @@ public class PieceSelectorAffectedByPotions extends PieceSelector {// TODO: 12/1
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster.world.isRemote) return null;
         Entity entVal = this.<Entity>getParamValue(context, entity);
-        if (entVal == null) {
+        if (entVal == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
-        }
-        if (entVal instanceof EntityLivingBase) {
-            if (((EntityLivingBase) entVal).getActivePotionEffects().size() > 0) {
-                return 1;
-            } else {
-                return 0;
-            }
-        } else {
+        else if (entVal instanceof EntityLivingBase)
+            return ((EntityLivingBase) entVal).getActivePotionEffects().size() > 0 ? 1.0 : 0.0;
+        else
             throw new SpellRuntimeException(SpellRuntimeExceptions.ENTITY_NOT_LIVING);
-        }
 
     }
 

@@ -1,22 +1,11 @@
 package com.kamefrede.rpsideas.items;
 
-import com.kamefrede.rpsideas.blocks.BlockCADCase;
-import com.kamefrede.rpsideas.blocks.RPSBlocks;
 import com.kamefrede.rpsideas.items.base.ItemModRod;
 import com.kamefrede.rpsideas.items.base.RPSItem;
 import com.kamefrede.rpsideas.items.components.*;
 import com.kamefrede.rpsideas.items.flow.*;
-import com.kamefrede.rpsideas.util.helpers.ClientHelpers;
 import com.kamefrede.rpsideas.util.libs.LibItemNames;
-import net.minecraft.client.renderer.color.BlockColors;
-import net.minecraft.client.renderer.color.ItemColors;
-import net.minecraft.item.EnumDyeColor;
-import net.minecraft.item.Item;
-import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.arl.item.ItemMod;
 import vazkii.arl.item.ItemModArmor;
 import vazkii.arl.item.ItemModSword;
@@ -68,62 +57,4 @@ public class RPSItems {
     public static final ItemMod gaussBullet = new RPSItem(LibItemNames.ITEM_GAUSS_BULLET);
     public static final ItemMod cadMagazine = new ItemCADMagazine(LibItemNames.SPELL_MAGAZINE);
     public static final ItemMod braceletCad = new ItemBraceletCAD();
-
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    public static void blockColors(ColorHandlerEvent.Block e) {
-        BlockColors bc = e.getBlockColors();
-        bc.registerBlockColorHandler((state, world, pos, layer) -> {
-            if (layer == 1 && world != null && pos != null && state.getBlock() instanceof BlockCADCase) {
-                return world.getBlockState(pos).getActualState(world, pos).getValue(BlockCADCase.COLOR).getColorValue();
-            } else return 0xFFFFFF;
-        }, RPSBlocks.cadCase);
-    }
-
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    public static void itemColors(ColorHandlerEvent.Item e) {
-        ItemColors ic = e.getItemColors();
-        ic.registerItemColorHandler((stack, layer) -> {
-            if (layer == 1) {
-                return ((ItemBioticSensor) bioticSensor).getColor(stack);
-            } else return 0xFFFFFF;
-        }, bioticSensor);
-
-        ic.registerItemColorHandler((stack, layer) -> {
-            if (layer == 1) {
-                return EnumDyeColor.byMetadata(stack.getMetadata()).getColorValue();
-            } else return 0xFFFFFF;
-        }, Item.getItemFromBlock(RPSBlocks.cadCase));
-
-        ic.registerItemColorHandler((stack, layer) -> {
-            if (layer == 1) {
-                return ((ItemLiquidColorizer) liquidColorizer).getColor(stack);
-            } else return 0xFFFFFF;
-        }, liquidColorizer);
-
-        ic.registerItemColorHandler((stack, layer) -> {
-                    if (layer == 1) {
-                        return ClientHelpers.getFlowColor(stack);
-                    } else return 0xFFFFFF;
-                }, inlineCaster,
-                ivorySword,
-                ivoryPickaxe,
-                ivoryAxe,
-                ivoryShovel,
-                ebonySword,
-                ebonyPickaxe,
-                ebonyAxe,
-                ebonyShovel
-        );
-        ic.registerItemColorHandler((stack, layer) -> ((ItemFlowExosuit) stack.getItem()).getColor(stack),
-                ivoryHelmet,
-                ebonyHelmet,
-                ivoryChest,
-                ebonyChest,
-                ivoryLegs,
-                ebonyLegs,
-                ivoryBoots,
-                ebonyBoots);
-    }
 }

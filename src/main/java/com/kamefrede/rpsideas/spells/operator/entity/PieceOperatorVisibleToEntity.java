@@ -11,11 +11,10 @@ import vazkii.psi.api.spell.SpellRuntimeException;
 import vazkii.psi.api.spell.param.ParamEntity;
 import vazkii.psi.api.spell.piece.PieceOperator;
 
-public class PieceOperatorVisibleToEntity extends PieceOperator {// TODO: 12/15/18 look at
+public class PieceOperatorVisibleToEntity extends PieceOperator {
 
-    SpellParam entity1;
-    SpellParam entity2;
-
+    private SpellParam viewer;
+    private SpellParam viewed;
 
     public PieceOperatorVisibleToEntity(Spell spell) {
         super(spell);
@@ -24,27 +23,22 @@ public class PieceOperatorVisibleToEntity extends PieceOperator {// TODO: 12/15/
     @Override
     public void initParams() {
         super.initParams();
-        addParam(entity1 = new ParamEntity(SpellParams.GENERIC_NAME_ENTITY1, SpellParam.BLUE, false, false));
-        addParam(entity2 = new ParamEntity(SpellParams.GENERIC_NAME_ENTITY2, SpellParam.RED, false, false));
+        addParam(viewer = new ParamEntity(SpellParams.GENERIC_NAME_VIEWER, SpellParam.BLUE, false, false));
+        addParam(viewed = new ParamEntity(SpellParams.GENERIC_NAME_VIEWED, SpellParam.RED, false, false));
     }
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster.world.isRemote) return null;
-        Entity entval1 = this.<Entity>getParamValue(context, entity1);
-        Entity entval2 = this.<Entity>getParamValue(context, entity2);
-        if (entval1 == null || entval2 == null) throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
-        if (entval1 instanceof EntityLivingBase) {
-            if (((EntityLivingBase) entval1).canEntityBeSeen(entval2)) {
-                return 1;
-            } else {
-                return 0;
-            }
+        Entity viewerEntity = this.getParamValue(context, viewer);
+        Entity viewedEntity = this.getParamValue(context, viewed);
+        if (viewerEntity == null || viewedEntity == null)
+            throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
 
-        } else {
-            throw new SpellRuntimeException(SpellRuntimeExceptions.ENTITY_NOT_LIVING);
-        }
+        if (viewerEntity instanceof EntityLivingBase)
+            return ((EntityLivingBase) viewerEntity).canEntityBeSeen(viewedEntity) ? 1.0 : 0.0;
 
+        throw new SpellRuntimeException(SpellRuntimeExceptions.ENTITY_NOT_LIVING);
     }
 
     @Override

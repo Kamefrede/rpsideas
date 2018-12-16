@@ -18,17 +18,13 @@ import vazkii.psi.common.block.base.ModBlocks;
 
 import static vazkii.psi.common.spell.trick.block.PieceTrickPlaceBlock.removeFromInventory;
 
-public class PieceTrickDirectionPlaceBlock extends PieceTrick {// TODO: 12/15/18 look at
+public class PieceTrickDirectionPlaceBlock extends PieceTrick {
 
-    SpellParam position;
-    SpellParam direction;
+    private SpellParam position;
+    private SpellParam direction;
 
     public PieceTrickDirectionPlaceBlock(Spell spell) {
         super(spell);
-    }
-
-    public static void placeBlock(EntityPlayer player, World world, BlockPos pos, int slot, boolean particles) {
-        placeBlock(player, world, pos, slot, false);
     }
 
     public static void placeBlock(EntityPlayer player, World world, BlockPos pos, int slot, boolean particles, boolean conjure, EnumFacing facing) {
@@ -39,21 +35,20 @@ public class PieceTrickDirectionPlaceBlock extends PieceTrick {// TODO: 12/15/18
         Block block = state.getBlock();
 
 
-        if (block == null || block.isAir(state, world, pos) || block.isReplaceable(world, pos)) {
+        if (block.isReplaceable(world, pos)) {
             if (conjure) {
-                if (!world.isRemote) {
+                if (!world.isRemote)
                     world.setBlockState(pos, ModBlocks.conjured.getDefaultState());
-                }
             } else {
                 ItemStack stack = player.inventory.getStackInSlot(slot);
                 if (!stack.isEmpty() && stack.getItem() instanceof ItemBlock) {
                     ItemStack rem = removeFromInventory(player, block, stack);
-                    ItemBlock iblock = (ItemBlock) rem.getItem();
+                    ItemBlock itemBlock = (ItemBlock) rem.getItem();
 
                     Block blockToPlace = Block.getBlockFromItem(rem.getItem());
                     if (!world.isRemote) {
                         IBlockState newState = blockToPlace.getStateForPlacement(world, pos, facing, 0, 0, 0, rem.getItemDamage(), player);
-                        iblock.placeBlockAt(stack, player, world, pos, facing, 0, 0, 0, newState);
+                        itemBlock.placeBlockAt(stack, player, world, pos, facing, 0, 0, 0, newState);
                         PieceTrickRotateBlock.rotateBlock(world, pos, facing);
                     }
 

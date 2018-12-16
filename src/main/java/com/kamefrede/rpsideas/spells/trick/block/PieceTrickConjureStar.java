@@ -16,12 +16,15 @@ import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellParam;
 import vazkii.psi.api.spell.SpellRuntimeException;
+import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.param.ParamVector;
+import vazkii.psi.api.spell.piece.PieceTrick;
 
-public class PieceTrickConjureStar extends PieceTrickConjurePulsarTest {// TODO: 12/15/18 look at
+public class PieceTrickConjureStar extends PieceTrick implements IPulsarConjuration {
 
+    protected SpellParam positionParam;
+    private SpellParam timeParam;
     private SpellParam rayParam;
-    private volatile Vector3 ray = null; //Just to pass from one method to the other.
 
     public PieceTrickConjureStar(Spell spell) {
         super(spell);
@@ -31,7 +34,10 @@ public class PieceTrickConjureStar extends PieceTrickConjurePulsarTest {// TODO:
     public void initParams() {
         super.initParams();
 
+        positionParam = new ParamVector(SpellParam.GENERIC_NAME_POSITION, SpellParam.BLUE, false, false);
+        timeParam = new ParamNumber(SpellParam.GENERIC_NAME_TIME, SpellParam.RED, true, false);
         rayParam = new ParamVector(SpellParams.GENERIC_VAZKII_RAY, SpellParam.GREEN, false, false);
+
         addParam(rayParam);
     }
 
@@ -49,9 +55,8 @@ public class PieceTrickConjureStar extends PieceTrickConjurePulsarTest {// TODO:
         if (!context.isInRadius(positionVec) || !context.isInRadius(positionVec.copy().add(rayVec))) {
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
         }
-
-        ray = rayVec;
-        return super.execute(context);
+        conjurePulsar(context, positionParam, timeParam);
+        return null;
     }
 
     @Override
@@ -60,7 +65,7 @@ public class PieceTrickConjureStar extends PieceTrickConjurePulsarTest {// TODO:
     }
 
     @Override
-    protected void postSet(SpellContext context, World world, BlockPos pos, int time) {
+    public void postSet(SpellContext context, World world, BlockPos pos, int time) {
         TileEntity tile = world.getTileEntity(pos);
         if (tile instanceof TileCracklingStar) {
             TileCracklingStar pulsar = (TileCracklingStar) tile;
@@ -68,11 +73,10 @@ public class PieceTrickConjureStar extends PieceTrickConjurePulsarTest {// TODO:
                 pulsar.setTime(time);
             }
 
-            if (ray != null) {
-                pulsar.addRay(ray.toVec3D());
-                ray = null;
-            }
+            Vector3 ray = getParamValue(context, rayParam);
 
+            if (ray != null)
+                pulsar.addRay(ray.toVec3D());
 
             ItemStack cad = PsiAPI.getPlayerCAD(context.caster);
             if (cad != null)

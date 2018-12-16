@@ -19,12 +19,12 @@ import vazkii.psi.api.spell.piece.PieceTrick;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PieceTrickMoveBlockSequence extends PieceTrick {// TODO: 12/15/18 look at
+public class PieceTrickMoveBlockSequence extends PieceTrick {
 
-    SpellParam position;
-    SpellParam target;
-    SpellParam maxBlocks;
-    SpellParam direction;
+    private SpellParam position;
+    private SpellParam target;
+    private SpellParam maxBlocks;
+    private SpellParam direction;
 
     public PieceTrickMoveBlockSequence(Spell spell) {
         super(spell);

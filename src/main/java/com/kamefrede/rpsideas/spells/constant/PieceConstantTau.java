@@ -2,7 +2,7 @@ package com.kamefrede.rpsideas.spells.constant;
 
 import vazkii.psi.api.spell.*;
 
-public class PieceConstantTau extends SpellPiece {// TODO: 12/15/18 look at
+public class PieceConstantTau extends SpellPiece {
 
     public PieceConstantTau(Spell spell) {
         super(spell);

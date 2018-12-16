@@ -5,7 +5,7 @@ import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellRuntimeException;
 import vazkii.psi.api.spell.piece.PieceSelector;
 
-public class PieceSelectorEidosTimestamp extends PieceSelector {// TODO: 12/15/18 look at
+public class PieceSelectorEidosTimestamp extends PieceSelector {
 
     public PieceSelectorEidosTimestamp(Spell spell) {
         super(spell);

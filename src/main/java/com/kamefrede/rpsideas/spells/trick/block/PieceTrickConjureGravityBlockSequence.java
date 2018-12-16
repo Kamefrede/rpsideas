@@ -1,25 +1,22 @@
 package com.kamefrede.rpsideas.spells.trick.block;
 
 import com.kamefrede.rpsideas.blocks.RPSBlocks;
-import com.kamefrede.rpsideas.tiles.TileEthereal;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
-import vazkii.psi.api.PsiAPI;
-import vazkii.psi.api.cad.EnumCADComponent;
-import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceTrick;
 
-public class PieceTrickConjureGravityBlockSequence extends PieceTrick {// TODO: 12/15/18 look at
+import static com.kamefrede.rpsideas.spells.trick.block.PieceTrickConjureEtherealBlockSequence.addBlocksVal;
 
-    SpellParam position;
-    SpellParam target;
-    SpellParam maxBlocks;
-    SpellParam time;
+public class PieceTrickConjureGravityBlockSequence extends PieceTrick {
+
+    private SpellParam position;
+    private SpellParam target;
+    private SpellParam maxBlocks;
+    private SpellParam time;
 
     public PieceTrickConjureGravityBlockSequence(Spell spell) {
         super(spell);
@@ -36,14 +33,7 @@ public class PieceTrickConjureGravityBlockSequence extends PieceTrick {// TODO: 
     @Override
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
         super.addToMetadata(meta);
-
-        Double maxBlocksVal = this.<Double>getParamEvaluation(maxBlocks);
-        if (maxBlocksVal == null || maxBlocksVal < 0)
-            throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_VALUE, x, y);
-
-        meta.addStat(EnumSpellStat.COST, (int) (maxBlocksVal * 20));
-        meta.addStat(EnumSpellStat.POTENCY, (int) (maxBlocksVal * 15));
-
+        addBlocksVal(this, maxBlocks, meta);
     }
 
     @Override
@@ -59,7 +49,6 @@ public class PieceTrickConjureGravityBlockSequence extends PieceTrick {// TODO: 
 
         int len = (int) targetVal.mag();
         Vector3 targetNorm = targetVal.copy().normalize();
-        ItemStack cad = PsiAPI.getPlayerCAD(context.caster);
 
         for (int i = 0; i < Math.min(len, maxBlocksInt); i++) {
             Vector3 blockVec = positionVal.copy().add(targetNorm.copy().multiply(i));
@@ -74,21 +63,11 @@ public class PieceTrickConjureGravityBlockSequence extends PieceTrick {// TODO: 
             IBlockState state = context.caster.getEntityWorld().getBlockState(pos);
 
             if (state.getBlock() != RPSBlocks.conjuredGravityBlock) {
-                PieceTrickConjureEtherealBlock.placeBlock(context.caster, context.caster.getEntityWorld(), pos, context.getTargetSlot(), false, true);
+                PieceTrickConjureEtherealBlock.placeBlock(context.caster, context.caster.getEntityWorld(), pos, true);
                 state = context.caster.getEntityWorld().getBlockState(pos);
 
-                if (!context.caster.getEntityWorld().isRemote && state.getBlock() == RPSBlocks.conjuredGravityBlock) {
-                    context.caster.getEntityWorld().setBlockState(pos, state);
-                    TileEthereal tile = (TileEthereal) context.caster.getEntityWorld().getTileEntity(pos);
-
-                    if (timeVal != null && timeVal.intValue() > 0) {
-                        int val = timeVal.intValue();
-                        tile.time = val;
-                    }
-
-                    if (cad != null)
-                        tile.colorizer = ((ICAD) cad.getItem()).getComponentInSlot(cad, EnumCADComponent.DYE);
-                }
+                if (!context.caster.getEntityWorld().isRemote && state.getBlock() == RPSBlocks.conjuredGravityBlock)
+                    PieceTrickConjureEtherealBlock.setColorAndTime(context, timeVal, pos, state);
             }
         }
 

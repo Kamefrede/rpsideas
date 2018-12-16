@@ -4,6 +4,7 @@ import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
 import com.kamefrede.rpsideas.util.helpers.ClientHelpers;
 import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
+import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.color.IItemColor;
@@ -17,7 +18,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import vazkii.arl.interf.IItemColorProvider;
 import vazkii.arl.item.ItemMod;
 import vazkii.arl.item.ItemModArmor;
 import vazkii.arl.util.ItemNBTHelper;
@@ -38,7 +38,7 @@ import vazkii.psi.common.item.tool.ItemPsimetalTool;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public abstract class ItemFlowExosuit extends ItemModArmor implements IPsiAddonTool, IPsiEventArmor, IItemColorProvider {
+public abstract class ItemFlowExosuit extends ItemModArmor implements IPsiAddonTool, IPsiEventArmor, IFlowColorAcceptor {
     private static final String TAG_TIMES_CAST = "timesCast";
     @SideOnly(Side.CLIENT)
     private static ModelPsimetalExosuit[] models;
@@ -150,11 +150,11 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsiAddonT
     @SideOnly(Side.CLIENT)
     public IItemColor getItemColor() {
         return (stack, tintIndex) -> {
-            if (tintIndex == 0) {
+            if (tintIndex == 1) {
                 return ClientHelpers.getFlowColor(stack);
-            } else if (tintIndex == 1) {
+            } else if (tintIndex == 2) {
                 return getColor(stack);
-            } else return 0xFFFFFF;
+            } else return -1;
         };
     }
 

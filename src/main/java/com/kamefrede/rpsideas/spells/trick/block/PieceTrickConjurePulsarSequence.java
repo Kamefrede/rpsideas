@@ -2,23 +2,17 @@ package com.kamefrede.rpsideas.spells.trick.block;
 
 import com.kamefrede.rpsideas.blocks.BlockConjuredPulsar;
 import com.kamefrede.rpsideas.blocks.RPSBlocks;
-import com.kamefrede.rpsideas.tiles.TileEthereal;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import vazkii.psi.api.PsiAPI;
-import vazkii.psi.api.cad.EnumCADComponent;
-import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceTrick;
 
-public class PieceTrickConjurePulsarSequence extends PieceTrick {// TODO: 12/15/18 look at
+public class PieceTrickConjurePulsarSequence extends PieceTrick {
 
     private SpellParam positionParam;
     private SpellParam targetParam;
@@ -62,7 +56,6 @@ public class PieceTrickConjurePulsarSequence extends PieceTrick {// TODO: 12/15/
 
         int length = (int) Math.min(targetVec.mag(), maxBlocks);
         Vector3 normalizedDirection = targetVec.copy().normalize();
-        ItemStack cad = PsiAPI.getPlayerCAD(context.caster);
 
         for (int i = 0; i < length; i++) {
             Vector3 blockVector = positionVec.copy().add(normalizedDirection.copy().multiply(i));
@@ -72,20 +65,10 @@ public class PieceTrickConjurePulsarSequence extends PieceTrick {// TODO: 12/15/
 
             World world = context.caster.world;
             BlockPos pos = blockVector.toBlockPos();
+            IBlockState state = getStateToSet();
 
-            if (SpellHelpers.placeBlock(world, pos, getStateToSet(), false)) {
-                TileEntity tile = world.getTileEntity(pos);
-                if (tile instanceof TileEthereal) {
-                    TileEthereal pulsar = (TileEthereal) tile;
-                    if (time > 0) {
-                        pulsar.time = time;
-                    }
-
-                    if (cad != null) {
-                        pulsar.colorizer = ((ICAD) cad.getItem()).getComponentInSlot(cad, EnumCADComponent.DYE);
-                    }
-                }
-            }
+            if (SpellHelpers.placeBlock(world, pos, state, false))
+                PieceTrickConjureEtherealBlock.setColorAndTime(context, (double) time, pos, state);
         }
 
         return null;

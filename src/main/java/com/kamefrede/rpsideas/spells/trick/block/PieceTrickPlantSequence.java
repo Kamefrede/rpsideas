@@ -7,11 +7,11 @@ import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceTrick;
 
-public class PieceTrickPlantSequence extends PieceTrick {// TODO: 12/15/18 look at
+public class PieceTrickPlantSequence extends PieceTrick {
 
-    SpellParam position;
-    SpellParam target;
-    SpellParam maxBlocks;
+    private SpellParam position;
+    private SpellParam target;
+    private SpellParam maxBlocks;
 
     public PieceTrickPlantSequence(Spell spell) {
         super(spell);

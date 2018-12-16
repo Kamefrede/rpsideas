@@ -1,7 +1,6 @@
 package com.kamefrede.rpsideas.items.components;
 
 import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.effect.base.PotionPsiChange;
 import com.kamefrede.rpsideas.items.base.IRegenerationBattery;
 import com.kamefrede.rpsideas.items.base.ItemComponent;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
@@ -50,10 +49,6 @@ public class ItemTwinflowBattery extends ItemComponent implements IRegenerationB
                         PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(player);
 
                         if (data != null) {
-                            if (data.regenCooldown == 0)
-                                PotionPsiChange.addPsiToPlayer(player, 5 +
-                                        (data.availablePsi != data.totalPsi ? (int) Math.ceil(data.regen / 2.0) : 0), false);
-
                             int amountToDump = Math.min(data.totalPsi - data.availablePsi, item.getStoredPsi(cad));
                             if (amountToDump > 0) {
                                 data.deductPsi(-amountToDump, 0, true);

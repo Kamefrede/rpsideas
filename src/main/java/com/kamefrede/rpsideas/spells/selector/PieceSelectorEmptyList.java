@@ -1,32 +1,25 @@
 package com.kamefrede.rpsideas.spells.selector;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.util.math.AxisAlignedBB;
-import vazkii.psi.api.spell.Spell;
-import vazkii.psi.api.spell.SpellContext;
-import vazkii.psi.api.spell.SpellRuntimeException;
+import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.piece.PieceSelector;
 import vazkii.psi.api.spell.wrapper.EntityListWrapper;
 
-import java.util.List;
+import java.util.ArrayList;
 
-public class PieceSelectorEmptyList extends PieceSelector {// TODO: 12/15/18 look at
+public class PieceSelectorEmptyList extends PieceSelector {
 
     public PieceSelectorEmptyList(Spell spell) {
         super(spell);
     }
 
     @Override
+    public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
+        // NO-OP
+    }
+
+    @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-
-        AxisAlignedBB axis = new AxisAlignedBB(0, 0, 0, 0, 0, 0);
-
-
-        List<Entity> list = context.caster.getEntityWorld().getEntitiesWithinAABB(Entity.class, axis, (Entity e) -> {
-            return e != null && e != context.caster && e != context.focalPoint && context.isInRadius(e);
-        });
-
-        return new EntityListWrapper(list);
+        return new EntityListWrapper(new ArrayList<>());
     }
 
     @Override

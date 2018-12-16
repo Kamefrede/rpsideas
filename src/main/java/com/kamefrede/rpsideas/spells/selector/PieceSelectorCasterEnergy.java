@@ -3,24 +3,22 @@ package com.kamefrede.rpsideas.spells.selector;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.piece.PieceSelector;
+import vazkii.psi.common.core.handler.PlayerDataHandler;
 
-public class PieceSelectorCasterEnergy extends PieceSelector {// TODO: 12/15/18 look at
+public class PieceSelectorCasterEnergy extends PieceSelector {
 
     public PieceSelectorCasterEnergy(Spell spell) {
         super(spell);
     }
 
     @Override
-    public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
-        super.addToMetadata(meta);
-    }
-
-    @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster == null) return null;
 
+        PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(context.caster);
 
-        return 1.0D * SpellHelpers.getPlayerData(context.caster).availablePsi;
+        if (data == null) return 0.0;
+        return 1.0 * data.availablePsi;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.kamefrede.rpsideas.spells.base;
 
-public abstract class SpellParams {// TODO: 12/15/18 look at
+public abstract class SpellParams {
     public static final String GENERIC_NAME_ROOT = "rpsideas.spellparam.root";
     public static final String GENERIC_NAME_DEGREE = "rpsideas.spellparam.degree";
     public static final String GENERIC_NAME_RADIAN = "rpsideas.spellparam.radian";
@@ -12,8 +12,8 @@ public abstract class SpellParams {// TODO: 12/15/18 look at
     public static final String GENERIC_VAZKII_RAY = "rpsideas.spellparam.vazkii";
     public static final String GENERIC_NAME_LIST1 = "rpsideas.spellparam.list1";
     public static final String GENERIC_NAME_LIST2 = "rpsideas.spellparam.list2";
-    public static final String GENERIC_NAME_ENTITY1 = "rpsideas.spellparam.entity1";
-    public static final String GENERIC_NAME_ENTITY2 = "rpsideas.spellparam.entity2";
+    public static final String GENERIC_NAME_VIEWER = "rpsideas.spellparam.viewer";
+    public static final String GENERIC_NAME_VIEWED = "rpsideas.spellparam.viewed";
     public static final String GENERIC_NAME_PITCH = "rpsideas.spellparam.pitch";
     public static final String GENERIC_NAME_INSTRUMENT = "rpsideas.spellparam.instrument";
     public static final String GENERIC_NAME_VOLUME = "rpsideas.spellparam.volume";

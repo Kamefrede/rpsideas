@@ -21,10 +21,10 @@ import java.util.Random;
 
 import static vazkii.psi.common.item.component.ItemCADColorizer.colorTable;
 
-public class PieceTrickFirework extends PieceTrick {// TODO: 12/15/18 look at
+public class PieceTrickFirework extends PieceTrick {
 
-    SpellParam position;
-    SpellParam time;
+    private SpellParam position;
+    private SpellParam time;
 
     public PieceTrickFirework(Spell spell) {
         super(spell);
@@ -61,7 +61,7 @@ public class PieceTrickFirework extends PieceTrick {// TODO: 12/15/18 look at
         if (!colorizer.isEmpty()) {
             color = getColor(colorizer);
         } else {
-            color = 0xFFFFFF;
+            color = -1;
         }
 
         if (positionVal == null)
@@ -95,7 +95,7 @@ public class PieceTrickFirework extends PieceTrick {// TODO: 12/15/18 look at
                 return new Color((int) (r * 255), (int) (g * 255), (int) (b * 255)).getRGB();
         }
 
-        return 0xFFFFFF;
+        return -1;
     }
 
 
@@ -124,7 +124,7 @@ public class PieceTrickFirework extends PieceTrick {// TODO: 12/15/18 look at
 
         NBTTagCompound fireworks = new NBTTagCompound();
 
-        fireworks.setInteger("Flight", (Integer) Math.max(-2, ((time - 10 - rdm.nextInt(6) - rdm.nextInt(7)) / 10)));
+        fireworks.setInteger("Flight", Math.max(-2, ((time - 10 - rdm.nextInt(6) - rdm.nextInt(7)) / 10)));
         NBTTagList explosions = new NBTTagList();
         explosions.appendTag(explosion);
         fireworks.setTag("Explosions", explosions);
