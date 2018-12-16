@@ -1,0 +1,15 @@
+{
+  "result": {
+    "item": "rpsideas:liquid_colorizer",
+    "count": 1
+  },
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+        {
+            "item": "rpsideas:empty_colorizer"
+        },
+        {
+            "item": "minecraft:water_bucket"
+        }
+    ]
+}

@@ -1,0 +1,27 @@
+{
+  "result": {
+    "item": "rpsideas:liquid_colorizer",
+    "count": 1
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " D ",
+    "GBG",
+    " I "
+  ],
+  "key": {
+    "D": {
+      "item": "psi:material",
+      "data": 0
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "B": {
+    	"item": "minecraft:water_bucket" 
+    },
+    "I": {
+    	"item": "minecraft:iron_ingot"
+    }
+  }
+}

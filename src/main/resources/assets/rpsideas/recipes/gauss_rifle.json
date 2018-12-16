@@ -1,0 +1,24 @@
+{
+  "result": {
+    "item": "rpsideas:gauss_rifle",
+    "count": 1
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "C  ",
+    "IIP",
+    "C I"
+  ],
+  "key": {
+    "P": {
+      "item": "psi:material",
+      "data": 0
+    },
+    "C": {
+    	"item": "minecraft:redstone" 
+    },
+    "I": {
+    	"item": "minecraft:iron_ingot"
+    }
+  }
+}

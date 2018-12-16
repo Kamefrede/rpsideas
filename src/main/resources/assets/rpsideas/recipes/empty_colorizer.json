@@ -1,0 +1,24 @@
+{
+  "result": {
+    "item": "rpsideas:empty_colorizer",
+    "count": 1
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " D ",
+    "G G",
+    " I "
+  ],
+  "key": {
+    "D": {
+      "item": "psi:material",
+      "data": 0
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "I": {
+    	"item": "minecraft:iron_ingot"
+    }
+  }
+}
