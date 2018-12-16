@@ -31,8 +31,8 @@ public class PieceOperatorVectorRotate extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 v = this.<Vector3>getParamValue(context, vector);
-        Vector3 a = this.<Vector3>getParamValue(context, axis);
+        Vector3 v = this.getParamValue(context, vector);
+        Vector3 a = this.getParamValue(context, axis);
         Double an = this.<Double>getParamValue(context, angle);
         if (v == null || axis == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);

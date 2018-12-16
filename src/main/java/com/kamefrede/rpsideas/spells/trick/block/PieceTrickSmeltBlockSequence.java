@@ -47,8 +47,8 @@ public class PieceTrickSmeltBlockSequence extends PieceTrick {
         if (context.caster.getEntityWorld().isRemote)
             return null;
 
-        Vector3 positionVal = this.<Vector3>getParamValue(context, position);
-        Vector3 targetVal = this.<Vector3>getParamValue(context, direction);
+        Vector3 positionVal = this.getParamValue(context, position);
+        Vector3 targetVal = this.getParamValue(context, direction);
         Double maxBlocksVal = this.<Double>getParamValue(context, maxBlocks);
 
         if (positionVal == null)

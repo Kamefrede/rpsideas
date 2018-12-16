@@ -21,6 +21,7 @@ public class PieceTrickPulsarLight extends PieceTrick implements IPulsarConjurat
 
     protected SpellParam positionParam;
     private SpellParam timeParam;
+
     public PieceTrickPulsarLight(Spell spell) {
         super(spell);
     }

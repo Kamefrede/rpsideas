@@ -30,7 +30,7 @@ public class OperatorDistanceFromGround extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 targetVal = this.<Vector3>getParamValue(context, target);
+        Vector3 targetVal = this.getParamValue(context, target);
         if (targetVal == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
 

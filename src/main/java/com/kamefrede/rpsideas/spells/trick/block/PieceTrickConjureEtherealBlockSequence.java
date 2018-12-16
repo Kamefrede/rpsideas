@@ -22,14 +22,6 @@ public class PieceTrickConjureEtherealBlockSequence extends PieceTrick {
         super(spell);
     }
 
-    @Override
-    public void initParams() {
-        addParam(position = new ParamVector(SpellParam.GENERIC_NAME_POSITION, SpellParam.BLUE, false, false));
-        addParam(target = new ParamVector(SpellParam.GENERIC_NAME_TARGET, SpellParam.GREEN, false, false));
-        addParam(maxBlocks = new ParamVector(SpellParam.GENERIC_NAME_MAX, SpellParam.RED, false, true));
-        addParam(time = new ParamNumber(SpellParam.GENERIC_NAME_TIME, SpellParam.PURPLE, true, false));
-    }
-
     public static void addBlocksVal(SpellPiece piece, SpellParam maxBlocks, SpellMetadata data) throws SpellCompilationException {
         Double maxBlocksVal = piece.<Double>getParamEvaluation(maxBlocks);
         if (maxBlocksVal == null || maxBlocksVal < 0)
@@ -40,6 +32,14 @@ public class PieceTrickConjureEtherealBlockSequence extends PieceTrick {
     }
 
     @Override
+    public void initParams() {
+        addParam(position = new ParamVector(SpellParam.GENERIC_NAME_POSITION, SpellParam.BLUE, false, false));
+        addParam(target = new ParamVector(SpellParam.GENERIC_NAME_TARGET, SpellParam.GREEN, false, false));
+        addParam(maxBlocks = new ParamVector(SpellParam.GENERIC_NAME_MAX, SpellParam.RED, false, true));
+        addParam(time = new ParamNumber(SpellParam.GENERIC_NAME_TIME, SpellParam.PURPLE, true, false));
+    }
+
+    @Override
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
         super.addToMetadata(meta);
         addBlocksVal(this, maxBlocks, meta);
@@ -47,8 +47,8 @@ public class PieceTrickConjureEtherealBlockSequence extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 positionVal = this.<Vector3>getParamValue(context, position);
-        Vector3 targetVal = this.<Vector3>getParamValue(context, target);
+        Vector3 positionVal = this.getParamValue(context, position);
+        Vector3 targetVal = this.getParamValue(context, target);
         Double maxBlocksVal = this.<Double>getParamValue(context, maxBlocks);
         Double timeVal = this.<Double>getParamValue(context, time);
         int maxBlocksInt = maxBlocksVal.intValue();

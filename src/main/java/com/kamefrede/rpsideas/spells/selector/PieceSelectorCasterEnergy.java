@@ -1,7 +1,9 @@
 package com.kamefrede.rpsideas.spells.selector;
 
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
-import vazkii.psi.api.spell.*;
+import vazkii.psi.api.spell.Spell;
+import vazkii.psi.api.spell.SpellContext;
+import vazkii.psi.api.spell.SpellRuntimeException;
 import vazkii.psi.api.spell.piece.PieceSelector;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 

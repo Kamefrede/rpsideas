@@ -21,6 +21,7 @@ public class PieceTrickConjurePulsarTest extends PieceTrick {
 
     protected SpellParam positionParam;
     private SpellParam timeParam;
+
     public PieceTrickConjurePulsarTest(Spell spell) {
         super(spell);
     }

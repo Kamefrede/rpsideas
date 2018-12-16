@@ -45,15 +45,11 @@ public class RecipeBlasterCADClip extends IForgeRegistryEntry.Impl<IRecipe> impl
                     if (foundGun)
                         return false;
                     foundGun = true;
-                }
-
-                else if (stack.getItem() == ModItems.clip) {
+                } else if (stack.getItem() == ModItems.clip) {
                     if (foundClip)
                         return false;
                     foundClip = true;
-                }
-
-                else return false; // Found an invalid item, breaking the recipe
+                } else return false; // Found an invalid item, breaking the recipe
             }
         }
 

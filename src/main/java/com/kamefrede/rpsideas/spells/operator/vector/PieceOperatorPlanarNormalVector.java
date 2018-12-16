@@ -27,7 +27,7 @@ public class PieceOperatorPlanarNormalVector extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 v = this.<Vector3>getParamValue(context, vector);
+        Vector3 v = this.getParamValue(context, vector);
         return v.copy().rotate(Math.PI * 2 / 3, new Vector3(1, 1, 1));
     }
 

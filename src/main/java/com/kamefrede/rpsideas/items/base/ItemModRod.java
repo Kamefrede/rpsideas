@@ -46,7 +46,7 @@ public abstract class ItemModRod extends ItemFishingRod implements IVariantHolde
 
     @Override
     public String[] getVariants() {
-        return new String[] { bareName };
+        return new String[]{bareName};
     }
 
     @Override

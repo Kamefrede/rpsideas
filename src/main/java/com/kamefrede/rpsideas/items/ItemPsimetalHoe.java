@@ -61,6 +61,7 @@ public class ItemPsimetalHoe extends RPSItem implements IPsimetalTool {
             ItemNBTHelper.setInt(stack, TAG_REGEN_TIME, regenTime + 1);
         }
     }
+
     @Override
     public boolean hitEntity(ItemStack itemstack, EntityLivingBase target, EntityLivingBase attacker) {
         itemstack.damageItem(1, attacker);

@@ -37,6 +37,21 @@ public class PieceTrickConjureEtherealBlock extends PieceTrick {
 
     }
 
+    public static void setColorAndTime(SpellContext context, Double timeVal, BlockPos pos, IBlockState state) {
+        context.caster.getEntityWorld().setBlockState(pos, state);
+        TileEthereal tile = (TileEthereal) context.caster.getEntityWorld().getTileEntity(pos);
+
+        if (tile != null) {
+            if (timeVal != null && timeVal.intValue() > 0) {
+                tile.time = timeVal.intValue();
+            }
+
+            ItemStack cad = PsiAPI.getPlayerCAD(context.caster);
+            if (cad != null)
+                tile.colorizer = ((ICAD) cad.getItem()).getComponentInSlot(cad, EnumCADComponent.DYE);
+        }
+    }
+
     @Override
     public void initParams() {
         addParam(position = new ParamVector(SpellParam.GENERIC_NAME_POSITION, SpellParam.BLUE, false, false));
@@ -56,7 +71,7 @@ public class PieceTrickConjureEtherealBlock extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 positionVal = this.<Vector3>getParamValue(context, position);
+        Vector3 positionVal = this.getParamValue(context, position);
         Double timeVal = this.<Double>getParamValue(context, time);
 
         if (positionVal == null)
@@ -80,21 +95,6 @@ public class PieceTrickConjureEtherealBlock extends PieceTrick {
         }
 
         return null;
-    }
-
-    public static void setColorAndTime(SpellContext context, Double timeVal, BlockPos pos, IBlockState state) {
-        context.caster.getEntityWorld().setBlockState(pos, state);
-        TileEthereal tile = (TileEthereal) context.caster.getEntityWorld().getTileEntity(pos);
-
-        if (tile != null) {
-            if (timeVal != null && timeVal.intValue() > 0) {
-                tile.time = timeVal.intValue();
-            }
-
-            ItemStack cad = PsiAPI.getPlayerCAD(context.caster);
-            if (cad != null)
-                tile.colorizer = ((ICAD) cad.getItem()).getComponentInSlot(cad, EnumCADComponent.DYE);
-        }
     }
 
 

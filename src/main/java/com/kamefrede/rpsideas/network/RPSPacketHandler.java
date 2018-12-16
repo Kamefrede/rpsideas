@@ -12,10 +12,8 @@ import net.minecraftforge.fml.relauncher.Side;
 
 public class RPSPacketHandler {// TODO: 12/15/18 look at
 
-    private static int id;
-
     public static SimpleNetworkWrapper NET = NetworkRegistry.INSTANCE.newSimpleChannel(RPSIdeas.MODID);
-
+    private static int id;
 
     public static void initPackets() {
         RPSPacketHandler.NET.registerMessage(MessageSpamlessChat.Handler.class, MessageSpamlessChat.class, id++, Side.CLIENT);

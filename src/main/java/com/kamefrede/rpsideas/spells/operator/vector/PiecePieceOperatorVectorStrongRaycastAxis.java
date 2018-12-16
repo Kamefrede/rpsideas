@@ -17,6 +17,7 @@ public class PiecePieceOperatorVectorStrongRaycastAxis extends PieceOperator {
     private SpellParam origin;
     private SpellParam ray;
     private SpellParam max;
+
     public PiecePieceOperatorVectorStrongRaycastAxis(Spell spell) {
         super(spell);
     }

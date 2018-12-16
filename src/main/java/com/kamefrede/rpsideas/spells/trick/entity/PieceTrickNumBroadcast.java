@@ -58,7 +58,7 @@ public class PieceTrickNumBroadcast extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 positionVal = this.<Vector3>getParamValue(context, position);
+        Vector3 positionVal = this.getParamValue(context, position);
         Double radiusVal = this.<Double>getParamValue(context, radius);
         Double channelVal = this.<Double>getParamValue(context, channel);
         Double signalVal = this.<Double>getParamValue(context, signal);

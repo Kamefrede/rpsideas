@@ -16,11 +16,11 @@ import java.util.Calendar;
  */
 @Mod.EventBusSubscriber
 public class ItemFlowHoe extends ItemPsimetalHoe implements IFlowColorAcceptor {
+    private static boolean xmas;
+
     public ItemFlowHoe(String name) {
         super(name);
     }
-
-    private static boolean xmas;
 
     @SubscribeEvent
     public static void onWorldTick(TickEvent.WorldTickEvent e) {

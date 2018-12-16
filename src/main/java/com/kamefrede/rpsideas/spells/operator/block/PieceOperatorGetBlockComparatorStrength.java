@@ -32,9 +32,9 @@ public class PieceOperatorGetBlockComparatorStrength extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 ax = this.<Vector3>getParamValue(context, axisParam);
+        Vector3 ax = this.getParamValue(context, axisParam);
         EnumFacing whichWay;
-        Vector3 vec = this.<Vector3>getParamValue(context, target);
+        Vector3 vec = this.getParamValue(context, target);
         if (vec == null || vec.isZero()) throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
 
         if (ax == null || ax.isZero()) {

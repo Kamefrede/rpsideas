@@ -18,6 +18,7 @@ public class PieceTrickConjurePulsarSequence extends PieceTrick {
     private SpellParam targetParam;
     private SpellParam maxBlocksParam;
     private SpellParam timeParam;
+
     public PieceTrickConjurePulsarSequence(Spell spell) {
         super(spell);
     }

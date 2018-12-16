@@ -18,6 +18,7 @@ public class PieceTrickParticleTrail extends PieceTrick {
     private SpellParam rayParam;
     private SpellParam lengthParam;
     private SpellParam timeParam;
+
     public PieceTrickParticleTrail(Spell spell) {
         super(spell);
     }

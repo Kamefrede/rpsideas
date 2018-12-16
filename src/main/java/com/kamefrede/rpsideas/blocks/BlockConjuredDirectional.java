@@ -30,6 +30,7 @@ public abstract class BlockConjuredDirectional extends BlockRPS {
     public static final PropertyBool BLOCK_WEST = PropertyBool.create("block_west");
     public static final PropertyBool BLOCK_EAST = PropertyBool.create("block_east");
     protected static final AxisAlignedBB PARTIAL_AABB = new AxisAlignedBB(0.25, 0.25, 0.25, 0.75, 0.75, 0.75);
+
     public BlockConjuredDirectional(String name, Material materialIn, String... variants) {
         super(name, materialIn, variants);
     }

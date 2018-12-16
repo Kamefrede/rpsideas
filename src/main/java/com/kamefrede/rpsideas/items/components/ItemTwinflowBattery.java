@@ -30,11 +30,6 @@ public class ItemTwinflowBattery extends ItemComponent implements IRegenerationB
         super(LibItemNames.TWINFLOW_BATTERY);
     }
 
-    @Override
-    public int getRegenerationValue(ItemStack stack) {
-        return PSI_REGEN_BONUS;
-    }
-
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent e) {
         if (e.phase == TickEvent.Phase.START) {
@@ -59,6 +54,11 @@ public class ItemTwinflowBattery extends ItemComponent implements IRegenerationB
                 }
             }
         }
+    }
+
+    @Override
+    public int getRegenerationValue(ItemStack stack) {
+        return PSI_REGEN_BONUS;
     }
 
     @Override

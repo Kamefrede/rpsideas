@@ -11,7 +11,7 @@ import vazkii.psi.common.spell.SpellCompiler;
 
 import java.util.UUID;
 
-public class GuiFlashRing extends GuiProgrammer {// TODO: 12/15/18 look at
+public class GuiFlashRing extends GuiProgrammer {
 
     public GuiFlashRing(EntityPlayer player, ItemStack stack) {
         super(new FlashRingProgrammingWrapper(player, stack));

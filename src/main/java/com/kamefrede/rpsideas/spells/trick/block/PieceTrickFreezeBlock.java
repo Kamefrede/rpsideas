@@ -69,7 +69,7 @@ public class PieceTrickFreezeBlock extends PieceTrick {
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster.getEntityWorld().isRemote)
             return null;
-        Vector3 pos = this.<Vector3>getParamValue(context, position);
+        Vector3 pos = this.getParamValue(context, position);
 
         if (pos == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);

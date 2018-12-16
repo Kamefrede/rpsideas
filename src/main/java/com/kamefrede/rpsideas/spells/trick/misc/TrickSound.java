@@ -71,7 +71,7 @@ public class TrickSound extends PieceTrick {
         list.add(SoundEvents.BLOCK_NOTE_XYLOPHONE);
         list.add(SoundEvents.BLOCK_NOTE_PLING);
 
-        Vector3 posVal = this.<Vector3>getParamValue(context, position);
+        Vector3 posVal = this.getParamValue(context, position);
         Double instrumentVal = this.<Double>getParamValue(context, instrument);
         Double volVal = this.<Double>getParamValue(context, volume);
         Double pitchVal = this.<Double>getParamValue(context, pitch);

@@ -9,17 +9,16 @@ import net.minecraft.world.chunk.IChunkProvider;
 import vazkii.psi.common.block.tile.TileProgrammer;
 import vazkii.psi.common.item.ItemSpellDrive;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
-public class FlashRingProgrammingWrapper extends TileProgrammer {// TODO: 12/15/18 look at
+public class FlashRingProgrammingWrapper extends TileProgrammer {
 
-    EntityPlayer player;
-    ItemStack stack;
+    private EntityPlayer player;
+
     public FlashRingProgrammingWrapper(EntityPlayer player, ItemStack stack) {
         super();
 
         this.player = player;
-        this.stack = stack;
 
         spell = ItemSpellDrive.getSpell(stack);
         enabled = true;
@@ -27,7 +26,7 @@ public class FlashRingProgrammingWrapper extends TileProgrammer {// TODO: 12/15/
 
     @Override
     public void onSpellChanged() {
-        //No-op
+        // NO-OP
     }
 
     @Override
@@ -35,8 +34,9 @@ public class FlashRingProgrammingWrapper extends TileProgrammer {// TODO: 12/15/
         return true;
     }
 
-    //TODO What in the fuck is this hack for
+    @Nonnull
     @Override
+    @SuppressWarnings({"ConstantConditions", "NullableProblems"})
     public World getWorld() {
         return new World(null, null, player.world.provider, null, true) {
             @Override
@@ -49,9 +49,9 @@ public class FlashRingProgrammingWrapper extends TileProgrammer {// TODO: 12/15/
                 return false;
             }
 
-            @Nullable
+            @Nonnull
             @Override
-            public TileEntity getTileEntity(BlockPos pos) {
+            public TileEntity getTileEntity(@Nonnull BlockPos pos) {
                 return FlashRingProgrammingWrapper.this;
             }
         };

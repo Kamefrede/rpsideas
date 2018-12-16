@@ -18,12 +18,14 @@ public class InventorySocketable implements IInventory {// TODO: 12/15/18 look a
     private final ItemStack stack;
     private final ISocketable socketable;
     private final int maxBandwidth;
+
     public InventorySocketable(ItemStack stack, int maxBandwidth) {
         this.stack = stack;
         this.maxBandwidth = maxBandwidth;
 
         socketable = (ISocketable) stack.getItem();
     }
+
     public InventorySocketable(ItemStack stack) {
         this(stack, -1);
     }

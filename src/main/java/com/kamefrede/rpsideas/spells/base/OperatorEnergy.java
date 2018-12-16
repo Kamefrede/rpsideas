@@ -35,9 +35,9 @@ public abstract class OperatorEnergy extends PieceOperator {
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster.world.isRemote) return null;
 
-        Vector3 posVec = this.<Vector3>getParamValue(context, position);
+        Vector3 posVec = this.getParamValue(context, position);
 
-        Vector3 axisVec = this.<Vector3>getParamValue(context, axis);
+        Vector3 axisVec = this.getParamValue(context, axis);
         if (axisVec != null && !axisVec.isAxial())
             throw new SpellRuntimeException(SpellRuntimeExceptions.NON_AXIAL_VECTOR);
 

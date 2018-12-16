@@ -38,8 +38,8 @@ public class PieceTrickPlantSequence extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 positionVal = this.<Vector3>getParamValue(context, position);
-        Vector3 targetVal = this.<Vector3>getParamValue(context, target);
+        Vector3 positionVal = this.getParamValue(context, position);
+        Vector3 targetVal = this.getParamValue(context, target);
         Double maxBlocksVal = this.<Double>getParamValue(context, maxBlocks);
         int maxBlocksInt = maxBlocksVal.intValue();
 

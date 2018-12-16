@@ -29,8 +29,8 @@ public class PieceOperatorVectorFallback extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 vec = this.<Vector3>getParamValue(context, vector);
-        Vector3 fall = this.<Vector3>getParamValue(context, fallback);
+        Vector3 vec = this.getParamValue(context, vector);
+        Vector3 fall = this.getParamValue(context, fallback);
         if (vec == null || vec.isZero()) {
             return fall;
         } else return vec;

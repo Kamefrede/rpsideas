@@ -31,7 +31,7 @@ public class PieceTrickSlotMatch extends PieceTrick {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster.world.isRemote) return null;
-        Vector3 posVec = this.<Vector3>getParamValue(context, position);
+        Vector3 posVec = this.getParamValue(context, position);
 
         if (posVec == null || posVec.isZero())
             throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);

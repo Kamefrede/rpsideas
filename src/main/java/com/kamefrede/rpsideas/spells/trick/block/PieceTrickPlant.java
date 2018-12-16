@@ -87,7 +87,7 @@ public class PieceTrickPlant extends PieceTrick {
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster.getEntityWorld().isRemote)
             return null;
-        Vector3 positionVal = this.<Vector3>getParamValue(context, position);
+        Vector3 positionVal = this.getParamValue(context, position);
 
         if (positionVal == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);

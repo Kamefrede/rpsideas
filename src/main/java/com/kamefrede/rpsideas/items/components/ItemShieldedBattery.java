@@ -30,11 +30,6 @@ public class ItemShieldedBattery extends ItemComponent implements IRegenerationB
         super(LibItemNames.SHIELDED_BATTERY);
     }
 
-    @Override
-    public int getRegenerationValue(ItemStack stack) {
-        return PSI_REGEN_BONUS;
-    }
-
     @SubscribeEvent
     public static void onDamage(LivingHurtEvent e) {
         EntityLivingBase living = e.getEntityLiving();
@@ -64,6 +59,11 @@ public class ItemShieldedBattery extends ItemComponent implements IRegenerationB
 
             }
         }
+    }
+
+    @Override
+    public int getRegenerationValue(ItemStack stack) {
+        return PSI_REGEN_BONUS;
     }
 
     @Override

@@ -57,6 +57,7 @@ public class ContainerCADMagazine extends Container { // TODO: 12/15/18 look at
     public boolean notifyOnce = false;
     public float tooltipTime = 0;
     public String tooltipText = "";
+
     public ContainerCADMagazine(EntityPlayer player, ItemStack stack) {
         this.player = player;
         this.stack = stack;
@@ -123,6 +124,7 @@ public class ContainerCADMagazine extends Container { // TODO: 12/15/18 look at
         public final int yPosition;
         public final int socketSlot;
         public final boolean dark;
+
         public SlotCustomBullet(InventorySocketable socketable, int index, int xPosition, int yPosition, int socketSlot, boolean dark) {
             super(socketable, index, xPosition, yPosition);
             this.socketable = socketable;

@@ -22,6 +22,7 @@ public class MessageSparkleSphere implements IMessage {// TODO: 12/15/18 look at
     @SuppressWarnings("unused")
     public MessageSparkleSphere() {
     }
+
     public MessageSparkleSphere(Vec3d position, EntityGaussPulse.AmmoStatus status) {
         this.position = position;
         this.status = status;

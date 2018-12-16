@@ -43,11 +43,6 @@ public class ItemPsimetalRod extends ItemModRod implements IPsiAddonTool {
         setMaxDamage(900);
     }
 
-    @Override
-    public String getModNamespace() {
-        return RPSIdeas.MODID;
-    }
-
     public static void castSpell(EntityPlayer player, ItemStack stack, Vec3d pos) {
         PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(player);
         ItemStack playerCad = PsiAPI.getPlayerCAD(player);
@@ -62,6 +57,11 @@ public class ItemPsimetalRod extends ItemModRod implements IPsiAddonTool {
             }
         }
 
+    }
+
+    @Override
+    public String getModNamespace() {
+        return RPSIdeas.MODID;
     }
 
     @Nonnull

@@ -23,9 +23,11 @@ public class MessageParticleTrail implements IMessage {// TODO: 12/15/18 look at
     double length;
     int time;
     ItemStack cad;
+
     @SuppressWarnings("unused")
     public MessageParticleTrail() {
     }
+
     public MessageParticleTrail(Vec3d position, Vec3d direction, double length, int time, ItemStack cad) {
         this.position = position;
         this.direction = direction;

@@ -34,8 +34,8 @@ public class PieceOperatorEntityRaycast extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 ent = this.<Vector3>getParamValue(context, target);
-        Vector3 vec = this.<Vector3>getParamValue(context, vector);
+        Vector3 ent = this.getParamValue(context, target);
+        Vector3 vec = this.getParamValue(context, vector);
         if (context.caster.world.isRemote) return null;
         if (ent == null || ent.isZero()) throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
         if (vec == null || vec.isZero()) throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);

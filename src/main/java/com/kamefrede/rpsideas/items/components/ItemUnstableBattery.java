@@ -30,11 +30,6 @@ public class ItemUnstableBattery extends ItemComponent implements IRegenerationB
         super(LibItemNames.UNSTABLE_BATTERY);
     }
 
-    @Override
-    public int getRegenerationValue(ItemStack stack) {
-        return PSI_REGEN_BONUS;
-    }
-
     @SubscribeEvent
     public static void onDamage(LivingHurtEvent e) {
         EntityLivingBase living = e.getEntityLiving();
@@ -57,6 +52,11 @@ public class ItemUnstableBattery extends ItemComponent implements IRegenerationB
                 NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP) player);
             }
         }
+    }
+
+    @Override
+    public int getRegenerationValue(ItemStack stack) {
+        return PSI_REGEN_BONUS;
     }
 
     @Override

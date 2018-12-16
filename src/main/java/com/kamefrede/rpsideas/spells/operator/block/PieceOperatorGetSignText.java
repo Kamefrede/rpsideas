@@ -28,7 +28,7 @@ public class PieceOperatorGetSignText extends PieceOperator {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster.world.isRemote) return null;
-        Vector3 positionVal = this.<Vector3>getParamValue(context, position);
+        Vector3 positionVal = this.getParamValue(context, position);
         if (position == null) throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
         if (!context.isInRadius(positionVal)) throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
         BlockPos pos = new BlockPos(positionVal.x, positionVal.y, positionVal.z);

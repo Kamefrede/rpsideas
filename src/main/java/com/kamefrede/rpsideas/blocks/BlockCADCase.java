@@ -57,6 +57,7 @@ public class BlockCADCase extends BlockRPS implements IBlockColorProvider {
     private static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.5 / 16.0, 0.0, 3.5 / 16.0, 15.5 / 16.0, 4.5 / 16.0, 12.5 / 16.0);
     private static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(3.5 / 16.0, 0.0, 0.5 / 16.0, 12.5 / 16.0, 4.5 / 16.0, 15.5 / 16.0);
     private static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.5 / 16.0, 0.0, 3.5 / 16.0, 15.5 / 16.0, 4.5 / 16.0, 12.5 / 16.0);
+
     public BlockCADCase() {
         super(LibBlockNames.CAD_CASE, Material.CLOTH);
 

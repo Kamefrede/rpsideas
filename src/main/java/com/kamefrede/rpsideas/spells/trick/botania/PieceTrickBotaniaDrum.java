@@ -112,6 +112,7 @@ public abstract class PieceTrickBotaniaDrum extends PieceComponentTrick implemen
     public static class ShearDrum extends PieceTrickBotaniaDrum {
         static final int RANGE = 10;
         static final AxisAlignedBB RANGE_AABB = new AxisAlignedBB(-RANGE, -RANGE, -RANGE, RANGE, RANGE, RANGE);
+
         public ShearDrum(Spell spell) {
             super(spell);
         }

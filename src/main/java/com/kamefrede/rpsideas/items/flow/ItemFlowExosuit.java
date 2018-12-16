@@ -50,11 +50,6 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsiAddonT
         this.ebony = ebony;
     }
 
-    @Override
-    public String getModNamespace() {
-        return RPSIdeas.MODID;
-    }
-
     @SideOnly(Side.CLIENT)
     public static ModelPsimetalExosuit getModel(int index) {
         if (models == null) {
@@ -63,6 +58,11 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsiAddonT
                 models[i] = new ModelPsimetalExosuit(i);
         }
         return models[index];
+    }
+
+    @Override
+    public String getModNamespace() {
+        return RPSIdeas.MODID;
     }
 
     @Override

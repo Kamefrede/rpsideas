@@ -31,8 +31,8 @@ public class PieceOperatorListExclusion extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        EntityListWrapper l1 = this.<EntityListWrapper>getParamValue(context, list1);
-        EntityListWrapper l2 = this.<EntityListWrapper>getParamValue(context, list2);
+        EntityListWrapper l1 = this.getParamValue(context, list1);
+        EntityListWrapper l2 = this.getParamValue(context, list2);
         if (l1 == null || l2 == null) throw new SpellRuntimeException(SpellRuntimeExceptions.NULL_LIST);
 
         List<Entity> entities = new ArrayList<>(l1.unwrap());

@@ -16,11 +16,9 @@ public class TileEthereal extends TileMod implements ITickable {
 
     private static final String TAG_TIME = "time";
     private static final String TAG_COLORIZER = "colorizer";
-
-    private long fellAt = -1;
-
     public int time = -1;
     public ItemStack colorizer = ItemStack.EMPTY;
+    private long fellAt = -1;
 
     @Override
     public void update() {

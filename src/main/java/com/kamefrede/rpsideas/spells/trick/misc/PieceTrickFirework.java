@@ -50,7 +50,7 @@ public class PieceTrickFirework extends PieceTrick {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster.world.isRemote) return null;
-        Vector3 positionVal = this.<Vector3>getParamValue(context, position);
+        Vector3 positionVal = this.getParamValue(context, position);
         Double timeVal = this.<Double>getParamValue(context, time);
         int timeR = timeVal.intValue();
 

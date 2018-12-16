@@ -31,8 +31,8 @@ public class PieceOperatorGetBlockSolidity extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 vec = this.<Vector3>getParamValue(context, target);
-        Vector3 axis = this.<Vector3>getParamValue(context, axisParam);
+        Vector3 vec = this.getParamValue(context, target);
+        Vector3 axis = this.getParamValue(context, axisParam);
         if (vec == null || vec.isZero())
             throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
         if (axis == null || !axis.isAxial() || axis.isZero())

@@ -14,6 +14,7 @@ public class PieceTrickDebugSpamless extends PieceTrick {
 
     private SpellParam targetParam;
     private SpellParam numParam;
+
     public PieceTrickDebugSpamless(Spell spell) {
         super(spell);
     }
