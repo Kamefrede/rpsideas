@@ -1,20 +1,20 @@
 package com.kamefrede.rpsideas.items.components.botania;
 
 import com.kamefrede.rpsideas.RPSIdeas;
+import com.kamefrede.rpsideas.items.base.ItemComponent;
 import com.kamefrede.rpsideas.util.RPSCreativeTab;
 import com.kamefrede.rpsideas.util.botania.IBlasterComponent;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.kamefrede.rpsideas.util.libs.LibItemNames;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -28,16 +28,15 @@ import vazkii.botania.common.item.ItemManaGun;
 import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.EnumCADStat;
 import vazkii.psi.api.cad.ICAD;
-import vazkii.psi.common.item.component.ItemCADComponent;
+import vazkii.psi.common.item.base.ModItems;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
 
 @Mod.EventBusSubscriber(Side.CLIENT)
-public class ItemBlasterAssembly extends ItemCADComponent implements IBlasterComponent, IExtraVariantHolder { // TODO: 12/15/18 look at
+public class ItemBlasterAssembly extends ItemComponent implements IBlasterComponent, IExtraVariantHolder {
 
     public static final String[] VARIANTS = {
             "cad_assembly_mana_blaster"
@@ -50,7 +49,7 @@ public class ItemBlasterAssembly extends ItemCADComponent implements IBlasterCom
 
     public ItemBlasterAssembly() {
         super(LibItemNames.CAD_ASSEMBLY);
-        vazkii.psi.common.item.base.ModItems.cad.addPropertyOverride(new ResourceLocation(RPSIdeas.MODID, "clip"), ((stack, world, ent) -> ItemManaGun.hasClip(stack) ? 1f : 0f));
+        ModItems.cad.addPropertyOverride(new ResourceLocation(RPSIdeas.MODID, "clip"), ((stack, world, ent) -> ItemManaGun.hasClip(stack) ? 1f : 0f));
         setCreativeTab(RPSCreativeTab.INSTANCE);
     }
 
@@ -62,6 +61,9 @@ public class ItemBlasterAssembly extends ItemCADComponent implements IBlasterCom
         if (!(item instanceof ICAD)) return;
         ICAD icad = (ICAD) item;
 
+        EntityPlayer player = e.getEntityPlayer();
+        World world = player == null ? null : player.getEntityWorld();
+
         ItemStack assemblyStack = icad.getComponentInSlot(e.getItemStack(), EnumCADComponent.ASSEMBLY);
         if (assemblyStack.isEmpty() || !(assemblyStack.getItem() instanceof IBlasterComponent)) return;
 
@@ -69,8 +71,6 @@ public class ItemBlasterAssembly extends ItemCADComponent implements IBlasterCom
         if (!lens.isEmpty()) {
             String itemName = e.getToolTip().get(0);
 
-
-            //Wtf is going on
             StringBuilder joined = new StringBuilder();
             String[] match = advancedMatcher.split(itemName);
             if (match.length > 1) {
@@ -84,7 +84,7 @@ public class ItemBlasterAssembly extends ItemCADComponent implements IBlasterCom
 
             if (GuiScreen.isShiftKeyDown()) {
                 List<String> gunTooltip = new ArrayList<>();
-                vazkii.botania.common.item.ModItems.manaGun.addInformation(stack, e.getEntityPlayer().world, gunTooltip, e.getFlags());
+                vazkii.botania.common.item.ModItems.manaGun.addInformation(stack, world, gunTooltip, e.getFlags());
                 e.getToolTip().addAll(2, gunTooltip);
             }
 
@@ -123,54 +123,15 @@ public class ItemBlasterAssembly extends ItemCADComponent implements IBlasterCom
         return new ModelResourceLocation(new ResourceLocation(RPSIdeas.MODID, "cad_blaster"), "inventory");
     }
 
-    protected void addTooltipTags(List<String> tooltip) {
-        //TODO my modified addtooltip is a bit different
-        addTooltipTag(true, tooltip, RPSIdeas.MODID + ".requirement.mana_cad");
-    }
-
-    @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag mistake) {
-        tooltip.add(I18n.translateToLocal("rpsideas.misc.hold") + TextFormatting.AQUA + I18n.translateToLocal("rpsideas.misc.shift") + TextFormatting.RESET + I18n.translateToLocal("rpsideas.misc.info"));
-        if (!GuiScreen.isShiftKeyDown()) return;
-        tooltip.remove(1);
-
-        addTooltipTags(tooltip);
-
-        EnumCADComponent componentType = getComponentType(stack);
-        String componentName = I18n.translateToLocal(componentType.getName());
-        tooltip.add(TextFormatting.GREEN + I18n.translateToLocal("rpsideas.componentType") + " " + TextFormatting.GRAY + componentName);
-
-        for (EnumCADStat cadStat : EnumCADStat.values()) {
-            if (cadStat.getSourceType() == componentType) {
-                int statValue = getCADStatValue(stack, cadStat);
-                String statValueString = statValue == -1 ? "∞" : String.valueOf(statValue);
-                String statName = I18n.translateToLocal(cadStat.getName());
-                tooltip.add(" " + TextFormatting.AQUA + statName + TextFormatting.GRAY + ": " + statValueString);
-            }
-        }
-    }
-
-    protected void addTooltipTag(boolean positiveEffect, List<String> tooltip, String descriptionTranslationKey, Object... descriptionFormatArgs) {
-        String nameFormatted = I18n.translateToLocal(RPSIdeas.MODID + ".cadstat." + (positiveEffect ? "extra" : "downside"));
-
-        if (descriptionFormatArgs == null) descriptionFormatArgs = new String[0];
-        String descriptionFormatted = I18n.translateToLocalFormatted(descriptionTranslationKey, descriptionFormatArgs);
-
-        TextFormatting color = positiveEffect ? TextFormatting.AQUA : TextFormatting.RED;
-
-        tooltip.add(" " + color + nameFormatted + ": " + TextFormatting.GRAY + descriptionFormatted);
-    }
-
-    protected void addTooltip(List<String> tooltip) {
-        //TODO my modified addtooltip is a bit different
+    protected void addTooltipTags(List<String> tooltip) {
         addTooltipTag(true, tooltip, RPSIdeas.MODID + ".requirement.mana_cad");
     }
 
     @Override
     public void registerStats() {
-        addStat(EnumCADStat.EFFICIENCY, 0, 80);
-        addStat(EnumCADStat.POTENCY, 0, 250);
+        addStat(EnumCADStat.EFFICIENCY, 80);
+        addStat(EnumCADStat.POTENCY, 250);
     }
 
     @Override
@@ -182,7 +143,6 @@ public class ItemBlasterAssembly extends ItemCADComponent implements IBlasterCom
     public String[] getVariants() {
         return VARIANTS;
     }
-
 
     @Override
     public String getModNamespace() {

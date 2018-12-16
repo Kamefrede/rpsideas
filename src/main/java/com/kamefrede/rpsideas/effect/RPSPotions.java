@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
-public class ModPotions {
+public class RPSPotions {
     public static final Potion psishock = new PotionPsishock();
     public static final Potion psipulse = new PotionPsipulse();
 

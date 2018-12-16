@@ -6,7 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
-public class ModEntities {
+public class RPSEntities {
     private static int id = 0;
 
     public static void init() {

@@ -1,7 +1,7 @@
 package com.kamefrede.rpsideas.spells.trick.block;
 
 import com.kamefrede.rpsideas.blocks.BlockConjuredPulsar;
-import com.kamefrede.rpsideas.blocks.ModBlocks;
+import com.kamefrede.rpsideas.blocks.RPSBlocks;
 import com.kamefrede.rpsideas.tiles.TileConjuredPulsar;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.state.IBlockState;
@@ -62,7 +62,7 @@ public class PieceTrickConjurePulsarTest extends PieceTrick {// TODO: 12/15/18 l
     }
 
     public IBlockState getStateToSet() {
-        return ModBlocks.conjuredPulsar.getDefaultState().withProperty(BlockConjuredPulsar.SOLID, true);
+        return RPSBlocks.conjuredPulsar.getDefaultState().withProperty(BlockConjuredPulsar.SOLID, true);
     }
 
     protected void postSet(SpellContext context, World world, BlockPos pos, int time) {

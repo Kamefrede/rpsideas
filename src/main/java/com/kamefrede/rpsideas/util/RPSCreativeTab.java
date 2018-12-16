@@ -1,7 +1,7 @@
 package com.kamefrede.rpsideas.util;
 
 import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.items.ModItems;
+import com.kamefrede.rpsideas.items.RPSItems;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
@@ -23,7 +23,7 @@ public class RPSCreativeTab extends CreativeTabs {
     @Override
     @Nonnull
     public ItemStack createIcon() {
-        return new ItemStack(ModItems.flashRing);
+        return new ItemStack(RPSItems.flashRing);
     }
 
     @Override

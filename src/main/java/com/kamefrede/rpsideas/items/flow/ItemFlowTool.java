@@ -1,6 +1,7 @@
-package com.kamefrede.rpsideas.items;
+package com.kamefrede.rpsideas.items.flow;
 
 import com.google.common.collect.Sets;
+import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
 import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
 import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
@@ -15,7 +16,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTool;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -24,6 +24,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.arl.item.ItemMod;
+import vazkii.arl.item.ItemModTool;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.ISocketable;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
@@ -31,21 +32,21 @@ import vazkii.psi.common.item.ItemCAD;
 import vazkii.psi.common.item.base.ModItems;
 import vazkii.psi.common.item.tool.ItemPsimetalTool;
 
+import javax.annotation.Nonnull;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-public class ItemFlowTool extends ItemTool implements IPsiAddonTool, IFlowColorAcceptor { // TODO: 12/15/18 look at
-    static final ToolMaterial mat = PsiAPI.PSIMETAL_TOOL_MATERIAL;
-    final boolean ebony;
+public class ItemFlowTool extends ItemModTool implements IPsiAddonTool, IFlowColorAcceptor {
+    private static final ToolMaterial mat = PsiAPI.PSIMETAL_TOOL_MATERIAL;
+    private final boolean ebony;
 
     //Use constructors down below
-    private ItemFlowTool(String toolClass, boolean ebony) {
-        super(getAttackDamage(toolClass, mat), getAttackSpeed(toolClass, mat), mat, getEffectiveList(toolClass));
+    private ItemFlowTool(String name, String toolClass, boolean ebony) {
+        super(name, getAttackDamage(toolClass, mat), getAttackSpeed(toolClass, mat), mat, getEffectiveList(toolClass));
         this.ebony = ebony;
     }
 
-    //Thanks mojang
     private static Set<Block> getEffectiveList(String toolClass) {
         switch (toolClass) {
             case "pickaxe":
@@ -59,7 +60,6 @@ public class ItemFlowTool extends ItemTool implements IPsiAddonTool, IFlowColorA
         }
     }
 
-    //Stoleded from liblib
     private static float getAttackDamage(String toolClass, ToolMaterial mat) {
         switch (toolClass) {
             case "axe":
@@ -89,8 +89,6 @@ public class ItemFlowTool extends ItemTool implements IPsiAddonTool, IFlowColorA
         }
     }
 
-    //TODO liblib item glow stuff
-
     @Override
     public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, EntityPlayer player) {
         super.onBlockStartBreak(stack, pos, player);
@@ -98,7 +96,7 @@ public class ItemFlowTool extends ItemTool implements IPsiAddonTool, IFlowColorA
         PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(player);
         ItemStack playerCad = PsiAPI.getPlayerCAD(player);
 
-        if (!playerCad.isEmpty()) {
+        if (data != null && !playerCad.isEmpty()) {
             ItemStack bullet = getBulletInSocket(stack, getSelectedSlot(stack));
             ItemCAD.cast(player.world, player, data, bullet, playerCad, 5, 10, 0.05f, spellContext -> {
                 spellContext.tool = stack;
@@ -122,7 +120,7 @@ public class ItemFlowTool extends ItemTool implements IPsiAddonTool, IFlowColorA
     }
 
     @Override
-    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+    public boolean getIsRepairable(ItemStack toRepair, @Nonnull ItemStack repair) {
         if (repair.getItem() == ModItems.material) {
             return repair.getItemDamage() == (ebony ? 4 : 5);
         } else return super.getIsRepairable(toRepair, repair);
@@ -134,10 +132,14 @@ public class ItemFlowTool extends ItemTool implements IPsiAddonTool, IFlowColorA
         return super.onEntityItemUpdate(ent);
     }
 
-    //This is the part where I copypasta vanilla tools to accommodate all of vanilla's stupid special casing
+    @Override
+    public String getModNamespace() {
+        return RPSIdeas.MODID;
+    }
+
     public static class Pickaxe extends ItemFlowTool {
-        public Pickaxe(boolean ebony) {
-            super("pickaxe", ebony);
+        public Pickaxe(String name, boolean ebony) {
+            super(name, "pickaxe", ebony);
         }
 
         @Override
@@ -174,27 +176,27 @@ public class ItemFlowTool extends ItemTool implements IPsiAddonTool, IFlowColorA
         }
 
         @Override
-        public float getDestroySpeed(ItemStack stack, IBlockState state) {
+        public float getDestroySpeed(@Nonnull ItemStack stack, IBlockState state) {
             Material material = state.getMaterial();
             return material != Material.IRON && material != Material.ANVIL && material != Material.ROCK ? super.getDestroySpeed(stack, state) : this.efficiency;
         }
     }
 
     public static class Axe extends ItemFlowTool {
-        public Axe(boolean ebony) {
-            super("axe", ebony);
+        public Axe(String name, boolean ebony) {
+            super(name, "axe", ebony);
         }
 
         @Override
-        public float getDestroySpeed(ItemStack stack, IBlockState state) {
+        public float getDestroySpeed(@Nonnull ItemStack stack, IBlockState state) {
             Material material = state.getMaterial();
             return material != Material.WOOD && material != Material.PLANTS && material != Material.VINE ? super.getDestroySpeed(stack, state) : this.efficiency;
         }
     }
 
     public static class Shovel extends ItemFlowTool {
-        public Shovel(boolean ebony) {
-            super("shovel", ebony);
+        public Shovel(String name, boolean ebony) {
+            super(name, "shovel", ebony);
         }
 
         @Override
@@ -204,6 +206,7 @@ public class ItemFlowTool extends ItemTool implements IPsiAddonTool, IFlowColorA
         }
 
         //so you're able to create paths and such with it
+        @Nonnull
         @Override
         public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
             return Items.IRON_SHOVEL.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);

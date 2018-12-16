@@ -15,6 +15,7 @@ public class LibItemNames {
     public static final String CAD_CASE = "cad_case";
     public static final String BIOTIC_SENSOR = "biotic_sensor";
     public static final String TWINFLOW_BATTERY = "twinflow_battery";
+    public static final String SHIELDED_BATTERY = "shielded_battery";
     public static final String UNSTABLE_BATTERY = "unstable_battery";
     public static final String CREATIVE_CORE = "creative_core";
     public static final String CREATIVE_SOCKET = "creative_socket";

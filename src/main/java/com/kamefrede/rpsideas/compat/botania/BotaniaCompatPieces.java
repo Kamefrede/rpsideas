@@ -7,7 +7,7 @@ import com.kamefrede.rpsideas.util.libs.LibPieceNames;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.common.lib.LibPieceGroups;
 
-public class BotaniaCompatPieces {// TODO: 12/15/18 look at
+public class BotaniaCompatPieces {
 
     public static void init() {
         PsiAPI.setGroupRequirements(LibPieceNames.MANA_PSIONICS, 16, LibPieceGroups.GREATER_INFUSION, LibPieceGroups.ELEMENTAL_ARTS);

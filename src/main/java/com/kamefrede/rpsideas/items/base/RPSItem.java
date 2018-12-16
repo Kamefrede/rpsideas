@@ -1,15 +1,17 @@
-package com.kamefrede.rpsideas.items;
+package com.kamefrede.rpsideas.items.base;
 
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.util.RPSCreativeTab;
-import com.kamefrede.rpsideas.util.libs.LibItemNames;
 import vazkii.arl.item.ItemMod;
 
-public class ItemGaussBullet extends ItemMod { // TODO: 12/15/18 look at
-    public ItemGaussBullet() {
-        super(LibItemNames.ITEM_GAUSS_BULLET);
+/**
+ * @author WireSegal
+ * Created at 9:19 AM on 12/16/18.
+ */
+public class RPSItem extends ItemMod {
+    public RPSItem(String name, String... variants) {
+        super(name, variants);
         setCreativeTab(RPSCreativeTab.INSTANCE);
-        setMaxStackSize(64);
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.kamefrede.rpsideas.items.blocks;
 
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.gui.GuiHandler;
-import com.kamefrede.rpsideas.items.base.Item16Colors;
 import com.kamefrede.rpsideas.items.base.ProxiedItemStackHandler;
 import com.kamefrede.rpsideas.tiles.TileCADCase;
 import com.kamefrede.rpsideas.util.RPSSoundHandler;
@@ -12,21 +11,19 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import vazkii.arl.item.ItemModBlock;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 
-public class ItemCADCase extends Item16Colors {
-    public ItemCADCase(Block block) {
-        super(block);
+public class ItemCADCase extends ItemModBlock {
+    public ItemCADCase(Block block, ResourceLocation res) {
+        super(block, res);
 
         setMaxStackSize(1);
     }

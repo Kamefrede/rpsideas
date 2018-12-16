@@ -1,7 +1,7 @@
 package com.kamefrede.rpsideas.entity;
 
-import com.kamefrede.rpsideas.effect.ModPotions;
-import com.kamefrede.rpsideas.items.ModItems;
+import com.kamefrede.rpsideas.effect.RPSPotions;
+import com.kamefrede.rpsideas.items.RPSItems;
 import com.kamefrede.rpsideas.network.MessageSparkleSphere;
 import com.kamefrede.rpsideas.network.RPSPacketHandler;
 import net.minecraft.entity.Entity;
@@ -158,7 +158,7 @@ public class EntityGaussPulse extends EntityThrowable {
                 setAmmoStatus(AmmoStatus.DEPLETED);
             entityhit.attackEntityFrom(new EntityDamageSourceIndirect("arrow", this, thrower).setProjectile(), getAmmo().damage);
             if (entityhit instanceof EntityLivingBase)
-                ((EntityLivingBase) entityhit).addPotionEffect(new PotionEffect(ModPotions.psishock, getAmmo().shockDuration));
+                ((EntityLivingBase) entityhit).addPotionEffect(new PotionEffect(RPSPotions.psishock, getAmmo().shockDuration));
             if (entityhit instanceof EntityEnderman) return;
         }
         posX = result.hitVec.x;
@@ -190,13 +190,13 @@ public class EntityGaussPulse extends EntityThrowable {
 
             if (list.size() > 0 || getAmmo() != AmmoStatus.AMMO) {
                 for (EntityLivingBase player : players)
-                    player.addPotionEffect(new PotionEffect(ModPotions.psishock, getAmmo().shockDuration));
+                    player.addPotionEffect(new PotionEffect(RPSPotions.psishock, getAmmo().shockDuration));
                 for (EntityLivingBase ent : list)
                     ent.attackEntityFrom(new EntityDamageSourceIndirect("arrow", this, thrower).setProjectile(), getAmmo().damage);
                 RPSPacketHandler.sendToAllWithinRange(new MessageSparkleSphere(getPositionVector(), getAmmo()), world, getPosition(), 128.0);
 
             } else if (getAmmo() == AmmoStatus.AMMO) {
-                EntityItem item = new EntityItem(world, posX, posY, posZ, new ItemStack(ModItems.gaussBullet));
+                EntityItem item = new EntityItem(world, posX, posY, posZ, new ItemStack(RPSItems.gaussBullet));
                 Vec3d motionVec = new Vec3d(motionX, motionY, motionZ);
                 Vec3d vec = motionVec.normalize().scale(1 / 4.5F);
                 EnumFacing eject = ejectFacing;

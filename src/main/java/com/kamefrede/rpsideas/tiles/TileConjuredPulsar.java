@@ -1,7 +1,7 @@
 package com.kamefrede.rpsideas.tiles;
 
 import com.kamefrede.rpsideas.blocks.BlockPulsarLight;
-import com.kamefrede.rpsideas.blocks.ModBlocks;
+import com.kamefrede.rpsideas.blocks.RPSBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -43,7 +43,7 @@ public class TileConjuredPulsar extends TileMod implements ITickable {
 
             IBlockState state = world.getBlockState(pos);
             state = state.getBlock().getActualState(state, world, pos);
-            if (state.getBlock() != ModBlocks.conjuredPulsarLight) return;
+            if (state.getBlock() != RPSBlocks.conjuredPulsarLight) return;
 
             if (!state.getValue(BlockPulsarLight.SOLID) && Math.random() < 0.5)
                 doNonSolidParticle(red, green, blue);

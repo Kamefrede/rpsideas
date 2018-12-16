@@ -1,10 +1,10 @@
 package com.kamefrede.rpsideas.items;
 
 import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.crafting.factory.ModRecipes;
+import com.kamefrede.rpsideas.crafting.factory.RPSRecipes;
 import com.kamefrede.rpsideas.gui.GuiHandler;
 import com.kamefrede.rpsideas.items.base.ICadComponentAcceptor;
-import com.kamefrede.rpsideas.util.RPSCreativeTab;
+import com.kamefrede.rpsideas.items.base.RPSItem;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,7 +20,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import vazkii.arl.item.ItemMod;
 import vazkii.arl.util.ItemNBTHelper;
 import vazkii.arl.util.VanillaPacketDispatcher;
 import vazkii.psi.api.PsiAPI;
@@ -37,14 +36,14 @@ import vazkii.psi.common.item.ItemSpellDrive;
 import vazkii.psi.common.item.base.ModItems;
 import vazkii.psi.common.spell.SpellCompiler;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemCADMagazine extends ItemMod implements ISocketable, ICadComponentAcceptor, ISpellSettable { // TODO: 12/15/18 look at
+public class ItemCADMagazine extends RPSItem implements ISocketable, ICadComponentAcceptor, ISpellSettable {
     public ItemCADMagazine(String name) {
         super(name);
         setMaxStackSize(1);
-        setCreativeTab(RPSCreativeTab.INSTANCE);
     }
 
     public static ItemStack getSocket(ItemStack stack) {
@@ -82,21 +81,23 @@ public class ItemCADMagazine extends ItemMod implements ISocketable, ICadCompone
     }
 
     @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items) {
 
         if (isInCreativeTab(tab)) {
-            for (ItemStack stack : ModRecipes.examplesockets) {
+            for (ItemStack stack : RPSRecipes.examplesockets) {
                 items.add(setSocket(new ItemStack(this), stack));
             }
         }
     }
 
+    @Nonnull
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         TileEntity tile = worldIn.getTileEntity(pos);
         ItemStack stack = player.getHeldItem(hand);
-        if (tile != null && tile instanceof TileProgrammer) {
+        if (tile instanceof TileProgrammer) {
             Spell spell = getSpell(stack);
+
             boolean enabled = ((TileProgrammer) tile).isEnabled();
             if (spell != null) {
                 SpellCompiler compiled = new SpellCompiler(spell);
@@ -115,8 +116,8 @@ public class ItemCADMagazine extends ItemMod implements ISocketable, ICadCompone
                 VanillaPacketDispatcher.dispatchTEToNearbyPlayers(tile);
                 return EnumActionResult.SUCCESS;
             } else {
-                if (!enabled || ((TileProgrammer) tile).playerLock.isEmpty() || ((TileProgrammer) tile).playerLock == player.getName()) {
-                    ((TileProgrammer) tile).spell = spell;
+                if (!enabled || ((TileProgrammer) tile).playerLock.isEmpty() || ((TileProgrammer) tile).playerLock.equals(player.getName())) {
+                    ((TileProgrammer) tile).spell = null;
                     ((TileProgrammer) tile).onSpellChanged();
                     worldIn.markBlockRangeForRenderUpdate(tile.getPos(), tile.getPos());
                     worldIn.playSound((double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, PsiSoundHandler.bulletCreate, SoundCategory.PLAYERS, 0.5f, 1.0f, false);
@@ -198,12 +199,13 @@ public class ItemCADMagazine extends ItemMod implements ISocketable, ICadCompone
         return getSocket(stack);
     }
 
+    @Nonnull
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn) {
         if (!worldIn.isRemote && !PsiAPI.getPlayerCAD(playerIn).isEmpty()) {
             playerIn.openGui(RPSIdeas.INSTANCE, GuiHandler.GUI_MAGAZINE, worldIn, 0, 0, 0);
         }
-        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+        return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
     }
 
 
@@ -212,10 +214,6 @@ public class ItemCADMagazine extends ItemMod implements ISocketable, ICadCompone
         return type == EnumCADComponent.SOCKET;
     }
 
-    @Override
-    public String getModNamespace() {
-        return RPSIdeas.MODID;
-    }
 
     @Override
     public boolean isSocketSlotAvailable(ItemStack stack, int slot) {

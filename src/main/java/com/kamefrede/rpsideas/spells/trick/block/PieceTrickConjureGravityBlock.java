@@ -1,6 +1,6 @@
 package com.kamefrede.rpsideas.spells.trick.block;
 
-import com.kamefrede.rpsideas.blocks.ModBlocks;
+import com.kamefrede.rpsideas.blocks.RPSBlocks;
 import com.kamefrede.rpsideas.tiles.TileEthereal;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -34,7 +34,7 @@ public class PieceTrickConjureGravityBlock extends PieceTrick {// TODO: 12/15/18
         if (block == null || block.isAir(state, world, pos) || block.isReplaceable(world, pos)) {
             if (conjure) {
                 if (!world.isRemote)
-                    world.setBlockState(pos, ModBlocks.conjuredGravityBlock.getDefaultState());
+                    world.setBlockState(pos, RPSBlocks.conjuredGravityBlock.getDefaultState());
             }
         }
     }
@@ -72,12 +72,12 @@ public class PieceTrickConjureGravityBlock extends PieceTrick {// TODO: 12/15/18
             return null;
 
         IBlockState state = context.caster.getEntityWorld().getBlockState(pos);
-        if (state.getBlock() != ModBlocks.conjuredGravityBlock) {
+        if (state.getBlock() != RPSBlocks.conjuredGravityBlock) {
             placeBlock(context.caster, context.caster.getEntityWorld(), pos, context.getTargetSlot(), false, true);
 
             state = context.caster.getEntityWorld().getBlockState(pos);
 
-            if (!context.caster.getEntityWorld().isRemote && state.getBlock() == ModBlocks.conjuredGravityBlock) {
+            if (!context.caster.getEntityWorld().isRemote && state.getBlock() == RPSBlocks.conjuredGravityBlock) {
                 context.caster.getEntityWorld().setBlockState(pos, state);
                 TileEthereal tile = (TileEthereal) context.caster.getEntityWorld().getTileEntity(pos);
 

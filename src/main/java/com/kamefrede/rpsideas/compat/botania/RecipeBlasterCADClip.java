@@ -15,7 +15,7 @@ import vazkii.psi.api.cad.ICAD;
 
 import javax.annotation.Nonnull;
 
-public class RecipeBlasterCADClipp extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {// TODO: 12/15/18 look at
+public class RecipeBlasterCADClip extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 
     @Override
     public boolean isDynamic() {
@@ -41,11 +41,17 @@ public class RecipeBlasterCADClipp extends IForgeRegistryEntry.Impl<IRecipe> imp
         for (int i = 0; i < inv.getSizeInventory(); i++) {
             ItemStack stack = inv.getStackInSlot(i);
             if (!stack.isEmpty()) {
-                if (stack.getItem() instanceof ICAD && ((ICAD) stack.getItem()).getComponentInSlot(stack, EnumCADComponent.ASSEMBLY).getItem() instanceof IBlasterComponent)
+                if (stack.getItem() instanceof ICAD && ((ICAD) stack.getItem()).getComponentInSlot(stack, EnumCADComponent.ASSEMBLY).getItem() instanceof IBlasterComponent) {
+                    if (foundGun)
+                        return false;
                     foundGun = true;
+                }
 
-                else if (stack.getItem() == ModItems.clip && !foundClip)
+                else if (stack.getItem() == ModItems.clip) {
+                    if (foundClip)
+                        return false;
                     foundClip = true;
+                }
 
                 else return false; // Found an invalid item, breaking the recipe
             }
@@ -75,10 +81,10 @@ public class RecipeBlasterCADClipp extends IForgeRegistryEntry.Impl<IRecipe> imp
 
         ItemStack lens = ItemManaGun.getLens(gun);
         ItemManaGun.setLens(gun, ItemStack.EMPTY);
-        ItemStack guncopy = gun.copy();
-        ItemManaGun.setClip(guncopy, true);
-        ItemManaGun.setLensAtPos(guncopy, lens, 0);
-        return guncopy;
+        ItemStack copy = gun.copy();
+        ItemManaGun.setClip(copy, true);
+        ItemManaGun.setLensAtPos(copy, lens, 0);
+        return copy;
 
     }
 }

@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.items;
+package com.kamefrede.rpsideas.items.flow;
 
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
@@ -6,18 +6,20 @@ import com.kamefrede.rpsideas.util.helpers.ClientHelpers;
 import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import vazkii.arl.interf.IItemColorProvider;
 import vazkii.arl.item.ItemMod;
+import vazkii.arl.item.ItemModArmor;
 import vazkii.arl.util.ItemNBTHelper;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.ICADColorizer;
@@ -33,18 +35,24 @@ import vazkii.psi.common.item.ItemCAD;
 import vazkii.psi.common.item.base.ModItems;
 import vazkii.psi.common.item.tool.ItemPsimetalTool;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
-public abstract class ItemFlowExosuit extends ItemArmor implements IPsiAddonTool, IPsiEventArmor { // TODO: 12/15/18 look at
+public abstract class ItemFlowExosuit extends ItemModArmor implements IPsiAddonTool, IPsiEventArmor, IItemColorProvider {
     private static final String TAG_TIMES_CAST = "timesCast";
     @SideOnly(Side.CLIENT)
     private static ModelPsimetalExosuit[] models;
     final boolean ebony;
 
 
-    private ItemFlowExosuit(EntityEquipmentSlot slot, boolean ebony) {
-        super(PsiAPI.PSIMETAL_ARMOR_MATERIAL, -1, slot);
+    private ItemFlowExosuit(String name, EntityEquipmentSlot slot, boolean ebony) {
+        super(name, PsiAPI.PSIMETAL_ARMOR_MATERIAL, -1, slot);
         this.ebony = ebony;
+    }
+
+    @Override
+    public String getModNamespace() {
+        return RPSIdeas.MODID;
     }
 
     @SideOnly(Side.CLIENT)
@@ -66,7 +74,7 @@ public abstract class ItemFlowExosuit extends ItemArmor implements IPsiAddonTool
         PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(event.getEntityPlayer());
         ItemStack playerCad = PsiAPI.getPlayerCAD(event.getEntityPlayer());
 
-        if (!playerCad.isEmpty()) {
+        if (data != null && !playerCad.isEmpty()) {
             int timesCast = ItemNBTHelper.getInt(stack, TAG_TIMES_CAST, 0);
 
             ItemStack bullet = getBulletInSocket(stack, getSelectedSlot(stack));
@@ -108,12 +116,12 @@ public abstract class ItemFlowExosuit extends ItemArmor implements IPsiAddonTool
 
 
     @Override
-    public int getColor(ItemStack stack) {
+    public int getColor(@Nonnull ItemStack stack) {
         return ICADColorizer.DEFAULT_SPELL_COLOR;
     }
 
     @Override
-    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+    public boolean getIsRepairable(ItemStack toRepair, @Nonnull ItemStack repair) {
         if (repair.getItem() == ModItems.material) {
             return repair.getItemDamage() == (ebony ? 4 : 5);
         } else return super.getIsRepairable(toRepair, repair);
@@ -127,7 +135,7 @@ public abstract class ItemFlowExosuit extends ItemArmor implements IPsiAddonTool
     }
 
     @Override
-    public boolean hasColor(ItemStack stack) {
+    public boolean hasColor(@Nonnull ItemStack stack) {
         return true;
     }
 
@@ -138,13 +146,16 @@ public abstract class ItemFlowExosuit extends ItemArmor implements IPsiAddonTool
         } else return "psi:textures/model/psimetal_exosuit_sensor.png";
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
-    public int getItemColor(ItemStack stack, int layer) {
-        if (layer == 0) {
-            return ClientHelpers.getFlowColor(stack);
-        } else if (layer == 1) {
-            return getColor(stack);
-        } else return 0xFFFFFF;
+    public IItemColor getItemColor() {
+        return (stack, tintIndex) -> {
+            if (tintIndex == 0) {
+                return ClientHelpers.getFlowColor(stack);
+            } else if (tintIndex == 1) {
+                return getColor(stack);
+            } else return 0xFFFFFF;
+        };
     }
 
     @SideOnly(Side.CLIENT)
@@ -154,8 +165,8 @@ public abstract class ItemFlowExosuit extends ItemArmor implements IPsiAddonTool
     }
 
     public static class Helmet extends ItemFlowExosuit implements ISensorHoldable {
-        public Helmet(boolean ebony) {
-            super(EntityEquipmentSlot.HEAD, ebony);
+        public Helmet(String name, boolean ebony) {
+            super(name, EntityEquipmentSlot.HEAD, ebony);
         }
 
         @Override
@@ -172,7 +183,7 @@ public abstract class ItemFlowExosuit extends ItemArmor implements IPsiAddonTool
         }
 
         @Override
-        public int getColor(ItemStack helmet) {
+        public int getColor(@Nonnull ItemStack helmet) {
             ItemStack sensor = getAttachedSensor(helmet);
             if (!sensor.isEmpty() && sensor.getItem() instanceof IExosuitSensor) {
                 return ((IExosuitSensor) sensor.getItem()).getColor(sensor);
@@ -190,19 +201,20 @@ public abstract class ItemFlowExosuit extends ItemArmor implements IPsiAddonTool
         }
 
         @Override
-        public boolean hasContainerItem() {
+        public boolean hasContainerItem(@Nonnull ItemStack stack) {
             return true;
         }
 
+        @Nonnull
         @Override
-        public ItemStack getContainerItem(ItemStack helmet) {
+        public ItemStack getContainerItem(@Nonnull ItemStack helmet) {
             return getAttachedSensor(helmet);
         }
     }
 
     public static class Chestplate extends ItemFlowExosuit {
-        public Chestplate(boolean ebony) {
-            super(EntityEquipmentSlot.CHEST, ebony);
+        public Chestplate(String name, boolean ebony) {
+            super(name, EntityEquipmentSlot.CHEST, ebony);
         }
 
         @Override
@@ -217,8 +229,8 @@ public abstract class ItemFlowExosuit extends ItemArmor implements IPsiAddonTool
     }
 
     public static class Leggings extends ItemFlowExosuit {
-        public Leggings(boolean ebony) {
-            super(EntityEquipmentSlot.LEGS, ebony);
+        public Leggings(String name, boolean ebony) {
+            super(name, EntityEquipmentSlot.LEGS, ebony);
         }
 
         @Override
@@ -238,8 +250,8 @@ public abstract class ItemFlowExosuit extends ItemArmor implements IPsiAddonTool
     }
 
     public static class Boots extends ItemFlowExosuit {
-        public Boots(boolean ebony) {
-            super(EntityEquipmentSlot.FEET, ebony);
+        public Boots(String name, boolean ebony) {
+            super(name, EntityEquipmentSlot.FEET, ebony);
         }
 
         @Override

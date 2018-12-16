@@ -1,8 +1,7 @@
 package com.kamefrede.rpsideas.items;
 
 import com.kamefrede.rpsideas.entity.EntitySniperProjectile;
-import com.kamefrede.rpsideas.util.IRPSIdeasItem;
-import com.kamefrede.rpsideas.util.RPSCreativeTab;
+import com.kamefrede.rpsideas.items.base.RPSItem;
 import com.kamefrede.rpsideas.util.libs.LibItemNames;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -14,7 +13,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import vazkii.arl.item.ItemMod;
 import vazkii.arl.util.ItemNBTHelper;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.EnumCADComponent;
@@ -24,10 +22,11 @@ import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.common.item.ItemSpellDrive;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemSniperSpellBullet extends ItemMod implements ISpellContainer, IRPSIdeasItem { // TODO: 12/15/18 look at
+public class ItemSniperSpellBullet extends RPSItem implements ISpellContainer {
 
     public static final String[] VARIANTS = {
             "spell_bullet_sniper",
@@ -38,7 +37,6 @@ public class ItemSniperSpellBullet extends ItemMod implements ISpellContainer, I
     public ItemSniperSpellBullet() {
         super(LibItemNames.SNIPER_BULLET, VARIANTS);
         setMaxStackSize(1);
-        setCreativeTab(RPSCreativeTab.INSTANCE);
     }
 
     @Override
@@ -47,25 +45,27 @@ public class ItemSniperSpellBullet extends ItemMod implements ISpellContainer, I
     }
 
 
+    @Nonnull
     @Override
-    public ItemStack getContainerItem(ItemStack itemStack) {
+    public ItemStack getContainerItem(@Nonnull ItemStack itemStack) {
         return itemStack.copy();
     }
 
 
+    @Nonnull
     @Override
-    public String getItemStackDisplayName(ItemStack stack) {
+    public String getItemStackDisplayName(@Nonnull ItemStack stack) {
         if (!containsSpell(stack)) return super.getItemStackDisplayName(stack);
 
         NBTTagCompound cmp = ItemNBTHelper.getCompound(stack, TAG_SPELL, false);
         String name = cmp.getString(Spell.TAG_SPELL_NAME);
-        if (name == null || name.isEmpty()) return super.getItemStackDisplayName(stack);
+        if (name.isEmpty()) return super.getItemStackDisplayName(stack);
 
         return name;
     }
 
     @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
+    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> subItems) {
         if (isInCreativeTab(tab))
             for (int i = 0; i < getVariants().length; i++)
                 if (i % 2 == 0)
@@ -98,6 +98,7 @@ public class ItemSniperSpellBullet extends ItemMod implements ISpellContainer, I
         }
     }
 
+    @Nonnull
     @SideOnly(Side.CLIENT)
     @Override
     public EnumRarity getRarity(ItemStack stack) {

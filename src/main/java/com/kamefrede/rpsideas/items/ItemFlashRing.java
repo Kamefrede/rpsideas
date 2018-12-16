@@ -2,17 +2,18 @@ package com.kamefrede.rpsideas.items;
 
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.gui.GuiHandler;
+import com.kamefrede.rpsideas.items.base.RPSItem;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import com.kamefrede.rpsideas.util.libs.LibItemNames;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -24,24 +25,27 @@ import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.item.ItemCAD;
 import vazkii.psi.common.item.ItemSpellDrive;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemFlashRing extends Item implements ISpellContainer { // TODO: 12/15/18 look at
+public class ItemFlashRing extends RPSItem implements ISpellContainer {
     public ItemFlashRing() {
+        super(LibItemNames.FLASH_RING);
         setMaxStackSize(1);
 
         addPropertyOverride(new ResourceLocation(RPSIdeas.MODID, "active"), (stack, world, ent) -> containsSpell(stack) ? 1f : 0f);
     }
 
+    @Nonnull
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
         ItemStack held = player.getHeldItem(hand);
         if (!player.isSneaking() && containsSpell(held)) {
             PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(player);
             ItemStack cad = PsiAPI.getPlayerCAD(player);
             boolean did = false;
-            if (!cad.isEmpty()) {
+            if (data != null && !cad.isEmpty()) {
                 did = ItemCAD.cast(world, player, data, held, cad, (int) (getCostModifier(held) * 15), 25, 0.5f, null);
             }
             return new ActionResult<>(did ? EnumActionResult.SUCCESS : EnumActionResult.PASS, held);
@@ -56,16 +60,16 @@ public class ItemFlashRing extends Item implements ISpellContainer { // TODO: 12
         return new ActionResult<>(EnumActionResult.PASS, held);
     }
 
-    //TODO: This 100 magic numbers differs from the 15 up there. Why?
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag mistake) {
-        String cost = TextFormatting.AQUA + I18n.translateToLocal("rpsideas.misc.cost") + " " + TextFormatting.GRAY + (int) (getCostModifier(stack) * 100) + "%";
+        String cost = TextFormatting.AQUA + I18n.format("rpsideas.misc.cost") + " " + TextFormatting.GRAY + (int) (getCostModifier(stack) * 100) + "%";
         tooltip.add(cost);
     }
 
+    @Nonnull
     @Override
-    public String getItemStackDisplayName(ItemStack stack) {
+    public String getItemStackDisplayName(@Nonnull ItemStack stack) {
         if (containsSpell(stack)) {
             Spell spell = getSpell(stack);
 
@@ -108,7 +112,7 @@ public class ItemFlashRing extends Item implements ISpellContainer { // TODO: 12
 
     @Override
     public boolean requiresSneakForSpellSet(ItemStack stack) {
-        return true; //Because the Flash Ring has shift-click behavior, this will never fire. -wire
+        return true; //Because the Flash Ring has shift-click behavior, this will never fire.
     }
 
     @Override
@@ -116,8 +120,9 @@ public class ItemFlashRing extends Item implements ISpellContainer { // TODO: 12
         return true;
     }
 
+    @Nonnull
     @Override
-    public ItemStack getContainerItem(ItemStack stack) {
+    public ItemStack getContainerItem(@Nonnull ItemStack stack) {
         return stack.copy();
     }
 }

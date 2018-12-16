@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.items.components;
 
 import com.kamefrede.rpsideas.items.base.ItemComponent;
+import com.kamefrede.rpsideas.util.libs.LibItemNames;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -11,6 +12,11 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemWideCADSocket extends ItemComponent {
+
+    public ItemWideCADSocket() {
+        super(LibItemNames.WIDE_SOCKET);
+    }
+
     @Override
     public EnumCADComponent getComponentType(ItemStack itemStack) {
         return EnumCADComponent.SOCKET;

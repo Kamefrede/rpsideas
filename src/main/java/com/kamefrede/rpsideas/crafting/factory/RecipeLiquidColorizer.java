@@ -1,67 +1,62 @@
 package com.kamefrede.rpsideas.crafting.factory;
 
-import com.google.common.collect.Lists;
 import com.kamefrede.rpsideas.items.components.ItemLiquidColorizer;
 import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.oredict.DyeUtils;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 import vazkii.arl.util.ItemNBTHelper;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.awt.*;
-import java.util.List;
 
-public class RecipeLiquidColorizer extends net.minecraftforge.registries.IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {// TODO: 12/15/18 look at
+public class RecipeLiquidColorizer extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 
-    public boolean matches(InventoryCrafting inv, World worldIn) {
-        ItemStack itemstack = ItemStack.EMPTY;
-        List<ItemStack> list = Lists.<ItemStack>newArrayList();
-
+    public boolean matches(@Nonnull InventoryCrafting inv, @Nullable World worldIn) {
+        boolean colorizerFound = false;
+        boolean dyeFound = false;
 
         for (int i = 0; i < inv.getSizeInventory(); ++i) {
-            ItemStack itemstack1 = inv.getStackInSlot(i);
+            ItemStack stack = inv.getStackInSlot(i);
 
-            if (!itemstack1.isEmpty()) {
-                if (itemstack1.getItem() instanceof ItemLiquidColorizer) {
+            if (!stack.isEmpty()) {
+                if (stack.getItem() instanceof ItemLiquidColorizer) {
 
-                    if (!itemstack.isEmpty()) {
+                    if (colorizerFound)
                         return false;
-                    }
 
-                    itemstack = itemstack1;
+                    colorizerFound = true;
                 } else {
-                    if (!DyeUtils.isDye(itemstack1)) {
+                    if (!DyeUtils.isDye(stack))
                         return false;
-                    }
 
-                    list.add(itemstack1);
+                    dyeFound = true;
                 }
             }
         }
 
-        return !itemstack.isEmpty() && !list.isEmpty();
+        return colorizerFound && dyeFound;
     }
 
-    /**
-     * Returns an Item that is the result of this recipe
-     */
-    public ItemStack getCraftingResult(InventoryCrafting inv) {
+    @Nonnull
+    public ItemStack getCraftingResult(@Nonnull InventoryCrafting inv) {
         ItemStack itemstack = ItemStack.EMPTY;
         int r = 0;
         int g = 0;
         int b = 0;
         int colors = 0;
-        ItemLiquidColorizer itemcolorizer;
 
         for (int k = 0; k < inv.getSizeInventory(); ++k) {
             ItemStack itemstack1 = inv.getStackInSlot(k);
 
             if (!itemstack1.isEmpty()) {
                 if (itemstack1.getItem() instanceof ItemLiquidColorizer) {
-                    itemcolorizer = (ItemLiquidColorizer) itemstack1.getItem();
 
                     if (!itemstack.isEmpty()) {
                         return ItemStack.EMPTY;
@@ -70,8 +65,8 @@ public class RecipeLiquidColorizer extends net.minecraftforge.registries.IForgeR
                     itemstack = itemstack1.copy();
                     itemstack.setCount(1);
 
-                    if (ItemLiquidColorizer.Companion.getColorFromStack(itemstack1) != Integer.MAX_VALUE) {
-                        Color color = new Color(ItemLiquidColorizer.Companion.getColorFromStack(itemstack1));
+                    if (ItemLiquidColorizer.getColorFromStack(itemstack1) != Integer.MAX_VALUE) {
+                        Color color = new Color(ItemLiquidColorizer.getColorFromStack(itemstack1));
                         r += color.getRed();
                         b += color.getBlue();
                         g += color.getGreen();
@@ -81,7 +76,7 @@ public class RecipeLiquidColorizer extends net.minecraftforge.registries.IForgeR
                     if (!DyeUtils.isDye(itemstack1)) {
                         return ItemStack.EMPTY;
                     }
-                    float[] color = DyeUtils.colorFromStack(itemstack1).get().getColorComponentValues();
+                    float[] color = DyeUtils.colorFromStack(itemstack1).orElse(EnumDyeColor.WHITE).getColorComponentValues();
 
                     r += (int) (color[0] * 255);
                     g += (int) (color[1] * 255);
@@ -103,37 +98,20 @@ public class RecipeLiquidColorizer extends net.minecraftforge.registries.IForgeR
         }
     }
 
-    /**
-     * Get the result of this recipe, usually for display purposes (e.g. recipe book). If your recipe has more than one
-     * possible result (e.g. it's dynamic and depends on its inputs), then return an empty stack.
-     */
+    @Nonnull
     public ItemStack getRecipeOutput() {
         return ItemStack.EMPTY;
     }
 
-
+    @Nonnull
     public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
-        NonNullList<ItemStack> nonnulllist = NonNullList.<ItemStack>withSize(inv.getSizeInventory(), ItemStack.EMPTY);
-
-        for (int i = 0; i < nonnulllist.size(); ++i) {
-            ItemStack itemstack = inv.getStackInSlot(i);
-            nonnulllist.set(i, ForgeHooks.getContainerItem(itemstack));
-        }
-
-        return nonnulllist;
+        return ForgeHooks.defaultRecipeGetRemainingItems(inv);
     }
 
-    /**
-     * If true, this recipe does not appear in the recipe book and does not respect recipe unlocking (and the
-     * doLimitedCrafting gamerule)
-     */
     public boolean isDynamic() {
         return true;
     }
 
-    /**
-     * Used to determine if this recipe can fit in a grid of the given width/height
-     */
     public boolean canFit(int width, int height) {
         return width * height >= 2;
     }

@@ -1,8 +1,7 @@
 package com.kamefrede.rpsideas.items;
 
-import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.entity.EntityGaussPulse;
-import com.kamefrede.rpsideas.util.RPSCreativeTab;
+import com.kamefrede.rpsideas.items.base.RPSItem;
 import com.kamefrede.rpsideas.util.helpers.ClientHelpers;
 import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
 import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
@@ -18,26 +17,26 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import vazkii.arl.interf.IItemColorProvider;
-import vazkii.arl.item.ItemMod;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.common.Psi;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.core.handler.PsiSoundHandler;
 
-public class ItemGaussRifle extends ItemMod implements IItemColorProvider, IFlowColorAcceptor { // TODO: 12/15/18 look at
+import javax.annotation.Nonnull;
+
+public class ItemGaussRifle extends RPSItem implements IItemColorProvider, IFlowColorAcceptor {
     protected ItemGaussRifle() {
         super(LibItemNames.ITEM_GAUSS_RIFLE);
-        setCreativeTab(RPSCreativeTab.INSTANCE);
         setMaxStackSize(1);
     }
 
     @Override
     public IItemColor getItemColor() {
-        return (stack, tintindex) -> {
-            if (tintindex == 0)
+        return (stack, tintIndex) -> {
+            if (tintIndex == 0)
                 return ClientHelpers.pulseColor(0xB87333);
-            else if (tintindex == 1) {
+            else if (tintIndex == 1) {
                 ItemStack colorizer = FlowColorsHelper.getColorizer(stack);
                 if (colorizer.isEmpty())
                     return 0;
@@ -50,18 +49,21 @@ public class ItemGaussRifle extends ItemMod implements IItemColorProvider, IFlow
     }
 
 
+    @Nonnull
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn) {
         PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(playerIn);
         ItemStack ammo = findAmmo(playerIn);
         ItemStack cad = PsiAPI.getPlayerCAD(playerIn);
-        if (cad.isEmpty()) return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
-        if (playerIn.capabilities.isCreativeMode || data.availablePsi > 0 || (!ammo.isEmpty() && data.availablePsi > 0)) {
+
+        if (data == null || cad.isEmpty())
+            return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+        if (playerIn.capabilities.isCreativeMode || data.availablePsi > 0) {
             boolean wasEmpty = ammo.isEmpty();
             boolean noneLeft = false;
             if (!playerIn.capabilities.isCreativeMode) {
                 if (wasEmpty) {
-                    int cadBattery = cad.isEmpty() ? 0 : ((ICAD) cad.getItem()).getStoredPsi(cad);
+                    int cadBattery = ((ICAD) cad.getItem()).getStoredPsi(cad);
                     if (data.availablePsi + cadBattery < 625) noneLeft = true;
                     data.deductPsi(625, (int) (3 * playerIn.getCooldownPeriod() + 10 + (noneLeft ? 50 : 0)), true);
                 } else {
@@ -94,28 +96,22 @@ public class ItemGaussRifle extends ItemMod implements IItemColorProvider, IFlow
             if (!playerIn.capabilities.isCreativeMode)
                 playerIn.getCooldownTracker().setCooldown(this, (int) (3 * playerIn.getCooldownPeriod()));
         }
-        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+        return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
 
     }
 
     public ItemStack findAmmo(EntityPlayer player) {
-        if (player.getHeldItemOffhand().getItem() == ModItems.gaussBullet) {
+        if (player.getHeldItemOffhand().getItem() == RPSItems.gaussBullet) {
             return player.getHeldItem(EnumHand.OFF_HAND);
-        } else if (player.getHeldItemMainhand().getItem() == ModItems.gaussBullet) {
+        } else if (player.getHeldItemMainhand().getItem() == RPSItems.gaussBullet) {
             return player.getHeldItem(EnumHand.MAIN_HAND);
         } else {
             for (int i = 0; i < player.inventory.getSizeInventory() - 1; i++) {
                 ItemStack stack = player.inventory.getStackInSlot(i);
-                if (!stack.isEmpty() && stack.getItem() == ModItems.gaussBullet) {
+                if (!stack.isEmpty() && stack.getItem() == RPSItems.gaussBullet)
                     return stack;
-                }
             }
         }
         return ItemStack.EMPTY;
-    }
-
-    @Override
-    public String getModNamespace() {
-        return RPSIdeas.MODID;
     }
 }

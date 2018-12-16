@@ -8,7 +8,7 @@ import net.minecraftforge.common.crafting.JsonContext;
 
 import java.util.function.BooleanSupplier;
 
-public class FlashRingConditionFactory implements IConditionFactory {// TODO: 12/15/18 look at
+public class FlashRingConditionFactory implements IConditionFactory {
 
     @Override
     public BooleanSupplier parse(JsonContext context, JsonObject json) {

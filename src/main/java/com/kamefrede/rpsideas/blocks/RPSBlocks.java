@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import vazkii.arl.block.BlockMod;
 
 @Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
-public class ModBlocks {
+public class RPSBlocks {
 
     public static final BlockMod conjuredEthereal = new BlockConjuredEthereal();
     public static final BlockMod conjuredGravityBlock = new BlockConjuredGravityBlock();

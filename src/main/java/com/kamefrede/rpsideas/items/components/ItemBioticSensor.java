@@ -1,10 +1,11 @@
 package com.kamefrede.rpsideas.items.components;
 
 import com.kamefrede.rpsideas.RPSIdeas;
+import com.kamefrede.rpsideas.items.base.RPSItem;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import com.kamefrede.rpsideas.util.libs.LibItemNames;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
@@ -21,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
-public class ItemBioticSensor extends Item implements IExosuitSensor { // TODO: 12/15/18 look at
+public class ItemBioticSensor extends RPSItem implements IExosuitSensor {
     public static final String EVENT_BIOTIC = RPSIdeas.MODID + ".event.nearby_entities";
     private static final double RANGE = 10d;
     private static final double RANGE_SQ = RANGE * RANGE;
@@ -30,6 +31,7 @@ public class ItemBioticSensor extends Item implements IExosuitSensor { // TODO: 
     private static final Map<EntityPlayer, List<EntityLivingBase>> triggeredBioticsNonRemote = new HashMap<>();
 
     public ItemBioticSensor() {
+        super(LibItemNames.BIOTIC_SENSOR);
         setMaxStackSize(1);
     }
 

@@ -1,8 +1,8 @@
 package com.kamefrede.rpsideas.util;
 
 import com.kamefrede.rpsideas.items.ItemPsimetalRod;
-import com.kamefrede.rpsideas.items.components.ItemTwinflowBattery;
-import com.kamefrede.rpsideas.items.components.ItemUnstableBattery;
+import com.kamefrede.rpsideas.items.base.IRegenerationBattery;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -24,8 +24,6 @@ public class RPSEventHandler {
     public static final int DEFAULT_REGEN_RATE = 25;
     public static final String REGEN_KEY = "rpsideasRegen";
     public static final String REGEN_BEFORE_KEY = "rpsideasRegenBefore";
-    public static final int UNSTABLE_REGEN_BONUS = 10;
-    public static final int SHIELDED_REGEN_BONUS = 5;
 
     @SubscribeEvent
     public static void onItemFished(ItemFishedEvent event) {
@@ -58,10 +56,8 @@ public class RPSEventHandler {
                 if (!cad.isEmpty()) {
                     ICAD cadItem = (ICAD) cad.getItem();
                     ItemStack battery = cadItem.getComponentInSlot(cad, EnumCADComponent.BATTERY);
-                    if (battery.getItem() instanceof ItemTwinflowBattery)
-                        extraRegen = SHIELDED_REGEN_BONUS;
-                    else if (battery.getItem() instanceof ItemUnstableBattery)
-                        extraRegen = UNSTABLE_REGEN_BONUS;
+                    if (battery.getItem() instanceof IRegenerationBattery)
+                        extraRegen = ((IRegenerationBattery) battery.getItem()).getRegenerationValue(battery);
                 }
 
                 if (regenNow + extraRegen == data.regen)

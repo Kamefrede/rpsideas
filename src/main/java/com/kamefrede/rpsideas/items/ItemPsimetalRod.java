@@ -1,6 +1,8 @@
 package com.kamefrede.rpsideas.items;
 
+import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
+import com.kamefrede.rpsideas.items.base.ItemModRod;
 import com.kamefrede.rpsideas.util.RPSCreativeTab;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.client.util.ITooltipFlag;
@@ -10,7 +12,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityFishHook;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.ItemFishingRod;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.*;
@@ -20,42 +21,31 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 import vazkii.arl.item.ItemMod;
-import vazkii.arl.util.ItemNBTHelper;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.ISocketable;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.item.ItemCAD;
-import vazkii.psi.common.item.base.ModItems;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
 
-@Mod.EventBusSubscriber
-public class ItemPsimetalRod extends ItemFishingRod implements IPsiAddonTool { // TODO: 12/15/18 look at
+@Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
+public class ItemPsimetalRod extends ItemModRod implements IPsiAddonTool {
 
-    private static final String TAG_REGEN_TIME = "regenTime";
-
-    protected ItemPsimetalRod() {
-        super();
+    protected ItemPsimetalRod(String name) {
+        super(name);
         setCreativeTab(RPSCreativeTab.INSTANCE);
         setMaxStackSize(1);
         setMaxDamage(900);
     }
 
-    public static void regen(ItemStack stack, Entity entityIn, boolean isSelected) {
-        if (entityIn instanceof EntityPlayer && stack.getItemDamage() > 0 && !isSelected) {
-            EntityPlayer player = (EntityPlayer) entityIn;
-            PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(player);
-            int regenTime = ItemNBTHelper.getInt(stack, TAG_REGEN_TIME, 0);
-
-            if (!data.overflowed && regenTime % 80 == 0 && (float) data.getAvailablePsi() / (float) data.getTotalPsi() > 0.5F) {
-                data.deductPsi(600, 5, true);
-                stack.setItemDamage(stack.getItemDamage() - 1);
-            }
-            ItemNBTHelper.setInt(stack, TAG_REGEN_TIME, regenTime + 1);
-        }
+    @Override
+    public String getModNamespace() {
+        return RPSIdeas.MODID;
     }
 
     public static void castSpell(EntityPlayer player, ItemStack stack, Vec3d pos) {
@@ -63,7 +53,7 @@ public class ItemPsimetalRod extends ItemFishingRod implements IPsiAddonTool { /
         ItemStack playerCad = PsiAPI.getPlayerCAD(player);
         if (stack.getItem() instanceof ItemPsimetalRod) {
             ItemPsimetalRod rod = (ItemPsimetalRod) stack.getItem();
-            if (!playerCad.isEmpty()) {
+            if (data != null && !playerCad.isEmpty()) {
                 ItemStack bullet = rod.getBulletInSocket(stack, rod.getSelectedSlot(stack));
                 ItemCAD.cast(player.getEntityWorld(), player, data, bullet, playerCad, 5, 10, 0.05F, (SpellContext context) -> {
                     context.tool = stack;
@@ -74,42 +64,38 @@ public class ItemPsimetalRod extends ItemFishingRod implements IPsiAddonTool { /
 
     }
 
+    @Nonnull
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn) {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
 
         if (playerIn.fishEntity != null) {
-            if (playerIn.fishEntity.caughtEntity != null && playerIn.fishEntity.caughtEntity instanceof EntityLivingBase) {
+            if (playerIn.fishEntity.caughtEntity instanceof EntityLivingBase) {
                 PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(playerIn);
                 ItemStack playerCad = PsiAPI.getPlayerCAD(playerIn);
 
-                if (!playerCad.isEmpty()) {
+                if (data != null && !playerCad.isEmpty()) {
                     ItemStack bullet = getBulletInSocket(itemstack, getSelectedSlot(itemstack));
-                    ItemCAD.cast(playerIn.getEntityWorld(), playerIn, data, bullet, playerCad, 5, 10, 0.05F, (SpellContext context) -> {
-                        context.attackedEntity = (EntityLivingBase) playerIn.fishEntity.caughtEntity;
-                    });
+                    ItemCAD.cast(playerIn.getEntityWorld(), playerIn, data, bullet, playerCad, 5, 10, 0.05F, (SpellContext context) ->
+                            context.attackedEntity = (EntityLivingBase) playerIn.fishEntity.caughtEntity);
                 }
             }
             int i = playerIn.fishEntity.handleHookRetraction();
             itemstack.damageItem(i, playerIn);
             playerIn.swingArm(handIn);
-            worldIn.playSound((EntityPlayer) null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_BOBBER_RETRIEVE, SoundCategory.NEUTRAL, 1.0F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+            worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_BOBBER_RETRIEVE, SoundCategory.NEUTRAL, 1.0F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
         } else {
-            worldIn.playSound((EntityPlayer) null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_BOBBER_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+            worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_BOBBER_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
             if (!worldIn.isRemote) {
                 EntityFishHook entityfishhook = new EntityFishHook(worldIn, playerIn);
-                int j = EnchantmentHelper.getFishingSpeedBonus(itemstack);
+                int lure = EnchantmentHelper.getFishingSpeedBonus(itemstack);
 
-                if (j > 0) {
-                    entityfishhook.setLureSpeed(j);
-                }
+                if (lure > 0) entityfishhook.setLureSpeed(lure);
 
-                int k = EnchantmentHelper.getFishingLuckBonus(itemstack);
+                int luck = EnchantmentHelper.getFishingLuckBonus(itemstack);
 
-                if (k > 0) {
-                    entityfishhook.setLuck(k);
-                }
+                if (luck > 0) entityfishhook.setLuck(luck);
 
                 worldIn.spawnEntity(entityfishhook);
             }
@@ -118,12 +104,12 @@ public class ItemPsimetalRod extends ItemFishingRod implements IPsiAddonTool { /
             playerIn.addStat(StatList.getObjectUseStats(this));
         }
 
-        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
+        return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
     }
 
     @Override
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-        regen(stack, entityIn, isSelected);
+        ItemPsimetalHoe.regenPsi(stack, entityIn, isSelected);
     }
 
     @SideOnly(Side.CLIENT)
@@ -134,8 +120,8 @@ public class ItemPsimetalRod extends ItemFishingRod implements IPsiAddonTool { /
     }
 
     @Override
-    public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack) {
-        return par2ItemStack.getItem() == ModItems.material && par2ItemStack.getItemDamage() == 1 || super.getIsRepairable(par1ItemStack, par2ItemStack);
+    public boolean getIsRepairable(ItemStack toRepair, ItemStack repairItem) {
+        return OreDictionary.containsMatch(false, OreDictionary.getOres("ingotPsi"), repairItem) || super.getIsRepairable(toRepair, repairItem);
     }
 
 

@@ -1,6 +1,6 @@
 package com.kamefrede.rpsideas.spells.trick.block;
 
-import com.kamefrede.rpsideas.blocks.ModBlocks;
+import com.kamefrede.rpsideas.blocks.RPSBlocks;
 import com.kamefrede.rpsideas.spells.base.SpellParams;
 import com.kamefrede.rpsideas.tiles.TileCracklingStar;
 import net.minecraft.block.state.IBlockState;
@@ -56,7 +56,7 @@ public class PieceTrickConjureStar extends PieceTrickConjurePulsarTest {// TODO:
 
     @Override
     public IBlockState getStateToSet() {
-        return ModBlocks.conjuredStar.getDefaultState();
+        return RPSBlocks.conjuredStar.getDefaultState();
     }
 
     @Override

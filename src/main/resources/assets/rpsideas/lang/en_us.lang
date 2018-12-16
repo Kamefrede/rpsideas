@@ -248,13 +248,24 @@ item.rpsideas.ivory_pickaxe.name=Ivory Flowpick
 item.rpsideas.ivory_shovel.name=Ivory Flowspade
 item.rpsideas.ivory_axe.name=Ivory Flowaxe
 item.rpsideas.ivory_sword.name=Ivory Flowblade
+item.rpsideas.ivory_hoe.name=Ivory Flowhoe
+item.rpsideas.ivory_hoe_xmas.name=Ivory Flow Ho Hoe
+item.rpsideas.ivory_shears.name=Ivory Flowshears
+item.rpsideas.ivory_rod.name=Ivory Flowrod
+item.rpsideas.ivory_rod_cast.name=Ivory Flowrod
 item.rpsideas.ebony_pickaxe.name=Ebony Flowpick
 item.rpsideas.ebony_shovel.name=Ebony Flowspade
 item.rpsideas.ebony_axe.name=Ebony Flowaxe
 item.rpsideas.ebony_sword.name=Ebony Flowblade
+item.rpsideas.ebony_hoe.name=Ebony Flowhoe
+item.rpsideas.ebony_hoe_xmas.name=Ebony Flow Ho Hoe
+item.rpsideas.ebony_shears.name=Ebony Flowshears
+item.rpsideas.ebony_rod.name=Ebony Flowrod
+item.rpsideas.ebony_rod_cast.name=Ebony Flowrod
 
 item.rpsideas.unstable_battery.name=Unstable CAD Battery
-item.rpsideas.twinflow_battery.name=Shielded CAD Battery
+item.rpsideas.twinflow_battery.name=Hybrid Flow CAD Battery
+item.rpsideas.shielded_battery.name=Shielded CAD Battery
 item.rpsideas.biotic_sensor.name=Exosuit Biotic Sensor
 
 psi.spellpiece.rpsideas.make_mana_burst=Trick: Form Burst
@@ -283,7 +294,9 @@ rpsideas.cadstat.extra=Extra
 rpsideas.cadstat.downside=Drawback
 rpsideas.downsides.on_damage=Drains entire Psi reserves on damage
 rpsideas.upsides.boost_regen=+%d to Psi regen rate
-rpsideas.upsides.fills_last=Removes Psi loss on damage but locks the regen for [10,50] ticks
+rpsideas.upsides.fills_last=Dumps its contents into the main reserve
+rpsideas.upsides.soaks_damage=No Psi loss on damage
+rpsideas.downsides.locks_regen=Locks Psi regen on damage for 1-3 seconds
 
 rpsideas.cadstat.enables=Enables
 rpsideas.requirement.mana_cad=Mana Flow

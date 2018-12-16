@@ -1,9 +1,10 @@
 package com.kamefrede.rpsideas.items.components;
 
 import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.items.ModItems;
+import com.kamefrede.rpsideas.items.RPSItems;
 import com.kamefrede.rpsideas.items.base.ICadComponentAcceptor;
 import com.kamefrede.rpsideas.items.base.ItemComponent;
+import com.kamefrede.rpsideas.util.libs.LibItemNames;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.util.ITooltipFlag;
@@ -14,7 +15,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -23,24 +24,50 @@ import vazkii.arl.util.ItemNBTHelper;
 import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.ICADColorizer;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.List;
 
-public class ItemLiquidColorizer extends ItemComponent implements ICADColorizer, IItemColorProvider, ICadComponentAcceptor { // TODO: 12/15/18 look at
+public class ItemLiquidColorizer extends ItemComponent implements ICADColorizer, IItemColorProvider, ICadComponentAcceptor {
+
+    public ItemLiquidColorizer() {
+        super(LibItemNames.LIQUID_COLORIZER);
+    }
+
+    public static int getColorFromStack(ItemStack stack) {
+        return ItemNBTHelper.getInt(stack, "color", Integer.MAX_VALUE);
+    }
+
+    public static ItemStack getInheriting(ItemStack stack) {
+        NBTTagCompound cmp = ItemNBTHelper.getCompound(stack, "inheriting", true);
+        if (cmp == null) return ItemStack.EMPTY;
+        return new ItemStack(cmp);
+    }
+
+    public static ItemStack setInheriting(ItemStack stack, ItemStack inheriting) {
+        if (inheriting.isEmpty()) {
+            if (ItemNBTHelper.detectNBT(stack)) ItemNBTHelper.getNBT(stack).removeTag("inheriting");
+        } else {
+            NBTTagCompound nbt = new NBTTagCompound();
+            inheriting.writeToNBT(nbt);
+            ItemNBTHelper.setCompound(stack, "inheriting", nbt);
+        }
+        return stack;
+    }
 
     @Override
     public ItemStack setPiece(ItemStack stack, EnumCADComponent type, ItemStack piece) {
         if (type != EnumCADComponent.DYE)
             return stack;
-        return Companion.setInheriting(stack, piece);
+        return setInheriting(stack, piece);
     }
 
     @Override
     public ItemStack getPiece(ItemStack stack, EnumCADComponent type) {
         if (type != EnumCADComponent.DYE)
             return ItemStack.EMPTY;
-        return Companion.getInheriting(stack);
+        return getInheriting(stack);
     }
 
     @Override
@@ -59,7 +86,7 @@ public class ItemLiquidColorizer extends ItemComponent implements ICADColorizer,
     public int getColor(ItemStack stack) {
         int itemcolor = ItemNBTHelper.getInt(stack, "color", Integer.MAX_VALUE);
         if (!stack.isEmpty()) {
-            ItemStack inheriting = Companion.getInheriting(stack);
+            ItemStack inheriting = getInheriting(stack);
             if (!inheriting.isEmpty() && inheriting.getItem() instanceof ICADColorizer) {
                 int inheritcolor = ((ICADColorizer) inheriting.getItem()).getColor(inheriting);
                 if (itemcolor == Integer.MAX_VALUE)
@@ -81,55 +108,33 @@ public class ItemLiquidColorizer extends ItemComponent implements ICADColorizer,
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag mistake) {
         super.addInformation(stack, world, tooltip, mistake);
         if (GuiScreen.isShiftKeyDown()) {
-            ItemStack inheriting = Companion.getInheriting(stack);
+            ItemStack inheriting = getInheriting(stack);
             if (!inheriting.isEmpty()) {
-                String translatedPrefix = I18n.translateToLocal(RPSIdeas.MODID + ".misc.color_inheritance");
+                String translatedPrefix = I18n.format(RPSIdeas.MODID + ".misc.color_inheritance");
                 tooltip.add(TextFormatting.GREEN + translatedPrefix + TextFormatting.GRAY + ": " + inheriting.getDisplayName());
             }
             if (mistake.isAdvanced()) {
-                int color = Companion.getColorFromStack(stack);
+                int color = getColorFromStack(stack);
                 if (color != Integer.MAX_VALUE) {
                     String formattedNumber = String.format("%06X", color);
                     if (formattedNumber.length() > 6)
                         formattedNumber = formattedNumber.substring(formattedNumber.length() - 6);
-                    String translatedPrefix = I18n.translateToLocal(RPSIdeas.MODID + ".misc.color");
+                    String translatedPrefix = I18n.format(RPSIdeas.MODID + ".misc.color");
                     tooltip.add(TextFormatting.GREEN + translatedPrefix + TextFormatting.GRAY + ": #" + formattedNumber);
                 }
             }
         }
     }
 
+    @Nonnull
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
         ItemStack held = player.getHeldItem(hand);
 
         if (player.isSneaking()) {
-            held = new ItemStack(ModItems.drainedColorizer);
+            held = new ItemStack(RPSItems.drainedColorizer);
         }
 
         return new ActionResult<>(EnumActionResult.SUCCESS, held);
-    }
-
-    public static class Companion {
-        public static int getColorFromStack(ItemStack stack) {
-            return ItemNBTHelper.getInt(stack, "color", Integer.MAX_VALUE);
-        }
-
-        public static ItemStack getInheriting(ItemStack stack) {
-            NBTTagCompound cmp = ItemNBTHelper.getCompound(stack, "inheriting", true);
-            if (cmp == null) return ItemStack.EMPTY;
-            return new ItemStack(cmp);
-        }
-
-        public static ItemStack setInheriting(ItemStack stack, ItemStack inheriting) {
-            if (inheriting.isEmpty()) {
-                if (ItemNBTHelper.detectNBT(stack)) ItemNBTHelper.getNBT(stack).removeTag("inheriting");
-            } else {
-                NBTTagCompound nbt = new NBTTagCompound();
-                inheriting.writeToNBT(nbt);
-                ItemNBTHelper.setCompound(stack, "inheriting", nbt);
-            }
-            return stack;
-        }
     }
 }

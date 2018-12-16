@@ -1,7 +1,7 @@
 package com.kamefrede.rpsideas.util.helpers;
 
 import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.items.ModItems;
+import com.kamefrede.rpsideas.items.RPSItems;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -32,7 +32,7 @@ public class FlowColorsHelper {
             else {
                 ItemStack colorizer = ((ICAD) cad.getItem()).getComponentInSlot(cad, EnumCADComponent.DYE);
                 if (colorizer.isEmpty())
-                    colorizer = new ItemStack(ModItems.liquidColorizer);
+                    colorizer = new ItemStack(RPSItems.liquidColorizer);
                 applyColorizer(player, colorizer);
             }
         }

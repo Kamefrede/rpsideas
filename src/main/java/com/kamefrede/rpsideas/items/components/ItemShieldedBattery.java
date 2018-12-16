@@ -23,11 +23,11 @@ import vazkii.psi.common.network.message.MessageDataSync;
 import java.util.List;
 
 @Mod.EventBusSubscriber
-public class ItemUnstableBattery extends ItemComponent implements IRegenerationBattery {
-    private static final int PSI_REGEN_BONUS = 10;
+public class ItemShieldedBattery extends ItemComponent implements IRegenerationBattery {
+    private static final int PSI_REGEN_BONUS = 5;
 
-    public ItemUnstableBattery() {
-        super(LibItemNames.UNSTABLE_BATTERY);
+    public ItemShieldedBattery() {
+        super(LibItemNames.SHIELDED_BATTERY);
     }
 
     @Override
@@ -50,30 +50,31 @@ public class ItemUnstableBattery extends ItemComponent implements IRegenerationB
             ICAD icad = (ICAD) cad.getItem();
 
             ItemStack battery = icad.getComponentInSlot(cad, EnumCADComponent.BATTERY);
-            if (!battery.isEmpty() && battery.getItem() instanceof ItemUnstableBattery) {
-                data.availablePsi = 0;
-                data.regenCooldown = 20;
-                data.save();
-                NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP) player);
+            if (!battery.isEmpty() && battery.getItem() instanceof ItemShieldedBattery) {
+                int psi = (int) (data.getTotalPsi() * 0.02D * (double) e.getAmount());
+                if (psi > 0 && data.availablePsi > 0) {
+                    int cd = psi / (data.getRegenPerTick() + 5);
+                    if (cd > 50) cd = 50;
+                    if (cd < 10) cd = 10;
+                    psi = Math.min(psi, data.availablePsi);
+                    data.deductPsi(-psi, cd, true);
+                    data.save();
+                    NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP) player);
+                }
+
             }
         }
     }
 
     @Override
     protected void registerStats() {
-        addStat(EnumCADStat.OVERFLOW, 800);
-    }
-
-    @Override
-    public EnumCADComponent getComponentType(ItemStack itemStack) {
-        return EnumCADComponent.BATTERY;
+        addStat(EnumCADStat.OVERFLOW, 200);
     }
 
     @Override
     protected void addTooltipTags(List<String> tooltip) {
         addTooltipTag(true, tooltip, RPSIdeas.MODID + ".upsides.boost_regen", PSI_REGEN_BONUS);
-        addTooltipTag(false, tooltip, RPSIdeas.MODID + ".downsides.on_damage");
+        addTooltipTag(true, tooltip, RPSIdeas.MODID + ".upsides.soaks_damage");
+        addTooltipTag(false, tooltip, RPSIdeas.MODID + ".downsides.locks_regen");
     }
-
-
 }

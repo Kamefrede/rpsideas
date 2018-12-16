@@ -4,7 +4,6 @@ import com.kamefrede.rpsideas.RPSIdeas;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -20,11 +19,11 @@ import java.util.List;
 import java.util.Map;
 
 
-public abstract class ItemComponent extends Item implements ICADComponent {
-    //Porting note: I removed metadata support -quat
+public abstract class ItemComponent extends RPSItem implements ICADComponent {
     private Map<EnumCADStat, Integer> stats = new HashMap<>();
 
-    public ItemComponent() {
+    public ItemComponent(String name) {
+        super(name);
         setMaxStackSize(1);
         registerStats();
     }
@@ -57,7 +56,7 @@ public abstract class ItemComponent extends Item implements ICADComponent {
     }
 
     protected void addTooltipTags(List<String> tooltip) {
-        //No-op
+        //NO-OP
     }
 
     protected void addTooltipTag(boolean positiveEffect, List<String> tooltip, String descriptionTranslationKey, Object... descriptionFormatArgs) {

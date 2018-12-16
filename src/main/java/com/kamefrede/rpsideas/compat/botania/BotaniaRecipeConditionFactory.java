@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.Loader;
 
 import java.util.function.BooleanSupplier;
 
-public class BotaniaRecipeConditionFactory implements IConditionFactory {// TODO: 12/15/18 look at
+public class BotaniaRecipeConditionFactory implements IConditionFactory {
 
     public BooleanSupplier parse(JsonContext context, JsonObject json) {
         return () -> Loader.isModLoaded("botania");

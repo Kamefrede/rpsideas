@@ -1,6 +1,6 @@
 package com.kamefrede.rpsideas.blocks;
 
-import com.kamefrede.rpsideas.items.ModItems;
+import com.kamefrede.rpsideas.items.blocks.ItemCADCase;
 import com.kamefrede.rpsideas.tiles.TileCADCase;
 import com.kamefrede.rpsideas.util.RPSSoundHandler;
 import com.kamefrede.rpsideas.util.libs.LibBlockNames;
@@ -22,12 +22,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -66,6 +64,12 @@ public class BlockCADCase extends BlockRPS {
     }
 
     //Block Properties and State
+
+
+    @Override
+    public ItemBlock createItemBlock(ResourceLocation res) {
+        return new ItemCADCase(this, res);
+    }
 
     @Nonnull
     @Override
@@ -143,7 +147,7 @@ public class BlockCADCase extends BlockRPS {
         TileEntity tileentity = world.getTileEntity(pos);
         if (tileentity instanceof TileCADCase) {
             TileCADCase cadCase = (TileCADCase) tileentity;
-            ItemStack itemstack = new ItemStack(ModItems.cadCaseItem, 1, getActualState(state, world, pos).getValue(COLOR).getMetadata());
+            ItemStack itemstack = new ItemStack(this, 1, getActualState(state, world, pos).getValue(COLOR).getMetadata());
             IItemHandler handler = itemstack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
             if (handler != null) {
                 for (int i = 0; i < handler.getSlots(); i++) {
@@ -191,7 +195,7 @@ public class BlockCADCase extends BlockRPS {
         TileEntity tileentity = worldIn.getTileEntity(pos);
         if (tileentity instanceof TileCADCase) {
             TileCADCase cadCase = (TileCADCase) tileentity;
-            ItemStack itemstack = new ItemStack(ModItems.cadCaseItem, 1, getActualState(state, worldIn, pos).getValue(COLOR).getMetadata());
+            ItemStack itemstack = new ItemStack(this, 1, getActualState(state, worldIn, pos).getValue(COLOR).getMetadata());
             IItemHandler handler = itemstack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
             if (handler != null) {
                 for (int i = 0; i < handler.getSlots(); i++) {

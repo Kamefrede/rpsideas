@@ -1,14 +1,15 @@
 package com.kamefrede.rpsideas.items;
 
 import com.kamefrede.rpsideas.RPSIdeas;
+import com.kamefrede.rpsideas.items.base.RPSItem;
 import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import com.kamefrede.rpsideas.util.libs.LibItemNames;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
@@ -25,25 +26,25 @@ import vazkii.psi.common.item.ItemCAD;
 import vazkii.psi.common.item.base.ModItems;
 import vazkii.psi.common.item.tool.IPsimetalTool;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
-public class ItemInlineCaster extends Item implements IPsimetalTool { // TODO: 12/15/18 look at
+public class ItemInlineCaster extends RPSItem implements IPsimetalTool {
     public ItemInlineCaster() {
+        super(LibItemNames.INLINE_CASTER);
         setMaxStackSize(1);
     }
 
-    //TODO Liblib glow
-
+    @Nonnull
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
         ItemStack held = player.getHeldItem(hand);
         PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(player);
         ItemStack cad = PsiAPI.getPlayerCAD(player);
 
-        if (!cad.isEmpty()) {
+        if (data != null && !cad.isEmpty()) {
             ItemStack bullet = getBulletInSocket(held, getSelectedSlot(held));
             if (bullet.isEmpty()) {
-                //Craft redstone into psidust
                 if (ItemCAD.craft(player, new ItemStack(Items.REDSTONE), new ItemStack(ModItems.material, 1, 0))) {
                     if (!world.isRemote) {
                         SpellHelpers.emitSoundFromEntity(world, player, PsiSoundHandler.cadShoot, .5f, (float) (.5f + Math.random() * .5));
@@ -64,7 +65,6 @@ public class ItemInlineCaster extends Item implements IPsimetalTool { // TODO: 1
         return super.onItemRightClick(world, player, hand);
     }
 
-    //The rest is taken care of in IPsiAddonTool
     @Override
     public boolean isSocketSlotAvailable(ItemStack stack, int slot) {
         return slot < 1;
