@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.tiles;
 
 import com.kamefrede.rpsideas.blocks.BlockCADCase;
+import com.kamefrede.rpsideas.items.ItemGaussRifle;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumDyeColor;
@@ -34,7 +35,7 @@ public class TileCADCase extends TileEntity {
     private String name = "";
 
     public static boolean isAllowed(int slot, Item item) {
-        return (slot == 0 && item instanceof ICAD) ||
+        return (slot == 0 && (item instanceof ICAD || item instanceof ItemGaussRifle)) ||
                 (slot == 1 && !(item instanceof ICAD) &&
                         (item instanceof ISpellContainer ||
                                 item instanceof ISocketable ||
