@@ -1,0 +1,7 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "rpsideas:items/influx_battery",
+		"layer1": "rpsideas:items/influx_battery_overlay"
+	}
+}

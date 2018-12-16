@@ -29,8 +29,6 @@ import com.kamefrede.rpsideas.spells.trick.entity.PieceTrickDetonate;
 import com.kamefrede.rpsideas.spells.trick.entity.PieceTrickNumBroadcast;
 import com.kamefrede.rpsideas.spells.trick.entity.PieceTrickOpenElytra;
 import com.kamefrede.rpsideas.spells.trick.misc.*;
-import com.kamefrede.rpsideas.spells.trick.potion.PieceTrickBlindness;
-import com.kamefrede.rpsideas.spells.trick.potion.PieceTrickNausea;
 import com.kamefrede.rpsideas.util.libs.LibPieceNames;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
@@ -85,8 +83,6 @@ public class SpellPieces {// TODO: 12/15/18 look at
         register(PieceOperatorListUnion.class, LibPieceNames.OPERATOR_LIST_UNION, LibPieceGroups.ENTITIES_INTRO);
         register(PieceOperatorListIntersection.class, LibPieceNames.OPERATOR_LIST_INTERSECTION, LibPieceGroups.ENTITIES_INTRO);
         register(PieceOperatorListExclusion.class, LibPieceNames.OPERATOR_LIST_EXCLUSION, LibPieceGroups.ENTITIES_INTRO);
-        register(PieceTrickNausea.class, LibPieceNames.PIECE_TRICK_NAUSEA, LibPieceGroups.NEGATIVE_EFFECTS);
-        register(PieceTrickBlindness.class, LibPieceNames.PIECE_TRICK_BLINDNESS, LibPieceGroups.NEGATIVE_EFFECTS);
         register(PieceSelectorEidosTimestamp.class, LibPieceNames.PIECE_SELECTOR_EIDOS_TIMESTAMP, LibPieceGroups.EIDOS_REVERSAL);
         register(PieceSelectorNearbyVehicles.class, LibPieceNames.SELECTOR_NEARBY_VECHICLES, LibPieceGroups.ENTITIES_INTRO);
         register(PieceSelectorFallingBlocks.class, LibPieceNames.SELECTOR_NEARBY_FALLING_BLOCKS, LibPieceGroups.ENTITIES_INTRO);
