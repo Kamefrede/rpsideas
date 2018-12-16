@@ -25,6 +25,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.api.internal.Vector3;
+import vazkii.psi.api.spell.ISpellImmune;
 import vazkii.psi.common.Psi;
 import vazkii.psi.common.core.handler.PsiSoundHandler;
 
@@ -36,7 +37,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-public class EntityGaussPulse extends EntityThrowable {
+public class EntityGaussPulse extends EntityThrowable implements ISpellImmune {
     private static final String TAG_CASTER = "caster";
     private static final String TAG_TIME_ALIVE = "timeAlive";
 
@@ -235,6 +236,11 @@ public class EntityGaussPulse extends EntityThrowable {
     @Override
     protected float getGravityVelocity() {
         return 0F;
+    }
+
+    @Override
+    public boolean isImmune() {
+        return true;
     }
 
     public enum AmmoStatus {
