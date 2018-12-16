@@ -20,7 +20,7 @@ public class PieceOperatorGetMetadata extends PieceOperator {
         if (!context.caster.world.isRemote) {
             int slot = context.getTargetSlot();
             if (!context.caster.inventory.getStackInSlot(slot).isEmpty()) {
-                return context.caster.inventory.getStackInSlot(slot).getMetadata();
+                return context.caster.inventory.getStackInSlot(slot).getMetadata() * 1.0;
             }
         }
         return 0.0;
