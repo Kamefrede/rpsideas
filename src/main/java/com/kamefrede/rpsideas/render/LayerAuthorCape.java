@@ -20,7 +20,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 import vazkii.psi.api.PsiAPI;
-import vazkii.psi.client.core.handler.ShaderHandler;
 import vazkii.psi.common.Psi;
 
 import javax.annotation.Nonnull;
@@ -170,7 +169,11 @@ public class LayerAuthorCape implements LayerRenderer<AbstractClientPlayer> {
         if (hasCad && !player.isInvisibleToPlayer(player)) {
             GlStateManager.pushMatrix();
             GlStateManager.disableLighting();
-            ShaderHandler.useShader(ShaderHandler.rawColor);
+
+            float lastBrightnessX = OpenGlHelper.lastBrightnessX;
+            float lastBrightnessY = OpenGlHelper.lastBrightnessY;
+
+            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 0xf0, 0xf0);
             GlStateManager.color(r, g, b);
             GlStateManager.enableBlendProfile(GlStateManager.Profile.PLAYER_SKIN);
 
@@ -185,7 +188,7 @@ public class LayerAuthorCape implements LayerRenderer<AbstractClientPlayer> {
 
             GlStateManager.disableBlendProfile(GlStateManager.Profile.PLAYER_SKIN);
             GlStateManager.color(1F, 1F, 1F);
-            ShaderHandler.releaseShader();
+            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, lastBrightnessX, lastBrightnessY);
             GlStateManager.enableLighting();
             GlStateManager.popMatrix();
         }

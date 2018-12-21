@@ -54,9 +54,8 @@ public class PieceTrickPlantSequence extends PieceTrick {
             if (!context.isInRadius(blockVec))
                 throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
 
-            BlockPos pos = new BlockPos(blockVec.x, blockVec.y, blockVec.z);
-            BlockPos plantPos = new BlockPos(blockVec.x, blockVec.y + 1, blockVec.z);
-            PieceTrickPlant.plantPlant(context.caster, context.caster.getEntityWorld(), pos, context.getTargetSlot(), plantPos);
+            BlockPos pos = blockVec.toBlockPos();
+            PieceTrickPlant.plantPlant(context.caster, context.caster.getEntityWorld(), pos, context.getTargetSlot());
         }
 
         return null;

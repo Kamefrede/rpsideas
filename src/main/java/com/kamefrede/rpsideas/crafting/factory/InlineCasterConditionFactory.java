@@ -1,7 +1,7 @@
 package com.kamefrede.rpsideas.crafting.factory;
 
 import com.google.gson.JsonObject;
-import com.kamefrede.rpsideas.util.ConfigHandler;
+import com.kamefrede.rpsideas.util.RPSConfigHandler;
 import net.minecraft.util.JsonUtils;
 import net.minecraftforge.common.crafting.IConditionFactory;
 import net.minecraftforge.common.crafting.JsonContext;
@@ -13,6 +13,6 @@ public class InlineCasterConditionFactory implements IConditionFactory {
     @Override
     public BooleanSupplier parse(JsonContext context, JsonObject json) {
         boolean value = JsonUtils.getBoolean(json, "value", true);
-        return () -> ConfigHandler.enableInline == value;
+        return () -> RPSConfigHandler.enableInline == value;
     }
 }

@@ -5,7 +5,7 @@ import com.kamefrede.rpsideas.items.base.ItemComponent;
 import com.kamefrede.rpsideas.util.RPSCreativeTab;
 import com.kamefrede.rpsideas.util.botania.IBlasterComponent;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
-import com.kamefrede.rpsideas.util.libs.LibItemNames;
+import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
@@ -48,7 +48,7 @@ public class ItemBlasterAssembly extends ItemComponent implements IBlasterCompon
 
 
     public ItemBlasterAssembly() {
-        super(LibItemNames.CAD_ASSEMBLY);
+        super(RPSItemNames.CAD_ASSEMBLY);
         ModItems.cad.addPropertyOverride(new ResourceLocation(RPSIdeas.MODID, "clip"), ((stack, world, ent) -> ItemManaGun.hasClip(stack) ? 1f : 0f));
         setCreativeTab(RPSCreativeTab.INSTANCE);
     }

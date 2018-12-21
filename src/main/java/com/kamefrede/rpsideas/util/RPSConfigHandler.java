@@ -6,7 +6,7 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber
 @Config(modid = RPSIdeas.MODID, category = "crafting")
-public class ConfigHandler {
+public class RPSConfigHandler {
     @Config.Name("enableInlineCaster")
     @Config.Comment("Is the Inline Caster craftable?")
     public static boolean enableInline = true;

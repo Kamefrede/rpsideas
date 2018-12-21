@@ -6,7 +6,7 @@ import com.kamefrede.rpsideas.util.helpers.ClientHelpers;
 import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
 import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
-import com.kamefrede.rpsideas.util.libs.LibItemNames;
+import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -24,7 +24,7 @@ import javax.annotation.Nonnull;
 
 public class ItemGaussRifle extends RPSItem implements IItemColorProvider, IFlowColorAcceptor {
     protected ItemGaussRifle() {
-        super(LibItemNames.ITEM_GAUSS_RIFLE);
+        super(RPSItemNames.ITEM_GAUSS_RIFLE);
         setMaxStackSize(1);
     }
 

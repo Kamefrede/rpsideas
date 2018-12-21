@@ -1,7 +1,7 @@
 package com.kamefrede.rpsideas.items.components;
 
 import com.kamefrede.rpsideas.items.base.ItemComponent;
-import com.kamefrede.rpsideas.util.libs.LibItemNames;
+import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -14,7 +14,7 @@ import java.util.List;
 public class ItemWideCADSocket extends ItemComponent {
 
     public ItemWideCADSocket() {
-        super(LibItemNames.WIDE_SOCKET);
+        super(RPSItemNames.WIDE_SOCKET);
     }
 
     @Override

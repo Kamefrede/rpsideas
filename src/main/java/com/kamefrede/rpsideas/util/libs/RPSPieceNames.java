@@ -2,7 +2,7 @@ package com.kamefrede.rpsideas.util.libs;
 
 import com.kamefrede.rpsideas.RPSIdeas;
 
-public class LibPieceNames {
+public class RPSPieceNames {
 
     public static final String TRICK_DIRECTION_PLACE_BLOCK = "trick_direction_place_block";
     public static final String TRICK_CONJURE_ETHEREAL_BLOCK_SEQUENCE = "trick_conjure_ethereal_block_sequence";

@@ -1,6 +1,6 @@
 package com.kamefrede.rpsideas.util.libs;
 
-public class LibEntityNames {
+public class RPSEntityNames {
 
     public static final String ENTITY_SNIPER_BULLET = "sniper_bullet";
     public static final String ENTITY_GAUSS_PULSE = "gauss";

@@ -3,7 +3,7 @@ package com.kamefrede.rpsideas.blocks;
 import com.kamefrede.rpsideas.items.blocks.ItemCADCase;
 import com.kamefrede.rpsideas.tiles.TileCADCase;
 import com.kamefrede.rpsideas.util.RPSSoundHandler;
-import com.kamefrede.rpsideas.util.libs.LibBlockNames;
+import com.kamefrede.rpsideas.util.libs.RPSBlockNames;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -63,7 +63,7 @@ public class BlockCADCase extends RPSBlock implements IBlockColorProvider {
     private static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.5 / 16.0, 0.0, 3.5 / 16.0, 15.5 / 16.0, 4.5 / 16.0, 12.5 / 16.0);
 
     public BlockCADCase() {
-        super(LibBlockNames.CAD_CASE, Material.CLOTH);
+        super(RPSBlockNames.CAD_CASE, Material.CLOTH);
 
         setHardness(0.5f);
         setSoundType(SoundType.METAL);

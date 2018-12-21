@@ -4,8 +4,8 @@ import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.effect.RPSPotions;
 import com.kamefrede.rpsideas.effect.botania.RPSBrew;
 import com.kamefrede.rpsideas.items.components.botania.ItemBlasterAssembly;
-import com.kamefrede.rpsideas.util.ConfigHandler;
-import com.kamefrede.rpsideas.util.libs.LibItemNames;
+import com.kamefrede.rpsideas.util.RPSConfigHandler;
+import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -32,9 +32,9 @@ public class BotaniaCompatItems {
     @Optional.Method(modid = "botania")
     public static void registerItems(RegistryEvent.Register<Item> evt) {
         blaster = new ItemBlasterAssembly();
-        psishockBrew = new RPSBrew(LibItemNames.PSISHOCK, 16000, new PotionEffect(RPSPotions.psishock, 300))
+        psishockBrew = new RPSBrew(RPSItemNames.PSISHOCK, 16000, new PotionEffect(RPSPotions.psishock, 300))
                 .setNotBloodPendantInfusable();
-        psipulseBrew = new RPSBrew(LibItemNames.PSIPULSE, 32000, new PotionEffect(RPSPotions.psipulse, 600))
+        psipulseBrew = new RPSBrew(RPSItemNames.PSIPULSE, 32000, new PotionEffect(RPSPotions.psipulse, 600))
                 .setNotIncenseInfusable().setNotBloodPendantInfusable();
     }
 
@@ -52,7 +52,7 @@ public class BotaniaCompatItems {
                     new ItemStack(Items.NETHER_WART),
                     "dustPsi",
                     new ItemStack(Items.FERMENTED_SPIDER_EYE));
-        if (ConfigHandler.enablePsipulse && psipulseBrew instanceof Brew)
+        if (RPSConfigHandler.enablePsipulse && psipulseBrew instanceof Brew)
             BotaniaAPI.registerBrewRecipe((Brew) psipulseBrew,
                     new ItemStack(Items.NETHER_WART),
                     "dustPsi",

@@ -1,7 +1,7 @@
 package com.kamefrede.rpsideas.util.libs;
 
 
-public class LibItemNames {
+public class RPSItemNames {
 
     public static final String SNIPER_BULLET = "sniper_bullet";
     public static final String PSIMETAL_HOE = "psimetal_hoe";

@@ -4,7 +4,7 @@ import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.base.IRegenerationBattery;
 import com.kamefrede.rpsideas.items.base.ItemComponent;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
-import com.kamefrede.rpsideas.util.libs.LibItemNames;
+import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -27,7 +27,7 @@ public class ItemUnstableBattery extends ItemComponent implements IRegenerationB
     private static final int PSI_REGEN_BONUS = 10;
 
     public ItemUnstableBattery() {
-        super(LibItemNames.UNSTABLE_BATTERY);
+        super(RPSItemNames.UNSTABLE_BATTERY);
     }
 
     @SubscribeEvent

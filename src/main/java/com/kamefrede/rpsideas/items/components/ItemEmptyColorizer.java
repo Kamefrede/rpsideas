@@ -1,7 +1,7 @@
 package com.kamefrede.rpsideas.items.components;
 
 import com.kamefrede.rpsideas.items.base.ItemComponent;
-import com.kamefrede.rpsideas.util.libs.LibItemNames;
+import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -10,7 +10,7 @@ import vazkii.psi.api.cad.ICADColorizer;
 public class ItemEmptyColorizer extends ItemComponent implements ICADColorizer {
 
     public ItemEmptyColorizer() {
-        super(LibItemNames.EMPTY_COLORIZER);
+        super(RPSItemNames.EMPTY_COLORIZER);
     }
 
     @SideOnly(Side.CLIENT)

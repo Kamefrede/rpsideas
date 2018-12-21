@@ -2,7 +2,7 @@ package com.kamefrede.rpsideas.items;
 
 import com.kamefrede.rpsideas.entity.EntitySniperProjectile;
 import com.kamefrede.rpsideas.items.base.RPSItem;
-import com.kamefrede.rpsideas.util.libs.LibItemNames;
+import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,7 +35,7 @@ public class ItemSniperSpellBullet extends RPSItem implements ISpellContainer {
     private static final String TAG_SPELL = "spell";
 
     public ItemSniperSpellBullet() {
-        super(LibItemNames.SNIPER_BULLET, VARIANTS);
+        super(RPSItemNames.SNIPER_BULLET, VARIANTS);
         setMaxStackSize(1);
     }
 

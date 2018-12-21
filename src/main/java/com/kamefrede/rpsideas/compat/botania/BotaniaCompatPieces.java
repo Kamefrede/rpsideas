@@ -3,21 +3,21 @@ package com.kamefrede.rpsideas.compat.botania;
 import com.kamefrede.rpsideas.spells.base.SpellPieces;
 import com.kamefrede.rpsideas.spells.trick.botania.PieceTrickBotaniaDrum;
 import com.kamefrede.rpsideas.spells.trick.botania.PieceTrickFormBurst;
-import com.kamefrede.rpsideas.util.libs.LibPieceNames;
+import com.kamefrede.rpsideas.util.libs.RPSPieceNames;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.common.lib.LibPieceGroups;
 
 public class BotaniaCompatPieces {
 
     public static void init() {
-        PsiAPI.setGroupRequirements(LibPieceNames.MANA_PSIONICS, 16, LibPieceGroups.GREATER_INFUSION, LibPieceGroups.ELEMENTAL_ARTS);
+        PsiAPI.setGroupRequirements(RPSPieceNames.MANA_PSIONICS, 16, LibPieceGroups.GREATER_INFUSION, LibPieceGroups.ELEMENTAL_ARTS);
 
-        SpellPieces.register(PieceTrickBotaniaDrum.DootGrass.class, LibPieceNames.WILD_DRUM, LibPieceNames.MANA_PSIONICS);
-        SpellPieces.register(PieceTrickBotaniaDrum.DootLeaves.class, LibPieceNames.CANOPY_DRUM, LibPieceNames.MANA_PSIONICS);
-        SpellPieces.register(PieceTrickBotaniaDrum.DootSnow.class, LibPieceNames.COVERING_HORN, LibPieceNames.MANA_PSIONICS);
-        SpellPieces.register(PieceTrickBotaniaDrum.ShearDrum.class, LibPieceNames.GATHERING_DRUM, LibPieceNames.MANA_PSIONICS);
+        SpellPieces.register(PieceTrickBotaniaDrum.DootGrass.class, RPSPieceNames.WILD_DRUM, RPSPieceNames.MANA_PSIONICS);
+        SpellPieces.register(PieceTrickBotaniaDrum.DootLeaves.class, RPSPieceNames.CANOPY_DRUM, RPSPieceNames.MANA_PSIONICS);
+        SpellPieces.register(PieceTrickBotaniaDrum.DootSnow.class, RPSPieceNames.COVERING_HORN, RPSPieceNames.MANA_PSIONICS);
+        SpellPieces.register(PieceTrickBotaniaDrum.ShearDrum.class, RPSPieceNames.GATHERING_DRUM, RPSPieceNames.MANA_PSIONICS);
 
-        SpellPieces.register(PieceTrickFormBurst.class, LibPieceNames.MAKE_BURST, LibPieceNames.MANA_PSIONICS, true);
+        SpellPieces.register(PieceTrickFormBurst.class, RPSPieceNames.MAKE_BURST, RPSPieceNames.MANA_PSIONICS, true);
     }
 
 }

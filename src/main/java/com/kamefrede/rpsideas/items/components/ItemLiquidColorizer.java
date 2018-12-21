@@ -4,7 +4,7 @@ import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.RPSItems;
 import com.kamefrede.rpsideas.items.base.ICADComponentAcceptor;
 import com.kamefrede.rpsideas.items.base.ItemComponent;
-import com.kamefrede.rpsideas.util.libs.LibItemNames;
+import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.resources.I18n;
@@ -32,7 +32,7 @@ import java.util.List;
 public class ItemLiquidColorizer extends ItemComponent implements ICADColorizer, IItemColorProvider, ICADComponentAcceptor {
 
     public ItemLiquidColorizer() {
-        super(LibItemNames.LIQUID_COLORIZER);
+        super(RPSItemNames.LIQUID_COLORIZER);
     }
 
     public static int getColorFromStack(ItemStack stack) {

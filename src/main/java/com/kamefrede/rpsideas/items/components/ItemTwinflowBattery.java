@@ -4,7 +4,7 @@ import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.base.IRegenerationBattery;
 import com.kamefrede.rpsideas.items.base.ItemComponent;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
-import com.kamefrede.rpsideas.util.libs.LibItemNames;
+import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
@@ -27,7 +27,7 @@ public class ItemTwinflowBattery extends ItemComponent implements IRegenerationB
     private static final int PSI_REGEN_BONUS = 5;
 
     public ItemTwinflowBattery() {
-        super(LibItemNames.TWINFLOW_BATTERY);
+        super(RPSItemNames.TWINFLOW_BATTERY);
     }
 
     @SubscribeEvent

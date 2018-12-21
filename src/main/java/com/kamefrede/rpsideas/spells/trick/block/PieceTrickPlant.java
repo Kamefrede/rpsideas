@@ -26,35 +26,33 @@ public class PieceTrickPlant extends PieceTrick {
         super(spell);
     }
 
-    public static void plantPlant(EntityPlayer player, World world, BlockPos pos, int slot, BlockPos pos2) {
-        if (!world.isBlockLoaded(pos) || !world.isBlockModifiable(player, pos)) {
+    public static void plantPlant(EntityPlayer player, World world, BlockPos pos, int slot) {
+        if (!world.isBlockLoaded(pos) || !world.isBlockModifiable(player, pos))
             return;
-        }
+
         IBlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
-        IBlockState state2 = world.getBlockState(pos2);
-        Block block2 = state2.getBlock();
+        BlockPos plantPos = pos.up();
+        IBlockState stateAtPlant = world.getBlockState(plantPos);
+        Block blockAtPlant = stateAtPlant.getBlock();
         ItemStack stack = player.inventory.getStackInSlot(slot);
         if (!stack.isEmpty()) {
-            if (block2.isReplaceable(world, pos)) {
+            if (blockAtPlant.isReplaceable(world, pos)) {
                 if (stack.getItem() instanceof IPlantable) {
                     ItemStack rem = removeFromInventory(player, block, stack);
                     IPlantable plant = ((IPlantable) rem.getItem());
-                    plant(player, world, pos, pos2, state, block, rem, plant);
-
+                    plant(player, world, pos, plantPos, state, block, rem, plant);
                 } else if (stack.getItem() instanceof ItemBlockSpecial) {
                     if (((ItemBlockSpecial) stack.getItem()).getBlock() instanceof IPlantable) {
                         ItemStack rem = removeFromInventory(player, block, stack);
                         IPlantable plant = ((IPlantable) ((ItemBlockSpecial) rem.getItem()).getBlock());
-                        plant(player, world, pos, pos2, state, block, rem, plant);
+                        plant(player, world, pos, plantPos, state, block, rem, plant);
                     }
-
                 } else if (stack.getItem() instanceof ItemBlock) {
                     if (((ItemBlock) stack.getItem()).getBlock() instanceof IPlantable) {
                         ItemStack rem = removeFromInventory(player, block, stack);
                         IPlantable plant = ((IPlantable) ((ItemBlock) rem.getItem()).getBlock());
-                        plant(player, world, pos, pos2, state, block, rem, plant);
-
+                        plant(player, world, pos, plantPos, state, block, rem, plant);
                     }
                 }
 
@@ -62,9 +60,9 @@ public class PieceTrickPlant extends PieceTrick {
         }
     }
 
-    public static void plant(EntityPlayer player, World world, BlockPos pos, BlockPos pos2, IBlockState state, Block block, ItemStack rem, IPlantable plant) {
+    public static void plant(EntityPlayer player, World world, BlockPos pos, BlockPos plantPos, IBlockState state, Block block, ItemStack rem, IPlantable plant) {
         if (block.canSustainPlant(state, world, pos, EnumFacing.UP, plant)) {
-            world.setBlockState(pos2, plant.getPlant(world, pos));
+            world.setBlockState(plantPos, plant.getPlant(world, pos));
             if (player.capabilities.isCreativeMode) HUDHandler.setRemaining(rem, -1);
             else HUDHandler.setRemaining(player, rem, null);
 
@@ -94,10 +92,9 @@ public class PieceTrickPlant extends PieceTrick {
         if (!context.isInRadius(positionVal))
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
 
-        BlockPos pos = new BlockPos(positionVal.x, positionVal.y, positionVal.z);
-        BlockPos plantPos = new BlockPos(positionVal.x, positionVal.y + 1, positionVal.z);
+        BlockPos pos = positionVal.toBlockPos();
 
-        plantPlant(context.caster, context.caster.getEntityWorld(), pos, context.getTargetSlot(), plantPos);
+        plantPlant(context.caster, context.caster.getEntityWorld(), pos, context.getTargetSlot());
 
         return null;
     }

@@ -1,7 +1,7 @@
 package com.kamefrede.rpsideas.effect;
 
 import com.kamefrede.rpsideas.effect.base.PotionPsiChange;
-import com.kamefrede.rpsideas.util.libs.LibItemNames;
+import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.PotionEffect;
 import vazkii.psi.api.cad.ICADColorizer;
@@ -10,8 +10,8 @@ import javax.annotation.Nonnull;
 
 public class PotionPsipulse extends PotionPsiChange {
     protected PotionPsipulse() {
-        super(LibItemNames.PSIPULSE, false, ICADColorizer.DEFAULT_SPELL_COLOR);
-        setRegistryName(LibItemNames.PSIPULSE);
+        super(RPSItemNames.PSIPULSE, false, ICADColorizer.DEFAULT_SPELL_COLOR);
+        setRegistryName(RPSItemNames.PSIPULSE);
     }
 
     @Override

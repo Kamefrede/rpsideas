@@ -3,7 +3,7 @@ package com.kamefrede.rpsideas.items.components;
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.base.RPSItem;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
-import com.kamefrede.rpsideas.util.libs.LibItemNames;
+import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,7 +35,7 @@ public class ItemBioticSensor extends RPSItem implements IExosuitSensor, IItemCo
     private static final Map<EntityPlayer, List<EntityLivingBase>> triggeredBioticsNonRemote = new HashMap<>();
 
     public ItemBioticSensor() {
-        super(LibItemNames.BIOTIC_SENSOR);
+        super(RPSItemNames.BIOTIC_SENSOR);
         setMaxStackSize(1);
     }
 

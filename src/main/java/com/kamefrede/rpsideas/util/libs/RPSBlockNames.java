@@ -1,6 +1,6 @@
 package com.kamefrede.rpsideas.util.libs;
 
-public class LibBlockNames {
+public class RPSBlockNames {
 
     public final static String CONJURED_ETHEREAL_BLOCK = "conjured_ethereal_block";
     public final static String CAD_CASE = "cad_case";

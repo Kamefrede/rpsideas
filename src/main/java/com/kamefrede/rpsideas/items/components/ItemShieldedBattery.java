@@ -3,7 +3,7 @@ package com.kamefrede.rpsideas.items.components;
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.base.ItemComponent;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
-import com.kamefrede.rpsideas.util.libs.LibItemNames;
+import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -25,7 +25,7 @@ import java.util.List;
 public class ItemShieldedBattery extends ItemComponent {
 
     public ItemShieldedBattery() {
-        super(LibItemNames.SHIELDED_BATTERY);
+        super(RPSItemNames.SHIELDED_BATTERY);
     }
 
     @SubscribeEvent
