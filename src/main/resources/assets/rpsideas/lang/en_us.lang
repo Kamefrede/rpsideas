@@ -302,7 +302,9 @@ item.rpsideas:creative_core.name=Creative CAD Core
 item.rpsideas:creative_battery.name=Creative CAD Battery
 item.rpsideas:creative_socket.name=Creative CAD Socket
 item.rpsideas:spell_bullet_sniper.name=Sniper Spell Bullet
+
 item.rpsideas:spell_bullet_sniper_active.name=Sniper Spell Bullet
+item.rpsideas:bracelet_cad.name=Bracelet CAD
 item.rpsideas:psimetal_hoe.name=Psimetal Hoe
 item.rpsideas:ivory_pickaxe.name=Ivory Flowpick
 item.rpsideas:ivory_shovel.name=Ivory Flowspade
