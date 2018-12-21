@@ -16,18 +16,18 @@
   ],
   "key": {
     "M": {
-      "item": "botania:rune",
-      "data": 8
+      "type": "forge:ore_dict",
+      "ore": "runeManaB"
     },
     "L": {
-      "item": "botania:manaresource",
-      "data": 0
+      "type": "forge:ore_dict",
+      "ore": "ingotManasteel"
     },
     "P": {
-      "item": "psi:material",
-      "data": 2
+      "type": "forge:ore_dict",
+      "ore": "gemPsi"
     },
-    "S":{
+    "S": {
       "item": "botania:spreader",
       "data": 1
     }

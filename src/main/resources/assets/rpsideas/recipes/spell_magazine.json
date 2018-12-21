@@ -1,0 +1,29 @@
+{
+  "conditions": [
+    {
+      "type": "magazine_enabled"
+    }
+  ],
+  "result": {
+    "item": "rpsideas:magazine"
+  },
+  "type": "rpsideas:cad_shaped",
+  "pattern": [
+    "MD",
+    "MS",
+    "MD"
+  ],
+  "key": {
+    "M": {
+      "type": "forge:ore_dict",
+      "ore": "ingotPsi"
+    },
+    "D": {
+      "item": "psi:spell_drive"
+    },
+    "S": {
+      "type": "rpsideas:cad_component",
+      "component": "socket"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "rpsideas:ivory_leggings"
+  },
+  "type": "rpsideas:socket_transfer",
+  "ingredients": [
+    {
+      "item": "psi:psimetal_exosuit_leggings"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "dustGlowstone"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "ingotIvoryPsi"
+    }
+  ]
+}

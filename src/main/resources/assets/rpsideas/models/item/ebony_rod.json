@@ -1,0 +1,15 @@
+{
+  "parent": "item/handheld_rod",
+  "textures": {
+    "layer0": "rpsideas:items/ebony_fishing_rod",
+    "layer1": "rpsideas:items/fishing_rod_overlay"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "cast": 1
+      },
+      "model": "rpsideas:item/ebony_rod_cast"
+    }
+  ]
+}

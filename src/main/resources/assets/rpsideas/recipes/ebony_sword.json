@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "rpsideas:ebony_sword"
+  },
+  "type": "rpsideas:socket_transfer",
+  "ingredients": [
+    {
+      "item": "psi:psimetal_sword"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "dustGlowstone"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "ingotEbonyPsi"
+    }
+  ]
+}

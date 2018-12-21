@@ -1,9 +1,19 @@
 {
-	"conditions": {
-		"inline_caster_enabled": "com.github.kamefrede.rpsideas.crafting.factory.InlineCasterConditionFactory",
-		"flash_ring_enabled": "com.github.kamefrede.rpsideas.crafting.factory.FlashRingConditionFactory",
-		"cad_case_enabled": "com.github.kamefrede.rpsideas.crafting.factory.CADCaseConditionFactory",
-		"creative_cad_enabled": "com.github.kamefrede.rpsideas.compat.avaritia.CreativeCADConditionFactory",
-		"botania_present": "com.github.kamefrede.rpsideas.compat.botania.BotaniaRecipeConditionFactory"
-	}
+  "conditions": {
+    "inline_caster_enabled": "com.kamefrede.rpsideas.crafting.factory.InlineCasterConditionFactory",
+    "flash_ring_enabled": "com.kamefrede.rpsideas.crafting.factory.FlashRingConditionFactory",
+    "cad_case_enabled": "com.kamefrede.rpsideas.crafting.factory.CADCaseConditionFactory",
+    "magazine_enabled": "com.kamefrede.rpsideas.crafting.factory.MagazineConditionFactory",
+    "creative_cad_enabled": "com.kamefrede.rpsideas.compat.avaritia.CreativeCADConditionFactory",
+    "botania_present": "com.kamefrede.rpsideas.compat.botania.BotaniaRecipeConditionFactory"
+  },
+  "recipes": {
+    "cad_shapeless": "com.kamefrede.rpsideas.crafting.RecipeCADShapeless$Factory",
+    "cad_shaped": "com.kamefrede.rpsideas.crafting.RecipeCADShaped$Factory",
+    "socket_transfer": "com.kamefrede.rpsideas.crafting.RecipeSocketTransfer$Factory"
+  },
+  "ingredients": {
+    "cad_component": "com.kamefrede.rpsideas.crafting.IngredientCADComponent$Factory",
+    "copper": "com.kamefrede.rpsideas.crafting.factory.CopperIngredientFactory"
+  }
 }

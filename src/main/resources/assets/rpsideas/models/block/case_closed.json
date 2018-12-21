@@ -3,7 +3,6 @@
 	"parent": "block/block",
 	"textures": {
 		"particle": "psi:blocks/psimetal_block",
-		"padding": "rpsideas:blocks/padding",
 		"texture": "rpsideas:blocks/case"
 	},
 	"elements": [
@@ -79,33 +78,27 @@
 			"faces": {
 				"down": {
 					"uv": [6, 13, 10, 15],
-					"texture": "#padding",
-					"tintindex": 1
+					"texture": "#padding"
 				},
 				"up": {
 					"uv": [6, 13, 10, 15],
-					"texture": "#padding",
-					"tintindex": 1
+					"texture": "#padding"
 				},
 				"north": {
 					"uv": [6, 13, 10, 15],
-					"texture": "#padding",
-					"tintindex": 1
+					"texture": "#padding"
 				},
 				"south": {
 					"uv": [6, 13, 10, 15],
-					"texture": "#padding",
-					"tintindex": 1
+					"texture": "#padding"
 				},
 				"west": {
 					"uv": [13, 13, 15, 15],
-					"texture": "#padding",
-					"tintindex": 1
+					"texture": "#padding"
 				},
 				"east": {
 					"uv": [13, 13, 15, 15],
-					"texture": "#padding",
-					"tintindex": 1
+					"texture": "#padding"
 				}
 			}
 		},

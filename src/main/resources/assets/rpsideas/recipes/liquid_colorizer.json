@@ -1,7 +1,6 @@
 {
   "result": {
-    "item": "rpsideas:liquid_colorizer",
-    "count": 1
+    "item": "rpsideas:liquid_colorizer"
   },
   "type": "forge:ore_shaped",
   "pattern": [
@@ -10,18 +9,20 @@
     " I "
   ],
   "key": {
-    "D": {
-      "item": "psi:material",
-      "data": 0
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
     },
     "G": {
-      "item": "minecraft:glass"
+      "type": "forge:ore_dict",
+      "ore": "blockGlass"
     },
     "B": {
-    	"item": "minecraft:water_bucket" 
+      "item": "minecraft:water_bucket"
     },
-    "I": {
-    	"item": "minecraft:iron_ingot"
+    "D": {
+      "type": "forge:ore_dict",
+      "ore": "dustPsi"
     }
   }
 }

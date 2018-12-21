@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "rpsideas:ebony_chestplate"
+  },
+  "type": "rpsideas:socket_transfer",
+  "ingredients": [
+    {
+      "item": "psi:psimetal_exosuit_chestplate"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "dustGlowstone"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "ingotEbonyPsi"
+    }
+  ]
+}

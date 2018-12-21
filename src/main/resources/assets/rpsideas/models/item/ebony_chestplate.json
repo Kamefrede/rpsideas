@@ -3,9 +3,5 @@
   "textures": {
     "layer0": "rpsideas:items/ebony_chestplate",
     "layer1": "rpsideas:items/chestplate_overlay"
-  },
-  "overrides": [{
-    "predicate": { "rpsideas:overlay": 1 },
-    "model": "rpsideas:item/chestplate_overlay"
-  }]
+  }
 }

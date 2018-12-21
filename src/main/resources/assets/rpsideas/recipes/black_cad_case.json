@@ -1,1 +1,36 @@
-{"conditions": [{"type": "cad_case_enabled"}], "result": {"item": "rpsideas:cad_case", "data": 15}, "type": "forge:ore_shaped", "pattern": [" B ", "GWG", "MMM"], "key": {"B": {"item": "minecraft:wool", "data": 15}, "G": {"item": "psi:material", "data": 2}, "W": {"item": "minecraft:wool", "data": 15}, "M": {"item": "psi:material", "data": 1}}}
+{
+  "group": "rpsideas:cad_case",
+  "conditions": [
+    {
+      "type": "cad_case_enabled"
+    }
+  ],
+  "result": {
+    "item": "rpsideas:cad_case",
+    "data": 15
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " B ",
+    "GWG",
+    "MMM"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:wool",
+      "data": 15
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "gemPsi"
+    },
+    "W": {
+      "item": "minecraft:wool",
+      "data": 15
+    },
+    "M": {
+      "type": "forge:ore_dict",
+      "ore": "ingotPsi"
+    }
+  }
+}

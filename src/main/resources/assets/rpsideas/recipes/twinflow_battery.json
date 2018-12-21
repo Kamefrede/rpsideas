@@ -10,18 +10,20 @@
   ],
   "key": {
     "E": {
-      "item": "psi:material",
-      "data": 4
-    },
-    "G": {
-      "item": "minecraft:gold_ingot"
+      "type": "forge:ore_dict",
+      "ore": "ingotIvoryPsi"
     },
     "P": {
-      "item": "psi:material",
-      "data": 2
+      "type": "forge:ore_dict",
+      "ore": "gemPsi"
     },
     "I": {
-      "item": "minecraft:iron_ingot"
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "ingotGold"
     }
   }
 }

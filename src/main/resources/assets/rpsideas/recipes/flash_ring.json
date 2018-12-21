@@ -15,15 +15,16 @@
   ],
   "key": {
     "E": {
-      "item": "psi:material",
-      "data": 3
+      "type": "forge:ore_dict",
+      "ore": "ingotEbonyPsi"
     },
     "G": {
-      "item": "minecraft:glowstone_dust"
+      "type": "forge:ore_dict",
+      "ore": "dustGlowstone"
     },
     "P": {
-      "item": "psi:material",
-      "data": 2
+      "type": "forge:ore_dict",
+      "ore": "gemPsi"
     }
   }
 }

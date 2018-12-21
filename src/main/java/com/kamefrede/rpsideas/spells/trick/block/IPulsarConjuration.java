@@ -1,0 +1,35 @@
+package com.kamefrede.rpsideas.spells.trick.block;
+
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import vazkii.psi.api.spell.SpellContext;
+import vazkii.psi.api.spell.SpellParam;
+import vazkii.psi.api.spell.SpellPiece;
+import vazkii.psi.api.spell.SpellRuntimeException;
+
+/**
+ * @author WireSegal
+ * Created at 2:11 PM on 12/16/18.
+ */
+public interface IPulsarConjuration {
+    default void conjurePulsar(SpellContext context, SpellParam positionParam, SpellParam timeParam) throws SpellRuntimeException {
+        if (context.caster.world.isRemote) return;
+
+        SpellPiece piece = (SpellPiece) this;
+
+        BlockPos pos = SpellHelpers.getBlockPosFromVectorParam(piece, context, positionParam);
+        SpellHelpers.checkPos(context, pos);
+
+        int time = (int) SpellHelpers.getNumber(piece, context, timeParam, 0);
+        World world = context.caster.world;
+
+        if (SpellHelpers.placeBlock(world, pos, getStateToSet(), false))
+            postSet(context, world, pos, time);
+    }
+
+    void postSet(SpellContext context, World world, BlockPos pos, int time);
+
+    IBlockState getStateToSet();
+}

@@ -1,7 +1,6 @@
 {
   "result": {
-    "item": "rpsideas:gauss_rifle",
-    "count": 1
+    "item": "rpsideas:gauss_rifle"
   },
   "type": "forge:ore_shaped",
   "pattern": [
@@ -10,15 +9,16 @@
     "C I"
   ],
   "key": {
-    "P": {
-      "item": "psi:material",
-      "data": 0
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
     },
     "C": {
-    	"item": "minecraft:redstone" 
+      "type": "rpsideas:copper"
     },
-    "I": {
-    	"item": "minecraft:iron_ingot"
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "dustPsi"
     }
   }
 }

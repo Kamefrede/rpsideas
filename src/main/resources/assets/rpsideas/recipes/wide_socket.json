@@ -11,14 +11,16 @@
   ],
   "key": {
     "I": {
-      "item": "minecraft:iron_ingot"
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
     },
     "D": {
-      "item": "psi:material",
-      "data": 0
+      "type": "forge:ore_dict",
+      "ore": "dustPsi"
     },
     "G": {
-      "item": "minecraft:glowstone_dust"
+      "type": "forge:ore_dict",
+      "ore": "dustGlowstone"
     }
   }
 }

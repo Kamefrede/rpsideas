@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "rpsideas:ivory_helmet"
+  },
+  "type": "rpsideas:socket_transfer",
+  "ingredients": [
+    {
+      "item": "psi:psimetal_exosuit_helmet"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "dustGlowstone"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "ingotIvoryPsi"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "rpsideas:items/ebony_hoe",
+    "layer1": "rpsideas:items/hoe_overlay"
+  }
+}

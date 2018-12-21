@@ -2,7 +2,7 @@
   "parent": "rpsideas:block/plate_base",
   "textures": {
     "top": "psi:blocks/psimetal_plate_black",
-    "side": "psi:blocks/psimetal_plate_black_light",
-    "overlay": "rpsideas:blocks/psimetal_plate_black_light"
+    "side": "rpsideas:blocks/plate_black_base",
+    "overlay": "rpsideas:blocks/plate_black_light"
   }
 }
