@@ -7,6 +7,7 @@ import com.kamefrede.rpsideas.tiles.TileCracklingStar;
 import com.kamefrede.rpsideas.tiles.TileEthereal;
 import com.kamefrede.rpsideas.util.libs.RPSBlockNames;
 import net.minecraft.block.Block;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
@@ -25,9 +26,16 @@ public class RPSBlocks {
     public static final BlockModNoItem conjuredPulsar = new BlockConjuredPulsar();
     public static final BlockModNoItem conjuredPulsarLight = new BlockPulsarLight();
     public static final BlockModNoItem conjuredStar = new BlockConjuredStar();
-    public static final BlockCADCase cadCase = new BlockCADCase();
+    public static final BlockCADCase[] cadCases = new BlockCADCase[16];
     public static final BlockMod brightPlate = new BlockPlate(RPSBlockNames.BRIGHT_PLATE);
     public static final BlockMod darkPlate = new BlockPlate(RPSBlockNames.DARK_PLATE);
+
+    static {
+        for (int i = 0; i < cadCases.length; i++) {
+            EnumDyeColor dye = EnumDyeColor.byMetadata(i);
+            cadCases[i] = new BlockCADCase(RPSBlockNames.CAD_CASE + "_" + dye.getName(), dye);
+        }
+    }
 
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
@@ -40,10 +48,6 @@ public class RPSBlocks {
         conjuredPulsar.registerStateMapper();
         conjuredPulsarLight.registerStateMapper();
         conjuredStar.registerStateMapper();
-
-        // Nor does it respect blocks with mesh definitions
-
-        cadCase.registerStateMapper();
     }
 
     @SubscribeEvent

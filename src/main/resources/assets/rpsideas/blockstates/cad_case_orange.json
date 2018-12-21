@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "facing=south,open=false": { "model": "rpsideas:case_closed_orange" },
+    "facing=north,open=false": { "model": "rpsideas:case_closed_orange", "y": 180 },
+    "facing=west,open=false": { "model": "rpsideas:case_closed_orange", "y": 90 },
+    "facing=east,open=false": { "model": "rpsideas:case_closed_orange", "y": 270 },
+    "facing=south,open=true": { "model": "rpsideas:case_open_orange" },
+    "facing=north,open=true": { "model": "rpsideas:case_open_orange", "y": 180 },
+    "facing=west,open=true": { "model": "rpsideas:case_open_orange", "y": 90 },
+    "facing=east,open=true": { "model": "rpsideas:case_open_orange", "y": 270 }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "rpsideas:block/case_open",
+  "textures": {
+    "padding": "minecraft:blocks/wool_colored_orange"
+  }
+}

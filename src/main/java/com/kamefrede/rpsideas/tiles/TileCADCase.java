@@ -4,7 +4,6 @@ import com.kamefrede.rpsideas.blocks.BlockCADCase;
 import com.kamefrede.rpsideas.items.ItemGaussRifle;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -31,7 +30,6 @@ import javax.annotation.Nullable;
 public class TileCADCase extends TileEntity {
     private ItemStackHandler itemHandler = new CaseTileHandler();
 
-    private EnumDyeColor color = EnumDyeColor.WHITE;
     private String name = "";
 
     public static boolean isAllowed(int slot, Item item) {
@@ -40,14 +38,6 @@ public class TileCADCase extends TileEntity {
                         (item instanceof ISpellContainer ||
                                 item instanceof ISocketable ||
                                 item instanceof ISocketableController));
-    }
-
-    public EnumDyeColor getDyeColor() {
-        return color;
-    }
-
-    public void setDyeColor(EnumDyeColor color) {
-        this.color = color;
     }
 
     public String getName() {
@@ -134,7 +124,6 @@ public class TileCADCase extends TileEntity {
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         nbt.setTag("Items", itemHandler.serializeNBT());
         nbt.setString("Name", name);
-        nbt.setInteger("Color", color.getMetadata());
         return super.writeToNBT(nbt);
     }
 
@@ -143,7 +132,6 @@ public class TileCADCase extends TileEntity {
         super.readFromNBT(nbt);
         itemHandler.deserializeNBT(nbt.getCompoundTag("Items"));
         name = nbt.getString("Name");
-        color = EnumDyeColor.byMetadata(nbt.getInteger("Color"));
     }
 
     @Override

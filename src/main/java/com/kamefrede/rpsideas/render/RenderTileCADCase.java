@@ -1,7 +1,6 @@
 package com.kamefrede.rpsideas.render;
 
 import com.kamefrede.rpsideas.blocks.BlockCADCase;
-import com.kamefrede.rpsideas.blocks.RPSBlocks;
 import com.kamefrede.rpsideas.tiles.TileCADCase;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -22,7 +21,7 @@ public class RenderTileCADCase extends TileEntitySpecialRenderer<TileCADCase> {
     @Override
     public void render(TileCADCase cadCase, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         IBlockState state = cadCase.getWorld().getBlockState(cadCase.getPos());
-        if (state.getBlock() != RPSBlocks.cadCase || !state.getValue(BlockCADCase.OPEN)) return;
+        if (!(state.getBlock() instanceof BlockCADCase) || !state.getValue(BlockCADCase.OPEN)) return;
 
         IItemHandler itemHandler = cadCase.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         if (itemHandler == null) return;

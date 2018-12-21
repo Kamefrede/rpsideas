@@ -38,7 +38,7 @@ public class ItemPsimetalRod extends ItemModRod implements IPsiAddonTool {
 
     protected ItemPsimetalRod(String name) {
         super(name);
-        setCreativeTab(RPSCreativeTab.INSTANCE);
+        RPSCreativeTab.set(this);
         setMaxStackSize(1);
         setMaxDamage(900);
     }

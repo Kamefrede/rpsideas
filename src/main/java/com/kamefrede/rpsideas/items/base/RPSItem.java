@@ -11,7 +11,7 @@ import vazkii.arl.item.ItemMod;
 public class RPSItem extends ItemMod {
     public RPSItem(String name, String... variants) {
         super(name, variants);
-        setCreativeTab(RPSCreativeTab.INSTANCE);
+        RPSCreativeTab.set(this);
     }
 
     @Override

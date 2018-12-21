@@ -7,6 +7,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.client.settings.KeyModifier;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.psi.api.cad.EnumCADComponent;
@@ -35,7 +36,7 @@ public abstract class ItemComponent extends RPSItem implements ICADComponent {
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag mistake) {
-        tooltip.add(I18n.format("rpsideas.misc.hold") + TextFormatting.AQUA + I18n.format("rpsideas.misc.shift") + TextFormatting.RESET + I18n.format("rpsideas.misc.info"));
+        tooltip.add(I18n.format(RPSIdeas.MODID + ".misc.hold", TextFormatting.AQUA + KeyModifier.SHIFT.name() + TextFormatting.RESET));
         if (!GuiScreen.isShiftKeyDown()) return;
         tooltip.remove(1);
 

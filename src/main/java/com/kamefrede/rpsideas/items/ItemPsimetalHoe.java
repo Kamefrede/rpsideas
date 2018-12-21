@@ -42,7 +42,7 @@ public class ItemPsimetalHoe extends RPSItem implements IPsimetalTool {
 
     public ItemPsimetalHoe(String name) {
         super(name);
-        setCreativeTab(RPSCreativeTab.INSTANCE);
+        RPSCreativeTab.set(this);
         this.speed = 4.0F;
         this.setMaxDamage(900);
 

@@ -49,7 +49,7 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsiAddonT
     private ItemFlowExosuit(String name, EntityEquipmentSlot slot, boolean ebony) {
         super(name, PsiAPI.PSIMETAL_ARMOR_MATERIAL, -1, slot);
         this.ebony = ebony;
-        setCreativeTab(RPSCreativeTab.INSTANCE);
+        RPSCreativeTab.set(this);
     }
 
     @SideOnly(Side.CLIENT)
@@ -102,9 +102,9 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsiAddonT
         return 0.025f;
     }
 
-    abstract int getCastCooldown(ItemStack armorPiece);
+    public abstract int getCastCooldown(ItemStack armorPiece);
 
-    abstract String getEvent(ItemStack armorPiece);
+    public abstract String getEvent(ItemStack armorPiece);
 
     @SideOnly(Side.CLIENT)
     @Override
@@ -177,11 +177,11 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsiAddonT
         }
 
         @Override
-        String getEvent(ItemStack hemlet) {
+        public String getEvent(ItemStack hemlet) {
             ItemStack sensor = getAttachedSensor(hemlet);
             if (!sensor.isEmpty() && sensor.getItem() instanceof IExosuitSensor) {
                 return ((IExosuitSensor) sensor.getItem()).getEventType(hemlet);
-            } else return PsiArmorEvent.DAMAGE;
+            } else return null;
         }
 
         @Override
@@ -225,7 +225,7 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsiAddonT
         }
 
         @Override
-        String getEvent(ItemStack armorPiece) {
+        public String getEvent(ItemStack armorPiece) {
             return PsiArmorEvent.DAMAGE;
         }
     }
@@ -241,7 +241,7 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsiAddonT
         }
 
         @Override
-        String getEvent(ItemStack armorPiece) {
+        public String getEvent(ItemStack armorPiece) {
             return PsiArmorEvent.TICK;
         }
 
@@ -262,7 +262,7 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsiAddonT
         }
 
         @Override
-        String getEvent(ItemStack armorPiece) {
+        public String getEvent(ItemStack armorPiece) {
             return PsiArmorEvent.JUMP;
         }
     }

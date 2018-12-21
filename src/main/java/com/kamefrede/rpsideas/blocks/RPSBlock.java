@@ -13,7 +13,7 @@ public class RPSBlock extends BlockMod {
 
     public RPSBlock(String name, Material materialIn, String... variants) {
         super(name, materialIn, variants);
-        setCreativeTab(RPSCreativeTab.INSTANCE);
+        RPSCreativeTab.set(this);
     }
 
     @Override

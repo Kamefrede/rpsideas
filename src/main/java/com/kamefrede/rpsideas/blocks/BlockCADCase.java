@@ -1,23 +1,19 @@
 package com.kamefrede.rpsideas.blocks;
 
+import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.blocks.ItemCADCase;
 import com.kamefrede.rpsideas.tiles.TileCADCase;
 import com.kamefrede.rpsideas.util.RPSSoundHandler;
-import com.kamefrede.rpsideas.util.libs.RPSBlockNames;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.block.statemap.IStateMapper;
-import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.resources.I18n;
@@ -25,7 +21,6 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -35,11 +30,9 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.Chunk;
-import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.client.settings.KeyModifier;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -56,35 +49,24 @@ import java.util.Objects;
 public class BlockCADCase extends RPSBlock implements IBlockColorProvider {
     public static final PropertyBool OPEN = PropertyBool.create("open");
     public static final PropertyDirection FACING = PropertyDirection.create("facing", Arrays.asList(EnumFacing.HORIZONTALS));
-    public static final PropertyEnum<EnumDyeColor> COLOR = PropertyEnum.create("color", EnumDyeColor.class);
     private static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(3.5 / 16.0, 0.0, 0.5 / 16.0, 12.5 / 16.0, 4.5 / 16.0, 15.5 / 16.0);
     private static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.5 / 16.0, 0.0, 3.5 / 16.0, 15.5 / 16.0, 4.5 / 16.0, 12.5 / 16.0);
     private static final AxisAlignedBB EAST_AABB = new AxisAlignedBB(3.5 / 16.0, 0.0, 0.5 / 16.0, 12.5 / 16.0, 4.5 / 16.0, 15.5 / 16.0);
     private static final AxisAlignedBB SOUTH_AABB = new AxisAlignedBB(0.5 / 16.0, 0.0, 3.5 / 16.0, 15.5 / 16.0, 4.5 / 16.0, 12.5 / 16.0);
 
-    public BlockCADCase() {
-        super(RPSBlockNames.CAD_CASE, Material.CLOTH);
+    public final EnumDyeColor color;
+
+    public BlockCADCase(String name, EnumDyeColor color) {
+        super(name, Material.CLOTH);
+        this.color = color;
 
         setHardness(0.5f);
         setSoundType(SoundType.METAL);
 
-        setDefaultState(getDefaultState().withProperty(OPEN, false).withProperty(FACING, EnumFacing.NORTH).withProperty(COLOR, EnumDyeColor.WHITE));
+        setDefaultState(getDefaultState().withProperty(OPEN, false).withProperty(FACING, EnumFacing.NORTH));
     }
 
     //Block Properties and State
-
-    @SideOnly(Side.CLIENT)
-    public void registerStateMapper() {
-        IStateMapper mapper = getStateMapper();
-        IProperty[] ignored = getIgnoredProperties();
-        if (mapper != null || ignored != null && ignored.length > 0) {
-            if (mapper != null)
-                ModelLoader.setCustomStateMapper(this, mapper);
-            else
-                ModelLoader.setCustomStateMapper(this, new StateMap.Builder().ignore(ignored).build());
-
-        }
-    }
 
     @Override
     public ItemBlock createItemBlock(ResourceLocation res) {
@@ -94,7 +76,7 @@ public class BlockCADCase extends RPSBlock implements IBlockColorProvider {
     @Nonnull
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, OPEN, FACING, COLOR);
+        return new BlockStateContainer(this, OPEN, FACING);
     }
 
     @Override
@@ -109,23 +91,6 @@ public class BlockCADCase extends RPSBlock implements IBlockColorProvider {
         boolean isOpen = (meta & 4) != 0;
         return getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(horizontalIndex)).withProperty(OPEN, isOpen);
     }
-
-    @Nonnull
-    @Override
-    public IBlockState getActualState(@Nonnull IBlockState state, IBlockAccess world, BlockPos pos) {
-        TileEntity tile;
-        if (world instanceof ChunkCache) {
-            tile = ((ChunkCache) world).getTileEntity(pos, Chunk.EnumCreateEntityType.CHECK);
-        } else {
-            tile = world.getTileEntity(pos);
-        }
-
-        if (tile instanceof TileCADCase) {
-            TileCADCase cadCase = (TileCADCase) tile;
-            return state.withProperty(COLOR, cadCase.getDyeColor());
-        } else return state;
-    }
-
 
     @Override
     public boolean isFullBlock(IBlockState state) {
@@ -167,7 +132,7 @@ public class BlockCADCase extends RPSBlock implements IBlockColorProvider {
         TileEntity tileentity = world.getTileEntity(pos);
         if (tileentity instanceof TileCADCase) {
             TileCADCase cadCase = (TileCADCase) tileentity;
-            ItemStack itemstack = new ItemStack(this, 1, getActualState(state, world, pos).getValue(COLOR).getMetadata());
+            ItemStack itemstack = new ItemStack(this);
             IItemHandler handler = itemstack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
             if (handler != null) {
                 for (int i = 0; i < handler.getSlots(); i++) {
@@ -179,7 +144,7 @@ public class BlockCADCase extends RPSBlock implements IBlockColorProvider {
             }
             return itemstack;
         }
-        return new ItemStack(Items.AIR);
+        return ItemStack.EMPTY;
     }
 
 
@@ -215,7 +180,7 @@ public class BlockCADCase extends RPSBlock implements IBlockColorProvider {
         TileEntity tileentity = worldIn.getTileEntity(pos);
         if (tileentity instanceof TileCADCase) {
             TileCADCase cadCase = (TileCADCase) tileentity;
-            ItemStack itemstack = new ItemStack(this, 1, getActualState(state, worldIn, pos).getValue(COLOR).getMetadata());
+            ItemStack itemstack = new ItemStack(this);
             IItemHandler handler = itemstack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
             if (handler != null) {
                 for (int i = 0; i < handler.getSlots(); i++) {
@@ -259,8 +224,6 @@ public class BlockCADCase extends RPSBlock implements IBlockColorProvider {
         if (tile instanceof TileCADCase) {
             TileCADCase cadCase = (TileCADCase) tile;
 
-            //TODO Flatten
-            cadCase.setDyeColor(EnumDyeColor.byMetadata(stack.getItemDamage()));
             if (stack.hasDisplayName()) cadCase.setName(stack.getDisplayName());
 
             IItemHandler stackHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
@@ -318,12 +281,16 @@ public class BlockCADCase extends RPSBlock implements IBlockColorProvider {
 
         boolean shifting = GuiScreen.isShiftKeyDown();
 
+        boolean inFirst = false;
+
         if (stackHandler != null) {
             for (int i = 0; i < stackHandler.getSlots(); i++) {
                 ItemStack slot = stackHandler.getStackInSlot(i);
                 if (slot.isEmpty()) continue;
+                if (i == 0)
+                    inFirst = true;
 
-                if (i != 0 && shifting) tooltip.add("");
+                if (inFirst && shifting) tooltip.add("");
                 tooltip.add("| " + TextFormatting.WHITE + slot.getDisplayName());
 
                 List<String> slotTooltip = slot.getTooltip(Minecraft.getMinecraft().player, ITooltipFlag.TooltipFlags.NORMAL); //thanks mojang
@@ -331,7 +298,7 @@ public class BlockCADCase extends RPSBlock implements IBlockColorProvider {
                     if (shifting)
                         for (String line : slotTooltip) tooltip.add("|   " + line);
                     else
-                        tooltip.add("|   " + I18n.format("rpsideas.misc.hold") + TextFormatting.AQUA + I18n.format("rpsideas.misc.shift") + TextFormatting.RESET + I18n.format("rpsideas.misc.info"));
+                        tooltip.add("|   " + I18n.format(RPSIdeas.MODID + ".misc.hold", TextFormatting.AQUA + KeyModifier.SHIFT.name() + TextFormatting.RESET));
                 }
             }
         }
@@ -339,16 +306,11 @@ public class BlockCADCase extends RPSBlock implements IBlockColorProvider {
     }
 
     @Override
-    public IProperty[] getIgnoredProperties() {
-        return new IProperty[] { COLOR };
-    }
-
-    @Override
     @SideOnly(Side.CLIENT)
     public IBlockColor getBlockColor() {
         return (state, world, pos, layer) -> {
-            if (layer == 1 && world != null && pos != null && state.getBlock() instanceof BlockCADCase) {
-                return world.getBlockState(pos).getActualState(world, pos).getValue(BlockCADCase.COLOR).getColorValue();
+            if (layer == 1) {
+                return color.getColorValue();
             } else return -1;
         };
     }
@@ -358,7 +320,7 @@ public class BlockCADCase extends RPSBlock implements IBlockColorProvider {
     public IItemColor getItemColor() {
         return (stack, tintIndex) -> {
             if (tintIndex == 1) {
-                return EnumDyeColor.byMetadata(stack.getMetadata()).getColorValue();
+                return color.getColorValue();
             } else return -1;
         };
     }

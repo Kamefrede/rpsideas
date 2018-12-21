@@ -393,9 +393,7 @@ psi.piecegroup.rpsideas.inter_cad.desc=This group introduces a way for you to co
 
 rpsideas.componentType=Component Type:
 rpsideas.misc.cost=Cost Multiplier:
-rpsideas.misc.hold=Hold 
-rpsideas.misc.shift=SHIFT
-rpsideas.misc.info= for more info
+rpsideas.misc.hold=Hold %s for more info
 rpsideas.spelldesc.requires=Requires: %s
 rpsideas.spellerror.tricknotenabled=ERROR: Trick doesn't have an enabling component.
 rpsideas.spellerror.trickdisabled=ERROR: Trick's enabling component doesn't have its requirements met.
