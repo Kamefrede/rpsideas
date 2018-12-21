@@ -2,7 +2,7 @@ package com.kamefrede.rpsideas.items.components;
 
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.RPSItems;
-import com.kamefrede.rpsideas.items.base.ICadComponentAcceptor;
+import com.kamefrede.rpsideas.items.base.ICADComponentAcceptor;
 import com.kamefrede.rpsideas.items.base.ItemComponent;
 import com.kamefrede.rpsideas.util.libs.LibItemNames;
 import net.minecraft.client.gui.GuiScreen;
@@ -29,7 +29,7 @@ import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.List;
 
-public class ItemLiquidColorizer extends ItemComponent implements ICADColorizer, IItemColorProvider, ICadComponentAcceptor {
+public class ItemLiquidColorizer extends ItemComponent implements ICADColorizer, IItemColorProvider, ICADComponentAcceptor {
 
     public ItemLiquidColorizer() {
         super(LibItemNames.LIQUID_COLORIZER);

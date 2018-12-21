@@ -1,0 +1,23 @@
+{
+  "result": {
+    "item": "rpsideas:gauss_bullet",
+    "count": 2
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "ICP"
+  ],
+  "key": {
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    },
+    "C": {
+      "type": "rpsideas:copper"
+    },
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "dustPsi"
+    }
+  }
+}

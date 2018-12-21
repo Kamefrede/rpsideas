@@ -1,0 +1,25 @@
+{
+  "result": {
+    "item": "rpsideas:empty_colorizer"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " D ",
+    "G G",
+    " I "
+  ],
+  "key": {
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "blockGlass"
+    },
+    "D": {
+      "type": "forge:ore_dict",
+      "ore": "dustPsi"
+    }
+  }
+}

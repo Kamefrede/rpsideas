@@ -15,15 +15,15 @@
   ],
   "key": {
     "M": {
-      "item": "psi:material",
-      "data": 1
+      "type": "forge:ore_dict",
+      "ore": "ingotPsi"
     },
     "S": {
       "item": "rpsideas:wide_socket"
     },
     "G": {
-      "item": "psi:material",
-      "data": 2
+      "type": "forge:ore_dict",
+      "ore": "gemPsi"
     }
   }
 }

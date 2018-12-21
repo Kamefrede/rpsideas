@@ -1,9 +1,9 @@
 package com.kamefrede.rpsideas.items;
 
 import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.crafting.factory.RPSRecipes;
+import com.kamefrede.rpsideas.crafting.IngredientCADComponent;
 import com.kamefrede.rpsideas.gui.GuiHandler;
-import com.kamefrede.rpsideas.items.base.ICadComponentAcceptor;
+import com.kamefrede.rpsideas.items.base.ICADComponentAcceptor;
 import com.kamefrede.rpsideas.items.base.RPSItem;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -40,7 +40,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemCADMagazine extends RPSItem implements ISocketable, ICadComponentAcceptor, ISpellSettable {
+public class ItemCADMagazine extends RPSItem implements ISocketable, ICADComponentAcceptor, ISpellSettable {
     public ItemCADMagazine(String name) {
         super(name);
         setMaxStackSize(1);
@@ -84,7 +84,7 @@ public class ItemCADMagazine extends RPSItem implements ISocketable, ICadCompone
     public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items) {
 
         if (isInCreativeTab(tab)) {
-            for (ItemStack stack : RPSRecipes.examplesockets) {
+            for (ItemStack stack : IngredientCADComponent.defaults(EnumCADComponent.SOCKET)) {
                 items.add(setSocket(new ItemStack(this), stack));
             }
         }
@@ -177,15 +177,13 @@ public class ItemCADMagazine extends RPSItem implements ISocketable, ICadCompone
         } else {
             return fallback;
         }
-
-
     }
 
     @Override
-    public ItemStack setPiece(ItemStack stack, EnumCADComponent type, ItemStack piece) {
+    public void setPiece(ItemStack stack, EnumCADComponent type, ItemStack piece) {
         if (type != EnumCADComponent.SOCKET)
-            return ItemStack.EMPTY;
-        return setSocket(stack, piece);
+            return;
+        setSocket(stack, piece);
     }
 
     public Spell getSpell(ItemStack stack) {

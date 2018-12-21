@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.crafting.factory;
+package com.kamefrede.rpsideas.crafting;
 
 import com.kamefrede.rpsideas.items.components.ItemLiquidColorizer;
 import net.minecraft.inventory.InventoryCrafting;

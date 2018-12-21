@@ -1,10 +1,6 @@
 package com.kamefrede.rpsideas.util.libs;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class LibItemNames {
 
     public static final String SNIPER_BULLET = "sniper_bullet";
@@ -12,7 +8,6 @@ public class LibItemNames {
     public static final String CAD_ASSEMBLY = "cad_assembly_mana_blaster";
     public static final String WIDE_SOCKET = "wide_socket";
     public static final String FLASH_RING = "flash_ring";
-    public static final String CAD_CASE = "cad_case";
     public static final String BIOTIC_SENSOR = "biotic_sensor";
     public static final String TWINFLOW_BATTERY = "twinflow_battery";
     public static final String SHIELDED_BATTERY = "shielded_battery";
@@ -66,12 +61,4 @@ public class LibItemNames {
     public static final String IVORY_SHEARS = "ivory_shears";
     public static final String IVORY_ROD = "ivory_rod";
     public static final String IVORY_HOE = "ivory_hoe";
-
-
-    public static final List<String> colors = new ArrayList<>(Arrays.asList("White", "Orange", "Magenta", "LightBlue",
-            "Yellow", "Lime", "Pink", "Gray",
-            "LightGray", "Cyan", "Purple", "Blue",
-            "Brown", "Green", "Red", "Black"));
-
-
 }

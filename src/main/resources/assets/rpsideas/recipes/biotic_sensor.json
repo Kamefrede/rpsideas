@@ -10,15 +10,15 @@
   ],
   "key": {
     "P": {
-      "item": "psi:material",
-      "data": 1
+      "type": "forge:ore_dict",
+      "ore": "ingotPsi"
     },
     "E": {
       "item": "minecraft:ender_eye"
     },
     "I": {
-      "item": "minecraft:iron_ingot",
-      "data": 0
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
     }
   }
 }

@@ -9,6 +9,7 @@ import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
@@ -22,10 +23,22 @@ import javax.annotation.Nullable;
 
 
 public class ItemCADCase extends ItemModBlock {
+
+    private final String[] variants;
+
     public ItemCADCase(Block block, ResourceLocation res) {
         super(block, res);
 
+        variants = new String[16];
+        for (int i = 0; i < 16; i++)
+            variants[i] = res.getPath() + "_" + EnumDyeColor.byMetadata(i).getName();
+
         setMaxStackSize(1);
+    }
+
+    @Override
+    public String[] getVariants() {
+        return variants;
     }
 
     @Nonnull
@@ -48,7 +61,6 @@ public class ItemCADCase extends ItemModBlock {
         return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
     }
 
-    //Wat
     @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
         target.knockBack(attacker, 1f, Math.sin(attacker.rotationYaw * Math.PI / 180d), -Math.cos(attacker.rotationYaw * Math.PI / 180d));

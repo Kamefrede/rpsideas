@@ -19,6 +19,10 @@ public class ConfigHandler {
     @Config.Comment("Is the Flash Ring craftable?")
     public static boolean enableRing = true;
 
+    @Config.Name("enableMagazine")
+    @Config.Comment("Is the Spell Magazine craftable?")
+    public static boolean enableMagazine = true;
+
     @Config.Name("enableCreativeCAD")
     @Config.Comment("If Avaritia is present, should the creative CAD assembly be craftable?")
     public static boolean enableCreativeCAD = false;

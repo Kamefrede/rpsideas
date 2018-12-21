@@ -1,0 +1,22 @@
+{
+  "group": "rpsideas:dark_plate",
+  "result": {
+    "item": "rpsideas:dark_plate",
+    "data": 7
+  },
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "psi:psi_decorative",
+      "data": 3
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "dustGlowstone"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "dyeGray"
+    }
+  ]
+}

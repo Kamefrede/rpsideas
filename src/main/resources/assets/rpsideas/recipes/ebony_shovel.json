@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "rpsideas:ebony_shovel"
+  },
+  "type": "rpsideas:socket_transfer",
+  "ingredients": [
+    {
+      "item": "psi:psimetal_shovel"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "dustGlowstone"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "ingotEbonyPsi"
+    }
+  ]
+}
