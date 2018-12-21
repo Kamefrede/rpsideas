@@ -94,16 +94,24 @@ public class PieceTrickFormBurst extends PieceComponentTrick {
     public EntityManaBurst formBurst(Vector3 pos, Vector3 rayIn, ItemStack cad, SpellContext context) {
         BurstProperties props = getBurstProps();
 
+        boolean lensHasColor = false;
+
 
         int color = props.color;
         ItemStack lens = ItemManaGun.getLens(cad);
-        if (!lens.isEmpty() && lens.getItem() instanceof ILens)
-            ((ILens) lens.getItem()).apply(lens, props);
+        if (!lens.isEmpty() && lens.getItem() instanceof ILens){
+             ILens ilens = (ILens)lens.getItem();
+            ilens.apply(lens, props);
+            if(ilens.getLensColor(lens) != -1){
+                lensHasColor = true;
+            }
+        }
+
 
 
         EntityManaBurst burst;
 
-        if (props.color == color) {
+        if (props.color == color && !lensHasColor) {
             ICAD icad = (ICAD) cad.getItem();
             ItemStack colorizer = icad.getComponentInSlot(cad, EnumCADComponent.DYE);
 
