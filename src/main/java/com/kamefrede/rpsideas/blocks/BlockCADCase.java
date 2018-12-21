@@ -7,6 +7,7 @@ import com.kamefrede.rpsideas.util.libs.LibBlockNames;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyEnum;
@@ -49,7 +50,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class BlockCADCase extends BlockRPS implements IBlockColorProvider {
+public class BlockCADCase extends RPSBlock implements IBlockColorProvider {
     public static final PropertyBool OPEN = PropertyBool.create("open");
     public static final PropertyDirection FACING = PropertyDirection.create("facing", Arrays.asList(EnumFacing.HORIZONTALS));
     public static final PropertyEnum<EnumDyeColor> COLOR = PropertyEnum.create("color", EnumDyeColor.class);
@@ -320,6 +321,11 @@ public class BlockCADCase extends BlockRPS implements IBlockColorProvider {
             }
         }
 
+    }
+
+    @Override
+    public IProperty[] getIgnoredProperties() {
+        return new IProperty[] { COLOR };
     }
 
     @Override

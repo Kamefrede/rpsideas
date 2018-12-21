@@ -1,6 +1,6 @@
 {
-	"parent": "psi:item/_standard_item",
-	"textures": { 
-		"layer0": "rpsideas:items/wide_socket"
-	}
+  "parent": "psi:item/_standard_item",
+  "textures": {
+    "layer0": "rpsideas:items/wide_socket"
+  }
 }

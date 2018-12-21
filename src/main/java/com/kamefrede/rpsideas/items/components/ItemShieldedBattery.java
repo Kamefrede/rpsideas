@@ -1,7 +1,6 @@
 package com.kamefrede.rpsideas.items.components;
 
 import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.items.base.IRegenerationBattery;
 import com.kamefrede.rpsideas.items.base.ItemComponent;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.kamefrede.rpsideas.util.libs.LibItemNames;
@@ -23,8 +22,7 @@ import vazkii.psi.common.network.message.MessageDataSync;
 import java.util.List;
 
 @Mod.EventBusSubscriber
-public class ItemShieldedBattery extends ItemComponent implements IRegenerationBattery {
-    private static final int PSI_REGEN_BONUS = 5;
+public class ItemShieldedBattery extends ItemComponent {
 
     public ItemShieldedBattery() {
         super(LibItemNames.SHIELDED_BATTERY);
@@ -62,8 +60,8 @@ public class ItemShieldedBattery extends ItemComponent implements IRegenerationB
     }
 
     @Override
-    public int getRegenerationValue(ItemStack stack) {
-        return PSI_REGEN_BONUS;
+    public EnumCADComponent getComponentType(ItemStack itemStack) {
+        return EnumCADComponent.BATTERY;
     }
 
     @Override
@@ -73,7 +71,6 @@ public class ItemShieldedBattery extends ItemComponent implements IRegenerationB
 
     @Override
     protected void addTooltipTags(List<String> tooltip) {
-        addTooltipTag(true, tooltip, RPSIdeas.MODID + ".upsides.boost_regen", PSI_REGEN_BONUS);
         addTooltipTag(true, tooltip, RPSIdeas.MODID + ".upsides.soaks_damage");
         addTooltipTag(false, tooltip, RPSIdeas.MODID + ".downsides.locks_regen");
     }

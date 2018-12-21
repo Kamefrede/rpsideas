@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
 
 import javax.annotation.Nullable;
 
-public class GuiHandler implements IGuiHandler {// TODO: 12/15/18 look at
+public class GuiHandler implements IGuiHandler {
     public static final int GUI_CASE = 0;
     public static final int GUI_FLASH_RING = 1;
     public static final int GUI_MAGAZINE = 2;

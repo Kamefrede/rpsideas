@@ -8,18 +8,19 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Optional;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import vazkii.arl.item.ItemMod;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
 public class BotaniaCompatItems {
     public static ItemMod blaster;
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.HIGH)
     @Optional.Method(modid = "botania")
-    public static void registerItem(RegistryEvent.Register<Item> evt) {
-        evt.getRegistry().register(blaster = new ItemBlasterAssembly());
+    public static void registerItems(RegistryEvent.Register<Item> evt) {
+        blaster = new ItemBlasterAssembly();
     }
 
     @SubscribeEvent

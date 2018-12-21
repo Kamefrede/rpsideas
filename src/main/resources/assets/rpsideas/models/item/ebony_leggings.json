@@ -3,9 +3,5 @@
   "textures": {
     "layer0": "rpsideas:items/ebony_leggings",
     "layer1": "rpsideas:items/leggings_overlay"
-  },
-  "overrides": [{
-    "predicate": { "rpsideas:overlay": 1 },
-    "model": "rpsideas:item/leggings_overlay"
-  }]
+  }
 }

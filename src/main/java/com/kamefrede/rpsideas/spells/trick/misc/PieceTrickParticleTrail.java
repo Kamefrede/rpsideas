@@ -62,7 +62,7 @@ public class PieceTrickParticleTrail extends PieceTrick {
         }
 
         if (!context.caster.world.isRemote) {
-            RPSPacketHandler.NET.sendToDimension(new MessageParticleTrail(pos.toVec3D(), dir.toVec3D(), length, (int) time, PsiAPI.getPlayerCAD(context.caster)), context.caster.world.provider.getDimension());
+            RPSPacketHandler.sendToDimension(new MessageParticleTrail(pos.toVec3D(), dir.toVec3D(), length, (int) time, PsiAPI.getPlayerCAD(context.caster)), context.caster.world.provider.getDimension());
         }
 
         return null;

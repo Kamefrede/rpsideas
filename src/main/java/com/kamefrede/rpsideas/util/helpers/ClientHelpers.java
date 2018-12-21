@@ -2,8 +2,8 @@ package com.kamefrede.rpsideas.util.helpers;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
+import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.client.core.handler.ClientTickHandler;
-import vazkii.psi.common.Psi;
 
 public class ClientHelpers {
     public static int pulseColor(int mergedColorIn) {
@@ -18,8 +18,10 @@ public class ClientHelpers {
     }
 
     public static int getFlowColor(ItemStack stack) {
-        ItemStack colorizer = FlowColorsHelper.getColorizer(stack);
-        if (colorizer.isEmpty()) return 0x000000;
-        else return Psi.proxy.getColorizerColor(colorizer).getRGB();
+        return ICADColorizer.DEFAULT_SPELL_COLOR;
+
+//        ItemStack colorizer = FlowColorsHelper.getColorizer(stack);
+//        if (colorizer.isEmpty()) return 0x000000;
+//        else return Psi.proxy.getColorizerColor(colorizer).getRGB();
     }
 }

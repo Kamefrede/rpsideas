@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.spells.trick.botania;
 
 import com.kamefrede.rpsideas.RPSIdeas;
+import com.kamefrede.rpsideas.entity.botania.EntityPsiManaBurst;
 import com.kamefrede.rpsideas.spells.base.SpellParams;
 import com.kamefrede.rpsideas.util.botania.PieceComponentTrick;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
@@ -18,10 +19,10 @@ import vazkii.botania.common.item.ItemManaGun;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.ICAD;
+import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamVector;
-import vazkii.psi.common.Psi;
 import vazkii.psi.common.spell.trick.entity.PieceTrickAddMotion;
 
 import javax.annotation.Nonnull;
@@ -29,7 +30,7 @@ import javax.annotation.Nonnull;
 public class PieceTrickFormBurst extends PieceComponentTrick {
 
     private static final String[] req = new String[]{RPSIdeas.MODID + ".requirement.form_burst"};
-    private static int MANA_PER_BURST = 120;
+    private static final int MANA_PER_BURST = 120;
     private SpellParam positionParam;
     private SpellParam rayParam;
 
@@ -78,37 +79,38 @@ public class PieceTrickFormBurst extends PieceComponentTrick {
         return null;
     }
 
-    // TODO: 12/16/18 packet shit
     @Nonnull
     public BurstProperties getBurstProps() {
         int maxMana = 120;
-        int color = 0x20FF20;
+        int color = ICADColorizer.DEFAULT_SPELL_COLOR;
         int ticksBeforeManaLoss = 60;
         float manaLossPerTick = 4F;
         float motionModifier = 5F;
         float gravity = 0F;
+
         return new BurstProperties(maxMana, ticksBeforeManaLoss, manaLossPerTick, gravity, motionModifier, color);
     }
 
     public EntityManaBurst formBurst(Vector3 pos, Vector3 rayIn, ItemStack cad, SpellContext context) {
-        EntityManaBurst burst = new EntityManaBurst(context.caster, EnumHand.MAIN_HAND);
         BurstProperties props = getBurstProps();
 
 
+        int color = props.color;
         ItemStack lens = ItemManaGun.getLens(cad);
-        if (!lens.isEmpty() && lens.getItem() instanceof ILens) {
+        if (!lens.isEmpty() && lens.getItem() instanceof ILens)
             ((ILens) lens.getItem()).apply(lens, props);
-        }
 
 
-        ICAD icad = (ICAD) cad.getItem();
-        ItemStack colorizer = icad.getComponentInSlot(cad, EnumCADComponent.DYE);
-        int color;
-        if (!colorizer.isEmpty()) {
-            color = Psi.proxy.getColorizerColor(colorizer).getRGB();
-        } else {
-            color = -1;
-        }
+        EntityManaBurst burst;
+
+        if (props.color == color) {
+            ICAD icad = (ICAD) cad.getItem();
+            ItemStack colorizer = icad.getComponentInSlot(cad, EnumCADComponent.DYE);
+
+            burst = new EntityPsiManaBurst(context.caster, EnumHand.MAIN_HAND);
+            ((EntityPsiManaBurst) burst).setColorizer(colorizer);
+        } else
+            burst = new EntityManaBurst(context.caster, EnumHand.MAIN_HAND);
 
 
         double yaw = -Math.atan2(rayIn.x, rayIn.z) * 180 / Math.PI - 180;
@@ -119,8 +121,7 @@ public class PieceTrickFormBurst extends PieceComponentTrick {
             burst.setBurstSourceCoords(new BlockPos(0, -1, 0));
             burst.setLocationAndAngles(pos.x, pos.y, pos.z, (float) yaw + 180, (float) pitch);
 
-
-            burst.setColor(color);
+            burst.setColor(props.color);
             burst.setMana(props.maxMana);
             burst.setStartingMana(props.maxMana);
             burst.setMinManaLoss(props.ticksBeforeManaLoss);
@@ -131,6 +132,7 @@ public class PieceTrickFormBurst extends PieceComponentTrick {
 
             return burst;
         }
+
         return null;
     }
 

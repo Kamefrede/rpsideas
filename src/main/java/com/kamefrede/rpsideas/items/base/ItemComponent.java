@@ -39,11 +39,11 @@ public abstract class ItemComponent extends RPSItem implements ICADComponent {
         if (!GuiScreen.isShiftKeyDown()) return;
         tooltip.remove(1);
 
-        addTooltipTags(tooltip);
-
         EnumCADComponent componentType = getComponentType(stack);
         String componentName = I18n.format(componentType.getName());
         tooltip.add(TextFormatting.GREEN + I18n.format("rpsideas.componentType") + " " + TextFormatting.GRAY + componentName);
+
+        addTooltipTags(tooltip);
 
         for (EnumCADStat cadStat : EnumCADStat.values()) {
             if (cadStat.getSourceType() == componentType) {

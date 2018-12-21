@@ -1,16 +1,16 @@
 [
 {
-  "modid": "rpsideas",
-  "name": "Random PSIdeas",
+  "modid": "${'${mod_id}'}",
+  "name": "${'${mod_name}'}",
   "description": "Random useful additions to PSI!",
-  "version": "1.11e",
-  "mcversion": "1.12.2",
+  "version": "${'${version}'}",
+  "mcversion": "${'${mc_version}'}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["Kamefrede"],
+  "authorList": ["Kamefrede", "wiresegal"],
   "credits": "The guys over at PSI: Taurus Silver discord and Vazkii, wiresegal for PSIonic Upgrades and Quat for porting PSIonic upgrades",
   "logoFile": "",
   "screenshots": [],
-  "dependencies": ["psi","autoreglib"]
+  "dependencies": ["psi", "autoreglib", "ctm"]
 }
 ]

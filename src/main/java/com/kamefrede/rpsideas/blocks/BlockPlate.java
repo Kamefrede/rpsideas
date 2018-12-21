@@ -17,7 +17,7 @@ import vazkii.arl.interf.IBlockColorProvider;
 
 import javax.annotation.Nonnull;
 
-public class BlockPlate extends BlockRPS implements IBlockColorProvider {
+public class BlockPlate extends RPSBlock implements IBlockColorProvider {
 
     public static final PropertyEnum<EnumDyeColor> COLOR = PropertyEnum.create("color", EnumDyeColor.class);
 

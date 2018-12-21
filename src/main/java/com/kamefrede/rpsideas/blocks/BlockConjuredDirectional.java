@@ -1,10 +1,13 @@
 package com.kamefrede.rpsideas.blocks;
 
+import com.google.common.collect.Maps;
+import com.kamefrede.rpsideas.RPSIdeas;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
@@ -12,6 +15,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -21,7 +26,7 @@ import java.util.Random;
  * @author WireSegal
  * Created at 3:33 PM on 12/15/18.
  */
-public abstract class BlockConjuredDirectional extends BlockRPS {
+public abstract class BlockConjuredDirectional extends BlockModNoItem {
     public static final PropertyBool SOLID = PropertyBool.create("solid");
     public static final PropertyBool BLOCK_UP = PropertyBool.create("block_up");
     public static final PropertyBool BLOCK_DOWN = PropertyBool.create("block_down");
@@ -31,8 +36,13 @@ public abstract class BlockConjuredDirectional extends BlockRPS {
     public static final PropertyBool BLOCK_EAST = PropertyBool.create("block_east");
     protected static final AxisAlignedBB PARTIAL_AABB = new AxisAlignedBB(0.25, 0.25, 0.25, 0.75, 0.75, 0.75);
 
-    public BlockConjuredDirectional(String name, Material materialIn, String... variants) {
-        super(name, materialIn, variants);
+    public BlockConjuredDirectional(String name, Material materialIn) {
+        super(name, materialIn);
+    }
+
+    @Override
+    public String getModNamespace() {
+        return RPSIdeas.MODID;
     }
 
     public static IProperty[] getDirectionalProperties() {
@@ -51,8 +61,9 @@ public abstract class BlockConjuredDirectional extends BlockRPS {
     }
 
     @Override
-    public IProperty[] getIgnoredProperties() {
-        return getProperties();
+    @SideOnly(Side.CLIENT)
+    public IStateMapper getStateMapper() {
+        return blockIn -> Maps.newHashMap();
     }
 
     @Nonnull

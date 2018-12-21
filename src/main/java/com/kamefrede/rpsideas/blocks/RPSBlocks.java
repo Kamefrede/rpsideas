@@ -8,23 +8,39 @@ import com.kamefrede.rpsideas.tiles.TileEthereal;
 import com.kamefrede.rpsideas.util.libs.LibBlockNames;
 import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.arl.block.BlockMod;
 
 @Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
 public class RPSBlocks {
 
-    public static final BlockMod conjuredEthereal = new BlockConjuredEthereal();
-    public static final BlockMod conjuredGravityBlock = new BlockConjuredGravityBlock();
-    public static final BlockMod conjuredPulsar = new BlockConjuredPulsar();
-    public static final BlockMod conjuredPulsarLight = new BlockPulsarLight();
-    public static final BlockMod conjuredStar = new BlockConjuredStar();
+    public static final BlockModNoItem conjuredEthereal = new BlockConjuredEthereal();
+    public static final BlockModNoItem conjuredGravityBlock = new BlockConjuredGravityBlock();
+    public static final BlockModNoItem conjuredPulsar = new BlockConjuredPulsar();
+    public static final BlockModNoItem conjuredPulsarLight = new BlockPulsarLight();
+    public static final BlockModNoItem conjuredStar = new BlockConjuredStar();
     public static final BlockMod cadCase = new BlockCADCase();
     public static final BlockMod brightPlate = new BlockPlate(LibBlockNames.BRIGHT_PLATE);
     public static final BlockMod darkPlate = new BlockPlate(LibBlockNames.DARK_PLATE);
+
+    @SubscribeEvent
+    @SideOnly(Side.CLIENT)
+    public static void registerStateMappers(ModelRegistryEvent e) {
+
+        // ARL doesn't respect itemless blocks
+
+        conjuredEthereal.registerStateMapper();
+        conjuredGravityBlock.registerStateMapper();
+        conjuredPulsar.registerStateMapper();
+        conjuredPulsarLight.registerStateMapper();
+        conjuredStar.registerStateMapper();
+    }
 
     @SubscribeEvent
     public static void registerTileEntities(RegistryEvent.Register<Block> e) {

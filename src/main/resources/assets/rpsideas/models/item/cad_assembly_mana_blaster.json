@@ -1,7 +1,6 @@
 {
   "parent": "psi:item/_standard_item",
   "textures": {
-    "layer0": "rpsideas:items/cad_assembly_blaster",
-    "layer1": "rpsideas:items/cad_assembly_blaster_overlay"
+    "layer0": "rpsideas:items/cad_assembly_blaster"
   }
 }

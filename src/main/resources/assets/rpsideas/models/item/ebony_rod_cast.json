@@ -1,0 +1,7 @@
+{
+  "parent": "item/handheld_rod",
+  "textures": {
+    "layer0": "rpsideas:items/ebony_fishing_rod_cast",
+    "layer1": "rpsideas:items/fishing_rod_cast_overlay"
+  }
+}

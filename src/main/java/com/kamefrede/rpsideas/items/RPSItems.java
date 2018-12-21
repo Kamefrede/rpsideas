@@ -1,23 +1,29 @@
 package com.kamefrede.rpsideas.items;
 
+import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.base.ItemModRod;
 import com.kamefrede.rpsideas.items.base.RPSItem;
 import com.kamefrede.rpsideas.items.components.*;
 import com.kamefrede.rpsideas.items.flow.*;
 import com.kamefrede.rpsideas.util.libs.LibItemNames;
+import net.minecraft.item.Item;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import vazkii.arl.item.ItemMod;
 import vazkii.arl.item.ItemModArmor;
 import vazkii.arl.item.ItemModSword;
 import vazkii.arl.item.ItemModTool;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
 public class RPSItems {
     public static final ItemMod wideBandSocket = new ItemWideCADSocket();
     public static final ItemMod flashRing = new ItemFlashRing();
     public static final ItemMod bioticSensor = new ItemBioticSensor();
     public static final ItemMod unstableBattery = new ItemUnstableBattery();
-    public static final ItemMod twinflowBattery = new ItemShieldedBattery();
+    public static final ItemMod twinflowBattery = new ItemTwinflowBattery();
+    public static final ItemMod shieldedBattery = new ItemShieldedBattery();
     public static final ItemMod creativeBattery = new ItemCreativeBattery();
     public static final ItemMod creativeCore = new ItemCreativeCore();
     public static final ItemMod creativeSocket = new ItemCreativeSocket();
@@ -57,4 +63,9 @@ public class RPSItems {
     public static final ItemMod gaussBullet = new RPSItem(LibItemNames.ITEM_GAUSS_BULLET);
     public static final ItemMod cadMagazine = new ItemCADMagazine(LibItemNames.SPELL_MAGAZINE);
     public static final ItemMod braceletCad = new ItemBraceletCAD();
+
+    @SubscribeEvent(priority = EventPriority.HIGH)
+    public static void registerItems(RegistryEvent.Register<Item> e) {
+        // NO-OP this is a hack
+    }
 }

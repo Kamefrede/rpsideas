@@ -3,9 +3,5 @@
   "textures": {
     "layer0": "rpsideas:items/ivory_boots",
     "layer1": "rpsideas:items/boots_overlay"
-  },
-  "overrides": [{
-    "predicate": { "rpsideas:overlay": 1 },
-    "model": "rpsideas:item/boots_overlay"
-  }]
+  }
 }

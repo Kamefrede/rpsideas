@@ -1,6 +1,6 @@
 {
-	"parent": "psi:item/_standard_item",
-	"textures": { 
-		"layer0": "rpsideas:items/magazine"
-	}
+  "parent": "psi:item/_standard_item",
+  "textures": {
+    "layer0": "rpsideas:items/magazine"
+  }
 }

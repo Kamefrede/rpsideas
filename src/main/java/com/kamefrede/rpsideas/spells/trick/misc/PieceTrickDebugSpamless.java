@@ -1,6 +1,6 @@
 package com.kamefrede.rpsideas.spells.trick.misc;
 
-import com.kamefrede.rpsideas.network.MessageSpamlessChat;
+import com.kamefrede.rpsideas.network.MessageNoSpamChat;
 import com.kamefrede.rpsideas.network.RPSPacketHandler;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.text.TextComponentString;
@@ -54,8 +54,8 @@ public class PieceTrickDebugSpamless extends PieceTrick {
         //End pasta
 
         TextComponentString component = new TextComponentString(s);
-        MessageSpamlessChat message = new MessageSpamlessChat(component);
-        RPSPacketHandler.NET.sendTo(message, (EntityPlayerMP) context.caster);
+        MessageNoSpamChat message = new MessageNoSpamChat(component);
+        RPSPacketHandler.sendTo(message, (EntityPlayerMP) context.caster);
 
         return null;
     }

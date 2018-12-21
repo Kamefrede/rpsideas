@@ -6,19 +6,39 @@
   "elements": [
     {
       "from": [ 0, 0, 0 ],
-      "to": [ 16, 16, 16 ],
+      "to": [ 16, 5, 16 ],
       "faces": {
         "down":  { "texture": "#top", "cullface": "down", "uv": [ 0, 0, 16, 16 ] },
-        "up":    { "texture": "#top", "cullface": "up", "uv": [ 0, 0, 16, 16 ] },
-        "north": { "texture": "#side", "cullface": "north", "uv": [ 0, 0, 16, 16 ] },
-        "south": { "texture": "#side", "cullface": "south", "uv": [ 0, 0, 16, 16 ] },
-        "west":  { "texture": "#side", "cullface": "west", "uv": [ 0, 0, 16, 16 ] },
-        "east":  { "texture": "#side", "cullface": "east", "uv": [ 0, 0, 16, 16 ] }
+        "north": { "texture": "#side", "cullface": "north", "uv": [ 0, 0, 16, 5 ] },
+        "south": { "texture": "#side", "cullface": "south", "uv": [ 0, 0, 16, 5 ] },
+        "west":  { "texture": "#side", "cullface": "west", "uv": [ 0, 0, 16, 5 ] },
+        "east":  { "texture": "#side", "cullface": "east", "uv": [ 0, 0, 16, 5 ] }
+      }
+    },
+    {
+      "from": [ 0, 6, 0 ],
+      "to": [ 16, 10, 16 ],
+      "faces": {
+        "north": { "texture": "#side", "cullface": "north", "uv": [ 0, 6, 16, 10 ] },
+        "south": { "texture": "#side", "cullface": "south", "uv": [ 0, 6, 16, 10 ] },
+        "west":  { "texture": "#side", "cullface": "west", "uv": [ 0, 6, 16, 10 ] },
+        "east":  { "texture": "#side", "cullface": "east", "uv": [ 0, 6, 16, 10 ] }
       }
     },
     {
       "from": [ 0, 11, 0 ],
-      "to": [ 16, 10, 16 ],
+      "to": [ 16, 16, 16 ],
+      "faces": {
+        "up":    { "texture": "#top", "cullface": "up", "uv": [ 0, 0, 16, 16 ] },
+        "north": { "texture": "#side", "cullface": "north", "uv": [ 0, 11, 16, 16 ] },
+        "south": { "texture": "#side", "cullface": "south", "uv": [ 0, 11, 16, 16 ] },
+        "west":  { "texture": "#side", "cullface": "west", "uv": [ 0, 11, 16, 16 ] },
+        "east":  { "texture": "#side", "cullface": "east", "uv": [ 0, 11, 16, 16 ] }
+      }
+    },
+    {
+      "from": [ 0, 10, 0 ],
+      "to": [ 16, 11, 16 ],
       "shade": false,
       "faces": {
         "north": { "texture": "#overlay", "cullface": "north", "tintindex": 1, "uv": [ 0, 5, 16, 6 ] },
