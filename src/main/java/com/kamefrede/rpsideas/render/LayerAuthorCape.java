@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerArmorBase;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EnumPlayerModelParts;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -34,6 +35,10 @@ import java.util.UUID;
 public class LayerAuthorCape implements LayerRenderer<AbstractClientPlayer> {
     private final RenderPlayer renderPlayer;
 
+    public static boolean isAuthor(EntityPlayer player) {
+        return player.getUniqueID().equals(WIRE_UUID) || player.getUniqueID().equals(KAMEFREDE_UUID);
+    }
+
     public LayerAuthorCape(RenderPlayer renderPlayer) {
         this.renderPlayer = renderPlayer;
     }
@@ -49,12 +54,12 @@ public class LayerAuthorCape implements LayerRenderer<AbstractClientPlayer> {
 
     @Override
     public void doRenderLayer(@Nonnull AbstractClientPlayer player, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-        if (!player.getUniqueID().equals(WIRE_UUID))
+        if (!isAuthor(player))
             return;
         
         ItemStack cad = PsiAPI.getPlayerCAD(player);
         
-        boolean hasCad = cad.isEmpty();
+        boolean hasCad = !cad.isEmpty();
         float r = 0, g = 0, b = 0;
         if (hasCad) {
             Color color = Psi.proxy.getCADColor(cad);
@@ -69,7 +74,7 @@ public class LayerAuthorCape implements LayerRenderer<AbstractClientPlayer> {
         
     }
 
-    private void doCapeRender(AbstractClientPlayer player, float partialTicks, float r, float g, float b, Boolean hasCad) {
+    private void doCapeRender(AbstractClientPlayer player, float partialTicks, float r, float g, float b, boolean hasCad) {
         if (player.hasPlayerInfo() && !player.isInvisible() && player.isWearing(EnumPlayerModelParts.CAPE) && player.getLocationCape() != null) {
             ItemStack stack = player.getItemStackFromSlot(EntityEquipmentSlot.CHEST);
 
@@ -124,9 +129,9 @@ public class LayerAuthorCape implements LayerRenderer<AbstractClientPlayer> {
         }
     }
 
-    private void doElytraRender(AbstractClientPlayer player, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale, float r, float g, float b, Boolean hasCad) {
+    private void doElytraRender(AbstractClientPlayer player, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale, float r, float g, float b, boolean hasCad) {
         ItemStack stack = player.getItemStackFromSlot(EntityEquipmentSlot.CHEST);
-        if (player.isWearing(EnumPlayerModelParts.CAPE) && !stack.isEmpty() && stack.getItem() == Items.ELYTRA) {
+        if (player.isWearing(EnumPlayerModelParts.CAPE) && player.getLocationCape() != null && !stack.isEmpty() && stack.getItem() == Items.ELYTRA) {
             GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
             GlStateManager.enableBlend();
             GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -161,7 +166,7 @@ public class LayerAuthorCape implements LayerRenderer<AbstractClientPlayer> {
         }
     }
 
-    private void doSkinOverlayRender(AbstractClientPlayer player, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale, float r, float b, float g, Boolean hasCad) {
+    private void doSkinOverlayRender(AbstractClientPlayer player, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale, float r, float g, float b, boolean hasCad) {
         if (hasCad && !player.isInvisibleToPlayer(player)) {
             GlStateManager.pushMatrix();
             GlStateManager.disableLighting();
@@ -169,7 +174,11 @@ public class LayerAuthorCape implements LayerRenderer<AbstractClientPlayer> {
             GlStateManager.color(r, g, b);
             GlStateManager.enableBlendProfile(GlStateManager.Profile.PLAYER_SKIN);
 
-            this.renderPlayer.bindTexture(TEXTURE_SKIN_OVERLAY);
+            if (player.getUniqueID().equals(WIRE_UUID))
+                this.renderPlayer.bindTexture(TEXTURE_SKIN_OVERLAY_WIRE);
+            else
+                this.renderPlayer.bindTexture(TEXTURE_SKIN_OVERLAY_KAMEFREDE);
+
             renderPlayer.setModelVisibilities(player);
 
             renderPlayer.getMainModel().render(player, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
@@ -188,9 +197,11 @@ public class LayerAuthorCape implements LayerRenderer<AbstractClientPlayer> {
     }
 
     private static final UUID WIRE_UUID = UUID.fromString("458391f5-6303-4649-b416-e4c0d18f837a");
+    private static final UUID KAMEFREDE_UUID = UUID.fromString("ed21cb5c-f66a-4e26-abf0-f209f7169751");
     private static final ResourceLocation TEXTURE_EBONY = new ResourceLocation(RPSIdeas.MODID, "textures/model/wire/ebony_cape2016.png");
     private static final ResourceLocation TEXTURE_IVORY = new ResourceLocation(RPSIdeas.MODID, "textures/model/wire/ivory_cape2016.png");
     private static final ResourceLocation TEXTURE_OVERLAY = new ResourceLocation(RPSIdeas.MODID, "textures/model/wire/cape2016_overlay.png");
-    private static final ResourceLocation TEXTURE_SKIN_OVERLAY = new ResourceLocation(RPSIdeas.MODID, "textures/model/wire/skin_overlay.png");
+    private static final ResourceLocation TEXTURE_SKIN_OVERLAY_WIRE = new ResourceLocation(RPSIdeas.MODID, "textures/model/wire/skin_overlay.png");
+    private static final ResourceLocation TEXTURE_SKIN_OVERLAY_KAMEFREDE = new ResourceLocation(RPSIdeas.MODID, "textures/model/wire/kamefrede_overlay.png");
 
 }
