@@ -448,5 +448,6 @@ rpsideas.subtitle.thwack=Metal thwacks
 
 rpsideas.channelid=Channel %d
 
+rpsideas.misc.slot_mismatch=Your magazine doesn't fit into this CAD.
 rpsideas.misc.too_complex=This spell is too large for the socket in your Spell Magazine.
 rpsideas.misc.too_complex_bullet=This spell is too large for the socket in your Spell Magazine to transfer.

@@ -15,7 +15,7 @@ import vazkii.psi.client.core.handler.ClientTickHandler;
 
 import java.util.ArrayList;
 
-public class GUICADMagazine extends GuiContainer {// TODO: 12/15/18 look at
+public class GUICADMagazine extends GuiContainer {
     private static final ResourceLocation texture = new ResourceLocation(RPSIdeas.MODID, "textures/gui/magazine.png");
     int lastTick = 0;
 
@@ -43,16 +43,24 @@ public class GUICADMagazine extends GuiContainer {// TODO: 12/15/18 look at
     }
 
     @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        super.drawScreen(mouseX, mouseY, partialTicks);
+        renderHoveredToolTip(mouseX, mouseY);
+    }
+
+    @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         GlStateManager.color(1f, 1f, 1f);
+        GlStateManager.enableBlend();
         mc.getTextureManager().bindTexture(texture);
         int x = (width - xSize) / 2;
         int y = (height - ySize) / 2;
         drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
-        inventorySlots.inventorySlots.removeIf(slot -> !(slot instanceof ContainerCADMagazine.SlotCustomBullet) || !((ContainerCADMagazine.SlotCustomBullet) slot).isSlotEnabled());
         for (Slot slots : inventorySlots.inventorySlots) {
-            boolean dark = ((ContainerCADMagazine.SlotCustomBullet) slots).dark;
-            drawTexturedModalRect(slots.xPos + x, slots.yPos + y, 16, 224 + (dark ? 16 : 0), 16, 16);
+            if (!slots.isEnabled()) {
+                boolean dark = ((ContainerCADMagazine.SlotCustomBullet) slots).dark;
+                drawTexturedModalRect(slots.xPos + x, slots.yPos + y, 16, 224 + (dark ? 16 : 0), 16, 16);
+            }
         }
     }
 

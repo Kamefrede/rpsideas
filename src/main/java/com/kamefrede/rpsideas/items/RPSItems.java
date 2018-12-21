@@ -31,7 +31,6 @@ public class RPSItems {
     public static final ItemMod drainedColorizer = new ItemEmptyColorizer();
     public static final ItemMod liquidColorizer = new ItemLiquidColorizer();
 
-    // TODO: 12/16/18 glow
     public static final ItemModTool ebonyPickaxe = new ItemFlowTool.Pickaxe(LibItemNames.EBONY_PICKAXE, true);
     public static final ItemModTool ebonyShovel = new ItemFlowTool.Shovel(LibItemNames.EBONY_SHOVEL, true);
     public static final ItemModTool ebonyAxe = new ItemFlowTool.Axe(LibItemNames.EBONY_AXE, true);

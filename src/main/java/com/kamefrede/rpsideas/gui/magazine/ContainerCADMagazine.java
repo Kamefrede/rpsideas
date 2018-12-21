@@ -10,10 +10,11 @@ import org.apache.commons.lang3.tuple.Pair;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.spell.ISpellContainer;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContainerCADMagazine extends Container { // TODO: 12/15/18 look at
+public class ContainerCADMagazine extends Container {
     private static final List<Pair<Integer, Integer>> innerSlotPositions;
     private static final List<Pair<Integer, Integer>> outerSlotPositions;
 
@@ -51,8 +52,6 @@ public class ContainerCADMagazine extends Container { // TODO: 12/15/18 look at
 
     private final EntityPlayer player;
     private final ItemStack stack;
-    private final InventorySocketable inventory;
-    private final InventorySocketable cadInventory;
     public boolean dontNotify = false;
     public boolean notifyOnce = false;
     public float tooltipTime = 0;
@@ -62,25 +61,25 @@ public class ContainerCADMagazine extends Container { // TODO: 12/15/18 look at
         this.player = player;
         this.stack = stack;
 
-        inventory = new InventorySocketable(stack, ItemCADMagazine.getBandwidth(stack));
-        cadInventory = new InventorySocketable(PsiAPI.getPlayerCAD(player), -1);
+        InventorySocketable inventory = new InventorySocketable(stack, ItemCADMagazine.getBandwidth(stack));
+        InventorySocketable cadInventory = new InventorySocketable(PsiAPI.getPlayerCAD(player), -1);
 
-        int index = 0;
+        int slotIndex = 0;
 
-        for (Pair<Integer, Integer> p : innerSlotPositions) {
-            addSlotToContainer(new SlotCustomBullet(cadInventory, index, p.getLeft(), p.getRight(), index, true));
-        }
+        for (Pair<Integer, Integer> p : innerSlotPositions)
+            addSlotToContainer(new SlotCustomBullet(inventory, slotIndex++, p.getLeft(), p.getRight(), true));
 
-        for (Pair<Integer, Integer> p : outerSlotPositions) {
-            addSlotToContainer(new SlotCustomBullet(cadInventory, index, p.getLeft(), p.getRight(), index, false));
-        }
+        slotIndex = 0;
+        for (Pair<Integer, Integer> p : outerSlotPositions)
+            addSlotToContainer(new SlotCustomBullet(cadInventory, slotIndex++, p.getLeft(), p.getRight(), false));
     }
 
     @Override
-    public boolean canInteractWith(EntityPlayer playerIn) {
-        return inventory.isUsableByPlayer(playerIn);
+    public boolean canInteractWith(@Nonnull EntityPlayer playerIn) {
+        return true;
     }
 
+    @Nonnull
     @Override
     public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
@@ -122,16 +121,14 @@ public class ContainerCADMagazine extends Container { // TODO: 12/15/18 look at
         public final int index;
         public final int xPosition;
         public final int yPosition;
-        public final int socketSlot;
         public final boolean dark;
 
-        public SlotCustomBullet(InventorySocketable socketable, int index, int xPosition, int yPosition, int socketSlot, boolean dark) {
+        public SlotCustomBullet(InventorySocketable socketable, int index, int xPosition, int yPosition, boolean dark) {
             super(socketable, index, xPosition, yPosition);
             this.socketable = socketable;
             this.index = index;
             this.xPosition = xPosition;
             this.yPosition = yPosition;
-            this.socketSlot = socketSlot;
             this.dark = dark;
         }
 
@@ -140,7 +137,7 @@ public class ContainerCADMagazine extends Container { // TODO: 12/15/18 look at
             if (stack.getItem() instanceof ISpellContainer) {
                 ISpellContainer container = (ISpellContainer) stack.getItem();
                 if (container.containsSpell(stack) && isSlotEnabled()) {
-                    boolean ret = socketable.isItemValidForSlot(socketSlot, stack);
+                    boolean ret = socketable.isItemValidForSlot(getSlotIndex(), stack);
                     if (!ret && (!dontNotify || notifyOnce) && player.world.isRemote) {
                         tooltipTime = 80;
                         tooltipText = RPSIdeas.MODID + ".misc.too_complex";
@@ -156,7 +153,7 @@ public class ContainerCADMagazine extends Container { // TODO: 12/15/18 look at
 
         @Override
         public boolean canTakeStack(EntityPlayer playerIn) {
-            boolean ret = socketable.isItemValidForSlot(socketSlot, stack);
+            boolean ret = socketable.isItemValidForSlot(getSlotIndex(), getStack());
             if (!ret && (!dontNotify || notifyOnce) && player.world.isRemote) {
                 tooltipTime = 80;
                 tooltipText = RPSIdeas.MODID + ".misc.too_complex_bullet";
@@ -172,7 +169,7 @@ public class ContainerCADMagazine extends Container { // TODO: 12/15/18 look at
         }
 
         public boolean isSlotEnabled() {
-            return socketSlot <= socketable.getSizeInventory();
+            return getSlotIndex() <= socketable.getSizeInventory();
         }
     }
 }

@@ -10,10 +10,7 @@ import com.kamefrede.rpsideas.util.libs.LibItemNames;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.util.*;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import vazkii.arl.interf.IItemColorProvider;
@@ -34,14 +31,14 @@ public class ItemGaussRifle extends RPSItem implements IItemColorProvider, IFlow
     @Override
     public IItemColor getItemColor() {
         return (stack, tintIndex) -> {
-            if (tintIndex == 0)
-                return ClientHelpers.pulseColor(0xB87333);
-            else if (tintIndex == 1) {
+            if (tintIndex == 0) {
                 ItemStack colorizer = FlowColorsHelper.getColorizer(stack);
                 if (colorizer.isEmpty())
                     return 0;
                 else
                     return Psi.proxy.getColorizerColor(colorizer).getRGB();
+            } else if (tintIndex == 1) {
+                return ClientHelpers.pulseColor(0xB87333);
             }
 
             return -1;

@@ -13,7 +13,9 @@ import vazkii.psi.api.spell.ISpellContainer;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.common.spell.SpellCompiler;
 
-public class InventorySocketable implements IInventory {// TODO: 12/15/18 look at
+import javax.annotation.Nonnull;
+
+public class InventorySocketable implements IInventory {
 
     private final ItemStack stack;
     private final ISocketable socketable;
@@ -59,11 +61,13 @@ public class InventorySocketable implements IInventory {// TODO: 12/15/18 look a
         return true;
     }
 
+    @Nonnull
     @Override
     public ItemStack getStackInSlot(int index) {
         return socketable.getBulletInSocket(stack, index);
     }
 
+    @Nonnull
     @Override
     public ItemStack decrStackSize(int index, int count) {
         ItemStack bullet = socketable.getBulletInSocket(stack, index);
@@ -71,15 +75,15 @@ public class InventorySocketable implements IInventory {// TODO: 12/15/18 look a
         return bullet;
     }
 
+    @Nonnull
     @Override
     public ItemStack removeStackFromSlot(int index) {
         return decrStackSize(index, 1);
     }
 
     @Override
-    public void setInventorySlotContents(int index, ItemStack bullet) {
+    public void setInventorySlotContents(int index, @Nonnull ItemStack bullet) {
         socketable.setBulletInSocket(stack, index, bullet);
-
     }
 
     @Override
@@ -93,29 +97,33 @@ public class InventorySocketable implements IInventory {// TODO: 12/15/18 look a
     }
 
     @Override
-    public boolean isUsableByPlayer(EntityPlayer player) {
+    public boolean isUsableByPlayer(@Nonnull EntityPlayer player) {
         return true;
     }
 
     @Override
-    public void openInventory(EntityPlayer player) {
+    public void openInventory(@Nonnull EntityPlayer player) {
         //no-op
     }
 
     @Override
-    public void closeInventory(EntityPlayer player) {
+    public void closeInventory(@Nonnull EntityPlayer player) {
         //no-op
     }
 
     @Override
-    public boolean isItemValidForSlot(int index, ItemStack stack) {
+    public boolean isItemValidForSlot(int index, @Nonnull ItemStack stack) {
+        if (stack.isEmpty())
+            return false;
         Item item = stack.getItem();
-        if (item != null && !(item instanceof ISpellContainer)) return false;
-        if (maxBandwidth == -1) return true;
+        if (!(item instanceof ISpellContainer)) return false;
+        if (maxBandwidth < 0)
+            return true;
         ISpellContainer container = (ISpellContainer) item;
         Spell spell = container.getSpell(stack);
         SpellCompiler cmp = new SpellCompiler(spell);
-        return cmp.getCompiledSpell().metadata.stats.get(EnumSpellStat.BANDWIDTH) != null && cmp.getCompiledSpell().metadata.stats.get(EnumSpellStat.BANDWIDTH) <= maxBandwidth;
+        int bandwidth = cmp.getCompiledSpell().metadata.stats.get(EnumSpellStat.BANDWIDTH);
+        return bandwidth <= maxBandwidth;
     }
 
     @Override
@@ -137,11 +145,11 @@ public class InventorySocketable implements IInventory {// TODO: 12/15/18 look a
     public void clear() {
         IteratorSocketable sockerator = getSockerator();
         while (sockerator.hasNext()) {
-            sockerator.next();
             sockerator.remove();
         }
     }
 
+    @Nonnull
     @Override
     public String getName() {
         return "rpsideas.container.socketable";
@@ -152,6 +160,7 @@ public class InventorySocketable implements IInventory {// TODO: 12/15/18 look a
         return false;
     }
 
+    @Nonnull
     @Override
     public ITextComponent getDisplayName() {
         return new TextComponentTranslation(getName());

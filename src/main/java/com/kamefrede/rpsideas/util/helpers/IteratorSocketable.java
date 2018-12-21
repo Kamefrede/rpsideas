@@ -25,4 +25,9 @@ public class IteratorSocketable implements Iterator<ItemStack> {
     public ItemStack next() {
         return socketable.getBulletInSocket(stack, ++index);
     }
+
+    @Override
+    public void remove() {
+        socketable.setBulletInSocket(stack, index++, ItemStack.EMPTY);
+    }
 }

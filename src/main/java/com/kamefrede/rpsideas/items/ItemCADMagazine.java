@@ -14,6 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
@@ -23,13 +24,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.arl.util.ItemNBTHelper;
 import vazkii.arl.util.VanillaPacketDispatcher;
 import vazkii.psi.api.PsiAPI;
-import vazkii.psi.api.cad.EnumCADComponent;
-import vazkii.psi.api.cad.EnumCADStat;
-import vazkii.psi.api.cad.ICADComponent;
-import vazkii.psi.api.cad.ISocketable;
-import vazkii.psi.api.spell.EnumSpellStat;
-import vazkii.psi.api.spell.ISpellSettable;
-import vazkii.psi.api.spell.Spell;
+import vazkii.psi.api.cad.*;
+import vazkii.psi.api.spell.*;
 import vazkii.psi.common.block.tile.TileProgrammer;
 import vazkii.psi.common.core.handler.PsiSoundHandler;
 import vazkii.psi.common.item.ItemSpellDrive;
@@ -82,11 +78,8 @@ public class ItemCADMagazine extends RPSItem implements ISocketable, ICADCompone
 
     @Override
     public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items) {
-
-        if (isInCreativeTab(tab)) {
-            for (ItemStack stack : IngredientCADComponent.defaults(EnumCADComponent.SOCKET)) {
-                items.add(setSocket(new ItemStack(this), stack));
-            }
+        if (isInCreativeTab(tab)) for (ItemStack stack : IngredientCADComponent.defaults(EnumCADComponent.SOCKET)) {
+            items.add(setSocket(new ItemStack(this), stack));
         }
     }
 
@@ -200,10 +193,67 @@ public class ItemCADMagazine extends RPSItem implements ISocketable, ICADCompone
     @Nonnull
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn) {
-        if (!worldIn.isRemote && !PsiAPI.getPlayerCAD(playerIn).isEmpty()) {
-            playerIn.openGui(RPSIdeas.INSTANCE, GuiHandler.GUI_MAGAZINE, worldIn, 0, 0, 0);
+        ItemStack mag = playerIn.getHeldItem(handIn);
+
+        if (!worldIn.isRemote) {
+            ItemStack cad = PsiAPI.getPlayerCAD(playerIn);
+            if (!cad.isEmpty()) {
+                if (playerIn.isSneaking()) {
+                    ICAD cadItem = (ICAD) cad.getItem();
+                    int socketsRequired = 0;
+                    int bandwidthRequired = 0;
+                    for (int i = 0; cadItem.isSocketSlotAvailable(cad, i); i++) {
+                        ItemStack bullet = cadItem.getBulletInSocket(cad, i);
+                        if (!bullet.isEmpty()) {
+                            if (socketsRequired < i + 1)
+                                socketsRequired = i + 1;
+                            CompiledSpell spell = new CompiledSpell(((ISpellContainer) bullet.getItem()).getSpell(bullet));
+                            int bandwidth = spell.metadata.stats.get(EnumSpellStat.BANDWIDTH);
+                            if (bandwidthRequired < bandwidth)
+                                bandwidthRequired = bandwidth;
+                        }
+                    }
+
+                    for (int i = 0; isSocketSlotAvailable(mag, i); i++) {
+                        if (socketsRequired < i + 1 && !getBulletInSocket(mag, i).isEmpty())
+                            socketsRequired = i + 1;
+                    }
+
+                    int cadSockets = cadItem.getStatValue(cad, EnumCADStat.SOCKETS);
+                    int magSockets = getSocketSlots(mag);
+                    int magBandwidth = getBandwidth(mag);
+
+                    boolean bandwidthMatch = magBandwidth < 0 || magBandwidth >= bandwidthRequired;
+
+                    if (cadSockets >= socketsRequired && magSockets >= socketsRequired && bandwidthMatch) {
+                        NonNullList<ItemStack> tempInventory = NonNullList.create();
+                        for (int i = 0; i < socketsRequired && isSocketSlotAvailable(mag, i); i++)
+                            tempInventory.add(getBulletInSocket(mag, i));
+                        for (int i = 0; i < socketsRequired && cadItem.isSocketSlotAvailable(cad, i); i++)
+                            setBulletInSocket(mag, i, cadItem.getBulletInSocket(cad, i));
+
+                        for (int i = 0; i < socketsRequired && i < tempInventory.size(); i++)
+                            cadItem.setBulletInSocket(cad, i, tempInventory.get(i));
+
+                        worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ,
+                                PsiSoundHandler.bulletCreate,
+                                SoundCategory.PLAYERS, 0.5f, 1f);
+                        playerIn.getCooldownTracker().setCooldown(this, 10);
+                    } else {
+                        ITextComponent text = new TextComponentTranslation(RPSIdeas.MODID +
+                                (bandwidthMatch ? ".misc.too_complex_bullet" : ".misc.slot_mismatch"));
+                        text.getStyle().setColor(TextFormatting.RED);
+                        playerIn.sendStatusMessage(text, true);
+                        worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ,
+                                PsiSoundHandler.compileError,
+                                SoundCategory.PLAYERS, 0.5f, 1f);
+                    }
+
+                } else
+                    playerIn.openGui(RPSIdeas.INSTANCE, GuiHandler.GUI_MAGAZINE, worldIn, 0, 0, 0);
+            }
         }
-        return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+        return new ActionResult<>(EnumActionResult.SUCCESS, mag);
     }
 
 

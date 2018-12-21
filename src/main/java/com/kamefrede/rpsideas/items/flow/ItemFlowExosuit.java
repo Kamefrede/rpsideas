@@ -2,6 +2,7 @@ package com.kamefrede.rpsideas.items.flow;
 
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
+import com.kamefrede.rpsideas.util.RPSCreativeTab;
 import com.kamefrede.rpsideas.util.helpers.ClientHelpers;
 import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
 import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
@@ -48,6 +49,7 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsiAddonT
     private ItemFlowExosuit(String name, EntityEquipmentSlot slot, boolean ebony) {
         super(name, PsiAPI.PSIMETAL_ARMOR_MATERIAL, -1, slot);
         this.ebony = ebony;
+        setCreativeTab(RPSCreativeTab.INSTANCE);
     }
 
     @SideOnly(Side.CLIENT)
