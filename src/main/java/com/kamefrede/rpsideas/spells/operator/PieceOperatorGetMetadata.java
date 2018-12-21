@@ -9,11 +9,6 @@ public class PieceOperatorGetMetadata extends PieceOperator {
         super(spell);
     }
 
-    @Override
-    public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
-        meta.addStat(EnumSpellStat.COMPLEXITY, 2);
-
-    }
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {

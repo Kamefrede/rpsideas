@@ -25,8 +25,7 @@ public class PieceTrickSpinChamber extends PieceTrick {
     @Override
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException, ArithmeticException {
         super.addToMetadata(meta);
-        meta.addStat(EnumSpellStat.POTENCY, 1);
-        meta.addStat(EnumSpellStat.COST, 5);
+        meta.addStat(EnumSpellStat.POTENCY, 2);
     }
 
     @Override

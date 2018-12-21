@@ -22,9 +22,6 @@ public class PieceTrickCloseElytra extends PieceTrick {
     @Override
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
         super.addToMetadata(meta);
-
-        meta.addStat(EnumSpellStat.COMPLEXITY, 1);
-        meta.addStat(EnumSpellStat.COST, 5);
     }
 
     @Override

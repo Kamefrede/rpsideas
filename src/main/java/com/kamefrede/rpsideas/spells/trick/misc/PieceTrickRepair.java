@@ -17,8 +17,7 @@ public class PieceTrickRepair extends PieceTrick {
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
         super.addToMetadata(meta);
 
-        meta.addStat(EnumSpellStat.COMPLEXITY, 1);
-        meta.addStat(EnumSpellStat.POTENCY, 1);
+        meta.addStat(EnumSpellStat.POTENCY, 3);
         meta.addStat(EnumSpellStat.COST, 600);
     }
 

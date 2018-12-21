@@ -50,8 +50,8 @@ public class TrickSound extends PieceTrick {
         if (dIn != null && !(dIn >= 0 && dIn <= 10))
             throw new SpellCompilationException(SpellRuntimeExceptions.INSTRUMENTS, x, y);
 
-        meta.addStat(EnumSpellStat.POTENCY, 3);
-        meta.addStat(EnumSpellStat.COST, 26);
+        meta.addStat(EnumSpellStat.POTENCY, 2);
+        meta.addStat(EnumSpellStat.COST, 20);
 
     }
 

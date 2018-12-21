@@ -22,7 +22,7 @@ public class PieceTrickSupressNextTrick extends PieceTrick {
 
     @Override
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
-        meta.addStat(EnumSpellStat.COMPLEXITY, 1);
+        meta.addStat(EnumSpellStat.COMPLEXITY, 3);
     }
 
     @Override

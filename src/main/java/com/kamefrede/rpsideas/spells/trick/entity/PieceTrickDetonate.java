@@ -31,7 +31,7 @@ public class PieceTrickDetonate extends PieceTrick {
         if (radiusVal == null || radiusVal <= 0)
             throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_VALUE, x, y);
         meta.addStat(EnumSpellStat.POTENCY, radiusVal.intValue());
-        meta.addStat(EnumSpellStat.COST, radiusVal.intValue() * 15);
+        meta.addStat(EnumSpellStat.COST, radiusVal.intValue() * 10);
     }
 
     @Override
