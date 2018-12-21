@@ -7,6 +7,8 @@ import com.kamefrede.rpsideas.tiles.TileCADCase;
 import com.kamefrede.rpsideas.util.RPSSoundHandler;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.ItemMeshDefinition;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumDyeColor;
@@ -16,6 +18,9 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import vazkii.arl.interf.IModBlock;
 import vazkii.arl.item.ItemModBlock;
 
 import javax.annotation.Nonnull;
@@ -24,20 +29,39 @@ import javax.annotation.Nullable;
 
 public class ItemCADCase extends ItemModBlock {
 
-    private final String[] variants;
+    private String[] variants;
+
+    private static final ThreadLocal<String> STRING_HOLDER = new ThreadLocal<>();
+
+    private static ResourceLocation capturePath(ResourceLocation res) {
+        STRING_HOLDER.set(res.getPath());
+        return res;
+    }
 
     public ItemCADCase(Block block, ResourceLocation res) {
-        super(block, res);
-
-        variants = new String[16];
-        for (int i = 0; i < 16; i++)
-            variants[i] = res.getPath() + "_" + EnumDyeColor.byMetadata(i).getName();
+        super(block, capturePath(res));
 
         setMaxStackSize(1);
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
+    public ItemMeshDefinition getCustomMeshDefinition() {
+        return (stack) -> {
+            ResourceLocation loc = getRegistryName();
+            if (loc == null)
+                loc = new ResourceLocation(getModNamespace(), ((IModBlock) block).getBareName());
+            return new ModelResourceLocation(loc, "inventory");
+        };
+    }
+
+    @Override
     public String[] getVariants() {
+        if (variants == null) {
+            variants = new String[16];
+            for (int i = 0; i < 16; i++)
+                variants[i] = STRING_HOLDER.get() + "_" + EnumDyeColor.byMetadata(i).getName();
+        }
         return variants;
     }
 

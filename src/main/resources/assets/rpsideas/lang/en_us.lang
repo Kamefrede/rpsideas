@@ -322,6 +322,8 @@ item.rpsideas:ebony_hoe_xmas.name=☃ Ebony Flow Ho Hoe ☃
 item.rpsideas:ebony_shears.name=Ebony Flowshears
 item.rpsideas:ebony_rod.name=Ebony Flowrod
 item.rpsideas:ebony_rod_cast.name=Ebony Flowrod
+item.rpsideas:gauss_rifle.name=Gauss Pulse Rifle
+item.rpsideas:gauss_bullet.name=Gauss Rifle Round
 
 item.rpsideas:unstable_battery.name=Unstable CAD Battery
 item.rpsideas:twinflow_battery.name=Hybrid Flow CAD Battery

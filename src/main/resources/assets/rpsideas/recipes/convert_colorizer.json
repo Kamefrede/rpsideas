@@ -6,7 +6,7 @@
   "ingredients": [
     {
       "type": "rpsideas:cad_component",
-      "ore": "dye",
+      "component": "dye",
       "excluded": {
         "item": "rpsideas:liquid_colorizer"
       }

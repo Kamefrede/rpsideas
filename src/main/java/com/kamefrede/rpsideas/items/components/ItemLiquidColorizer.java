@@ -36,16 +36,21 @@ public class ItemLiquidColorizer extends ItemComponent implements ICADColorizer,
     }
 
     public static int getColorFromStack(ItemStack stack) {
-        return ItemNBTHelper.getInt(stack, "color", Integer.MAX_VALUE);
+        if (!stack.hasTagCompound())
+            return -1;
+        return ItemNBTHelper.getInt(stack, "color", -1);
     }
 
     public static ItemStack getInheriting(ItemStack stack) {
+        if (!stack.hasTagCompound())
+            return ItemStack.EMPTY;
         NBTTagCompound cmp = ItemNBTHelper.getCompound(stack, "inheriting", true);
-        if (cmp == null) return ItemStack.EMPTY;
+        if (cmp == null)
+            return ItemStack.EMPTY;
         return new ItemStack(cmp);
     }
 
-    public static ItemStack setInheriting(ItemStack stack, ItemStack inheriting) {
+    public static void setInheriting(ItemStack stack, ItemStack inheriting) {
         if (inheriting.isEmpty()) {
             if (ItemNBTHelper.detectNBT(stack)) ItemNBTHelper.getNBT(stack).removeTag("inheriting");
         } else {
@@ -53,14 +58,13 @@ public class ItemLiquidColorizer extends ItemComponent implements ICADColorizer,
             inheriting.writeToNBT(nbt);
             ItemNBTHelper.setCompound(stack, "inheriting", nbt);
         }
-        return stack;
     }
 
     @Override
-    public ItemStack setPiece(ItemStack stack, EnumCADComponent type, ItemStack piece) {
+    public void setPiece(ItemStack stack, EnumCADComponent type, ItemStack piece) {
         if (type != EnumCADComponent.DYE)
-            return stack;
-        return setInheriting(stack, piece);
+            return;
+        setInheriting(stack, piece);
     }
 
     @Override
@@ -88,23 +92,23 @@ public class ItemLiquidColorizer extends ItemComponent implements ICADColorizer,
     @SideOnly(Side.CLIENT)
     @Override
     public int getColor(ItemStack stack) {
-        int itemcolor = ItemNBTHelper.getInt(stack, "color", Integer.MAX_VALUE);
+        int itemcolor = getColorFromStack(stack);
         if (!stack.isEmpty()) {
             ItemStack inheriting = getInheriting(stack);
             if (!inheriting.isEmpty() && inheriting.getItem() instanceof ICADColorizer) {
-                int inheritcolor = ((ICADColorizer) inheriting.getItem()).getColor(inheriting);
-                if (itemcolor == Integer.MAX_VALUE)
-                    itemcolor = inheritcolor;
+                int inheritColor = ((ICADColorizer) inheriting.getItem()).getColor(inheriting);
+                if (itemcolor == -1)
+                    itemcolor = inheritColor;
                 else {
                     Color it = new Color(itemcolor);
-                    Color inh = new Color(inheritcolor);
+                    Color inh = new Color(inheritColor);
                     itemcolor = new Color((it.getRed() + inh.getRed()) / 2, (it.getGreen() + inh.getGreen()) / 2, (it.getBlue() + inh.getBlue()) / 2).getRGB();
 
                 }
             }
 
         }
-        return (itemcolor == Integer.MAX_VALUE) ? ICADColorizer.DEFAULT_SPELL_COLOR : itemcolor;
+        return (itemcolor == -1) ? ICADColorizer.DEFAULT_SPELL_COLOR : itemcolor;
     }
 
     @SideOnly(Side.CLIENT)
@@ -135,9 +139,8 @@ public class ItemLiquidColorizer extends ItemComponent implements ICADColorizer,
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
         ItemStack held = player.getHeldItem(hand);
 
-        if (player.isSneaking()) {
+        if (player.isSneaking())
             held = new ItemStack(RPSItems.drainedColorizer);
-        }
 
         return new ActionResult<>(EnumActionResult.SUCCESS, held);
     }

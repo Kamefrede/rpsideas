@@ -21,7 +21,7 @@ import org.apache.logging.log4j.Logger;
 import vazkii.botania.api.BotaniaAPI;
 
 
-@Mod(modid = RPSIdeas.MODID, name = RPSIdeas.NAME, version = RPSIdeas.VERSION, dependencies = "required-after:psi;required-after:ctm;", useMetadata = true)
+@Mod(modid = RPSIdeas.MODID, name = RPSIdeas.NAME, version = RPSIdeas.VERSION, dependencies = "after:botania;required-after:psi;required-after:ctm;", useMetadata = true)
 public class RPSIdeas {
 
     public static final String MODID = "rpsideas";
@@ -41,22 +41,28 @@ public class RPSIdeas {
         NetworkRegistry.INSTANCE.registerGuiHandler(RPSIdeas.INSTANCE, new GuiHandler());
     }
 
-    @Optional.Method(modid = "botania")
     @Mod.EventHandler
+    @Optional.Method(modid = "botania")
     public void preInitBotania(FMLPreInitializationEvent event) {
         RPSEntities.initBotania();
     }
 
-    @Optional.Method(modid = "botania")
     @Mod.EventHandler
+    @Optional.Method(modid = "botania")
     public void initBotania(FMLInitializationEvent event) {
         FMLInterModComms.sendMessage("projecte", "interdictionblacklist", EntityPsiManaBurst.class.getCanonicalName());
     }
 
-    @Optional.Method(modid = "botania")
     @Mod.EventHandler
+    @Optional.Method(modid = "botania")
     public void postInitBotania(FMLPostInitializationEvent event) {
         BotaniaAPI.blacklistEntityFromGravityRod(EntityPsiManaBurst.class);
+    }
+
+    @Mod.EventHandler
+    @SideOnly(Side.CLIENT)
+    public void clientPreInit(FMLPreInitializationEvent e) {
+        RPSEntities.clientInit();
     }
 
     @Mod.EventHandler

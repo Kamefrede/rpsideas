@@ -16,6 +16,8 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.resources.I18n;
@@ -37,6 +39,7 @@ import net.minecraft.world.ChunkCache;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -70,6 +73,18 @@ public class BlockCADCase extends RPSBlock implements IBlockColorProvider {
 
     //Block Properties and State
 
+    @SideOnly(Side.CLIENT)
+    public void registerStateMapper() {
+        IStateMapper mapper = getStateMapper();
+        IProperty[] ignored = getIgnoredProperties();
+        if (mapper != null || ignored != null && ignored.length > 0) {
+            if (mapper != null)
+                ModelLoader.setCustomStateMapper(this, mapper);
+            else
+                ModelLoader.setCustomStateMapper(this, new StateMap.Builder().ignore(ignored).build());
+
+        }
+    }
 
     @Override
     public ItemBlock createItemBlock(ResourceLocation res) {

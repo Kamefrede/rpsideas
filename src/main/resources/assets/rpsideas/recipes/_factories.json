@@ -8,12 +8,12 @@
     "botania_present": "com.kamefrede.rpsideas.compat.botania.BotaniaRecipeConditionFactory"
   },
   "recipes": {
-    "cad_shapeless": "com.kamefrede.rpsideas.crafting.RecipeCADShapeless.Factory",
-    "cad_shaped": "com.kamefrede.rpsideas.crafting.RecipeCADShaped.Factory",
-    "socket_transfer": "com.kamefrede.rpsideas.crafting.RecipeSocketTransfer.Factory"
+    "cad_shapeless": "com.kamefrede.rpsideas.crafting.RecipeCADShapeless$Factory",
+    "cad_shaped": "com.kamefrede.rpsideas.crafting.RecipeCADShaped$Factory",
+    "socket_transfer": "com.kamefrede.rpsideas.crafting.RecipeSocketTransfer$Factory"
   },
   "ingredients": {
-    "cad_component": "com.kamefrede.rpsideas.crafting.IngredientCADComponent.Factory",
+    "cad_component": "com.kamefrede.rpsideas.crafting.IngredientCADComponent$Factory",
     "copper": "com.kamefrede.rpsideas.crafting.factory.CopperIngredientFactory"
   }
 }

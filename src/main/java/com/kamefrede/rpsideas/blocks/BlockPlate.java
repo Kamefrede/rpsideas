@@ -26,7 +26,6 @@ public class BlockPlate extends RPSBlock implements IBlockColorProvider {
         setLightLevel(1f);
         this.setHardness(5.0f);
         this.setResistance(10.0f);
-        setCreativeTab(RPSCreativeTab.INSTANCE);
         this.blockSoundType = SoundType.METAL;
     }
 

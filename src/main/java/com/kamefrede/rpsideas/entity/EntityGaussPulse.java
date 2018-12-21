@@ -46,7 +46,7 @@ public class EntityGaussPulse extends EntityThrowable implements ISpellImmune {
     private static final String TAG_LAST_MOTION_Z = "lastMotionZ";
 
     private static final String TAG_AMMO = "ammo";
-    private static final DataParameter<Byte> AMMO_STATUS = EntityDataManager.createKey(EntitySniperProjectile.class, DataSerializers.BYTE);
+    private static final DataParameter<Byte> AMMO_STATUS = EntityDataManager.createKey(EntityGaussPulse.class, DataSerializers.BYTE);
     public int timeAlive = 0;
     @Nullable
     public UUID uuid;

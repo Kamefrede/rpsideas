@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.blocks;
 
 import com.kamefrede.rpsideas.RPSIdeas;
+import com.kamefrede.rpsideas.util.RPSCreativeTab;
 import net.minecraft.block.material.Material;
 import vazkii.arl.block.BlockMod;
 
@@ -12,6 +13,7 @@ public class RPSBlock extends BlockMod {
 
     public RPSBlock(String name, Material materialIn, String... variants) {
         super(name, materialIn, variants);
+        setCreativeTab(RPSCreativeTab.INSTANCE);
     }
 
     @Override

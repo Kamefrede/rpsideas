@@ -31,7 +31,7 @@ public class PotionModColorized extends Potion {
         iconX = iconIndex % 8;
         iconY = iconIndex / 8;
 
-        setPotionName(RPSIdeas.MODID + ".potion" + name);
+        setPotionName(RPSIdeas.MODID + ".potion." + name);
         if (!badEffect)
             setBeneficial();
     }

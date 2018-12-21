@@ -25,7 +25,7 @@ public class RPSBlocks {
     public static final BlockModNoItem conjuredPulsar = new BlockConjuredPulsar();
     public static final BlockModNoItem conjuredPulsarLight = new BlockPulsarLight();
     public static final BlockModNoItem conjuredStar = new BlockConjuredStar();
-    public static final BlockMod cadCase = new BlockCADCase();
+    public static final BlockCADCase cadCase = new BlockCADCase();
     public static final BlockMod brightPlate = new BlockPlate(LibBlockNames.BRIGHT_PLATE);
     public static final BlockMod darkPlate = new BlockPlate(LibBlockNames.DARK_PLATE);
 
@@ -40,6 +40,10 @@ public class RPSBlocks {
         conjuredPulsar.registerStateMapper();
         conjuredPulsarLight.registerStateMapper();
         conjuredStar.registerStateMapper();
+
+        // Nor does it respect blocks with mesh definitions
+
+        cadCase.registerStateMapper();
     }
 
     @SubscribeEvent
