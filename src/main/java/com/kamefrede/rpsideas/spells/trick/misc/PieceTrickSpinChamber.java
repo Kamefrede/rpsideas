@@ -32,7 +32,7 @@ public class PieceTrickSpinChamber extends PieceTrick {
     public Object execute(SpellContext context) throws SpellRuntimeException {
         Double num = this.<Double>getParamValue(context, number);
         if (num == null || num == 0) return null;
-        if (!(context.tool.getItem() instanceof ItemCAD)) throw new SpellRuntimeException(SpellRuntimeExceptions.CAD);
+        if (context.tool != ItemStack.EMPTY) throw new SpellRuntimeException(SpellRuntimeExceptions.CAD);
         ItemStack stack = context.tool;
         ItemCAD cad = (ItemCAD) stack.getItem();
         if (num > 0) {
