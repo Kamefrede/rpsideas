@@ -100,7 +100,7 @@ public class PieceTrickFormBurst extends PieceComponentTrick {
         int color = props.color;
         ItemStack lens = ItemManaGun.getLens(cad);
         if (!lens.isEmpty() && lens.getItem() instanceof ILens){
-             ILens ilens = (ILens)lens.getItem();
+            ILens ilens = (ILens)lens.getItem();
             ilens.apply(lens, props);
             if(ilens.getLensColor(lens) != -1){
                 lensHasColor = true;
