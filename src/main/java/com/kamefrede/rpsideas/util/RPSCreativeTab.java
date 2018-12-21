@@ -5,7 +5,6 @@ import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.RPSItems;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -14,6 +13,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.List;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public class RPSCreativeTab extends CreativeTabs {
     public static final RPSCreativeTab INSTANCE = new RPSCreativeTab();
@@ -24,26 +25,32 @@ public class RPSCreativeTab extends CreativeTabs {
         setBackgroundImageName("psideas.png");
     }
 
-    private static final List<Item> order = Lists.newArrayList();
+    private static final List<Supplier<Item>> suppliers = Lists.newArrayList();
+
+    private static List<Item> order;
+
+    private List<Item> getOrder() {
+        if (order == null)
+            order = suppliers.stream().map(Supplier::get).collect(Collectors.toList());
+        return order;
+    }
 
     public static void set(Block block) {
         block.setCreativeTab(INSTANCE);
-        Item item = Item.getItemFromBlock(block);
-        if (item != Items.AIR)
-            order.add(item);
+        suppliers.add(() -> Item.getItemFromBlock(block));
     }
 
     public static void set(Item item) {
         item.setCreativeTab(INSTANCE);
-        order.add(item);
+        suppliers.add(() -> item);
     }
 
     @Override
     public void displayAllRelevantItems(@Nonnull NonNullList<ItemStack> stacks) {
-        for (Item item : order)
+        for (Item item : getOrder())
             item.getSubItems(this, stacks);
         for (Item item : Item.REGISTRY)
-            if (!order.contains(item))
+            if (!getOrder().contains(item))
                 item.getSubItems(this, stacks);
     }
 
