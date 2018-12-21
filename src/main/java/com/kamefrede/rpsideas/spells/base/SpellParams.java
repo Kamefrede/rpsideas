@@ -9,7 +9,7 @@ public abstract class SpellParams {
     public static final String GENERIC_NAME_AXIS = "rpsideas.spellparam.axis";
     public static final String GENERIC_NAME_ANGLE = "rpsideas.spellparam.angle";
     public static final String GENERIC_FALLBACK = "rpsideas.spellparam.fallback";
-    public static final String GENERIC_VAZKII_RAY = "rpsideas.spellparam.vazkii";
+    public static final String GENERIC_VAZKII_RAY = "psi.spellparam.ray";
     public static final String GENERIC_NAME_LIST1 = "rpsideas.spellparam.list1";
     public static final String GENERIC_NAME_LIST2 = "rpsideas.spellparam.list2";
     public static final String GENERIC_NAME_VIEWER = "rpsideas.spellparam.viewer";

@@ -23,6 +23,10 @@ public class ConfigHandler {
     @Config.Comment("Is the Spell Magazine craftable?")
     public static boolean enableMagazine = true;
 
+    @Config.Name("enablePsipulse")
+    @Config.Comment("Is the Psionic Pulse potion effect brewable?")
+    public static boolean enablePsipulse = true;
+
     @Config.Name("enableCreativeCAD")
     @Config.Comment("If Avaritia is present, should the creative CAD assembly be craftable?")
     public static boolean enableCreativeCAD = false;
