@@ -6,8 +6,7 @@
     }
   ],
   "result": {
-    "item": "rpsideas:cad_case",
-    "data": 5
+    "item": "rpsideas:cad_case_lime"
   },
   "type": "forge:ore_shaped",
   "pattern": [
