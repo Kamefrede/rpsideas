@@ -7,6 +7,7 @@ import com.kamefrede.rpsideas.util.RPSSoundHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
@@ -14,8 +15,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.color.IBlockColor;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
@@ -38,7 +37,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
-import vazkii.arl.interf.IBlockColorProvider;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -46,8 +44,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class BlockCADCase extends RPSBlock implements IBlockColorProvider {
+public class BlockCADCase extends RPSBlock {
     public static final PropertyBool OPEN = PropertyBool.create("open");
+    public static final PropertyBool POWERED = PropertyBool.create("powered");
     public static final PropertyDirection FACING = PropertyDirection.create("facing", Arrays.asList(EnumFacing.HORIZONTALS));
     private static final AxisAlignedBB WEST_AABB = new AxisAlignedBB(3.5 / 16.0, 0.0, 0.5 / 16.0, 12.5 / 16.0, 4.5 / 16.0, 15.5 / 16.0);
     private static final AxisAlignedBB NORTH_AABB = new AxisAlignedBB(0.5 / 16.0, 0.0, 3.5 / 16.0, 15.5 / 16.0, 4.5 / 16.0, 12.5 / 16.0);
@@ -63,7 +62,7 @@ public class BlockCADCase extends RPSBlock implements IBlockColorProvider {
         setHardness(0.5f);
         setSoundType(SoundType.METAL);
 
-        setDefaultState(getDefaultState().withProperty(OPEN, false).withProperty(FACING, EnumFacing.NORTH));
+        setDefaultState(getDefaultState().withProperty(OPEN, false).withProperty(FACING, EnumFacing.NORTH).withProperty(POWERED, false));
     }
 
     //Block Properties and State
@@ -76,12 +75,12 @@ public class BlockCADCase extends RPSBlock implements IBlockColorProvider {
     @Nonnull
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, OPEN, FACING);
+        return new BlockStateContainer(this, OPEN, FACING, POWERED);
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(FACING).getHorizontalIndex() | (state.getValue(OPEN) ? 4 : 0);
+        return state.getValue(FACING).getHorizontalIndex() | (state.getValue(OPEN) ? 4 : 0) | (state.getValue(POWERED) ? 8 : 0);
     }
 
     @Nonnull
@@ -89,7 +88,11 @@ public class BlockCADCase extends RPSBlock implements IBlockColorProvider {
     public IBlockState getStateFromMeta(int meta) {
         int horizontalIndex = meta & 3;
         boolean isOpen = (meta & 4) != 0;
-        return getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(horizontalIndex)).withProperty(OPEN, isOpen);
+        boolean isPowered = (meta & 8) != 0;
+        return getDefaultState()
+                .withProperty(FACING, EnumFacing.byHorizontalIndex(horizontalIndex))
+                .withProperty(OPEN, isOpen)
+                .withProperty(POWERED, isPowered);
     }
 
     @Override
@@ -182,14 +185,11 @@ public class BlockCADCase extends RPSBlock implements IBlockColorProvider {
             TileCADCase cadCase = (TileCADCase) tileentity;
             ItemStack itemstack = new ItemStack(this);
             IItemHandler handler = itemstack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-            if (handler != null) {
-                for (int i = 0; i < handler.getSlots(); i++) {
-                    handler.insertItem(i, Objects.requireNonNull(tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)).getStackInSlot(i), false);
-                }
-            }
-            if (cadCase.getDisplayName() != null) {
+            IItemHandler tileHandler = tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+            if (handler != null && tileHandler != null) for (int i = 0; i < handler.getSlots(); i++)
+                handler.insertItem(i, tileHandler.extractItem(i, 64, true), false);
+            if (cadCase.getDisplayName() != null)
                 itemstack.setStackDisplayName(cadCase.getName());
-            }
             spawnAsEntity(worldIn, pos, itemstack);
 
             worldIn.updateComparatorOutputLevel(pos, state.getBlock());
@@ -215,7 +215,7 @@ public class BlockCADCase extends RPSBlock implements IBlockColorProvider {
     @Nonnull
     @Override
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-        return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()).withProperty(OPEN, false);
+        return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
     }
 
     @Override
@@ -238,17 +238,23 @@ public class BlockCADCase extends RPSBlock implements IBlockColorProvider {
 
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        TileEntity tile = world.getTileEntity(pos);
         if (player.isSneaking()) {
             if (!world.isRemote) {
+                boolean wasOpen = state.getValue(OPEN);
                 world.setBlockState(pos, state.cycleProperty(OPEN), 2);
+                playOpenCloseSound(world, pos, wasOpen);
             }
             return true;
         }
-        if (tile instanceof TileCADCase) {
+        TileEntity tile = world.getTileEntity(pos);
+        if (tile instanceof TileCADCase)
             return ((TileCADCase) tile).whenClicked(state, player, hand, hitX, hitZ);
-        }
         return false;
+    }
+
+    @Override
+    public IProperty[] getIgnoredProperties() {
+        return new IProperty[] { POWERED };
     }
 
     @Override
@@ -256,16 +262,25 @@ public class BlockCADCase extends RPSBlock implements IBlockColorProvider {
         if (world.isRemote) return;
 
         if (canPlaceBlockAt(world, pos)) {
-            boolean shouldOpen = world.isBlockPowered(pos);
+            boolean wasPowered = state.getValue(POWERED);
+
+            boolean isPowered = world.isBlockPowered(pos);
             boolean isOpen = state.getValue(OPEN);
 
-            if (shouldOpen != isOpen) {
-                world.setBlockState(pos, state.withProperty(OPEN, shouldOpen), 2);
-                playOpenCloseSound(world, pos, shouldOpen);
+            IBlockState set = state;
+
+            if (wasPowered == isOpen && isPowered != wasPowered) {
+                set = set.withProperty(OPEN, isPowered);
+                playOpenCloseSound(world, pos, isPowered);
             }
-        } else {
+
+            if (isPowered != wasPowered)
+                set = set.withProperty(POWERED, isPowered);
+
+            if (set != state)
+                world.setBlockState(pos, set, 2);
+        } else
             world.destroyBlock(pos, true);
-        }
     }
 
     private void playOpenCloseSound(World world, BlockPos pos, boolean closing) {
@@ -303,25 +318,5 @@ public class BlockCADCase extends RPSBlock implements IBlockColorProvider {
             }
         }
 
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IBlockColor getBlockColor() {
-        return (state, world, pos, layer) -> {
-            if (layer == 1) {
-                return color.getColorValue();
-            } else return -1;
-        };
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IItemColor getItemColor() {
-        return (stack, tintIndex) -> {
-            if (tintIndex == 1) {
-                return color.getColorValue();
-            } else return -1;
-        };
     }
 }

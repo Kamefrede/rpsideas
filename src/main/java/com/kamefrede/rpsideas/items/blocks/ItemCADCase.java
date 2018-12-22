@@ -39,9 +39,12 @@ public class ItemCADCase extends ItemModBlock {
         RPSDataFixer.registerFix(FixTypes.ITEM_INSTANCE, "1.11", compound -> {
             if (compound.getString("id").startsWith(RPSIdeas.MODID + ":" + RPSBlockNames.CAD_CASE)) {
                 int damage = compound.getInteger("Damage");
-                if (damage != 0) compound.setString("id", RPSIdeas.MODID + ":" +
-                        RPSBlockNames.CAD_CASE + "_" +
-                        EnumDyeColor.byMetadata(damage).getName());
+                if (damage != 0) {
+                    compound.setString("id", RPSIdeas.MODID + ":" +
+                            RPSBlockNames.CAD_CASE + "_" +
+                            EnumDyeColor.byMetadata(damage).getName());
+                    compound.setInteger("Damage", 0);
+                }
 
                 if (compound.hasKey("ForgeCaps", Constants.NBT.TAG_COMPOUND)) {
                     NBTTagCompound caps = compound.getCompoundTag("ForgeCaps");

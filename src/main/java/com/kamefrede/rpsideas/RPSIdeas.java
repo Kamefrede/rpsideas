@@ -13,7 +13,6 @@ import com.kamefrede.rpsideas.render.RenderTileCADCase;
 import com.kamefrede.rpsideas.spells.base.SpellPieces;
 import com.kamefrede.rpsideas.tiles.TileCADCase;
 import com.kamefrede.rpsideas.util.RPSDataFixer;
-import com.kamefrede.rpsideas.util.RPSEventHandler;
 import com.kamefrede.rpsideas.util.RPSKeybindHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
@@ -56,7 +55,7 @@ public class RPSIdeas {
     public void preInit(FMLPreInitializationEvent event) {
         SpellPieces.init();
         RPSEntities.init();
-        DATA_FIXER = FMLCommonHandler.instance().getDataFixer().init(MODID, RPSDataFixer.parseSemVer(VERSION));
+        DATA_FIXER = FMLCommonHandler.instance().getDataFixer().init(MODID, RPSDataFixer.parseSemVer("2"));
 
         RPSPacketHandler.initPackets();
         NetworkRegistry.INSTANCE.registerGuiHandler(RPSIdeas.INSTANCE, new GuiHandler());

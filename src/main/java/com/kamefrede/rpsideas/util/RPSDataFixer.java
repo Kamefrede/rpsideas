@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
  * Created at 3:03 PM on 12/22/18.
  */
 public class RPSDataFixer {
+
     private static final Pattern SEM_VER = Pattern.compile("^(\\d+)(?:\\.(\\d+)(?:\\.(\\d+))?)?");
 
     public static int parseSemVer(String semVer) {

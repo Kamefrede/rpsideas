@@ -9,4 +9,5 @@ public class RPSBlockNames {
     public static final String PLATE_BLOCK = "block_plate";
     public static final String BRIGHT_PLATE = "bright_plate";
     public static final String DARK_PLATE = "dark_plate";
+    public static final String CAD_CASE_TILE = "case";
 }

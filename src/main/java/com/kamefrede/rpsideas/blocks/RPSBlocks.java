@@ -59,6 +59,6 @@ public class RPSBlocks {
         GameRegistry.registerTileEntity(TileCracklingStar.class,
                 new ResourceLocation(RPSIdeas.MODID, RPSBlockNames.CONJURED_STAR_BLOCK));
         GameRegistry.registerTileEntity(TileCADCase.class,
-                new ResourceLocation(RPSIdeas.MODID, RPSBlockNames.CAD_CASE));
+                new ResourceLocation(RPSIdeas.MODID, RPSBlockNames.CAD_CASE_TILE));
     }
 }

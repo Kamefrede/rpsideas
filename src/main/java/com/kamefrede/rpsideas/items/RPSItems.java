@@ -62,12 +62,12 @@ public class RPSItems {
     public static final ItemMod inlineCaster = new ItemInlineCaster();
     public static final ItemMod gaussRifle = new ItemGaussRifle();
 
-    public static final ItemMod sniperBullet = new ItemSniperSpellBullet();
+  //public static final ItemMod sniperBullet = new ItemSniperSpellBullet();
     public static final ItemMod psimetalHoe = new ItemPsimetalHoe(RPSItemNames.PSIMETAL_HOE);
     public static final ItemMod psimetalShears = new ItemPsimetalShears(RPSItemNames.PSIMETAL_SHEARS);
     public static final ItemMod gaussBullet = new RPSItem(RPSItemNames.ITEM_GAUSS_BULLET);
     public static final ItemMod cadMagazine = new ItemCADMagazine(RPSItemNames.SPELL_MAGAZINE);
-    public static final ItemMod braceletCad = new ItemBraceletCAD();
+   //public static final ItemMod braceletCad = new ItemBraceletCAD();
 
     @SubscribeEvent(priority = EventPriority.HIGH)
     public static void registerItems(RegistryEvent.Register<Item> e) {

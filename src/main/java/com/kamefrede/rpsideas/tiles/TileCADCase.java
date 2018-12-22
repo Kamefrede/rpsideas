@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.tiles;
 
 import com.kamefrede.rpsideas.blocks.BlockCADCase;
+import com.kamefrede.rpsideas.blocks.RPSBlocks;
 import com.kamefrede.rpsideas.items.ItemGaussRifle;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,6 +15,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -31,6 +33,43 @@ public class TileCADCase extends TileEntity {
     private ItemStackHandler itemHandler = new CaseTileHandler();
 
     private String name = "";
+
+    private int dyeColor = -1; // Legacy
+
+    private BlockCADCase getCaseBlock() {
+        if (needsLegacyDyeUpdate())
+            return RPSBlocks.cadCases[dyeColor % RPSBlocks.cadCases.length];
+
+        if (blockType instanceof BlockCADCase)
+            return (BlockCADCase) blockType;
+
+        return RPSBlocks.cadCases[0];
+    }
+
+    private boolean needsLegacyDyeUpdate() {
+        return dyeColor >= 0;
+    }
+
+    @Override
+    public void onLoad() {
+        if (!world.isRemote && needsLegacyDyeUpdate()) {
+            BlockCADCase cadCase = getCaseBlock();
+            IBlockState inWorld = world.getBlockState(pos);
+
+            if (cadCase != inWorld.getBlock()) {
+                Chunk chunk = world.getChunk(pos);
+
+                IBlockState toPlace = cadCase.getDefaultState();
+                if (inWorld.getBlock() instanceof BlockCADCase)
+                    toPlace = toPlace.withProperty(BlockCADCase.FACING, inWorld.getValue(BlockCADCase.FACING))
+                        .withProperty(BlockCADCase.OPEN, inWorld.getValue(BlockCADCase.OPEN))
+                        .withProperty(BlockCADCase.POWERED, inWorld.getValue(BlockCADCase.POWERED));
+
+                chunk.getBlockStorageArray()[pos.getY() >> 4]
+                        .set(pos.getX() & 15, pos.getY() & 15, pos.getZ() & 15, toPlace);
+            }
+        }
+    }
 
     public static boolean isAllowed(int slot, Item item) {
         return (slot == 0 && (item instanceof ICAD || item instanceof ItemGaussRifle)) ||
@@ -130,6 +169,11 @@ public class TileCADCase extends TileEntity {
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
+        if (nbt.hasKey("Color"))
+            dyeColor = nbt.getInteger("Color");
+        else
+            dyeColor = -1;
+
         itemHandler.deserializeNBT(nbt.getCompoundTag("Items"));
         name = nbt.getString("Name");
     }
@@ -164,7 +208,7 @@ public class TileCADCase extends TileEntity {
 
     @Override
     public boolean shouldRefresh(World world, BlockPos pos, @Nonnull IBlockState oldState, @Nonnull IBlockState newState) {
-        return oldState.getBlock() != newState.getBlock();
+        return newState.getBlock() instanceof BlockCADCase;
     }
 
     public class CaseTileHandler extends ItemStackHandler {
