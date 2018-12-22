@@ -1,10 +1,10 @@
 [
 {
-  "modid": "${'${mod_id}'}",
-  "name": "${'${mod_name}'}",
+  "modid": "${mod_id}",
+  "name": "${mod_name}",
   "description": "Random useful additions to PSI!",
-  "version": "${'${version}'}",
-  "mcversion": "${'${mc_version}'}",
+  "version": "${version}",
+  "mcversion": "${mc_version}",
   "url": "",
   "updateUrl": "",
   "authorList": ["Kamefrede", "wiresegal"],

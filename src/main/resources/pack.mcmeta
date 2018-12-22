@@ -1,6 +1,6 @@
 {
     "pack": {
-        "description": "Random PSIdeas",
+        "description": "${mod_name}",
         "pack_format": 3,
         "_comment":""
     }
