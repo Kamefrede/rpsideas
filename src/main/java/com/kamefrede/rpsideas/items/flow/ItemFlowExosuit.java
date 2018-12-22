@@ -106,6 +106,7 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsiAddonT
 
     public abstract String getEvent(ItemStack armorPiece);
 
+
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, World playerIn, List<String> tooltip, ITooltipFlag advanced) {
@@ -181,7 +182,8 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsiAddonT
             ItemStack sensor = getAttachedSensor(hemlet);
             if (!sensor.isEmpty() && sensor.getItem() instanceof IExosuitSensor) {
                 return ((IExosuitSensor) sensor.getItem()).getEventType(hemlet);
-            } else return null;
+            }
+            return PsiArmorEvent.NONE;
         }
 
         @Override

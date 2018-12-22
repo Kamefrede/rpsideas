@@ -12,6 +12,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import vazkii.arl.item.ItemMod;
 import vazkii.arl.item.ItemModArmor;
@@ -64,6 +65,11 @@ public class RPSItems {
     public static final ItemMod gaussBullet = new RPSItem(RPSItemNames.ITEM_GAUSS_BULLET);
     public static final ItemMod cadMagazine = new ItemCADMagazine(RPSItemNames.SPELL_MAGAZINE);
     public static final ItemMod braceletCad = new ItemBraceletCAD();
+
+    @SubscribeEvent(priority = EventPriority.HIGH)
+    public static void registerItems(RegistryEvent.Register<Item> e) {
+        // NO-OP this is a hack
+    }
 
     @SubscribeEvent
     public static void remapItem(RegistryEvent.MissingMappings<Item> e) {
