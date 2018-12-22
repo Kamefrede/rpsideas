@@ -24,9 +24,9 @@ public class RPSDataFixer {
             String minorMatch = match.group(2);
             String patchMatch = match.group(3);
 
-            int major = majorMatch.isEmpty() ? 0 : Integer.parseInt(majorMatch);
-            int minor = minorMatch.isEmpty() ? 0 : Integer.parseInt(minorMatch);
-            int patch = patchMatch.isEmpty() ? 0 : Integer.parseInt(patchMatch);
+            int major =( majorMatch == null || majorMatch.isEmpty() ) ? 0 : Integer.parseInt(majorMatch);
+            int minor = (minorMatch == null || minorMatch.isEmpty()) ? 0 : Integer.parseInt(minorMatch);
+            int patch = (patchMatch == null || patchMatch.isEmpty()) ? 0 : Integer.parseInt(patchMatch);
 
             return (major * 100 + minor) * 1000 + patch;
         }
