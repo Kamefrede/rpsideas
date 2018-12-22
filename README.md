@@ -1,5 +1,5 @@
 # Random PSIdeas
-An attempt at a PSI addon
+A PSI addon & a port of Psionic Upgrades
 1.12
 
 
@@ -7,17 +7,31 @@ An attempt at a PSI addon
 
 Items
 ===========
-* Creative CAD Socket
-* Creative CAD Core
-* Creative CAD Battery
-* Psimetal Hoe
-* Psimetal Shears
-* Psimetal Fishing Rod
+* Creative CAD Parts
+* Psimetal Hoe(And ebony/ivory variant)
+* Psimetal Shears(And ebony/ivory variant)
+* Psimetal Fishing Rod(And ebony/ivory variant)
+* Wide Band Socket
+* Flash Ring
+* CAD Case
+* Inline Caster
+* Blaster CAD
+* Gauss Rifle
+* Ebony/Ivory Psimetal Armor
+* Ebony/Ivory Tools
+* CAD Magazine
+* Liquid Colorizer 
+* Empty Colorizer
+* Twinflow Battery
+* Unstable Battery
+* Shielded Battery
+
 
 Mod Integrations
 ===========
 * Avaritia
 * Botania
+* JEI
 
 Spell Pieces
 ============
@@ -28,8 +42,6 @@ Spell Pieces
 * Trick: Plant Sequence
 * Trick: Till
 * Trick: Till Sequence
-* Trick: Blindness
-* Trick: Nausea
 * Selector: Nearby Players
 * Operator: Signum
 * Operator: Degrees to Radians
@@ -79,19 +91,6 @@ Spell Pieces
 * Selector: Number of Charges
 * Selector: Sucession Counter
 * Constant: Tau
-
-
-
-Items from PSIonic Upgrades
-=============
-* Wide Band Socket
-* Flash Ring
-* CAD Case
-* Inline Caster
-* Blaster CAD
-
-Spell Pieces from PSIonic Upgrades
-=============
 * Operator: List Size
 * Operator: Get Block Properties
 * Operator: Get Block Light
@@ -112,20 +111,13 @@ Spell Pieces from PSIonic Upgrades
 * Trick: Conjure Pulsar Sequence
 * The Mana Tricks
 
-May get removed
-============
-* Selector: Eidos Timestamp
-* Selector: Empty List
-* Operator: List Intersection
-* Operator: List Exclusion
-* Operator: List Union
 
 Known bugs
 =========
-* Issue #6
+* None
 
 Thank yous
 ============
 [PSI Taurus Silver Discord](http://discord.gg/vqg6qTH)
-[wiresegal for PSIonic Upgrades](https://minecraft.curseforge.com/projects/psionic-upgrades)
+[wiresegal for PSIonic Upgrades and his work on PSIdeas](https://minecraft.curseforge.com/projects/psionic-upgrades)
 [Quat for updating PSIonic Upgrades to 1.12](https://github.com/quat1024/PSIonic-Upgrades)
