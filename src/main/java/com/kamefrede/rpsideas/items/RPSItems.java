@@ -10,6 +10,9 @@ import com.kamefrede.rpsideas.util.libs.RPSBlockNames;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.datafix.walkers.BlockEntityTag;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -71,17 +74,24 @@ public class RPSItems {
         // NO-OP this is a hack
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void remapItem(RegistryEvent.MissingMappings<Item> e) {
         for (RegistryEvent.MissingMappings.Mapping<Item> mapping : e.getMappings())
-            if (mapping.key.getPath().equals(RPSBlockNames.CAD_CASE))
-                mapping.remap(Item.getItemFromBlock(RPSBlocks.cadCases[0]));
+            if (mapping.key.getPath().equals(RPSBlockNames.CAD_CASE)){
+            mapping.remap(Item.getItemFromBlock(RPSBlocks.cadCases[0]));
+            System.out.println("remapped " + mapping.key.getPath() + " to " + RPSBlocks.cadCases[0]);
+            }
+
     }
 
-    @SubscribeEvent
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void remapBlock(RegistryEvent.MissingMappings<Block> e) {
         for (RegistryEvent.MissingMappings.Mapping<Block> mapping : e.getMappings())
-            if (mapping.key.getPath().equals(RPSBlockNames.CAD_CASE))
-                mapping.remap(RPSBlocks.cadCases[0]);
+            if (mapping.key.getPath().equals(RPSBlockNames.CAD_CASE)){
+            System.out.println("remapped " + mapping.key.getPath() + " to " + RPSBlocks.cadCases[0]);
+            mapping.remap(RPSBlocks.cadCases[0]);
+            }
+
     }
 }
