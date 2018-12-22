@@ -12,6 +12,7 @@ import com.kamefrede.rpsideas.render.LayerAuthorOccludeElytra;
 import com.kamefrede.rpsideas.render.RenderTileCADCase;
 import com.kamefrede.rpsideas.spells.base.SpellPieces;
 import com.kamefrede.rpsideas.tiles.TileCADCase;
+import com.kamefrede.rpsideas.util.RPSKeybindHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.RenderPlayer;
@@ -79,7 +80,9 @@ public class RPSIdeas {
     @Mod.EventHandler
     @SideOnly(Side.CLIENT)
     public void clientPreInit(FMLPreInitializationEvent e) {
-        RPSEntities.clientInit();
+        RPSKeybindHandler.init();
+        RPSEntities.clientInit()
+        ;
     }
 
     @Mod.EventHandler
