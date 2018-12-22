@@ -12,6 +12,7 @@ import com.kamefrede.rpsideas.render.LayerAuthorOccludeElytra;
 import com.kamefrede.rpsideas.render.RenderTileCADCase;
 import com.kamefrede.rpsideas.spells.base.SpellPieces;
 import com.kamefrede.rpsideas.tiles.TileCADCase;
+import com.kamefrede.rpsideas.util.RPSDataFixer;
 import com.kamefrede.rpsideas.util.RPSEventHandler;
 import com.kamefrede.rpsideas.util.RPSKeybindHandler;
 import net.minecraft.client.Minecraft;
@@ -55,7 +56,7 @@ public class RPSIdeas {
     public void preInit(FMLPreInitializationEvent event) {
         SpellPieces.init();
         RPSEntities.init();
-        DATA_FIXER = FMLCommonHandler.instance().getDataFixer().init(MODID, RPSEventHandler.parseSemVer(VERSION));
+        DATA_FIXER = FMLCommonHandler.instance().getDataFixer().init(MODID, RPSDataFixer.parseSemVer(VERSION));
 
         RPSPacketHandler.initPackets();
         NetworkRegistry.INSTANCE.registerGuiHandler(RPSIdeas.INSTANCE, new GuiHandler());
