@@ -221,6 +221,21 @@ rpsideas.unlearn.players=%s isn't a player, only players can have Psi knowledge
 rpsideas.unlearn.not_a_group='%s' is not a valid Psi piece group
 rpsideas.unlearn.unknown=A CME has occurred. The cause is unknowable.
 
+key.category.rpsideas=Random PSIdeas
+rpsideas.kb.offhandcast=Use CAD in Off-Hand slot
+rpsideas.kb.switchslot01=Switch to 1st spell
+rpsideas.kb.switchslot02=Switch to 2nd spell
+rpsideas.kb.switchslot03=Switch to 3rd spell
+rpsideas.kb.switchslot04=Switch to 4th spell
+rpsideas.kb.switchslot05=Switch to 5th spell
+rpsideas.kb.switchslot06=Switch to 6th spell
+rpsideas.kb.switchslot07=Switch to 7th spell
+rpsideas.kb.switchslot08=Switch to 8th spell
+rpsideas.kb.switchslot09=Switch to 9th spell
+rpsideas.kb.switchslot10=Switch to 10th spell
+rpsideas.kb.switchslot11=Switch to 11th spell
+rpsideas.kb.switchslot12=Switch to 12th spell
+
 rpsideas.misc.psidust=Psidust Infusion
 
 tile.rpsideas:conjuredblock.name=Ethereal Conjured Block

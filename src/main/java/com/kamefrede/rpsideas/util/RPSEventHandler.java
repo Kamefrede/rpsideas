@@ -47,8 +47,8 @@ public class RPSEventHandler {
     public static void keyDown(InputEvent.KeyInputEvent ev){
         Minecraft mc = Minecraft.getMinecraft();
         if(mc.currentScreen == null){
-            KeyBinding[] slotbindings = RPSKeybindHandler.keyBindings;
-            KeyBinding offhandbinding = RPSKeybindHandler.offhandCast;
+            RPSKeybind[] slotbindings = RPSKeybindHandler.keybinds;
+            RPSKeybind offhandbinding = RPSKeybindHandler.offhandCast;
             if(offhandbinding.isPressed()){
                 RPSPacketHandler.sendToServer(new MessageCastOffHand());
             }
