@@ -5,16 +5,22 @@ import com.kamefrede.rpsideas.blocks.BlockCADCase;
 import com.kamefrede.rpsideas.gui.GuiHandler;
 import com.kamefrede.rpsideas.items.base.ProxiedItemStackHandler;
 import com.kamefrede.rpsideas.tiles.TileCADCase;
+import com.kamefrede.rpsideas.util.RPSDataFixer;
 import com.kamefrede.rpsideas.util.RPSSoundHandler;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import com.kamefrede.rpsideas.util.libs.RPSBlockNames;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.*;
+import net.minecraft.util.datafix.FixTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.common.util.Constants;
 import vazkii.arl.item.ItemModBlock;
 
 import javax.annotation.Nonnull;
@@ -27,6 +33,35 @@ public class ItemCADCase extends ItemModBlock {
         super(block, res);
 
         setMaxStackSize(1);
+    }
+
+    static {
+        RPSDataFixer.registerFix(FixTypes.ITEM_INSTANCE, "1.11", compound -> {
+            if (compound.getString("id").startsWith(RPSIdeas.MODID + ":" + RPSBlockNames.CAD_CASE)) {
+                int damage = compound.getInteger("Damage");
+                if (damage != 0) compound.setString("id", RPSIdeas.MODID + ":" +
+                        RPSBlockNames.CAD_CASE + "_" +
+                        EnumDyeColor.byMetadata(damage).getName());
+
+                if (compound.hasKey("ForgeCaps", Constants.NBT.TAG_COMPOUND)) {
+                    NBTTagCompound caps = compound.getCompoundTag("ForgeCaps");
+                    if (caps.hasKey("Parent", Constants.NBT.TAG_COMPOUND)) {
+                        NBTTagCompound parent = caps.getCompoundTag("Parent");
+                        if (parent.hasKey("Items", Constants.NBT.TAG_LIST)) {
+                            NBTTagList items = parent.getTagList("Items", Constants.NBT.TAG_COMPOUND);
+
+                            if (!compound.hasKey("tag", Constants.NBT.TAG_COMPOUND))
+                                compound.setTag("tag", new NBTTagCompound());
+                            compound.getCompoundTag("tag").setTag("Inventory", items);
+
+                            caps.removeTag("Parent");
+                        }
+                    }
+                }
+            }
+
+            return compound;
+        });
     }
 
     @Nonnull

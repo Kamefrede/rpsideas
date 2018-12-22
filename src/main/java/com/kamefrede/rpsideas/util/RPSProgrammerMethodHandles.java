@@ -3,7 +3,6 @@ package com.kamefrede.rpsideas.util;
 import com.google.common.base.Throwables;
 import com.kamefrede.rpsideas.RPSIdeas;
 import net.minecraft.client.gui.GuiTextField;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import org.apache.logging.log4j.Level;
 import vazkii.psi.client.gui.GuiProgrammer;
 import vazkii.psi.common.spell.SpellCompiler;
@@ -14,17 +13,19 @@ import java.lang.reflect.Field;
 
 import static java.lang.invoke.MethodHandles.publicLookup;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked", "JavaReflectionMemberAccess"})
 public class RPSProgrammerMethodHandles {
     @Nonnull
     private static final MethodHandle spellNameFieldGetter, compilerGetter, compilerSetter;
 
     static {
         try {
-            Field f = ReflectionHelper.findField(GuiProgrammer.class, "spellNameField");
+            Field f = GuiProgrammer.class.getField("spellNameField");
+            f.setAccessible(true);
             spellNameFieldGetter = publicLookup().unreflectGetter(f);
 
-            f = ReflectionHelper.findField(GuiProgrammer.class, "compiler");
+            f = GuiProgrammer.class.getField("compiler");
+            f.setAccessible(true);
             compilerGetter = publicLookup().unreflectGetter(f);
             compilerSetter = publicLookup().unreflectSetter(f);
 

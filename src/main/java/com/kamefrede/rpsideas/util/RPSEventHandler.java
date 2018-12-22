@@ -7,17 +7,13 @@ import com.kamefrede.rpsideas.network.MessageChangeSocketSlot;
 import com.kamefrede.rpsideas.network.RPSPacketHandler;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.Vec3d;
-import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.ItemFishedEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import vazkii.arl.network.NetworkHandler;
@@ -26,6 +22,9 @@ import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.network.message.MessageDataSync;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 @Mod.EventBusSubscriber

@@ -12,13 +12,16 @@ import com.kamefrede.rpsideas.render.LayerAuthorOccludeElytra;
 import com.kamefrede.rpsideas.render.RenderTileCADCase;
 import com.kamefrede.rpsideas.spells.base.SpellPieces;
 import com.kamefrede.rpsideas.tiles.TileCADCase;
+import com.kamefrede.rpsideas.util.RPSEventHandler;
 import com.kamefrede.rpsideas.util.RPSKeybindHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerElytra;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
+import net.minecraftforge.common.util.ModFixs;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.event.*;
@@ -44,12 +47,15 @@ public class RPSIdeas {
     @Mod.Instance
     public static RPSIdeas INSTANCE;
 
+    public static ModFixs DATA_FIXER;
+
     // Common
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         SpellPieces.init();
         RPSEntities.init();
+        DATA_FIXER = FMLCommonHandler.instance().getDataFixer().init(MODID, RPSEventHandler.parseSemVer(VERSION));
 
         RPSPacketHandler.initPackets();
         NetworkRegistry.INSTANCE.registerGuiHandler(RPSIdeas.INSTANCE, new GuiHandler());
