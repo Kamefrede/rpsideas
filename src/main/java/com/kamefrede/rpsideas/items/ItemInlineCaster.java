@@ -81,21 +81,6 @@ public class ItemInlineCaster extends RPSItem implements IPsimetalTool {
         return super.onEntityItemUpdate(ent);
     }
 
-    @Override
-    public String[] getVariants() {
-        return new String[0];
-    }
-
-    @Override
-    public ItemMeshDefinition getCustomMeshDefinition() {
-        return null;
-    }
-
-    @Override
-    public String getModNamespace() {
-        return RPSIdeas.MODID;
-    }
-
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, World playerIn, List<String> tooltip, ITooltipFlag advanced) {
