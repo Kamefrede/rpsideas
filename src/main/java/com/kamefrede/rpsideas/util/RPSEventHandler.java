@@ -2,8 +2,12 @@ package com.kamefrede.rpsideas.util;
 
 import com.kamefrede.rpsideas.items.ItemPsimetalRod;
 import com.kamefrede.rpsideas.items.base.IRegenerationBattery;
+import com.kamefrede.rpsideas.network.MessageCastOffHand;
+import com.kamefrede.rpsideas.network.MessageChangeSocketSlot;
+import com.kamefrede.rpsideas.network.RPSPacketHandler;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -39,15 +43,24 @@ public class RPSEventHandler {
         ItemPsimetalRod.castSpell(player, stack, pos);
     }
 
-    @SubscribeEvent(priority=EventPriority.NORMAL, receiveCanceled=true)
+    @SubscribeEvent
     public static void keyDown(InputEvent.KeyInputEvent ev){
         Minecraft mc = Minecraft.getMinecraft();
-        ItemStack offhand = mc.player.getHeldItem(EnumHand.MAIN_HAND);
-        ItemStack cad = PsiAPI.getPlayerCAD(mc.player);
         if(mc.currentScreen == null){
-            //do the binds
+            KeyBinding[] slotbindings = RPSKeybindHandler.keyBindings;
+            KeyBinding offhandbinding = RPSKeybindHandler.offhandCast;
+            if(offhandbinding.isPressed()){
+                RPSPacketHandler.sendToServer(new MessageCastOffHand());
+            }
+            for(int i = 0; i < slotbindings.length; i++){
+                if(slotbindings[i].isPressed()){
+                    RPSPacketHandler.sendToServer(new MessageChangeSocketSlot(i));
+                }
+            }
         }
     }
+
+
 
     @SubscribeEvent
     public static void updateRegenRate(LivingEvent.LivingUpdateEvent e) {

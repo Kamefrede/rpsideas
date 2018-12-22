@@ -24,6 +24,8 @@ public class RPSPacketHandler {
         register(MessageParticleTrail.class, Side.CLIENT);
         register(MessageFlashSync.class, Side.SERVER);
         register(MessageSparkleSphere.class, Side.CLIENT);
+        register(MessageChangeSocketSlot.class, Side.SERVER);
+        register(MessageCastOffHand.class, Side.SERVER);
     }
 
     private static void register(Class<? extends PacketBase> packet, Side target) {

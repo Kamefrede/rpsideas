@@ -50,7 +50,6 @@ public class ItemBlasterAssembly extends ItemComponent implements IBlasterCompon
     public ItemBlasterAssembly() {
         super(RPSItemNames.CAD_ASSEMBLY);
         ModItems.cad.addPropertyOverride(new ResourceLocation(RPSIdeas.MODID, "clip"), ((stack, world, ent) -> ItemManaGun.hasClip(stack) ? 1f : 0f));
-        RPSCreativeTab.set(this);
     }
 
     @SubscribeEvent

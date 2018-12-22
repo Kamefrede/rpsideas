@@ -81,8 +81,7 @@ public class RPSIdeas {
     @SideOnly(Side.CLIENT)
     public void clientPreInit(FMLPreInitializationEvent e) {
         RPSKeybindHandler.init();
-        RPSEntities.clientInit()
-        ;
+        RPSEntities.clientInit();
     }
 
     @Mod.EventHandler
