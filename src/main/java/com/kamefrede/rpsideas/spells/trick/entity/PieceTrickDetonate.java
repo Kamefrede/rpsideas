@@ -48,14 +48,13 @@ public class PieceTrickDetonate extends PieceTrick {
 
 
         List<EntitySpellCharge> list = context.caster.getEntityWorld().getEntitiesWithinAABB(EntitySpellCharge.class, axis,
-                (EntitySpellCharge e) -> e != null && e != context.focalPoint && context.isInRadius(e) && e.getThrower() != context.caster);
+                (EntitySpellCharge e) -> e != null && e != context.focalPoint && context.isInRadius(e) && e.getThrower() == context.caster);
 
 
         for (EntitySpellCharge ent : list)
             ent.doExplosion();
-        if(!list.isEmpty()){
-            PsiArmorEvent.post(new PsiArmorEvent(context.caster, ItemTriggerSensor.EVENT_TRIGGER));
-        }
+
+        PsiArmorEvent.post(new PsiArmorEvent(context.caster, ItemTriggerSensor.EVENT_TRIGGER));
         return !list.isEmpty();
     }
 }

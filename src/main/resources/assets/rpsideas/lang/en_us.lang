@@ -346,6 +346,7 @@ item.rpsideas:unstable_battery.name=Unstable CAD Battery
 item.rpsideas:twinflow_battery.name=Hybrid Flow CAD Battery
 item.rpsideas:shielded_battery.name=Shielded CAD Battery
 item.rpsideas:biotic_sensor.name=Exosuit Biotic Sensor
+item.rpsideas:trigger_sensor.name=Exosuit Detonator Sensor
 
 psi.spellpiece.rpsideas.make_mana_burst=Trick: Form Burst
 psi.spellpiece.rpsideas.make_mana_burst.desc=Makes a mana burst from a position along a ray
@@ -456,6 +457,7 @@ splash_potion.effect.rpsideas.psishock_strong=Splash Potion of Mental Disruption
 lingering_potion.effect.rpsideas.psishock_strong=Lingering Potion of Mental Disruption
 
 rpsideas.event.nearby_entities=&bEvent&7: Biotic Pulse
+rpsideas.event.spelldetonate=&bEvent&7: Detonator
 
 itemGroup.rpsideas=Random PSIdeas
 
