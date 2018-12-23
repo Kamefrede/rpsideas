@@ -80,6 +80,7 @@ psi.spellpiece.rpsideas.trick_num_broadcast=Trick: Broadcast
 psi.spellpiece.rpsideas.selector_transmission=Selector: Last Transmission
 psi.spellpiece.rpsideas.trick_freeze_block=Trick: Freeze Block
 psi.spellpiece.rpsideas.operator_parse_number=Operator: Parse Number
+psi.spellpiece.rpsideas.operator_closest_to_line=Operator: Closest To Line
 
 
 
@@ -165,6 +166,7 @@ psi.spellpiece.rpsideas.trick_num_broadcast.desc=Broadcasts a number in a given 
 psi.spellpiece.rpsideas.selector_transmission.desc=Gets the last message this cad received on a certain channel if none throws an error
 psi.spellpiece.rpsideas.trick_freeze_block.desc=Freezes the block at the selected position
 psi.spellpiece.rpsideas.operator_parse_number.desc=Parses a number
+psi.spellpiece.rpsideas.operator_closest_to_line.desc=Given two ends of a ray and an entity list, it will select the closest.
 
 psi.datatype.String=String
 rpsideas.datatype.String=String
@@ -203,6 +205,8 @@ rpsideas.spellparam.channel=Channel
 rpsideas.spellparam.instrument=Instrument
 rpsideas.spellparam.volume=Volume
 rpsideas.spellparam.pitch=Pitch
+rpsideas.spellparam.ray_end=Ray End
+rpsideas.spellparam.ray_start=Ray Start
 psi.datatype.BlockProperties=Block Properties
 
 rpsideas.learn.usage=/psi-learn <group> [player]

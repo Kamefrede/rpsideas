@@ -85,6 +85,7 @@ public class RPSPieceNames {
     public static final String TRICK_NUM_BROADCAST = "trick_num_broadcast";
     public static final String SELECTOR_TRANSMISSION = "selector_transmission";
     public static final String TRICK_FREEZE_BLOCK = "trick_freeze_block";
+    public static final String OPERATOR_CLOSEST_TO_LINE = "operator_closest_to_line";
 
     public static final String ALTERNATE_CONJURATION = RPSIdeas.MODID + ".redstone_conjuration";
     public static final String SECONDARY_VECTOR_OPERATORS = RPSIdeas.MODID + ".secondary_vectors";

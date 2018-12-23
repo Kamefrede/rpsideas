@@ -8,10 +8,7 @@ import com.kamefrede.rpsideas.spells.operator.PieceOperatorGetDamage;
 import com.kamefrede.rpsideas.spells.operator.PieceOperatorGetMetadata;
 import com.kamefrede.rpsideas.spells.operator.block.*;
 import com.kamefrede.rpsideas.spells.operator.energy.*;
-import com.kamefrede.rpsideas.spells.operator.entity.OperatorDistanceFromGround;
-import com.kamefrede.rpsideas.spells.operator.entity.PieceOperatorAffectedByPotions;
-import com.kamefrede.rpsideas.spells.operator.entity.PieceOperatorIsElytraFlying;
-import com.kamefrede.rpsideas.spells.operator.entity.PieceOperatorVisibleToEntity;
+import com.kamefrede.rpsideas.spells.operator.entity.*;
 import com.kamefrede.rpsideas.spells.operator.list.PieceOperatorListExclusion;
 import com.kamefrede.rpsideas.spells.operator.list.PieceOperatorListIntersection;
 import com.kamefrede.rpsideas.spells.operator.list.PieceOperatorListSize;
@@ -128,6 +125,7 @@ public class SpellPieces {
         register(PieceTrickNumBroadcast.class, RPSPieceNames.TRICK_NUM_BROADCAST, RPSPieceNames.INTER_CAD, true);
         register(PieceSelectorTransmission.class, RPSPieceNames.SELECTOR_TRANSMISSION, RPSPieceNames.INTER_CAD);
         register(PieceTrickFreezeBlock.class, RPSPieceNames.TRICK_FREEZE_BLOCK, RPSPieceNames.ALTERNATE_CONJURATION);
+        register(PieceOperatorClosestToLine.class, RPSPieceNames.OPERATOR_CLOSEST_TO_LINE, LibPieceGroups.SECONDARY_OPERATORS);
         if (Loader.isModLoaded("botania")) BotaniaCompatPieces.init();
     }
 
