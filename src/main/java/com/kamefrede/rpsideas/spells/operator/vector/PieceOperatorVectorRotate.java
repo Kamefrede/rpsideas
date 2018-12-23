@@ -36,7 +36,7 @@ public class PieceOperatorVectorRotate extends PieceOperator {
         Double an = this.<Double>getParamValue(context, angle);
         if (v == null || axis == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        return v.copy().rotate(an, a);
+        return v.copy().rotate(an, a.copy());
     }
 
     @Override
