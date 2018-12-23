@@ -20,11 +20,11 @@ public class RPSProgrammerMethodHandles {
 
     static {
         try {
-            Field f = GuiProgrammer.class.getField("spellNameField");
+            Field f = GuiProgrammer.class.getDeclaredField("spellNameField");
             f.setAccessible(true);
             spellNameFieldGetter = publicLookup().unreflectGetter(f);
 
-            f = GuiProgrammer.class.getField("compiler");
+            f = GuiProgrammer.class.getDeclaredField("compiler");
             f.setAccessible(true);
             compilerGetter = publicLookup().unreflectGetter(f);
             compilerSetter = publicLookup().unreflectSetter(f);
