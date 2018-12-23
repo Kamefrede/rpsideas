@@ -42,7 +42,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public class BlockCADCase extends RPSBlock {
     public static final PropertyBool OPEN = PropertyBool.create("open");
@@ -137,14 +136,11 @@ public class BlockCADCase extends RPSBlock {
             TileCADCase cadCase = (TileCADCase) tileentity;
             ItemStack itemstack = new ItemStack(this);
             IItemHandler handler = itemstack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-            if (handler != null) {
-                for (int i = 0; i < handler.getSlots(); i++) {
-                    handler.insertItem(i, Objects.requireNonNull(tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)).getStackInSlot(i), false);
-                }
-            }
-            if (cadCase.getDisplayName() != null) {
+            IItemHandler tileHandler = tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+            if (handler != null && tileHandler != null) for (int i = 0; i < handler.getSlots(); i++)
+                handler.insertItem(i, tileHandler.getStackInSlot(i).copy(), false);
+            if (cadCase.getDisplayName() != null)
                 itemstack.setStackDisplayName(cadCase.getName());
-            }
             return itemstack;
         }
         return ItemStack.EMPTY;
@@ -187,7 +183,7 @@ public class BlockCADCase extends RPSBlock {
             IItemHandler handler = itemstack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
             IItemHandler tileHandler = tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
             if (handler != null && tileHandler != null) for (int i = 0; i < handler.getSlots(); i++)
-                handler.insertItem(i, tileHandler.extractItem(i, 64, true), false);
+                handler.insertItem(i, tileHandler.getStackInSlot(i).copy(), false);
             if (cadCase.getDisplayName() != null)
                 itemstack.setStackDisplayName(cadCase.getName());
             spawnAsEntity(worldIn, pos, itemstack);
