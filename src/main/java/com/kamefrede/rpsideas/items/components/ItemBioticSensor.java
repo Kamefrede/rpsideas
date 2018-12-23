@@ -2,6 +2,7 @@ package com.kamefrede.rpsideas.items.components;
 
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.base.RPSItem;
+import com.kamefrede.rpsideas.util.helpers.ClientHelpers;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import net.minecraft.client.renderer.color.IItemColor;
@@ -18,7 +19,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.arl.interf.IItemColorProvider;
 import vazkii.psi.api.exosuit.IExosuitSensor;
 import vazkii.psi.api.exosuit.PsiArmorEvent;
-import vazkii.psi.client.core.handler.ClientTickHandler;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -74,8 +74,7 @@ public class ItemBioticSensor extends RPSItem implements IExosuitSensor, IItemCo
     @Override
     @SideOnly(Side.CLIENT)
     public int getColor(ItemStack stack) {
-        byte add = (byte) Math.max(Math.sin(ClientTickHandler.ticksInGame * 0.1d) * 96, 0);
-        return (add << 16) | (add << 8) | add;
+        return ClientHelpers.pulseColor(0x000000, 0.1f, 96);
     }
 
     @Override

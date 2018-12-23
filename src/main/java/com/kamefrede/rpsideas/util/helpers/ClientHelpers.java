@@ -8,15 +8,19 @@ import vazkii.psi.client.core.handler.ClientTickHandler;
 import vazkii.psi.common.Psi;
 
 public class ClientHelpers {
-    public static int pulseColor(int mergedColorIn) {
-        return pulseColor(mergedColorIn, 1f);
+    public static int pulseColor(int source) {
+        return pulseColor(source, 1f, 0.2f, 24);
     }
 
-    public static int pulseColor(int mergedColorIn, float multiplier) {
-        int add = (int) (Math.sin(ClientTickHandler.ticksInGame * 0.2) * 24);
-        int red = (0xFF0000 & mergedColorIn) >> 16;
-        int green = (0x00FF00 & mergedColorIn) >> 8;
-        int blue = 0x0000FF & mergedColorIn;
+    public static int pulseColor(int source, float speed, int magnitude) {
+        return pulseColor(source, 1f, speed, magnitude);
+    }
+
+    public static int pulseColor(int source, float multiplier, float speed, int magnitude) {
+        int add = (int) (MathHelper.sin(ClientTickHandler.ticksInGame * speed) * magnitude);
+        int red = (0xFF0000 & source) >> 16;
+        int green = (0x00FF00 & source) >> 8;
+        int blue = 0x0000FF & source;
         int addedRed = MathHelper.clamp((int) (multiplier * (red + add)), 0, 255);
         int addedGreen = MathHelper.clamp((int) (multiplier * (green + add)), 0, 255);
         int addedBlue = MathHelper.clamp((int) (multiplier * (blue + add)), 0, 255);
