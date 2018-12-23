@@ -59,7 +59,7 @@ public class MessageParticleTrail extends PacketBase {
         World world = Minecraft.getMinecraft().world;
 
         Color color = new Color(ICADColorizer.DEFAULT_SPELL_COLOR);
-        if (!cad.isEmpty()) Psi.proxy.getCADColor(cad);
+        if (!cad.isEmpty()) color = Psi.proxy.getCADColor(cad);
 
         float red = color.getRed() / 255f;
         float green = color.getGreen() / 255f;
