@@ -55,7 +55,7 @@ public class RPSIdeas {
     public void preInit(FMLPreInitializationEvent event) {
         SpellPieces.init();
         RPSEntities.init();
-        DATA_FIXER = FMLCommonHandler.instance().getDataFixer().init(MODID, RPSDataFixer.parseSemVer("2"));
+        DATA_FIXER = FMLCommonHandler.instance().getDataFixer().init(MODID, RPSDataFixer.parseSemVer(VERSION));
 
         RPSPacketHandler.initPackets();
         NetworkRegistry.INSTANCE.registerGuiHandler(RPSIdeas.INSTANCE, new GuiHandler());
