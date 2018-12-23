@@ -26,6 +26,7 @@ import vazkii.arl.item.ItemModTool;
 public class RPSItems {
     public static final ItemMod wideBandSocket = new ItemWideCADSocket();
     public static final ItemMod flashRing = new ItemFlashRing();
+    public static final ItemMod triggerSensor = new ItemTriggerSensor();
     public static final ItemMod bioticSensor = new ItemBioticSensor();
     public static final ItemMod unstableBattery = new ItemUnstableBattery();
     public static final ItemMod twinflowBattery = new ItemTwinflowBattery();

@@ -1,6 +1,8 @@
 package com.kamefrede.rpsideas.spells.trick.entity;
 
+import com.kamefrede.rpsideas.items.components.ItemTriggerSensor;
 import net.minecraft.util.math.AxisAlignedBB;
+import vazkii.psi.api.exosuit.PsiArmorEvent;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
@@ -51,6 +53,9 @@ public class PieceTrickDetonate extends PieceTrick {
 
         for (EntitySpellCharge ent : list)
             ent.doExplosion();
+        if(!list.isEmpty()){
+            PsiArmorEvent.post(new PsiArmorEvent(context.caster, ItemTriggerSensor.EVENT_TRIGGER));
+        }
         return !list.isEmpty();
     }
 }

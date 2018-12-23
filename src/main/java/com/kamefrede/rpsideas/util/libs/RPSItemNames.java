@@ -22,6 +22,7 @@ public class RPSItemNames {
     public static final String LIQUID_COLORIZER = "liquid_colorizer";
     public static final String SPELL_MAGAZINE = "magazine";
     public static final String BRACELET_CAD = "bracelet_cad";
+    public static final String TRIGGER_SENSOR = "trigger_sensor";
 
 
     public static final String PSISHOCK = "psishock";
