@@ -4,7 +4,7 @@ import com.kamefrede.rpsideas.RPSIdeas;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
 @Config(modid = RPSIdeas.MODID, category = "crafting")
 public class RPSConfigHandler {
     @Config.Name("enableInlineCaster")

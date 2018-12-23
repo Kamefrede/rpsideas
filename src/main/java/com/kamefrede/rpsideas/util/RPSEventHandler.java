@@ -1,5 +1,6 @@
 package com.kamefrede.rpsideas.util;
 
+import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.ItemPsimetalRod;
 import com.kamefrede.rpsideas.items.base.IRegenerationBattery;
 import com.kamefrede.rpsideas.network.MessageCastOffHand;
@@ -23,11 +24,8 @@ import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.network.message.MessageDataSync;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
 public class RPSEventHandler {
 
     public static final int DEFAULT_REGEN_RATE = 25;

@@ -23,7 +23,7 @@ import vazkii.psi.common.lib.LibPieceNames;
 import javax.annotation.Nullable;
 import java.util.List;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
 public class RPSRecipes {
 
     public static final List<TrickRecipe> trickRecipes = Lists.newArrayList();

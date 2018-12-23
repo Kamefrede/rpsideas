@@ -21,7 +21,7 @@ import vazkii.psi.common.network.message.MessageDataSync;
 
 import java.util.List;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
 public class ItemShieldedBattery extends ItemComponent {
 
     public ItemShieldedBattery() {

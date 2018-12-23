@@ -22,7 +22,7 @@ import vazkii.psi.common.network.message.MessageDataSync;
 
 import java.util.List;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
 public class ItemUnstableBattery extends ItemComponent implements IRegenerationBattery {
     private static final int PSI_REGEN_BONUS = 10;
 

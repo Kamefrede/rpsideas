@@ -5,6 +5,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemFishingRod;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.arl.interf.IVariantHolder;
 import vazkii.arl.item.ItemMod;
 import vazkii.arl.util.ProxyRegistry;
@@ -50,6 +52,7 @@ public abstract class ItemModRod extends ItemFishingRod implements IVariantHolde
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public ItemMeshDefinition getCustomMeshDefinition() {
         return null;
     }

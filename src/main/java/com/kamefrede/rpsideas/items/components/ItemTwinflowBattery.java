@@ -22,7 +22,7 @@ import java.util.List;
  * @author WireSegal
  * Created at 10:46 AM on 12/16/18.
  */
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
 public class ItemTwinflowBattery extends ItemComponent implements IRegenerationBattery {
     private static final int PSI_REGEN_BONUS = 5;
 

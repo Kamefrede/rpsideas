@@ -2,7 +2,6 @@ package com.kamefrede.rpsideas.items.components.botania;
 
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.base.ItemComponent;
-import com.kamefrede.rpsideas.util.RPSCreativeTab;
 import com.kamefrede.rpsideas.util.botania.IBlasterComponent;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
@@ -35,7 +34,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 
-@Mod.EventBusSubscriber(Side.CLIENT)
+@Mod.EventBusSubscriber(value = Side.CLIENT, modid = RPSIdeas.MODID)
 public class ItemBlasterAssembly extends ItemComponent implements IBlasterComponent, IExtraVariantHolder {
 
     public static final String[] VARIANTS = {

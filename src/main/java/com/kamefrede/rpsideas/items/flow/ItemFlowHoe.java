@@ -1,5 +1,6 @@
 package com.kamefrede.rpsideas.items.flow;
 
+import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.ItemPsimetalHoe;
 import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
 import net.minecraft.item.ItemStack;
@@ -14,7 +15,7 @@ import java.util.Calendar;
  * @author WireSegal
  * Created at 10:59 AM on 12/16/18.
  */
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
 public class ItemFlowHoe extends ItemPsimetalHoe implements IFlowColorAcceptor {
     private static boolean xmas;
 
@@ -22,6 +23,7 @@ public class ItemFlowHoe extends ItemPsimetalHoe implements IFlowColorAcceptor {
         super(name);
     }
 
+    @SuppressWarnings("MagicConstant")
     @SubscribeEvent
     public static void onWorldTick(TickEvent.WorldTickEvent e) {
         if (e.phase == TickEvent.Phase.START) {
