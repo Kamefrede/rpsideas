@@ -53,9 +53,7 @@ public class PieceTrickParticleTrail extends PieceTrick {
 
         if (time > 2400) time = 2400;
 
-        time = time / 20;
-
-        if (pos == null || dir == null) throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
+        if (pos == null || dir == null || dir.isZero()) throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
 
         if (!context.isInRadius(pos) || !context.isInRadius(pos.copy().add(dir.copy().multiply(length)))) {
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
