@@ -208,7 +208,7 @@ public class TileCADCase extends TileEntity {
 
     @Override
     public boolean shouldRefresh(World world, BlockPos pos, @Nonnull IBlockState oldState, @Nonnull IBlockState newState) {
-        return newState.getBlock() instanceof BlockCADCase;
+        return !(newState.getBlock() instanceof BlockCADCase);
     }
 
     public class CaseTileHandler extends ItemStackHandler {
