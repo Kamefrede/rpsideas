@@ -46,8 +46,11 @@ public class PieceTrickConjureText extends PieceTrick {
         ItemStack cad = PsiAPI.getPlayerCAD(context.caster);
         ItemStack colorizer = ((ICAD) cad.getItem()).getComponentInSlot(cad, EnumCADComponent.DYE);
         EntityConjuredText conjuredText = new EntityConjuredText(context.caster.world);
-        conjuredText.setInfo(context.caster, colorizer, s, pos);
-        conjuredText.getEntityWorld().spawnEntity(conjuredText);
+        if(!context.caster.world.isRemote){
+            conjuredText.setInfo(context.caster, colorizer, s, pos);
+            conjuredText.getEntityWorld().spawnEntity(conjuredText);
+        }
+
 
         return true;
     }
