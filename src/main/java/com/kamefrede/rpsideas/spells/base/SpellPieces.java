@@ -126,6 +126,7 @@ public class SpellPieces {
         register(PieceSelectorTransmission.class, RPSPieceNames.SELECTOR_TRANSMISSION, RPSPieceNames.INTER_CAD);
         register(PieceTrickFreezeBlock.class, RPSPieceNames.TRICK_FREEZE_BLOCK, RPSPieceNames.ALTERNATE_CONJURATION);
         register(PieceOperatorClosestToLine.class, RPSPieceNames.OPERATOR_CLOSEST_TO_LINE, LibPieceGroups.SECONDARY_OPERATORS);
+        register(PieceTrickConjureText.class, RPSPieceNames.TRICK_CONJURE_TEXT, RPSPieceNames.VISUAL_AUDITIVE);
         if (Loader.isModLoaded("botania")) BotaniaCompatPieces.init();
     }
 

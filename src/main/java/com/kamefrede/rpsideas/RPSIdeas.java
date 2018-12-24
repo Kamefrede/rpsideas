@@ -2,14 +2,12 @@ package com.kamefrede.rpsideas;
 
 import com.kamefrede.rpsideas.command.CommandPsiLearn;
 import com.kamefrede.rpsideas.command.CommandPsiUnlearn;
+import com.kamefrede.rpsideas.entity.EntityConjuredText;
 import com.kamefrede.rpsideas.entity.RPSEntities;
 import com.kamefrede.rpsideas.entity.botania.EntityPsiManaBurst;
 import com.kamefrede.rpsideas.gui.GuiHandler;
 import com.kamefrede.rpsideas.network.RPSPacketHandler;
-import com.kamefrede.rpsideas.render.ExosuitGlowLayer;
-import com.kamefrede.rpsideas.render.LayerAuthorCape;
-import com.kamefrede.rpsideas.render.LayerAuthorOccludeElytra;
-import com.kamefrede.rpsideas.render.RenderTileCADCase;
+import com.kamefrede.rpsideas.render.*;
 import com.kamefrede.rpsideas.spells.base.SpellPieces;
 import com.kamefrede.rpsideas.tiles.TileCADCase;
 import com.kamefrede.rpsideas.util.RPSDataFixer;
@@ -96,6 +94,7 @@ public class RPSIdeas {
         ClientRegistry.bindTileEntitySpecialRenderer(TileCADCase.class, new RenderTileCADCase());
 
         Map<String, RenderPlayer> skinMap = Minecraft.getMinecraft().getRenderManager().getSkinMap();
+        Minecraft.getMinecraft().getRenderManager().entityRenderMap.put(EntityConjuredText.class, new RenderConjuredText(Minecraft.getMinecraft().getRenderManager()));
         injectLayers(skinMap.get("default"));
         injectLayers(skinMap.get("slim"));
     }
