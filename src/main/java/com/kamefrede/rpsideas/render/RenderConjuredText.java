@@ -27,21 +27,16 @@ public class RenderConjuredText extends Render<EntityConjuredText> {
 
     @Override
     public void doRender(EntityConjuredText entity, double x, double y, double z, float entityYaw, float partialTicks) {
-        EntityPlayer player = (EntityPlayer) Minecraft.getMinecraft().getRenderManager().renderViewEntity;
+        EntityPlayer player = (EntityPlayer) this.renderManager.renderViewEntity;
+        int maxDist = 64;
+        double d3 = entity.getDistanceSq(player);
+        float f = this.renderManager.playerViewY;
+        float f1 = this.renderManager.playerViewX;
         Color color = new Color(entity.getColor());
-        //int maxDist = 64;
         String text = entity.getText();
-        //Vec3d pos = entity.getPositionVector();
-       // double d3 = entity.getDistanceSq(player);
-       /* if(d3 <= maxDist){
-            FontRenderer fontRenderer = renderManager.getFontRenderer();
-            float f = 1.6F;
-            float f1 = 0.016666668F * f;
-            GlStateManager.pushMatrix();
-            GlStateManager.translate(x + 0.0f, y + entity.height + 0.5f, z );
-
-        }*/
-        drawNameplate(Minecraft.getMinecraft().fontRenderer, text, (float)x, (float)y, (float)z, 0, Minecraft.getMinecraft().player.cameraYaw, Minecraft.getMinecraft().player.cameraPitch, Minecraft.getMinecraft().gameSettings.thirdPersonView == 2, color);
+        if(d3 <= 64*64){
+            drawNameplate(Minecraft.getMinecraft().fontRenderer, text, (float)x, (float)y, (float)z, 0,f, f1, Minecraft.getMinecraft().gameSettings.thirdPersonView == 2, color);
+        }
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
     }
 
