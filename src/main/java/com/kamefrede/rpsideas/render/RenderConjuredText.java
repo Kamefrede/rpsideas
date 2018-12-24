@@ -11,10 +11,8 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nullable;
 import java.awt.*;
@@ -34,7 +32,7 @@ public class RenderConjuredText extends Render<EntityConjuredText> {
         float f1 = this.renderManager.playerViewX;
         Color color = new Color(entity.getColor());
         String text = entity.getText();
-        if(d3 <= 64*64){
+        if(d3 <= maxDist * maxDist){
             drawNameplate(Minecraft.getMinecraft().fontRenderer, text, (float)x, (float)y, (float)z, 0,f, f1, Minecraft.getMinecraft().gameSettings.thirdPersonView == 2, color);
         }
         super.doRender(entity, x, y, z, entityYaw, partialTicks);

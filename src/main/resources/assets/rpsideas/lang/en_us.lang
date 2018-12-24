@@ -81,6 +81,7 @@ psi.spellpiece.rpsideas.selector_transmission=Selector: Last Transmission
 psi.spellpiece.rpsideas.trick_freeze_block=Trick: Freeze Block
 psi.spellpiece.rpsideas.operator_parse_number=Operator: Parse Number
 psi.spellpiece.rpsideas.operator_closest_to_line=Operator: Closest To Line
+psi.spellpiece.rpsideas.trick_conjure_text=Trick: Conjure Text
 
 
 
@@ -167,6 +168,7 @@ psi.spellpiece.rpsideas.selector_transmission.desc=Gets the last message this ca
 psi.spellpiece.rpsideas.trick_freeze_block.desc=Freezes the block at the selected position
 psi.spellpiece.rpsideas.operator_parse_number.desc=Parses a number
 psi.spellpiece.rpsideas.operator_closest_to_line.desc=Given two ends of a ray and an entity list, it will select the closest.
+psi.spellpiece.rpsideas.trick_conjure_text.desc=Conjures a holographic text at a given position
 
 psi.datatype.String=String
 rpsideas.datatype.String=String
@@ -207,6 +209,7 @@ rpsideas.spellparam.volume=Volume
 rpsideas.spellparam.pitch=Pitch
 rpsideas.spellparam.ray_end=Ray End
 rpsideas.spellparam.ray_start=Ray Start
+rpsideas.spellparam.text=Text
 psi.datatype.BlockProperties=Block Properties
 
 rpsideas.learn.usage=/psi-learn <group> [player]
@@ -420,6 +423,7 @@ rpsideas.spelldesc.requires=Requires: %s
 rpsideas.spellerror.tricknotenabled=ERROR: Trick doesn't have an enabling component.
 rpsideas.spellerror.trickdisabled=ERROR: Trick's enabling component doesn't have its requirements met.
 rpsideas.spellerror.nomana=ERROR: Not enough mana.
+rpsideas.spellerror.text=ERROR: Text must be 32 characters or less.
 
 entity.gauss_pulse.name=Gauss Pulse
 entity.sniper_bullet.name=Sniper Round

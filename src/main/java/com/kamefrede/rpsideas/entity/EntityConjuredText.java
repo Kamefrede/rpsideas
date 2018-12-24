@@ -29,6 +29,7 @@ public class EntityConjuredText extends Entity implements ISpellImmune {
     private static final DataParameter<ItemStack> COLORIZER_DATA = EntityDataManager.createKey(EntityConjuredText.class, DataSerializers.ITEM_STACK);
     private static final DataParameter<String> TEXT_DATA = EntityDataManager.createKey(EntityConjuredText.class, DataSerializers.STRING);
     private static final DataParameter<String> CASTER_NAME = EntityDataManager.createKey(EntityConjuredText.class, DataSerializers.STRING);
+    private static final DataParameter<Byte> MAX_ALIVE = EntityDataManager.createKey(EntityConjuredText.class, DataSerializers.BYTE);
 
     private static final DataParameter<Float> LOOK_X = EntityDataManager.createKey(EntityConjuredText.class, DataSerializers.FLOAT);
     private static final DataParameter<Float> LOOK_Y = EntityDataManager.createKey(EntityConjuredText.class, DataSerializers.FLOAT);
@@ -41,6 +42,7 @@ public class EntityConjuredText extends Entity implements ISpellImmune {
     private static final String TAG_TEXT = "text";
     private static final String TAG_TIME_ALIVE = "timeAlive";
     private static final String TAG_CASTER_NAME = "casterName";
+    private static final String TAG_MAX_ALIVE = "maxAlive";
 
     private static final String TAG_LOOK_X = "savedLookX";
     private static final String TAG_LOOK_Y = "savedLookY";
@@ -52,6 +54,8 @@ public class EntityConjuredText extends Entity implements ISpellImmune {
 
 
     public int timeAlive;
+    public int maxTimeAlive;
+
 
     public EntityConjuredText(World world){
         super(world);
@@ -65,23 +69,6 @@ public class EntityConjuredText extends Entity implements ISpellImmune {
         int timeAlive = ticksExisted;
         if (timeAlive > getLiveTime())
             setDead();
-
-        FontRenderer renderer = Minecraft.getMinecraft().fontRenderer;
-
-        int colorVal = ICADColorizer.DEFAULT_SPELL_COLOR;
-        ItemStack colorizer = dataManager.get(COLORIZER_DATA);
-        if (!colorizer.isEmpty() && colorizer.getItem() instanceof ICADColorizer)
-            colorVal = Psi.proxy.getColorizerColor(colorizer).getRGB();
-
-        String text = dataManager.get(TEXT_DATA);
-
-        Color color = new Color(colorVal);
-        float r = color.getRed() / 255F;
-        float g = color.getGreen() / 255F;
-        float b = color.getBlue() / 255F;
-        Vec3d pos = new Vec3d(posX, posY, posZ);
-
-
         setVelocity(0f,0f,0f);
         velocityChanged = true;
     }
@@ -90,7 +77,7 @@ public class EntityConjuredText extends Entity implements ISpellImmune {
 
 
 
-    public void setInfo(EntityPlayer player, ItemStack colorizer, String text, Vector3 pos) {
+    public void setInfo(EntityPlayer player, ItemStack colorizer, String text, Vector3 pos, int maxAlive) {
         dataManager.set(COLORIZER_DATA, colorizer);
         dataManager.set(TEXT_DATA, text);
         dataManager.set(CASTER_NAME, player.getName());
@@ -103,6 +90,7 @@ public class EntityConjuredText extends Entity implements ISpellImmune {
         dataManager.set(POS_X, (float)position.y);
         dataManager.set(POS_Y, (float)position.x);
         dataManager.set(POS_Z, (float)position.z);
+        dataManager.set(MAX_ALIVE, (byte) maxAlive);
         this.setPosition(position.x, position.y, position.z);
     }
 
@@ -117,6 +105,7 @@ public class EntityConjuredText extends Entity implements ISpellImmune {
         dataManager.register(POS_X, 0F);
         dataManager.register(POS_Y, 0F);
         dataManager.register(POS_Z, 0F);
+        dataManager.register(MAX_ALIVE, (byte)0);
     }
 
     @Override
@@ -131,6 +120,7 @@ public class EntityConjuredText extends Entity implements ISpellImmune {
 
         String text = dataManager.get(TEXT_DATA);
         tagCompound.setString(TAG_TEXT, text);
+        tagCompound.setInteger(TAG_MAX_ALIVE, (int) dataManager.get(MAX_ALIVE));
 
         tagCompound.setInteger(TAG_TIME_ALIVE, timeAlive);
 
@@ -159,6 +149,8 @@ public class EntityConjuredText extends Entity implements ISpellImmune {
         dataManager.set(TEXT_DATA, text);
 
         timeAlive = compound.getInteger(TAG_TIME_ALIVE);
+        maxTimeAlive = compound.getInteger(TAG_MAX_ALIVE);
+
 
         dataManager.set(LOOK_X, compound.getFloat(TAG_LOOK_X));
         dataManager.set(LOOK_Y, compound.getFloat(TAG_LOOK_Y));
@@ -208,7 +200,7 @@ public class EntityConjuredText extends Entity implements ISpellImmune {
 
 
     public int getLiveTime() {
-        return 600;
+        return maxTimeAlive;
     }
 
 }
