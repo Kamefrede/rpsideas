@@ -5,7 +5,6 @@ import com.kamefrede.rpsideas.entity.botania.EntityPsiManaBurst;
 import com.kamefrede.rpsideas.render.RenderConjuredText;
 import com.kamefrede.rpsideas.util.libs.RPSEntityNames;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Items;
@@ -30,6 +29,7 @@ public class RPSEntities {
     public static void clientInit() {
         RenderingRegistry.registerEntityRenderingHandler(EntityPsireworkRocket.class,
                 (manager) -> new RenderSnowball<>(manager, Items.FIREWORKS, Minecraft.getMinecraft().getRenderItem()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityConjuredText.class, RenderConjuredText::new);
     }
 
     @Optional.Method(modid = "botania")

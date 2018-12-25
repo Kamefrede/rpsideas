@@ -1,19 +1,23 @@
 package com.kamefrede.rpsideas.network;
 
+import com.teamwizardry.librarianlib.features.autoregister.PacketRegister;
+import com.teamwizardry.librarianlib.features.network.PacketBase;
+import com.teamwizardry.librarianlib.features.saving.Save;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.relauncher.Side;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.EnumCADStat;
 import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 
 import javax.annotation.Nonnull;
-import java.io.IOException;
 
+@PacketRegister(Side.SERVER)
 public class MessageChangeSocketSlot extends PacketBase {
 
+    @Save
     public int slot;
 
     public MessageChangeSocketSlot() {
@@ -37,15 +41,5 @@ public class MessageChangeSocketSlot extends PacketBase {
         }
         PlayerDataHandler.get(player).stopLoopcast();
 
-    }
-
-    @Override
-    public void read(@Nonnull PacketBuffer buf) throws IOException {
-        slot = buf.readInt();
-    }
-
-    @Override
-    public void write(@Nonnull PacketBuffer buf) throws IOException {
-        buf.writeInt(slot);
     }
 }

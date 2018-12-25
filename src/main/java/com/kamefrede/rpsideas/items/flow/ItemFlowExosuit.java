@@ -2,13 +2,15 @@ package com.kamefrede.rpsideas.items.flow;
 
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
-import com.kamefrede.rpsideas.util.RPSCreativeTab;
 import com.kamefrede.rpsideas.util.helpers.ClientHelpers;
 import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
 import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import com.teamwizardry.librarianlib.features.base.item.ItemModArmor;
+import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
+import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
+import kotlin.jvm.functions.Function2;
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,12 +18,11 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import vazkii.arl.item.ItemMod;
-import vazkii.arl.item.ItemModArmor;
-import vazkii.arl.util.ItemNBTHelper;
+import org.jetbrains.annotations.Nullable;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.api.cad.ISocketable;
@@ -47,9 +48,8 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsiAddonT
 
 
     private ItemFlowExosuit(String name, EntityEquipmentSlot slot, boolean ebony) {
-        super(name, PsiAPI.PSIMETAL_ARMOR_MATERIAL, -1, slot);
+        super(name, PsiAPI.PSIMETAL_ARMOR_MATERIAL, slot);
         this.ebony = ebony;
-        RPSCreativeTab.set(this);
     }
 
     @SideOnly(Side.CLIENT)
@@ -60,11 +60,6 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsiAddonT
                 models[i] = new ModelPsimetalExosuit(i);
         }
         return models[index];
-    }
-
-    @Override
-    public String getModNamespace() {
-        return RPSIdeas.MODID;
     }
 
     @Override
@@ -110,10 +105,10 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsiAddonT
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, World playerIn, List<String> tooltip, ITooltipFlag advanced) {
-        ItemMod.tooltipIfShift(tooltip, () -> {
-            String componentName = ItemMod.local(ISocketable.getSocketedItemName(stack, "psimisc.none"));
-            ItemMod.addToTooltip(tooltip, "psimisc.spellSelected", componentName);
-            ItemMod.addToTooltip(tooltip, getEvent(stack));
+        TooltipHelper.tooltipIfShift(tooltip, () -> {
+            String componentName = TooltipHelper.local(ISocketable.getSocketedItemName(stack, "psimisc.none"));
+            TooltipHelper.addToTooltip(tooltip, "psimisc.spellSelected", componentName);
+            TooltipHelper.addToTooltip(tooltip, getEvent(stack));
         });
     }
 
@@ -149,9 +144,10 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsiAddonT
         } else return "psi:textures/model/psimetal_exosuit_sensor.png";
     }
 
+    @Nullable
     @Override
     @SideOnly(Side.CLIENT)
-    public IItemColor getItemColor() {
+    public Function2<ItemStack, Integer, Integer> getItemColorFunction() {
         return (stack, tintIndex) -> {
             if (tintIndex == 1) {
                 return ClientHelpers.getFlowColor(stack);
@@ -196,7 +192,8 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsiAddonT
 
         @Override
         public ItemStack getAttachedSensor(ItemStack helmet) {
-            return new ItemStack(ItemNBTHelper.getCompound(helmet, "Sensor", false));
+            NBTTagCompound compound = ItemNBTHelper.getCompound(helmet, "Sensor");
+            return compound == null ? ItemStack.EMPTY : new ItemStack(compound);
         }
 
         @Override

@@ -51,15 +51,13 @@ public class ContainerCADMagazine extends Container {
     }
 
     private final EntityPlayer player;
-    private final ItemStack stack;
-    public boolean dontNotify = false;
+    public boolean suppressNotify = false;
     public boolean notifyOnce = false;
     public float tooltipTime = 0;
     public String tooltipText = "";
 
     public ContainerCADMagazine(EntityPlayer player, ItemStack stack) {
         this.player = player;
-        this.stack = stack;
 
         InventorySocketable inventory = new InventorySocketable(stack, ItemCADMagazine.getBandwidth(stack));
         InventorySocketable cadInventory = new InventorySocketable(PsiAPI.getPlayerCAD(player), -1);
@@ -93,7 +91,7 @@ public class ContainerCADMagazine extends Container {
             int cadStart = magazineEnd + 1;
             int cadEnd = cadStart + outerSlotPositions.size() - 1;
 
-            dontNotify = true;
+            suppressNotify = true;
             notifyOnce = true;
 
             if (index > magazineEnd) {
@@ -103,7 +101,7 @@ public class ContainerCADMagazine extends Container {
             } else if (!this.mergeItemStack(itemstack1, cadStart, cadEnd, false)) {
                 return ItemStack.EMPTY;
             }
-            dontNotify = false;
+            suppressNotify = false;
             notifyOnce = false;
 
             slot.onSlotChanged();
@@ -138,7 +136,7 @@ public class ContainerCADMagazine extends Container {
                 ISpellContainer container = (ISpellContainer) stack.getItem();
                 if (container.containsSpell(stack) && isSlotEnabled()) {
                     boolean ret = socketable.isItemValidForSlot(getSlotIndex(), stack);
-                    if (!ret && (!dontNotify || notifyOnce) && player.world.isRemote) {
+                    if (!ret && (!suppressNotify || notifyOnce) && player.world.isRemote) {
                         tooltipTime = 80;
                         tooltipText = RPSIdeas.MODID + ".misc.too_complex";
                         if (notifyOnce) notifyOnce = false;
@@ -154,7 +152,7 @@ public class ContainerCADMagazine extends Container {
         @Override
         public boolean canTakeStack(EntityPlayer playerIn) {
             boolean ret = socketable.isItemValidForSlot(getSlotIndex(), getStack());
-            if (!ret && (!dontNotify || notifyOnce) && player.world.isRemote) {
+            if (!ret && (!suppressNotify || notifyOnce) && player.world.isRemote) {
                 tooltipTime = 80;
                 tooltipText = RPSIdeas.MODID + ".misc.too_complex_bullet";
                 if (notifyOnce) notifyOnce = false;

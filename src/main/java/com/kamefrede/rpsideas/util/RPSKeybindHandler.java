@@ -1,10 +1,12 @@
 package com.kamefrede.rpsideas.util;
 
 import com.kamefrede.rpsideas.RPSIdeas;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 
 
+@SideOnly(Side.CLIENT)
 public class RPSKeybindHandler {
 
     public static final RPSKeybind[] keybinds = new RPSKeybind[12];
@@ -14,7 +16,6 @@ public class RPSKeybindHandler {
 
     public static void init(){
         offhandCast = new RPSKeybind("rpsideas.kb.offhandcast", Keyboard.KEY_NONE, categoryName);
-        ClientRegistry.registerKeyBinding(offhandCast);
         keybinds[0] = new RPSKeybind("rpsideas.kb.switchslot01", Keyboard.KEY_NONE, categoryName);
         keybinds[1] = new RPSKeybind("rpsideas.kb.switchslot02", Keyboard.KEY_NONE, categoryName);
         keybinds[2] = new RPSKeybind("rpsideas.kb.switchslot03", Keyboard.KEY_NONE, categoryName);
@@ -27,8 +28,6 @@ public class RPSKeybindHandler {
         keybinds[9] = new RPSKeybind("rpsideas.kb.switchslot10", Keyboard.KEY_NONE, categoryName);
         keybinds[10] = new RPSKeybind("rpsideas.kb.switchslot11", Keyboard.KEY_NONE, categoryName);
         keybinds[11] = new RPSKeybind("rpsideas.kb.switchslot12", Keyboard.KEY_NONE, categoryName);
-
-        for (RPSKeybind keybind : keybinds) ClientRegistry.registerKeyBinding(keybind);
     }
 
 

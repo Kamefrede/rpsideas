@@ -1,8 +1,9 @@
 package com.kamefrede.rpsideas.items;
 
 import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
-import com.kamefrede.rpsideas.items.base.RPSItem;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import com.teamwizardry.librarianlib.features.base.item.ItemMod;
+import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -16,7 +17,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
-import vazkii.arl.item.ItemMod;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.ISocketable;
 import vazkii.psi.api.spell.SpellContext;
@@ -28,7 +28,7 @@ import java.util.List;
 
 import static vazkii.psi.common.item.tool.ItemPsimetalTool.raytraceFromEntity;
 
-public class ItemPsimetalShears extends RPSItem implements IPsiAddonTool {
+public class ItemPsimetalShears extends ItemMod implements IPsiAddonTool {
     public ItemPsimetalShears(String name) {
         super(name);
         setMaxStackSize(1);
@@ -90,8 +90,8 @@ public class ItemPsimetalShears extends RPSItem implements IPsiAddonTool {
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, World playerIn, List<String> tooltip, ITooltipFlag advanced) {
-        String componentName = ItemMod.local(ISocketable.getSocketedItemName(stack, "psimisc.none"));
-        ItemMod.addToTooltip(tooltip, "psimisc.spellSelected", componentName);
+        String componentName = TooltipHelper.local(ISocketable.getSocketedItemName(stack, "psimisc.none"));
+        TooltipHelper.addToTooltip(tooltip, "psimisc.spellSelected", componentName);
     }
 
     @Override

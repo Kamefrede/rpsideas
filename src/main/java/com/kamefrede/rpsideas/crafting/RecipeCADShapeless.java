@@ -1,5 +1,6 @@
 package com.kamefrede.rpsideas.crafting;
 
+import com.google.common.collect.Maps;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
@@ -18,6 +19,7 @@ import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.ICADComponent;
 
 import javax.annotation.Nonnull;
+import java.util.Map;
 
 /**
  * @author WireSegal
@@ -40,15 +42,18 @@ public class RecipeCADShapeless extends ShapelessRecipes {
     public static void transferComponents(InventoryCrafting inv, ItemStack stack) {
         if (!stack.isEmpty() && stack.getItem() instanceof ICADComponentAcceptor) {
             ICADComponentAcceptor acceptor = (ICADComponentAcceptor) stack.getItem();
+            Map<EnumCADComponent, NonNullList<ItemStack>> components = Maps.newEnumMap(EnumCADComponent.class);
             for (int i = 0; i < inv.getSizeInventory(); i++) {
                 ItemStack stackInSlot = inv.getStackInSlot(i);
                 if (!stackInSlot.isEmpty() && stackInSlot.getItem() instanceof ICADComponent) {
                     ICADComponent component = (ICADComponent) stackInSlot.getItem();
                     EnumCADComponent type = component.getComponentType(stackInSlot);
                     if (acceptor.acceptsPiece(stack, type))
-                        acceptor.setPiece(stack, type, stackInSlot);
+                        components.computeIfAbsent(type, (c) -> NonNullList.create()).add(stackInSlot);
                 }
             }
+            for (Map.Entry<EnumCADComponent, NonNullList<ItemStack>> component : components.entrySet())
+                acceptor.setPiece(stack, component.getKey(), component.getValue());
         }
     }
 

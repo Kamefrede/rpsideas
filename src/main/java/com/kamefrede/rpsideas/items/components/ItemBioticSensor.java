@@ -1,11 +1,12 @@
 package com.kamefrede.rpsideas.items.components;
 
 import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.items.base.RPSItem;
 import com.kamefrede.rpsideas.util.helpers.ClientHelpers;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
-import net.minecraft.client.renderer.color.IItemColor;
+import com.teamwizardry.librarianlib.features.base.item.IItemColorProvider;
+import com.teamwizardry.librarianlib.features.base.item.ItemMod;
+import kotlin.jvm.functions.Function2;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -16,7 +17,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import vazkii.arl.interf.IItemColorProvider;
+import org.jetbrains.annotations.Nullable;
 import vazkii.psi.api.exosuit.IExosuitSensor;
 import vazkii.psi.api.exosuit.PsiArmorEvent;
 
@@ -26,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 @Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
-public class ItemBioticSensor extends RPSItem implements IExosuitSensor, IItemColorProvider {
+public class ItemBioticSensor extends ItemMod implements IExosuitSensor, IItemColorProvider {
     public static final String EVENT_BIOTIC = RPSIdeas.MODID + ".event.nearby_entities";
     private static final double RANGE = 10d;
     private static final double RANGE_SQ = RANGE * RANGE;
@@ -77,9 +78,10 @@ public class ItemBioticSensor extends RPSItem implements IExosuitSensor, IItemCo
         return ClientHelpers.pulseColor(0x000000, 0.1f, 96);
     }
 
+    @Nullable
     @Override
     @SideOnly(Side.CLIENT)
-    public IItemColor getItemColor() {
+    public Function2<ItemStack, Integer, Integer> getItemColorFunction() {
         return (stack, tintIndex) -> {
             if (tintIndex == 1)
                 return getColor(stack);

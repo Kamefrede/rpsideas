@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.util;
 
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -8,6 +9,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RPSKeybind extends KeyBinding {
     public RPSKeybind(String description, int keyCode, String category) {
         super(description, keyCode, category);
+        ClientRegistry.registerKeyBinding(this);
     }
 
     @Override

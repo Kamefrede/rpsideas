@@ -68,8 +68,6 @@ public class GuiHandler implements IGuiHandler {
                 if (!stack.isEmpty()) return new GuiCADCase(player, stack);
                 break;
             }
-
-
             case GUI_FLASH_RING: {
                 ItemStack stack = getStack(player, ItemFlashRing.class);
                 if (!stack.isEmpty()) return new GuiFlashRing(player, stack);

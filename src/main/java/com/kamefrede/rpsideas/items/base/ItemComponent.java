@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.items.base;
 
 import com.kamefrede.rpsideas.RPSIdeas;
+import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -20,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public abstract class ItemComponent extends RPSItem implements ICADComponent {
+public abstract class ItemComponent extends ItemMod implements ICADComponent {
     private Map<EnumCADStat, Integer> stats = new HashMap<>();
 
     public ItemComponent(String name) {

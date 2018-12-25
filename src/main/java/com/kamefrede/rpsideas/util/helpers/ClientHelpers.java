@@ -1,9 +1,7 @@
 package com.kamefrede.rpsideas.util.helpers;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.client.model.pipeline.LightUtil;
 import vazkii.psi.client.core.handler.ClientTickHandler;
 import vazkii.psi.common.Psi;
 
@@ -25,10 +23,6 @@ public class ClientHelpers {
         int addedGreen = MathHelper.clamp((int) (multiplier * (green + add)), 0, 255);
         int addedBlue = MathHelper.clamp((int) (multiplier * (blue + add)), 0, 255);
         return (addedRed << 16) | (addedGreen << 8) | addedBlue;
-    }
-
-    public static float getDiffuseLighting(EnumFacing side) {
-        return LightUtil.diffuseLight(side);
     }
 
     public static int getFlowColor(ItemStack stack) {

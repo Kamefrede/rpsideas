@@ -3,24 +3,20 @@ package com.kamefrede.rpsideas.items;
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.blocks.RPSBlocks;
 import com.kamefrede.rpsideas.items.base.ItemModRod;
-import com.kamefrede.rpsideas.items.base.RPSItem;
 import com.kamefrede.rpsideas.items.components.*;
 import com.kamefrede.rpsideas.items.flow.*;
 import com.kamefrede.rpsideas.util.libs.RPSBlockNames;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
+import com.teamwizardry.librarianlib.features.base.item.ItemMod;
+import com.teamwizardry.librarianlib.features.base.item.ItemModArmor;
+import com.teamwizardry.librarianlib.features.base.item.ItemModSword;
+import com.teamwizardry.librarianlib.features.base.item.ItemModTool;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.datafix.walkers.BlockEntityTag;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import vazkii.arl.item.ItemMod;
-import vazkii.arl.item.ItemModArmor;
-import vazkii.arl.item.ItemModSword;
-import vazkii.arl.item.ItemModTool;
 
 @Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
 public class RPSItems {
@@ -63,36 +59,25 @@ public class RPSItems {
     public static final ItemMod inlineCaster = new ItemInlineCaster();
     public static final ItemMod gaussRifle = new ItemGaussRifle();
 
-  //public static final ItemMod sniperBullet = new ItemSniperSpellBullet();
+    //public static final ItemMod sniperBullet = new ItemSniperSpellBullet();
     public static final ItemMod psimetalHoe = new ItemPsimetalHoe(RPSItemNames.PSIMETAL_HOE);
     public static final ItemMod psimetalShears = new ItemPsimetalShears(RPSItemNames.PSIMETAL_SHEARS);
-    public static final ItemMod gaussBullet = new RPSItem(RPSItemNames.ITEM_GAUSS_BULLET);
+    public static final ItemMod gaussBullet = new ItemMod(RPSItemNames.ITEM_GAUSS_BULLET);
     public static final ItemMod cadMagazine = new ItemCADMagazine(RPSItemNames.SPELL_MAGAZINE);
-   //public static final ItemMod braceletCad = new ItemBraceletCAD();
-
-    @SubscribeEvent(priority = EventPriority.HIGH)
-    public static void registerItems(RegistryEvent.Register<Item> e) {
-        // NO-OP this is a hack
-    }
+    //public static final ItemMod braceletCad = new ItemBraceletCAD();
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void remapItem(RegistryEvent.MissingMappings<Item> e) {
         for (RegistryEvent.MissingMappings.Mapping<Item> mapping : e.getMappings())
-            if (mapping.key.getPath().equals(RPSBlockNames.CAD_CASE)){
-            mapping.remap(Item.getItemFromBlock(RPSBlocks.cadCases[0]));
-            System.out.println("remapped " + mapping.key.getPath() + " to " + RPSBlocks.cadCases[0]);
-            }
-
+            if (mapping.key.getPath().equals(RPSBlockNames.CAD_CASE))
+                mapping.remap(Item.getItemFromBlock(RPSBlocks.cadCases[0]));
     }
 
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void remapBlock(RegistryEvent.MissingMappings<Block> e) {
         for (RegistryEvent.MissingMappings.Mapping<Block> mapping : e.getMappings())
-            if (mapping.key.getPath().equals(RPSBlockNames.CAD_CASE)){
-            System.out.println("remapped " + mapping.key.getPath() + " to " + RPSBlocks.cadCases[0]);
-            mapping.remap(RPSBlocks.cadCases[0]);
-            }
-
+            if (mapping.key.getPath().equals(RPSBlockNames.CAD_CASE))
+                mapping.remap(RPSBlocks.cadCases[0]);
     }
 }

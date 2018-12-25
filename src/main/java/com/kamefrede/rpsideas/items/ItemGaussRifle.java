@@ -1,19 +1,27 @@
 package com.kamefrede.rpsideas.items;
 
 import com.kamefrede.rpsideas.entity.EntityGaussPulse;
-import com.kamefrede.rpsideas.items.base.RPSItem;
 import com.kamefrede.rpsideas.util.helpers.ClientHelpers;
 import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
 import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
-import net.minecraft.client.renderer.color.IItemColor;
+import com.teamwizardry.librarianlib.features.base.item.IGlowingItem;
+import com.teamwizardry.librarianlib.features.base.item.ItemMod;
+import kotlin.jvm.functions.Function2;
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import vazkii.arl.interf.IItemColorProvider;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.common.Psi;
@@ -22,14 +30,23 @@ import vazkii.psi.common.core.handler.PsiSoundHandler;
 
 import javax.annotation.Nonnull;
 
-public class ItemGaussRifle extends RPSItem implements IItemColorProvider, IFlowColorAcceptor {
+public class ItemGaussRifle extends ItemMod implements IFlowColorAcceptor {
     protected ItemGaussRifle() {
         super(RPSItemNames.ITEM_GAUSS_RIFLE);
         setMaxStackSize(1);
     }
 
     @Override
-    public IItemColor getItemColor() {
+    @SideOnly(Side.CLIENT)
+    @Nullable
+    public IBakedModel transformToGlow(@NotNull ItemStack itemStack, @NotNull IBakedModel model) {
+        return IGlowingItem.Helper.wrapperBake(model, false, 0, 1);
+    }
+
+    @Nullable
+    @Override
+    @SideOnly(Side.CLIENT)
+    public Function2<ItemStack, Integer, Integer> getItemColorFunction() {
         return (stack, tintIndex) -> {
             if (tintIndex == 0) {
                 ItemStack colorizer = FlowColorsHelper.getColorizer(stack);
@@ -78,7 +95,7 @@ public class ItemGaussRifle extends RPSItem implements IItemColorProvider, IFlow
             } else if (noneLeft)
                 status = EntityGaussPulse.AmmoStatus.BLOOD;
             else
-                status = EntityGaussPulse.AmmoStatus.NOTAMMO;
+                status = EntityGaussPulse.AmmoStatus.PSI;
             EntityGaussPulse proj = new EntityGaussPulse(worldIn, playerIn, status);
             if (!worldIn.isRemote) worldIn.spawnEntity(proj);
             Vec3d look = playerIn.getLookVec();

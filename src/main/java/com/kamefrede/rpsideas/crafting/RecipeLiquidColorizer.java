@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.crafting;
 
 import com.kamefrede.rpsideas.items.components.ItemLiquidColorizer;
+import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
@@ -10,7 +11,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.oredict.DyeUtils;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-import vazkii.arl.util.ItemNBTHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

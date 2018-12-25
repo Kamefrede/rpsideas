@@ -1,17 +1,24 @@
 package com.kamefrede.rpsideas.network;
 
 import com.kamefrede.rpsideas.items.ItemFlashRing;
+import com.teamwizardry.librarianlib.features.autoregister.PacketRegister;
+import com.teamwizardry.librarianlib.features.network.PacketBase;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.relauncher.Side;
+import org.jetbrains.annotations.NotNull;
 import vazkii.psi.api.spell.ISpellContainer;
 import vazkii.psi.api.spell.Spell;
 
 import javax.annotation.Nonnull;
-import java.io.IOException;
 
+import static com.teamwizardry.librarianlib.features.kotlin.CommonUtilMethods.readTag;
+import static com.teamwizardry.librarianlib.features.kotlin.CommonUtilMethods.writeTag;
+
+@PacketRegister(Side.SERVER)
 public class MessageFlashSync extends PacketBase {
 
     private Spell spell;
@@ -48,16 +55,14 @@ public class MessageFlashSync extends PacketBase {
     }
 
     @Override
-    public void read(@Nonnull PacketBuffer buf) throws IOException {
-        NBTTagCompound tag = buf.readCompoundTag();
-        if (tag != null)
-            spell = Spell.createFromNBT(tag);
+    public void readCustomBytes(@NotNull ByteBuf buf) {
+        spell = Spell.createFromNBT(readTag(buf));
     }
 
     @Override
-    public void write(@Nonnull PacketBuffer buf) {
+    public void writeCustomBytes(@NotNull ByteBuf buf) {
         NBTTagCompound nbt = new NBTTagCompound();
         spell.writeToNBT(nbt);
-        buf.writeCompoundTag(nbt);
+        writeTag(buf, nbt);
     }
 }

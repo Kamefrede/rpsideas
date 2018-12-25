@@ -1,27 +1,32 @@
 package com.kamefrede.rpsideas.tiles;
 
 import com.kamefrede.rpsideas.blocks.BlockConjuredDirectional;
+import com.kamefrede.rpsideas.util.libs.RPSBlockNames;
+import com.teamwizardry.librarianlib.features.autoregister.TileRegister;
+import com.teamwizardry.librarianlib.features.base.block.tile.TileModTickable;
+import com.teamwizardry.librarianlib.features.saving.Save;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ITickable;
-import vazkii.arl.block.tile.TileMod;
+import org.jetbrains.annotations.NotNull;
 import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.common.Psi;
 
 import java.awt.*;
 import java.util.Arrays;
 
-public class TileEthereal extends TileMod implements ITickable {
+@TileRegister(RPSBlockNames.CONJURED_ETHEREAL_BLOCK)
+public class TileEthereal extends TileModTickable {
 
-    private static final String TAG_TIME = "time";
-    private static final String TAG_COLORIZER = "colorizer";
+    @Save
     public int time = -1;
+    @Save
     public ItemStack colorizer = ItemStack.EMPTY;
+
     private long fellAt = -1;
 
     @Override
-    public void update() {
+    public void tick() {
         if (getWorld().isRemote) {
             Color color = colorizer.isEmpty() ?
                     new Color(ICADColorizer.DEFAULT_SPELL_COLOR) :
@@ -110,23 +115,9 @@ public class TileEthereal extends TileMod implements ITickable {
     }
 
     @Override
-    public void writeSharedNBT(NBTTagCompound cmp) {
-        cmp.setInteger(TAG_TIME, time);
-
-        NBTTagCompound stackCmp = new NBTTagCompound();
-        if (!colorizer.isEmpty())
-            colorizer.writeToNBT(stackCmp);
-        cmp.setTag(TAG_COLORIZER, stackCmp);
-    }
-
-    @Override
-    public void readSharedNBT(NBTTagCompound cmp) {
-        time = cmp.getInteger(TAG_TIME);
+    public void readCustomNBT(@NotNull NBTTagCompound cmp) {
         if (cmp.hasKey("FellAt"))
             fellAt = cmp.getLong("FellAt");
-
-        NBTTagCompound stackCmp = cmp.getCompoundTag(TAG_COLORIZER);
-        colorizer = new ItemStack(stackCmp);
     }
 
 }

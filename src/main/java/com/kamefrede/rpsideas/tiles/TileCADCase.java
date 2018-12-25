@@ -3,35 +3,44 @@ package com.kamefrede.rpsideas.tiles;
 import com.kamefrede.rpsideas.blocks.BlockCADCase;
 import com.kamefrede.rpsideas.blocks.RPSBlocks;
 import com.kamefrede.rpsideas.items.ItemGaussRifle;
+import com.kamefrede.rpsideas.render.RenderTileCADCase;
+import com.kamefrede.rpsideas.util.libs.RPSBlockNames;
+import com.teamwizardry.librarianlib.features.autoregister.TileRegister;
+import com.teamwizardry.librarianlib.features.base.block.tile.TileMod;
+import com.teamwizardry.librarianlib.features.base.block.tile.module.ModuleCapability;
+import com.teamwizardry.librarianlib.features.base.block.tile.module.ModuleInventory;
+import com.teamwizardry.librarianlib.features.saving.Module;
+import com.teamwizardry.librarianlib.features.saving.Save;
+import com.teamwizardry.librarianlib.features.tesr.TileRenderer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
-import vazkii.arl.util.VanillaPacketDispatcher;
 import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.api.cad.ISocketable;
 import vazkii.psi.api.cad.ISocketableController;
 import vazkii.psi.api.spell.ISpellContainer;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
-public class TileCADCase extends TileEntity {
-    private ItemStackHandler itemHandler = new CaseTileHandler();
+@TileRenderer(RenderTileCADCase.class)
+@TileRegister(RPSBlockNames.CAD_CASE_TILE)
+public class TileCADCase extends TileMod {
 
+    @Module
+    private ModuleCapability<ItemStackHandler> inventory =
+            new ModuleInventory(new CaseTileHandler()).disallowSides(EnumFacing.UP,
+                    EnumFacing.NORTH, EnumFacing.SOUTH, EnumFacing.EAST, EnumFacing.WEST);
+
+    @Save
     private String name = "";
 
     private int dyeColor = -1; // Legacy
@@ -93,29 +102,29 @@ public class TileCADCase extends TileEntity {
 
         if (clickedState.getValue(BlockCADCase.OPEN)) {
             int slot = getSlot(facing, hitX, hitZ);
-            ItemStack stackInSlot = itemHandler.getStackInSlot(slot);
+            ItemStack stackInSlot = inventory.getHandler().getStackInSlot(slot);
 
             if (heldStack.isEmpty()) {
                 //Take an item out of the case. They've got an empty hand, so just give it to them.
                 if (!stackInSlot.isEmpty()) {
                     if (!world.isRemote)
-                        player.setHeldItem(hand, itemHandler.extractItem(slot, 1, false));
+                        player.setHeldItem(hand, inventory.getHandler().extractItem(slot, 1, false));
                     return true;
                 }
             } else {
                 if (stackInSlot.isEmpty()) {
                     //Try to put the item in the player's hand into the case.
                     //Does it fit in that slot?
-                    ItemStack leftover = itemHandler.insertItem(slot, heldStack, true);
+                    ItemStack leftover = inventory.getHandler().insertItem(slot, heldStack, true);
                     if (leftover.isEmpty()) {
                         if (!world.isRemote)
-                            player.setHeldItem(hand, itemHandler.insertItem(slot, heldStack.copy(), false));
+                            player.setHeldItem(hand, inventory.getHandler().insertItem(slot, heldStack.copy(), false));
                         return true;
                     }
                 } else {
                     //Take an item out of the case. Their hand is full, so use a more complex routine to give it to them.
                     if (!world.isRemote)
-                        ItemHandlerHelper.giveItemToPlayer(player, itemHandler.extractItem(slot, 1, false));
+                        ItemHandlerHelper.giveItemToPlayer(player, inventory.getHandler().extractItem(slot, 1, false));
                     return true;
                 }
             }
@@ -145,69 +154,20 @@ public class TileCADCase extends TileEntity {
     }
 
     @Override
-    public boolean hasCapability(@Nonnull Capability<?> cap, @Nullable EnumFacing facing) {
-        return cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(cap, facing);
-    }
-
-    @Nullable
-    @Override
-    public <T> T getCapability(@Nonnull Capability<T> cap, @Nullable EnumFacing facing) {
-        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-            return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(itemHandler);
-        else
-            return super.getCapability(cap, facing);
-    }
-
-    @Nonnull
-    @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-        nbt.setTag("Items", itemHandler.serializeNBT());
-        nbt.setString("Name", name);
-        return super.writeToNBT(nbt);
-    }
-
-    @Override
-    public void readFromNBT(NBTTagCompound nbt) {
+    public void readFromNBT(@Nonnull NBTTagCompound nbt) {
         super.readFromNBT(nbt);
+
+        if (nbt.hasKey("Items"))
+            inventory.getHandler().deserializeNBT(nbt.getCompoundTag("Items"));
+
         if (nbt.hasKey("Color"))
             dyeColor = nbt.getInteger("Color");
         else
             dyeColor = -1;
-
-        itemHandler.deserializeNBT(nbt.getCompoundTag("Items"));
-        name = nbt.getString("Name");
     }
 
     @Override
-    public SPacketUpdateTileEntity getUpdatePacket() {
-        return new SPacketUpdateTileEntity(pos, 0, getUpdateTag());
-    }
-
-    @Nonnull
-    @Override
-    public NBTTagCompound getUpdateTag() {
-        return writeToNBT(new NBTTagCompound());
-    }
-
-    @Override
-    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-        readFromNBT(pkt.getNbtCompound());
-        notifyBlockUpdate();
-    }
-
-    private void notifyBlockUpdate() {
-        IBlockState state = world.getBlockState(pos);
-        world.notifyBlockUpdate(pos, state, state, 3);
-    }
-
-    @Override
-    public void markDirty() {
-        super.markDirty();
-        notifyBlockUpdate();
-    }
-
-    @Override
-    public boolean shouldRefresh(World world, BlockPos pos, @Nonnull IBlockState oldState, @Nonnull IBlockState newState) {
+    public boolean shouldRefresh(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState oldState, @Nonnull IBlockState newState) {
         return !(newState.getBlock() instanceof BlockCADCase);
     }
 
@@ -224,7 +184,6 @@ public class TileCADCase extends TileEntity {
         @Override
         protected void onContentsChanged(int slot) {
             markDirty();
-            VanillaPacketDispatcher.dispatchTEToNearbyPlayers(TileCADCase.this);
         }
     }
 }

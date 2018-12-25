@@ -11,7 +11,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemHandlerHelper;
-import vazkii.arl.util.ItemNBTHelper;
+import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -44,7 +44,7 @@ public class ProxiedItemStackHandler implements IItemHandler, IItemHandlerModifi
     }
 
     private NBTTagList getStackList() {
-        NBTTagList list = ItemNBTHelper.getList(stack, key, Constants.NBT.TAG_COMPOUND, true);
+        NBTTagList list = ItemNBTHelper.getList(stack, key, Constants.NBT.TAG_COMPOUND);
         if (list == null)
             ItemNBTHelper.setList(stack, key, list = new NBTTagList());
 

@@ -1,9 +1,10 @@
 package com.kamefrede.rpsideas.items;
 
 import com.google.common.collect.Multimap;
-import com.kamefrede.rpsideas.items.base.RPSItem;
-import com.kamefrede.rpsideas.util.RPSCreativeTab;
+import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import com.teamwizardry.librarianlib.features.base.item.ItemMod;
+import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -24,25 +25,22 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
-import vazkii.arl.item.ItemMod;
-import vazkii.arl.util.ItemNBTHelper;
+import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.ISocketable;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.item.ItemCAD;
-import vazkii.psi.common.item.tool.IPsimetalTool;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class ItemPsimetalHoe extends RPSItem implements IPsimetalTool {
+public class ItemPsimetalHoe extends ItemMod implements IPsiAddonTool {
     private static final String TAG_REGEN_TIME = "regenTime";
     private final float speed;
 
     public ItemPsimetalHoe(String name) {
         super(name);
-        RPSCreativeTab.set(this);
         this.speed = 4.0F;
         this.setMaxDamage(900);
 
@@ -107,8 +105,8 @@ public class ItemPsimetalHoe extends RPSItem implements IPsimetalTool {
 
     @Override
     public void addInformation(ItemStack stack, World playerIn, List<String> tooltip, ITooltipFlag advanced) {
-        String componentName = ItemMod.local(ISocketable.getSocketedItemName(stack, "psimisc.none"));
-        ItemMod.addToTooltip(tooltip, "psimisc.spellSelected", componentName);
+        String componentName = TooltipHelper.local(ISocketable.getSocketedItemName(stack, "psimisc.none"));
+        TooltipHelper.addToTooltip(tooltip, "psimisc.spellSelected", componentName);
     }
 
     @Override

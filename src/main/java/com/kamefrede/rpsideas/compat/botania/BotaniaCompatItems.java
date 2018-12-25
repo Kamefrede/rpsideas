@@ -6,6 +6,7 @@ import com.kamefrede.rpsideas.effect.botania.RPSBrew;
 import com.kamefrede.rpsideas.items.components.botania.ItemBlasterAssembly;
 import com.kamefrede.rpsideas.util.RPSConfigHandler;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
+import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -17,7 +18,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import vazkii.arl.item.ItemMod;
 import vazkii.botania.api.BotaniaAPI;
 import vazkii.botania.api.brew.Brew;
 

@@ -1,5 +1,6 @@
 package com.kamefrede.rpsideas.gui;
 
+import net.minecraft.client.multiplayer.ChunkProviderClient;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -36,12 +37,14 @@ public class FlashRingProgrammingWrapper extends TileProgrammer {
 
     @Nonnull
     @Override
-    @SuppressWarnings({"ConstantConditions", "NullableProblems"})
     public World getWorld() {
-        return new World(null, null, player.world.provider, null, true) {
+        return new World(player.world.getSaveHandler(),
+                player.world.getWorldInfo(),
+                player.world.provider, player.world.profiler, true) {
+            @Nonnull
             @Override
             protected IChunkProvider createChunkProvider() {
-                return null;
+                return new ChunkProviderClient(this);
             }
 
             @Override

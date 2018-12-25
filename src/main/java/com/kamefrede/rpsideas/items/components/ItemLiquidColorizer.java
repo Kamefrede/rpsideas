@@ -5,8 +5,9 @@ import com.kamefrede.rpsideas.items.RPSItems;
 import com.kamefrede.rpsideas.items.base.ICADComponentAcceptor;
 import com.kamefrede.rpsideas.items.base.ItemComponent;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
+import com.teamwizardry.librarianlib.features.base.item.IItemColorProvider;
+import kotlin.jvm.functions.Function2;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,12 +16,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import vazkii.arl.interf.IItemColorProvider;
-import vazkii.arl.util.ItemNBTHelper;
+import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.ICADColorizer;
 
@@ -44,7 +45,7 @@ public class ItemLiquidColorizer extends ItemComponent implements ICADColorizer,
     public static ItemStack getInheriting(ItemStack stack) {
         if (!stack.hasTagCompound())
             return ItemStack.EMPTY;
-        NBTTagCompound cmp = ItemNBTHelper.getCompound(stack, "inheriting", true);
+        NBTTagCompound cmp = ItemNBTHelper.getCompound(stack, "inheriting");
         if (cmp == null)
             return ItemStack.EMPTY;
         return new ItemStack(cmp);
@@ -61,17 +62,17 @@ public class ItemLiquidColorizer extends ItemComponent implements ICADColorizer,
     }
 
     @Override
-    public void setPiece(ItemStack stack, EnumCADComponent type, ItemStack piece) {
-        if (type != EnumCADComponent.DYE)
+    public void setPiece(ItemStack stack, EnumCADComponent type, NonNullList<ItemStack> piece) {
+        if (type != EnumCADComponent.DYE || piece.isEmpty())
             return;
-        setInheriting(stack, piece);
+        setInheriting(stack, piece.get(0));
     }
 
     @Override
-    public ItemStack getPiece(ItemStack stack, EnumCADComponent type) {
+    public NonNullList<ItemStack> getPiece(ItemStack stack, EnumCADComponent type) {
         if (type != EnumCADComponent.DYE)
-            return ItemStack.EMPTY;
-        return getInheriting(stack);
+            return NonNullList.create();
+        return NonNullList.withSize(1, getInheriting(stack));
     }
 
     @Override
@@ -79,9 +80,10 @@ public class ItemLiquidColorizer extends ItemComponent implements ICADColorizer,
         return type == EnumCADComponent.DYE;
     }
 
-    @SideOnly(Side.CLIENT)
+    @Nullable
     @Override
-    public IItemColor getItemColor() {
+    @SideOnly(Side.CLIENT)
+    public Function2<ItemStack, Integer, Integer> getItemColorFunction() {
         return (stack, layer) -> {
             if (layer == 1) {
                 return getColor(stack);

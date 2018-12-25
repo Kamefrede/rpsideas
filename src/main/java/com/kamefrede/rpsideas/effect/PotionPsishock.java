@@ -6,7 +6,6 @@ import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 public class PotionPsishock extends PotionPsiChange {
     protected PotionPsishock() {
         super(RPSItemNames.PSISHOCK, true, 0xFF4D12);
-        setRegistryName(RPSItemNames.PSISHOCK);
     }
 
     @Override

@@ -1,9 +1,9 @@
 package com.kamefrede.rpsideas.spells.trick.misc;
 
 import com.kamefrede.rpsideas.network.MessageParticleTrail;
-import com.kamefrede.rpsideas.network.RPSPacketHandler;
 import com.kamefrede.rpsideas.spells.base.SpellParams;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
@@ -61,9 +61,8 @@ public class PieceTrickParticleTrail extends PieceTrick {
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
         }
 
-        if (!context.caster.world.isRemote) {
-            RPSPacketHandler.sendToDimension(new MessageParticleTrail(pos.toVec3D(), dir.toVec3D(), length, (int) time, PsiAPI.getPlayerCAD(context.caster)), context.caster.world.provider.getDimension());
-        }
+        if (!context.caster.world.isRemote)
+            PacketHandler.NETWORK.sendToDimension(new MessageParticleTrail(pos.toVec3D(), dir.toVec3D(), length, (int) time, PsiAPI.getPlayerCAD(context.caster)), context.caster.world.provider.getDimension());
 
         return null;
     }

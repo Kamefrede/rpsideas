@@ -1,10 +1,11 @@
 package com.kamefrede.rpsideas.items.components;
 
 import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.items.base.RPSItem;
 import com.kamefrede.rpsideas.util.helpers.ClientHelpers;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
-import net.minecraft.client.renderer.color.IItemColor;
+import com.teamwizardry.librarianlib.features.base.item.IItemColorProvider;
+import com.teamwizardry.librarianlib.features.base.item.ItemMod;
+import kotlin.jvm.functions.Function2;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -16,7 +17,7 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import vazkii.arl.interf.IItemColorProvider;
+import org.jetbrains.annotations.Nullable;
 import vazkii.psi.api.exosuit.IExosuitSensor;
 import vazkii.psi.api.exosuit.PsiArmorEvent;
 import vazkii.psi.common.entity.EntitySpellCharge;
@@ -25,9 +26,8 @@ import vazkii.psi.common.item.ItemDetonator;
 import java.util.List;
 
 @Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
-public class ItemTriggerSensor extends RPSItem implements IExosuitSensor, IItemColorProvider {
-    public static final String EVENT_TRIGGER = RPSIdeas.MODID + ".event.spelldetonate";
-    private static final double RANGE = 10d;
+public class ItemTriggerSensor extends ItemMod implements IExosuitSensor, IItemColorProvider {
+    public static final String EVENT_TRIGGER = RPSIdeas.MODID + ".event.spell_detonate";
 
     public ItemTriggerSensor(){
         super(RPSItemNames.TRIGGER_SENSOR);
@@ -64,9 +64,10 @@ public class ItemTriggerSensor extends RPSItem implements IExosuitSensor, IItemC
         return ClientHelpers.pulseColor(0xBC650F, 0.1f, 96);
     }
 
+    @Nullable
     @Override
     @SideOnly(Side.CLIENT)
-    public IItemColor getItemColor() {
+    public Function2<ItemStack, Integer, Integer> getItemColorFunction() {
         return (stack, tintIndex) -> {
             if (tintIndex == 1)
                 return getColor(stack);

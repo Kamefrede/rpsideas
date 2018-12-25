@@ -1,26 +1,34 @@
 package com.kamefrede.rpsideas.network;
 
-import net.minecraft.client.Minecraft;
+import com.teamwizardry.librarianlib.core.LibrarianLib;
+import com.teamwizardry.librarianlib.features.autoregister.PacketRegister;
+import com.teamwizardry.librarianlib.features.network.PacketBase;
+import com.teamwizardry.librarianlib.features.saving.Save;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.relauncher.Side;
 import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.common.Psi;
 
 import javax.annotation.Nonnull;
 import java.awt.*;
-import java.io.IOException;
 
+@PacketRegister(Side.CLIENT)
 public class MessageParticleTrail extends PacketBase {
 
     private static final int STEPS_PER_UNIT = 4;
 
+    @Save
     private Vec3d position;
+    @Save
     private Vec3d direction;
+    @Save
     private double length;
+    @Save
     private int time;
+    @Save
     private ItemStack cad;
 
     @SuppressWarnings("unused")
@@ -37,26 +45,8 @@ public class MessageParticleTrail extends PacketBase {
     }
 
     @Override
-    public void write(@Nonnull PacketBuffer buf) {
-        writeVec(buf, position);
-        writeVec(buf, direction);
-        buf.writeDouble(length);
-        buf.writeInt(time);
-        buf.writeItemStack(cad);
-    }
-
-    @Override
-    public void read(@Nonnull PacketBuffer buf) throws IOException {
-        position = readVec(buf);
-        direction = readVec(buf);
-        length = buf.readDouble();
-        time = buf.readInt();
-        cad = buf.readItemStack();
-    }
-
-    @Override
     public void handle(@Nonnull MessageContext context) {
-        World world = Minecraft.getMinecraft().world;
+        World world = LibrarianLib.PROXY.getClientPlayer().world;
 
         Color color = new Color(ICADColorizer.DEFAULT_SPELL_COLOR);
         if (!cad.isEmpty()) color = Psi.proxy.getCADColor(cad);

@@ -9,19 +9,22 @@ import com.kamefrede.rpsideas.util.RPSDataFixer;
 import com.kamefrede.rpsideas.util.RPSSoundHandler;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.kamefrede.rpsideas.util.libs.RPSBlockNames;
+import com.teamwizardry.librarianlib.features.base.block.ItemModBlock;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.datafix.FixTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.Constants;
-import vazkii.arl.item.ItemModBlock;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -29,8 +32,8 @@ import javax.annotation.Nullable;
 
 public class ItemCADCase extends ItemModBlock {
 
-    public ItemCADCase(BlockCADCase block, ResourceLocation res) {
-        super(block, res);
+    public ItemCADCase(BlockCADCase block) {
+        super(block);
 
         setMaxStackSize(1);
     }

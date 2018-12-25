@@ -3,8 +3,8 @@ package com.kamefrede.rpsideas.items;
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
 import com.kamefrede.rpsideas.items.base.ItemModRod;
-import com.kamefrede.rpsideas.util.RPSCreativeTab;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -22,7 +22,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
-import vazkii.arl.item.ItemMod;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.ISocketable;
 import vazkii.psi.api.spell.SpellContext;
@@ -31,6 +30,7 @@ import vazkii.psi.common.item.ItemCAD;
 
 import javax.annotation.Nonnull;
 import java.util.List;
+import java.util.Objects;
 
 
 @Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
@@ -38,7 +38,6 @@ public class ItemPsimetalRod extends ItemModRod implements IPsiAddonTool {
 
     protected ItemPsimetalRod(String name) {
         super(name);
-        RPSCreativeTab.set(this);
         setMaxStackSize(1);
         setMaxDamage(900);
     }
@@ -57,11 +56,6 @@ public class ItemPsimetalRod extends ItemModRod implements IPsiAddonTool {
             }
         }
 
-    }
-
-    @Override
-    public String getModNamespace() {
-        return RPSIdeas.MODID;
     }
 
     @Nonnull
@@ -101,7 +95,7 @@ public class ItemPsimetalRod extends ItemModRod implements IPsiAddonTool {
             }
 
             playerIn.swingArm(handIn);
-            playerIn.addStat(StatList.getObjectUseStats(this));
+            playerIn.addStat(Objects.requireNonNull(StatList.getObjectUseStats(this)));
         }
 
         return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
@@ -115,8 +109,8 @@ public class ItemPsimetalRod extends ItemModRod implements IPsiAddonTool {
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, World playerIn, List<String> tooltip, ITooltipFlag advanced) {
-        String componentName = ItemMod.local(ISocketable.getSocketedItemName(stack, "psimisc.none"));
-        ItemMod.addToTooltip(tooltip, "psimisc.spellSelected", componentName);
+        String componentName = TooltipHelper.local(ISocketable.getSocketedItemName(stack, "psimisc.none"));
+        TooltipHelper.addToTooltip(tooltip, "psimisc.spellSelected", componentName);
     }
 
     @Override

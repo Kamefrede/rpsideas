@@ -2,28 +2,32 @@ package com.kamefrede.rpsideas.render;
 
 import com.kamefrede.rpsideas.blocks.BlockCADCase;
 import com.kamefrede.rpsideas.tiles.TileCADCase;
+import com.teamwizardry.librarianlib.features.tesr.TileRenderHandler;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import org.jetbrains.annotations.NotNull;
 
 @SideOnly(Side.CLIENT)
-public class RenderTileCADCase extends TileEntitySpecialRenderer<TileCADCase> {
+public class RenderTileCADCase extends TileRenderHandler<TileCADCase> {
 
+    public RenderTileCADCase(@NotNull TileCADCase tile) {
+        super(tile);
+    }
 
     @Override
-    public void render(TileCADCase cadCase, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-        IBlockState state = cadCase.getWorld().getBlockState(cadCase.getPos());
+    public void render(float partialTicks, int destroyStage, float alpha) {
+        IBlockState state = tile.getWorld().getBlockState(tile.getPos());
         if (!(state.getBlock() instanceof BlockCADCase) || !state.getValue(BlockCADCase.OPEN)) return;
 
-        IItemHandler itemHandler = cadCase.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+        IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         if (itemHandler == null) return;
 
         RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
@@ -31,17 +35,11 @@ public class RenderTileCADCase extends TileEntitySpecialRenderer<TileCADCase> {
         GlStateManager.pushMatrix();
         GlStateManager.enableBlend();
         GlStateManager.enableRescaleNormal();
-        GlStateManager.translate(x, y, z);
 
         EnumFacing facing = state.getValue(BlockCADCase.FACING);
+        GlStateManager.translate(0.5, 0.5, 0.5);
         GlStateManager.rotate(-facing.getHorizontalAngle(), 0f, 1f, 0f);
-        if (facing == EnumFacing.NORTH) {
-            GlStateManager.translate(-1f, 0f, -1f);
-        } else if (facing == EnumFacing.WEST) {
-            GlStateManager.translate(0f, 0f, -1f);
-        } else if (facing == EnumFacing.EAST) {
-            GlStateManager.translate(-1f, 0f, 0f);
-        }
+        GlStateManager.translate(-0.5, -0.5, -0.5);
 
         GlStateManager.pushMatrix();
         GlStateManager.rotate(-90f, 1f, 0f, 0f);

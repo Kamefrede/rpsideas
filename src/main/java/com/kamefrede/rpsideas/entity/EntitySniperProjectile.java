@@ -10,7 +10,6 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.api.internal.Vector3;
@@ -43,10 +42,6 @@ public class EntitySniperProjectile extends EntityThrowable implements ISpellImm
     private static final DataParameter<ItemStack> BULLET_DATA = EntityDataManager.createKey(EntitySniperProjectile.class, DataSerializers.ITEM_STACK);
     private static final DataParameter<String> CASTER_NAME = EntityDataManager.createKey(EntitySniperProjectile.class, DataSerializers.STRING);
 
-    private static final DataParameter<Float> LOOK_X = EntityDataManager.createKey(EntitySniperProjectile.class, DataSerializers.FLOAT);
-    private static final DataParameter<Float> LOOK_Y = EntityDataManager.createKey(EntitySniperProjectile.class, DataSerializers.FLOAT);
-    private static final DataParameter<Float> LOOK_Z = EntityDataManager.createKey(EntitySniperProjectile.class, DataSerializers.FLOAT);
-
     public SpellContext context;
     public int timeAlive;
 
@@ -69,11 +64,6 @@ public class EntitySniperProjectile extends EntityThrowable implements ISpellImm
         dataManager.set(COLORIZER_DATA, colorizer);
         dataManager.set(BULLET_DATA, bullet);
         dataManager.set(CASTER_NAME, player.getName());
-
-        Vec3d lookVec = player.getLook(1F);
-        dataManager.set(LOOK_X, (float) lookVec.x);
-        dataManager.set(LOOK_Y, (float) lookVec.y);
-        dataManager.set(LOOK_Z, (float) lookVec.z);
     }
 
     @Override
@@ -81,9 +71,6 @@ public class EntitySniperProjectile extends EntityThrowable implements ISpellImm
         dataManager.register(COLORIZER_DATA, ItemStack.EMPTY);
         dataManager.register(BULLET_DATA, ItemStack.EMPTY);
         dataManager.register(CASTER_NAME, "");
-        dataManager.register(LOOK_X, 0F);
-        dataManager.register(LOOK_Y, 0F);
-        dataManager.register(LOOK_Z, 0F);
     }
 
     @Override
@@ -107,10 +94,6 @@ public class EntitySniperProjectile extends EntityThrowable implements ISpellImm
         tagCompound.setDouble(TAG_LAST_MOTION_X, motionX);
         tagCompound.setDouble(TAG_LAST_MOTION_Y, motionY);
         tagCompound.setDouble(TAG_LAST_MOTION_Z, motionZ);
-
-        tagCompound.setFloat(TAG_LOOK_X, dataManager.get(LOOK_X));
-        tagCompound.setFloat(TAG_LOOK_Y, dataManager.get(LOOK_Y));
-        tagCompound.setFloat(TAG_LOOK_Z, dataManager.get(LOOK_Z));
     }
 
     @Override
@@ -130,10 +113,6 @@ public class EntitySniperProjectile extends EntityThrowable implements ISpellImm
             dataManager.set(CASTER_NAME, thrower.getName());
 
         timeAlive = tagCompound.getInteger(TAG_TIME_ALIVE);
-
-        dataManager.set(LOOK_X, tagCompound.getFloat(TAG_LOOK_X));
-        dataManager.set(LOOK_Y, tagCompound.getFloat(TAG_LOOK_Y));
-        dataManager.set(LOOK_Z, tagCompound.getFloat(TAG_LOOK_Z));
 
         double lastMotionX = tagCompound.getDouble(TAG_LAST_MOTION_X);
         double lastMotionY = tagCompound.getDouble(TAG_LAST_MOTION_Y);
@@ -169,15 +148,6 @@ public class EntitySniperProjectile extends EntityThrowable implements ISpellImm
 
         Vector3 lookOrig = new Vector3(motionX, motionY, motionZ).normalize();
         sparkle(getEntityWorld(), getParticleCount(), lookOrig, x, y, z, r, g, b);
-    }
-
-    @Nonnull
-    @Override
-    public Vec3d getLook(float f) {
-        float x = dataManager.get(LOOK_X);
-        float y = dataManager.get(LOOK_Y);
-        float z = dataManager.get(LOOK_Z);
-        return new Vec3d(x, y, z);
     }
 
     public int getLiveTime() {

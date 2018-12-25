@@ -1,6 +1,5 @@
 package com.kamefrede.rpsideas.util;
 
-import com.google.common.base.Throwables;
 import com.kamefrede.rpsideas.RPSIdeas;
 import net.minecraft.client.gui.GuiTextField;
 import org.apache.logging.log4j.Level;
@@ -13,7 +12,7 @@ import java.lang.reflect.Field;
 
 import static java.lang.invoke.MethodHandles.publicLookup;
 
-@SuppressWarnings({"unchecked", "JavaReflectionMemberAccess"})
+@SuppressWarnings("unchecked")
 public class RPSProgrammerMethodHandles {
     @Nonnull
     private static final MethodHandle spellNameFieldGetter, compilerGetter, compilerSetter;
@@ -32,7 +31,7 @@ public class RPSProgrammerMethodHandles {
         } catch (Throwable t) {
             RPSIdeas.LOGGER.log(Level.ERROR, "Couldn't initialize methodhandles! Things will be broken!");
             t.printStackTrace();
-            throw Throwables.propagate(t);
+            throw new RuntimeException(t);
         }
     }
 

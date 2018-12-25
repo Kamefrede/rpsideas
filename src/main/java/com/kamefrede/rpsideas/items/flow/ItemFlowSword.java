@@ -1,10 +1,11 @@
 package com.kamefrede.rpsideas.items.flow;
 
-import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
 import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
 import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import com.teamwizardry.librarianlib.features.base.item.ItemModSword;
+import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,8 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import vazkii.arl.item.ItemMod;
-import vazkii.arl.item.ItemModSword;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.ISocketable;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
@@ -62,8 +61,8 @@ public class ItemFlowSword extends ItemModSword implements IPsiAddonTool, IFlowC
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, World playerIn, List<String> tooltip, ITooltipFlag advanced) {
-        String componentName = ItemMod.local(ISocketable.getSocketedItemName(stack, "psimisc.none"));
-        ItemMod.addToTooltip(tooltip, "psimisc.spellSelected", componentName);
+        String componentName = TooltipHelper.local(ISocketable.getSocketedItemName(stack, "psimisc.none"));
+        TooltipHelper.addToTooltip(tooltip, "psimisc.spellSelected", componentName);
     }
 
     @Override
@@ -77,10 +76,5 @@ public class ItemFlowSword extends ItemModSword implements IPsiAddonTool, IFlowC
     public boolean onEntityItemUpdate(EntityItem ent) {
         FlowColorsHelper.clearColorizer(ent.getItem());
         return super.onEntityItemUpdate(ent);
-    }
-
-    @Override
-    public String getModNamespace() {
-        return RPSIdeas.MODID;
     }
 }

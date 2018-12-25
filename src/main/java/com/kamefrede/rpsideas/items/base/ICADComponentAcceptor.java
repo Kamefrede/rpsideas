@@ -1,12 +1,13 @@
 package com.kamefrede.rpsideas.items.base;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import vazkii.psi.api.cad.EnumCADComponent;
 
 public interface ICADComponentAcceptor {
-    void setPiece(ItemStack stack, EnumCADComponent type, ItemStack piece);
+    void setPiece(ItemStack stack, EnumCADComponent type, NonNullList<ItemStack> piece);
 
-    ItemStack getPiece(ItemStack stack, EnumCADComponent type);
+    NonNullList<ItemStack> getPiece(ItemStack stack, EnumCADComponent type);
 
     boolean acceptsPiece(ItemStack stack, EnumCADComponent type);
 }

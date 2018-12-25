@@ -465,7 +465,7 @@ splash_potion.effect.rpsideas.psishock_strong=Splash Potion of Mental Disruption
 lingering_potion.effect.rpsideas.psishock_strong=Lingering Potion of Mental Disruption
 
 rpsideas.event.nearby_entities=&bEvent&7: Biotic Pulse
-rpsideas.event.spelldetonate=&bEvent&7: Detonator
+rpsideas.event.spell_detonate=&bEvent&7: Detonation
 
 itemGroup.rpsideas=Random PSIdeas
 
