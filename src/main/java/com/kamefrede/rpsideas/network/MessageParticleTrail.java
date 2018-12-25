@@ -49,7 +49,7 @@ public class MessageParticleTrail extends PacketBase {
         World world = LibrarianLib.PROXY.getClientPlayer().world;
 
         Color color = new Color(ICADColorizer.DEFAULT_SPELL_COLOR);
-        if (!cad.isEmpty()) Psi.proxy.getCADColor(cad);
+        if (!cad.isEmpty()) color = Psi.proxy.getCADColor(cad);
 
         float red = color.getRed() / 255f;
         float green = color.getGreen() / 255f;
@@ -63,7 +63,7 @@ public class MessageParticleTrail extends PacketBase {
             double y = position.y + ray.y * i;
             double z = position.z + ray.z * i;
 
-            Psi.proxy.sparkleFX(world, x, y, z, red, green, blue, 0, 0, 0, 0.4f, time);
+            Psi.proxy.sparkleFX(world, x, y, z, red, green, blue, 0, 0, 0, 0.6f, time);
         }
     }
 

@@ -16,5 +16,6 @@ public class SpellRuntimeExceptions {
     public static final String NO_MESSAGE = "rpsideas.spellerror.no_message";
     public static final String CAD = "rpsideas.spellerror.cad";
     public static final String NAN = "rpsideas.spellerror.nan";
+    public static final String TEXT = "rpsideas.spellerror.text";
 
 }

@@ -80,6 +80,8 @@ psi.spellpiece.rpsideas.trick_num_broadcast=Trick: Broadcast
 psi.spellpiece.rpsideas.selector_transmission=Selector: Last Transmission
 psi.spellpiece.rpsideas.trick_freeze_block=Trick: Freeze Block
 psi.spellpiece.rpsideas.operator_parse_number=Operator: Parse Number
+psi.spellpiece.rpsideas.operator_closest_to_line=Operator: Closest To Line
+psi.spellpiece.rpsideas.trick_conjure_text=Trick: Conjure Text
 
 
 
@@ -165,6 +167,8 @@ psi.spellpiece.rpsideas.trick_num_broadcast.desc=Broadcasts a number in a given 
 psi.spellpiece.rpsideas.selector_transmission.desc=Gets the last message this cad received on a certain channel if none throws an error
 psi.spellpiece.rpsideas.trick_freeze_block.desc=Freezes the block at the selected position
 psi.spellpiece.rpsideas.operator_parse_number.desc=Parses a number
+psi.spellpiece.rpsideas.operator_closest_to_line.desc=Given two ends of a ray and an entity list, it will select the closest.
+psi.spellpiece.rpsideas.trick_conjure_text.desc=Conjures a holographic text at a given position
 
 psi.datatype.String=String
 rpsideas.datatype.String=String
@@ -203,6 +207,9 @@ rpsideas.spellparam.channel=Channel
 rpsideas.spellparam.instrument=Instrument
 rpsideas.spellparam.volume=Volume
 rpsideas.spellparam.pitch=Pitch
+rpsideas.spellparam.ray_end=Ray End
+rpsideas.spellparam.ray_start=Ray Start
+rpsideas.spellparam.text=Text
 psi.datatype.BlockProperties=Block Properties
 
 rpsideas.learn.usage=/psi-learn <group> [player]
@@ -346,6 +353,7 @@ item.rpsideas:unstable_battery.name=Unstable CAD Battery
 item.rpsideas:twinflow_battery.name=Hybrid Flow CAD Battery
 item.rpsideas:shielded_battery.name=Shielded CAD Battery
 item.rpsideas:biotic_sensor.name=Exosuit Biotic Sensor
+item.rpsideas:trigger_sensor.name=Exosuit Detonator Sensor
 
 psi.spellpiece.rpsideas.make_mana_burst=Trick: Form Burst
 psi.spellpiece.rpsideas.make_mana_burst.desc=Makes a mana burst from a position along a ray
@@ -415,6 +423,7 @@ rpsideas.spelldesc.requires=Requires: %s
 rpsideas.spellerror.tricknotenabled=ERROR: Trick doesn't have an enabling component.
 rpsideas.spellerror.trickdisabled=ERROR: Trick's enabling component doesn't have its requirements met.
 rpsideas.spellerror.nomana=ERROR: Not enough mana.
+rpsideas.spellerror.text=ERROR: Text must be 32 characters or less.
 
 entity.gauss_pulse.name=Gauss Pulse
 entity.sniper_bullet.name=Sniper Round
@@ -456,6 +465,7 @@ splash_potion.effect.rpsideas.psishock_strong=Splash Potion of Mental Disruption
 lingering_potion.effect.rpsideas.psishock_strong=Lingering Potion of Mental Disruption
 
 rpsideas.event.nearby_entities=&bEvent&7: Biotic Pulse
+rpsideas.event.spelldetonate=&bEvent&7: Detonator
 
 itemGroup.rpsideas=Random PSIdeas
 

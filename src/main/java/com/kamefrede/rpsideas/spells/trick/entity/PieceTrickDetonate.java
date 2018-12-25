@@ -1,6 +1,8 @@
 package com.kamefrede.rpsideas.spells.trick.entity;
 
+import com.kamefrede.rpsideas.items.components.ItemTriggerSensor;
 import net.minecraft.util.math.AxisAlignedBB;
+import vazkii.psi.api.exosuit.PsiArmorEvent;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
@@ -31,7 +33,7 @@ public class PieceTrickDetonate extends PieceTrick {
         if (radiusVal == null || radiusVal <= 0)
             throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_VALUE, x, y);
         meta.addStat(EnumSpellStat.POTENCY, radiusVal.intValue());
-        meta.addStat(EnumSpellStat.COST, radiusVal.intValue() * 10);
+        meta.addStat(EnumSpellStat.COST, radiusVal.intValue() * 5);
     }
 
     @Override
@@ -46,11 +48,13 @@ public class PieceTrickDetonate extends PieceTrick {
 
 
         List<EntitySpellCharge> list = context.caster.getEntityWorld().getEntitiesWithinAABB(EntitySpellCharge.class, axis,
-                (EntitySpellCharge e) -> e != null && e != context.focalPoint && context.isInRadius(e) && e.getThrower() != context.caster);
+                (EntitySpellCharge e) -> e != null && e != context.focalPoint && context.isInRadius(e) && e.getThrower() == context.caster);
 
 
         for (EntitySpellCharge ent : list)
             ent.doExplosion();
+
+        PsiArmorEvent.post(new PsiArmorEvent(context.caster, ItemTriggerSensor.EVENT_TRIGGER));
         return !list.isEmpty();
     }
 }
