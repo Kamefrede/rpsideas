@@ -4,6 +4,7 @@ import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.blocks.ItemCADCase;
 import com.kamefrede.rpsideas.tiles.TileCADCase;
 import com.kamefrede.rpsideas.util.RPSSoundHandler;
+import com.teamwizardry.librarianlib.features.base.block.BlockMod;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -43,7 +44,7 @@ import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.List;
 
-public class BlockCADCase extends RPSBlock {
+public class BlockCADCase extends BlockMod {
     public static final PropertyBool OPEN = PropertyBool.create("open");
     public static final PropertyBool POWERED = PropertyBool.create("powered");
     public static final PropertyDirection FACING = PropertyDirection.create("facing", Arrays.asList(EnumFacing.HORIZONTALS));
@@ -66,9 +67,11 @@ public class BlockCADCase extends RPSBlock {
 
     //Block Properties and State
 
+
+    @Nullable
     @Override
-    public ItemBlock createItemBlock(ResourceLocation res) {
-        return new ItemCADCase(this, res);
+    public ItemBlock createItemForm() {
+        return new ItemCADCase(this);
     }
 
     @Nonnull

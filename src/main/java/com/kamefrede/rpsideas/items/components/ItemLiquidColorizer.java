@@ -5,8 +5,9 @@ import com.kamefrede.rpsideas.items.RPSItems;
 import com.kamefrede.rpsideas.items.base.ICADComponentAcceptor;
 import com.kamefrede.rpsideas.items.base.ItemComponent;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
+import com.teamwizardry.librarianlib.features.base.item.IItemColorProvider;
+import kotlin.jvm.functions.Function2;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,8 +20,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import vazkii.arl.interf.IItemColorProvider;
-import vazkii.arl.util.ItemNBTHelper;
+import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.ICADColorizer;
 
@@ -79,9 +79,10 @@ public class ItemLiquidColorizer extends ItemComponent implements ICADColorizer,
         return type == EnumCADComponent.DYE;
     }
 
-    @SideOnly(Side.CLIENT)
+    @Nullable
     @Override
-    public IItemColor getItemColor() {
+    @SideOnly(Side.CLIENT)
+    public Function2<ItemStack, Integer, Integer> getItemColorFunction() {
         return (stack, layer) -> {
             if (layer == 1) {
                 return getColor(stack);

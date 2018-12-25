@@ -1,9 +1,11 @@
 package com.kamefrede.rpsideas.items;
 
-import com.kamefrede.rpsideas.items.base.RPSItem;
+import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
 import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
+import com.teamwizardry.librarianlib.features.base.item.ItemMod;
+import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,19 +17,17 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import vazkii.arl.item.ItemMod;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.ISocketable;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.core.handler.PsiSoundHandler;
 import vazkii.psi.common.item.ItemCAD;
 import vazkii.psi.common.item.base.ModItems;
-import vazkii.psi.common.item.tool.IPsimetalTool;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class ItemInlineCaster extends RPSItem implements IPsimetalTool {
+public class ItemInlineCaster extends ItemMod implements IPsiAddonTool {
     public ItemInlineCaster() {
         super(RPSItemNames.INLINE_CASTER);
         setMaxStackSize(1);
@@ -82,9 +82,9 @@ public class ItemInlineCaster extends RPSItem implements IPsimetalTool {
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, World playerIn, List<String> tooltip, ITooltipFlag advanced) {
-        ItemMod.tooltipIfShift(tooltip, () -> {
-            String componentName = ItemMod.local(ISocketable.getSocketedItemName(stack, "psimisc.none"));
-            ItemMod.addToTooltip(tooltip, "psimisc.spellSelected", componentName);
+        TooltipHelper.tooltipIfShift(tooltip, () -> {
+            String componentName = TooltipHelper.local(ISocketable.getSocketedItemName(stack, "psimisc.none"));
+            TooltipHelper.addToTooltip(tooltip, "psimisc.spellSelected", componentName);
         });
     }
 }

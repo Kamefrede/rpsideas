@@ -1,23 +1,24 @@
 package com.kamefrede.rpsideas.blocks;
 
-import com.kamefrede.rpsideas.util.RPSCreativeTab;
+import com.teamwizardry.librarianlib.features.base.block.BlockMod;
+import com.teamwizardry.librarianlib.features.base.block.IBlockColorProvider;
+import kotlin.jvm.functions.Function2;
+import kotlin.jvm.functions.Function4;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.color.IBlockColor;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import vazkii.arl.interf.IBlockColorProvider;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 
-public class BlockPlate extends RPSBlock implements IBlockColorProvider {
+public class BlockPlate extends BlockMod implements IBlockColorProvider {
 
     public static final PropertyEnum<EnumDyeColor> COLOR = PropertyEnum.create("color", EnumDyeColor.class);
 
@@ -64,14 +65,16 @@ public class BlockPlate extends RPSBlock implements IBlockColorProvider {
         return MapColor.getBlockColor(state.getValue(COLOR));
     }
 
+    @Nullable
     @Override
-    public IBlockColor getBlockColor() {
-        return (IBlockState iBlockState, IBlockAccess access, BlockPos pos, int i) -> i == 1 ? MapColor.getBlockColor(iBlockState.getValue(COLOR)).colorValue : -1;
+    public Function4<IBlockState, IBlockAccess, BlockPos, Integer, Integer> getBlockColorFunction() {
+        return (IBlockState iBlockState, IBlockAccess access, BlockPos pos, Integer i) -> i == 1 ? MapColor.getBlockColor(iBlockState.getValue(COLOR)).colorValue : -1;
     }
 
+    @Nullable
     @Override
-    public IItemColor getItemColor() {
-        return (ItemStack stack, int index) -> MapColor.getBlockColor(EnumDyeColor.byMetadata(stack.getItemDamage())).colorValue;
+    public Function2<ItemStack, Integer, Integer> getItemColorFunction() {
+        return (ItemStack stack, Integer index) -> MapColor.getBlockColor(EnumDyeColor.byMetadata(stack.getItemDamage())).colorValue;
     }
 
 }

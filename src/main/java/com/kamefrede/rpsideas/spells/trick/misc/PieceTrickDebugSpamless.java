@@ -1,14 +1,13 @@
 package com.kamefrede.rpsideas.spells.trick.misc;
 
-import com.kamefrede.rpsideas.network.MessageNoSpamChat;
-import com.kamefrede.rpsideas.network.RPSPacketHandler;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamAny;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.piece.PieceTrick;
+
+import static com.teamwizardry.librarianlib.features.kotlin.CommonUtilMethods.sendSpamlessMessage;
 
 public class PieceTrickDebugSpamless extends PieceTrick {
 
@@ -32,7 +31,7 @@ public class PieceTrickDebugSpamless extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (context.caster.world.isRemote || !(context.caster instanceof EntityPlayerMP)) return null;
+        if (context.caster.world.isRemote ) return null;
 
         Double numberVal = this.<Double>getParamValue(context, numParam);
         Object targetVal = getParamValue(context, targetParam);
@@ -54,8 +53,7 @@ public class PieceTrickDebugSpamless extends PieceTrick {
         //End pasta
 
         TextComponentString component = new TextComponentString(s);
-        MessageNoSpamChat message = new MessageNoSpamChat(component);
-        RPSPacketHandler.sendTo(message, (EntityPlayerMP) context.caster);
+        sendSpamlessMessage(context.caster, component, "rps spamless");
 
         return null;
     }

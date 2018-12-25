@@ -2,9 +2,9 @@ package com.kamefrede.rpsideas.items;
 
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.gui.GuiHandler;
-import com.kamefrede.rpsideas.items.base.RPSItem;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
+import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,7 +29,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemFlashRing extends RPSItem implements ISpellContainer {
+public class ItemFlashRing extends ItemMod implements ISpellContainer {
     public ItemFlashRing() {
         super(RPSItemNames.FLASH_RING);
         setMaxStackSize(1);

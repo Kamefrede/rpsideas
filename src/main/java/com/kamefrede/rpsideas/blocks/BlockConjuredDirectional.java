@@ -1,13 +1,16 @@
 package com.kamefrede.rpsideas.blocks;
 
 import com.google.common.collect.Maps;
-import com.kamefrede.rpsideas.RPSIdeas;
+import com.teamwizardry.librarianlib.features.base.block.BlockMod;
+import com.teamwizardry.librarianlib.features.base.block.tile.BlockModContainer;
+import kotlin.jvm.functions.Function1;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.statemap.IStateMapper;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
@@ -20,13 +23,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Map;
 import java.util.Random;
 
 /**
  * @author WireSegal
  * Created at 3:33 PM on 12/15/18.
  */
-public abstract class BlockConjuredDirectional extends BlockModNoItem {
+public abstract class BlockConjuredDirectional extends BlockModContainer {
     public static final PropertyBool SOLID = PropertyBool.create("solid");
     public static final PropertyBool BLOCK_UP = PropertyBool.create("block_up");
     public static final PropertyBool BLOCK_DOWN = PropertyBool.create("block_down");
@@ -38,11 +42,6 @@ public abstract class BlockConjuredDirectional extends BlockModNoItem {
 
     public BlockConjuredDirectional(String name, Material materialIn) {
         super(name, materialIn);
-    }
-
-    @Override
-    public String getModNamespace() {
-        return RPSIdeas.MODID;
     }
 
     public static IProperty[] getDirectionalProperties() {
@@ -62,7 +61,7 @@ public abstract class BlockConjuredDirectional extends BlockModNoItem {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public IStateMapper getStateMapper() {
+    public Function1<Block, Map<IBlockState, ModelResourceLocation>> getStateMapper() {
         return blockIn -> Maps.newHashMap();
     }
 

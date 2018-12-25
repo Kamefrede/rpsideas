@@ -1,20 +1,26 @@
 package com.kamefrede.rpsideas.network;
 
 import com.kamefrede.rpsideas.entity.EntityGaussPulse.AmmoStatus;
-import net.minecraft.client.Minecraft;
-import net.minecraft.network.PacketBuffer;
+import com.teamwizardry.librarianlib.core.LibrarianLib;
+import com.teamwizardry.librarianlib.features.autoregister.PacketRegister;
+import com.teamwizardry.librarianlib.features.network.PacketBase;
+import com.teamwizardry.librarianlib.features.saving.Save;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.relauncher.Side;
 import vazkii.psi.common.Psi;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
 
+@PacketRegister(Side.CLIENT)
 public class MessageSparkleSphere extends PacketBase {
 
+    @Save
     private Vec3d position;
+    @Save
     private AmmoStatus status;
 
     @SuppressWarnings("unused")
@@ -29,7 +35,7 @@ public class MessageSparkleSphere extends PacketBase {
 
     @Override
     public void handle(@Nonnull MessageContext context) {
-        World world = Minecraft.getMinecraft().world;
+        World world = LibrarianLib.PROXY.getClientPlayer().world;
         Random rand = world.rand;
 
         int color = status.color;
@@ -50,17 +56,5 @@ public class MessageSparkleSphere extends PacketBase {
                 Psi.proxy.sparkleFX(world, position.x, position.y, position.z, r, g, b, x, y, z, 1.2f, 12);
             }
         }
-    }
-
-    @Override
-    public void read(@Nonnull PacketBuffer buf) {
-        position = readVec(buf);
-        status = readEnum(buf, AmmoStatus.class);
-    }
-
-    @Override
-    public void write(@Nonnull PacketBuffer buf) {
-        writeVec(buf, position);
-        writeEnum(buf, status);
     }
 }

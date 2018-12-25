@@ -1,60 +1,86 @@
 package com.kamefrede.rpsideas.items.base;
 
-import net.minecraft.client.renderer.ItemMeshDefinition;
+import com.teamwizardry.librarianlib.features.base.ModCreativeTab;
+import com.teamwizardry.librarianlib.features.base.item.IModItemProvider;
+import com.teamwizardry.librarianlib.features.helpers.VariantHelper;
+import kotlin.jvm.functions.Function1;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFishingRod;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import vazkii.arl.interf.IVariantHolder;
-import vazkii.arl.item.ItemMod;
-import vazkii.arl.util.ProxyRegistry;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
+
+import static com.teamwizardry.librarianlib.features.helpers.CommonUtilMethods.getCurrentModId;
 
 /**
  * @author WireSegal
  * Created at 10:06 AM on 12/16/18.
  */
-public abstract class ItemModRod extends ItemFishingRod implements IVariantHolder {
+public abstract class ItemModRod extends ItemFishingRod implements IModItemProvider {
+
+    @NotNull
+    @Override
+    public Item getProvidedItem() {
+        return this;
+    }
 
     private final String bareName;
+    private final String modId;
+    private final String[] variants;
 
     public ItemModRod(String name) {
         super();
-        setTranslationKey(name);
-        bareName = name;
-        ItemMod.variantHolders.add(this);
+
+        bareName = VariantHelper.toSnakeCase(name);
+        modId = getCurrentModId();
+
+        variants = VariantHelper.setupItem(this, bareName, new String[0], this::getCreativeTab);
     }
 
     @Nonnull
     @Override
     public Item setTranslationKey(@Nonnull String name) {
-        super.setTranslationKey(name);
-        setRegistryName(new ResourceLocation(getPrefix() + name));
-        ProxyRegistry.register(this);
+        VariantHelper.setTranslationKeyForItem(this, modId, name);
+        return super.setTranslationKey(name);
+    }
 
-        return this;
+    @NotNull
+    @Override
+    public String[] getVariants() {
+        return variants;
     }
 
     @Nonnull
     @Override
-    public String getTranslationKey(ItemStack par1ItemStack) {
-        par1ItemStack.getItemDamage();
+    public String getTranslationKey(ItemStack stack) {
+        int dmg = stack.getItemDamage();
+        String name = dmg >= variants.length ? this.bareName : variants[dmg];
 
-        return "item." + getPrefix() + bareName;
+        return "item." + modId + ":" + name;
     }
 
     @Override
-    public String[] getVariants() {
-        return new String[]{bareName};
+    public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items) {
+        if (isInCreativeTab(tab))
+            for (int i = 0; i < variants.length; i++)
+                items.add(new ItemStack(this, 1, i));
     }
 
+    public ModCreativeTab getCreativeTab() {
+        return ModCreativeTab.Companion.getDefaultTabs().get(modId);
+    }
+
+    @Nullable
     @Override
     @SideOnly(Side.CLIENT)
-    public ItemMeshDefinition getCustomMeshDefinition() {
+    public Function1<ItemStack, ModelResourceLocation> getMeshDefinition() {
         return null;
     }
-
 }

@@ -3,7 +3,7 @@ package com.kamefrede.rpsideas.entity;
 import com.kamefrede.rpsideas.effect.RPSPotions;
 import com.kamefrede.rpsideas.items.RPSItems;
 import com.kamefrede.rpsideas.network.MessageSparkleSphere;
-import com.kamefrede.rpsideas.network.RPSPacketHandler;
+import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -36,6 +36,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+
+import static com.teamwizardry.librarianlib.features.network.PacketExtensionKt.sendToAllAround;
 
 public class EntityGaussPulse extends EntityThrowable implements ISpellImmune {
     private static final String TAG_CASTER = "caster";
@@ -194,7 +196,7 @@ public class EntityGaussPulse extends EntityThrowable implements ISpellImmune {
                     player.addPotionEffect(new PotionEffect(RPSPotions.psishock, getAmmo().shockDuration));
                 for (EntityLivingBase ent : list)
                     ent.attackEntityFrom(new EntityDamageSourceIndirect("arrow", this, thrower).setProjectile(), getAmmo().damage);
-                RPSPacketHandler.sendToAllWithinRange(new MessageSparkleSphere(getPositionVector(), getAmmo()), world, getPosition(), 128.0);
+                sendToAllAround(PacketHandler.NETWORK, new MessageSparkleSphere(getPositionVector(), getAmmo()), world, getPositionVector(), 128.0);
 
             } else if (getAmmo() == AmmoStatus.AMMO) {
                 EntityItem item = new EntityItem(world, posX, posY, posZ, new ItemStack(RPSItems.gaussBullet));

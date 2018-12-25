@@ -5,6 +5,7 @@ import com.kamefrede.rpsideas.items.base.ItemComponent;
 import com.kamefrede.rpsideas.util.botania.IBlasterComponent;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
+import com.teamwizardry.librarianlib.features.base.IExtraVariantHolder;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,7 +22,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import vazkii.arl.interf.IExtraVariantHolder;
 import vazkii.botania.client.core.handler.ItemsRemainingRenderHandler;
 import vazkii.botania.common.item.ItemManaGun;
 import vazkii.psi.api.cad.EnumCADComponent;
@@ -29,6 +29,7 @@ import vazkii.psi.api.cad.EnumCADStat;
 import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.common.item.base.ModItems;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -132,18 +133,15 @@ public class ItemBlasterAssembly extends ItemComponent implements IBlasterCompon
         addStat(EnumCADStat.POTENCY, 250);
     }
 
+    @Nonnull
     @Override
     public String[] getExtraVariants() {
         return CAD_MODELS;
     }
 
+    @Nonnull
     @Override
     public String[] getVariants() {
         return VARIANTS;
-    }
-
-    @Override
-    public String getModNamespace() {
-        return RPSIdeas.MODID;
     }
 }

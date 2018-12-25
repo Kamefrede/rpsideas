@@ -1,8 +1,9 @@
 package com.kamefrede.rpsideas.items;
 
 import com.kamefrede.rpsideas.entity.EntitySniperProjectile;
-import com.kamefrede.rpsideas.items.base.RPSItem;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
+import com.teamwizardry.librarianlib.features.base.item.ItemMod;
+import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,7 +14,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import vazkii.arl.util.ItemNBTHelper;
+import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.ICAD;
@@ -26,7 +27,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemSniperSpellBullet extends RPSItem implements ISpellContainer {
+public class ItemSniperSpellBullet extends ItemMod implements ISpellContainer {
 
     public static final String[] VARIANTS = {
             "spell_bullet_sniper",
@@ -107,9 +108,9 @@ public class ItemSniperSpellBullet extends RPSItem implements ISpellContainer {
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        tooltipIfShift(tooltip, () -> {
-            addToTooltip(tooltip, "psimisc.bulletType", local("psi.bulletType" + stack.getItemDamage() / 2));
-            addToTooltip(tooltip, "psimisc.bulletCost", (int) (getCostModifier(stack) * 100));
+        TooltipHelper.tooltipIfShift(tooltip, () -> {
+            TooltipHelper.addToTooltip(tooltip, "psimisc.bulletType", TooltipHelper.local("psi.bulletType" + stack.getItemDamage() / 2));
+            TooltipHelper.addToTooltip(tooltip, "psimisc.bulletCost", (int) (getCostModifier(stack) * 100));
         });
     }
 

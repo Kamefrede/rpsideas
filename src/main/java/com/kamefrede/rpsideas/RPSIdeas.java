@@ -1,17 +1,20 @@
 package com.kamefrede.rpsideas;
 
+import com.kamefrede.rpsideas.blocks.RPSBlocks;
 import com.kamefrede.rpsideas.command.CommandPsiLearn;
 import com.kamefrede.rpsideas.command.CommandPsiUnlearn;
+import com.kamefrede.rpsideas.effect.RPSPotions;
 import com.kamefrede.rpsideas.entity.RPSEntities;
 import com.kamefrede.rpsideas.entity.botania.EntityPsiManaBurst;
 import com.kamefrede.rpsideas.gui.GuiHandler;
-import com.kamefrede.rpsideas.network.RPSPacketHandler;
+import com.kamefrede.rpsideas.items.RPSItems;
 import com.kamefrede.rpsideas.render.ExosuitGlowLayer;
 import com.kamefrede.rpsideas.render.LayerAuthorCape;
 import com.kamefrede.rpsideas.render.LayerAuthorOccludeElytra;
 import com.kamefrede.rpsideas.render.RenderTileCADCase;
 import com.kamefrede.rpsideas.spells.base.SpellPieces;
 import com.kamefrede.rpsideas.tiles.TileCADCase;
+import com.kamefrede.rpsideas.util.RPSCreativeTab;
 import com.kamefrede.rpsideas.util.RPSDataFixer;
 import com.kamefrede.rpsideas.util.RPSKeybindHandler;
 import net.minecraft.client.Minecraft;
@@ -53,12 +56,20 @@ public class RPSIdeas {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        new RPSCreativeTab();
+
+        load(RPSItems.class, RPSBlocks.class, RPSPotions.class);
+
         SpellPieces.init();
         RPSEntities.init();
         DATA_FIXER = FMLCommonHandler.instance().getDataFixer().init(MODID, RPSDataFixer.parseSemVer(VERSION));
 
-        RPSPacketHandler.initPackets();
         NetworkRegistry.INSTANCE.registerGuiHandler(RPSIdeas.INSTANCE, new GuiHandler());
+    }
+
+    @SuppressWarnings("unused")
+    private void load(Class<?>... ignored) {
+        // This is a hack. Ignore it. Please.
     }
 
     // Botania

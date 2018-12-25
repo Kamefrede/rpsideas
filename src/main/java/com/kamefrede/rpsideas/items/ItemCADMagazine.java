@@ -4,7 +4,8 @@ import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.crafting.IngredientCADComponent;
 import com.kamefrede.rpsideas.gui.GuiHandler;
 import com.kamefrede.rpsideas.items.base.ICADComponentAcceptor;
-import com.kamefrede.rpsideas.items.base.RPSItem;
+import com.teamwizardry.librarianlib.features.base.item.ItemMod;
+import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,7 +22,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import vazkii.arl.util.ItemNBTHelper;
+import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import vazkii.arl.util.VanillaPacketDispatcher;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.*;
@@ -36,7 +37,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemCADMagazine extends RPSItem implements ISocketable, ICADComponentAcceptor, ISpellSettable {
+public class ItemCADMagazine extends ItemMod implements ISocketable, ICADComponentAcceptor, ISpellSettable {
     public ItemCADMagazine(String name) {
         super(name);
         setMaxStackSize(1);
@@ -125,10 +126,10 @@ public class ItemCADMagazine extends RPSItem implements ISocketable, ICADCompone
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        tooltipIfShift(tooltip, () -> {
-                    String socketName = local(getSocket(stack).getDisplayName());
-                    String line = TextFormatting.GREEN.toString() + local(EnumCADComponent.SOCKET.getName()) + TextFormatting.GRAY.toString() + ": " + socketName;
-                    addToTooltip(tooltip, line);
+        TooltipHelper.tooltipIfShift(tooltip, () -> {
+                    String socketName = TooltipHelper.local(getSocket(stack).getDisplayName());
+                    String line = TextFormatting.GREEN.toString() + TooltipHelper.local(EnumCADComponent.SOCKET.getName()) + TextFormatting.GRAY.toString() + ": " + socketName;
+                    tooltip.add(line);
                     int var12 = EnumCADStat.class.getEnumConstants().length;
                     for (int var13 = 0; var13 < var12 - 1; var13++) {
                         EnumCADStat stat = EnumCADStat.class.getEnumConstants()[var13];
@@ -138,9 +139,9 @@ public class ItemCADMagazine extends RPSItem implements ISocketable, ICADCompone
                             if (item instanceof ICADComponent) {
                                 int statVal = ((ICADComponent) item).getCADStatValue(getSocket(stack), stat);
                                 String stratValStr = statVal == -1 ? "∞" : "" + statVal;
-                                line = " " + TextFormatting.AQUA + local(shrt) + TextFormatting.GRAY + ": " + stratValStr;
+                                line = " " + TextFormatting.AQUA + TooltipHelper.local(shrt) + TextFormatting.GRAY + ": " + stratValStr;
                                 if (!line.isEmpty()) {
-                                    addToTooltip(tooltip, line);
+                                    tooltip.add(line);
                                 }
                             }
                         }
@@ -150,9 +151,9 @@ public class ItemCADMagazine extends RPSItem implements ISocketable, ICADCompone
                         String name = getSocketedItemName(stack, slot, null);
                         if (name != null) {
                             if (slot == getSelectedSlot(stack)) {
-                                addToTooltip(tooltip, "| ${TextFormatting.WHITE}${TextFormatting.BOLD}$name");
+                                tooltip.add("| ${TextFormatting.WHITE}${TextFormatting.BOLD}$name");
                             } else
-                                addToTooltip(tooltip, "| ${TextFormatting.WHITE}$name");
+                                tooltip.add("| ${TextFormatting.WHITE}$name");
 
                         }
                         slot++;

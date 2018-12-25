@@ -2,22 +2,22 @@ package com.kamefrede.rpsideas.tiles;
 
 import com.kamefrede.rpsideas.blocks.BlockPulsarLight;
 import com.kamefrede.rpsideas.blocks.RPSBlocks;
+import com.kamefrede.rpsideas.util.libs.RPSBlockNames;
+import com.teamwizardry.librarianlib.features.autoregister.TileRegister;
+import com.teamwizardry.librarianlib.features.base.block.tile.TileModTickable;
+import com.teamwizardry.librarianlib.features.saving.Save;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ITickable;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import vazkii.arl.block.tile.TileMod;
 import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.common.Psi;
 
-import javax.annotation.Nonnull;
 import java.awt.*;
 
-
-public class TileConjuredPulsar extends TileMod implements ITickable {
+@TileRegister(RPSBlockNames.CONJURED_PULSAR_BLOCK)
+public class TileConjuredPulsar extends TileModTickable {
+    @Save
     private int time = -1;
+    @Save
     private ItemStack colorizer = ItemStack.EMPTY;
 
     private int particleCounter = 0;
@@ -31,7 +31,7 @@ public class TileConjuredPulsar extends TileMod implements ITickable {
     }
 
     @Override
-    public void update() {
+    public void tick() {
         if (world.isRemote) {
             Color color = new Color(ICADColorizer.DEFAULT_SPELL_COLOR);
             if (!colorizer.isEmpty())
@@ -68,25 +68,5 @@ public class TileConjuredPulsar extends TileMod implements ITickable {
         float s = 0.2f + (float) Math.random() * 0.1f;
         float m = 0.01f + (float) Math.random() * 0.015f;
         Psi.proxy.wispFX(this.world, x, y, z, red, green, blue, s, -m);
-    }
-
-    @Nonnull
-    @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-        nbt.setInteger("Time", time);
-        nbt.setTag("Colorizer", colorizer.serializeNBT());
-        return super.writeToNBT(nbt);
-    }
-
-    @Override
-    public void readFromNBT(NBTTagCompound nbt) {
-        super.readFromNBT(nbt);
-        time = nbt.getInteger("Time");
-        colorizer = new ItemStack(nbt.getCompoundTag("Colorizer"));
-    }
-
-    @Override
-    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
-        return oldState.getBlock() != newState.getBlock();
     }
 }

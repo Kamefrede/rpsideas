@@ -1,7 +1,6 @@
 package com.kamefrede.rpsideas.gui;
 
 import com.kamefrede.rpsideas.network.MessageFlashSync;
-import com.kamefrede.rpsideas.network.RPSPacketHandler;
 import com.kamefrede.rpsideas.util.RPSProgrammerMethodHandles;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -20,7 +19,7 @@ public class GuiFlashRing extends GuiProgrammer {
     @Override
     public void onSpellChanged(boolean nameOnly) {
         programmer.spell.uuid = UUID.randomUUID();
-        RPSPacketHandler.sendToServer(new MessageFlashSync(programmer.spell));
+        PacketHandler.NETWORK.sendToServer(new MessageFlashSync(programmer.spell));
         onSelectedChanged();
         RPSProgrammerMethodHandles.getSpellNameField(this).setFocused(nameOnly);
 

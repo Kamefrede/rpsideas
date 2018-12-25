@@ -5,8 +5,8 @@ import com.kamefrede.rpsideas.items.ItemPsimetalRod;
 import com.kamefrede.rpsideas.items.base.IRegenerationBattery;
 import com.kamefrede.rpsideas.network.MessageCastOffHand;
 import com.kamefrede.rpsideas.network.MessageChangeSocketSlot;
-import com.kamefrede.rpsideas.network.RPSPacketHandler;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -47,11 +47,11 @@ public class RPSEventHandler {
             RPSKeybind[] slotbindings = RPSKeybindHandler.keybinds;
             RPSKeybind offhandbinding = RPSKeybindHandler.offhandCast;
             if(offhandbinding.isPressed()){
-                RPSPacketHandler.sendToServer(new MessageCastOffHand());
+                PacketHandler.NETWORK.sendToServer(new MessageCastOffHand());
             }
             for(int i = 0; i < slotbindings.length; i++){
                 if(slotbindings[i].isPressed()){
-                    RPSPacketHandler.sendToServer(new MessageChangeSocketSlot(i));
+                    PacketHandler.NETWORK.sendToServer(new MessageChangeSocketSlot(i));
                 }
             }
         }
