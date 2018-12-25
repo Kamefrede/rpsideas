@@ -143,12 +143,14 @@ public class ItemCyclicColorizer extends ItemComponent implements ICADColorizer,
         ItemStack first = getInheriting(stack, true);
         ItemStack last = getInheriting(stack, false);
 
-        addTooltipTagRaw(tooltip, TextFormatting.GREEN,
-                RPSIdeas.MODID + ".misc.color_inheritance",
-                first.getDisplayName());
-        addTooltipTagSubLineRaw(tooltip,
-                RPSIdeas.MODID + ".misc.color_inheritance",
-                last.getDisplayName());
+        if (!first.isEmpty() && !last.isEmpty()) {
+            addTooltipTagRaw(tooltip, TextFormatting.GREEN,
+                    RPSIdeas.MODID + ".misc.color_inheritance",
+                    first.getDisplayName());
+            addTooltipTagSubLineRaw(tooltip,
+                    RPSIdeas.MODID + ".misc.color_inheritance",
+                    last.getDisplayName());
+        }
 
         addTooltipTag(tooltip, TextFormatting.DARK_AQUA,
                 RPSIdeas.MODID + ".misc.info",
