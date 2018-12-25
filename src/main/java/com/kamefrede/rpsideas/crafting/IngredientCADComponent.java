@@ -59,7 +59,7 @@ public class IngredientCADComponent extends Ingredient {
 
     @Override
     public boolean apply(@Nullable ItemStack stack) {
-        if (stack == null || !stack.isEmpty() || excluded.test(stack))
+        if (stack == null || stack.isEmpty() || excluded.test(stack))
             return false;
 
         Item item = stack.getItem();
