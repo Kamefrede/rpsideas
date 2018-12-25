@@ -16,6 +16,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -61,17 +62,17 @@ public class ItemLiquidColorizer extends ItemComponent implements ICADColorizer,
     }
 
     @Override
-    public void setPiece(ItemStack stack, EnumCADComponent type, ItemStack piece) {
-        if (type != EnumCADComponent.DYE)
+    public void setPiece(ItemStack stack, EnumCADComponent type, NonNullList<ItemStack> piece) {
+        if (type != EnumCADComponent.DYE || piece.isEmpty())
             return;
-        setInheriting(stack, piece);
+        setInheriting(stack, piece.get(0));
     }
 
     @Override
-    public ItemStack getPiece(ItemStack stack, EnumCADComponent type) {
+    public NonNullList<ItemStack> getPiece(ItemStack stack, EnumCADComponent type) {
         if (type != EnumCADComponent.DYE)
-            return ItemStack.EMPTY;
-        return getInheriting(stack);
+            return NonNullList.create();
+        return NonNullList.withSize(1, getInheriting(stack));
     }
 
     @Override

@@ -85,13 +85,15 @@ public class BlockPlate extends BlockMod implements IBlockColorProvider, IGlowin
     @Nullable
     @Override
     public Function4<IBlockState, IBlockAccess, BlockPos, Integer, Integer> getBlockColorFunction() {
-        return (IBlockState iBlockState, IBlockAccess access, BlockPos pos, Integer i) -> i == 1 ? MapColor.getBlockColor(iBlockState.getValue(COLOR)).colorValue : -1;
+        return (state, world, pos, tintIndex) ->
+                tintIndex == 1 ? MapColor.getBlockColor(state.getValue(COLOR)).colorValue : -1;
     }
 
     @Nullable
     @Override
     public Function2<ItemStack, Integer, Integer> getItemColorFunction() {
-        return (ItemStack stack, Integer index) -> MapColor.getBlockColor(EnumDyeColor.byMetadata(stack.getItemDamage())).colorValue;
+        return (stack, tintIndex) ->
+                MapColor.getBlockColor(EnumDyeColor.byMetadata(stack.getItemDamage())).colorValue;
     }
 
 }

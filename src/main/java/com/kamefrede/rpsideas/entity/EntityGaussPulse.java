@@ -91,7 +91,7 @@ public class EntityGaussPulse extends EntityThrowable implements ISpellImmune {
 
     @Override
     protected void entityInit() {
-        this.dataManager.register(AMMO_STATUS, (byte) AmmoStatus.NOTAMMO.ordinal());
+        this.dataManager.register(AMMO_STATUS, (byte) AmmoStatus.PSI.ordinal());
     }
 
     @Override
@@ -154,15 +154,21 @@ public class EntityGaussPulse extends EntityThrowable implements ISpellImmune {
     @Override
     protected void onImpact(@Nonnull RayTraceResult result) {
         if (world.isRemote) return;
-        Entity entityhit = result.entityHit;
-        if (entityhit != null) {
-            if (Objects.equals(entityhit.getCachedUniqueIdString(), thrower.getCachedUniqueIdString())) return;
+        Entity entityHit = result.entityHit;
+        if (entityHit != null) {
+            if (Objects.equals(entityHit.getCachedUniqueIdString(), thrower.getCachedUniqueIdString()))
+                return;
+
             if (getAmmo() == AmmoStatus.AMMO)
                 setAmmoStatus(AmmoStatus.DEPLETED);
-            entityhit.attackEntityFrom(new EntityDamageSourceIndirect("arrow", this, thrower).setProjectile(), getAmmo().damage);
-            if (entityhit instanceof EntityLivingBase)
-                ((EntityLivingBase) entityhit).addPotionEffect(new PotionEffect(RPSPotions.psishock, getAmmo().shockDuration));
-            if (entityhit instanceof EntityEnderman) return;
+
+            entityHit.attackEntityFrom(new EntityDamageSourceIndirect("arrow", this, thrower).setProjectile(), getAmmo().damage);
+
+            if (entityHit instanceof EntityLivingBase)
+                ((EntityLivingBase) entityHit).addPotionEffect(new PotionEffect(RPSPotions.psishock, getAmmo().shockDuration));
+
+            if (entityHit instanceof EntityEnderman)
+                return;
         }
         posX = result.hitVec.x;
         posY = result.hitVec.y;
@@ -246,7 +252,7 @@ public class EntityGaussPulse extends EntityThrowable implements ISpellImmune {
     }
 
     public enum AmmoStatus {
-        NOTAMMO(ICADColorizer.DEFAULT_SPELL_COLOR, 2f, 100, false),
+        PSI(ICADColorizer.DEFAULT_SPELL_COLOR, 2f, 100, false),
         DEPLETED(0xB87333, 8f, 25, false),
         AMMO(0xB87333, 8f, 25, true),
         BLOOD(0xFF0000, 10f, 25, false);

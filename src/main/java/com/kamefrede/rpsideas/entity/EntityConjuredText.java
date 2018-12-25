@@ -7,7 +7,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.api.internal.Vector3;
@@ -21,14 +20,7 @@ public class EntityConjuredText extends Entity implements ISpellImmune {
     private static final DataParameter<ItemStack> COLORIZER_DATA = EntityDataManager.createKey(EntityConjuredText.class, DataSerializers.ITEM_STACK);
     private static final DataParameter<String> TEXT_DATA = EntityDataManager.createKey(EntityConjuredText.class, DataSerializers.STRING);
     private static final DataParameter<String> CASTER_NAME = EntityDataManager.createKey(EntityConjuredText.class, DataSerializers.STRING);
-    private static final DataParameter<Byte> MAX_ALIVE = EntityDataManager.createKey(EntityConjuredText.class, DataSerializers.BYTE);
-
-    private static final DataParameter<Float> LOOK_X = EntityDataManager.createKey(EntityConjuredText.class, DataSerializers.FLOAT);
-    private static final DataParameter<Float> LOOK_Y = EntityDataManager.createKey(EntityConjuredText.class, DataSerializers.FLOAT);
-    private static final DataParameter<Float> LOOK_Z = EntityDataManager.createKey(EntityConjuredText.class, DataSerializers.FLOAT);
-    private static final DataParameter<Float> POS_X = EntityDataManager.createKey(EntityConjuredText.class, DataSerializers.FLOAT);
-    private static final DataParameter<Float> POS_Y = EntityDataManager.createKey(EntityConjuredText.class, DataSerializers.FLOAT);
-    private static final DataParameter<Float> POS_Z = EntityDataManager.createKey(EntityConjuredText.class, DataSerializers.FLOAT);
+    private static final DataParameter<Integer> MAX_ALIVE = EntityDataManager.createKey(EntityConjuredText.class, DataSerializers.VARINT);
 
     private static final String TAG_COLORIZER = "colorizer";
     private static final String TAG_TEXT = "text";
@@ -36,54 +28,27 @@ public class EntityConjuredText extends Entity implements ISpellImmune {
     private static final String TAG_CASTER_NAME = "casterName";
     private static final String TAG_MAX_ALIVE = "maxAlive";
 
-    private static final String TAG_LOOK_X = "savedLookX";
-    private static final String TAG_LOOK_Y = "savedLookY";
-    private static final String TAG_LOOK_Z = "savedLookZ";
-
-    private static final String TAG_POS_X = "savedPosX";
-    private static final String TAG_POS_Y = "savedPosY";
-    private static final String TAG_POS_Z = "savedPosZ";
-
-
     public int timeAlive;
-    public int maxTimeAlive;
 
-
-    public EntityConjuredText(World world){
+    public EntityConjuredText(World world) {
         super(world);
-        setSize(1F, 1F);
-
     }
 
     @Override
     public void onUpdate() {
         super.onUpdate();
-        int timeAlive = ticksExisted;
-        if (timeAlive > getLiveTime())
+        if (!world.isRemote && timeAlive++ > dataManager.get(MAX_ALIVE))
             setDead();
-        setVelocity(0f,0f,0f);
-        velocityChanged = true;
     }
-
-
-
 
 
     public void setInfo(EntityPlayer player, ItemStack colorizer, String text, Vector3 pos, int maxAlive) {
         dataManager.set(COLORIZER_DATA, colorizer);
         dataManager.set(TEXT_DATA, text);
         dataManager.set(CASTER_NAME, player.getName());
+        dataManager.set(MAX_ALIVE, maxAlive);
 
-        Vec3d lookVec = player.getLook(1F).scale(-1);
-        dataManager.set(LOOK_X, (float) lookVec.x);
-        dataManager.set(LOOK_Y, (float) lookVec.y);
-        dataManager.set(LOOK_Z, (float) lookVec.z);
-        Vec3d position = pos.toVec3D();
-        dataManager.set(POS_X, (float)position.y);
-        dataManager.set(POS_Y, (float)position.x);
-        dataManager.set(POS_Z, (float)position.z);
-        dataManager.set(MAX_ALIVE, (byte) maxAlive);
-        this.setPosition(position.x, position.y, position.z);
+        this.setPositionAndRotation(pos.x, pos.y, pos.z, player.rotationYaw, player.rotationPitch);
     }
 
     @Override
@@ -91,17 +56,11 @@ public class EntityConjuredText extends Entity implements ISpellImmune {
         dataManager.register(COLORIZER_DATA, ItemStack.EMPTY);
         dataManager.register(TEXT_DATA, "");
         dataManager.register(CASTER_NAME, "");
-        dataManager.register(LOOK_X, 0F);
-        dataManager.register(LOOK_Y, 0F);
-        dataManager.register(LOOK_Z, 0F);
-        dataManager.register(POS_X, 0F);
-        dataManager.register(POS_Y, 0F);
-        dataManager.register(POS_Z, 0F);
-        dataManager.register(MAX_ALIVE, (byte)0);
+        dataManager.register(MAX_ALIVE, 0);
     }
 
     @Override
-    public void writeEntityToNBT(NBTTagCompound tagCompound) {
+    public void writeEntityToNBT(@Nonnull NBTTagCompound tagCompound) {
         NBTTagCompound colorizerCmp = new NBTTagCompound();
         ItemStack colorizer = dataManager.get(COLORIZER_DATA);
         if (!colorizer.isEmpty())
@@ -112,44 +71,19 @@ public class EntityConjuredText extends Entity implements ISpellImmune {
 
         String text = dataManager.get(TEXT_DATA);
         tagCompound.setString(TAG_TEXT, text);
-        tagCompound.setInteger(TAG_MAX_ALIVE, (int) dataManager.get(MAX_ALIVE));
+        tagCompound.setInteger(TAG_MAX_ALIVE, dataManager.get(MAX_ALIVE));
 
         tagCompound.setInteger(TAG_TIME_ALIVE, timeAlive);
-
-
-        tagCompound.setFloat(TAG_POS_X, dataManager.get(POS_X));
-        tagCompound.setFloat(TAG_POS_Y, dataManager.get(POS_Y));
-        tagCompound.setFloat(TAG_POS_Z, dataManager.get(POS_Z));
-
-        tagCompound.setFloat(TAG_LOOK_X, dataManager.get(LOOK_X));
-        tagCompound.setFloat(TAG_LOOK_Y, dataManager.get(LOOK_Y));
-        tagCompound.setFloat(TAG_LOOK_Z, dataManager.get(LOOK_Z));
     }
 
     @Override
-    protected void readEntityFromNBT(NBTTagCompound compound) {
-
-
-        NBTTagCompound colorizerCmp = compound.getCompoundTag(TAG_COLORIZER);
-        ItemStack colorizer = new ItemStack(colorizerCmp);
-        dataManager.set(COLORIZER_DATA, colorizer);
-
-       String casterName = compound.getString(TAG_CASTER_NAME);
-       dataManager.set(CASTER_NAME, casterName);
-
-        String text = compound.getString(TAG_TEXT);
-        dataManager.set(TEXT_DATA, text);
+    protected void readEntityFromNBT(@Nonnull NBTTagCompound compound) {
+        dataManager.set(COLORIZER_DATA, new ItemStack(compound.getCompoundTag(TAG_COLORIZER)));
+        dataManager.set(CASTER_NAME, compound.getString(TAG_CASTER_NAME));
+        dataManager.set(TEXT_DATA, compound.getString(TAG_TEXT));
+        dataManager.set(MAX_ALIVE, compound.getInteger(TAG_MAX_ALIVE));
 
         timeAlive = compound.getInteger(TAG_TIME_ALIVE);
-        maxTimeAlive = compound.getInteger(TAG_MAX_ALIVE);
-
-
-        dataManager.set(LOOK_X, compound.getFloat(TAG_LOOK_X));
-        dataManager.set(LOOK_Y, compound.getFloat(TAG_LOOK_Y));
-        dataManager.set(LOOK_Z, compound.getFloat(TAG_LOOK_Z));
-        dataManager.set(POS_X, compound.getFloat(TAG_POS_X));
-        dataManager.set(POS_Y, compound.getFloat(TAG_POS_Y));
-        dataManager.set(POS_Z, compound.getFloat(TAG_POS_Z));
     }
 
     @Override
@@ -157,23 +91,7 @@ public class EntityConjuredText extends Entity implements ISpellImmune {
         return true;
     }
 
-    @Nonnull
-    @Override
-    public Vec3d getLook(float f) {
-        float x = dataManager.get(LOOK_X);
-        float y = dataManager.get(LOOK_Y);
-        float z = dataManager.get(LOOK_Z);
-        return new Vec3d(x, y, z);
-    }
-
-    public Vec3d getPositionVector(){
-        float x = dataManager.get(POS_X);
-        float y = dataManager.get(POS_Y);
-        float z = dataManager.get(POS_Z);
-        return new Vec3d(x,y,z);
-    }
-
-    public String getText(){
+    public String getText() {
         return dataManager.get(TEXT_DATA);
     }
 
@@ -189,10 +107,4 @@ public class EntityConjuredText extends Entity implements ISpellImmune {
     public boolean hasNoGravity() {
         return true;
     }
-
-
-    public int getLiveTime() {
-        return maxTimeAlive;
-    }
-
 }

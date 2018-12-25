@@ -7,6 +7,7 @@ import com.kamefrede.rpsideas.render.RenderTileCADCase;
 import com.kamefrede.rpsideas.util.libs.RPSBlockNames;
 import com.teamwizardry.librarianlib.features.autoregister.TileRegister;
 import com.teamwizardry.librarianlib.features.base.block.tile.TileMod;
+import com.teamwizardry.librarianlib.features.base.block.tile.module.ModuleCapability;
 import com.teamwizardry.librarianlib.features.base.block.tile.module.ModuleInventory;
 import com.teamwizardry.librarianlib.features.saving.Module;
 import com.teamwizardry.librarianlib.features.saving.Save;
@@ -23,7 +24,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
-import vazkii.arl.util.VanillaPacketDispatcher;
 import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.api.cad.ISocketable;
 import vazkii.psi.api.cad.ISocketableController;
@@ -36,7 +36,9 @@ import javax.annotation.Nonnull;
 public class TileCADCase extends TileMod {
 
     @Module
-    private ModuleInventory inventory = new ModuleInventory(new CaseTileHandler());
+    private ModuleCapability<ItemStackHandler> inventory =
+            new ModuleInventory(new CaseTileHandler()).disallowSides(EnumFacing.UP,
+                    EnumFacing.NORTH, EnumFacing.SOUTH, EnumFacing.EAST, EnumFacing.WEST);
 
     @Save
     private String name = "";
@@ -182,7 +184,6 @@ public class TileCADCase extends TileMod {
         @Override
         protected void onContentsChanged(int slot) {
             markDirty();
-            VanillaPacketDispatcher.dispatchTEToNearbyPlayers(TileCADCase.this);
         }
     }
 }

@@ -30,7 +30,6 @@ public class RPSEntities {
         RenderingRegistry.registerEntityRenderingHandler(EntityPsireworkRocket.class,
                 (manager) -> new RenderSnowball<>(manager, Items.FIREWORKS, Minecraft.getMinecraft().getRenderItem()));
         RenderingRegistry.registerEntityRenderingHandler(EntityConjuredText.class, RenderConjuredText::new);
-
     }
 
     @Optional.Method(modid = "botania")

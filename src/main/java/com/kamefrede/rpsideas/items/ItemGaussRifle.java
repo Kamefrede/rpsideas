@@ -95,7 +95,7 @@ public class ItemGaussRifle extends ItemMod implements IFlowColorAcceptor {
             } else if (noneLeft)
                 status = EntityGaussPulse.AmmoStatus.BLOOD;
             else
-                status = EntityGaussPulse.AmmoStatus.NOTAMMO;
+                status = EntityGaussPulse.AmmoStatus.PSI;
             EntityGaussPulse proj = new EntityGaussPulse(worldIn, playerIn, status);
             if (!worldIn.isRemote) worldIn.spawnEntity(proj);
             Vec3d look = playerIn.getLookVec();

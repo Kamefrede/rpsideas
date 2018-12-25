@@ -4,7 +4,7 @@ import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.blocks.ItemCADCase;
 import com.kamefrede.rpsideas.tiles.TileCADCase;
 import com.kamefrede.rpsideas.util.RPSSoundHandler;
-import com.teamwizardry.librarianlib.features.base.block.BlockMod;
+import com.teamwizardry.librarianlib.features.base.block.tile.BlockModContainer;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -25,7 +25,10 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -37,14 +40,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.List;
 
-public class BlockCADCase extends BlockMod {
+public class BlockCADCase extends BlockModContainer {
     public static final PropertyBool OPEN = PropertyBool.create("open");
     public static final PropertyBool POWERED = PropertyBool.create("powered");
     public static final PropertyDirection FACING = PropertyDirection.create("facing", Arrays.asList(EnumFacing.HORIZONTALS));
@@ -149,32 +151,9 @@ public class BlockCADCase extends BlockMod {
         return ItemStack.EMPTY;
     }
 
-
-    //Tile Entity
-    @Override
-    public boolean hasTileEntity(IBlockState state) {
-        return true;
-    }
-
     @Override
     public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
         return new TileCADCase();
-    }
-
-    @Override
-    public boolean hasComparatorInputOverride(IBlockState state) {
-        return true;
-    }
-
-    @Override
-    public int getComparatorInputOverride(IBlockState blockState, World world, BlockPos pos) {
-        TileEntity tile = world.getTileEntity(pos);
-        if (tile instanceof TileCADCase) {
-            TileCADCase cadCase = (TileCADCase) tile;
-            IItemHandler handler = cadCase.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-            if (handler == null) return 0;
-            else return ItemHandlerHelper.calcRedstoneFromInventory(handler);
-        } else return 0;
     }
 
     @Override
@@ -186,7 +165,7 @@ public class BlockCADCase extends BlockMod {
             IItemHandler handler = itemstack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
             IItemHandler tileHandler = tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
             if (handler != null && tileHandler != null) for (int i = 0; i < handler.getSlots(); i++)
-                handler.insertItem(i, tileHandler.getStackInSlot(i).copy(), false);
+                handler.insertItem(i, tileHandler.extractItem(i, 64, false), false);
             if (cadCase.getDisplayName() != null)
                 itemstack.setStackDisplayName(cadCase.getName());
             spawnAsEntity(worldIn, pos, itemstack);
@@ -201,7 +180,6 @@ public class BlockCADCase extends BlockMod {
     public void getDrops(@Nonnull NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, @Nonnull IBlockState state, int fortune) {
         // NO-OP
     }
-
 
     //Events
 
@@ -236,7 +214,7 @@ public class BlockCADCase extends BlockMod {
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (player.isSneaking()) {
             if (!world.isRemote) {
                 boolean wasOpen = state.getValue(OPEN);
@@ -245,6 +223,7 @@ public class BlockCADCase extends BlockMod {
             }
             return true;
         }
+
         TileEntity tile = world.getTileEntity(pos);
         if (tile instanceof TileCADCase)
             return ((TileCADCase) tile).whenClicked(state, player, hand, hitX, hitZ);

@@ -12,7 +12,6 @@ import java.util.Objects;
 public class PotionPsipulse extends PotionPsiChange {
     protected PotionPsipulse() {
         super(RPSItemNames.PSIPULSE, false, ICADColorizer.DEFAULT_SPELL_COLOR);
-        setRegistryName(RPSItemNames.PSIPULSE);
     }
 
     @Override

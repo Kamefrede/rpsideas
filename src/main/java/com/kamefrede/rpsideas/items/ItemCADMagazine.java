@@ -174,10 +174,10 @@ public class ItemCADMagazine extends ItemMod implements ISocketable, ICADCompone
     }
 
     @Override
-    public void setPiece(ItemStack stack, EnumCADComponent type, ItemStack piece) {
-        if (type != EnumCADComponent.SOCKET)
+    public void setPiece(ItemStack stack, EnumCADComponent type, NonNullList<ItemStack> piece) {
+        if (type != EnumCADComponent.SOCKET || piece.isEmpty())
             return;
-        setSocket(stack, piece);
+        setSocket(stack, piece.get(0));
     }
 
     public Spell getSpell(ItemStack stack) {
@@ -185,10 +185,10 @@ public class ItemCADMagazine extends ItemMod implements ISocketable, ICADCompone
     }
 
     @Override
-    public ItemStack getPiece(ItemStack stack, EnumCADComponent type) {
+    public NonNullList<ItemStack> getPiece(ItemStack stack, EnumCADComponent type) {
         if (type != EnumCADComponent.SOCKET)
-            return ItemStack.EMPTY;
-        return getSocket(stack);
+            return NonNullList.create();
+        return NonNullList.withSize(1, getSocket(stack));
     }
 
     @Nonnull
