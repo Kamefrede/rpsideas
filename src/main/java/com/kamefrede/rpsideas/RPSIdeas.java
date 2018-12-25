@@ -57,22 +57,15 @@ public class RPSIdeas {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         new RPSCreativeTab();
-
-        load(RPSItems.class, RPSBlocks.class, RPSPotions.class);
+        new RPSItems();
+        new RPSBlocks();
+        new RPSPotions();
 
         SpellPieces.init();
         RPSEntities.init();
         DATA_FIXER = FMLCommonHandler.instance().getDataFixer().init(MODID, RPSDataFixer.parseSemVer(VERSION));
 
         NetworkRegistry.INSTANCE.registerGuiHandler(RPSIdeas.INSTANCE, new GuiHandler());
-    }
-
-    @SuppressWarnings("unused")
-    private void load(Class<?>... ignored) {
-        // This is a hack. Ignore it. Please.
-
-        // For those wondering, I need to load the classes. It doesn't matter how.
-        // Invoking this method does nothing, but the classes in the arguments do.
     }
 
     // Botania
