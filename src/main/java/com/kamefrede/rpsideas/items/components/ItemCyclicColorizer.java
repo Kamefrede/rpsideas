@@ -67,7 +67,7 @@ public class ItemCyclicColorizer extends ItemComponent implements ICADColorizer,
         if (type != EnumCADComponent.DYE || piece.size() < 2)
             return;
         setInheriting(stack, piece.get(0), true);
-        setInheriting(stack, piece.get(0), false);
+        setInheriting(stack, piece.get(1), false);
     }
 
     @Override

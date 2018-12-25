@@ -72,7 +72,7 @@ public abstract class ItemComponent extends ItemMod implements ICADComponent {
         FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
         int length = fontRenderer.getStringWidth(nameFormatted + ":  ");
         int space = fontRenderer.getStringWidth(" ");
-        String padding = times(" ", length / space);
+        String padding = times(" ", (int) Math.ceil(length * 1.0 / space));
 
         tooltip.add(padding + TextFormatting.GRAY + rawValue);
     }
