@@ -12,12 +12,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
+import net.minecraft.util.*;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -155,6 +153,12 @@ public class ItemLiquidColorizer extends ItemComponent implements ICADColorizer,
                 held = inheriting;
             else
                 held = new ItemStack(RPSItems.drainedColorizer);
+
+            if (!world.isRemote)
+                world.playSound(null, player.posX, player.posY, player.posZ,
+                        SoundEvents.ITEM_BUCKET_EMPTY,
+                        SoundCategory.PLAYERS, 0.5f, 1f);
+
             return new ActionResult<>(EnumActionResult.SUCCESS, held);
         }
 

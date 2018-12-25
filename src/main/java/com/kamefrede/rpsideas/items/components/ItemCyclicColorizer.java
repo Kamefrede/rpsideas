@@ -11,7 +11,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -25,7 +27,6 @@ import org.jetbrains.annotations.NotNull;
 import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.client.core.handler.ClientTickHandler;
-import vazkii.psi.common.core.handler.PsiSoundHandler;
 import vazkii.psi.common.item.base.ModItems;
 
 import javax.annotation.Nonnull;
@@ -164,12 +165,18 @@ public class ItemCyclicColorizer extends ItemComponent implements ICADColorizer,
         ItemStack held = player.getHeldItem(hand);
 
         if (player.isSneaking()) {
-            player.dropItem(getInheriting(held, false), false);
+            if (!world.isRemote) {
+                EntityItem item = player.dropItem(getInheriting(held, false), false, true);
+                if (item != null) {
+                    item.posY -= player.getEyeHeight() / 2;
+                    world.spawnEntity(item);
+                }
+            }
             held = getInheriting(held, true);
 
             if (!world.isRemote)
                 world.playSound(null, player.posX, player.posY, player.posZ,
-                        PsiSoundHandler.compileError,
+                        SoundEvents.BLOCK_GLASS_BREAK,
                         SoundCategory.PLAYERS, 0.5f, 1f);
 
             return new ActionResult<>(EnumActionResult.SUCCESS, held);
