@@ -42,8 +42,6 @@ public abstract class ItemComponent extends ItemMod implements ICADComponent {
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced) {
         TooltipHelper.tooltipIfShift(tooltip, () -> {
-            tooltip.remove(1);
-
             EnumCADComponent componentType = getComponentType(stack);
             TooltipHelper.addToTooltip(tooltip, "psimisc.componentType", TooltipHelper.local(componentType.getName()));
 
