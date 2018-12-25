@@ -166,9 +166,12 @@ public class ItemCyclicColorizer extends ItemComponent implements ICADColorizer,
 
         if (player.isSneaking()) {
             if (!world.isRemote) {
+                player.captureDrops = true;
                 EntityItem item = player.dropItem(getInheriting(held, false), false, true);
+                player.captureDrops = false;
+
                 if (item != null) {
-                    item.posY -= player.getEyeHeight() / 2;
+                    item.posY -= player.getEyeHeight() / 4;
                     world.spawnEntity(item);
                 }
             }
