@@ -1,7 +1,6 @@
 package com.kamefrede.rpsideas.blocks;
 
 import com.google.common.collect.Maps;
-import com.teamwizardry.librarianlib.features.base.block.BlockMod;
 import com.teamwizardry.librarianlib.features.base.block.tile.BlockModContainer;
 import kotlin.jvm.functions.Function1;
 import net.minecraft.block.Block;
@@ -12,6 +11,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -77,6 +77,12 @@ public abstract class BlockConjuredDirectional extends BlockModContainer {
         state = state.withProperty(BLOCK_EAST, worldIn.getBlockState(pos.east()).equals(origState));
 
         return state;
+    }
+
+    @Nullable
+    @Override
+    public ItemBlock createItemForm() {
+        return null;
     }
 
     public boolean isSolid(IBlockState state) {

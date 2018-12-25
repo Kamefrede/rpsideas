@@ -9,9 +9,9 @@ import org.jetbrains.annotations.NotNull;
 public class RPSCreativeTab extends ModCreativeTab {
 
     public RPSCreativeTab() {
-        super(RPSIdeas.MODID);
+        super();
         setNoTitle();
-        setBackgroundImageName("psideas.png");
+        setBackgroundImageName(RPSIdeas.MODID + ".png");
     }
 
     @NotNull
