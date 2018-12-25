@@ -1,6 +1,5 @@
 package com.kamefrede.rpsideas.compat.jei;
 
-import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.compat.jei.craftingTricks.TrickCraftingCategory;
 import com.kamefrede.rpsideas.compat.jei.craftingTricks.TrickCraftingRecipeJEI;
 import com.kamefrede.rpsideas.crafting.RPSRecipes;
@@ -42,8 +41,6 @@ public class JEICompat implements IModPlugin {
         ModItems.cad.getSubItems(CreativeTabs.SEARCH, stacks);
         for (ItemStack stack : stacks)
             registry.addRecipeCatalyst(stack, TrickCraftingCategory.INSTANCE.getUid());
-
-        registry.addIngredientInfo(new ItemStack(RPSItems.drainedColorizer), ItemStack.class, "jei." + RPSIdeas.MODID + ".drained.desc");
     }
 
     @Override

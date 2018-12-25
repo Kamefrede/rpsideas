@@ -50,7 +50,7 @@ public class ItemCADMagazine extends ItemMod implements ISocketable, ICADCompone
 
     public static ItemStack setSocket(ItemStack stack, ItemStack socket) {
         if (socket.isEmpty()) {
-            if (ItemNBTHelper.detectNBT(stack)) ItemNBTHelper.getNBT(stack).removeTag("socket");
+            ItemNBTHelper.removeEntry(stack, "socket");
         } else {
             NBTTagCompound nbt = new NBTTagCompound();
             socket.writeToNBT(nbt);
@@ -151,9 +151,9 @@ public class ItemCADMagazine extends ItemMod implements ISocketable, ICADCompone
                         String name = getSocketedItemName(stack, slot, null);
                         if (name != null) {
                             if (slot == getSelectedSlot(stack)) {
-                                tooltip.add("| ${TextFormatting.WHITE}${TextFormatting.BOLD}$name");
+                                tooltip.add("| " + TextFormatting.WHITE + TextFormatting.BOLD + name);
                             } else
-                                tooltip.add("| ${TextFormatting.WHITE}$name");
+                                tooltip.add("| " + TextFormatting.WHITE + name);
 
                         }
                         slot++;

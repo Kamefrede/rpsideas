@@ -46,6 +46,9 @@ public class RecipeCADShapeless extends ShapelessRecipes {
             for (int i = 0; i < inv.getSizeInventory(); i++) {
                 ItemStack stackInSlot = inv.getStackInSlot(i);
                 if (!stackInSlot.isEmpty() && stackInSlot.getItem() instanceof ICADComponent) {
+                    if (stackInSlot.getItem() == stack.getItem())
+                        continue;
+
                     ICADComponent component = (ICADComponent) stackInSlot.getItem();
                     EnumCADComponent type = component.getComponentType(stackInSlot);
                     if (acceptor.acceptsPiece(stack, type))

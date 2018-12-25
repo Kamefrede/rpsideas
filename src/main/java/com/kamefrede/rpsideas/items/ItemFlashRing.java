@@ -5,7 +5,7 @@ import com.kamefrede.rpsideas.gui.GuiHandler;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
-import net.minecraft.client.resources.I18n;
+import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -13,7 +13,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -46,14 +45,13 @@ public class ItemFlashRing extends ItemMod implements ISpellContainer {
             ItemStack cad = PsiAPI.getPlayerCAD(player);
             boolean did = false;
             if (data != null && !cad.isEmpty()) {
-                did = ItemCAD.cast(world, player, data, held, cad, (int) (getCostModifier(held) * 15), 25, 0.5f, null);
+                int cooldown = (int) (getCostModifier(held) * 15);
+                did = ItemCAD.cast(world, player, data, held, cad, cooldown, 25, 0.5f, null);
             }
             return new ActionResult<>(did ? EnumActionResult.SUCCESS : EnumActionResult.PASS, held);
         } else if (player.isSneaking()) {
-            if (world.isRemote) {
+            if (world.isRemote)
                 player.openGui(RPSIdeas.INSTANCE, GuiHandler.GUI_FLASH_RING, world, 0, 0, 0);
-
-            }
             return new ActionResult<>(EnumActionResult.SUCCESS, held);
         }
 
@@ -62,9 +60,8 @@ public class ItemFlashRing extends ItemMod implements ISpellContainer {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag mistake) {
-        String cost = TextFormatting.AQUA + I18n.format("rpsideas.misc.cost") + " " + TextFormatting.GRAY + (int) (getCostModifier(stack) * 100) + "%";
-        tooltip.add(cost);
+    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced) {
+        TooltipHelper.addToTooltip(tooltip, "psimisc.bulletCost", getCostModifier(stack) * 100.0);
     }
 
     @Nonnull
@@ -73,7 +70,8 @@ public class ItemFlashRing extends ItemMod implements ISpellContainer {
         if (containsSpell(stack)) {
             Spell spell = getSpell(stack);
 
-            if (spell != null && !spell.name.isEmpty()) return spell.name;
+            if (spell != null && !spell.name.isEmpty())
+                return spell.name;
         }
 
         return super.getItemStackDisplayName(stack);

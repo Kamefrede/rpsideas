@@ -8,6 +8,8 @@ import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.IExtraVariantHolder;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
@@ -30,6 +32,7 @@ import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.common.item.base.ModItems;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -122,9 +125,10 @@ public class ItemBlasterAssembly extends ItemComponent implements IBlasterCompon
         return new ModelResourceLocation(new ResourceLocation(RPSIdeas.MODID, "cad_blaster"), "inventory");
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
-    protected void addTooltipTags(List<String> tooltip) {
-        addTooltipTag(true, tooltip, RPSIdeas.MODID + ".requirement.mana_cad");
+    protected void addTooltipTags(Minecraft minecraft, @Nullable World world, KeyBinding sneak, ItemStack stack, List<String> tooltip, ITooltipFlag advanced) {
+        addTooltipTag(tooltip, true, RPSIdeas.MODID + ".requirement.mana_cad");
     }
 
     @Override

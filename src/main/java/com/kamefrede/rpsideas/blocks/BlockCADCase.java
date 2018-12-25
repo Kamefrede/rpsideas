@@ -1,10 +1,10 @@
 package com.kamefrede.rpsideas.blocks;
 
-import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.blocks.ItemCADCase;
 import com.kamefrede.rpsideas.tiles.TileCADCase;
 import com.kamefrede.rpsideas.util.RPSSoundHandler;
 import com.teamwizardry.librarianlib.features.base.block.tile.BlockModContainer;
+import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -16,7 +16,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,7 +34,6 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.client.settings.KeyModifier;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -286,12 +284,12 @@ public class BlockCADCase extends BlockModContainer {
                 if (inFirst && shifting) tooltip.add("");
                 tooltip.add("| " + TextFormatting.WHITE + slot.getDisplayName());
 
-                List<String> slotTooltip = slot.getTooltip(Minecraft.getMinecraft().player, ITooltipFlag.TooltipFlags.NORMAL); //thanks mojang
+                List<String> slotTooltip = slot.getTooltip(Minecraft.getMinecraft().player, flag);
                 if (slotTooltip.size() > 1) {
                     if (shifting)
                         for (String line : slotTooltip) tooltip.add("|   " + line);
                     else
-                        tooltip.add("|   " + I18n.format(RPSIdeas.MODID + ".misc.hold", TextFormatting.AQUA + KeyModifier.SHIFT.name() + TextFormatting.RESET));
+                        tooltip.add("|   " + TooltipHelper.local("librarianlib.shiftinfo").replace("&", "\u00a7"));
                 }
             }
         }

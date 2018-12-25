@@ -389,6 +389,8 @@ rpsideas.cadstat.enables=Enables
 rpsideas.requirement.mana_cad=Mana Flow
 
 rpsideas.misc.lens=Lens: %s
+rpsideas.misc.info=Info
+rpsideas.misc.sneak_to_destroy=Use with %s to reclaim the components
 rpsideas.misc.color=Color
 rpsideas.misc.color_inheritance=Color Inheritance
 
@@ -416,9 +418,6 @@ psi.piecegroup.rpsideas.advanced_loopcast_control.desc=This group introduces var
 psi.piecegroup.rpsideas.inter_cad=Inter-CAD Communication
 psi.piecegroup.rpsideas.inter_cad.desc=This group introduces a way for you to communicate with other CADs in the world. By using Trick: Broadcast and supplying a channel and signal value it will broadcast a number to everyone in radius of the position given.<br><br>This has some restrictions: It can only be used once per spellcast and you can only broadcast one number at the time, if you broadcast one after another it will overwrite the previous one.
 
-rpsideas.componentType=Component Type:
-rpsideas.misc.cost=Cost Multiplier:
-rpsideas.misc.hold=Hold %s for more info
 rpsideas.spelldesc.requires=Requires: %s
 rpsideas.spellerror.tricknotenabled=ERROR: Trick doesn't have an enabling component.
 rpsideas.spellerror.trickdisabled=ERROR: Trick's enabling component doesn't have its requirements met.
@@ -478,4 +477,3 @@ rpsideas.misc.too_complex=This spell is too large for the socket in your Spell M
 rpsideas.misc.too_complex_bullet=This spell is too large for the socket in your Spell Magazine to transfer.
 
 jei.rpsideas.category.trick=Spell Infusion
-jei.rpsideas.drained.desc=Sneak-using the Liquid-Ink Colorizer will drain the fluid out, resulting in a Drained Colorizer.

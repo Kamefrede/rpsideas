@@ -61,7 +61,7 @@ public class FlowColorsHelper {
     }
 
     public static void clearColorizer(ItemStack colorable) {
-        if (ItemNBTHelper.detectNBT(colorable)) ItemNBTHelper.getNBT(colorable).removeTag(TAG_FLOW_COLOR);
+        ItemNBTHelper.removeEntry(colorable, TAG_FLOW_COLOR);
     }
 
     public static ItemStack getColorizer(ItemStack colorable) {

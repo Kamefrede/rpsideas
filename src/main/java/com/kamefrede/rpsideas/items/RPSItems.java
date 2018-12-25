@@ -33,6 +33,7 @@ public class RPSItems {
     public static final ItemModRod psimetalRod = new ItemPsimetalRod(RPSItemNames.PSIMETAL_ROD);
     public static final ItemMod drainedColorizer = new ItemEmptyColorizer();
     public static final ItemMod liquidColorizer = new ItemLiquidColorizer();
+    public static final ItemMod cyclicColorizer = new ItemCyclicColorizer();
 
     public static final ItemModTool ebonyPickaxe = new ItemFlowTool.Pickaxe(RPSItemNames.EBONY_PICKAXE, true);
     public static final ItemModTool ebonyShovel = new ItemFlowTool.Shovel(RPSItemNames.EBONY_SHOVEL, true);

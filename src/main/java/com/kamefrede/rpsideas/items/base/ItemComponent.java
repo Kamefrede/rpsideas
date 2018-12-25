@@ -2,23 +2,27 @@ package com.kamefrede.rpsideas.items.base;
 
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
-import net.minecraft.client.gui.GuiScreen;
+import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.client.settings.KeyModifier;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.EnumCADStat;
 import vazkii.psi.api.cad.ICADComponent;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.teamwizardry.librarianlib.features.kotlin.CommonUtilMethods.times;
 
 
 public abstract class ItemComponent extends ItemMod implements ICADComponent {
@@ -31,45 +35,75 @@ public abstract class ItemComponent extends ItemMod implements ICADComponent {
     }
 
     protected void registerStats() {
-        //No-op by default
+        // NO-OP
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag mistake) {
-        tooltip.add(I18n.format(RPSIdeas.MODID + ".misc.hold", TextFormatting.AQUA + KeyModifier.SHIFT.name() + TextFormatting.RESET));
-        if (!GuiScreen.isShiftKeyDown()) return;
-        tooltip.remove(1);
+    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced) {
+        TooltipHelper.tooltipIfShift(tooltip, () -> {
+            tooltip.remove(1);
 
-        EnumCADComponent componentType = getComponentType(stack);
-        String componentName = I18n.format(componentType.getName());
-        tooltip.add(TextFormatting.GREEN + I18n.format("rpsideas.componentType") + " " + TextFormatting.GRAY + componentName);
+            EnumCADComponent componentType = getComponentType(stack);
+            TooltipHelper.addToTooltip(tooltip, "psimisc.componentType", TooltipHelper.local(componentType.getName()));
 
-        addTooltipTags(tooltip);
+            addTooltipTags(Minecraft.getMinecraft(), world,
+                    Minecraft.getMinecraft().gameSettings.keyBindSneak,
+                    stack, tooltip, advanced);
 
-        for (EnumCADStat cadStat : EnumCADStat.values()) {
-            if (cadStat.getSourceType() == componentType) {
-                int statValue = getCADStatValue(stack, cadStat);
-                String statValueString = statValue == -1 ? "∞" : String.valueOf(statValue);
-                String statName = I18n.format(cadStat.getName());
-                tooltip.add(" " + TextFormatting.AQUA + statName + TextFormatting.GRAY + ": " + statValueString);
+            for (EnumCADStat cadStat : EnumCADStat.values()) {
+                if (cadStat.getSourceType() == componentType) {
+                    int statValue = getCADStatValue(stack, cadStat);
+                    String statValueString = statValue == -1 ? "∞" : String.valueOf(statValue);
+                    String statName = I18n.format(cadStat.getName());
+                    tooltip.add(" " + TextFormatting.AQUA + statName + TextFormatting.GRAY + ": " + statValueString);
+                }
             }
-        }
+        });
     }
 
-    protected void addTooltipTags(List<String> tooltip) {
-        //NO-OP
+    @SideOnly(Side.CLIENT)
+    protected void addTooltipTags(Minecraft minecraft, @Nullable World world, KeyBinding sneak, ItemStack stack, List<String> tooltip, ITooltipFlag advanced) {
+        // NO-OP
     }
 
-    protected void addTooltipTag(boolean positiveEffect, List<String> tooltip, String descriptionTranslationKey, Object... descriptionFormatArgs) {
-        String nameFormatted = I18n.format(RPSIdeas.MODID + ".cadstat." + (positiveEffect ? "extra" : "downside"));
+    @SideOnly(Side.CLIENT)
+    protected final void addTooltipTagSubLineRaw(@Nonnull List<String> tooltip, String prefix, String rawValue) {
+        String nameFormatted = I18n.format(prefix);
+        String padding = times(" ", nameFormatted.length() + 3);
 
-        if (descriptionFormatArgs == null) descriptionFormatArgs = new String[0];
-        String descriptionFormatted = I18n.format(descriptionTranslationKey, descriptionFormatArgs);
+        tooltip.add(padding + TextFormatting.GRAY + rawValue);
+    }
 
-        TextFormatting color = positiveEffect ? TextFormatting.AQUA : TextFormatting.RED;
+    @SideOnly(Side.CLIENT)
+    protected final void addTooltipTagRaw(@Nonnull List<String> tooltip, TextFormatting color, String prefix, String rawValue) {
+        String nameFormatted = I18n.format(prefix);
 
-        tooltip.add(" " + color + nameFormatted + ": " + TextFormatting.GRAY + descriptionFormatted);
+        tooltip.add(" " + color + nameFormatted + ": " + TextFormatting.GRAY + rawValue);
+    }
+
+    @SideOnly(Side.CLIENT)
+    protected final void addTooltipTag(@Nonnull List<String> tooltip, TextFormatting color, String prefix, String key, Object... format) {
+        if (format == null) format = new String[0];
+        String descriptionFormatted = I18n.format(key, format);
+
+        addTooltipTagRaw(tooltip, color, prefix, descriptionFormatted);
+    }
+
+    @SideOnly(Side.CLIENT)
+    protected final void addTooltipTagSubLine(@Nonnull List<String> tooltip, String prefix, String key, Object... format) {
+        if (format == null) format = new String[0];
+        String formatted = I18n.format(key, format);
+
+        addTooltipTagSubLineRaw(tooltip, prefix, formatted);
+    }
+
+    @SideOnly(Side.CLIENT)
+    protected void addTooltipTag(List<String> tooltip, boolean positiveEffect, String descriptionTranslationKey, Object... descriptionFormatArgs) {
+        addTooltipTag(tooltip,
+                positiveEffect ? TextFormatting.AQUA : TextFormatting.RED,
+                RPSIdeas.MODID + ".cadstat." + (positiveEffect ? "extra" : "downside"),
+                descriptionTranslationKey, descriptionFormatArgs);
     }
 
     protected void addStat(EnumCADStat stat, int value) {

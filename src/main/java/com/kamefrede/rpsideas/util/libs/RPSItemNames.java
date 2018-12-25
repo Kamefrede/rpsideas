@@ -20,6 +20,7 @@ public class RPSItemNames {
     public static final String PSIMETAL_ROD = "psimetal_rod";
     public static final String EMPTY_COLORIZER = "empty_colorizer";
     public static final String LIQUID_COLORIZER = "liquid_colorizer";
+    public static final String CYCLIC_COLORIZER = "cyclic_colorizer";
     public static final String SPELL_MAGAZINE = "magazine";
     public static final String BRACELET_CAD = "bracelet_cad";
     public static final String TRIGGER_SENSOR = "trigger_sensor";

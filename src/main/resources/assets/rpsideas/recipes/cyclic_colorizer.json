@@ -1,0 +1,28 @@
+{
+  "result": {
+    "item": "rpsideas:cyclic_colorizer"
+  },
+  "type": "rpsideas:cad_shaped",
+  "pattern": [
+    " D ",
+    "GCG",
+    " C "
+  ],
+  "key": {
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "blockGlass"
+    },
+    "D": {
+      "type": "forge:ore_dict",
+      "ore": "dustPsi"
+    },
+    "C": {
+      "type": "rpsideas:cad_component",
+      "component": "dye",
+      "excluded": {
+        "item": "rpsideas:cyclic_colorizer"
+      }
+    }
+  }
+}

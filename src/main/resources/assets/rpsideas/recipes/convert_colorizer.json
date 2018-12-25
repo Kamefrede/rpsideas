@@ -7,9 +7,13 @@
     {
       "type": "rpsideas:cad_component",
       "component": "dye",
-      "excluded": {
+      "excluded": [{
         "item": "rpsideas:liquid_colorizer"
-      }
+      }, {
+        "item": "rpsideas:empty_colorizer"
+      }, {
+        "item": "rpsideas:cyclic_colorizer"
+      }]
     },
     {
       "item": "minecraft:water_bucket"

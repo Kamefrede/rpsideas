@@ -5,17 +5,22 @@ import com.kamefrede.rpsideas.items.base.IRegenerationBattery;
 import com.kamefrede.rpsideas.items.base.ItemComponent;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
+import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.EnumCADStat;
 import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -66,9 +71,10 @@ public class ItemTwinflowBattery extends ItemComponent implements IRegenerationB
         addStat(EnumCADStat.OVERFLOW, 500);
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
-    protected void addTooltipTags(List<String> tooltip) {
-        addTooltipTag(true, tooltip, RPSIdeas.MODID + ".upsides.boost_regen", PSI_REGEN_BONUS);
-        addTooltipTag(true, tooltip, RPSIdeas.MODID + ".upsides.fills_last");
+    protected void addTooltipTags(Minecraft minecraft, @Nullable World world, KeyBinding sneak, ItemStack stack, List<String> tooltip, ITooltipFlag advanced) {
+        addTooltipTag(tooltip, true, RPSIdeas.MODID + ".upsides.boost_regen", PSI_REGEN_BONUS);
+        addTooltipTag(tooltip, true, RPSIdeas.MODID + ".upsides.fills_last");
     }
 }

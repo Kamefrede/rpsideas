@@ -6,9 +6,10 @@ import com.kamefrede.rpsideas.items.base.ICADComponentAcceptor;
 import com.kamefrede.rpsideas.items.base.ItemComponent;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.item.IItemColorProvider;
+import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import kotlin.jvm.functions.Function2;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.resources.I18n;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -21,13 +22,11 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.ICADColorizer;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.awt.*;
 import java.util.List;
 
 public class ItemLiquidColorizer extends ItemComponent implements ICADColorizer, IItemColorProvider, ICADComponentAcceptor {
@@ -53,7 +52,7 @@ public class ItemLiquidColorizer extends ItemComponent implements ICADColorizer,
 
     public static void setInheriting(ItemStack stack, ItemStack inheriting) {
         if (inheriting.isEmpty()) {
-            if (ItemNBTHelper.detectNBT(stack)) ItemNBTHelper.getNBT(stack).removeTag("inheriting");
+            ItemNBTHelper.removeEntry(stack, "inheriting");
         } else {
             NBTTagCompound nbt = new NBTTagCompound();
             inheriting.writeToNBT(nbt);
@@ -77,7 +76,7 @@ public class ItemLiquidColorizer extends ItemComponent implements ICADColorizer,
 
     @Override
     public boolean acceptsPiece(ItemStack stack, EnumCADComponent type) {
-        return type == EnumCADComponent.DYE;
+        return type == EnumCADComponent.DYE && !(stack.getItem() instanceof ICADComponentAcceptor);
     }
 
     @Nullable
@@ -94,46 +93,55 @@ public class ItemLiquidColorizer extends ItemComponent implements ICADColorizer,
     @SideOnly(Side.CLIENT)
     @Override
     public int getColor(ItemStack stack) {
-        int itemcolor = getColorFromStack(stack);
+        int itemColor = getColorFromStack(stack);
         if (!stack.isEmpty()) {
             ItemStack inheriting = getInheriting(stack);
             if (!inheriting.isEmpty() && inheriting.getItem() instanceof ICADColorizer) {
                 int inheritColor = ((ICADColorizer) inheriting.getItem()).getColor(inheriting);
-                if (itemcolor == -1)
-                    itemcolor = inheritColor;
+                if (itemColor == -1)
+                    itemColor = inheritColor;
                 else {
-                    Color it = new Color(itemcolor);
-                    Color inh = new Color(inheritColor);
-                    itemcolor = new Color((it.getRed() + inh.getRed()) / 2, (it.getGreen() + inh.getGreen()) / 2, (it.getBlue() + inh.getBlue()) / 2).getRGB();
+                    int itemR = (itemColor >> 16) & 0xff;
+                    int itemG = (itemColor >> 8) & 0xff;
+                    int itemB = itemColor & 0xff;
+                    int inheritR = (inheritColor >> 16) & 0xff;
+                    int inheritG = (inheritColor >> 8) & 0xff;
+                    int inheritB = inheritColor & 0xff;
 
+                    itemColor = ((itemR + inheritR) >> 1 << 16) |
+                            ((itemG + inheritG) >> 1 << 8) |
+                            (itemB + inheritB) / 2;
                 }
             }
 
         }
-        return (itemcolor == -1) ? ICADColorizer.DEFAULT_SPELL_COLOR : itemcolor;
+        return (itemColor == -1) ? ICADColorizer.DEFAULT_SPELL_COLOR : itemColor;
     }
 
-    @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag mistake) {
-        super.addInformation(stack, world, tooltip, mistake);
-        if (GuiScreen.isShiftKeyDown()) {
-            ItemStack inheriting = getInheriting(stack);
-            if (!inheriting.isEmpty()) {
-                String translatedPrefix = I18n.format(RPSIdeas.MODID + ".misc.color_inheritance");
-                tooltip.add(TextFormatting.GREEN + translatedPrefix + TextFormatting.GRAY + ": " + inheriting.getDisplayName());
-            }
-            if (mistake.isAdvanced()) {
-                int color = getColorFromStack(stack);
-                if (color != Integer.MAX_VALUE) {
-                    String formattedNumber = String.format("%06X", color);
-                    if (formattedNumber.length() > 6)
-                        formattedNumber = formattedNumber.substring(formattedNumber.length() - 6);
-                    String translatedPrefix = I18n.format(RPSIdeas.MODID + ".misc.color");
-                    tooltip.add(TextFormatting.GREEN + translatedPrefix + TextFormatting.GRAY + ": #" + formattedNumber);
-                }
+    @SideOnly(Side.CLIENT)
+    protected void addTooltipTags(Minecraft minecraft, @Nullable World world, KeyBinding sneak, ItemStack stack, List<String> tooltip, ITooltipFlag advanced) {
+        ItemStack inheriting = getInheriting(stack);
+        if (!inheriting.isEmpty())
+            addTooltipTagRaw(tooltip, TextFormatting.GREEN,
+                    RPSIdeas.MODID + ".misc.color_inheritance", inheriting.getDisplayName());
+
+        if (advanced.isAdvanced()) {
+            int color = getColorFromStack(stack);
+            if (color != Integer.MAX_VALUE) {
+                String formattedNumber = String.format("%06X", color);
+                if (formattedNumber.length() > 6)
+                    formattedNumber = formattedNumber.substring(formattedNumber.length() - 6);
+                addTooltipTagRaw(tooltip, TextFormatting.GREEN,
+                        RPSIdeas.MODID + ".misc.color", "#" + formattedNumber);
             }
         }
+
+        addTooltipTag(tooltip, TextFormatting.DARK_AQUA,
+                RPSIdeas.MODID + ".misc.info",
+                RPSIdeas.MODID + ".misc.sneak_to_destroy",
+                TextFormatting.AQUA + sneak.getDisplayName() + TextFormatting.GRAY);
+
     }
 
     @Nonnull
@@ -141,9 +149,15 @@ public class ItemLiquidColorizer extends ItemComponent implements ICADColorizer,
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
         ItemStack held = player.getHeldItem(hand);
 
-        if (player.isSneaking())
-            held = new ItemStack(RPSItems.drainedColorizer);
+        if (player.isSneaking()) {
+            ItemStack inheriting = getInheriting(held);
+            if (!inheriting.isEmpty())
+                held = inheriting;
+            else
+                held = new ItemStack(RPSItems.drainedColorizer);
+            return new ActionResult<>(EnumActionResult.SUCCESS, held);
+        }
 
-        return new ActionResult<>(EnumActionResult.SUCCESS, held);
+        return new ActionResult<>(EnumActionResult.PASS, held);
     }
 }
