@@ -11,19 +11,18 @@ import com.kamefrede.rpsideas.items.RPSItems;
 import com.kamefrede.rpsideas.render.ExosuitGlowLayer;
 import com.kamefrede.rpsideas.render.LayerAuthorCape;
 import com.kamefrede.rpsideas.render.LayerAuthorOccludeElytra;
-import com.kamefrede.rpsideas.render.RenderTileCADCase;
 import com.kamefrede.rpsideas.spells.base.SpellPieces;
-import com.kamefrede.rpsideas.tiles.TileCADCase;
 import com.kamefrede.rpsideas.util.RPSCreativeTab;
 import com.kamefrede.rpsideas.util.RPSDataFixer;
 import com.kamefrede.rpsideas.util.RPSKeybindHandler;
+import com.teamwizardry.librarianlib.core.client.GlowingHandler;
+import com.teamwizardry.librarianlib.features.base.item.IGlowingItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerElytra;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraftforge.common.util.ModFixs;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Optional;
@@ -34,6 +33,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import vazkii.botania.api.BotaniaAPI;
+import vazkii.psi.common.item.base.ModItems;
 
 import java.util.List;
 import java.util.Map;
@@ -70,6 +70,9 @@ public class RPSIdeas {
     @SuppressWarnings("unused")
     private void load(Class<?>... ignored) {
         // This is a hack. Ignore it. Please.
+
+        // For those wondering, I need to load the classes. It doesn't matter how.
+        // Invoking this method does nothing, but the classes in the arguments do.
     }
 
     // Botania
@@ -104,7 +107,7 @@ public class RPSIdeas {
     @Mod.EventHandler
     @SideOnly(Side.CLIENT)
     public void clientInit(FMLInitializationEvent e) {
-        ClientRegistry.bindTileEntitySpecialRenderer(TileCADCase.class, new RenderTileCADCase());
+        GlowingHandler.registerCustomGlowHandler(ModItems.cad, (stack, model) -> IGlowingItem.Helper.wrapperBake(model, false, 1, 2), (stack, model) -> false);
 
         Map<String, RenderPlayer> skinMap = Minecraft.getMinecraft().getRenderManager().getSkinMap();
         injectLayers(skinMap.get("default"));

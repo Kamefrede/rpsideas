@@ -2,6 +2,7 @@ package com.kamefrede.rpsideas.blocks;
 
 import com.teamwizardry.librarianlib.features.base.block.BlockMod;
 import com.teamwizardry.librarianlib.features.base.block.IBlockColorProvider;
+import com.teamwizardry.librarianlib.features.base.block.IGlowingBlock;
 import kotlin.jvm.functions.Function2;
 import kotlin.jvm.functions.Function4;
 import net.minecraft.block.SoundType;
@@ -10,15 +11,19 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 
-public class BlockPlate extends BlockMod implements IBlockColorProvider {
+public class BlockPlate extends BlockMod implements IBlockColorProvider, IGlowingBlock {
 
     public static final PropertyEnum<EnumDyeColor> COLOR = PropertyEnum.create("color", EnumDyeColor.class);
 
@@ -35,6 +40,18 @@ public class BlockPlate extends BlockMod implements IBlockColorProvider {
         for (int i = 0; i < array.length; i++)
             array[i] = name + "_" + EnumDyeColor.byMetadata(i).getName();
         return array;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public int packedGlowCoords(@NotNull IBlockAccess world, @NotNull IBlockState state, @NotNull BlockPos pos) {
+        return 0xf000f0;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean shouldGlow(@NotNull IBlockAccess world, @NotNull BakedQuad quad, @NotNull IBlockState state, @NotNull BlockPos pos) {
+        return quad.hasTintIndex() && quad.getTintIndex() == 1;
     }
 
     @Nonnull

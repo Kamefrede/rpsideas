@@ -6,8 +6,10 @@ import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
 import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
+import com.teamwizardry.librarianlib.features.base.item.IGlowingItem;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import kotlin.jvm.functions.Function2;
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
@@ -18,6 +20,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.ICAD;
@@ -33,10 +36,17 @@ public class ItemGaussRifle extends ItemMod implements IFlowColorAcceptor {
         setMaxStackSize(1);
     }
 
+    @Override
+    @SideOnly(Side.CLIENT)
+    @Nullable
+    public IBakedModel transformToGlow(@NotNull ItemStack itemStack, @NotNull IBakedModel model) {
+        return IGlowingItem.Helper.wrapperBake(model, false, 0, 1);
+    }
+
     @Nullable
     @Override
     @SideOnly(Side.CLIENT)
-    public  Function2<ItemStack, Integer, Integer> getItemColorFunction() {
+    public Function2<ItemStack, Integer, Integer> getItemColorFunction() {
         return (stack, tintIndex) -> {
             if (tintIndex == 0) {
                 ItemStack colorizer = FlowColorsHelper.getColorizer(stack);

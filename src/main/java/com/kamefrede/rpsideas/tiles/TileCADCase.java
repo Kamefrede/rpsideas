@@ -3,12 +3,14 @@ package com.kamefrede.rpsideas.tiles;
 import com.kamefrede.rpsideas.blocks.BlockCADCase;
 import com.kamefrede.rpsideas.blocks.RPSBlocks;
 import com.kamefrede.rpsideas.items.ItemGaussRifle;
+import com.kamefrede.rpsideas.render.RenderTileCADCase;
 import com.kamefrede.rpsideas.util.libs.RPSBlockNames;
 import com.teamwizardry.librarianlib.features.autoregister.TileRegister;
 import com.teamwizardry.librarianlib.features.base.block.tile.TileMod;
 import com.teamwizardry.librarianlib.features.base.block.tile.module.ModuleInventory;
 import com.teamwizardry.librarianlib.features.saving.Module;
 import com.teamwizardry.librarianlib.features.saving.Save;
+import com.teamwizardry.librarianlib.features.tesr.TileRenderer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -29,6 +31,7 @@ import vazkii.psi.api.spell.ISpellContainer;
 
 import javax.annotation.Nonnull;
 
+@TileRenderer(RenderTileCADCase.class)
 @TileRegister(RPSBlockNames.CAD_CASE_TILE)
 public class TileCADCase extends TileMod {
 
