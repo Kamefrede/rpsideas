@@ -128,7 +128,7 @@ public class ItemLiquidColorizer extends ItemComponent implements ICADColorizer,
 
         if (advanced.isAdvanced()) {
             int color = getColorFromStack(stack);
-            if (color != Integer.MAX_VALUE) {
+            if (color != -1) {
                 String formattedNumber = String.format("%06X", color);
                 if (formattedNumber.length() > 6)
                     formattedNumber = formattedNumber.substring(formattedNumber.length() - 6);
