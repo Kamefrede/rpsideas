@@ -4,7 +4,6 @@ import com.kamefrede.rpsideas.RPSIdeas;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.ITooltipFlag;
@@ -22,8 +21,6 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static com.teamwizardry.librarianlib.features.kotlin.CommonUtilMethods.times;
 
 
 public abstract class ItemComponent extends ItemMod implements ICADComponent {
@@ -67,17 +64,6 @@ public abstract class ItemComponent extends ItemMod implements ICADComponent {
     }
 
     @SideOnly(Side.CLIENT)
-    protected final void addTooltipTagSubLineRaw(@Nonnull List<String> tooltip, String prefix, String rawValue) {
-        String nameFormatted = I18n.format(prefix);
-        FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
-        int length = fontRenderer.getStringWidth(nameFormatted + ":  ");
-        int space = fontRenderer.getStringWidth(" ");
-        String padding = times(" ", (int) Math.ceil(length * 1.0 / space));
-
-        tooltip.add(padding + TextFormatting.GRAY + rawValue);
-    }
-
-    @SideOnly(Side.CLIENT)
     protected final void addTooltipTagRaw(@Nonnull List<String> tooltip, TextFormatting color, String prefix, String rawValue) {
         String nameFormatted = I18n.format(prefix);
 
@@ -90,14 +76,6 @@ public abstract class ItemComponent extends ItemMod implements ICADComponent {
         String descriptionFormatted = I18n.format(key, format);
 
         addTooltipTagRaw(tooltip, color, prefix, descriptionFormatted);
-    }
-
-    @SideOnly(Side.CLIENT)
-    protected final void addTooltipTagSubLine(@Nonnull List<String> tooltip, String prefix, String key, Object... format) {
-        if (format == null) format = new String[0];
-        String formatted = I18n.format(key, format);
-
-        addTooltipTagSubLineRaw(tooltip, prefix, formatted);
     }
 
     @SideOnly(Side.CLIENT)
