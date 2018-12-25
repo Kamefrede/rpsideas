@@ -7,6 +7,8 @@ import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
 import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.teamwizardry.librarianlib.features.base.item.ItemModArmor;
+import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
+import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import kotlin.jvm.functions.Function2;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.util.ITooltipFlag;
@@ -16,11 +18,11 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.Nullable;
-import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.api.cad.ISocketable;
@@ -190,7 +192,8 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsiAddonT
 
         @Override
         public ItemStack getAttachedSensor(ItemStack helmet) {
-            return new ItemStack(ItemNBTHelper.getCompound(helmet, "Sensor", false));
+            NBTTagCompound compound = ItemNBTHelper.getCompound(helmet, "Sensor");
+            return compound == null ? ItemStack.EMPTY : new ItemStack(compound);
         }
 
         @Override

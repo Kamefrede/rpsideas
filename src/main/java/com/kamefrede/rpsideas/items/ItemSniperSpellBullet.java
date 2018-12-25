@@ -58,7 +58,9 @@ public class ItemSniperSpellBullet extends ItemMod implements ISpellContainer {
     public String getItemStackDisplayName(@Nonnull ItemStack stack) {
         if (!containsSpell(stack)) return super.getItemStackDisplayName(stack);
 
-        NBTTagCompound cmp = ItemNBTHelper.getCompound(stack, TAG_SPELL, false);
+        NBTTagCompound cmp = ItemNBTHelper.getCompound(stack, TAG_SPELL);
+        if (cmp == null)
+            return super.getItemStackDisplayName(stack);
         String name = cmp.getString(Spell.TAG_SPELL_NAME);
         if (name.isEmpty()) return super.getItemStackDisplayName(stack);
 

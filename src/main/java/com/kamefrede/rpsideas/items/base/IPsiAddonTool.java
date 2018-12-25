@@ -26,7 +26,7 @@ public interface IPsiAddonTool extends ISocketable, ISpellSettable {
     @Override
     default ItemStack getBulletInSocket(ItemStack stack, int slot) {
         String name = TAG_BULLET_PREFIX + slot;
-        NBTTagCompound cmp = ItemNBTHelper.getCompound(stack, name, true);
+        NBTTagCompound cmp = ItemNBTHelper.getCompound(stack, name);
 
         if (cmp == null)
             return ItemStack.EMPTY;

@@ -65,39 +65,41 @@ public class EntityPsireworkRocket extends EntityFireworkRocket {
 
                 int color = Psi.proxy.getColorizerColor(colorizer).getRGB();
 
-                NBTTagCompound fireworks = ItemNBTHelper.getCompound(fireworkItem, "Fireworks", false);
+                NBTTagCompound fireworks = ItemNBTHelper.getCompound(fireworkItem, "Fireworks");
+                if (fireworks != null) {
 
-                NBTTagList explosions = fireworks.getTagList("Explosions", Constants.NBT.TAG_COMPOUND);
-                for (int i = 0; i < explosions.tagCount(); i++) {
-                    NBTTagCompound explosion = explosions.getCompoundTagAt(i);
-                    explosion.setIntArray("Colors", new int[]{ color });
-                }
-
-                if (explosions.isEmpty()) {
-                    NBTTagCompound explosion = new NBTTagCompound();
-                    explosion.setIntArray("Colors", new int[]{ color });
-                    int type = 1;
-                    double rand = Math.random();
-                    if (rand > 0.25) {
-                        if (rand > 0.9)
-                            type = 2;
-                        else type = 0;
+                    NBTTagList explosions = fireworks.getTagList("Explosions", Constants.NBT.TAG_COMPOUND);
+                    for (int i = 0; i < explosions.tagCount(); i++) {
+                        NBTTagCompound explosion = explosions.getCompoundTagAt(i);
+                        explosion.setIntArray("Colors", new int[]{color});
                     }
 
-                    explosion.setInteger("Type", type);
+                    if (explosions.isEmpty()) {
+                        NBTTagCompound explosion = new NBTTagCompound();
+                        explosion.setIntArray("Colors", new int[]{color});
+                        int type = 1;
+                        double rand = Math.random();
+                        if (rand > 0.25) {
+                            if (rand > 0.9)
+                                type = 2;
+                            else type = 0;
+                        }
 
-                    if (Math.random() < 0.05) {
-                        if (Math.random() < 0.5)
-                            explosion.setBoolean("Flicker", true);
-                        else explosion.setBoolean("Trail", true);
+                        explosion.setInteger("Type", type);
+
+                        if (Math.random() < 0.05) {
+                            if (Math.random() < 0.5)
+                                explosion.setBoolean("Flicker", true);
+                            else explosion.setBoolean("Trail", true);
+                        }
+
+                        explosions.appendTag(explosion);
                     }
 
-                    explosions.appendTag(explosion);
+                    fireworks.setTag("Explosions", explosions);
+
+                    ItemNBTHelper.setCompound(fireworkItem, "Fireworks", fireworks);
                 }
-
-                fireworks.setTag("Explosions", explosions);
-
-                ItemNBTHelper.setCompound(fireworkItem, "Fireworks", fireworks);
             }
         }
 

@@ -2,6 +2,7 @@ package com.kamefrede.rpsideas.gui;
 
 import com.kamefrede.rpsideas.network.MessageFlashSync;
 import com.kamefrede.rpsideas.util.RPSProgrammerMethodHandles;
+import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import vazkii.psi.api.spell.SpellCompilationException;

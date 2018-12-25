@@ -44,7 +44,7 @@ public class ProxiedItemStackHandler implements IItemHandler, IItemHandlerModifi
     }
 
     private NBTTagList getStackList() {
-        NBTTagList list = ItemNBTHelper.getList(stack, key, Constants.NBT.TAG_COMPOUND, true);
+        NBTTagList list = ItemNBTHelper.getList(stack, key, Constants.NBT.TAG_COMPOUND);
         if (list == null)
             ItemNBTHelper.setList(stack, key, list = new NBTTagList());
 

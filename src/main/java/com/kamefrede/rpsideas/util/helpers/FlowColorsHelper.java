@@ -65,7 +65,7 @@ public class FlowColorsHelper {
     }
 
     public static ItemStack getColorizer(ItemStack colorable) {
-        NBTTagCompound colorizer = ItemNBTHelper.getCompound(colorable, TAG_FLOW_COLOR, true);
+        NBTTagCompound colorizer = ItemNBTHelper.getCompound(colorable, TAG_FLOW_COLOR);
         if (colorizer == null) return ItemStack.EMPTY;
         else return new ItemStack(colorizer);
     }

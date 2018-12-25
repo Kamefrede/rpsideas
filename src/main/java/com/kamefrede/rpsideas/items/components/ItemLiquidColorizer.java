@@ -44,7 +44,7 @@ public class ItemLiquidColorizer extends ItemComponent implements ICADColorizer,
     public static ItemStack getInheriting(ItemStack stack) {
         if (!stack.hasTagCompound())
             return ItemStack.EMPTY;
-        NBTTagCompound cmp = ItemNBTHelper.getCompound(stack, "inheriting", true);
+        NBTTagCompound cmp = ItemNBTHelper.getCompound(stack, "inheriting");
         if (cmp == null)
             return ItemStack.EMPTY;
         return new ItemStack(cmp);

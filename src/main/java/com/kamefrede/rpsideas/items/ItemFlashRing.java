@@ -116,7 +116,7 @@ public class ItemFlashRing extends ItemMod implements ISpellContainer {
     }
 
     @Override
-    public boolean hasContainerItem() {
+    public boolean hasContainerItem(ItemStack stack) {
         return true;
     }
 

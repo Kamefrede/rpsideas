@@ -44,7 +44,7 @@ public class ItemCADMagazine extends ItemMod implements ISocketable, ICADCompone
     }
 
     public static ItemStack getSocket(ItemStack stack) {
-        NBTTagCompound nbt = ItemNBTHelper.getCompound(stack, "socket", true);
+        NBTTagCompound nbt = ItemNBTHelper.getCompound(stack, "socket");
         return nbt == null ? new ItemStack(ModItems.cadSocket) : new ItemStack(nbt);
     }
 
@@ -272,7 +272,7 @@ public class ItemCADMagazine extends ItemMod implements ISocketable, ICADCompone
     @Override
     public ItemStack getBulletInSocket(ItemStack stack, int slot) {
         String name = "bullet" + slot;
-        NBTTagCompound cmp = ItemNBTHelper.getCompound(stack, name, true);
+        NBTTagCompound cmp = ItemNBTHelper.getCompound(stack, name);
         return cmp == null ? ItemStack.EMPTY : new ItemStack(cmp);
     }
 
