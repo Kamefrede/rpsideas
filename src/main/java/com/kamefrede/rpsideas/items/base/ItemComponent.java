@@ -4,6 +4,7 @@ import com.kamefrede.rpsideas.RPSIdeas;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.ITooltipFlag;
@@ -68,7 +69,10 @@ public abstract class ItemComponent extends ItemMod implements ICADComponent {
     @SideOnly(Side.CLIENT)
     protected final void addTooltipTagSubLineRaw(@Nonnull List<String> tooltip, String prefix, String rawValue) {
         String nameFormatted = I18n.format(prefix);
-        String padding = times(" ", nameFormatted.length() + 3);
+        FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+        int length = fontRenderer.getStringWidth(nameFormatted + ":  ");
+        int space = fontRenderer.getStringWidth(" ");
+        String padding = times(" ", length / space);
 
         tooltip.add(padding + TextFormatting.GRAY + rawValue);
     }
