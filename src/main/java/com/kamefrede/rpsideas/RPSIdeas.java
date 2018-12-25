@@ -56,6 +56,8 @@ public class RPSIdeas {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        DATA_FIXER = FMLCommonHandler.instance().getDataFixer().init(MODID, RPSDataFixer.parseSemVer(VERSION));
+
         new RPSCreativeTab();
         new RPSItems();
         new RPSBlocks();
@@ -63,7 +65,6 @@ public class RPSIdeas {
 
         SpellPieces.init();
         RPSEntities.init();
-        DATA_FIXER = FMLCommonHandler.instance().getDataFixer().init(MODID, RPSDataFixer.parseSemVer(VERSION));
 
         NetworkRegistry.INSTANCE.registerGuiHandler(RPSIdeas.INSTANCE, new GuiHandler());
     }
