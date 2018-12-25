@@ -410,13 +410,13 @@ psi.piecegroup.rpsideas.mana_psionics.desc=What is elemental magic worth without
 psi.piecegroup.rpsideas.macros=Macros
 psi.piecegroup.rpsideas.macros.desc=This group introduces a new type of pieces to the game, Macros.<br><br>Macros are a way to save on bandwidth by compressing commonly used techniques into a single piece, but at the expense of complexity.<br><br>Macro: Caster Raycast does the exact same as using Operator: Vector Raycast with the Caster's position and look but trades bandwidth for complexity
 
-psi.piecegroup.rpsideas.visual_auditive=Visual and Auditory Tricks
+psi.piecegroup.rpsideas.visual_auditive=Sight and Sound
 psi.piecegroup.rpsideas.visual_auditive.desc=This group introduces tricks that either provoke visual or auditory sensations on players and entities.<br><br>Trick: Note Block Sound plays a sound at a given position. Its parameters are as follows:<br><br>Instrument: Value ranging from 0 to 10 and correspond to the following instruments(in order): Harp/Piano, Bass drum, Snare drum, Clicks and sticks, Bass guitar, Flute, Bell, Guitar, Chime, Xylophone, Stronger harp.<br><br>Volume: values ranging from 0 to 1, controls how loud it is.<br><br>Pitch: value ranging from 0 to 24, controls what note the trick plays.
 
-psi.piecegroup.rpsideas.advanced_loopcast_control=Advanced Loopcast and Flow Control
+psi.piecegroup.rpsideas.advanced_loopcast_control=Flow Control II
 psi.piecegroup.rpsideas.advanced_loopcast_control.desc=This group introduces various tricks and selectors to further enhance the flow control of both loopcast and spells.<br><br>The main piece of this group is Selector: Sucess Counter, which when put on a piece of armor, returns the amount of times a spell has been cast.<br><br>Trick: Spin Chamber takes a number input, if the number is below -1 it will select the previous bullet in the CAD. If the number is above one, it will select the next bullet. If the input is 0 it does nothing.
 
-psi.piecegroup.rpsideas.inter_cad=Inter-CAD Communication
+psi.piecegroup.rpsideas.inter_cad=CAD Networking
 psi.piecegroup.rpsideas.inter_cad.desc=This group introduces a way for you to communicate with other CADs in the world. By using Trick: Broadcast and supplying a channel and signal value it will broadcast a number to everyone in radius of the position given.<br><br>This has some restrictions: It can only be used once per spellcast and you can only broadcast one number at the time, if you broadcast one after another it will overwrite the previous one.
 
 rpsideas.spelldesc.requires=Requires: %s
