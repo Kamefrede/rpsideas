@@ -42,6 +42,8 @@ public class PotionModColorized extends PotionMod {
         GlStateManager.color(1f, 1f, 1f);
     }
 
+
+    @SideOnly(Side.CLIENT)
     public int getPulsedColor() {
         int color = ICADColorizer.DEFAULT_SPELL_COLOR;
         ItemStack cad = PsiAPI.getPlayerCAD(Minecraft.getMinecraft().player);
