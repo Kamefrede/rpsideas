@@ -467,7 +467,7 @@ lingering_potion.effect.rpsideas.psishock_strong=Lingering Potion of Mental Disr
 rpsideas.event.nearby_entities=&bEvent&7: Biotic Pulse
 rpsideas.event.spell_detonate=&bEvent&7: Detonation
 
-itemGroup.rpsideas=Random PSIdeas
+item_group.rpsideas=Random PSIdeas
 
 rpsideas.subtitle.thwack=Metal thwacks
 
