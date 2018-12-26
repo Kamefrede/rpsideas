@@ -11,7 +11,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -20,6 +22,7 @@ import javax.annotation.Nullable;
 public class BlockPsiDampener extends BlockMod {
 
     public static final PropertyBool ACTIVATED = PropertyBool.create("activated");
+    public static final AxisAlignedBB BOUNDS = new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1 / 16.0, 1.0);
 
     public BlockPsiDampener() {
         super(RPSBlockNames.BLOCK_PSI_DAMPENER, Material.IRON);
@@ -38,6 +41,7 @@ public class BlockPsiDampener extends BlockMod {
         return new TilePsiDampener();
     }
 
+
     @Override
     public boolean onBlockActivated(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (player.isSneaking()) {
@@ -48,11 +52,12 @@ public class BlockPsiDampener extends BlockMod {
             }
             return true;
         }
-
-        TileEntity tile = world.getTileEntity(pos);
-        if (tile instanceof TilePsiDampener)
-            return true;//add the action here
         return false;
+    }
+
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return BOUNDS;
     }
 
     @Override
