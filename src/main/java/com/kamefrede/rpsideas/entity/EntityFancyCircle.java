@@ -24,7 +24,9 @@ public class EntityFancyCircle extends Entity implements ISpellImmune {
     private static final DataParameter<String> CASTER_NAME = EntityDataManager.createKey(EntityFancyCircle.class, DataSerializers.STRING);
     private static final DataParameter<Integer> MAX_ALIVE = EntityDataManager.createKey(EntityFancyCircle.class, DataSerializers.VARINT);
     private static final DataParameter<Float> SCALE_DATA = EntityDataManager.createKey(EntityFancyCircle.class, DataSerializers.FLOAT);
-    private static final DataParameter<EnumFacing> FACING_DATA = EntityDataManager.createKey(EntityFancyCircle.class, DataSerializers.FACING);
+    private static final DataParameter<Float> FACING_X = EntityDataManager.createKey(EntityFancyCircle.class, DataSerializers.FLOAT);
+    private static final DataParameter<Float> FACING_Y = EntityDataManager.createKey(EntityFancyCircle.class, DataSerializers.FLOAT);
+    private static final DataParameter<Float> FACING_Z = EntityDataManager.createKey(EntityFancyCircle.class, DataSerializers.FLOAT);
 
     private static final String TAG_COLORIZER = "colorizer";
     private static final String TAG_TIME_ALIVE = "timeAlive";
@@ -55,7 +57,9 @@ public class EntityFancyCircle extends Entity implements ISpellImmune {
         dataManager.set(CASTER_NAME, player.getName());
         dataManager.set(MAX_ALIVE, maxAlive);
         dataManager.set(SCALE_DATA, scale);
-        dataManager.set(FACING_DATA, EnumFacing.getFacingFromVector((float)vec.x, (float)vec.y, (float)vec.z));
+        dataManager.set(FACING_X, (float)vec.x);
+        dataManager.set(FACING_Y, (float)vec.y);
+        dataManager.set(FACING_Z, (float)vec.z);
 
         this.setPositionAndRotation(pos.x, pos.y, pos.z, player.rotationYaw, player.rotationPitch);
     }
@@ -66,7 +70,9 @@ public class EntityFancyCircle extends Entity implements ISpellImmune {
         dataManager.register(CASTER_NAME, "");
         dataManager.register(MAX_ALIVE, 0);
         dataManager.register(SCALE_DATA, 0f);
-        dataManager.register(FACING_DATA, EnumFacing.UP);
+        dataManager.register(FACING_X, 0f);
+        dataManager.register(FACING_Y, 0f);
+        dataManager.set(FACING_Z, 0f);
     }
 
     @Override
@@ -77,11 +83,10 @@ public class EntityFancyCircle extends Entity implements ISpellImmune {
             colorizer.writeToNBT(colorizerCmp);
         tagCompound.setTag(TAG_COLORIZER, colorizerCmp);
         tagCompound.setString(TAG_CASTER_NAME, dataManager.get(CASTER_NAME));
-        Vec3i vec = dataManager.get(FACING_DATA).getDirectionVec();
 
-        tagCompound.setFloat(TAG_FACING_X, vec.getX());
-        tagCompound.setFloat(TAG_FACING_Y, vec.getY());
-        tagCompound.setFloat(TAG_FACING_Z, vec.getZ());
+        tagCompound.setFloat(TAG_FACING_X, dataManager.get(FACING_X));
+        tagCompound.setFloat(TAG_FACING_Y, dataManager.get(FACING_Y));
+        tagCompound.setFloat(TAG_FACING_Z, dataManager.get(FACING_Z));
 
         tagCompound.setInteger(TAG_MAX_ALIVE, dataManager.get(MAX_ALIVE));
         tagCompound.setFloat(TAG_SCALE, dataManager.get(SCALE_DATA));
@@ -96,7 +101,9 @@ public class EntityFancyCircle extends Entity implements ISpellImmune {
         dataManager.set(CASTER_NAME, compound.getString(TAG_CASTER_NAME));
         dataManager.set(MAX_ALIVE, compound.getInteger(TAG_MAX_ALIVE));
         dataManager.set(SCALE_DATA, compound.getFloat(TAG_SCALE));
-        dataManager.set(FACING_DATA, EnumFacing.getFacingFromVector(compound.getFloat(TAG_FACING_X), compound.getFloat(TAG_FACING_Y), compound.getFloat(TAG_FACING_Z)));
+        dataManager.set(FACING_X, compound.getFloat(TAG_FACING_X));
+        dataManager.set(FACING_Y, compound.getFloat(TAG_FACING_Y));
+        dataManager.set(FACING_Z, compound.getFloat(TAG_FACING_Z));
         timeAlive = compound.getInteger(TAG_TIME_ALIVE);
     }
 
@@ -122,8 +129,8 @@ public class EntityFancyCircle extends Entity implements ISpellImmune {
         return dataManager.get(SCALE_DATA);
     }
 
-    public Vec3i getDirectionVector(){
-        return dataManager.get(FACING_DATA).getDirectionVec();
+    public Vec3d getDirectionVector() {
+        return new Vec3d(dataManager.get(FACING_X), dataManager.get(FACING_Y), dataManager.get(FACING_Z));
     }
 
     @Override

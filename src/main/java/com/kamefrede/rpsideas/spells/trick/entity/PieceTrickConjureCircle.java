@@ -55,7 +55,6 @@ public class PieceTrickConjureCircle extends PieceTrick {
         double scl = this.getParamValue(context, scale);
         double maxTimeAlive = this.getParamValue(context, time);
         if (pos == null) throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        if(dir != null && !dir.isAxial()) throw new SpellRuntimeException(SpellRuntimeExceptions.NON_AXIAL_VECTOR);
         if(dir == null || dir.isZero()) dir = new Vector3(0,1,0);
         if (!context.isInRadius(pos))
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);

@@ -40,12 +40,13 @@ public class RenderFancyCircle extends Render<EntityFancyCircle> {
         int colorVal = entity.getColor();
         float alive = entity.getLiveTime() + partialTicks;
         float s1 = entity.getScale();
-        Vec3i rotation = entity.getDirectionVector();
-        Vec3d vec = new Vec3d(0,0,0);
-        rotation = rotation.crossProduct(new Vec3i(0,1,0));
+        Vec3d rotation = entity.getDirectionVector().normalize();
+        Vec3d defaultorientation = new Vec3d(0,1,0);
+        rotation = rotation.crossProduct(defaultorientation);
+        float angle  = (float)Math.acos(rotation.y) / (float) Math.PI;
 
 
-        renderSpellCircle(alive, s1, x, y, z, colorVal, rotation);
+        renderSpellCircle(alive, s1, x, y, z, colorVal, rotation, angle);
     }
 
     @Nullable
@@ -54,13 +55,14 @@ public class RenderFancyCircle extends Render<EntityFancyCircle> {
         return null;
     }
 
-    public static void renderSpellCircle(float time, float s1, double x, double y, double z, int colorVal, Vec3i vec) {
+    public static void renderSpellCircle(float time, float s1, double x, double y, double z, int colorVal, Vec3d vec, float angle) {
         float s = 1F / 16F;
         GlStateManager.pushMatrix();
         GlStateManager.translate(x - s1 * 2, y + 0.01, z - s1 * 2);
         GlStateManager.scale(s, s, s);
         GlStateManager.scale(s1, 1F, s1);
         GlStateManager.rotate(90F, 1F, 0F, 0F);
+        GlStateManager.rotate(angle, (float)vec.z, 0f, (float)-vec.x);
         GlStateManager.disableCull();
         GlStateManager.disableLighting();
         ShaderHandler.useShader(ShaderHandler.rawColor);
