@@ -72,7 +72,7 @@ public class EntityFancyCircle extends Entity implements ISpellImmune {
         dataManager.register(SCALE_DATA, 0f);
         dataManager.register(FACING_X, 0f);
         dataManager.register(FACING_Y, 0f);
-        dataManager.set(FACING_Z, 0f);
+        dataManager.register(FACING_Z, 0f);
     }
 
     @Override
