@@ -23,6 +23,7 @@ public class RPSEntities {
         registerModEntity(EntityGaussPulse.class, RPSEntityNames.ENTITY_GAUSS_PULSE, 256, 10, true);
         registerModEntity(EntityPsireworkRocket.class, RPSEntityNames.ENTITY_PSI_FIREWORK, 64, 10, true);
         registerModEntity(EntityConjuredText.class, RPSEntityNames.ENTITY_CONJURED_TEXT, 64, 10, false);
+        registerModEntity(EntityFancyCircle.class, RPSEntityNames.ENTITY_FANCY_CIRCLE, 64, 10, false);
     }
 
     @SideOnly(Side.CLIENT)

@@ -22,10 +22,7 @@ import com.kamefrede.rpsideas.spells.operator.string.PieceOperatorParseNumber;
 import com.kamefrede.rpsideas.spells.operator.vector.*;
 import com.kamefrede.rpsideas.spells.selector.*;
 import com.kamefrede.rpsideas.spells.trick.block.*;
-import com.kamefrede.rpsideas.spells.trick.entity.PieceTrickCloseElytra;
-import com.kamefrede.rpsideas.spells.trick.entity.PieceTrickDetonate;
-import com.kamefrede.rpsideas.spells.trick.entity.PieceTrickNumBroadcast;
-import com.kamefrede.rpsideas.spells.trick.entity.PieceTrickOpenElytra;
+import com.kamefrede.rpsideas.spells.trick.entity.*;
 import com.kamefrede.rpsideas.spells.trick.misc.*;
 import com.kamefrede.rpsideas.util.libs.RPSPieceNames;
 import net.minecraft.util.ResourceLocation;
@@ -127,6 +124,7 @@ public class SpellPieces {
         register(PieceTrickFreezeBlock.class, RPSPieceNames.TRICK_FREEZE_BLOCK, RPSPieceNames.ALTERNATE_CONJURATION);
         register(PieceOperatorClosestToLine.class, RPSPieceNames.OPERATOR_CLOSEST_TO_LINE, LibPieceGroups.SECONDARY_OPERATORS);
         register(PieceTrickConjureText.class, RPSPieceNames.TRICK_CONJURE_TEXT, RPSPieceNames.VISUAL_AUDITIVE);
+        register(PieceTrickConjureCircle.class, RPSPieceNames.TRICK_CONJURE_CIRCLE, RPSPieceNames.VISUAL_AUDITIVE);
         if (Loader.isModLoaded("botania")) BotaniaCompatPieces.init();
     }
 

@@ -17,5 +17,6 @@ public class SpellRuntimeExceptions {
     public static final String CAD = "rpsideas.spellerror.cad";
     public static final String NAN = "rpsideas.spellerror.nan";
     public static final String TEXT = "rpsideas.spellerror.text";
+    public static final String SCALE = "rpsideas.spellerror.scale";
 
 }
