@@ -22,4 +22,5 @@ public abstract class SpellParams {
     public static final String GENERIC_NAME_RAY_START = "rpsideas.spellparam.ray_start";
     public static final String GENERIC_NAME_TEXT = "rpsideas.spellparam.text";
     public static final String GENERIC_NAME_SCALE = "rpsideas.spellparam.scale";
+    public static final String GENERIC_NAME_DIRECTION = "rpsideas.spellparam.direction";
 }

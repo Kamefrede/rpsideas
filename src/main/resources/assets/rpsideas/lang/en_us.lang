@@ -82,6 +82,7 @@ psi.spellpiece.rpsideas.trick_freeze_block=Trick: Freeze Block
 psi.spellpiece.rpsideas.operator_parse_number=Operator: Parse Number
 psi.spellpiece.rpsideas.operator_closest_to_line=Operator: Closest To Line
 psi.spellpiece.rpsideas.trick_conjure_text=Trick: Conjure Text
+psi.spellpiece.rpsideas.trick_conjure_circle=Trick: Conjure Circle
 
 
 
@@ -169,6 +170,7 @@ psi.spellpiece.rpsideas.trick_freeze_block.desc=Freezes the block at the selecte
 psi.spellpiece.rpsideas.operator_parse_number.desc=Parses a number
 psi.spellpiece.rpsideas.operator_closest_to_line.desc=Given two ends of a ray and an entity list, it will select the closest.
 psi.spellpiece.rpsideas.trick_conjure_text.desc=Conjures a holographic text at a given position
+psi.spellpiece.rpsideas.trick_conjure_circle.desc=Conjures a circle at the given position
 
 psi.datatype.String=String
 rpsideas.datatype.String=String
@@ -188,6 +190,7 @@ rpsideas.spellerror.no_message=CAD has not picked up a broadcasted message
 rpsideas.spellerror.armor=Selector only works in armor
 rpsideas.spellerror.cad=Trick only works in a CAD
 rpsideas.spellerror.nan=Not a number
+rpsideas.spellerror.scale=Scale must be between ]0,1[
 
 rpsideas.spellparam.root=Root
 rpsideas.spellparam.degree=Degrees
@@ -210,6 +213,8 @@ rpsideas.spellparam.pitch=Pitch
 rpsideas.spellparam.ray_end=Ray End
 rpsideas.spellparam.ray_start=Ray Start
 rpsideas.spellparam.text=Text
+rpsideas.spellparam.scale=Scale
+rpsideas.spellparam.direction=Direction
 psi.datatype.BlockProperties=Block Properties
 
 rpsideas.learn.usage=/psi-learn <group> [player]
@@ -428,6 +433,7 @@ rpsideas.spellerror.text=ERROR: Text must be 32 characters or less.
 entity.gauss_pulse.name=Gauss Pulse
 entity.sniper_bullet.name=Sniper Round
 entity.psi_mana_burst.name=Psi Mana Burst
+entity.entity_fancy_circle.name=Conjured Circle
 
 rpsideas.potion.psishock=Psionic Shock
 rpsideas.potion.psipulse=Psionic Pulse

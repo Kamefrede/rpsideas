@@ -1,6 +1,5 @@
 package com.kamefrede.rpsideas.spells.trick.entity;
 
-import com.kamefrede.rpsideas.entity.EntityConjuredText;
 import com.kamefrede.rpsideas.entity.EntityFancyCircle;
 import com.kamefrede.rpsideas.spells.base.SpellParams;
 import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
@@ -14,8 +13,6 @@ import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceTrick;
-
-import java.util.Objects;
 
 public class PieceTrickConjureCircle extends PieceTrick {
 
@@ -33,7 +30,7 @@ public class PieceTrickConjureCircle extends PieceTrick {
         addParam(time = new ParamNumber(SpellParam.GENERIC_NAME_TIME, SpellParam.BLUE, false, true));
         addParam(position = new ParamVector(SpellParam.GENERIC_NAME_POSITION,SpellParam.RED, false, false));
         addParam(scale = new ParamNumber(SpellParams.GENERIC_NAME_SCALE, SpellParam.GREEN, false, false));
-        addParam(direction = new ParamVector(SpellParams.GENERIC_VAZKII_RAY, SpellParam.CYAN, true, false));
+        addParam(direction = new ParamVector(SpellParams.GENERIC_NAME_DIRECTION, SpellParam.CYAN, true, false));
     }
 
     @Override
