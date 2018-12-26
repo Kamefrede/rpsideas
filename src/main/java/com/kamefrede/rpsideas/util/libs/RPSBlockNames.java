@@ -10,4 +10,6 @@ public class RPSBlockNames {
     public static final String BRIGHT_PLATE = "bright_plate";
     public static final String DARK_PLATE = "dark_plate";
     public static final String CAD_CASE_TILE = "case";
+    public static final String BLOCK_PSI_DAMPENER = "psi_dampener_block";
+    public static final String TILE_PSI_DAMPENER = "psi_dampener";
 }
