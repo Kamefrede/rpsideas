@@ -8,6 +8,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
@@ -102,10 +103,15 @@ public class EntityFancyCircle extends Entity implements ISpellImmune {
         dataManager.set(CASTER_NAME, compound.getString(TAG_CASTER_NAME));
         dataManager.set(MAX_ALIVE, compound.getInteger(TAG_MAX_ALIVE));
         dataManager.set(SCALE_DATA, compound.getFloat(TAG_SCALE));
-        dataManager.set(FACING_X, compound.getFloat(TAG_FACING_X));
-        dataManager.set(FACING_Y, compound.getFloat(TAG_FACING_Y));
-        dataManager.set(FACING_Z, compound.getFloat(TAG_FACING_Z));
-        timeAlive = compound.getInteger(TAG_TIME_ALIVE);
+        float xFacing = compound.getFloat(TAG_FACING_X);
+        float yFacing = compound.getFloat(TAG_FACING_Y);
+        float zFacing = compound.getFloat(TAG_FACING_Z);
+
+        float facingMod = (float) MathHelper.fastInvSqrt(xFacing * xFacing + yFacing * yFacing + zFacing * zFacing);
+
+        dataManager.set(FACING_X, xFacing * facingMod);
+        dataManager.set(FACING_Y, yFacing * facingMod);
+        dataManager.set(FACING_Z, zFacing * facingMod);
     }
 
     @Override
@@ -132,6 +138,18 @@ public class EntityFancyCircle extends Entity implements ISpellImmune {
 
     public Vec3d getDirectionVector() {
         return new Vec3d(dataManager.get(FACING_X), dataManager.get(FACING_Y), dataManager.get(FACING_Z));
+    }
+
+    public float getZFacing(){
+        return dataManager.get(FACING_Z);
+    }
+
+    public float getXFacing(){
+        return dataManager.get(FACING_X);
+    }
+
+    public float getYFacing(){
+        return dataManager.get(FACING_Y);
     }
 
     @Override

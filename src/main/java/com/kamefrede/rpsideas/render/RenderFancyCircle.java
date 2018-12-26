@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 import net.minecraftforge.fml.relauncher.Side;
@@ -38,17 +39,15 @@ public class RenderFancyCircle extends Render<EntityFancyCircle> {
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
 
         int colorVal = entity.getColor();
-        float alive = entity.timeAlive + partialTicks;
+        float alive = entity.ticksExisted + partialTicks;
         float s1 = entity.getScale();
-        Vec3d rotation = entity.getDirectionVector().normalize();
-        Vec3d defaultorientation = new Vec3d(0,1,0);
-        Vec3d rot = rotation.crossProduct(defaultorientation);
-        float angle  = (float)Math.acos(rotation.y) * (180 / (float) Math.PI);
+        float angle = (float) (Math.acos(entity.getZFacing()) * 180 / Math.PI);
         if(alive > entity.getLiveTime() - 5)
-            s1 = entity.getScale() - Math.min(entity.getScale(), Math.max(0, alive - (entity.getLiveTime() - 5)) / 5);
+           s1 =Math.min(entity.getScale(), Math.max(0, alive - (entity.getLiveTime() - 5)) / 5);
+            //s1 =entity.getScale() -  Math.max(0, alive - (entity.getLiveTime() - 5) / 5);
 
 
-        renderSpellCircle(alive, s1, x, y, z, colorVal, rot, angle);
+        renderSpellCircle(alive, s1, x, y, z, colorVal, entity, angle);
     }
 
     @Nullable
@@ -57,22 +56,24 @@ public class RenderFancyCircle extends Render<EntityFancyCircle> {
         return null;
     }
 
-    public static void renderSpellCircle(float time, float s1, double x, double y, double z, int colorVal, Vec3d vec, float angle) {
+    public static void renderSpellCircle(float time, float s1, double x, double y, double z, int colorVal, EntityFancyCircle entity, float angle) {
+        Vec3d vec = entity.getDirectionVector();
         float s = 1F / 16F;
         GlStateManager.pushMatrix();
         GlStateManager.translate(x - s1 * 2, y + 0.01, z - s1 * 2);
         GlStateManager.scale(s, s, s);
         GlStateManager.scale(s1, 1F, s1);
-        GlStateManager.rotate(90F, 1F, 0F, 0F);
-        if(vec == new Vec3d(0f,1f,0f)){
-            //do nothin
-        }else if(vec == new Vec3d(0f,-1f,0f)){
-            GlStateManager.rotate(180f, 1f,0f,0f);
-        }else
-            GlStateManager.rotate(angle, (float)vec.z, 0f, (float)-vec.x);
+
+
+
         GlStateManager.disableCull();
         GlStateManager.disableLighting();
-        ShaderHandler.useShader(ShaderHandler.rawColor);
+        if(vec == new Vec3d(0f,0f,1f)){
+            //do nothin
+        }else if(vec == new Vec3d(0f,0,-1f)){
+            GlStateManager.rotate(180f, 1f,0f,0f);
+        }else
+            GlStateManager.rotate(angle, -entity.getYFacing(), entity.getXFacing(), 0);
 
         for(int i = 0; i < layers.length; i++) {
             Color color = new Color(colorVal);

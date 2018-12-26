@@ -65,7 +65,7 @@ public class PieceTrickConjureCircle extends PieceTrick {
         World world = context.caster.world;
         if (!world.isRemote) {
             EntityFancyCircle circle = new EntityFancyCircle(world);
-            circle.setInfo(context.caster, colorizer, pos, (int)maxTimeAlive,(float) scl,  dir.toVec3D());
+            circle.setInfo(context.caster, colorizer, pos, (int)maxTimeAlive,(float) scl,  dir.toVec3D().normalize());
             circle.getEntityWorld().spawnEntity(circle);
         }
         return null;
