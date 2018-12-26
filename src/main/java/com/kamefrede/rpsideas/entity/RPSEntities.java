@@ -3,6 +3,7 @@ package com.kamefrede.rpsideas.entity;
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.entity.botania.EntityPsiManaBurst;
 import com.kamefrede.rpsideas.render.RenderConjuredText;
+import com.kamefrede.rpsideas.render.RenderFancyCircle;
 import com.kamefrede.rpsideas.util.libs.RPSEntityNames;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderSnowball;
@@ -31,6 +32,7 @@ public class RPSEntities {
         RenderingRegistry.registerEntityRenderingHandler(EntityPsireworkRocket.class,
                 (manager) -> new RenderSnowball<>(manager, Items.FIREWORKS, Minecraft.getMinecraft().getRenderItem()));
         RenderingRegistry.registerEntityRenderingHandler(EntityConjuredText.class, RenderConjuredText::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityFancyCircle.class, RenderFancyCircle::new);
     }
 
     @Optional.Method(modid = "botania")

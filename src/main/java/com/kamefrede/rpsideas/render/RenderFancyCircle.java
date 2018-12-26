@@ -43,7 +43,7 @@ public class RenderFancyCircle extends Render<EntityFancyCircle> {
         Vec3d rotation = entity.getDirectionVector().normalize();
         Vec3d defaultorientation = new Vec3d(0,1,0);
         rotation = rotation.crossProduct(defaultorientation);
-        float angle  = (float)Math.acos(rotation.y) / (float) Math.PI;
+        float angle  = (float)Math.acos(rotation.y) * 180 / (float) Math.PI;
 
 
         renderSpellCircle(alive, s1, x, y, z, colorVal, rotation, angle);
