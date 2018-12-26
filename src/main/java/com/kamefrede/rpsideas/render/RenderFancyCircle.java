@@ -68,9 +68,9 @@ public class RenderFancyCircle extends Render<EntityFancyCircle> {
 
         GlStateManager.disableCull();
         GlStateManager.disableLighting();
-        if(vec == new Vec3d(0f,0f,1f)){
+        if(vec.equals(new Vec3d(0f,0f,1f))){
             //do nothin
-        }else if(vec == new Vec3d(0f,0,-1f)){
+        }else if(vec.equals(new Vec3d(0f,0,-1f))){
             GlStateManager.rotate(180f, 1f,0f,0f);
         }else
             GlStateManager.rotate(angle, -entity.getYFacing(), entity.getXFacing(), 0);
