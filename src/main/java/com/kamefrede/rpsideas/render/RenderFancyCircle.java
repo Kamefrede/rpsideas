@@ -34,13 +34,22 @@ public class RenderFancyCircle extends Render<EntityFancyCircle> {
 
         int color = entity.getColor();
         float alive = entity.ticksExisted + partialTicks;
-        float scale = entity.getScale();
+        float scale = Math.min(1F, alive / 5);
         if (alive > entity.getLiveTime() - 5)
-            scale *= (1F - Math.min(1F, Math.max(0, alive - (entity.getLiveTime() - 5f)) / 5));
+            scale = 1F - Math.min(1F, Math.max(0, alive - (entity.getLiveTime() - 5f)) / 5);
 
         GlStateManager.pushMatrix();
-        GlStateManager.translate(x - scale * 2, y + 0.01, z - scale * 2);
-        GlStateManager.scale(0.0625 * scale, 0.0625, 0.0625 * scale);
+        float facingZ = entity.getZFacing();
+        double ratio = 0.0625 * entity.getScale();
+        GlStateManager.translate(x, y, z);
+
+        if (facingZ == -1)
+            GlStateManager.rotate(180, 1, 0, 0);
+        else if (facingZ != 1)
+            GlStateManager.rotate((float) (Math.acos(facingZ) * 180 / Math.PI),
+                    -entity.getYFacing(), entity.getXFacing(), 0);
+        GlStateManager.translate(-scale * 2, -scale * 2, 0.01);
+        GlStateManager.scale(ratio * scale, ratio * scale, ratio);
 
         GlStateManager.disableCull();
         GlStateManager.disableLighting();
@@ -49,13 +58,7 @@ public class RenderFancyCircle extends Render<EntityFancyCircle> {
 
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 0xf0, 0xf0);
 
-        float facingZ = entity.getZFacing();
 
-        if (facingZ == -1)
-            GlStateManager.rotate(180, 1, 0, 0);
-        else if (facingZ != 1)
-            GlStateManager.rotate((float) (Math.acos(facingZ) * 180 / Math.PI),
-                    -entity.getYFacing(), entity.getXFacing(), 0);
 
         int r = (color >> 16) & 0xFF;
         int g = (color >> 8) & 0xFF;
