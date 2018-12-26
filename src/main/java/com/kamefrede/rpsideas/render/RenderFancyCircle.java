@@ -38,15 +38,17 @@ public class RenderFancyCircle extends Render<EntityFancyCircle> {
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
 
         int colorVal = entity.getColor();
-        float alive = entity.getLiveTime() + partialTicks;
+        float alive = entity.timeAlive + partialTicks;
         float s1 = entity.getScale();
         Vec3d rotation = entity.getDirectionVector().normalize();
         Vec3d defaultorientation = new Vec3d(0,1,0);
-        rotation = rotation.crossProduct(defaultorientation);
-        float angle  = (float)Math.acos(rotation.y) * 180 / (float) Math.PI;
+        Vec3d rot = rotation.crossProduct(defaultorientation);
+        float angle  = (float)Math.acos(rotation.y) * (180 / (float) Math.PI);
+        if(alive > entity.getLiveTime() - 5)
+            s1 = entity.getScale() - Math.min(entity.getScale(), Math.max(0, alive - (entity.getLiveTime() - 5)) / 5);
 
 
-        renderSpellCircle(alive, s1, x, y, z, colorVal, rotation, angle);
+        renderSpellCircle(alive, s1, x, y, z, colorVal, rot, angle);
     }
 
     @Nullable

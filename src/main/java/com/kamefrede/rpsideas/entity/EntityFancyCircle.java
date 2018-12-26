@@ -49,6 +49,7 @@ public class EntityFancyCircle extends Entity implements ISpellImmune {
         super.onUpdate();
         if (!world.isRemote && timeAlive++ > dataManager.get(MAX_ALIVE))
             setDead();
+        timeAlive++;
     }
 
 
