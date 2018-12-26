@@ -38,7 +38,7 @@ public class PieceTrickConjureText extends PieceTrick {
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException, ArithmeticException {
         super.addToMetadata(meta);
         Double timeAlive = this.getParamEvaluation(time);
-        if (timeAlive <= 0)
+        if (timeAlive != null && timeAlive <= 0)
             throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_INTEGER);
     }
 

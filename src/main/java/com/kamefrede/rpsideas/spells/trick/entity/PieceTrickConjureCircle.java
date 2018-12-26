@@ -39,11 +39,11 @@ public class PieceTrickConjureCircle extends PieceTrick {
     @Override
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException, ArithmeticException {
         super.addToMetadata(meta);
-        double scl = this.getParamEvaluation(scale);
-        double tim = this.getParamEvaluation(time);
-        if(scl > 1 || scl <= 0)
+        Double scl = this.getParamEvaluation(scale);
+        Double tim = this.getParamEvaluation(time);
+        if(scl != null &&(scl > 1 || scl <= 0))
             throw new SpellCompilationException(SpellRuntimeExceptions.SCALE);
-        if(tim <= 0)
+        if(tim != null && tim <= 0)
             throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_VALUE);
 
     }
