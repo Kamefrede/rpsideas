@@ -7,10 +7,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.api.internal.Vector3;
@@ -140,15 +138,15 @@ public class EntityFancyCircle extends Entity implements ISpellImmune {
         return new Vec3d(dataManager.get(FACING_X), dataManager.get(FACING_Y), dataManager.get(FACING_Z));
     }
 
-    public float getZFacing(){
+    public float getZFacing() {
         return dataManager.get(FACING_Z);
     }
 
-    public float getXFacing(){
+    public float getXFacing() {
         return dataManager.get(FACING_X);
     }
 
-    public float getYFacing(){
+    public float getYFacing() {
         return dataManager.get(FACING_Y);
     }
 
