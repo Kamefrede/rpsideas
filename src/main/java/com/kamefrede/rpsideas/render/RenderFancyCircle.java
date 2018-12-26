@@ -35,8 +35,8 @@ public class RenderFancyCircle extends Render<EntityFancyCircle> {
         int color = entity.getColor();
         float alive = entity.ticksExisted + partialTicks;
         float scale = entity.getScale();
-        if (alive > (entity.getLiveTime() - 5))
-            scale = entity.getScale() * (0.0625f / (alive - entity.getLiveTime()));
+        if (alive > entity.getLiveTime() - 5)
+            scale *= (1F - Math.min(1F, Math.max(0, alive - (entity.getLiveTime() - 5f)) / 5));
 
         GlStateManager.pushMatrix();
         GlStateManager.translate(x - scale * 2, y + 0.01, z - scale * 2);
