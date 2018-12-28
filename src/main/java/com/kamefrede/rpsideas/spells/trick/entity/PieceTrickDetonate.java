@@ -2,6 +2,7 @@ package com.kamefrede.rpsideas.spells.trick.entity;
 
 import com.kamefrede.rpsideas.items.components.ItemTriggerSensor;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.world.WorldServer;
 import vazkii.psi.api.exosuit.PsiArmorEvent;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
@@ -54,7 +55,11 @@ public class PieceTrickDetonate extends PieceTrick {
         for (EntitySpellCharge ent : list)
             ent.doExplosion();
 
-        PsiArmorEvent.post(new PsiArmorEvent(context.caster, ItemTriggerSensor.EVENT_TRIGGER));
+        if (context.caster.world instanceof WorldServer) {
+            WorldServer server = (WorldServer) context.caster.world;
+            server.addScheduledTask(() ->
+                PsiArmorEvent.post(new PsiArmorEvent(context.caster, ItemTriggerSensor.EVENT_TRIGGER)));
+        }
         return !list.isEmpty();
     }
 }

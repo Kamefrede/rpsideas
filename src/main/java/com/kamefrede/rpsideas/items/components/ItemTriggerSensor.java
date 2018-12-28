@@ -11,6 +11,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -39,7 +40,11 @@ public class ItemTriggerSensor extends ItemMod implements IExosuitSensor, IItemC
         EntityPlayer player = ev.getEntityPlayer();
         ItemStack stack = ev.getItemStack();
         if (!stack.isEmpty() && stack.getItem() instanceof ItemDetonator) {
-            if (!player.world.isRemote) PsiArmorEvent.post(new PsiArmorEvent(player, EVENT_TRIGGER));
+            if (player.world instanceof WorldServer) {
+                WorldServer server = (WorldServer) player.world;
+                server.addScheduledTask(() ->
+                        PsiArmorEvent.post(new PsiArmorEvent(player, ItemTriggerSensor.EVENT_TRIGGER)));
+            }
 
             List<EntitySpellCharge> charges = player.world.getEntitiesWithinAABB(EntitySpellCharge.class, player.getEntityBoundingBox().grow(32, 32, 32));
             if (charges.isEmpty()) {
