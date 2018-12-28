@@ -484,3 +484,26 @@ rpsideas.misc.too_complex=This spell is too large for the socket in your Spell M
 rpsideas.misc.too_complex_bullet=This spell is too large for the socket in your Spell Magazine to transfer.
 
 jei.rpsideas.category.trick=Spell Infusion
+
+
+rpsideas.param.range=Range
+rpsideas.param.range.x=X Range
+rpsideas.param.range.y=Y Range
+rpsideas.param.range.z=Z Range
+rpsideas.param.relpos.x=X
+rpsideas.param.relpos.y=Y
+rpsideas.param.relpos.z=Z
+rpsideas.param.relpos.x.min=-X
+rpsideas.param.relpos.y.min=-Y
+rpsideas.param.relpos.z.min=-Z
+rpsideas.param.relpos.x.max=+X
+rpsideas.param.relpos.y.max=+Y
+rpsideas.param.relpos.z.max=+Z
+
+rpsideas.volumetric.sphere=Sphere
+rpsideas.volumetric.cube=Cube
+rpsideas.volumetric.ranges=Ellipsoid
+rpsideas.volumetric.tube.x=X-Axis Cylinder
+rpsideas.volumetric.tube.y=Y-Axis Cylinder
+rpsideas.volumetric.tube.z=Z-Axis Cylinder
+rpsideas.volumetric.rect=Box

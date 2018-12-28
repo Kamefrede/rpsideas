@@ -11,10 +11,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import vazkii.psi.common.core.handler.PsiSoundHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -22,7 +25,7 @@ import javax.annotation.Nullable;
 public class BlockPsiDampener extends BlockMod {
 
     public static final PropertyBool ACTIVATED = PropertyBool.create("activated");
-    public static final AxisAlignedBB BOUNDS = new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1 / 16.0, 1.0);
+    private static final AxisAlignedBB BOUNDS = new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1 / 16.0, 1.0);
 
     public BlockPsiDampener() {
         super(RPSBlockNames.BLOCK_PSI_DAMPENER, Material.IRON);
@@ -30,6 +33,7 @@ public class BlockPsiDampener extends BlockMod {
         setDefaultState(getDefaultState().withProperty(ACTIVATED, false));
     }
 
+    @Nonnull
     @Override
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, ACTIVATED);
@@ -37,24 +41,27 @@ public class BlockPsiDampener extends BlockMod {
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
+    public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
         return new TilePsiDampener();
     }
-
 
     @Override
     public boolean onBlockActivated(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (player.isSneaking()) {
             if (!world.isRemote) {
-                boolean wasOpen = state.getValue(ACTIVATED);
-                world.setBlockState(pos, state.cycleProperty(ACTIVATED), 2);
-                //play a sound
+                if (player.canUseCommandBlock()) {
+                    boolean wasActive = state.getValue(ACTIVATED);
+                    world.setBlockState(pos, state.cycleProperty(ACTIVATED), 2);
+                    if (!wasActive)
+                        world.playSound(null, pos, PsiSoundHandler.bulletCreate, SoundCategory.BLOCKS, 1f, 1f);
+                } else player.sendMessage(new TextComponentTranslation("advMode.notAllowed"));
             }
             return true;
         }
         return false;
     }
 
+    @Nonnull
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return BOUNDS;
