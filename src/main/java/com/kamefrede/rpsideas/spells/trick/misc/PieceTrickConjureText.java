@@ -40,6 +40,9 @@ public class PieceTrickConjureText extends PieceTrick {
         Double timeAlive = this.getParamEvaluation(time);
         if (timeAlive != null && timeAlive <= 0)
             throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_INTEGER);
+        if (timeAlive != null) {
+            meta.addStat(EnumSpellStat.POTENCY, (timeAlive.intValue() / 20) );
+        }
     }
 
     @Override

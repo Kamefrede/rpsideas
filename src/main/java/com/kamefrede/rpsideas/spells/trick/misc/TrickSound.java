@@ -29,7 +29,7 @@ public class TrickSound extends PieceTrick {
     @Override
     public void initParams() {
         addParam(position = new ParamVector(SpellParam.GENERIC_NAME_POSITION, SpellParam.BLUE, false, false));
-        addParam(pitch = new ParamNumber(SpellParams.GENERIC_NAME_PITCH, SpellParam.GREEN, false, true));
+        addParam(pitch = new ParamNumber(SpellParams.GENERIC_NAME_PITCH, SpellParam.GREEN, false, false));
         addParam(volume = new ParamNumber(SpellParams.GENERIC_NAME_VOLUME, SpellParam.YELLOW, false, false));
         addParam(instrument = new ParamNumber(SpellParams.GENERIC_NAME_INSTRUMENT, SpellParam.RED, false, true));
     }
@@ -50,8 +50,7 @@ public class TrickSound extends PieceTrick {
         if (dIn != null && !(dIn >= 0 && dIn <= 10))
             throw new SpellCompilationException(SpellRuntimeExceptions.INSTRUMENTS, x, y);
 
-        meta.addStat(EnumSpellStat.POTENCY, 2);
-        meta.addStat(EnumSpellStat.COST, 20);
+        meta.addStat(EnumSpellStat.POTENCY, 4);
 
     }
 

@@ -41,7 +41,6 @@ public class PieceTrickFirework extends PieceTrick {
             throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_VALUE, x, y);
 
         meta.addStat(EnumSpellStat.COST, timeVal.intValue() * 10);
-        meta.addStat(EnumSpellStat.POTENCY, timeVal.intValue() * 2);
     }
 
     @Override
