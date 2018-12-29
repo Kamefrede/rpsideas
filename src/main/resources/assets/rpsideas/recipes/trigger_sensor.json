@@ -1,0 +1,24 @@
+{
+  "result": {
+    "item": "rpsideas:trigger_sensor"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " P ",
+    "PEI",
+    " I "
+  ],
+  "key": {
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "ingotPsi"
+    },
+    "E": {
+      "item": "minecraft:gunpowder"
+    },
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    }
+  }
+}
