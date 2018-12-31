@@ -20,11 +20,6 @@ public class PieceTrickCloseElytra extends PieceTrick {
     }
 
     @Override
-    public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
-        super.addToMetadata(meta);
-    }
-
-    @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         double value = this.getParamValue(context, num);
         if (Math.abs(value) < 1.0) context.caster.setFlag(7, false);
