@@ -148,7 +148,7 @@ public class EntityGaussPulse extends EntityThrowable implements ISpellImmune {
 
 
         Vector3 lookOrig = new Vector3(motionX, motionY, motionZ).normalize();
-        sparkle(getEntityWorld(), getParticleCount(), lookOrig, x, y, z, r, g, b);
+        sparkle(world, getParticleCount(), lookOrig, x, y, z, r, g, b);
     }
 
     @Override

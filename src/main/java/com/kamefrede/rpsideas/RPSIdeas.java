@@ -101,7 +101,7 @@ public class RPSIdeas {
     @Mod.EventHandler
     @SideOnly(Side.CLIENT)
     public void clientInit(FMLInitializationEvent e) {
-        GlowingHandler.registerCustomGlowHandler(ModItems.cad, (stack, model) -> IGlowingItem.Helper.wrapperBake(model, false, 1, 2), (stack, model) -> false);
+        GlowingHandler.registerCustomGlowHandler(ModItems.cad, (stack, model) -> IGlowingItem.Helper.wrapperBake(model, false, 1, 2), (stack, model) -> true);
 
         Map<String, RenderPlayer> skinMap = Minecraft.getMinecraft().getRenderManager().getSkinMap();
         injectLayers(skinMap.get("default"));

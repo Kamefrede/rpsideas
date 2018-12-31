@@ -86,16 +86,11 @@ public class PieceTrickRotateBlock extends PieceTrick {
         Vector3 positionVal = this.getParamValue(context, position);
         Vector3 directionVal = this.getParamValue(context, direction);
 
-        if (positionVal == null) {
+        if (positionVal == null || directionVal == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        }
-
-        if (directionVal == null) {
-            throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        }
 
         World world = context.caster.world;
-        BlockPos pos = new BlockPos(positionVal.x, positionVal.y, positionVal.z);
+        BlockPos pos = positionVal.toBlockPos();
         IBlockState state = world.getBlockState(pos);
 
         if (world.isAirBlock(pos)) return null;

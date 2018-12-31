@@ -18,7 +18,6 @@ import com.kamefrede.rpsideas.spells.operator.math.PieceOperatorSignum;
 import com.kamefrede.rpsideas.spells.operator.math.PieceOperatorToDegrees;
 import com.kamefrede.rpsideas.spells.operator.math.PieceOperatorToRadians;
 import com.kamefrede.rpsideas.spells.operator.string.PieceOperatorGetComment;
-import com.kamefrede.rpsideas.spells.operator.string.PieceOperatorParseNumber;
 import com.kamefrede.rpsideas.spells.operator.vector.*;
 import com.kamefrede.rpsideas.spells.selector.*;
 import com.kamefrede.rpsideas.spells.trick.block.*;
@@ -26,7 +25,6 @@ import com.kamefrede.rpsideas.spells.trick.entity.*;
 import com.kamefrede.rpsideas.spells.trick.misc.*;
 import com.kamefrede.rpsideas.util.libs.RPSPieceNames;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.Loader;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.spell.SpellPiece;
 import vazkii.psi.common.lib.LibPieceGroups;
@@ -84,7 +82,6 @@ public class SpellPieces {
         register(PieceOperatorGetSignText.class, RPSPieceNames.OPERATOR_GET_SIGN_TEXT, LibPieceGroups.MEMORY_MANAGEMENT);
         register(PieceTrickMoveBlockSequence.class, RPSPieceNames.TRICK_MOVE_BLOCK_SEQUENCE, LibPieceGroups.BLOCK_MOVEMENT);
         register(PieceOperatorGetComment.class, RPSPieceNames.OPERATOR_GET_COMMENT, LibPieceGroups.MEMORY_MANAGEMENT);
-        register(PieceOperatorParseNumber.class, RPSPieceNames.OPERATOR_PARSE_NUMBER, LibPieceGroups.MEMORY_MANAGEMENT);
         register(PieceSelectorGlowing.class, RPSPieceNames.SELECTOR_GLOWING, LibPieceGroups.ENTITIES_INTRO);
         register(PieceSelectorListFilter.class, RPSPieceNames.SELECTOR_LIST_FILTER, LibPieceGroups.ENTITIES_INTRO);
         register(PieceOperatorVisibleToEntity.class, RPSPieceNames.OPERATOR_IS_VISIBLE, LibPieceGroups.DETECTION_DYNAMICS);
@@ -125,7 +122,7 @@ public class SpellPieces {
         register(PieceOperatorClosestToLine.class, RPSPieceNames.OPERATOR_CLOSEST_TO_LINE, LibPieceGroups.SECONDARY_OPERATORS);
         register(PieceTrickConjureText.class, RPSPieceNames.TRICK_CONJURE_TEXT, RPSPieceNames.VISUAL_AUDITIVE);
         register(PieceTrickConjureCircle.class, RPSPieceNames.TRICK_CONJURE_CIRCLE, RPSPieceNames.VISUAL_AUDITIVE);
-        if (Loader.isModLoaded("botania")) BotaniaCompatPieces.init();
+        new BotaniaCompatPieces().run();
     }
 
     public static void register(Class<? extends SpellPiece> pieceClass, String name, String group) {

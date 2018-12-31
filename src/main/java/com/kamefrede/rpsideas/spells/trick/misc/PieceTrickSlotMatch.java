@@ -1,5 +1,6 @@
 package com.kamefrede.rpsideas.spells.trick.misc;
 
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -7,7 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellParam;
@@ -31,13 +31,9 @@ public class PieceTrickSlotMatch extends PieceTrick {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster.world.isRemote) return null;
-        Vector3 posVec = this.getParamValue(context, position);
-
-        if (posVec == null || posVec.isZero())
-            throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
+        BlockPos pos = SpellHelpers.getBlockPos(this, context, position);
 
         World world = context.caster.world;
-        BlockPos pos = new BlockPos(posVec.x, posVec.y, posVec.z);
         IBlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
         if (block.isAir(state, world, pos)) return null;

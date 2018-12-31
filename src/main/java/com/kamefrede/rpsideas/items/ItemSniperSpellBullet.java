@@ -89,13 +89,13 @@ public class ItemSniperSpellBullet extends ItemMod implements ISpellContainer {
     public void castSpell(ItemStack stack, SpellContext context) {
         switch (stack.getItemDamage()) {
             case 1:
-                if (!context.caster.getEntityWorld().isRemote) {
-                    EntitySniperProjectile proj = new EntitySniperProjectile(context.caster.getEntityWorld(), context.caster);
+                if (!context.caster.world.isRemote) {
+                    EntitySniperProjectile proj = new EntitySniperProjectile(context.caster.world, context.caster);
                     ItemStack cad = PsiAPI.getPlayerCAD(context.caster);
                     ItemStack colorizer = ((ICAD) cad.getItem()).getComponentInSlot(cad, EnumCADComponent.DYE);
                     proj.setInfo(context.caster, colorizer, stack);
                     proj.context = context;
-                    proj.getEntityWorld().spawnEntity(proj);
+                    proj.world.spawnEntity(proj);
 
                 }
         }

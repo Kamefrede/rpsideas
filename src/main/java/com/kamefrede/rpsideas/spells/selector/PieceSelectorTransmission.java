@@ -25,18 +25,14 @@ public class PieceSelectorTransmission extends PieceSelector {
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
         super.addToMetadata(meta);
 
-        Double channelVal = this.<Double>getParamEvaluation(channel);
-
-        if (channelVal != null && channelVal <= 0)
-            throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_VALUE, x, y);
+        SpellHelpers.ensurePositiveOrZero(this, channel);
     }
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster.world.isRemote) return null;
-        Double channelVal = this.<Double>getParamValue(context, channel);
-        if (channelVal == null) channelVal = 0.0;
-        int channel = channelVal.intValue();
+        double channelVal = SpellHelpers.getNumber(this, context, channel, 0);
+        int channel = (int) channelVal;
 
         String key = "rpsideas:" + channel;
 

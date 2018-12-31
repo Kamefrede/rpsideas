@@ -42,9 +42,9 @@ public class ItemPsimetalShears extends ItemMod implements IPsiAddonTool {
 
             if (data != null && !playerCad.isEmpty()) {
                 ItemStack bullet = getBulletInSocket(itemstack, getSelectedSlot(itemstack));
-                ItemCAD.cast(player.getEntityWorld(), player, data, bullet, playerCad, 5, 10, 0.05F, (SpellContext context) -> {
+                ItemCAD.cast(player.world, player, data, bullet, playerCad, 5, 10, 0.05F, (SpellContext context) -> {
                     context.tool = itemstack;
-                    context.positionBroken = raytraceFromEntity(player.getEntityWorld(), player, false, player.getAttributeMap().getAttributeInstance(EntityPlayer.REACH_DISTANCE).getAttributeValue());
+                    context.positionBroken = raytraceFromEntity(player.world, player, false, player.getAttributeMap().getAttributeInstance(EntityPlayer.REACH_DISTANCE).getAttributeValue());
                 });
             }
         }

@@ -28,8 +28,8 @@ public class PieceTrickSupressNextTrick extends PieceTrick {
     @Override
     @SuppressWarnings("unchecked")
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Double timeVal = this.<Double>getParamValue(context, target);
-        if (Math.abs(timeVal) < 1) {
+        double boolVal = this.getParamValue(context, target);
+        if (Math.abs(boolVal) < 1) {
             Stack<CompiledSpell.Action> stack = (Stack<CompiledSpell.Action>) context.actions.clone();
 
             while (!stack.isEmpty()) {

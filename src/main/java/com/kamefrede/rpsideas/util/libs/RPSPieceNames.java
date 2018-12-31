@@ -39,15 +39,12 @@ public class RPSPieceNames {
     public static final String OPERATOR_LIST_UNION = "operator_list_union";
     public static final String OPERATOR_LIST_INTERSECTION = "operator_list_intersection";
     public static final String OPERATOR_LIST_EXCLUSION = "operator_list_exclusion";
-    public static final String PIECE_TRICK_NAUSEA = "trick_nausea";
-    public static final String PIECE_TRICK_BLINDNESS = "trick_blindness";
     public static final String PIECE_SELECTOR_EIDOS_TIMESTAMP = "selector_eidos_timestamp";
     public static final String SELECTOR_NEARBY_VECHICLES = "selector_nearby_vehicles";
     public static final String SELECTOR_NEARBY_FALLING_BLOCKS = "selector_nearby_falling_blocks";
     public static final String OPERATOR_GET_SIGN_TEXT = "operator_get_sign_text";
     public static final String TRICK_MOVE_BLOCK_SEQUENCE = "trick_move_block_sequence";
     public static final String OPERATOR_GET_COMMENT = "operator_get_comment";
-    public static final String OPERATOR_PARSE_NUMBER = "operator_parse_number";
     public static final String OPERATOR_GET_DISTANCE_FROM_GROUND = "operator_distance_from_ground";
     public static final String SELECTOR_GLOWING = "selector_glowing";
     public static final String SELECTOR_LIST_FILTER = "selector_list_filter";

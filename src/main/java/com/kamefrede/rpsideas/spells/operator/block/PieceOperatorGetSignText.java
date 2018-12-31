@@ -1,10 +1,10 @@
 package com.kamefrede.rpsideas.spells.operator.block;
 
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
-import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellParam;
@@ -28,10 +28,8 @@ public class PieceOperatorGetSignText extends PieceOperator {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster.world.isRemote) return null;
-        Vector3 positionVal = this.getParamValue(context, position);
-        if (position == null) throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        if (!context.isInRadius(positionVal)) throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
-        BlockPos pos = new BlockPos(positionVal.x, positionVal.y, positionVal.z);
+
+        BlockPos pos = SpellHelpers.getBlockPos(this, context, position);
         TileEntity sign = context.caster.world.getTileEntity(pos);
         if (sign instanceof TileEntitySign) {
             StringBuilder s = new StringBuilder();

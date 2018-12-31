@@ -26,7 +26,7 @@ public class PieceTrickCloseElytra extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        double value = this.<Double>getParamValue(context, num);
+        double value = this.getParamValue(context, num);
         if (Math.abs(value) < 1.0) context.caster.setFlag(7, false);
 
         return false;

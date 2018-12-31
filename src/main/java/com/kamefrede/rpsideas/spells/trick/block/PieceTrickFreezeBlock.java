@@ -1,5 +1,6 @@
 package com.kamefrede.rpsideas.spells.trick.block;
 
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDynamicLiquid;
 import net.minecraft.block.BlockSnow;
@@ -11,7 +12,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceTrick;
@@ -67,17 +67,12 @@ public class PieceTrickFreezeBlock extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (context.caster.getEntityWorld().isRemote)
+        if (context.caster.world.isRemote)
             return null;
-        Vector3 pos = this.getParamValue(context, position);
-
-        if (pos == null)
-            throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        if (!context.isInRadius(pos))
-            throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
+        BlockPos pos = SpellHelpers.getBlockPos(this, context, position);
 
         World world = context.caster.world;
-        freezeBlock(world, pos.toBlockPos());
+        freezeBlock(world, pos);
         return null;
     }
 

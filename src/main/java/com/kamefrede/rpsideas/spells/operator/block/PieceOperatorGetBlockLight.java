@@ -1,8 +1,8 @@
 package com.kamefrede.rpsideas.spells.operator.block;
 
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
-import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellParam;
@@ -25,10 +25,7 @@ public class PieceOperatorGetBlockLight extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 vec = this.getParamValue(context, target);
-        if (vec == null || vec.isZero()) throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
-
-        BlockPos pos = new BlockPos(vec.x, vec.y, vec.z);
+        BlockPos pos = SpellHelpers.getBlockPos(this, context, target);
         IBlockState state = context.caster.world.getBlockState(pos);
         return state.getLightValue(context.caster.world, pos) * 1.0;
     }

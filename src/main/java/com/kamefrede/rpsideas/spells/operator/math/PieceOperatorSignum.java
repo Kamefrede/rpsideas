@@ -22,11 +22,7 @@ public class PieceOperatorSignum extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Double number = this.<Double>getParamValue(context, num);
-
-        if (number == null)
-            return 0.0;
-
+        double number = this.getParamValue(context, num);
         return Math.signum(number);
     }
 

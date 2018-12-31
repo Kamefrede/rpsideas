@@ -23,26 +23,40 @@ public class SpellHelpers {
             piece.addParam(param);
     }
 
-    public static double ensurePositiveAndNonzero(SpellPiece piece, SpellParam param) throws SpellCompilationException {
-        Double val = piece.getParamEvaluation(param);
+    public static double evaluateNumber(SpellPiece piece, SpellParam param, double def) throws SpellCompilationException {
+        Double value = piece.getParamEvaluation(param);
+        if (value == null) return def;
+        else return value;
+    }
 
-        if (val == null || val <= 0)
+
+    public static double ensurePositiveAndNonzero(SpellPiece piece, SpellParam param, double def) throws SpellCompilationException {
+        double val = evaluateNumber(piece, param, def);
+
+        if (val <= 0)
             throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_VALUE, piece.x, piece.y);
 
         return val;
+    }
+
+    public static double ensurePositiveAndNonzero(SpellPiece piece, SpellParam param) throws SpellCompilationException {
+        return evaluateNumber(piece, param, 0);
     }
 
     public static double ensurePositiveOrZero(SpellPiece piece, SpellParam param) throws SpellCompilationException {
-        Double val = piece.getParamEvaluation(param);
-
-        if (val == null || val <= 0)
+        double val = evaluateNumber(piece, param, 0);
+        if (val < 0)
             throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_VALUE, piece.x, piece.y);
-
         return val;
     }
 
-    public static BlockPos getBlockPosFromVectorParam(SpellPiece piece, SpellContext context, SpellParam param) {
-        return piece.<Vector3>getParamValue(context, param).toBlockPos();
+    public static BlockPos getBlockPos(SpellPiece piece, SpellContext context, SpellParam param) throws SpellRuntimeException {
+        Vector3 position = piece.getParamValue(context, param);
+        if (position == null)
+            throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
+        if (!context.isInRadius(position))
+            throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
+        return position.toBlockPos();
     }
 
     public static void checkPos(SpellContext context, BlockPos pos) throws SpellRuntimeException {
@@ -60,6 +74,14 @@ public class SpellHelpers {
         Double value = piece.getParamValue(context, param);
         if (value == null) return def;
         else return value;
+    }
+
+    public static double getBoundedNumber(SpellPiece piece, SpellContext context, SpellParam param, double def) {
+        double val = getNumber(piece, context, param, def);
+        if (val > def)
+            return def;
+        else
+            return val;
     }
 
     public static void placeBlockFromInventory(SpellContext context, BlockPos pos, boolean particles) {

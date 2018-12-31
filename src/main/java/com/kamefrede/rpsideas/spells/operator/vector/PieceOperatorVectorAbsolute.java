@@ -25,7 +25,7 @@ public class PieceOperatorVectorAbsolute extends PieceOperator {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         Vector3 vector = this.getParamValue(context, vec);
-        if (vector == null || vector.isZero()) throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
+        if (vector == null) throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
         return new Vector3(Math.abs(vector.x), Math.abs(vector.y), Math.abs(vector.z));
     }
 

@@ -1,6 +1,8 @@
 package com.kamefrede.rpsideas.spells.trick.entity;
 
 import com.kamefrede.rpsideas.items.components.ItemTriggerSensor;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.WorldServer;
 import vazkii.psi.api.exosuit.PsiArmorEvent;
@@ -28,38 +30,41 @@ public class PieceTrickDetonate extends PieceTrick {
     @Override
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
         super.addToMetadata(meta);
+        double radiusVal = SpellHelpers.ensurePositiveOrZero(this, radius);
+        meta.addStat(EnumSpellStat.POTENCY, (int) Math.min(radiusVal, 5));
+        meta.addStat(EnumSpellStat.COST, (int) (radiusVal * 5));
 
-
-        Double radiusVal = this.<Double>getParamEvaluation(radius);
-        if (radiusVal == null || radiusVal <= 0)
-            throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_VALUE, x, y);
-        meta.addStat(EnumSpellStat.POTENCY, radiusVal.intValue());
-        meta.addStat(EnumSpellStat.COST, radiusVal.intValue() * 5);
+        if (radiusVal == 0)
+            meta.addStat(EnumSpellStat.COMPLEXITY, 1);
     }
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 positionVal = Vector3.fromEntity(context.caster).add(0, context.caster.getEyeHeight(), 0);
-        Double radiusVal = this.<Double>getParamValue(context, radius);
+        double radiusVal = this.getParamValue(context, radius);
 
-        if (!context.isInRadius(positionVal))
-            throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
+        if (radiusVal > 0) {
+            Vector3 positionVal = Vector3.fromEntity(context.focalPoint);
+            if (context.focalPoint instanceof EntityPlayer)
+                positionVal.add(0, context.focalPoint.getEyeHeight(), 0);
 
-        AxisAlignedBB axis = new AxisAlignedBB(positionVal.x - radiusVal, positionVal.y - radiusVal, positionVal.z - radiusVal, positionVal.x + radiusVal, positionVal.y + radiusVal, positionVal.z + radiusVal);
+            if (!context.isInRadius(positionVal))
+                throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
 
+            AxisAlignedBB axis = new AxisAlignedBB(positionVal.x - radiusVal, positionVal.y - radiusVal, positionVal.z - radiusVal, positionVal.x + radiusVal, positionVal.y + radiusVal, positionVal.z + radiusVal);
 
-        List<EntitySpellCharge> list = context.caster.getEntityWorld().getEntitiesWithinAABB(EntitySpellCharge.class, axis,
-                (EntitySpellCharge e) -> e != null && e != context.focalPoint && context.isInRadius(e) && e.getThrower() == context.caster);
+            List<EntitySpellCharge> list = context.focalPoint.world.getEntitiesWithinAABB(EntitySpellCharge.class, axis,
+                    (EntitySpellCharge e) -> e != null && e != context.focalPoint && context.isInRadius(e) && e.getThrower() == context.caster);
 
-
-        for (EntitySpellCharge ent : list)
-            ent.doExplosion();
+            for (EntitySpellCharge ent : list)
+                ent.doExplosion();
+        }
 
         if (context.caster.world instanceof WorldServer) {
             WorldServer server = (WorldServer) context.caster.world;
             server.addScheduledTask(() ->
                 PsiArmorEvent.post(new PsiArmorEvent(context.caster, ItemTriggerSensor.EVENT_TRIGGER)));
         }
-        return !list.isEmpty();
+
+        return null;
     }
 }

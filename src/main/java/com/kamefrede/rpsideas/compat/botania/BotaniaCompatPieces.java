@@ -4,12 +4,15 @@ import com.kamefrede.rpsideas.spells.base.SpellPieces;
 import com.kamefrede.rpsideas.spells.trick.botania.PieceTrickBotaniaDrum;
 import com.kamefrede.rpsideas.spells.trick.botania.PieceTrickFormBurst;
 import com.kamefrede.rpsideas.util.libs.RPSPieceNames;
+import net.minecraftforge.fml.common.Optional;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.common.lib.LibPieceGroups;
 
-public class BotaniaCompatPieces {
+public class BotaniaCompatPieces extends NoopRunnable {
 
-    public static void init() {
+    @Override
+    @Optional.Method(modid = "botania")
+    public void run() {
         PsiAPI.setGroupRequirements(RPSPieceNames.MANA_PSIONICS, 16, LibPieceGroups.GREATER_INFUSION, LibPieceGroups.ELEMENTAL_ARTS);
 
         SpellPieces.register(PieceTrickBotaniaDrum.DootGrass.class, RPSPieceNames.WILD_DRUM, RPSPieceNames.MANA_PSIONICS);

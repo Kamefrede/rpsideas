@@ -1,5 +1,6 @@
 package com.kamefrede.rpsideas.spells.base;
 
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -35,7 +36,7 @@ public abstract class OperatorEnergy extends PieceOperator {
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster.world.isRemote) return null;
 
-        Vector3 posVec = this.getParamValue(context, position);
+        BlockPos pos = SpellHelpers.getBlockPos(this, context, position);
 
         Vector3 axisVec = this.getParamValue(context, axis);
         if (axisVec != null && !axisVec.isAxial())
@@ -46,10 +47,6 @@ public abstract class OperatorEnergy extends PieceOperator {
                 (float) axisVec.y,
                 (float) axisVec.z);
 
-        if (posVec == null || posVec.isZero())
-            throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-
-        BlockPos pos = new BlockPos(posVec.x, posVec.y, posVec.z);
         World world = context.caster.world;
 
         TileEntity tile = world.getTileEntity(pos);

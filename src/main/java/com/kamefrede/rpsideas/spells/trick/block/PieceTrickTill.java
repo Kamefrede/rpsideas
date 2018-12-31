@@ -1,5 +1,6 @@
 package com.kamefrede.rpsideas.spells.trick.block;
 
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.util.EnumActionResult;
@@ -7,7 +8,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceTrick;
@@ -42,15 +42,7 @@ public class PieceTrickTill extends PieceTrick {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
 
-        Vector3 positionVal = this.getParamValue(context, position);
-
-        if (positionVal == null)
-            throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        if (!context.isInRadius(positionVal))
-            throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
-
-        BlockPos pos = new BlockPos(positionVal.x, positionVal.y, positionVal.z);
-
+        BlockPos pos = SpellHelpers.getBlockPos(this, context, position);
 
         return tillBlock(context.caster, context.caster.world, pos);
 

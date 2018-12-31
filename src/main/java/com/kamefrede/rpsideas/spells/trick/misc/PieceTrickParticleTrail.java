@@ -46,7 +46,7 @@ public class PieceTrickParticleTrail extends PieceTrick {
         Vector3 pos = getParamValue(context, positionParam);
         Vector3 dir = getParamValue(context, rayParam);
         double length = SpellHelpers.getNumber(this, context, lengthParam, 0);
-        double time = Math.min(SpellHelpers.getNumber(this, context, timeParam, 20), 400);
+        double time = Math.min(SpellHelpers.getNumber(this, context, timeParam, 20) * 20, 400);
         if (context.caster.world.isRemote) return null;
 
         if (time < 0d) throw new SpellRuntimeException(SpellRuntimeException.NEGATIVE_NUMBER);

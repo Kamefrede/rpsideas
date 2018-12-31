@@ -75,7 +75,7 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsiAddonT
             int timesCast = ItemNBTHelper.getInt(stack, TAG_TIMES_CAST, 0);
 
             ItemStack bullet = getBulletInSocket(stack, getSelectedSlot(stack));
-            ItemCAD.cast(event.getEntityPlayer().getEntityWorld(), event.getEntityPlayer(), data, bullet, playerCad, getCastCooldown(stack), 0, getCastVolume(), (SpellContext context) -> {
+            ItemCAD.cast(event.getEntityPlayer().world, event.getEntityPlayer(), data, bullet, playerCad, getCastCooldown(stack), 0, getCastVolume(), (SpellContext context) -> {
                 context.tool = stack;
                 context.attackingEntity = event.attacker;
                 context.damageTaken = event.damage;

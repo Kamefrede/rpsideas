@@ -59,14 +59,13 @@ public abstract class PieceTrickBotaniaDrum extends PieceComponentTrick implemen
         Vector3 position = getParamValue(context, positionParam);
         if (position == null) throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
 
-        World world = context.caster.world; //Typing mehh
+        World world = context.caster.world;
 
-        if (world.isRemote) {
+        if (world.isRemote)
             world.spawnParticle(EnumParticleTypes.NOTE, position.x + .5, position.y + 1.2, position.z + .5, 1 / 24d, 0, 0);
-        } else {
-            for (int i = 0; i < 10; i++) {
+        else {
+            for (int i = 0; i < 10; i++)
                 world.playSound(null, position.toBlockPos(), SoundEvents.BLOCK_NOTE_BASEDRUM, SoundCategory.BLOCKS, 1f, 1f); //Bwaaaaaaaaaappppp
-            }
         }
 
         doEffect(context, position.toBlockPos());

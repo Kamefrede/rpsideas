@@ -21,4 +21,8 @@ public class TrickRule implements ISpellRule {
     public boolean isAllowed(EnumActionType type) {
         return true;
     }
+
+    public String getTrick() {
+        return trick;
+    }
 }

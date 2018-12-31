@@ -2,6 +2,7 @@ package com.kamefrede.rpsideas.spells.selector;
 
 import com.kamefrede.rpsideas.spells.base.SpellParams;
 import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -34,9 +35,7 @@ public class PieceSelectorVisibleEntities extends PieceSelector {
     @Override
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
         super.addToMetadata(meta);
-        Double radiusVal = this.getParamEvaluation(this.radius);
-        if (radiusVal == null || radiusVal <= 0.0D)
-            throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_VALUE, this.x, this.y);
+        SpellHelpers.ensurePositiveAndNonzero(this, radius);
     }
 
     @Override
@@ -48,17 +47,20 @@ public class PieceSelectorVisibleEntities extends PieceSelector {
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster.world.isRemote) return null;
         Entity entity = this.getParamValue(context, ent);
-        Double radius = this.getParamValue(context, this.radius);
+
+        double radiusVal = SpellHelpers.getBoundedNumber(this, context, radius, SpellContext.MAX_DISTANCE);
+
         if (!(entity instanceof EntityLivingBase))
             throw new SpellRuntimeException(SpellRuntimeExceptions.ENTITY_NOT_LIVING);
+
         EntityLivingBase living = (EntityLivingBase) entity;
-        Vector3 pos = new Vector3(living.posX, living.posY, living.posZ);
+        Vector3 pos = Vector3.fromEntity(entity);
         if (!context.isInRadius(pos))
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
         else {
-            AxisAlignedBB axis = new AxisAlignedBB(pos.x, pos.y - radius, pos.z - radius, pos.x + radius, pos.y + radius, pos.z + radius);
+            AxisAlignedBB axis = new AxisAlignedBB(pos.x, pos.y - radiusVal, pos.z - radiusVal, pos.x + radiusVal, pos.y + radiusVal, pos.z + radiusVal);
             Predicate<Entity> targetPredicate = this.getTargetPredicate();
-            List<Entity> list = context.caster.getEntityWorld().getEntitiesWithinAABB(Entity.class, axis,
+            List<Entity> list = context.caster.world.getEntitiesWithinAABB(Entity.class, axis,
                     (e) -> e != null && targetPredicate.test(e) &&
                             e != context.caster &&
                             e != context.focalPoint &&

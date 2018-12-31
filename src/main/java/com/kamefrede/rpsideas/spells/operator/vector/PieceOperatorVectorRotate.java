@@ -33,7 +33,7 @@ public class PieceOperatorVectorRotate extends PieceOperator {
     public Object execute(SpellContext context) throws SpellRuntimeException {
         Vector3 v = this.getParamValue(context, vector);
         Vector3 a = this.getParamValue(context, axis);
-        Double an = this.<Double>getParamValue(context, angle);
+        double an = this.getParamValue(context, angle);
         if (v == null || axis == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
         return v.copy().rotate(an, a.copy());

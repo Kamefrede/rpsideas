@@ -2,6 +2,7 @@ package com.kamefrede.rpsideas.spells.operator.block;
 
 import com.kamefrede.rpsideas.spells.base.SpellParams;
 import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -33,19 +34,15 @@ public class PieceOperatorGetBlockComparatorStrength extends PieceOperator {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         Vector3 ax = this.getParamValue(context, axisParam);
-        EnumFacing whichWay;
-        Vector3 vec = this.getParamValue(context, target);
-        if (vec == null || vec.isZero()) throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
+        BlockPos pos = SpellHelpers.getBlockPos(this, context, target);
 
-        if (ax == null || ax.isZero()) {
+        if (ax == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        } else if (!ax.isAxial()) {
+        else if (!ax.isAxial())
             throw new SpellRuntimeException(SpellRuntimeExceptions.NON_AXIAL_VECTOR);
-        } else {
-            whichWay = EnumFacing.getFacingFromVector((float) ax.x, (float) ax.y, (float) ax.z);
-        }
 
-        BlockPos pos = new BlockPos(vec.x, vec.y, vec.z);
+        EnumFacing whichWay = EnumFacing.getFacingFromVector((float) ax.x, (float) ax.y, (float) ax.z);
+
         IBlockState state = Blocks.POWERED_COMPARATOR.getDefaultState()
                 .withProperty(BlockHorizontal.FACING, whichWay.getOpposite());
 

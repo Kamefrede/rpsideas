@@ -1,6 +1,8 @@
 package com.kamefrede.rpsideas.spells.trick.block;
 
+import com.google.common.collect.Maps;
 import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.state.IBlockState;
@@ -9,15 +11,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BlockEvent;
-import org.apache.commons.lang3.tuple.Pair;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceTrick;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 public class PieceTrickMoveBlockSequence extends PieceTrick {
 
@@ -42,9 +42,7 @@ public class PieceTrickMoveBlockSequence extends PieceTrick {
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException, ArithmeticException {
         super.addToMetadata(meta);
 
-        Double maxBlocksVal = this.<Double>getParamEvaluation(maxBlocks);
-        if (maxBlocksVal == null || maxBlocksVal <= 0)
-            throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_VALUE, x, y);
+        double maxBlocksVal = SpellHelpers.ensurePositiveAndNonzero(this, maxBlocks);
 
         meta.addStat(EnumSpellStat.POTENCY, (int) (maxBlocksVal * 10));
         meta.addStat(EnumSpellStat.COST, (int) (maxBlocksVal * 15));
@@ -52,17 +50,16 @@ public class PieceTrickMoveBlockSequence extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (context.caster.getEntityWorld().isRemote)
+        if (context.caster.world.isRemote)
             return null;
 
         Vector3 directionVal = this.getParamValue(context, direction);
         Vector3 positionVal = this.getParamValue(context, position);
         Vector3 targetVal = this.getParamValue(context, target);
-        Double maxBlocksVal = this.<Double>getParamValue(context, maxBlocks);
-        int maxBlocksInt = maxBlocksVal.intValue();
+        Double maxBlocksVal = this.getParamValue(context, maxBlocks);
 
 
-        List<Pair<IBlockState, BlockPos>> toset = new ArrayList<>();
+        Map<BlockPos, IBlockState> toSet = Maps.newHashMap();
 
         if (positionVal == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
@@ -76,52 +73,48 @@ public class PieceTrickMoveBlockSequence extends PieceTrick {
             throw new SpellRuntimeException(SpellRuntimeExceptions.NON_AXIAL_VECTOR);
 
 
-        for (int i = 0; i < Math.min(len, maxBlocksInt) + 1; i++) {
+        for (int i = 0; i < Math.min(len, maxBlocksVal) + 1; i++) {
             Vector3 blockVec = positionVal.copy().add(targetNorm.copy().multiply(i));
             if (!context.isInRadius(blockVec))
                 throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
 
-            World world = context.caster.getEntityWorld();
-            BlockPos pos = new BlockPos(blockVec.x, blockVec.y, blockVec.z);
+            World world = context.caster.world;
+            BlockPos pos = blockVec.toBlockPos();
             IBlockState state = world.getBlockState(pos);
             Block block = state.getBlock();
             BlockEvent.BreakEvent event = new BlockEvent.BreakEvent(world, pos, state, context.caster);
-            MinecraftForge.EVENT_BUS.post(event);
 
-            if (event.isCanceled())
+            if (MinecraftForge.EVENT_BUS.post(event))
                 continue;
 
-            if (world.getTileEntity(pos) != null || state.getPushReaction() != EnumPushReaction.NORMAL || !block.canSilkHarvest(world, pos, state, context.caster) || block.getPlayerRelativeBlockHardness(state, context.caster, world, pos) <= 0 || !ForgeHooks.canHarvestBlock(block, context.caster, world, pos))
+            if (world.getTileEntity(pos) != null ||
+                    state.getPushReaction() != EnumPushReaction.NORMAL ||
+                    !block.canSilkHarvest(world, pos, state, context.caster) ||
+                    block.getPlayerRelativeBlockHardness(state, context.caster, world, pos) <= 0 ||
+                    !ForgeHooks.canHarvestBlock(block, context.caster, world, pos))
                 continue;
 
-            int x = pos.getX() + (int) directNorm.x;
-            int y = pos.getY() + (int) directNorm.y;
-            int z = pos.getZ() + (int) directNorm.z;
+            BlockPos pushToPos = pos.add(directNorm.x, directNorm.y, directNorm.z);
+            BlockPos nextPos = pos.add(targetNorm.x, targetNorm.y, targetNorm.z);
+            IBlockState pushToState = world.getBlockState(pushToPos);
 
-            BlockPos pos1 = new BlockPos(x, y, z);
-            Vector3 vecc = new Vector3(x, y, z);
-            IBlockState state1 = world.getBlockState(pos1);
-
-            if (!world.isBlockModifiable(context.caster, pos) || !world.isBlockModifiable(context.caster, pos1))
+            if (!world.isBlockModifiable(context.caster, pos) ||
+                    !world.isBlockModifiable(context.caster, pushToPos))
                 continue;
 
             if (y > 256 || y < 1) continue;
 
-            if (world.isAirBlock(pos1) || (vecc == positionVal.copy().add(targetNorm.copy().multiply(i + 1)) && (i + 1) < Math.min(len, maxBlocksInt) + 1) || state1.getBlock().isReplaceable(world, pos1)) {
+            if (world.isAirBlock(pushToPos) ||
+                    (nextPos.equals(pushToPos) && i + 1 < Math.min(len, maxBlocksVal)) ||
+                    pushToState.getBlock().isReplaceable(world, pushToPos)) {
                 world.setBlockToAir(pos);
-                world.playEvent(2001, pos, Block.getIdFromBlock(block) + (block.getMetaFromState(state) << 12));
-                Pair<IBlockState, BlockPos> pair = Pair.of(state, pos1);
-                toset.add(pair);
+                world.playEvent(2001, pos, Block.getStateId(state));
+                toSet.put(pos, state);
             }
         }
 
-        for (Pair<IBlockState, BlockPos> aToset : toset) {
-            World world = context.caster.getEntityWorld();
-            IBlockState state = aToset.getLeft();
-            BlockPos pos1 = aToset.getRight();
-            world.setBlockState(pos1, state, 1 | 2);
-
-        }
+        for (Map.Entry<BlockPos, IBlockState> pairToSet : toSet.entrySet())
+            context.caster.world.setBlockState(pairToSet.getKey(), pairToSet.getValue());
 
         return null;
     }

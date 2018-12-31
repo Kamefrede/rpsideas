@@ -1,5 +1,6 @@
 package com.kamefrede.rpsideas.spells.trick.block;
 
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -34,9 +35,7 @@ public class PieceTrickSmeltBlockSequence extends PieceTrick {
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
         super.addToMetadata(meta);
 
-        Double maxBlocksVal = this.<Double>getParamEvaluation(maxBlocks);
-        if (maxBlocksVal == null || maxBlocksVal <= 0)
-            throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_VALUE, x, y);
+        double maxBlocksVal = SpellHelpers.ensurePositiveAndNonzero(this, maxBlocks);
 
         meta.addStat(EnumSpellStat.POTENCY, (int) (maxBlocksVal * 20));
         meta.addStat(EnumSpellStat.COST, (int) (maxBlocksVal * 80));
@@ -44,31 +43,30 @@ public class PieceTrickSmeltBlockSequence extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (context.caster.getEntityWorld().isRemote)
+        if (context.caster.world.isRemote)
             return null;
 
         Vector3 positionVal = this.getParamValue(context, position);
         Vector3 targetVal = this.getParamValue(context, direction);
-        Double maxBlocksVal = this.<Double>getParamValue(context, maxBlocks);
+        double maxBlocksVal = this.getParamValue(context, maxBlocks);
 
         if (positionVal == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        int maxBlocksInt = maxBlocksVal.intValue();
 
 
         int len = (int) targetVal.mag();
         Vector3 targetNorm = targetVal.copy().normalize();
-        for (int i = 0; i < Math.min(len, maxBlocksInt); i++) {
+        for (int i = 0; i < Math.min(len, maxBlocksVal); i++) {
             Vector3 blockVec = positionVal.copy().add(targetNorm.copy().multiply(i));
 
             if (!context.isInRadius(blockVec))
                 throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
 
             BlockPos pos = new BlockPos(blockVec.x, blockVec.y, blockVec.z);
-            if (!context.caster.getEntityWorld().isBlockModifiable(context.caster, pos))
+            if (!context.caster.world.isBlockModifiable(context.caster, pos))
                 continue;
 
-            IBlockState state = context.caster.getEntityWorld().getBlockState(pos);
+            IBlockState state = context.caster.world.getBlockState(pos);
             Block block = state.getBlock();
             int meta = block.getMetaFromState(state);
             ItemStack stack = new ItemStack(block, 1, meta);
@@ -77,9 +75,9 @@ public class PieceTrickSmeltBlockSequence extends PieceTrick {
                 Item item = result.getItem();
                 Block block1 = Block.getBlockFromItem(item);
                 if (block1 != Blocks.AIR) {
-                    context.caster.getEntityWorld().setBlockState(pos, block1.getStateFromMeta(result.getMetadata()));
-                    state = context.caster.getEntityWorld().getBlockState(pos);
-                    context.caster.getEntityWorld().playEvent(2001, pos, Block.getStateId(state));
+                    context.caster.world.setBlockState(pos, block1.getStateFromMeta(result.getMetadata()));
+                    state = context.caster.world.getBlockState(pos);
+                    context.caster.world.playEvent(2001, pos, Block.getStateId(state));
                 }
             }
 

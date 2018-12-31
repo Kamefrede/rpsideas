@@ -49,7 +49,7 @@ public class ItemPsimetalRod extends ItemModRod implements IPsiAddonTool {
             ItemPsimetalRod rod = (ItemPsimetalRod) stack.getItem();
             if (data != null && !playerCad.isEmpty()) {
                 ItemStack bullet = rod.getBulletInSocket(stack, rod.getSelectedSlot(stack));
-                ItemCAD.cast(player.getEntityWorld(), player, data, bullet, playerCad, 5, 10, 0.05F, (SpellContext context) -> {
+                ItemCAD.cast(player.world, player, data, bullet, playerCad, 5, 10, 0.05F, (SpellContext context) -> {
                     context.tool = stack;
                     context.positionBroken = new RayTraceResult(pos, EnumFacing.UP);
                 });
@@ -70,7 +70,7 @@ public class ItemPsimetalRod extends ItemModRod implements IPsiAddonTool {
 
                 if (data != null && !playerCad.isEmpty()) {
                     ItemStack bullet = getBulletInSocket(itemstack, getSelectedSlot(itemstack));
-                    ItemCAD.cast(playerIn.getEntityWorld(), playerIn, data, bullet, playerCad, 5, 10, 0.05F, (SpellContext context) ->
+                    ItemCAD.cast(playerIn.world, playerIn, data, bullet, playerCad, 5, 10, 0.05F, (SpellContext context) ->
                             context.attackedEntity = (EntityLivingBase) playerIn.fishEntity.caughtEntity);
                 }
             }

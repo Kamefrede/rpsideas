@@ -21,4 +21,8 @@ public class ActionRule implements ISpellRule {
     public boolean isAllowed(EnumActionType type) {
         return this.type != type;
     }
+
+    public EnumActionType getType() {
+        return type;
+    }
 }

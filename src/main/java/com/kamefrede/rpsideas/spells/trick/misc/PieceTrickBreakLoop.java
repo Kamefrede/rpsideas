@@ -23,7 +23,8 @@ public class PieceTrickBreakLoop extends PieceTrick {
     }
 
     @Override
-    public void addToMetadata(SpellMetadata meta) throws SpellCompilationException, ArithmeticException {
+    public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
+        // NO-OP
     }
 
     @Override

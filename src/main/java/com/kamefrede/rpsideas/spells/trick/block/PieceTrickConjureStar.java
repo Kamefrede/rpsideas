@@ -48,13 +48,12 @@ public class PieceTrickConjureStar extends PieceTrick implements IPulsarConjurat
         Vector3 rayVec = getParamValue(context, rayParam);
         Vector3 positionVec = getParamValue(context, positionParam);
 
-        if (positionVec == null || rayVec == null) {
+        if (positionVec == null || rayVec == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        }
 
-        if (!context.isInRadius(positionVec) || !context.isInRadius(positionVec.copy().add(rayVec))) {
+        if (!context.isInRadius(positionVec) || !context.isInRadius(positionVec.copy().add(rayVec)))
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
-        }
+
         conjurePulsar(context, positionParam, timeParam);
         return null;
     }

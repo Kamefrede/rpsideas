@@ -40,9 +40,8 @@ public class PieceTrickConjureGravityBlockSequence extends PieceTrick {
     public Object execute(SpellContext context) throws SpellRuntimeException {
         Vector3 positionVal = this.getParamValue(context, position);
         Vector3 targetVal = this.getParamValue(context, target);
-        Double maxBlocksVal = this.<Double>getParamValue(context, maxBlocks);
-        Double timeVal = this.<Double>getParamValue(context, time);
-        int maxBlocksInt = maxBlocksVal.intValue();
+        double maxBlocksVal = this.getParamValue(context, maxBlocks);
+        Double timeVal = this.getParamValue(context, time);
 
         if (positionVal == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
@@ -50,23 +49,23 @@ public class PieceTrickConjureGravityBlockSequence extends PieceTrick {
         int len = (int) targetVal.mag();
         Vector3 targetNorm = targetVal.copy().normalize();
 
-        for (int i = 0; i < Math.min(len, maxBlocksInt); i++) {
+        for (int i = 0; i < Math.min(len, maxBlocksVal); i++) {
             Vector3 blockVec = positionVal.copy().add(targetNorm.copy().multiply(i));
 
             if (!context.isInRadius(blockVec))
                 throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
 
-            BlockPos pos = new BlockPos(blockVec.x, blockVec.y, blockVec.z);
-            if (!context.caster.getEntityWorld().isBlockModifiable(context.caster, pos))
+            BlockPos pos = blockVec.toBlockPos();
+            if (!context.caster.world.isBlockModifiable(context.caster, pos))
                 continue;
 
-            IBlockState state = context.caster.getEntityWorld().getBlockState(pos);
+            IBlockState state = context.caster.world.getBlockState(pos);
 
             if (state.getBlock() != RPSBlocks.conjuredGravityBlock) {
-                PieceTrickConjureEtherealBlock.placeBlock(context.caster, context.caster.getEntityWorld(), pos, true);
-                state = context.caster.getEntityWorld().getBlockState(pos);
+                PieceTrickConjureEtherealBlock.placeBlock(context.caster, context.caster.world, pos, true);
+                state = context.caster.world.getBlockState(pos);
 
-                if (!context.caster.getEntityWorld().isRemote && state.getBlock() == RPSBlocks.conjuredGravityBlock)
+                if (!context.caster.world.isRemote && state.getBlock() == RPSBlocks.conjuredGravityBlock)
                     PieceTrickConjureEtherealBlock.setColorAndTime(context, timeVal, pos, state);
             }
         }

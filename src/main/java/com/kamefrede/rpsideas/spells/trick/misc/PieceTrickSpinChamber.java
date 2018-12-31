@@ -30,9 +30,10 @@ public class PieceTrickSpinChamber extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Double num = this.<Double>getParamValue(context, number);
+        Double num = this.getParamValue(context, number);
         if (num == null || num == 0) return null;
-        if (!context.tool.isEmpty()) throw new SpellRuntimeException(SpellRuntimeExceptions.CAD);
+        if (!context.tool.isEmpty())
+            throw new SpellRuntimeException(SpellRuntimeExceptions.CAD);
         ItemStack stack = PsiAPI.getPlayerCAD(context.caster);
         ItemCAD cad = (ItemCAD) stack.getItem();
         if (num > 0) {

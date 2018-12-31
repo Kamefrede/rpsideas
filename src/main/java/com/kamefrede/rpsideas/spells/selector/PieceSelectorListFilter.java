@@ -33,18 +33,15 @@ public class PieceSelectorListFilter extends PieceSelector {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster.world.isRemote) return null;
-        Double numVal = this.<Double>getParamValue(context, num);
+        double numVal = this.getParamValue(context, num);
         EntityListWrapper listVal = this.getParamValue(context, list);
-        int val = numVal.intValue();
-        if (listVal == null) throw new SpellRuntimeException(SpellRuntimeExceptions.NULL_LIST);
-        if (listVal.unwrap().isEmpty()) {
-            throw new SpellRuntimeException(SpellRuntimeExceptions.NULL_LIST);
-        }
-        if (val >= 0 && val < listVal.unwrap().size()) {
+        int val = (int) numVal;
+        if (listVal == null || listVal.unwrap().isEmpty()) throw new SpellRuntimeException(SpellRuntimeExceptions.NULL_LIST);
+
+        if (val >= 0 && val < listVal.unwrap().size())
             return listVal.unwrap().get(val);
-        } else {
+        else
             throw new SpellRuntimeException(SpellRuntimeExceptions.OUT_OF_BOUNDS);
-        }
 
     }
 

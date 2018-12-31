@@ -3,6 +3,7 @@ package com.kamefrede.rpsideas.spells.trick.entity;
 import com.kamefrede.rpsideas.entity.EntityFancyCircle;
 import com.kamefrede.rpsideas.spells.base.SpellParams;
 import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import vazkii.psi.api.PsiAPI;
@@ -27,32 +28,38 @@ public class PieceTrickConjureCircle extends PieceTrick {
 
     @Override
     public void initParams() {
-        addParam(time = new ParamNumber(SpellParam.GENERIC_NAME_TIME, SpellParam.BLUE, false, true));
-        addParam(position = new ParamVector(SpellParam.GENERIC_NAME_POSITION,SpellParam.RED, false, false));
-        addParam(scale = new ParamNumber(SpellParams.GENERIC_NAME_SCALE, SpellParam.GREEN, false, false));
+        addParam(position = new ParamVector(SpellParam.GENERIC_NAME_POSITION, SpellParam.RED, false, false));
         addParam(direction = new ParamVector(SpellParams.GENERIC_NAME_DIRECTION, SpellParam.CYAN, true, false));
+        addParam(time = new ParamNumber(SpellParam.GENERIC_NAME_TIME, SpellParam.BLUE, true, true));
+        addParam(scale = new ParamNumber(SpellParams.GENERIC_NAME_SCALE, SpellParam.GREEN, true, true));
     }
 
     @Override
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException, ArithmeticException {
         super.addToMetadata(meta);
-        Double scl = this.getParamEvaluation(scale);
-        Double tim = this.getParamEvaluation(time);
-        if(scl != null &&(scl > 1 || scl <= 0))
+
+        double scl = SpellHelpers.evaluateNumber(this, scale, 1);
+        double tim = SpellHelpers.evaluateNumber(this, time, 100);
+
+        if (scl > 1 || scl <= 0)
             throw new SpellCompilationException(SpellRuntimeExceptions.SCALE);
-        if(tim != null && tim <= 0)
+        if (tim <= 0)
             throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_VALUE);
 
+        meta.addStat(EnumSpellStat.POTENCY, (int) (scl * tim / 100));
     }
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         Vector3 pos = this.getParamValue(context, position);
         Vector3 dir = this.getParamValue(context, direction);
-        double scl = this.getParamValue(context, scale);
-        double maxTimeAlive = this.getParamValue(context, time);
-        if (pos == null) throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        if(dir == null || dir.isZero()) dir = new Vector3(0,1,0);
+        double scl = SpellHelpers.getNumber(this, context, scale, 1);
+        double maxTimeAlive = SpellHelpers.getNumber(this, context, time, 100);
+
+        if (pos == null)
+            throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
+        if (dir == null || dir.isZero())
+            dir = new Vector3(0, 1, 0);
         if (!context.isInRadius(pos))
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
 
@@ -62,8 +69,8 @@ public class PieceTrickConjureCircle extends PieceTrick {
         World world = context.caster.world;
         if (!world.isRemote) {
             EntityFancyCircle circle = new EntityFancyCircle(world);
-            circle.setInfo(context.caster, colorizer, pos, (int)maxTimeAlive,(float) scl,  dir.toVec3D().normalize());
-            circle.getEntityWorld().spawnEntity(circle);
+            circle.setInfo(context.caster, colorizer, pos, (int) maxTimeAlive, (float) scl, dir.toVec3D().normalize());
+            circle.world.spawnEntity(circle);
         }
         return null;
     }

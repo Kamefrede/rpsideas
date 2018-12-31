@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.spells.trick.misc;
 
 import com.kamefrede.rpsideas.entity.EntityPsireworkRocket;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.entity.item.EntityFireworkRocket;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -36,19 +37,16 @@ public class PieceTrickFirework extends PieceTrick {
     @Override
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
         super.addToMetadata(meta);
-        Double timeVal = this.<Double>getParamEvaluation(time);
-        if (timeVal == null || timeVal < 0)
-            throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_VALUE, x, y);
+        double timeVal = SpellHelpers.ensurePositiveOrZero(this, time);
 
-        meta.addStat(EnumSpellStat.COST, timeVal.intValue() * 10);
+        meta.addStat(EnumSpellStat.COST, (int) (timeVal * 10));
     }
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster.world.isRemote) return null;
         Vector3 positionVal = this.getParamValue(context, position);
-        Double timeVal = this.<Double>getParamValue(context, time);
-        int timeR = timeVal.intValue();
+        double timeVal = this.getParamValue(context, time);
 
         ItemStack cad = PsiAPI.getPlayerCAD(context.caster);
         ICAD icad = (ICAD) cad.getItem();
@@ -58,7 +56,7 @@ public class PieceTrickFirework extends PieceTrick {
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
         if (!context.isInRadius(positionVal))
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
-        ItemStack fireworkStack = generateFirework(timeR);
+        ItemStack fireworkStack = generateFirework((int) timeVal);
 
         EntityFireworkRocket rocket = new EntityPsireworkRocket(context.caster.world, positionVal.x, positionVal.y, positionVal.z, fireworkStack, colorizer);
         context.caster.world.spawnEntity(rocket);
@@ -66,8 +64,6 @@ public class PieceTrickFirework extends PieceTrick {
         return true;
     }
 
-
-    //thanks u botania
     public ItemStack generateFirework(int time) {
         ItemStack stack = new ItemStack(Items.FIREWORKS);
         Random rdm = new Random();

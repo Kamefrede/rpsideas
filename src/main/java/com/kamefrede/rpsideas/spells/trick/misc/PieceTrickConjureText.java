@@ -3,6 +3,7 @@ package com.kamefrede.rpsideas.spells.trick.misc;
 import com.kamefrede.rpsideas.entity.EntityConjuredText;
 import com.kamefrede.rpsideas.spells.base.SpellParams;
 import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import vazkii.psi.api.PsiAPI;
@@ -37,12 +38,8 @@ public class PieceTrickConjureText extends PieceTrick {
     @Override
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException, ArithmeticException {
         super.addToMetadata(meta);
-        Double timeAlive = this.getParamEvaluation(time);
-        if (timeAlive != null && timeAlive <= 0)
-            throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_INTEGER);
-        if (timeAlive != null) {
-            meta.addStat(EnumSpellStat.POTENCY, (timeAlive.intValue() / 20) );
-        }
+        double timeAlive = SpellHelpers.ensurePositiveAndNonzero(this, time);
+        meta.addStat(EnumSpellStat.POTENCY, (int) (timeAlive / 20));
     }
 
     @Override

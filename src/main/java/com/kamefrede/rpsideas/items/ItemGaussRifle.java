@@ -43,6 +43,11 @@ public class ItemGaussRifle extends ItemMod implements IFlowColorAcceptor {
         return IGlowingItem.Helper.wrapperBake(model, false, 0, 1);
     }
 
+    @Override
+    public boolean shouldDisableLightingForGlow(@NotNull ItemStack itemStack, @NotNull IBakedModel model) {
+        return false;
+    }
+
     @Nullable
     @Override
     @SideOnly(Side.CLIENT)

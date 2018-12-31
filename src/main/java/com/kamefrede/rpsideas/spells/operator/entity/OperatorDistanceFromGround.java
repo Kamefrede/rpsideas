@@ -34,7 +34,7 @@ public class OperatorDistanceFromGround extends PieceOperator {
         if (targetVal == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
 
-        World world = context.caster.getEntityWorld();
+        World world = context.caster.world;
         BlockPos pos = targetVal.toBlockPos();
 
         Chunk chunk = world.getChunk(pos);

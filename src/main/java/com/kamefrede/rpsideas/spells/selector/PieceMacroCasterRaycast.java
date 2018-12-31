@@ -1,5 +1,6 @@
 package com.kamefrede.rpsideas.spells.selector;
 
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.util.math.RayTraceResult;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
@@ -34,19 +35,13 @@ public class PieceMacroCasterRaycast extends SpellPiece {
         Vector3 originVal = Vector3.fromEntity(context.caster).add(0, context.caster.getEyeHeight(), 0);
         Vector3 rayVal = new Vector3(context.caster.getLook(1F));
 
-        double maxLen = SpellContext.MAX_DISTANCE;
-        Double numberVal = this.<Double>getParamValue(context, maxDistance);
-        if (numberVal != null)
-            maxLen = numberVal;
-        if (maxLen <= 0)
-            throw new SpellRuntimeException(SpellRuntimeException.NEGATIVE_NUMBER);
-        maxLen = Math.min(SpellContext.MAX_DISTANCE, maxLen);
+        double maxLen = SpellHelpers.getBoundedNumber(this, context, maxDistance, SpellContext.MAX_DISTANCE);
 
-        RayTraceResult pos = PieceOperatorVectorRaycast.raycast(context.caster.getEntityWorld(), originVal, rayVal, maxLen);
+        RayTraceResult pos = PieceOperatorVectorRaycast.raycast(context.caster.world, originVal, rayVal, maxLen);
         if (pos == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
 
-        return new Vector3(pos.getBlockPos().getX(), pos.getBlockPos().getY(), pos.getBlockPos().getZ());
+        return Vector3.fromBlockPos(pos.getBlockPos());
     }
 
     @Override

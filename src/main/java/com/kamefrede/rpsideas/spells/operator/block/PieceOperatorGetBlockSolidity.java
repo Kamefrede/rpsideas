@@ -2,6 +2,7 @@ package com.kamefrede.rpsideas.spells.operator.block;
 
 import com.kamefrede.rpsideas.spells.base.SpellParams;
 import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -31,14 +32,11 @@ public class PieceOperatorGetBlockSolidity extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 vec = this.getParamValue(context, target);
+        BlockPos pos = SpellHelpers.getBlockPos(this, context, target);
         Vector3 axis = this.getParamValue(context, axisParam);
-        if (vec == null || vec.isZero())
-            throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
         if (axis == null || !axis.isAxial() || axis.isZero())
             throw new SpellRuntimeException(SpellRuntimeExceptions.NON_AXIAL_VECTOR);
 
-        BlockPos pos = new BlockPos(vec.x, vec.y, vec.z);
         IBlockState state = context.caster.world.getBlockState(pos);
         return state.isSideSolid(context.caster.world, pos, EnumFacing.getFacingFromVector((float) axis.x, (float) axis.y, (float) axis.z)) ? 1.0D : 0.D;
     }

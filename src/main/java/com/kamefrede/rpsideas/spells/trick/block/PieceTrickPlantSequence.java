@@ -1,5 +1,6 @@
 package com.kamefrede.rpsideas.spells.trick.block;
 
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.util.math.BlockPos;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
@@ -28,9 +29,7 @@ public class PieceTrickPlantSequence extends PieceTrick {
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
         super.addToMetadata(meta);
 
-        Double maxBlocksVal = this.<Double>getParamEvaluation(maxBlocks);
-        if (maxBlocksVal == null || maxBlocksVal <= 0)
-            throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_VALUE, x, y);
+        double maxBlocksVal = SpellHelpers.ensurePositiveAndNonzero(this, maxBlocks);
 
         meta.addStat(EnumSpellStat.POTENCY, (int) (maxBlocksVal * 8));
         meta.addStat(EnumSpellStat.COST, (int) (maxBlocksVal * 8));
@@ -55,7 +54,7 @@ public class PieceTrickPlantSequence extends PieceTrick {
                 throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
 
             BlockPos pos = blockVec.toBlockPos();
-            PieceTrickPlant.plantPlant(context.caster, context.caster.getEntityWorld(), pos, context.getTargetSlot());
+            PieceTrickPlant.plantPlant(context.caster, context.caster.world, pos, context.getTargetSlot());
         }
 
         return null;

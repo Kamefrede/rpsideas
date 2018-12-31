@@ -23,7 +23,7 @@ public class PieceOperatorToRadians extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        double n = this.<Double>getParamValue(context, num);
+        double n = this.getParamValue(context, num);
         return Math.toRadians(n);
     }
 

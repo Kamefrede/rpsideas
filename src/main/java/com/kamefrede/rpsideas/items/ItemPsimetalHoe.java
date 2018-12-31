@@ -76,7 +76,7 @@ public class ItemPsimetalHoe extends ItemMod implements IPsiAddonTool {
             ItemStack playerCad = PsiAPI.getPlayerCAD(player);
             if (data != null && !playerCad.isEmpty()) {
                 ItemStack bullet = getBulletInSocket(stack, getSelectedSlot(stack));
-                ItemCAD.cast(player.getEntityWorld(), player, data, bullet, playerCad, 5, 10, 0.05F, (SpellContext context) -> {
+                ItemCAD.cast(player.world, player, data, bullet, playerCad, 5, 10, 0.05F, (SpellContext context) -> {
                     context.tool = stack;
                     context.positionBroken = new RayTraceResult(new Vec3d(hitX + pos.getX(), hitY + pos.getY(), hitZ + pos.getZ()), facing, pos);
                 });

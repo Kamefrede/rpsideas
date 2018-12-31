@@ -147,7 +147,7 @@ public class EntitySniperProjectile extends EntityThrowable implements ISpellImm
         double z = posZ;
 
         Vector3 lookOrig = new Vector3(motionX, motionY, motionZ).normalize();
-        sparkle(getEntityWorld(), getParticleCount(), lookOrig, x, y, z, r, g, b);
+        sparkle(world, getParticleCount(), lookOrig, x, y, z, r, g, b);
     }
 
     public int getLiveTime() {
@@ -207,7 +207,7 @@ public class EntitySniperProjectile extends EntityThrowable implements ISpellImm
             return superThrower;
 
         String name = dataManager.get(CASTER_NAME);
-        return getEntityWorld().getPlayerEntityByName(name);
+        return world.getPlayerEntityByName(name);
     }
 
     @Override

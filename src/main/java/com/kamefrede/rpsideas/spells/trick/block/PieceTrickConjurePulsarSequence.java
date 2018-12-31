@@ -48,8 +48,8 @@ public class PieceTrickConjurePulsarSequence extends PieceTrick {
 
         Vector3 positionVec = getParamValue(context, positionParam);
         Vector3 targetVec = getParamValue(context, targetParam);
-        int maxBlocks = (int) SpellHelpers.getNumber(this, context, maxBlocksParam, 0);
-        int time = (int) SpellHelpers.getNumber(this, context, timeParam, 0);
+        double maxBlocks = this.getParamValue(context, maxBlocksParam);
+        Double time = this.getParamValue(context, timeParam);
 
         if (positionVec == null || targetVec == null) {
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
@@ -60,16 +60,15 @@ public class PieceTrickConjurePulsarSequence extends PieceTrick {
 
         for (int i = 0; i < length; i++) {
             Vector3 blockVector = positionVec.copy().add(normalizedDirection.copy().multiply(i));
-            if (!context.isInRadius(blockVector)) {
+            if (!context.isInRadius(blockVector))
                 throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
-            }
 
             World world = context.caster.world;
             BlockPos pos = blockVector.toBlockPos();
             IBlockState state = getStateToSet();
 
             if (SpellHelpers.placeBlock(world, pos, state, false))
-                PieceTrickConjureEtherealBlock.setColorAndTime(context, (double) time, pos, state);
+                PieceTrickConjureEtherealBlock.setColorAndTime(context, time, pos, state);
         }
 
         return null;

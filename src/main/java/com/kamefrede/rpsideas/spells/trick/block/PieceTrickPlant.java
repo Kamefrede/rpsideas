@@ -1,5 +1,6 @@
 package com.kamefrede.rpsideas.spells.trick.block;
 
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,7 +11,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
-import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceTrick;
@@ -83,18 +83,11 @@ public class PieceTrickPlant extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (context.caster.getEntityWorld().isRemote)
+        if (context.caster.world.isRemote)
             return null;
-        Vector3 positionVal = this.getParamValue(context, position);
+        BlockPos pos = SpellHelpers.getBlockPos(this, context, position);
 
-        if (positionVal == null)
-            throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        if (!context.isInRadius(positionVal))
-            throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
-
-        BlockPos pos = positionVal.toBlockPos();
-
-        plantPlant(context.caster, context.caster.getEntityWorld(), pos, context.getTargetSlot());
+        plantPlant(context.caster, context.caster.world, pos, context.getTargetSlot());
 
         return null;
     }

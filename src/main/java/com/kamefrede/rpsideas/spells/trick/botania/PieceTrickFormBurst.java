@@ -59,12 +59,10 @@ public class PieceTrickFormBurst extends PieceComponentTrick {
         Vector3 posVec = getParamValue(context, positionParam);
         Vector3 rayVec = getParamValue(context, rayParam);
 
-        if (posVec == null || rayVec == null) {
+        if (posVec == null || rayVec == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        }
-        if (!context.isInRadius(posVec)) {
+        if (!context.isInRadius(posVec))
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
-        }
 
         EntityPlayer player = context.caster;
 

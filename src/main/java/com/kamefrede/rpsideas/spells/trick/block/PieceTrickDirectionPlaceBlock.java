@@ -86,28 +86,21 @@ public class PieceTrickDirectionPlaceBlock extends PieceTrick {
         Vector3 positionVal = this.getParamValue(context, position);
         Vector3 directionVal = this.getParamValue(context, direction);
 
-        if (positionVal == null) {
-            throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        }
+        if (positionVal == null) throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
 
-        if (directionVal == null || directionVal.isZero()) {
+        if (directionVal == null || directionVal.isZero())
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        }
 
         if (!directionVal.isAxial()) throw new SpellRuntimeException(SpellRuntimeExceptions.NON_AXIAL_VECTOR);
 
-        if (!context.isInRadius(positionVal)) {
+        if (!context.isInRadius(positionVal))
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
-        }
 
-        BlockPos pos = new BlockPos(positionVal.x, positionVal.y, positionVal.z);
+        BlockPos pos = positionVal.toBlockPos();
 
-        float vectorZ = (float) directionVal.z;
-        float vectorY = (float) directionVal.y;
-        float vectorX = (float) directionVal.x;
-        EnumFacing facing = EnumFacing.getFacingFromVector(vectorX, vectorY, vectorZ);
+        EnumFacing facing = EnumFacing.getFacingFromVector((float) directionVal.x, (float) directionVal.y, (float) directionVal.z);
 
-        placeBlock(context.caster, context.caster.getEntityWorld(), pos, context.getTargetSlot(), false, false, facing);
+        placeBlock(context.caster, context.caster.world, pos, context.getTargetSlot(), false, false, facing);
 
         return null;
     }

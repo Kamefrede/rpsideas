@@ -12,6 +12,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.psi.common.lib.LibResources;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 @SideOnly(Side.CLIENT)
@@ -29,7 +30,7 @@ public class RenderFancyCircle extends Render<EntityFancyCircle> {
     }
 
     @Override
-    public void doRender(EntityFancyCircle entity, double x, double y, double z, float entityYaw, float partialTicks) {
+    public void doRender(@Nonnull EntityFancyCircle entity, double x, double y, double z, float entityYaw, float partialTicks) {
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
 
         int color = entity.getColor();
@@ -48,7 +49,7 @@ public class RenderFancyCircle extends Render<EntityFancyCircle> {
         else if (facingZ != 1)
             GlStateManager.rotate((float) (Math.acos(facingZ) * 180 / Math.PI),
                     -entity.getYFacing(), entity.getXFacing(), 0);
-        GlStateManager.translate(-scale * 2, -scale * 2, 0.01);
+        GlStateManager.translate(0, 0, 0.01);
         GlStateManager.scale(ratio * scale, ratio * scale, ratio);
 
         GlStateManager.disableCull();
@@ -73,26 +74,24 @@ public class RenderFancyCircle extends Render<EntityFancyCircle> {
                 rValue = gValue = bValue = 0xFF;
             else if (i == 2) {
                 int minBrightness = (int) (1 / (1 - BRIGHTNESS_FACTOR));
-                if (r == 0 && g == 0 && b == 0)
-                    r = g = b = minBrightness;
-                if (r > 0 && r < minBrightness) r = minBrightness;
-                if (g > 0 && g < minBrightness) g = minBrightness;
-                if (b > 0 && b < minBrightness) b = minBrightness;
+                if (rValue == 0 && gValue == 0 && bValue == 0)
+                    rValue = gValue = bValue = minBrightness;
+                if (rValue > 0 && rValue < minBrightness) rValue = minBrightness;
+                if (gValue > 0 && gValue < minBrightness) gValue = minBrightness;
+                if (bValue > 0 && bValue < minBrightness) bValue = minBrightness;
 
-                r = (int) Math.min(r / BRIGHTNESS_FACTOR, 0xFF);
-                r = (int) Math.min(g / BRIGHTNESS_FACTOR, 0xFF);
-                r = (int) Math.min(b / BRIGHTNESS_FACTOR, 0xFF);
+                rValue = (int) Math.min(rValue / BRIGHTNESS_FACTOR, 0xFF);
+                gValue = (int) Math.min(gValue / BRIGHTNESS_FACTOR, 0xFF);
+                bValue = (int) Math.min(bValue / BRIGHTNESS_FACTOR, 0xFF);
             }
 
             GlStateManager.pushMatrix();
-            GlStateManager.translate(32, 32, 0);
             GlStateManager.rotate(i == 0 ? -alive : alive, 0, 0, 1);
-            GlStateManager.translate(-32, -32, 0);
 
-            GlStateManager.color(r / 255f, g / 255f, b / 255f);
+            GlStateManager.color(rValue / 255f, gValue / 255f, bValue / 255f);
 
             Minecraft.getMinecraft().renderEngine.bindTexture(layers[i]);
-            Gui.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, 64, 64, 64, 64);
+            Gui.drawModalRectWithCustomSizedTexture(-32, -32, 0, 0, 64, 64, 64, 64);
             GlStateManager.popMatrix();
 
             GlStateManager.translate(0, 0, -0.5);
@@ -106,7 +105,7 @@ public class RenderFancyCircle extends Render<EntityFancyCircle> {
 
     @Nullable
     @Override
-    protected ResourceLocation getEntityTexture(EntityFancyCircle entity) {
+    protected ResourceLocation getEntityTexture(@Nonnull EntityFancyCircle entity) {
         return null;
     }
 

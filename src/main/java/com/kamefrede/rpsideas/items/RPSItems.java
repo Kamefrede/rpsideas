@@ -2,6 +2,7 @@ package com.kamefrede.rpsideas.items;
 
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.blocks.RPSBlocks;
+import com.kamefrede.rpsideas.compat.botania.BotaniaCompatItems;
 import com.kamefrede.rpsideas.items.base.ItemModRod;
 import com.kamefrede.rpsideas.items.components.*;
 import com.kamefrede.rpsideas.items.flow.*;
@@ -66,6 +67,10 @@ public class RPSItems {
     public static final ItemMod gaussBullet = new ItemMod(RPSItemNames.ITEM_GAUSS_BULLET);
     public static final ItemMod cadMagazine = new ItemCADMagazine(RPSItemNames.SPELL_MAGAZINE);
     //public static final ItemMod braceletCad = new ItemBraceletCAD();
+
+    static {
+        new BotaniaCompatItems().run();
+    }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void remapItem(RegistryEvent.MissingMappings<Item> e) {

@@ -42,12 +42,10 @@ import java.util.regex.Pattern;
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = RPSIdeas.MODID)
 public class ItemBlasterAssembly extends ItemComponent implements IBlasterComponent, IExtraVariantHolder {
 
-    public static final String[] VARIANTS = {
-            "cad_assembly_mana_blaster"
-    };
     public static final String[] CAD_MODELS = {
             "cad_blaster"
     };
+
     private static final Pattern advancedMatcher = Pattern.compile("\\s+(?=\\(#\\d+\\))");
 
 
@@ -65,7 +63,7 @@ public class ItemBlasterAssembly extends ItemComponent implements IBlasterCompon
         ICAD icad = (ICAD) item;
 
         EntityPlayer player = e.getEntityPlayer();
-        World world = player == null ? null : player.getEntityWorld();
+        World world = player == null ? null : player.world;
 
         ItemStack assemblyStack = icad.getComponentInSlot(e.getItemStack(), EnumCADComponent.ASSEMBLY);
         if (assemblyStack.isEmpty() || !(assemblyStack.getItem() instanceof IBlasterComponent)) return;
@@ -142,11 +140,5 @@ public class ItemBlasterAssembly extends ItemComponent implements IBlasterCompon
     @Override
     public String[] getExtraVariants() {
         return CAD_MODELS;
-    }
-
-    @Nonnull
-    @Override
-    public String[] getVariants() {
-        return VARIANTS;
     }
 }

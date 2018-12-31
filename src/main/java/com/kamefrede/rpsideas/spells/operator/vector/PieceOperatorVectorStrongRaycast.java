@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.spells.operator.vector;
 
 import com.kamefrede.rpsideas.spells.base.SpellParams;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import vazkii.psi.api.internal.Vector3;
@@ -42,13 +43,9 @@ public class PieceOperatorVectorStrongRaycast extends PieceOperator {
         if (originVal == null || rayVal == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
 
-        double maxLen = SpellContext.MAX_DISTANCE;
-        Double numberVal = this.<Double>getParamValue(context, maxParam);
-        if (numberVal != null)
-            maxLen = numberVal;
-        maxLen = Math.min(SpellContext.MAX_DISTANCE, maxLen);
+        double maxLen = SpellHelpers.getBoundedNumber(this, context, maxParam, SpellContext.MAX_DISTANCE);
 
-        RayTraceResult pos = raycast(context.caster.getEntityWorld(), originVal, rayVal, maxLen);
+        RayTraceResult pos = raycast(context.caster.world, originVal, rayVal, maxLen);
         if (pos == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
 

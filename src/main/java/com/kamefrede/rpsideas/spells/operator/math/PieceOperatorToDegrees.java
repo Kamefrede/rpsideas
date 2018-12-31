@@ -24,7 +24,7 @@ public class PieceOperatorToDegrees extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        double r = this.<Double>getParamValue(context, num);
+        double r = this.getParamValue(context, num);
         return Math.toDegrees(r);
 
     }

@@ -2,15 +2,12 @@ package com.kamefrede.rpsideas.spells.operator.entity;
 
 import com.kamefrede.rpsideas.spells.base.SpellParams;
 import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import vazkii.psi.api.internal.Vector3;
-import vazkii.psi.api.spell.Spell;
-import vazkii.psi.api.spell.SpellContext;
-import vazkii.psi.api.spell.SpellParam;
-import vazkii.psi.api.spell.SpellRuntimeException;
+import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamEntityListWrapper;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.param.ParamVector;
@@ -38,11 +35,19 @@ public class PieceOperatorClosestToLine extends PieceOperator {
     }
 
     @Override
+    public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
+        super.addToMetadata(meta);
+        SpellHelpers.ensurePositiveAndNonzero(this, length, SpellContext.MAX_DISTANCE);
+    }
+
+    @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         Vector3 rayStart = this.getParamValue(context, rayStartParam);
         Vector3 rayEnd = this.getParamValue(context, rayEndParam);
         if (rayStart == null || rayEnd == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
+
+        double maxLength = SpellHelpers.getBoundedNumber(this, context, length, SpellContext.MAX_DISTANCE);
 
         Vec3d origin = rayStart.toVec3D();
         Vec3d rayVector = rayEnd.toVec3D().subtract(origin);
@@ -53,16 +58,19 @@ public class PieceOperatorClosestToLine extends PieceOperator {
         if (list == null)
             throw new SpellRuntimeException(SpellRuntimeExceptions.NULL_LIST);
 
-        double minDistance = 0xffff;
+        double minDistance = maxLength;
         Entity found = null;
         for (Entity entity : list) {
             Vec3d displacement = entity.getPositionVector().subtract(origin);
             double unmodifiedDistance = MathHelper.clamp(ray.dotProduct(displacement), 0, len);
             double distance = displacement.subtract(ray.scale(unmodifiedDistance)).length();
 
-            if (distance < minDistance) {
+            if (distance > maxLength)
+                continue;
+
+            if (distance <= minDistance) {
                 minDistance = distance;
-                found =  entity;
+                found = entity;
             }
         }
 

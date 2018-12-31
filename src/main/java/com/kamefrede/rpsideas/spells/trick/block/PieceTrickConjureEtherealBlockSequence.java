@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.spells.trick.block;
 
 import com.kamefrede.rpsideas.blocks.RPSBlocks;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import vazkii.psi.api.internal.Vector3;
@@ -23,9 +24,7 @@ public class PieceTrickConjureEtherealBlockSequence extends PieceTrick {
     }
 
     public static void addBlocksVal(SpellPiece piece, SpellParam maxBlocks, SpellMetadata data) throws SpellCompilationException {
-        Double maxBlocksVal = piece.<Double>getParamEvaluation(maxBlocks);
-        if (maxBlocksVal == null || maxBlocksVal < 0)
-            throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_VALUE, piece.x, piece.y);
+        double maxBlocksVal = SpellHelpers.ensurePositiveAndNonzero(piece, maxBlocks);
 
         data.addStat(EnumSpellStat.COST, (int) (maxBlocksVal * 20));
         data.addStat(EnumSpellStat.POTENCY, (int) (maxBlocksVal * 15));
@@ -49,9 +48,8 @@ public class PieceTrickConjureEtherealBlockSequence extends PieceTrick {
     public Object execute(SpellContext context) throws SpellRuntimeException {
         Vector3 positionVal = this.getParamValue(context, position);
         Vector3 targetVal = this.getParamValue(context, target);
-        Double maxBlocksVal = this.<Double>getParamValue(context, maxBlocks);
-        Double timeVal = this.<Double>getParamValue(context, time);
-        int maxBlocksInt = maxBlocksVal.intValue();
+        double maxBlocksVal = this.getParamValue(context, maxBlocks);
+        Double timeVal = this.getParamValue(context, time);
 
         if (positionVal == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
@@ -59,23 +57,23 @@ public class PieceTrickConjureEtherealBlockSequence extends PieceTrick {
         int len = (int) targetVal.mag();
         Vector3 targetNorm = targetVal.copy().normalize();
 
-        for (int i = 0; i < Math.min(len, maxBlocksInt); i++) {
+        for (int i = 0; i < Math.min(len, maxBlocksVal); i++) {
             Vector3 blockVec = positionVal.copy().add(targetNorm.copy().multiply(i));
 
             if (!context.isInRadius(blockVec))
                 throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
 
-            BlockPos pos = new BlockPos(blockVec.x, blockVec.y, blockVec.z);
-            if (!context.caster.getEntityWorld().isBlockModifiable(context.caster, pos))
+            BlockPos pos = blockVec.toBlockPos();
+            if (!context.caster.world.isBlockModifiable(context.caster, pos))
                 continue;
 
-            IBlockState state = context.caster.getEntityWorld().getBlockState(pos);
+            IBlockState state = context.caster.world.getBlockState(pos);
 
             if (state.getBlock() != RPSBlocks.conjuredEthereal) {
-                placeBlock(context.caster, context.caster.getEntityWorld(), pos, true);
-                state = context.caster.getEntityWorld().getBlockState(pos);
+                placeBlock(context.caster, context.caster.world, pos, true);
+                state = context.caster.world.getBlockState(pos);
 
-                if (!context.caster.getEntityWorld().isRemote && state.getBlock() == RPSBlocks.conjuredEthereal)
+                if (!context.caster.world.isRemote && state.getBlock() == RPSBlocks.conjuredEthereal)
                     PieceTrickConjureEtherealBlock.setColorAndTime(context, timeVal, pos, state);
             }
         }

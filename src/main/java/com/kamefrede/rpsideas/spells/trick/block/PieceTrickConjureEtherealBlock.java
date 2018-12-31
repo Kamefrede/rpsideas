@@ -2,6 +2,7 @@ package com.kamefrede.rpsideas.spells.trick.block;
 
 import com.kamefrede.rpsideas.blocks.RPSBlocks;
 import com.kamefrede.rpsideas.tiles.TileEthereal;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,7 +12,6 @@ import net.minecraft.world.World;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.ICAD;
-import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.param.ParamVector;
@@ -38,8 +38,8 @@ public class PieceTrickConjureEtherealBlock extends PieceTrick {
     }
 
     public static void setColorAndTime(SpellContext context, Double timeVal, BlockPos pos, IBlockState state) {
-        context.caster.getEntityWorld().setBlockState(pos, state);
-        TileEthereal tile = (TileEthereal) context.caster.getEntityWorld().getTileEntity(pos);
+        context.caster.world.setBlockState(pos, state);
+        TileEthereal tile = (TileEthereal) context.caster.world.getTileEntity(pos);
 
         if (tile != null) {
             if (timeVal != null && timeVal.intValue() > 0) {
@@ -71,26 +71,19 @@ public class PieceTrickConjureEtherealBlock extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 positionVal = this.getParamValue(context, position);
-        Double timeVal = this.<Double>getParamValue(context, time);
+        BlockPos pos = SpellHelpers.getBlockPos(this, context, position);
+        Double timeVal = this.getParamValue(context, time);
 
-        if (positionVal == null)
-            throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        if (!context.isInRadius(positionVal))
-            throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
-
-        BlockPos pos = new BlockPos(positionVal.x, positionVal.y, positionVal.z);
-
-        if (!context.caster.getEntityWorld().isBlockModifiable(context.caster, pos))
+        if (!context.caster.world.isBlockModifiable(context.caster, pos))
             return null;
 
-        IBlockState state = context.caster.getEntityWorld().getBlockState(pos);
+        IBlockState state = context.caster.world.getBlockState(pos);
         if (state.getBlock() != RPSBlocks.conjuredEthereal) {
-            placeBlock(context.caster, context.caster.getEntityWorld(), pos, true);
+            placeBlock(context.caster, context.caster.world, pos, true);
 
-            state = context.caster.getEntityWorld().getBlockState(pos);
+            state = context.caster.world.getBlockState(pos);
 
-            if (!context.caster.getEntityWorld().isRemote && state.getBlock() == RPSBlocks.conjuredEthereal)
+            if (!context.caster.world.isRemote && state.getBlock() == RPSBlocks.conjuredEthereal)
                 setColorAndTime(context, timeVal, pos, state);
         }
 

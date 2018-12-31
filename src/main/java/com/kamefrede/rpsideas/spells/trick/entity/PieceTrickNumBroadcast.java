@@ -45,23 +45,18 @@ public class PieceTrickNumBroadcast extends PieceTrick {
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
         super.addToMetadata(meta);
 
-        Double radiusVal = this.<Double>getParamEvaluation(radius);
-        Double channelVal = this.<Double>getParamEvaluation(channel);
-
-        if (channelVal != null && channelVal <= 0)
-            throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_VALUE, x, y);
-        if (radiusVal == null || radiusVal <= 0)
-            throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_VALUE, x, y);
-        meta.addStat(EnumSpellStat.COST, radiusVal.intValue() * 5);
+        double radiusVal = SpellHelpers.ensurePositiveAndNonzero(this, radius, SpellContext.MAX_DISTANCE);
+        SpellHelpers.ensurePositiveOrZero(this, channel);
+        meta.addStat(EnumSpellStat.COST, (int) (radiusVal * 5));
         meta.addStat(EnumSpellStat.POTENCY, 5);
     }
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         Vector3 positionVal = this.getParamValue(context, position);
-        Double radiusVal = this.<Double>getParamValue(context, radius);
-        Double channelVal = this.<Double>getParamValue(context, channel);
-        Double signalVal = this.<Double>getParamValue(context, signal);
+        Double radiusVal = SpellHelpers.getBoundedNumber(this, context, radius, SpellContext.MAX_DISTANCE);
+        Double channelVal = this.getParamValue(context, channel);
+        Double signalVal = this.getParamValue(context, signal);
 
         if (context.customData.get("rpsideas:BroadcastAny") != null)
             return null;
@@ -90,7 +85,7 @@ public class PieceTrickNumBroadcast extends PieceTrick {
         AxisAlignedBB axis = new AxisAlignedBB(positionVal.x - radiusVal, positionVal.y - radiusVal, positionVal.z - radiusVal, positionVal.x + radiusVal, positionVal.y + radiusVal, positionVal.z + radiusVal);
 
 
-        List<EntityPlayer> list = context.caster.getEntityWorld().getEntitiesWithinAABB(EntityPlayer.class, axis,
+        List<EntityPlayer> list = context.caster.world.getEntitiesWithinAABB(EntityPlayer.class, axis,
                 (EntityPlayer e) -> e != null && e != context.caster && e != context.focalPoint && context.isInRadius(e));
         if (list.size() > 0) {
 
