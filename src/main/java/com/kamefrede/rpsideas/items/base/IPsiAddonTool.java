@@ -1,9 +1,9 @@
 package com.kamefrede.rpsideas.items.base;
 
+import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import vazkii.psi.api.cad.ISocketable;
 import vazkii.psi.api.spell.ISpellSettable;
 import vazkii.psi.api.spell.Spell;

@@ -26,16 +26,6 @@ public class BotaniaCompatItems extends NoopRunnable {
     // Permissive type so that this doesn't become a problem if botania isn't installed
     private static Object psishockBrew, psipulseBrew;
 
-    @Override
-    @Optional.Method(modid = "botania")
-    public void run() {
-        blaster = new ItemBlasterAssembly();
-        psishockBrew = new RPSBrew(RPSItemNames.PSISHOCK, 16000, new PotionEffect(RPSPotions.psishock, 300))
-                .setNotBloodPendantInfusable();
-        psipulseBrew = new RPSBrew(RPSItemNames.PSIPULSE, 32000, new PotionEffect(RPSPotions.psipulse, 600))
-                .setNotIncenseInfusable().setNotBloodPendantInfusable();
-    }
-
     @SubscribeEvent
     @Optional.Method(modid = "botania")
     public static void registerRecipes(RegistryEvent.Register<IRecipe> evt) {
@@ -57,6 +47,16 @@ public class BotaniaCompatItems extends NoopRunnable {
                     new ItemStack(Items.GHAST_TEAR));
 
 
+    }
+
+    @Override
+    @Optional.Method(modid = "botania")
+    public void run() {
+        blaster = new ItemBlasterAssembly();
+        psishockBrew = new RPSBrew(RPSItemNames.PSISHOCK, 16000, new PotionEffect(RPSPotions.psishock, 300))
+                .setNotBloodPendantInfusable();
+        psipulseBrew = new RPSBrew(RPSItemNames.PSIPULSE, 32000, new PotionEffect(RPSPotions.psipulse, 600))
+                .setNotIncenseInfusable().setNotBloodPendantInfusable();
     }
 }
 

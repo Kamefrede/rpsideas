@@ -71,7 +71,7 @@ public class PieceTrickDirectionPlaceBlock extends PieceTrick {
     @Override
     public void initParams() {
         addParam(position = new ParamVector(SpellParam.GENERIC_NAME_POSITION, SpellParam.BLUE, false, false));
-        addParam(direction = new ParamVector("psi.spellparam.direction", SpellParam.GREEN, false, false));
+        addParam(direction = new ParamVector(SpellParams.GENERIC_NAME_DIRECTION, SpellParam.GREEN, false, false));
     }
 
     @Override

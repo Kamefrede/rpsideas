@@ -62,7 +62,7 @@ public class PieceTrickDetonate extends PieceTrick {
         if (context.caster.world instanceof WorldServer) {
             WorldServer server = (WorldServer) context.caster.world;
             server.addScheduledTask(() ->
-                PsiArmorEvent.post(new PsiArmorEvent(context.caster, ItemTriggerSensor.EVENT_TRIGGER)));
+                    PsiArmorEvent.post(new PsiArmorEvent(context.caster, ItemTriggerSensor.EVENT_TRIGGER)));
         }
 
         return null;

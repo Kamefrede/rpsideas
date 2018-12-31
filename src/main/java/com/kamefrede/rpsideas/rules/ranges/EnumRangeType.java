@@ -27,16 +27,15 @@ public enum EnumRangeType {
             NBT_REVERSE_LOOKUP.put(type.getNBTKey(), type);
     }
 
-    public static EnumRangeType byKey(String type) {
-        return NBT_REVERSE_LOOKUP.get(type);
-    }
-
     private final String nbtKey;
     private final Supplier<IRange> createNew;
-
     EnumRangeType(String nbtKey, Supplier<IRange> createNew) {
         this.nbtKey = nbtKey;
         this.createNew = createNew;
+    }
+
+    public static EnumRangeType byKey(String type) {
+        return NBT_REVERSE_LOOKUP.get(type);
     }
 
     public String getLangKey() {

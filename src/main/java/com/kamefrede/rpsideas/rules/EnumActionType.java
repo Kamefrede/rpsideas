@@ -16,10 +16,6 @@ public enum EnumActionType {
     HARM_ENTITY,
     APPLY_POTION;
 
-    public String getName() {
-        return name().toLowerCase(Locale.ROOT);
-    }
-
     private static final Map<String, EnumActionType> actions = Maps.newHashMap();
 
     static {
@@ -30,5 +26,9 @@ public enum EnumActionType {
     @Nullable
     public static EnumActionType byName(String name) {
         return actions.get(name);
+    }
+
+    public String getName() {
+        return name().toLowerCase(Locale.ROOT);
     }
 }

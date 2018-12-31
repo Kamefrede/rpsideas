@@ -230,7 +230,7 @@ public class BlockCADCase extends BlockModContainer {
 
     @Override
     public IProperty[] getIgnoredProperties() {
-        return new IProperty[] { POWERED };
+        return new IProperty[]{POWERED};
     }
 
     @Override

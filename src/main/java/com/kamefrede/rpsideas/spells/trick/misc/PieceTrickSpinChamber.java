@@ -30,25 +30,25 @@ public class PieceTrickSpinChamber extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Double num = this.getParamValue(context, number);
-        if (num == null || num == 0) return null;
+        double num = this.getParamValue(context, number);
+
+        if (num == 0)
+            return null;
+
         if (!context.tool.isEmpty())
             throw new SpellRuntimeException(SpellRuntimeExceptions.CAD);
+
         ItemStack stack = PsiAPI.getPlayerCAD(context.caster);
         ItemCAD cad = (ItemCAD) stack.getItem();
-        if (num > 0) {
-            if (cad.getSelectedSlot(stack) < cad.getStatValue(stack, EnumCADStat.SOCKETS) - 1) {
-                cad.setSelectedSlot(stack, cad.getSelectedSlot(stack) + 1);
-            } else {
-                cad.setSelectedSlot(stack, 0);
-            }
-        } else {
-            if (cad.getSelectedSlot(stack) != 0) {
-                cad.setSelectedSlot(stack, cad.getSelectedSlot(stack) - 1);
-            } else {
-                cad.setSelectedSlot(stack, cad.getStatValue(stack, EnumCADStat.SOCKETS) - 1);
-            }
-        }
+
+        int selectedSlot = cad.getSelectedSlot(stack);
+        int sockets = cad.getStatValue(stack, EnumCADStat.SOCKETS);
+
+        int offset = num > 0 ? 1 : -1;
+
+        int target = ((selectedSlot + offset) + sockets) % sockets;
+
+        cad.setSelectedSlot(stack, target);
 
         return null;
     }

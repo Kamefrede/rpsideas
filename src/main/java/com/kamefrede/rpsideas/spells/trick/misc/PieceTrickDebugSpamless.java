@@ -36,6 +36,8 @@ public class PieceTrickDebugSpamless extends PieceTrick {
         Double numberVal = this.getParamValue(context, numParam);
         Object targetVal = getParamValue(context, targetParam);
 
+        int number = -1;
+
         String s = "null";
         if (targetVal != null)
             s = targetVal.toString();
@@ -45,15 +47,14 @@ public class PieceTrickDebugSpamless extends PieceTrick {
             if (numberVal - numberVal.intValue() == 0) {
                 int numInt = numberVal.intValue();
                 numStr = "" + numInt;
+                number = numInt;
             }
 
             s = TextFormatting.AQUA + "[" + numStr + "] " + TextFormatting.RESET + s;
         }
 
-        //End pasta
-
         TextComponentString component = new TextComponentString(s);
-        sendSpamlessMessage(context.caster, component, "rps spamless");
+        sendSpamlessMessage(context.caster, component, "rps spamless".hashCode() + number);
 
         return null;
     }

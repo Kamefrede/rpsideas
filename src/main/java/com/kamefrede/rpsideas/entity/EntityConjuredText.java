@@ -95,7 +95,7 @@ public class EntityConjuredText extends Entity implements ISpellImmune {
         return dataManager.get(TEXT_DATA);
     }
 
-    public int getColor(){
+    public int getColor() {
         int colorVal = ICADColorizer.DEFAULT_SPELL_COLOR;
         ItemStack colorizer = dataManager.get(COLORIZER_DATA);
         if (!colorizer.isEmpty() && colorizer.getItem() instanceof ICADColorizer)

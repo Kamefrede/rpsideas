@@ -21,7 +21,7 @@ public class PieceOperatorClosestToLine extends PieceOperator {
     private SpellParam entList;
     private SpellParam length;
 
-    public PieceOperatorClosestToLine(Spell spell){
+    public PieceOperatorClosestToLine(Spell spell) {
         super(spell);
     }
 

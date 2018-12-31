@@ -70,7 +70,7 @@ public class PieceTrickConjureText extends PieceTrick {
             conjuredText.setInfo(context.caster, colorizer, text, pos, (int) maxTimeAlive);
             world.spawnEntity(conjuredText);
         }
-        
+
         return true;
     }
 }

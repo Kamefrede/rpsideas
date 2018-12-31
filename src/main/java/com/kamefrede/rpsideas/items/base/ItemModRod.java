@@ -25,16 +25,9 @@ import static com.teamwizardry.librarianlib.features.helpers.CommonUtilMethods.g
  */
 public abstract class ItemModRod extends ItemFishingRod implements IModItemProvider {
 
-    @NotNull
-    @Override
-    public Item getProvidedItem() {
-        return this;
-    }
-
     private final String bareName;
     private final String modId;
     private final String[] variants;
-
     public ItemModRod(String name) {
         super();
 
@@ -42,6 +35,12 @@ public abstract class ItemModRod extends ItemFishingRod implements IModItemProvi
         modId = getCurrentModId();
 
         variants = VariantHelper.setupItem(this, bareName, new String[0], this::getCreativeTab);
+    }
+
+    @NotNull
+    @Override
+    public Item getProvidedItem() {
+        return this;
     }
 
     @Nonnull

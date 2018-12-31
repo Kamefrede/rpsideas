@@ -35,13 +35,11 @@ public class EntityFancyCircle extends Entity implements ISpellImmune {
     private static final String TAG_FACING_X = "circleFacingX";
     private static final String TAG_FACING_Y = "circleFacingY";
     private static final String TAG_FACING_Z = "circleFacingZ";
+    public int timeAlive;
 
-
-    public EntityFancyCircle(World world){
+    public EntityFancyCircle(World world) {
         super(world);
     }
-
-    public int timeAlive;
 
     @Override
     public void onUpdate() {
@@ -56,9 +54,9 @@ public class EntityFancyCircle extends Entity implements ISpellImmune {
         dataManager.set(CASTER_NAME, player.getName());
         dataManager.set(MAX_ALIVE, maxAlive);
         dataManager.set(SCALE_DATA, scale);
-        dataManager.set(FACING_X, (float)vec.x);
-        dataManager.set(FACING_Y, (float)vec.y);
-        dataManager.set(FACING_Z, (float)vec.z);
+        dataManager.set(FACING_X, (float) vec.x);
+        dataManager.set(FACING_Y, (float) vec.y);
+        dataManager.set(FACING_Z, (float) vec.z);
 
         this.setPositionAndRotation(pos.x, pos.y, pos.z, player.rotationYaw, player.rotationPitch);
     }
@@ -117,7 +115,7 @@ public class EntityFancyCircle extends Entity implements ISpellImmune {
     }
 
 
-    public int getColor(){
+    public int getColor() {
         int colorVal = ICADColorizer.DEFAULT_SPELL_COLOR;
         ItemStack colorizer = dataManager.get(COLORIZER_DATA);
         if (!colorizer.isEmpty() && colorizer.getItem() instanceof ICADColorizer)
@@ -125,11 +123,11 @@ public class EntityFancyCircle extends Entity implements ISpellImmune {
         return colorVal;
     }
 
-    public int getLiveTime(){
+    public int getLiveTime() {
         return dataManager.get(MAX_ALIVE);
     }
 
-    public float getScale(){
+    public float getScale() {
         return dataManager.get(SCALE_DATA);
     }
 

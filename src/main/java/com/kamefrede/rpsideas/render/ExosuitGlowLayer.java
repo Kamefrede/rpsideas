@@ -24,14 +24,13 @@ import vazkii.psi.common.Psi;
 @SideOnly(Side.CLIENT)
 public class ExosuitGlowLayer extends LayerBipedArmor {
 
+    private static final ResourceLocation RESOURCE = new ResourceLocation(RPSIdeas.MODID, "textures/model/exosuit_overlay.png");
     private final RenderLivingBase<?> renderer;
 
     public ExosuitGlowLayer(RenderLivingBase<?> rendererIn) {
         super(rendererIn);
         renderer = rendererIn;
     }
-
-    private static final ResourceLocation RESOURCE = new ResourceLocation(RPSIdeas.MODID, "textures/model/exosuit_overlay.png");
 
     private static int getColorFromPlayer(EntityPlayer player) {
         ItemStack cad = PsiAPI.getPlayerCAD(player);

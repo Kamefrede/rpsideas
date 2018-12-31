@@ -1,8 +1,8 @@
 package com.kamefrede.rpsideas.spells.trick.entity;
 
 import com.kamefrede.rpsideas.entity.EntityFancyCircle;
+import com.kamefrede.rpsideas.spells.base.SpellCompilationExceptions;
 import com.kamefrede.rpsideas.spells.base.SpellParams;
-import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -42,9 +42,9 @@ public class PieceTrickConjureCircle extends PieceTrick {
         double tim = SpellHelpers.evaluateNumber(this, time, 100);
 
         if (scl > 1 || scl <= 0)
-            throw new SpellCompilationException(SpellRuntimeExceptions.SCALE);
+            throw new SpellCompilationException(SpellCompilationExceptions.SCALE, x, y);
         if (tim <= 0)
-            throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_VALUE);
+            throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_VALUE, x, y);
 
         meta.addStat(EnumSpellStat.POTENCY, (int) (scl * tim / 100));
     }

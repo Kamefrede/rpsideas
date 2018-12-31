@@ -30,15 +30,6 @@ public class RecipeCADShapeless extends ShapelessRecipes {
         super(group, output, ingredients);
     }
 
-    @Nonnull
-    @Override
-    public ItemStack getCraftingResult(InventoryCrafting inv) {
-        ItemStack stack = super.getCraftingResult(inv);
-        transferComponents(inv, stack);
-
-        return stack;
-    }
-
     public static void transferComponents(InventoryCrafting inv, ItemStack stack) {
         if (!stack.isEmpty() && stack.getItem() instanceof ICADComponentAcceptor) {
             ICADComponentAcceptor acceptor = (ICADComponentAcceptor) stack.getItem();
@@ -58,6 +49,15 @@ public class RecipeCADShapeless extends ShapelessRecipes {
             for (Map.Entry<EnumCADComponent, NonNullList<ItemStack>> component : components.entrySet())
                 acceptor.setPiece(stack, component.getKey(), component.getValue());
         }
+    }
+
+    @Nonnull
+    @Override
+    public ItemStack getCraftingResult(InventoryCrafting inv) {
+        ItemStack stack = super.getCraftingResult(inv);
+        transferComponents(inv, stack);
+
+        return stack;
     }
 
     public static class Factory implements IRecipeFactory {

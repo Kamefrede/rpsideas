@@ -1,5 +1,6 @@
 package com.kamefrede.rpsideas.entity;
 
+import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import net.minecraft.entity.item.EntityFireworkRocket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -9,7 +10,6 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
-import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import vazkii.psi.common.Psi;
 
 /**
@@ -35,12 +35,12 @@ public class EntityPsireworkRocket extends EntityFireworkRocket {
         dataManager.register(COLORIZER, ItemStack.EMPTY);
     }
 
-    public void setColorizer(ItemStack colorizer) {
-        dataManager.set(COLORIZER, colorizer);
-    }
-
     public ItemStack getColorizer() {
         return dataManager.get(COLORIZER);
+    }
+
+    public void setColorizer(ItemStack colorizer) {
+        dataManager.set(COLORIZER, colorizer);
     }
 
     @Override

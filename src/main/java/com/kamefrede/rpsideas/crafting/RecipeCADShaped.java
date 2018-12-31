@@ -48,8 +48,7 @@ public class RecipeCADShaped extends ShapedRecipes {
             //    group = context.getModId() + ":" + group;
 
             Map<Character, Ingredient> ingMap = Maps.newHashMap();
-            for (Map.Entry<String, JsonElement> entry : JsonUtils.getJsonObject(json, "key").entrySet())
-            {
+            for (Map.Entry<String, JsonElement> entry : JsonUtils.getJsonObject(json, "key").entrySet()) {
                 if (entry.getKey().length() != 1)
                     throw new JsonSyntaxException("Invalid key entry: '" + entry.getKey() + "' is an invalid symbol (must be 1 character only).");
                 if (" ".equals(entry.getKey()))
@@ -67,8 +66,7 @@ public class RecipeCADShaped extends ShapedRecipes {
                 throw new JsonSyntaxException("Invalid pattern: too many rows, 3 is maximum");
 
             String[] pattern = new String[patternJ.size()];
-            for (int x = 0; x < pattern.length; ++x)
-            {
+            for (int x = 0; x < pattern.length; ++x) {
                 String line = JsonUtils.getString(patternJ.get(x), "pattern[" + x + "]");
                 if (line.length() > 3)
                     throw new JsonSyntaxException("Invalid pattern: too many columns, 3 is maximum");
@@ -82,10 +80,8 @@ public class RecipeCADShaped extends ShapedRecipes {
             keys.remove(' ');
 
             int x = 0;
-            for (String line : pattern)
-            {
-                for (char chr : line.toCharArray())
-                {
+            for (String line : pattern) {
+                for (char chr : line.toCharArray()) {
                     Ingredient ing = ingMap.get(chr);
                     if (ing == null)
                         throw new JsonSyntaxException("Pattern references symbol '" + chr + "' but it's not defined in the key");

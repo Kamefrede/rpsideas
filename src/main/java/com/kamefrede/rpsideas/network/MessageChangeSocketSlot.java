@@ -32,10 +32,10 @@ public class MessageChangeSocketSlot extends PacketBase {
     public void handle(@Nonnull MessageContext context) {
         EntityPlayerMP player = context.getServerHandler().player;
         ItemStack stack = PsiAPI.getPlayerCAD(player);
-        if(!stack.isEmpty()){
-            ICAD cad = (ICAD)stack.getItem();
+        if (!stack.isEmpty()) {
+            ICAD cad = (ICAD) stack.getItem();
             int maxSlot = cad.getStatValue(stack, EnumCADStat.SOCKETS) - 1;
-            if(slot <= maxSlot){
+            if (slot <= maxSlot) {
                 cad.setSelectedSlot(stack, slot);
             }
         }

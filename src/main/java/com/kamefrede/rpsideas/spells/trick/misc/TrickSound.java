@@ -1,8 +1,8 @@
 package com.kamefrede.rpsideas.spells.trick.misc;
 
 import com.google.common.collect.ImmutableList;
+import com.kamefrede.rpsideas.spells.base.SpellCompilationExceptions;
 import com.kamefrede.rpsideas.spells.base.SpellParams;
-import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.SoundCategory;
@@ -18,19 +18,18 @@ import java.util.List;
 public class TrickSound extends PieceTrick {
 
 
-
     private static final List<SoundEvent> SOUND_EVENTS = ImmutableList.of(
-        SoundEvents.BLOCK_NOTE_HARP,
-        SoundEvents.BLOCK_NOTE_BASEDRUM,
-        SoundEvents.BLOCK_NOTE_SNARE,
-        SoundEvents.BLOCK_NOTE_HAT,
-        SoundEvents.BLOCK_NOTE_BASS,
-        SoundEvents.BLOCK_NOTE_FLUTE,
-        SoundEvents.BLOCK_NOTE_BELL,
-        SoundEvents.BLOCK_NOTE_GUITAR,
-        SoundEvents.BLOCK_NOTE_CHIME,
-        SoundEvents.BLOCK_NOTE_XYLOPHONE,
-        SoundEvents.BLOCK_NOTE_PLING);
+            SoundEvents.BLOCK_NOTE_HARP,
+            SoundEvents.BLOCK_NOTE_BASEDRUM,
+            SoundEvents.BLOCK_NOTE_SNARE,
+            SoundEvents.BLOCK_NOTE_HAT,
+            SoundEvents.BLOCK_NOTE_BASS,
+            SoundEvents.BLOCK_NOTE_FLUTE,
+            SoundEvents.BLOCK_NOTE_BELL,
+            SoundEvents.BLOCK_NOTE_GUITAR,
+            SoundEvents.BLOCK_NOTE_CHIME,
+            SoundEvents.BLOCK_NOTE_XYLOPHONE,
+            SoundEvents.BLOCK_NOTE_PLING);
 
     private SpellParam position;
     private SpellParam pitch;
@@ -57,13 +56,13 @@ public class TrickSound extends PieceTrick {
         double dIn = SpellHelpers.ensurePositiveOrZero(this, instrument);
 
         if (dPit < 0 || dPit > 24)
-            throw new SpellCompilationException(SpellRuntimeExceptions.PITCH, x, y);
+            throw new SpellCompilationException(SpellCompilationExceptions.PITCH, x, y);
 
         if (dVol < 0 || dVol > 1)
-            throw new SpellCompilationException(SpellRuntimeExceptions.VOLUME, x, y);
+            throw new SpellCompilationException(SpellCompilationExceptions.VOLUME, x, y);
 
         if (dIn < 0 || dIn > 10)
-            throw new SpellCompilationException(SpellRuntimeExceptions.INSTRUMENTS, x, y);
+            throw new SpellCompilationException(SpellCompilationExceptions.INSTRUMENTS, x, y);
 
         meta.addStat(EnumSpellStat.POTENCY, 4);
 

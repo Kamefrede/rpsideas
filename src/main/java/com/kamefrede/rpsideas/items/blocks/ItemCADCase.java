@@ -32,12 +32,6 @@ import javax.annotation.Nullable;
 
 public class ItemCADCase extends ItemModBlock {
 
-    public ItemCADCase(BlockCADCase block) {
-        super(block);
-
-        setMaxStackSize(1);
-    }
-
     static {
         RPSDataFixer.registerFix(FixTypes.ITEM_INSTANCE, "1.11", compound -> {
             if (compound.getString("id").startsWith(RPSIdeas.MODID + ":" + RPSBlockNames.CAD_CASE)) {
@@ -68,6 +62,12 @@ public class ItemCADCase extends ItemModBlock {
 
             return compound;
         });
+    }
+
+    public ItemCADCase(BlockCADCase block) {
+        super(block);
+
+        setMaxStackSize(1);
     }
 
     @Nonnull

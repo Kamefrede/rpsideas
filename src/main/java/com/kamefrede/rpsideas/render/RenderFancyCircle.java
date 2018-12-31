@@ -17,7 +17,7 @@ import javax.annotation.Nullable;
 
 @SideOnly(Side.CLIENT)
 public class RenderFancyCircle extends Render<EntityFancyCircle> {
-    private static final ResourceLocation[] layers = new ResourceLocation[] {
+    private static final ResourceLocation[] layers = new ResourceLocation[]{
             new ResourceLocation(String.format(LibResources.MISC_SPELL_CIRCLE, 0)),
             new ResourceLocation(String.format(LibResources.MISC_SPELL_CIRCLE, 1)),
             new ResourceLocation(String.format(LibResources.MISC_SPELL_CIRCLE, 2)),
@@ -58,7 +58,6 @@ public class RenderFancyCircle extends Render<EntityFancyCircle> {
         float lastBrightnessY = OpenGlHelper.lastBrightnessY;
 
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 0xf0, 0xf0);
-
 
 
         int r = (color >> 16) & 0xFF;

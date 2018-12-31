@@ -1,7 +1,6 @@
 package com.kamefrede.rpsideas.spells.trick.entity;
 
 import com.kamefrede.rpsideas.spells.base.SpellParams;
-import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -55,19 +54,13 @@ public class PieceTrickNumBroadcast extends PieceTrick {
     public Object execute(SpellContext context) throws SpellRuntimeException {
         Vector3 positionVal = this.getParamValue(context, position);
         Double radiusVal = SpellHelpers.getBoundedNumber(this, context, radius, SpellContext.MAX_DISTANCE);
-        Double channelVal = this.getParamValue(context, channel);
-        Double signalVal = this.getParamValue(context, signal);
+        double channelVal = SpellHelpers.getNumber(this, context, channel, 0);
+        double signalVal = this.getParamValue(context, signal);
 
         if (context.customData.get("rpsideas:BroadcastAny") != null)
             return null;
 
         context.customData.put("rpsideas:BroadcastAny", true);
-
-        if (signalVal == null)
-            throw new SpellRuntimeException(SpellRuntimeExceptions.NULL_NUMBER);
-
-        if (channelVal == null) channelVal = 0D;
-        Integer chanInt = channelVal.intValue();
 
         if (!context.isInRadius(positionVal))
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
@@ -79,7 +72,7 @@ public class PieceTrickNumBroadcast extends PieceTrick {
         final String secChannelKey = "rpsideas:BroadcastedChannel";
         final String secPlayerKey = "rpsideas:BroadcastedToWhat";
 
-        final String channelKey = "rpsideas:" + chanInt.toString();
+        final String channelKey = "rpsideas:" + ((int) channelVal);
 
 
         AxisAlignedBB axis = new AxisAlignedBB(positionVal.x - radiusVal, positionVal.y - radiusVal, positionVal.z - radiusVal, positionVal.x + radiusVal, positionVal.y + radiusVal, positionVal.z + radiusVal);
@@ -97,7 +90,7 @@ public class PieceTrickNumBroadcast extends PieceTrick {
                 }
             }
 
-            writeSecurity(sec, chanInt, signalVal, context.caster, secPlayerKey, secChannelKey, secSignalKey, context.caster.world);
+            writeSecurity(sec, (int) channelVal, signalVal, context.caster, secPlayerKey, secChannelKey, secSignalKey, context.caster.world);
 
             for (Entity ent : list) {
                 EntityPlayer pl = (EntityPlayer) ent;

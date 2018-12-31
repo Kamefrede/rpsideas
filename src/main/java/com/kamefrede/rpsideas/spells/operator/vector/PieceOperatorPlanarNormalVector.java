@@ -16,7 +16,6 @@ public class PieceOperatorPlanarNormalVector extends PieceOperator {
 
     @Override
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
-        super.addToMetadata(meta);
         meta.addStat(EnumSpellStat.COMPLEXITY, 2);
     }
 

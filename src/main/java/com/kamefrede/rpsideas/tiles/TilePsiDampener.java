@@ -39,12 +39,10 @@ import java.util.function.Predicate;
 @TileRegister(RPSBlockNames.TILE_PSI_DAMPENER)
 public class TilePsiDampener extends TileMod {
 
-    private List<ISpellRule> rules;
-
-    private IRange range;
-
     private static boolean isIntercepting = false;
     private static Vec3d location;
+    private List<ISpellRule> rules;
+    private IRange range;
 
     @SubscribeEvent
     public static void preSpellCast(PreSpellCastEvent ev) {
@@ -134,7 +132,6 @@ public class TilePsiDampener extends TileMod {
             }
         }
     }
-
 
 
     public boolean isInRange(BlockPos position) {

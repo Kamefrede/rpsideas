@@ -23,30 +23,12 @@ public class RenderConjuredText extends Render<EntityConjuredText> {
         super(renderManager);
     }
 
-    @Override
-    public void doRender(EntityConjuredText entity, double x, double y, double z, float entityYaw, float partialTicks) {
-        EntityPlayer player = (EntityPlayer) this.renderManager.renderViewEntity;
-        int maxDist = 64;
-        double d3 = entity.getDistanceSq(player);
-        float f = this.renderManager.playerViewY;
-        float f1 = this.renderManager.playerViewX;
-        Color color = new Color(entity.getColor());
-        String text = entity.getText();
-        if(d3 <= maxDist * maxDist){
-            drawNameplate(Minecraft.getMinecraft().fontRenderer, text, (float)x, (float)y, (float)z, 0,f, f1, Minecraft.getMinecraft().gameSettings.thirdPersonView == 2, color);
-        }
-        super.doRender(entity, x, y, z, entityYaw, partialTicks);
-    }
-
-
-
-    public static void drawNameplate(FontRenderer fontRendererIn, String str, float x, float y, float z, int verticalShift, float viewerYaw, float viewerPitch, boolean isThirdPersonFrontal, Color color)
-    {
+    public static void drawNameplate(FontRenderer fontRendererIn, String str, float x, float y, float z, int verticalShift, float viewerYaw, float viewerPitch, boolean isThirdPersonFrontal, Color color) {
         GlStateManager.pushMatrix();
-        GlStateManager.translate(x,y,z);
+        GlStateManager.translate(x, y, z);
         GlStateManager.glNormal3f(0.0F, 1.0F, 0.0F);
         GlStateManager.rotate(-viewerYaw, 0.0F, 1.0F, 0.0F);
-        GlStateManager.rotate((float)(isThirdPersonFrontal ? -1 : 1) * viewerPitch, 1.0F, 0.0F, 0.0F);
+        GlStateManager.rotate((float) (isThirdPersonFrontal ? -1 : 1) * viewerPitch, 1.0F, 0.0F, 0.0F);
         GlStateManager.scale(-0.025F, -0.025F, 0.025F);
         GlStateManager.disableLighting();
         GlStateManager.depthMask(false);
@@ -60,10 +42,10 @@ public class RenderConjuredText extends Render<EntityConjuredText> {
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferbuilder = tessellator.getBuffer();
         bufferbuilder.begin(7, DefaultVertexFormats.POSITION_COLOR);
-        bufferbuilder.pos((double)(-i - 1), (double)(-1 + verticalShift), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
-        bufferbuilder.pos((double)(-i - 1), (double)(8 + verticalShift), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
-        bufferbuilder.pos((double)(i + 1), (double)(8 + verticalShift), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
-        bufferbuilder.pos((double)(i + 1), (double)(-1 + verticalShift), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
+        bufferbuilder.pos((double) (-i - 1), (double) (-1 + verticalShift), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
+        bufferbuilder.pos((double) (-i - 1), (double) (8 + verticalShift), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
+        bufferbuilder.pos((double) (i + 1), (double) (8 + verticalShift), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
+        bufferbuilder.pos((double) (i + 1), (double) (-1 + verticalShift), 0.0D).color(0.0F, 0.0F, 0.0F, 0.25F).endVertex();
         tessellator.draw();
         GlStateManager.enableTexture2D();
 
@@ -76,6 +58,21 @@ public class RenderConjuredText extends Render<EntityConjuredText> {
         GlStateManager.disableBlend();
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         GlStateManager.popMatrix();
+    }
+
+    @Override
+    public void doRender(EntityConjuredText entity, double x, double y, double z, float entityYaw, float partialTicks) {
+        EntityPlayer player = (EntityPlayer) this.renderManager.renderViewEntity;
+        int maxDist = 64;
+        double d3 = entity.getDistanceSq(player);
+        float f = this.renderManager.playerViewY;
+        float f1 = this.renderManager.playerViewX;
+        Color color = new Color(entity.getColor());
+        String text = entity.getText();
+        if (d3 <= maxDist * maxDist) {
+            drawNameplate(Minecraft.getMinecraft().fontRenderer, text, (float) x, (float) y, (float) z, 0, f, f1, Minecraft.getMinecraft().gameSettings.thirdPersonView == 2, color);
+        }
+        super.doRender(entity, x, y, z, entityYaw, partialTicks);
     }
 
     @Nullable

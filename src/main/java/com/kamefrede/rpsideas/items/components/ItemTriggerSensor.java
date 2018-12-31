@@ -30,7 +30,7 @@ import java.util.List;
 public class ItemTriggerSensor extends ItemMod implements IExosuitSensor, IItemColorProvider {
     public static final String EVENT_TRIGGER = RPSIdeas.MODID + ".event.spell_detonate";
 
-    public ItemTriggerSensor(){
+    public ItemTriggerSensor() {
         super(RPSItemNames.TRIGGER_SENSOR);
         setMaxStackSize(1);
     }
@@ -48,7 +48,7 @@ public class ItemTriggerSensor extends ItemMod implements IExosuitSensor, IItemC
 
             List<EntitySpellCharge> charges = player.world.getEntitiesWithinAABB(EntitySpellCharge.class, player.getEntityBoundingBox().grow(32, 32, 32));
             if (charges.isEmpty()) {
-                if(!player.world.isRemote)
+                if (!player.world.isRemote)
                     player.world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.UI_BUTTON_CLICK, SoundCategory.PLAYERS, 1F, 1F);
                 else player.swingArm(ev.getHand());
                 ev.setCancellationResult(EnumActionResult.SUCCESS);

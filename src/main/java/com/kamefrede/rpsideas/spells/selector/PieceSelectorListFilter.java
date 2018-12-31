@@ -36,7 +36,8 @@ public class PieceSelectorListFilter extends PieceSelector {
         double numVal = this.getParamValue(context, num);
         EntityListWrapper listVal = this.getParamValue(context, list);
         int val = (int) numVal;
-        if (listVal == null || listVal.unwrap().isEmpty()) throw new SpellRuntimeException(SpellRuntimeExceptions.NULL_LIST);
+        if (listVal == null || listVal.unwrap().isEmpty())
+            throw new SpellRuntimeException(SpellRuntimeExceptions.NULL_LIST);
 
         if (val >= 0 && val < listVal.unwrap().size())
             return listVal.unwrap().get(val);

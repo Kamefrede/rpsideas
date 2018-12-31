@@ -1,5 +1,6 @@
 package com.kamefrede.rpsideas.spells.trick.block;
 
+import com.kamefrede.rpsideas.spells.base.SpellParams;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.BlockLog;
@@ -70,7 +71,7 @@ public class PieceTrickRotateBlock extends PieceTrick {
     @Override
     public void initParams() {
         addParam(position = new ParamVector(SpellParam.GENERIC_NAME_POSITION, SpellParam.BLUE, false, false));
-        addParam(direction = new ParamVector("psi.spellparam.direction", SpellParam.GREEN, false, false));
+        addParam(direction = new ParamVector(SpellParams.GENERIC_NAME_DIRECTION, SpellParam.GREEN, false, false));
     }
 
     @Override

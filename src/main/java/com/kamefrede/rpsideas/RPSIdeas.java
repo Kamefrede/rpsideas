@@ -11,7 +11,7 @@ import com.kamefrede.rpsideas.items.RPSItems;
 import com.kamefrede.rpsideas.render.ExosuitGlowLayer;
 import com.kamefrede.rpsideas.render.LayerAuthorCape;
 import com.kamefrede.rpsideas.render.LayerAuthorOccludeElytra;
-import com.kamefrede.rpsideas.spells.base.SpellPieces;
+import com.kamefrede.rpsideas.spells.base.RPSPieces;
 import com.kamefrede.rpsideas.util.RPSCreativeTab;
 import com.kamefrede.rpsideas.util.RPSDataFixer;
 import com.kamefrede.rpsideas.util.RPSKeybindHandler;
@@ -54,6 +54,24 @@ public class RPSIdeas {
 
     // Common
 
+    @SideOnly(Side.CLIENT)
+    private static void injectLayers(RenderPlayer render) {
+        if (render != null) {
+            render.addLayer(new ExosuitGlowLayer(render));
+            render.addLayer(new LayerAuthorCape(render));
+
+            List<LayerRenderer<AbstractClientPlayer>> layers = render.layerRenderers;
+            for (int i = 0; i < layers.size(); i++) {
+                LayerRenderer layer = layers.get(i);
+                if (layer instanceof LayerElytra)
+                    layers.set(i, new LayerAuthorOccludeElytra((LayerElytra) layer));
+            }
+
+        }
+    }
+
+    // Botania
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         DATA_FIXER = FMLCommonHandler.instance().getDataFixer().init(MODID, RPSDataFixer.parseSemVer(VERSION));
@@ -63,13 +81,11 @@ public class RPSIdeas {
         new RPSBlocks();
         new RPSPotions();
 
-        SpellPieces.init();
+        RPSPieces.init();
         RPSEntities.init();
 
         NetworkRegistry.INSTANCE.registerGuiHandler(RPSIdeas.INSTANCE, new GuiHandler());
     }
-
-    // Botania
 
     @Mod.EventHandler
     @Optional.Method(modid = "botania")
@@ -83,13 +99,13 @@ public class RPSIdeas {
         FMLInterModComms.sendMessage("projecte", "interdictionblacklist", EntityPsiManaBurst.class.getCanonicalName());
     }
 
+    // Client
+
     @Mod.EventHandler
     @Optional.Method(modid = "botania")
     public void postInitBotania(FMLPostInitializationEvent event) {
         BotaniaAPI.blacklistEntityFromGravityRod(EntityPsiManaBurst.class);
     }
-
-    // Client
 
     @Mod.EventHandler
     @SideOnly(Side.CLIENT)
@@ -106,22 +122,6 @@ public class RPSIdeas {
         Map<String, RenderPlayer> skinMap = Minecraft.getMinecraft().getRenderManager().getSkinMap();
         injectLayers(skinMap.get("default"));
         injectLayers(skinMap.get("slim"));
-    }
-
-    @SideOnly(Side.CLIENT)
-    private static void injectLayers(RenderPlayer render) {
-        if (render != null) {
-            render.addLayer(new ExosuitGlowLayer(render));
-            render.addLayer(new LayerAuthorCape(render));
-
-            List<LayerRenderer<AbstractClientPlayer>> layers = render.layerRenderers;
-            for (int i = 0; i < layers.size(); i++) {
-                LayerRenderer layer = layers.get(i);
-                if (layer instanceof LayerElytra)
-                    layers.set(i, new LayerAuthorOccludeElytra((LayerElytra) layer));
-            }
-
-        }
     }
 
     // Server Commands

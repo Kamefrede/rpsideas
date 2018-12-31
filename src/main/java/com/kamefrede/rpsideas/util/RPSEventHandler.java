@@ -41,22 +41,21 @@ public class RPSEventHandler {
     }
 
     @SubscribeEvent
-    public static void keyDown(InputEvent.KeyInputEvent ev){
+    public static void keyDown(InputEvent.KeyInputEvent ev) {
         Minecraft mc = Minecraft.getMinecraft();
-        if(mc.currentScreen == null){
+        if (mc.currentScreen == null) {
             RPSKeybind[] slotbindings = RPSKeybindHandler.keybinds;
             RPSKeybind offhandbinding = RPSKeybindHandler.offhandCast;
-            if(offhandbinding.isPressed()){
+            if (offhandbinding.isPressed()) {
                 PacketHandler.NETWORK.sendToServer(new MessageCastOffHand());
             }
-            for(int i = 0; i < slotbindings.length; i++){
-                if(slotbindings[i].isPressed()){
+            for (int i = 0; i < slotbindings.length; i++) {
+                if (slotbindings[i].isPressed()) {
                     PacketHandler.NETWORK.sendToServer(new MessageChangeSocketSlot(i));
                 }
             }
         }
     }
-
 
 
     @SubscribeEvent

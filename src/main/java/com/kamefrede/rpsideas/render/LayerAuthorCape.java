@@ -32,17 +32,23 @@ import java.util.UUID;
  */
 @SideOnly(Side.CLIENT)
 public class LayerAuthorCape implements LayerRenderer<AbstractClientPlayer> {
+    private static final UUID WIRE_UUID = UUID.fromString("458391f5-6303-4649-b416-e4c0d18f837a");
+    private static final UUID KAMEFREDE_UUID = UUID.fromString("ed21cb5c-f66a-4e26-abf0-f209f7169751");
+    private static final ResourceLocation TEXTURE_EBONY = new ResourceLocation(RPSIdeas.MODID, "textures/model/wire/ebony_cape2016.png");
+    private static final ResourceLocation TEXTURE_IVORY = new ResourceLocation(RPSIdeas.MODID, "textures/model/wire/ivory_cape2016.png");
+    private static final ResourceLocation TEXTURE_OVERLAY = new ResourceLocation(RPSIdeas.MODID, "textures/model/wire/cape2016_overlay.png");
+    private static final ResourceLocation TEXTURE_SKIN_OVERLAY_WIRE = new ResourceLocation(RPSIdeas.MODID, "textures/model/wire/skin_overlay.png");
+    private static final ResourceLocation TEXTURE_SKIN_OVERLAY_KAMEFREDE = new ResourceLocation(RPSIdeas.MODID, "textures/model/wire/kamefrede_overlay.png");
     private final RenderPlayer renderPlayer;
-
-    public static boolean isAuthor(EntityPlayer player) {
-        return player.getUniqueID().equals(WIRE_UUID) || player.getUniqueID().equals(KAMEFREDE_UUID);
-    }
+    private final ModelElytra modelElytra = new ModelElytra();
 
     public LayerAuthorCape(RenderPlayer renderPlayer) {
         this.renderPlayer = renderPlayer;
     }
 
-    private final ModelElytra modelElytra = new ModelElytra();
+    public static boolean isAuthor(EntityPlayer player) {
+        return player.getUniqueID().equals(WIRE_UUID) || player.getUniqueID().equals(KAMEFREDE_UUID);
+    }
 
     private ResourceLocation getTexture(AbstractClientPlayer player) {
         ItemStack stack = player.getItemStackFromSlot(EntityEquipmentSlot.LEGS);
@@ -55,9 +61,9 @@ public class LayerAuthorCape implements LayerRenderer<AbstractClientPlayer> {
     public void doRenderLayer(@Nonnull AbstractClientPlayer player, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         if (!isAuthor(player))
             return;
-        
+
         ItemStack cad = PsiAPI.getPlayerCAD(player);
-        
+
         boolean hasCad = !cad.isEmpty();
         float r = 0, g = 0, b = 0;
         if (hasCad) {
@@ -66,11 +72,11 @@ public class LayerAuthorCape implements LayerRenderer<AbstractClientPlayer> {
             g = color.getGreen() / 255f;
             b = color.getBlue() / 255f;
         }
-        
+
         doCapeRender(player, partialTicks, r, g, b, hasCad);
         doElytraRender(player, limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch, scale, r, g, b, hasCad);
         doSkinOverlayRender(player, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, r, g, b, hasCad);
-        
+
     }
 
     private void doCapeRender(AbstractClientPlayer player, float partialTicks, float r, float g, float b, boolean hasCad) {
@@ -198,13 +204,5 @@ public class LayerAuthorCape implements LayerRenderer<AbstractClientPlayer> {
     public boolean shouldCombineTextures() {
         return false;
     }
-
-    private static final UUID WIRE_UUID = UUID.fromString("458391f5-6303-4649-b416-e4c0d18f837a");
-    private static final UUID KAMEFREDE_UUID = UUID.fromString("ed21cb5c-f66a-4e26-abf0-f209f7169751");
-    private static final ResourceLocation TEXTURE_EBONY = new ResourceLocation(RPSIdeas.MODID, "textures/model/wire/ebony_cape2016.png");
-    private static final ResourceLocation TEXTURE_IVORY = new ResourceLocation(RPSIdeas.MODID, "textures/model/wire/ivory_cape2016.png");
-    private static final ResourceLocation TEXTURE_OVERLAY = new ResourceLocation(RPSIdeas.MODID, "textures/model/wire/cape2016_overlay.png");
-    private static final ResourceLocation TEXTURE_SKIN_OVERLAY_WIRE = new ResourceLocation(RPSIdeas.MODID, "textures/model/wire/skin_overlay.png");
-    private static final ResourceLocation TEXTURE_SKIN_OVERLAY_KAMEFREDE = new ResourceLocation(RPSIdeas.MODID, "textures/model/wire/kamefrede_overlay.png");
 
 }

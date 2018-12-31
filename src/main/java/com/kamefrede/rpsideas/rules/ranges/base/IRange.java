@@ -31,6 +31,17 @@ public interface IRange extends INBTSerializable<NBTTagCompound> {
     String Y_MAX = RPSIdeas.MODID + ".param.relpos.y.max";
     String Z_MAX = RPSIdeas.MODID + ".param.relpos.z.max";
 
+    static IRange deserialize(NBTTagCompound nbt) {
+        String typeKey = nbt.getString("Type");
+        EnumRangeType type = EnumRangeType.byKey(typeKey);
+        if (type == null)
+            return null;
+
+        IRange range = type.createNewRange();
+        range.deserializeNBT(nbt);
+        return range;
+    }
+
     @Nonnull
     EnumRangeType getRangeType();
 
@@ -110,16 +121,5 @@ public interface IRange extends INBTSerializable<NBTTagCompound> {
         for (String name : numericMap.keySet())
             if (positions.hasKey(name, Constants.NBT.TAG_ANY_NUMERIC))
                 numericMap.put(name, positions.getDouble(name));
-    }
-
-    static IRange deserialize(NBTTagCompound nbt) {
-        String typeKey = nbt.getString("Type");
-        EnumRangeType type = EnumRangeType.byKey(typeKey);
-        if (type == null)
-            return null;
-
-        IRange range = type.createNewRange();
-        range.deserializeNBT(nbt);
-        return range;
     }
 }

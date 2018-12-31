@@ -11,6 +11,30 @@ import javax.annotation.Nonnull;
  */
 public class RangeBox extends AbstractRange {
 
+    public static double min(double a, double b, double c, double d) {
+        double minimum = a;
+        if (b < minimum)
+            minimum = b;
+        if (c < minimum)
+            minimum = c;
+        if (d < minimum)
+            minimum = d;
+
+        return minimum;
+    }
+
+    public static double max(double a, double b, double c, double d) {
+        double maximum = a;
+        if (b > maximum)
+            maximum = b;
+        if (c > maximum)
+            maximum = c;
+        if (d > maximum)
+            maximum = d;
+
+        return maximum;
+    }
+
     @Nonnull
     @Override
     public EnumRangeType getRangeType() {
@@ -42,30 +66,6 @@ public class RangeBox extends AbstractRange {
         return xMin <= x && x <= xMax &&
                 yMin <= y && y <= yMax &&
                 zMax <= z && z <= zMin;
-    }
-
-    public static double min(double a, double b, double c, double d) {
-        double minimum = a;
-        if (b < minimum)
-            minimum = b;
-        if (c < minimum)
-            minimum = c;
-        if (d < minimum)
-            minimum = d;
-
-        return minimum;
-    }
-
-    public static double max(double a, double b, double c, double d) {
-        double maximum = a;
-        if (b > maximum)
-            maximum = b;
-        if (c > maximum)
-            maximum = c;
-        if (d > maximum)
-            maximum = d;
-
-        return maximum;
     }
 
     @Override

@@ -18,6 +18,7 @@ import com.kamefrede.rpsideas.spells.operator.math.PieceOperatorSignum;
 import com.kamefrede.rpsideas.spells.operator.math.PieceOperatorToDegrees;
 import com.kamefrede.rpsideas.spells.operator.math.PieceOperatorToRadians;
 import com.kamefrede.rpsideas.spells.operator.string.PieceOperatorGetComment;
+import com.kamefrede.rpsideas.spells.operator.string.PieceOperatorGetCommentNumber;
 import com.kamefrede.rpsideas.spells.operator.vector.*;
 import com.kamefrede.rpsideas.spells.selector.*;
 import com.kamefrede.rpsideas.spells.trick.block.*;
@@ -29,7 +30,7 @@ import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.spell.SpellPiece;
 import vazkii.psi.common.lib.LibPieceGroups;
 
-public class SpellPieces {
+public class RPSPieces {
 
     public static void init() {
 
@@ -82,6 +83,7 @@ public class SpellPieces {
         register(PieceOperatorGetSignText.class, RPSPieceNames.OPERATOR_GET_SIGN_TEXT, LibPieceGroups.MEMORY_MANAGEMENT);
         register(PieceTrickMoveBlockSequence.class, RPSPieceNames.TRICK_MOVE_BLOCK_SEQUENCE, LibPieceGroups.BLOCK_MOVEMENT);
         register(PieceOperatorGetComment.class, RPSPieceNames.OPERATOR_GET_COMMENT, LibPieceGroups.MEMORY_MANAGEMENT);
+        register(PieceOperatorGetCommentNumber.class, RPSPieceNames.OPERATOR_GET_COMMENT_NUMBER, LibPieceGroups.MEMORY_MANAGEMENT);
         register(PieceSelectorGlowing.class, RPSPieceNames.SELECTOR_GLOWING, LibPieceGroups.ENTITIES_INTRO);
         register(PieceSelectorListFilter.class, RPSPieceNames.SELECTOR_LIST_FILTER, LibPieceGroups.ENTITIES_INTRO);
         register(PieceOperatorVisibleToEntity.class, RPSPieceNames.OPERATOR_IS_VISIBLE, LibPieceGroups.DETECTION_DYNAMICS);
@@ -118,7 +120,7 @@ public class SpellPieces {
         register(PieceTrickFirework.class, RPSPieceNames.TRICK_FIREWORK, RPSPieceNames.VISUAL_AUDITIVE);
         register(PieceTrickNumBroadcast.class, RPSPieceNames.TRICK_NUM_BROADCAST, RPSPieceNames.INTER_CAD, true);
         register(PieceSelectorTransmission.class, RPSPieceNames.SELECTOR_TRANSMISSION, RPSPieceNames.INTER_CAD);
-        register(PieceTrickFreezeBlock.class, RPSPieceNames.TRICK_FREEZE_BLOCK, RPSPieceNames.ALTERNATE_CONJURATION);
+        register(PieceTrickFreezeBlock.class, RPSPieceNames.TRICK_FREEZE_BLOCK, LibPieceGroups.BLOCK_WORKS);
         register(PieceOperatorClosestToLine.class, RPSPieceNames.OPERATOR_CLOSEST_TO_LINE, LibPieceGroups.SECONDARY_OPERATORS);
         register(PieceTrickConjureText.class, RPSPieceNames.TRICK_CONJURE_TEXT, RPSPieceNames.VISUAL_AUDITIVE);
         register(PieceTrickConjureCircle.class, RPSPieceNames.TRICK_CONJURE_CIRCLE, RPSPieceNames.VISUAL_AUDITIVE);

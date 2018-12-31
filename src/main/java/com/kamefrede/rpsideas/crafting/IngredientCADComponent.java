@@ -26,6 +26,12 @@ public class IngredientCADComponent extends Ingredient {
     private final EnumCADComponent component;
     private final Ingredient excluded;
 
+    public IngredientCADComponent(EnumCADComponent component, @Nullable Ingredient excluded) {
+        super(getForIngredient(component, excluded));
+        this.component = component;
+        this.excluded = excluded == null ? Ingredient.EMPTY : excluded;
+    }
+
     public static NonNullList<ItemStack> defaults(EnumCADComponent component) {
         NonNullList<ItemStack> stacks = NonNullList.create();
         for (Item item : Item.REGISTRY) {
@@ -49,12 +55,6 @@ public class IngredientCADComponent extends Ingredient {
             valid.removeIf(excluded);
 
         return valid.toArray(new ItemStack[0]);
-    }
-
-    public IngredientCADComponent(EnumCADComponent component, @Nullable Ingredient excluded) {
-        super(getForIngredient(component, excluded));
-        this.component = component;
-        this.excluded = excluded == null ? Ingredient.EMPTY : excluded;
     }
 
     @Override

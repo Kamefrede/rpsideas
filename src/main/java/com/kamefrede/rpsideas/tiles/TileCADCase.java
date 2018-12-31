@@ -45,6 +45,14 @@ public class TileCADCase extends TileMod {
 
     private int dyeColor = -1; // Legacy
 
+    public static boolean isAllowed(int slot, Item item) {
+        return (slot == 0 && (item instanceof ICAD || item instanceof ItemGaussRifle)) ||
+                (slot == 1 && !(item instanceof ICAD) &&
+                        (item instanceof ISpellContainer ||
+                                item instanceof ISocketable ||
+                                item instanceof ISocketableController));
+    }
+
     private BlockCADCase getCaseBlock() {
         if (needsLegacyDyeUpdate())
             return RPSBlocks.cadCases[dyeColor % RPSBlocks.cadCases.length];
@@ -71,21 +79,13 @@ public class TileCADCase extends TileMod {
                 IBlockState toPlace = cadCase.getDefaultState();
                 if (inWorld.getBlock() instanceof BlockCADCase)
                     toPlace = toPlace.withProperty(BlockCADCase.FACING, inWorld.getValue(BlockCADCase.FACING))
-                        .withProperty(BlockCADCase.OPEN, inWorld.getValue(BlockCADCase.OPEN))
-                        .withProperty(BlockCADCase.POWERED, inWorld.getValue(BlockCADCase.POWERED));
+                            .withProperty(BlockCADCase.OPEN, inWorld.getValue(BlockCADCase.OPEN))
+                            .withProperty(BlockCADCase.POWERED, inWorld.getValue(BlockCADCase.POWERED));
 
                 chunk.getBlockStorageArray()[pos.getY() >> 4]
                         .set(pos.getX() & 15, pos.getY() & 15, pos.getZ() & 15, toPlace);
             }
         }
-    }
-
-    public static boolean isAllowed(int slot, Item item) {
-        return (slot == 0 && (item instanceof ICAD || item instanceof ItemGaussRifle)) ||
-                (slot == 1 && !(item instanceof ICAD) &&
-                        (item instanceof ISpellContainer ||
-                                item instanceof ISocketable ||
-                                item instanceof ISocketableController));
     }
 
     public String getName() {

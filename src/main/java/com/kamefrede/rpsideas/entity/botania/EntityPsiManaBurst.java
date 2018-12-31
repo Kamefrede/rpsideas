@@ -47,12 +47,12 @@ public class EntityPsiManaBurst extends EntityManaBurst {
         dataManager.register(COLORIZER, ItemStack.EMPTY);
     }
 
-    public void setColorizer(ItemStack colorizer) {
-        dataManager.set(COLORIZER, colorizer);
-    }
-
     public ItemStack getColorizer() {
         return dataManager.get(COLORIZER);
+    }
+
+    public void setColorizer(ItemStack colorizer) {
+        dataManager.set(COLORIZER, colorizer);
     }
 
     @Override
