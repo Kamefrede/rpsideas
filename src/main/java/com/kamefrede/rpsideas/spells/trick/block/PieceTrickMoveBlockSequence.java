@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.spells.trick.block;
 
 import com.google.common.collect.Maps;
+import com.kamefrede.rpsideas.spells.base.SpellParams;
 import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.Block;
