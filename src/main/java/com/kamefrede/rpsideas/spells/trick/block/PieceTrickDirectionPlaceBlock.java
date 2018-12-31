@@ -47,7 +47,8 @@ public class PieceTrickDirectionPlaceBlock extends PieceTrick {
 
                     Block blockToPlace = Block.getBlockFromItem(rem.getItem());
                     if (!world.isRemote) {
-                        IBlockState newState = blockToPlace.getStateForPlacement(world, pos, facing, 0, 0, 0, rem.getItemDamage(), player);
+
+                        IBlockState newState = blockToPlace.getStateForPlacement(world, pos, facing, 0,0,0, rem.getItemDamage(), player, player.getActiveHand());
                         itemBlock.placeBlockAt(stack, player, world, pos, facing, 0, 0, 0, newState);
                         PieceTrickRotateBlock.rotateBlock(world, pos, facing);
                     }

@@ -90,7 +90,7 @@ public class PieceTrickMoveBlockSequence extends PieceTrick {
             if (world.getTileEntity(pos) != null ||
                     state.getPushReaction() != EnumPushReaction.NORMAL ||
                     !block.canSilkHarvest(world, pos, state, context.caster) ||
-                    block.getPlayerRelativeBlockHardness(state, context.caster, world, pos) <= 0 ||
+                    state.getPlayerRelativeBlockHardness(context.caster, world, pos) <= 0 ||
                     !ForgeHooks.canHarvestBlock(block, context.caster, world, pos))
                 continue;
 
