@@ -25,6 +25,9 @@ Items
 * Twinflow Battery
 * Unstable Battery
 * Shielded Battery
+* Hybrid Suspension Colorizer
+* Trigger Sensor
+* Psi Dampener (WIP)
 
 
 Mod Integrations
@@ -85,7 +88,6 @@ Spell Pieces
 * Trick: Note Block Sound
 * Trick: Firework
 * Trick: Supress Next Trick
-* Trick: Slot Match
 * Macro: Caster Raycast
 * Selector: Transmission
 * Selector: Number of Charges
@@ -96,7 +98,6 @@ Spell Pieces
 * Operator: List Intersection
 * Operator: List Exclusion
 * Selector: Eidos Timestamp
-* Operator: Get Block Properties
 * Operator: Get Block Light
 * Operator: Get Block Solidity
 * Operator: Get Block Hardness
@@ -106,6 +107,8 @@ Spell Pieces
 * Operator: Vector Strong Raycast
 * Operator: Vector Axis Strong Raycast
 * Operator: Vector Fallback
+* Operator: Closest to Line
+* Operator: Parse Comment
 * Trick: Spamless Debug
 * Trick: Break Loop
 * Trick: Conjure Star
@@ -118,6 +121,8 @@ Spell Pieces
 * Trick: Canopy Pulse
 * Trick: Covering Pulse
 * Trick: Gathering Pulse
+* Trick: Conjure Text
+* Trick: Conjure Circle
 
 
 Known bugs
