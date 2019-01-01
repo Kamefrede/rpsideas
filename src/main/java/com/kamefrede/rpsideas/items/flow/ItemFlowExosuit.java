@@ -87,6 +87,18 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsiAddonT
     }
 
     @Override
+    public void setSelectedSlot(ItemStack stack, int slot) {
+        IPsiAddonTool.super.setSelectedSlot(stack, slot);
+        ItemNBTHelper.setInt(stack, TAG_TIMES_CAST, 0);
+    }
+
+    @Override
+    public void setBulletInSocket(ItemStack stack, int slot, ItemStack bullet) {
+        IPsiAddonTool.super.setBulletInSocket(stack, slot, bullet);
+        ItemNBTHelper.setInt(stack, TAG_TIMES_CAST, 0);
+    }
+
+    @Override
     public void onEvent(ItemStack stack, PsiArmorEvent event) {
         if (event.type.equals(getEvent(stack)))
             cast(stack, event);

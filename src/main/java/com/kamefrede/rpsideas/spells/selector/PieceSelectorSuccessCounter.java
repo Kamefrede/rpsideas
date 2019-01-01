@@ -1,5 +1,6 @@
 package com.kamefrede.rpsideas.spells.selector;
 
+import com.kamefrede.rpsideas.items.flow.ItemFlowExosuit;
 import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
@@ -15,7 +16,7 @@ public class PieceSelectorSuccessCounter extends PieceSelector {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (!(context.tool.getItem() instanceof ItemPsimetalArmor))
+        if (!(context.tool.getItem() instanceof ItemPsimetalArmor || context.tool.getItem() instanceof ItemFlowExosuit))
             throw new SpellRuntimeException(SpellRuntimeExceptions.ARMOR);
         if (context.tool.getTagCompound() != null)
             return context.tool.getTagCompound().getInteger("timesCast") * 1.0;

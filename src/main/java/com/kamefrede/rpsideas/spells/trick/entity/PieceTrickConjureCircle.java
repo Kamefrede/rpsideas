@@ -41,7 +41,7 @@ public class PieceTrickConjureCircle extends PieceTrick {
         double scl = SpellHelpers.evaluateNumber(this, scale, 1);
         double tim = SpellHelpers.evaluateNumber(this, time, 100);
 
-        if (scl > 1 || scl <= 0)
+        if (scl > 4 || scl <= 0)
             throw new SpellCompilationException(SpellCompilationExceptions.SCALE, x, y);
         if (tim <= 0)
             throw new SpellCompilationException(SpellCompilationException.NON_POSITIVE_VALUE, x, y);

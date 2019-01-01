@@ -79,6 +79,12 @@ public abstract class BlockConjuredDirectional extends BlockModContainer {
         return state;
     }
 
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean addDestroyEffects(World world, BlockPos pos, net.minecraft.client.particle.ParticleManager manager) {
+        return true;
+    }
+
     @Nullable
     @Override
     public ItemBlock createItemForm() {
