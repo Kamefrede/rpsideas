@@ -33,20 +33,14 @@ public class PieceOperatorGetSignText extends PieceOperator {
         TileEntity sign = context.caster.world.getTileEntity(pos);
         if (sign instanceof TileEntitySign) {
             StringBuilder s = new StringBuilder();
-            boolean any = false;
             for (ITextComponent component : ((TileEntitySign) sign).signText)
-                if (!component.getUnformattedText().isEmpty()) {
-                    if (!any) {
-                        s.append("\n");
-                        any = true;
-                    }
+                if (!component.getUnformattedText().isEmpty())
                     s.append(component.getFormattedText());
-                }
             return s.toString();
 
 
         }
-        return false;
+        return "";
 
     }
 
