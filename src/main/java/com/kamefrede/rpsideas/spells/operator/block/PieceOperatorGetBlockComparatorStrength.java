@@ -42,11 +42,13 @@ public class PieceOperatorGetBlockComparatorStrength extends PieceOperator {
             throw new SpellRuntimeException(SpellRuntimeExceptions.NON_AXIAL_VECTOR);
 
         EnumFacing whichWay = EnumFacing.getFacingFromVector((float) ax.x, (float) ax.y, (float) ax.z);
+        if(whichWay == EnumFacing.UP || whichWay == EnumFacing.DOWN)
+            throw new SpellRuntimeException(SpellRuntimeExceptions.COMPARATOR);
 
         IBlockState state = Blocks.POWERED_COMPARATOR.getDefaultState()
                 .withProperty(BlockHorizontal.FACING, whichWay.getOpposite());
 
-        return Blocks.POWERED_COMPARATOR.calculateInputStrength(context.caster.world, pos.offset(whichWay), state);
+        return Blocks.POWERED_COMPARATOR.calculateInputStrength(context.caster.world, pos.offset(whichWay), state) * 1.0;
     }
 
     @Override

@@ -26,7 +26,7 @@ public class PieceTrickConjureGravityBlockSequence extends PieceTrick {
     public void initParams() {
         addParam(position = new ParamVector(SpellParam.GENERIC_NAME_POSITION, SpellParam.BLUE, false, false));
         addParam(target = new ParamVector(SpellParam.GENERIC_NAME_TARGET, SpellParam.GREEN, false, false));
-        addParam(maxBlocks = new ParamVector(SpellParam.GENERIC_NAME_MAX, SpellParam.RED, false, true));
+        addParam(maxBlocks = new ParamNumber(SpellParam.GENERIC_NAME_MAX, SpellParam.RED, false, true));
         addParam(time = new ParamNumber(SpellParam.GENERIC_NAME_TIME, SpellParam.PURPLE, true, false));
     }
 
@@ -62,7 +62,7 @@ public class PieceTrickConjureGravityBlockSequence extends PieceTrick {
             IBlockState state = context.caster.world.getBlockState(pos);
 
             if (state.getBlock() != RPSBlocks.conjuredGravityBlock) {
-                PieceTrickConjureEtherealBlock.placeBlock(context.caster, context.caster.world, pos, true);
+                PieceTrickConjureGravityBlock.placeBlock(context.caster, context.caster.world, pos, true);
                 state = context.caster.world.getBlockState(pos);
 
                 if (!context.caster.world.isRemote && state.getBlock() == RPSBlocks.conjuredGravityBlock)

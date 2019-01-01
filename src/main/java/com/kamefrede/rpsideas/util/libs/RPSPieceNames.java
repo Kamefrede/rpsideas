@@ -72,7 +72,6 @@ public class RPSPieceNames {
     public static final String TRICK_REPAIR = "trick_repair";
     public static final String SELECTOR_NUMBER_CHARGES = "selector_number_charges";
     public static final String TRICK_DETONATE = "trick_detonate";
-    public static final String TRICK_SLOT_MATCH = "trick_slot_match";
     public static final String CONSTANT_TAU = "constant_tau";
     public static final String MACRO_CASTER_RAYCAST = "macro_caster_raycast";
     public static final String TRICK_SOUND = "trick_sound";

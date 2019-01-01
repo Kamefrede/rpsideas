@@ -63,7 +63,7 @@ public class MessageParticleTrail extends PacketBase {
             double y = position.y + ray.y * i;
             double z = position.z + ray.z * i;
 
-            Psi.proxy.sparkleFX(world, x, y, z, red, green, blue, 0, 0, 0, 0.6f, time);
+            Psi.proxy.sparkleFX(world, x, y, z, red, green, blue, 0, 0, 0, 0.8f, time);
         }
     }
 

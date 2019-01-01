@@ -12,10 +12,7 @@ import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.api.internal.Vector3;
-import vazkii.psi.api.spell.Spell;
-import vazkii.psi.api.spell.SpellContext;
-import vazkii.psi.api.spell.SpellParam;
-import vazkii.psi.api.spell.SpellRuntimeException;
+import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceTrick;
@@ -35,18 +32,25 @@ public class PieceTrickConjureStar extends PieceTrick implements IPulsarConjurat
         super.initParams();
 
         positionParam = new ParamVector(SpellParam.GENERIC_NAME_POSITION, SpellParam.BLUE, false, false);
-        timeParam = new ParamNumber(SpellParam.GENERIC_NAME_TIME, SpellParam.RED, true, false);
+        timeParam = new ParamNumber(SpellParam.GENERIC_NAME_TIME, SpellParam.RED, true, true);
         rayParam = new ParamVector(SpellParams.GENERIC_VAZKII_RAY, SpellParam.GREEN, false, false);
 
         addParam(rayParam);
+        addParam(timeParam);
+        addParam(positionParam);
+    }
+
+    @Override
+    public void addToMetadata(SpellMetadata meta) throws SpellCompilationException, ArithmeticException {
+        super.addToMetadata(meta);
     }
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster.world.isRemote) return null;
 
-        Vector3 rayVec = getParamValue(context, rayParam);
-        Vector3 positionVec = getParamValue(context, positionParam);
+        Vector3 rayVec = this.getParamValue(context, rayParam);
+        Vector3 positionVec = this.getParamValue(context, positionParam);
 
         if (positionVec == null || rayVec == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);

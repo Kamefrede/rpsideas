@@ -45,7 +45,7 @@ public class TileConjuredPulsar extends TileModTickable {
             state = state.getBlock().getActualState(state, world, pos);
             if (state.getBlock() != RPSBlocks.conjuredPulsarLight) return;
 
-            if (!state.getValue(BlockPulsarLight.SOLID) && Math.random() < 0.5)
+            if (Math.random() < 0.5)
                 doNonSolidParticle(red, green, blue);
 
             if (particleCounter == 0)

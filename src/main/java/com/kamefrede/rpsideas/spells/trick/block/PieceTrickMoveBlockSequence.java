@@ -74,7 +74,7 @@ public class PieceTrickMoveBlockSequence extends PieceTrick {
             throw new SpellRuntimeException(SpellRuntimeExceptions.NON_AXIAL_VECTOR);
 
 
-        for (int i = 0; i < Math.min(len, maxBlocksVal) + 1; i++) {
+        for (int i = 0; i < Math.min(len, maxBlocksVal); i++) {
             Vector3 blockVec = positionVal.copy().add(targetNorm.copy().multiply(i));
             if (!context.isInRadius(blockVec))
                 throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
@@ -88,12 +88,15 @@ public class PieceTrickMoveBlockSequence extends PieceTrick {
             if (MinecraftForge.EVENT_BUS.post(event))
                 continue;
 
+
             if (world.getTileEntity(pos) != null ||
                     state.getPushReaction() != EnumPushReaction.NORMAL ||
                     !block.canSilkHarvest(world, pos, state, context.caster) ||
                     state.getPlayerRelativeBlockHardness(context.caster, world, pos) <= 0 ||
                     !ForgeHooks.canHarvestBlock(block, context.caster, world, pos))
                 continue;
+
+
 
             BlockPos pushToPos = pos.add(directNorm.x, directNorm.y, directNorm.z);
             BlockPos nextPos = pos.add(targetNorm.x, targetNorm.y, targetNorm.z);
@@ -103,14 +106,16 @@ public class PieceTrickMoveBlockSequence extends PieceTrick {
                     !world.isBlockModifiable(context.caster, pushToPos))
                 continue;
 
+
             if (y > 256 || y < 1) continue;
+
 
             if (world.isAirBlock(pushToPos) ||
                     (nextPos.equals(pushToPos) && i + 1 < Math.min(len, maxBlocksVal)) ||
                     pushToState.getBlock().isReplaceable(world, pushToPos)) {
                 world.setBlockToAir(pos);
                 world.playEvent(2001, pos, Block.getStateId(state));
-                toSet.put(pos, state);
+                toSet.put(pushToPos, state);
             }
         }
 

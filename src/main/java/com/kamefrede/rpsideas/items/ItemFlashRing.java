@@ -1,11 +1,14 @@
 package com.kamefrede.rpsideas.items;
 
+import com.google.common.collect.ImmutableSet;
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.gui.GuiHandler;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -20,6 +23,7 @@ import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.spell.ISpellContainer;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
+import vazkii.psi.common.core.handler.ConfigHandler;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.item.ItemCAD;
 import vazkii.psi.common.item.ItemSpellDrive;
@@ -27,6 +31,7 @@ import vazkii.psi.common.item.ItemSpellDrive;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Set;
 
 public class ItemFlashRing extends ItemMod implements ISpellContainer {
     public ItemFlashRing() {
@@ -35,6 +40,8 @@ public class ItemFlashRing extends ItemMod implements ISpellContainer {
 
         addPropertyOverride(new ResourceLocation(RPSIdeas.MODID, "active"), (stack, world, ent) -> containsSpell(stack) ? 1f : 0f);
     }
+
+
 
     @Nonnull
     @Override
@@ -122,5 +129,22 @@ public class ItemFlashRing extends ItemMod implements ISpellContainer {
     @Override
     public ItemStack getContainerItem(@Nonnull ItemStack stack) {
         return stack.copy();
+    }
+
+    @Override
+    public Set<String> getToolClasses(ItemStack stack) {
+        return ImmutableSet.of("pickaxe", "axe", "shovel");
+    }
+
+    @Override
+    public boolean canHarvestBlock(IBlockState state, ItemStack stack) {
+        Block block = state.getBlock();
+        int level = block.getHarvestLevel(state);
+        return getHarvestLevel(stack, "", null, null) >= level;
+    }
+
+    @Override
+    public int getHarvestLevel(ItemStack stack, String toolClass, @Nullable EntityPlayer player, @Nullable IBlockState blockState) {
+        return ConfigHandler.cadHarvestLevel;
     }
 }

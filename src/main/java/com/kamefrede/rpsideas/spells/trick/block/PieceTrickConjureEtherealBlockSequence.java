@@ -34,7 +34,7 @@ public class PieceTrickConjureEtherealBlockSequence extends PieceTrick {
     public void initParams() {
         addParam(position = new ParamVector(SpellParam.GENERIC_NAME_POSITION, SpellParam.BLUE, false, false));
         addParam(target = new ParamVector(SpellParam.GENERIC_NAME_TARGET, SpellParam.GREEN, false, false));
-        addParam(maxBlocks = new ParamVector(SpellParam.GENERIC_NAME_MAX, SpellParam.RED, false, true));
+        addParam(maxBlocks = new ParamNumber(SpellParam.GENERIC_NAME_MAX, SpellParam.RED, false, true));
         addParam(time = new ParamNumber(SpellParam.GENERIC_NAME_TIME, SpellParam.PURPLE, true, false));
     }
 

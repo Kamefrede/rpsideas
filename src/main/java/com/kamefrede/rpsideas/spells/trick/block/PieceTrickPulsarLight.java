@@ -53,7 +53,7 @@ public class PieceTrickPulsarLight extends PieceTrick implements IPulsarConjurat
 
     @Override
     public IBlockState getStateToSet() {
-        return RPSBlocks.conjuredPulsarLight.getDefaultState().withProperty(BlockPulsarLight.SOLID, false);
+        return RPSBlocks.conjuredPulsarLight.getDefaultState();
     }
 
     @Override

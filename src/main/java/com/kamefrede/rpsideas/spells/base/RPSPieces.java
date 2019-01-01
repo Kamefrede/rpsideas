@@ -114,7 +114,6 @@ public class RPSPieces {
         register(PieceSelectorSuccessCounter.class, RPSPieceNames.SELECTOR_SUCESSION_COUNTER, RPSPieceNames.ADVANCED_LOOPCAST_CONTROL, true);
         register(PieceTrickSupressNextTrick.class, RPSPieceNames.TRICK_SUPRESS_NEXT_TRICK, RPSPieceNames.ADVANCED_LOOPCAST_CONTROL);
         register(PieceTrickDetonate.class, RPSPieceNames.TRICK_DETONATE, RPSPieceNames.ADVANCED_LOOPCAST_CONTROL);
-        register(PieceTrickSlotMatch.class, RPSPieceNames.TRICK_SLOT_MATCH, RPSPieceNames.ALTERNATE_CONJURATION);
         register(PieceSelectorNumberCharges.class, RPSPieceNames.SELECTOR_NUMBER_CHARGES, RPSPieceNames.ADVANCED_LOOPCAST_CONTROL);
         register(PieceTrickSpinChamber.class, RPSPieceNames.TRICK_SPIN_CHAMBER, RPSPieceNames.ADVANCED_LOOPCAST_CONTROL);
         register(PieceTrickFirework.class, RPSPieceNames.TRICK_FIREWORK, RPSPieceNames.VISUAL_AUDITIVE);

@@ -1,5 +1,6 @@
 package com.kamefrede.rpsideas.items;
 
+import com.google.common.collect.ImmutableSet;
 import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
 import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
 import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
@@ -7,6 +8,8 @@ import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,19 +23,23 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.ISocketable;
+import vazkii.psi.common.core.handler.ConfigHandler;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.core.handler.PsiSoundHandler;
 import vazkii.psi.common.item.ItemCAD;
 import vazkii.psi.common.item.base.ModItems;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Set;
 
 public class ItemInlineCaster extends ItemMod implements IPsiAddonTool, IFlowColorAcceptor {
     public ItemInlineCaster() {
         super(RPSItemNames.INLINE_CASTER);
         setMaxStackSize(1);
     }
+
 
     @Nonnull
     @Override
@@ -87,5 +94,22 @@ public class ItemInlineCaster extends ItemMod implements IPsiAddonTool, IFlowCol
             String componentName = TooltipHelper.local(ISocketable.getSocketedItemName(stack, "psimisc.none"));
             TooltipHelper.addToTooltip(tooltip, "psimisc.spellSelected", componentName);
         });
+    }
+
+    @Override
+    public Set<String> getToolClasses(ItemStack stack) {
+        return ImmutableSet.of("pickaxe", "axe", "shovel");
+    }
+
+    @Override
+    public boolean canHarvestBlock(IBlockState state, ItemStack stack) {
+        Block block = state.getBlock();
+        int level = block.getHarvestLevel(state);
+        return getHarvestLevel(stack, "", null, null) >= level;
+    }
+
+    @Override
+    public int getHarvestLevel(ItemStack stack, String toolClass, @Nullable EntityPlayer player, @Nullable IBlockState blockState) {
+        return ConfigHandler.cadHarvestLevel;
     }
 }
