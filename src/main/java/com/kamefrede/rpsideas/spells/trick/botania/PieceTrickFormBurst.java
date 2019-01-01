@@ -3,7 +3,8 @@ package com.kamefrede.rpsideas.spells.trick.botania;
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.entity.botania.EntityPsiManaBurst;
 import com.kamefrede.rpsideas.spells.base.SpellParams;
-import com.kamefrede.rpsideas.util.botania.PieceComponentTrick;
+import com.kamefrede.rpsideas.spells.enabler.PieceComponentTrick;
+import com.kamefrede.rpsideas.spells.enabler.botania.IManaTrick;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -27,7 +28,7 @@ import vazkii.psi.common.spell.trick.entity.PieceTrickAddMotion;
 
 import javax.annotation.Nonnull;
 
-public class PieceTrickFormBurst extends PieceComponentTrick {
+public class PieceTrickFormBurst extends PieceComponentTrick implements IManaTrick {
 
     private static final String[] req = new String[]{RPSIdeas.MODID + ".requirement.form_burst"};
     private static final int MANA_PER_BURST = 120;
@@ -142,7 +143,7 @@ public class PieceTrickFormBurst extends PieceComponentTrick {
     }
 
     @Override
-    public int manaDrain(SpellContext context, int x, int y) {
+    public int manaDrain(SpellContext context) {
         return MANA_PER_BURST;
     }
 

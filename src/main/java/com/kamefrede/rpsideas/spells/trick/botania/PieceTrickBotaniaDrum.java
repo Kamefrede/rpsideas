@@ -1,8 +1,8 @@
 package com.kamefrede.rpsideas.spells.trick.botania;
 
-import com.kamefrede.rpsideas.util.botania.EnumManaTier;
-import com.kamefrede.rpsideas.util.botania.IManaTrick;
-import com.kamefrede.rpsideas.util.botania.PieceComponentTrick;
+import com.kamefrede.rpsideas.spells.enabler.botania.EnumManaTier;
+import com.kamefrede.rpsideas.spells.enabler.botania.IManaTrick;
+import com.kamefrede.rpsideas.spells.enabler.PieceComponentTrick;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityCow;
@@ -50,7 +50,7 @@ public abstract class PieceTrickBotaniaDrum extends PieceComponentTrick implemen
     }
 
     @Override
-    public int manaDrain(SpellContext context, int x, int y) {
+    public int manaDrain(SpellContext context) {
         return 120;
     }
 
@@ -181,7 +181,7 @@ public abstract class PieceTrickBotaniaDrum extends PieceComponentTrick implemen
         }
 
         @Override
-        public int manaDrain(SpellContext context, int x, int y) {
+        public int manaDrain(SpellContext context) {
             return 500;
         }
 
