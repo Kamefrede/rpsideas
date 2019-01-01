@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.util.botania;
+package com.kamefrede.rpsideas.spells.enabler.botania;
 
 public enum EnumManaTier {
     BASE,

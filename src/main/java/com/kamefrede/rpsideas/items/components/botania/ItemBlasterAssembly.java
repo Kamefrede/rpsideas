@@ -2,7 +2,9 @@ package com.kamefrede.rpsideas.items.components.botania;
 
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.base.ItemComponent;
-import com.kamefrede.rpsideas.util.botania.IBlasterComponent;
+import com.kamefrede.rpsideas.spells.enabler.botania.EnumManaTier;
+import com.kamefrede.rpsideas.spells.enabler.botania.IBlasterComponent;
+import com.kamefrede.rpsideas.spells.enabler.botania.IManaTrick;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.IExtraVariantHolder;
@@ -22,6 +24,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -30,6 +33,7 @@ import vazkii.botania.common.item.ItemManaGun;
 import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.EnumCADStat;
 import vazkii.psi.api.cad.ICAD;
+import vazkii.psi.api.spell.SpellPiece;
 import vazkii.psi.common.item.base.ModItems;
 
 import javax.annotation.Nonnull;
@@ -54,7 +58,21 @@ public class ItemBlasterAssembly extends ItemComponent implements IBlasterCompon
         ModItems.cad.addPropertyOverride(new ResourceLocation(RPSIdeas.MODID, "clip"), ((stack, world, ent) -> ItemManaGun.hasClip(stack) ? 1f : 0f));
     }
 
+    @Override
+    @Optional.Method(modid = "botania")
+    public boolean enables(ItemStack cad, ItemStack component, SpellPiece piece) {
+        if (piece instanceof IManaTrick) {
+            EnumManaTier cadTier = EnumManaTier.BASE;
+            if (ItemManaGun.hasClip(cad))
+                cadTier = EnumManaTier.ALFHEIM;
+            EnumManaTier pieceTier = ((IManaTrick) piece).tier();
+            return EnumManaTier.allowed(cadTier, pieceTier);
+        }
+        return false;
+    }
+
     @SubscribeEvent
+    @Optional.Method(modid = "botania")
     public static void tooltip(ItemTooltipEvent e) {
         ItemStack stack = e.getItemStack();
         Item item = stack.getItem();
@@ -94,6 +112,7 @@ public class ItemBlasterAssembly extends ItemComponent implements IBlasterCompon
     }
 
     @SubscribeEvent
+    @Optional.Method(modid = "botania")
     public static void onInteract(PlayerInteractEvent.RightClickItem e) {
         if (e.getEntityPlayer().isSneaking()) {
             ItemStack heldStack = e.getItemStack();

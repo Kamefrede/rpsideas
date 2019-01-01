@@ -1,6 +1,6 @@
 package com.kamefrede.rpsideas.compat.botania;
 
-import com.kamefrede.rpsideas.util.botania.IBlasterComponent;
+import com.kamefrede.rpsideas.spells.enabler.botania.IBlasterComponent;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
