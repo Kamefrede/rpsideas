@@ -40,6 +40,11 @@ public class TileCADCase extends TileMod {
             new ModuleInventory(new CaseTileHandler()).disallowSides(EnumFacing.UP,
                     EnumFacing.NORTH, EnumFacing.SOUTH, EnumFacing.EAST, EnumFacing.WEST);
 
+
+    public static ItemStackHandler getHandler(TileCADCase tile) {
+        return tile.inventory.getHandler();
+    }
+
     @Save
     private String name = "";
 

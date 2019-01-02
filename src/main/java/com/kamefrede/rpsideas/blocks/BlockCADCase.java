@@ -193,6 +193,7 @@ public class BlockCADCase extends BlockModContainer {
         return getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
     }
 
+
     @Override
     public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         TileEntity tile = world.getTileEntity(pos);
@@ -203,7 +204,7 @@ public class BlockCADCase extends BlockModContainer {
 
             IItemHandler stackHandler = stack.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
             if (stackHandler == null) return;
-            IItemHandler caseHandler = cadCase.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+            IItemHandler caseHandler = TileCADCase.getHandler(cadCase);
             if (caseHandler == null) return;
 
             for (int i = 0; i < caseHandler.getSlots(); i++)

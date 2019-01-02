@@ -1,5 +1,6 @@
 package com.kamefrede.rpsideas.items.flow;
 
+import com.kamefrede.rpsideas.items.ItemPsimetalHoe;
 import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
 import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
 import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
@@ -62,7 +63,7 @@ public class ItemFlowTool extends ItemModTool implements IPsiAddonTool, IFlowCol
 
     @Override
     public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-        super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
+        ItemPsimetalHoe.regenPsi(stack, entityIn, isSelected);
     }
 
     @SideOnly(Side.CLIENT)
