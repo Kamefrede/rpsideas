@@ -320,10 +320,10 @@ item.rpsideas:cyclic_colorizer.name=Hybrid Suspension CAD Colorizer
 item.rpsideas:liquid_colorizer.name=Liquid-Ink CAD Colorizer
 item.rpsideas:empty_colorizer.name=Drained CAD Colorizer
 item.rpsideas:cad_assembly_mana_blaster.name=Blaster CAD Assembly
-item.rpsideas:creative_core.name=Creative CAD Core
-item.rpsideas:creative_battery.name=Creative CAD Battery
-item.rpsideas:creative_socket.name=Creative CAD Socket
 item.rpsideas:spell_bullet_sniper.name=Sniper Spell Bullet
+
+item.rpsideas:creative_colorizer.name=Creative CAD Suspension
+item.rpsideas:creative_colorizer.desc=This strange liquid perfects your CAD's stats.
 
 item.rpsideas:spell_bullet_sniper_active.name=Sniper Spell Bullet
 item.rpsideas:bracelet_cad.name=Bracelet CAD

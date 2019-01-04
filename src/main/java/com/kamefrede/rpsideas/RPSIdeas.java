@@ -39,7 +39,7 @@ import java.util.List;
 import java.util.Map;
 
 
-@Mod(modid = RPSIdeas.MODID, name = RPSIdeas.NAME, version = RPSIdeas.VERSION, dependencies = "after:botania;required-after:psi@[r1.1-63,);required-after:librarianlib;required-after:forge@[14.23.5.2796,);", useMetadata = true)
+@Mod(modid = RPSIdeas.MODID, name = RPSIdeas.NAME, version = RPSIdeas.VERSION, dependencies = "after:botania;required-after:psi@[r1.1-65,);required-after:librarianlib;required-after:forge@[14.23.5.2796,);", useMetadata = true)
 public class RPSIdeas {
 
     public static final String MODID = "rpsideas";

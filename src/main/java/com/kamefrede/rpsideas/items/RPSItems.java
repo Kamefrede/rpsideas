@@ -28,9 +28,7 @@ public class RPSItems {
     public static final ItemMod unstableBattery = new ItemUnstableBattery();
     public static final ItemMod twinflowBattery = new ItemTwinflowBattery();
     public static final ItemMod shieldedBattery = new ItemShieldedBattery();
-    public static final ItemMod creativeBattery = new ItemCreativeBattery();
-    public static final ItemMod creativeCore = new ItemCreativeCore();
-    public static final ItemMod creativeSocket = new ItemCreativeSocket();
+    public static final ItemMod creativeColorizer = new ItemCreativeSuspension();
     public static final ItemModRod psimetalRod = new ItemPsimetalRod(RPSItemNames.PSIMETAL_ROD);
     public static final ItemMod drainedColorizer = new ItemEmptyColorizer();
     public static final ItemMod liquidColorizer = new ItemLiquidColorizer();

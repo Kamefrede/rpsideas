@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.client.config.GuiUtils;
-import vazkii.psi.client.core.handler.ClientTickHandler;
+import vazkii.arl.util.ClientTicker;
 
 import java.util.ArrayList;
 
@@ -70,8 +70,8 @@ public class GUICADMagazine extends GuiContainer {
             ArrayList<String> list = new ArrayList<String>();
             list.add(TextFormatting.RED.toString() + I18n.format(getTooltipText()));
             GuiUtils.drawHoveringText(list, -10, ySize / 2, width, height, xSize, Minecraft.getMinecraft().fontRenderer);
-            decreaseTooltipTime(ClientTickHandler.ticksInGame - lastTick);
+            decreaseTooltipTime(ClientTicker.ticksInGame - lastTick);
         }
-        lastTick = ClientTickHandler.ticksInGame;
+        lastTick = ClientTicker.ticksInGame;
     }
 }

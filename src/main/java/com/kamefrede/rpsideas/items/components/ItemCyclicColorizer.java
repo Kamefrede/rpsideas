@@ -2,7 +2,9 @@ package com.kamefrede.rpsideas.items.components;
 
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.base.ICADComponentAcceptor;
+import com.kamefrede.rpsideas.items.base.INoCraftingComponent;
 import com.kamefrede.rpsideas.items.base.ItemComponent;
+import com.kamefrede.rpsideas.util.helpers.ClientHelpers;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.item.IItemColorProvider;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
@@ -18,7 +20,6 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -26,7 +27,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.ICADColorizer;
-import vazkii.psi.client.core.handler.ClientTickHandler;
 import vazkii.psi.common.item.base.ModItems;
 
 import javax.annotation.Nonnull;
@@ -38,7 +38,7 @@ import java.util.List;
  * @author WireSegal
  * Created at 11:06 AM on 12/25/18.
  */
-public class ItemCyclicColorizer extends ItemComponent implements ICADColorizer, IItemColorProvider, ICADComponentAcceptor {
+public class ItemCyclicColorizer extends ItemComponent implements ICADColorizer, IItemColorProvider, ICADComponentAcceptor, INoCraftingComponent {
     public ItemCyclicColorizer() {
         super(RPSItemNames.CYCLIC_COLORIZER);
     }
@@ -122,18 +122,7 @@ public class ItemCyclicColorizer extends ItemComponent implements ICADColorizer,
             int firstColor = ((ICADColorizer) first.getItem()).getColor(first);
             int lastColor = ((ICADColorizer) last.getItem()).getColor(last);
 
-            float wave = (1 + MathHelper.sin(ClientTickHandler.ticksInGame * 0.1f)) / 2;
-
-            int firstR = (firstColor >> 16) & 0xff;
-            int firstG = (firstColor >> 8) & 0xff;
-            int firstB = firstColor & 0xff;
-            int lastR = (lastColor >> 16) & 0xff;
-            int lastG = (lastColor >> 8) & 0xff;
-            int lastB = lastColor & 0xff;
-
-            return (int) (firstR * wave + lastR * (1 - wave)) << 16 |
-                    (int) (firstG * wave + lastG * (1 - wave)) << 8 |
-                    (int) (firstB * wave + lastB * (1 - wave));
+            return ClientHelpers.slideColor(firstColor, lastColor, 0.1f);
         }
         return ICADColorizer.DEFAULT_SPELL_COLOR;
     }

@@ -3,6 +3,7 @@ package com.kamefrede.rpsideas.crafting;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.kamefrede.rpsideas.items.base.INoCraftingComponent;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -35,7 +36,7 @@ public class IngredientCADComponent extends Ingredient {
     public static NonNullList<ItemStack> defaults(EnumCADComponent component) {
         NonNullList<ItemStack> stacks = NonNullList.create();
         for (Item item : Item.REGISTRY) {
-            if (item instanceof ICADComponent) {
+            if (item instanceof ICADComponent && !(item instanceof INoCraftingComponent)) {
                 NonNullList<ItemStack> inTab = NonNullList.create();
                 item.getSubItems(CreativeTabs.SEARCH, inTab);
                 for (ItemStack stack : inTab) {

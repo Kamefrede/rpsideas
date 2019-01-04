@@ -12,9 +12,7 @@ public class RPSItemNames {
     public static final String TWINFLOW_BATTERY = "twinflow_battery";
     public static final String SHIELDED_BATTERY = "shielded_battery";
     public static final String UNSTABLE_BATTERY = "unstable_battery";
-    public static final String CREATIVE_CORE = "creative_core";
-    public static final String CREATIVE_SOCKET = "creative_socket";
-    public static final String CREATIVE_BATTERY = "creative_battery";
+    public static final String CREATIVE_COLORIZER = "creative_colorizer";
     public static final String INLINE_CASTER = "inline_caster";
     public static final String PSIMETAL_SHEARS = "psimetal_shears";
     public static final String PSIMETAL_ROD = "psimetal_rod";
