@@ -49,7 +49,7 @@ public class RenderFancyCircle extends Render<EntityFancyCircle> {
         else if (facingZ != 1)
             GlStateManager.rotate((float) (Math.acos(facingZ) * 180 / Math.PI),
                     -entity.getYFacing(), entity.getXFacing(), 0);
-        GlStateManager.translate(0, 0, 0.01);
+        GlStateManager.translate(0, 0, 0.1);
         GlStateManager.scale(ratio * scale, ratio * scale, ratio);
 
         GlStateManager.disableCull();
