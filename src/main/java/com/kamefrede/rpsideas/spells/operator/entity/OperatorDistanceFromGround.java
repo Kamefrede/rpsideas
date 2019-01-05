@@ -1,6 +1,5 @@
 package com.kamefrede.rpsideas.spells.operator.entity;
 
-import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
@@ -48,8 +47,8 @@ public class OperatorDistanceFromGround extends PieceOperator {
                 break;
         }
 
-        if (pointer.getY() < 0)
-            throw new SpellRuntimeException(SpellRuntimeExceptions.OUT_OF_BOUNDS);
+        if (pointer.getY() <= 0)
+            throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
 
         return targetVal.y - (pointer.getY() + 1);
     }
