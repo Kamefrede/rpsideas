@@ -51,7 +51,7 @@ public class TileCracklingStar extends TileModTickable {
                 makeLine(ray, red, green, blue);
             }
 
-            Psi.proxy.wispFX(world, pos.getX() + .5, pos.getY() + .5, pos.getZ() + .5, red, green, blue, 0.075f);
+            Psi.proxy.wispFX(world, pos.getX() + .5, pos.getY() + .5, pos.getZ() + .5, red, green, blue, 0.25f);
         } else {
             if (time > 0) time--;
             else if (time == 0) world.setBlockToAir(pos);
@@ -69,7 +69,7 @@ public class TileCracklingStar extends TileModTickable {
         for (int step = 0; step < stepCount; step++) {
             Vec3d ext = ray.scale(step / stepsPer);
 
-            Psi.proxy.wispFX(world, start.x + ext.x, start.y + ext.y, start.z + ext.z, red, green, blue, 0.0375f);
+            Psi.proxy.wispFX(world, start.x + ext.x, start.y + ext.y, start.z + ext.z, red, green, blue, 0.125f);
         }
     }
 }
