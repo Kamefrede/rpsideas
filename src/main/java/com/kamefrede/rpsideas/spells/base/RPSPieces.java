@@ -124,6 +124,10 @@ public class RPSPieces {
         register(PieceTrickConjureText.class, RPSPieceNames.TRICK_CONJURE_TEXT, RPSPieceNames.VISUAL_AUDITIVE);
         register(PieceTrickConjureCircle.class, RPSPieceNames.TRICK_CONJURE_CIRCLE, RPSPieceNames.VISUAL_AUDITIVE);
         //   register(PieceTrickSansUndertale.class, RPSPieceNames.TRICK_SANS_UNDERTALE, RPSPieceNames.VISUAL_AUDITIVE);
+        register(PieceMacroCasterAxisRaycast.class, RPSPieceNames.MACRO_CASTER_AXIS_RAYCAST, RPSPieceNames.MACROS);
+        register(PieceMacroCasterStrongAxisRaycast.class, RPSPieceNames.MACRO_CASTER_STRONG_AXIS_RAYCAST, RPSPieceNames.MACROS);
+        register(PieceMacroCasterStrongRaycast.class, RPSPieceNames.MACRO_CASTER_STRONG_RAYCAST, RPSPieceNames.MACROS);
+
         new BotaniaCompatPieces().run();
     }
 
