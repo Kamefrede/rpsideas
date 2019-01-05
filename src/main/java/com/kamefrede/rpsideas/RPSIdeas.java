@@ -59,6 +59,7 @@ public class RPSIdeas {
         if (render != null) {
             render.addLayer(new ExosuitGlowLayer(render));
             render.addLayer(new LayerAuthorCape(render));
+            //   render.addLayer(new SansUndertaleEyeGlow(render));
 
             List<LayerRenderer<AbstractClientPlayer>> layers = render.layerRenderers;
             for (int i = 0; i < layers.size(); i++) {

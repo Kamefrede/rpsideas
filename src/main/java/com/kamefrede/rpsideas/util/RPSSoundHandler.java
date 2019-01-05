@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
 public class RPSSoundHandler {
     public static final SoundEvent THWACK = makeSoundEvent("thwack");
+    public static final SoundEvent MEGALOVANIA = makeSoundEvent("megalovania");
 
     public static final SoundEvent CAD_CASE_OPEN = SoundEvents.BLOCK_WOODEN_DOOR_OPEN;
     public static final SoundEvent CAD_CASE_CLOSE = SoundEvents.BLOCK_WOODEN_DOOR_OPEN;
@@ -22,6 +23,7 @@ public class RPSSoundHandler {
 
     @SubscribeEvent
     public static void registerSounds(RegistryEvent.Register<SoundEvent> e) {
+        e.getRegistry().register(MEGALOVANIA);
         e.getRegistry().register(THWACK);
     }
 }

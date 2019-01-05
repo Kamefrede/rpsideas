@@ -123,6 +123,7 @@ public class RPSPieces {
         register(PieceOperatorClosestToLine.class, RPSPieceNames.OPERATOR_CLOSEST_TO_LINE, LibPieceGroups.SECONDARY_OPERATORS);
         register(PieceTrickConjureText.class, RPSPieceNames.TRICK_CONJURE_TEXT, RPSPieceNames.VISUAL_AUDITIVE);
         register(PieceTrickConjureCircle.class, RPSPieceNames.TRICK_CONJURE_CIRCLE, RPSPieceNames.VISUAL_AUDITIVE);
+        //   register(PieceTrickSansUndertale.class, RPSPieceNames.TRICK_SANS_UNDERTALE, RPSPieceNames.VISUAL_AUDITIVE);
         new BotaniaCompatPieces().run();
     }
 

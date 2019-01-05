@@ -1,3 +1,16 @@
 {
-  "thwack": { "category": "player", "sounds": ["rpsideas:thwack"], "subtitle": "rpsideas.subtitle.thwack" }
+  "thwack": {
+    "category": "player",
+    "sounds": [
+      "rpsideas:thwack"
+    ],
+    "subtitle": "rpsideas.subtitle.thwack"
+  },
+  "megalovania": {
+    "category": "player",
+    "sounds": [
+      "rpsideas:megalovania"
+    ],
+    "subtitle": "rpsideas.subtitle.megalovania"
+  }
 }
