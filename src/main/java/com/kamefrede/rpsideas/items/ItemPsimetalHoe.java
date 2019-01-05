@@ -41,9 +41,9 @@ public class ItemPsimetalHoe extends ItemMod implements IPsiAddonTool {
 
     public ItemPsimetalHoe(String name) {
         super(name);
+        this.setMaxStackSize(1);
         this.speed = 4.0F;
         this.setMaxDamage(900);
-
     }
 
     public static void regenPsi(ItemStack stack, Entity entityIn, boolean isSelected) {

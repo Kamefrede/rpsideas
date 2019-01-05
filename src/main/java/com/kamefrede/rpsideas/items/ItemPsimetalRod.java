@@ -18,7 +18,9 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.player.ItemFishedEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
@@ -58,6 +60,15 @@ public class ItemPsimetalRod extends ItemModRod implements IPsiAddonTool {
 
     }
 
+    @SubscribeEvent
+    public static void onItemFished(ItemFishedEvent event) {
+        EntityPlayer player = event.getEntityPlayer();
+        ItemStack stack = player.inventory.getCurrentItem();
+        Vec3d pos = new Vec3d(event.getHookEntity().posX, event.getHookEntity().posY, event.getHookEntity().posZ);
+        castSpell(player, stack, pos);
+    }
+
+
     @Nonnull
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn) {
@@ -70,8 +81,10 @@ public class ItemPsimetalRod extends ItemModRod implements IPsiAddonTool {
 
                 if (data != null && !playerCad.isEmpty()) {
                     ItemStack bullet = getBulletInSocket(itemstack, getSelectedSlot(itemstack));
-                    ItemCAD.cast(playerIn.world, playerIn, data, bullet, playerCad, 5, 10, 0.05F, (SpellContext context) ->
-                            context.attackedEntity = (EntityLivingBase) playerIn.fishEntity.caughtEntity);
+                    ItemCAD.cast(playerIn.world, playerIn, data, bullet, playerCad, 5, 10, 0.05F, (SpellContext context) -> {
+                        context.tool = itemstack;
+                        context.attackedEntity = (EntityLivingBase) playerIn.fishEntity.caughtEntity;
+                    });
                 }
             }
             int i = playerIn.fishEntity.handleHookRetraction();
@@ -117,7 +130,6 @@ public class ItemPsimetalRod extends ItemModRod implements IPsiAddonTool {
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repairItem) {
         return OreDictionary.containsMatch(false, OreDictionary.getOres("ingotPsi"), repairItem) || super.getIsRepairable(toRepair, repairItem);
     }
-
 
     @Override
     public boolean requiresSneakForSpellSet(ItemStack stack) {

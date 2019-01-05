@@ -135,6 +135,7 @@ public class ItemFlowTool extends ItemModTool implements IPsiAddonTool, IFlowCol
     public static class Axe extends ItemFlowTool {
         public Axe(String name, boolean ebony) {
             super(name, "axe", ebony);
+            this.attackDamage = 8.0F;
         }
 
         @Override

@@ -5,6 +5,7 @@ import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.crafting.trick.TrickRecipe;
 import com.kamefrede.rpsideas.effect.RPSPotions;
 import com.kamefrede.rpsideas.util.RPSConfigHandler;
+import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.item.ItemStack;
@@ -30,9 +31,11 @@ public class RPSRecipes {
 
     @SubscribeEvent
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
-        RecipeLiquidColorizer recipeLiquidDye = new RecipeLiquidColorizer();
-        recipeLiquidDye.setRegistryName(new ResourceLocation(RPSIdeas.MODID, "liquiddye"));
-        event.getRegistry().register(recipeLiquidDye);
+        event.getRegistry().register(new RecipeLiquidColorizer()
+                .setRegistryName(new ResourceLocation(RPSIdeas.MODID, RPSItemNames.LIQUID_COLORIZER)));
+        event.getRegistry().register(new RecipeAttachBattlecaster()
+                .setRegistryName(new ResourceLocation(RPSIdeas.MODID, RPSItemNames.INTEGRATED_BATTLECASTER)));
+
 
         trickRecipe("", Items.REDSTONE, new ItemStack(ModItems.material), new ItemStack(ModItems.cadAssembly));
         trickRecipe(LibPieceNames.TRICK_INFUSION, Items.GOLD_INGOT, new ItemStack(ModItems.material, 1, 1), new ItemStack(ModItems.cadAssembly));

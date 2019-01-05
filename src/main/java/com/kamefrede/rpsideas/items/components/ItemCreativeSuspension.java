@@ -32,17 +32,22 @@ public class ItemCreativeSuspension extends ItemComponent implements ICADColoriz
         ItemStack colorizer = cadItem.getComponentInSlot(cad, EnumCADComponent.DYE);
         if (!colorizer.isEmpty() && colorizer.getItem() instanceof ItemCreativeSuspension)
             event.setStatValue(getStatValue(event.getStat()));
+        else {
+
+            ItemStack assembly = cadItem.getComponentInSlot(cad, EnumCADComponent.ASSEMBLY);
+            if (!assembly.isEmpty()) {
+                ICADComponent componentItem = (ICADComponent) assembly.getItem();
+                if (componentItem.getCADStatValue(assembly, EnumCADStat.POTENCY) == -1 &&
+                        componentItem.getCADStatValue(assembly, EnumCADStat.EFFICIENCY) == -1)
+                    event.setStatValue(getStatValue(event.getStat()));
+            }
+        }
     }
 
     private static int getStatValue(EnumCADStat stat) {
-        switch (stat) {
-            case BANDWIDTH:
-                return 9;
-            case SOCKETS:
-                return 12;
-            default:
-                return -1;
-        }
+        if (stat == EnumCADStat.SOCKETS)
+            return 12;
+        return -1;
     }
 
     @Override
@@ -54,6 +59,6 @@ public class ItemCreativeSuspension extends ItemComponent implements ICADColoriz
     @Override
     @SideOnly(Side.CLIENT)
     public int getColor(ItemStack itemStack) {
-        return ClientHelpers.slideColor(0x9B3200, 0xFFAB00, 0.125f);
+        return ClientHelpers.slideColor(0x9B3200, 0xFFAB00, 0.02f);
     }
 }

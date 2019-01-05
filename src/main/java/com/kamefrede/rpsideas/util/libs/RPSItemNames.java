@@ -61,4 +61,6 @@ public class RPSItemNames {
     public static final String IVORY_SHEARS = "ivory_shears";
     public static final String IVORY_ROD = "ivory_rod";
     public static final String IVORY_HOE = "ivory_hoe";
+
+    public static final String INTEGRATED_BATTLECASTER = "battlecaster";
 }

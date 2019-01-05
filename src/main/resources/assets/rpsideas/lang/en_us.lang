@@ -321,11 +321,16 @@ item.rpsideas:liquid_colorizer.name=Liquid-Ink CAD Colorizer
 item.rpsideas:empty_colorizer.name=Drained CAD Colorizer
 item.rpsideas:cad_assembly_mana_blaster.name=Blaster CAD Assembly
 item.rpsideas:spell_bullet_sniper.name=Sniper Spell Bullet
+item.rpsideas:spell_bullet_sniper_active.name=Sniper Spell Bullet
 
 item.rpsideas:creative_colorizer.name=Creative CAD Suspension
 item.rpsideas:creative_colorizer.desc=This strange liquid perfects your CAD's stats.
 
-item.rpsideas:spell_bullet_sniper_active.name=Sniper Spell Bullet
+item.rpsideas:battlecaster.name=Integrated Battlecaster
+item.rpsideas:battlecaster.desc=&bCraft this with a PSI tool to make it fire
+item.rpsideas:battlecaster.desc1=&bwhen you attack with it instead of use it.
+rpsideas.battlecaster_attached=&bEvent Override&7: Melee
+
 item.rpsideas:bracelet_cad.name=Bracelet CAD
 item.rpsideas:psimetal_hoe.name=Psimetal Hoe
 item.rpsideas:ivory_pickaxe.name=Ivory Flowpick
