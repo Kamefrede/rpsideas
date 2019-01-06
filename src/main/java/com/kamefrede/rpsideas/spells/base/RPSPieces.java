@@ -127,6 +127,11 @@ public class RPSPieces {
         register(PieceMacroCasterAxisRaycast.class, RPSPieceNames.MACRO_CASTER_AXIS_RAYCAST, RPSPieceNames.MACROS);
         register(PieceMacroCasterStrongAxisRaycast.class, RPSPieceNames.MACRO_CASTER_STRONG_AXIS_RAYCAST, RPSPieceNames.MACROS);
         register(PieceMacroCasterStrongRaycast.class, RPSPieceNames.MACRO_CASTER_STRONG_RAYCAST, RPSPieceNames.MACROS);
+        register(PieceMacroDefaultedVector.class, RPSPieceNames.MACRO_DEFAULTED_VECTOR, RPSPieceNames.MACROS);
+        register(PieceMacroCasterWeakAxisRaycast.class, RPSPieceNames.MACRO_CASTER_WEAK_AXIS_RAYCAST, RPSPieceNames.MACROS);
+        register(PieceMacroCasterWeakRaycast.class, RPSPieceNames.MACRO_CASTER_WEAK_RAYCAST, RPSPieceNames.MACROS);
+        register(PieceOperatorWeakRaycast.class, RPSPieceNames.PIECE_OPERATOR_WEAK_RAYCAST, RPSPieceNames.SECONDARY_VECTOR_OPERATORS);
+        register(PieceOperatorWeakRaycastAxis.class, RPSPieceNames.PIECE_OPERATOR_WEAK_RAYCAST_AXIS, RPSPieceNames.SECONDARY_VECTOR_OPERATORS);
 
         new BotaniaCompatPieces().run();
     }

@@ -1,22 +1,16 @@
 package com.kamefrede.rpsideas.spells.selector;
 
+import com.kamefrede.rpsideas.spells.operator.vector.PieceOperatorWeakRaycast;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.RayTraceResult;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
-import vazkii.psi.api.spell.param.ParamNumber;
 
-public class PieceMacroCasterStrongAxisRaycast extends SpellPiece {
+public class PieceMacroCasterWeakRaycast extends SpellPiece {
     private SpellParam maxDistance;
 
-    public PieceMacroCasterStrongAxisRaycast(Spell spell) {
+    public PieceMacroCasterWeakRaycast(Spell spell) {
         super(spell);
-    }
-
-    @Override
-    public void initParams() {
-        addParam(maxDistance = new ParamNumber(SpellParam.GENERIC_NAME_MAX, SpellParam.RED, true, false));
     }
 
     @Override
@@ -32,20 +26,15 @@ public class PieceMacroCasterStrongAxisRaycast extends SpellPiece {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         Vector3 originVal = Vector3.fromEntity(context.caster).add(0, context.caster.getEyeHeight(), 0);
-        Vector3 look = new Vector3(context.caster.getLook(1F));
-        EnumFacing facing = EnumFacing.getFacingFromVector((float) look.x, (float) look.y, (float) look.z);
-        Vector3 rayVal = new Vector3(facing.getXOffset(), facing.getYOffset(), facing.getZOffset());
+        Vector3 rayVal = new Vector3(context.caster.getLook(1F));
 
         double maxLen = SpellHelpers.getBoundedNumber(this, context, maxDistance, SpellContext.MAX_DISTANCE);
 
-        Vector3 end = originVal.copy().add(rayVal.copy().normalize().multiply(maxLen));
-
-        RayTraceResult pos = context.caster.world.rayTraceBlocks(originVal.toVec3D(), end.toVec3D(), false, true, false);
+        RayTraceResult pos = PieceOperatorWeakRaycast.raycast(context.caster.world, originVal, rayVal, maxLen);
         if (pos == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
 
-        EnumFacing sideHit = pos.sideHit;
-        return new Vector3(sideHit.getXOffset(), sideHit.getYOffset(), sideHit.getZOffset());
+        return Vector3.fromBlockPos(pos.getBlockPos());
     }
 
     @Override

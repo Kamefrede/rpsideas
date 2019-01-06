@@ -80,6 +80,14 @@ psi.spellpiece.rpsideas.trick_freeze_block=Trick: Freeze Block
 psi.spellpiece.rpsideas.operator_closest_to_line=Operator: Closest To Line
 psi.spellpiece.rpsideas.trick_conjure_text=Trick: Conjure Text
 psi.spellpiece.rpsideas.trick_conjure_circle=Trick: Conjure Circle
+psi.spellpiece.rpsideas.macro_caster_raycast_axis=Macro: Axis Caster Raycast
+psi.spellpiece.rpsideas.macro_caster_strong_raycast=Macro: Strong Caster Raycast
+psi.spellpiece.rpsideas.macro_caster_strong_raycast_axis=Macro: Strong Axis Caster Raycast
+psi.spellpiece.rpsideas.macro_defaulted_vector=Macro: Defaulted Vector
+psi.spellpiece.rpsideas.macro_caster_weak_raycast=Macro: Weak Caster Raycast
+psi.spellpiece.rpsideas.macro_caster_weak_raycast_axis=Macro: Weak Axis Caster Raycast
+psi.spellpiece.rpsideas.operator_weak_raycast=Operator: Vector Weak Raycast
+psi.spellpiece.rpsideas.operator_weak_raycast_axis=Operator: Vector Axis Weak Raycast
 
 
 
@@ -165,6 +173,14 @@ psi.spellpiece.rpsideas.trick_freeze_block.desc=Freezes the block at the selecte
 psi.spellpiece.rpsideas.operator_closest_to_line.desc=Select the closest entity to the line segment
 psi.spellpiece.rpsideas.trick_conjure_text.desc=Conjures a holographic text at a given position
 psi.spellpiece.rpsideas.trick_conjure_circle.desc=Conjures a circle at the given position
+psi.spellpiece.rpsideas.macro_caster_raycast_axis.desc=A macro for doing a raycast with caster position and caster axial look
+psi.spellpiece.rpsideas.macro_caster_strong_raycast.desc=A macro for doing a strong raycast with caster position and caster look
+psi.spellpiece.rpsideas.macro_caster_strong_raycast_axis.desc=A macro for doing a strong raycast with caster position and caster axial look
+psi.spellpiece.rpsideas.macro_defaulted_vector.desc=Uses the default number if any of the x,y,z are null or don't exist
+psi.spellpiece.rpsideas.macro_caster_weak_raycast.desc=A macro for doing a weak raycast with caster position and caster ook
+psi.spellpiece.rpsideas.macro_caster_weak_raycast_axis.desc=A macro for doing a weak raycast with caster position and caster axial look
+psi.spellpiece.rpsideas.operator_weak_raycast.desc=Gets a raycast result, stopping at liquids (max 32)
+psi.spellpiece.rpsideas.operator_weak_raycast_axis.desc=Gets a raycast side, stopping at liquids (max 32)
 
 psi.datatype.String=String
 rpsideas.datatype.String=String

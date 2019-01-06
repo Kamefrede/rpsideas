@@ -7,10 +7,10 @@ import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
 
-public class PieceMacroCasterStrongAxisRaycast extends SpellPiece {
+public class PieceMacroCasterWeakAxisRaycast extends SpellPiece {
     private SpellParam maxDistance;
 
-    public PieceMacroCasterStrongAxisRaycast(Spell spell) {
+    public PieceMacroCasterWeakAxisRaycast(Spell spell) {
         super(spell);
     }
 
@@ -40,7 +40,7 @@ public class PieceMacroCasterStrongAxisRaycast extends SpellPiece {
 
         Vector3 end = originVal.copy().add(rayVal.copy().normalize().multiply(maxLen));
 
-        RayTraceResult pos = context.caster.world.rayTraceBlocks(originVal.toVec3D(), end.toVec3D(), false, true, false);
+        RayTraceResult pos = context.caster.world.rayTraceBlocks(originVal.toVec3D(), end.toVec3D(), true, false, false);
         if (pos == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
 

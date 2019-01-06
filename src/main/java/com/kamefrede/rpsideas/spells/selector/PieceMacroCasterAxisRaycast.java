@@ -6,7 +6,6 @@ import net.minecraft.util.math.RayTraceResult;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
-import vazkii.psi.common.spell.operator.vector.PieceOperatorVectorRaycast;
 
 public class PieceMacroCasterAxisRaycast extends SpellPiece {
     private SpellParam maxDistance;
@@ -39,11 +38,14 @@ public class PieceMacroCasterAxisRaycast extends SpellPiece {
 
         double maxLen = SpellHelpers.getBoundedNumber(this, context, maxDistance, SpellContext.MAX_DISTANCE);
 
-        RayTraceResult pos = PieceOperatorVectorRaycast.raycast(context.caster.world, originVal, rayVal, maxLen);
+        Vector3 end = originVal.copy().add(rayVal.copy().normalize().multiply(maxLen));
+
+        RayTraceResult pos = context.caster.world.rayTraceBlocks(originVal.toVec3D(), end.toVec3D(), false, false, false);
         if (pos == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
 
-        return Vector3.fromBlockPos(pos.getBlockPos());
+        EnumFacing sideHit = pos.sideHit;
+        return new Vector3(sideHit.getXOffset(), sideHit.getYOffset(), sideHit.getZOffset());
     }
 
     @Override
