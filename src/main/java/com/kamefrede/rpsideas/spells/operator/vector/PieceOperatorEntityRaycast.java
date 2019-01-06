@@ -5,11 +5,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceOperator;
+import vazkii.psi.common.spell.operator.vector.PieceOperatorVectorRaycast;
 
 import java.util.List;
 
@@ -40,34 +40,56 @@ public class PieceOperatorEntityRaycast extends PieceOperator {
         if (context.caster.world.isRemote) return null;
         if (ent == null || ent.isZero()) throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
         if (vec == null || vec.isZero()) throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        if (getFirstRaycastEntity(context,vec, ent) == null) {
+        if (getEntityLookedAt(ent.toVec3D(), vec.toVec3D(), context) == null) {
             throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
-        } else return getFirstRaycastEntity(context, vec, ent);
+        } else return getEntityLookedAt(ent.toVec3D(), vec.toVec3D(), context);
 
     }
 
 
-    public Entity getFirstRaycastEntity(SpellContext context, Vector3 vector, Vector3 target) {
-        double dist = 32;
-        World world = context.caster.world;
-        Vec3d positionVector = target.toVec3D();
-        Vec3d raycastVec = new Vec3d(vector.x * dist, vector.y * dist, vector.z * dist);
-        Entity found = null;
+    public static Entity getEntityLookedAt(Vec3d positionVector, Vec3d lookVector, SpellContext context) throws SpellRuntimeException {
+        Entity foundEntity = null;
 
+        final double finalDistance = 32;
+        double distance = finalDistance;
+        RayTraceResult pos = PieceOperatorVectorRaycast.raycast(context.caster.world, new Vector3(positionVector.x, positionVector.y, positionVector.z), new Vector3(lookVector.x, lookVector.y, lookVector.z), finalDistance);
 
-        AxisAlignedBB raycastAABB = new AxisAlignedBB(positionVector.x, positionVector.y, positionVector.z, positionVector.x + raycastVec.x, positionVector.y + raycastVec.y, positionVector.z + raycastVec.z);
-        List<Entity> allEntities = world.getEntitiesWithinAABBExcludingEntity(context.caster, raycastAABB);
-        double d0 = -1.0D;
+        if (pos != null)
+            distance = pos.hitVec.distanceTo(positionVector);
 
-        for (Entity ent1 : allEntities) {
-            double d1 = ent1.getDistanceSq(positionVector.x, positionVector.y, positionVector.z);
-            if (d1 <= dist * dist && (d0 == -1.0D || d1 < d0)) {
-                d0 = d1;
-                found = ent1;
+        Vec3d reachVector = positionVector.add(lookVector.scale(finalDistance));
+
+        Entity lookedEntity = null;
+        AxisAlignedBB aabb = new AxisAlignedBB(positionVector.x, positionVector.y, positionVector.z, reachVector.x, reachVector.y, reachVector.z).expand(1f, 1f, 1f);
+        List<Entity> entitiesInBoundingBox = context.caster.world.getEntitiesWithinAABBExcludingEntity(context.caster, aabb);
+        double minDistance = distance;
+
+        for (Entity entity : entitiesInBoundingBox) {
+            if (entity.canBeCollidedWith()) {
+                float collisionBorderSize = entity.getCollisionBorderSize();
+                AxisAlignedBB hitbox = entity.getEntityBoundingBox().grow(collisionBorderSize, collisionBorderSize, collisionBorderSize);
+                RayTraceResult interceptPosition = hitbox.calculateIntercept(positionVector, reachVector);
+
+                if (hitbox.contains(positionVector)) {
+                    if (0.0D < minDistance || minDistance == 0.0D) {
+                        lookedEntity = entity;
+                        minDistance = 0.0D;
+                    }
+                } else if (interceptPosition != null) {
+                    double distanceToEntity = positionVector.distanceTo(interceptPosition.hitVec);
+
+                    if (distanceToEntity < minDistance || minDistance == 0.0D) {
+                        lookedEntity = entity;
+                        minDistance = distanceToEntity;
+                    }
+                }
             }
+
+            if (lookedEntity != null && (minDistance < distance || pos == null))
+                foundEntity = lookedEntity;
         }
 
-        return found;
+        return foundEntity;
     }
 
     @Override
