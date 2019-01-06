@@ -22,6 +22,8 @@ public class RPSItemNames {
     public static final String SPELL_MAGAZINE = "magazine";
     public static final String BRACELET_CAD = "bracelet_cad";
     public static final String TRIGGER_SENSOR = "trigger_sensor";
+    public static final String IVORY_OVERCLOCKED_ASSEMBLY = "ivory_overclocked_assembly";
+    public static final String IVORY_UNDERCLOCKED_ASSEMBLY = "ivory_underclocked_assembly";
 
 
     public static final String PSISHOCK = "psishock";

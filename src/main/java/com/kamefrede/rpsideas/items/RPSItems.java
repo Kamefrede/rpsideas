@@ -58,6 +58,8 @@ public class RPSItems {
     public static final ItemMod ivoryHoe = new ItemFlowHoe(RPSItemNames.IVORY_HOE);
     public static final ItemMod inlineCaster = new ItemInlineCaster();
     public static final ItemMod gaussRifle = new ItemGaussRifle();
+    public static final ItemMod ivoryOverclocked = new ItemOverclockedIvoryAssembly();
+    public static final ItemMod ivoryUnderclocked = new ItemUnderclockedIvoryAssembly();
 
     //public static final ItemMod sniperBullet = new ItemSniperSpellBullet();
     public static final ItemMod psimetalHoe = new ItemPsimetalHoe(RPSItemNames.PSIMETAL_HOE);
