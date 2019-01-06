@@ -1,0 +1,25 @@
+{
+  "result": {
+    "item": "rpsideas:battlecaster"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "II ",
+    "PID",
+    " ID"
+  ],
+  "key": {
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "ingotPsi"
+    },
+    "D": {
+      "type": "forge:ore_dict",
+      "ore": "dustPsi"
+    },
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    }
+  }
+}
