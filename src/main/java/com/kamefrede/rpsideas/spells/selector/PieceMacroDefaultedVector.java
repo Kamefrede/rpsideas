@@ -18,9 +18,9 @@ public class PieceMacroDefaultedVector extends SpellPiece {
 
     @Override
     public void initParams() {
-        addParam(number = new ParamNumber(SpellParam.GENERIC_NAME_NUMBER, SpellParam.BLUE, true, false));
-        addParam(x = new ParamNumber(SpellParam.GENERIC_NAME_X, SpellParam.BLUE, true, false));
-        addParam(y = new ParamNumber(SpellParam.GENERIC_NAME_Y, SpellParam.BLUE, true, false));
+        addParam(number = new ParamNumber(SpellParam.GENERIC_NAME_NUMBER, SpellParam.YELLOW, true, false));
+        addParam(x = new ParamNumber(SpellParam.GENERIC_NAME_X, SpellParam.RED, true, false));
+        addParam(y = new ParamNumber(SpellParam.GENERIC_NAME_Y, SpellParam.GREEN, true, false));
         addParam(z = new ParamNumber(SpellParam.GENERIC_NAME_Z, SpellParam.BLUE, true, false));
     }
 
