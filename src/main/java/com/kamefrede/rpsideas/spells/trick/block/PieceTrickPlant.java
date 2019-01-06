@@ -39,18 +39,18 @@ public class PieceTrickPlant extends PieceTrick {
         if (!stack.isEmpty()) {
             if (blockAtPlant.isReplaceable(world, pos)) {
                 if (stack.getItem() instanceof IPlantable) {
-                    ItemStack rem = removeFromInventory(player, block, stack);
+                    ItemStack rem = removeFromInventory(player, stack);
                     IPlantable plant = ((IPlantable) rem.getItem());
                     plant(player, world, pos, plantPos, state, block, rem, plant);
                 } else if (stack.getItem() instanceof ItemBlockSpecial) {
                     if (((ItemBlockSpecial) stack.getItem()).getBlock() instanceof IPlantable) {
-                        ItemStack rem = removeFromInventory(player, block, stack);
+                        ItemStack rem = removeFromInventory(player, stack);
                         IPlantable plant = ((IPlantable) ((ItemBlockSpecial) rem.getItem()).getBlock());
                         plant(player, world, pos, plantPos, state, block, rem, plant);
                     }
                 } else if (stack.getItem() instanceof ItemBlock) {
                     if (((ItemBlock) stack.getItem()).getBlock() instanceof IPlantable) {
-                        ItemStack rem = removeFromInventory(player, block, stack);
+                        ItemStack rem = removeFromInventory(player, stack);
                         IPlantable plant = ((IPlantable) ((ItemBlock) rem.getItem()).getBlock());
                         plant(player, world, pos, plantPos, state, block, rem, plant);
                     }

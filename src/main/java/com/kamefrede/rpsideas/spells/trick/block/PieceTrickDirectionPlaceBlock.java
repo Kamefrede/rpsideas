@@ -43,7 +43,7 @@ public class PieceTrickDirectionPlaceBlock extends PieceTrick {
             } else {
                 ItemStack stack = player.inventory.getStackInSlot(slot);
                 if (!stack.isEmpty() && stack.getItem() instanceof ItemBlock) {
-                    ItemStack rem = removeFromInventory(player, block, stack);
+                    ItemStack rem = removeFromInventory(player, stack);
                     ItemBlock itemBlock = (ItemBlock) rem.getItem();
 
                     Block blockToPlace = Block.getBlockFromItem(rem.getItem());
