@@ -24,6 +24,9 @@ public class RPSItemNames {
     public static final String TRIGGER_SENSOR = "trigger_sensor";
     public static final String IVORY_OVERCLOCKED_ASSEMBLY = "ivory_overclocked_assembly";
     public static final String IVORY_UNDERCLOCKED_ASSEMBLY = "ivory_underclocked_assembly";
+    public static final String OPTIMIZED_CAD_CORE = "optimized_cad_core";
+    public static final String HYPERTHREADED_CAD_CORE = "hyperthreaded_cad_core";
+    public static final String VIRTUAL_THREAD_CAD_CORE = "virtual_thread_cad_core";
 
 
     public static final String PSISHOCK = "psishock";

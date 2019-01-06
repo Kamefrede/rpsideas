@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.util;
 
 import com.kamefrede.rpsideas.RPSIdeas;
+import com.kamefrede.rpsideas.items.base.ICooldownAssembly;
 import com.kamefrede.rpsideas.items.base.IRegenerationBattery;
 import com.kamefrede.rpsideas.network.MessageCastOffHand;
 import com.kamefrede.rpsideas.network.MessageChangeSocketSlot;
@@ -12,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -20,6 +22,7 @@ import vazkii.arl.network.NetworkHandler;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.ICAD;
+import vazkii.psi.api.spell.PreSpellCastEvent;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.network.message.MessageDataSync;
 
@@ -46,6 +49,17 @@ public class RPSEventHandler {
                     PacketHandler.NETWORK.sendToServer(new MessageChangeSocketSlot(i));
                 }
             }
+        }
+    }
+
+    @SubscribeEvent(priority = EventPriority.HIGH)
+    public static void assemblyCooldown(PreSpellCastEvent event) {
+        ItemStack cad = event.getCad();
+        ICAD icad = (ICAD) event.getCad().getItem();
+        ItemStack assembly = icad.getComponentInSlot(cad, EnumCADComponent.ASSEMBLY);
+        if (!assembly.isEmpty() && assembly.getItem() instanceof ICooldownAssembly) {
+            ICooldownAssembly assembl = (ICooldownAssembly) assembly.getItem();
+            event.setCooldown((int) (event.getCooldown() * assembl.getCooldownFactor(cad)));
         }
     }
 

@@ -371,6 +371,9 @@ item.rpsideas:gauss_rifle.name=Gauss Pulse Rifle
 item.rpsideas:gauss_bullet.name=Gauss Rifle Round
 item.rpsideas:ivory_underclocked_assembly.name=Ivory Underclocked Assembly
 item.rpsideas:ivory_overclocked_assembly.name=Ivory Overclocked Assembly
+item.rpsideas:hyperthreaded_cad_core.name=Hyperthreaded CAD Core
+item.rpsideas:virtual_thread_cad_core.name=Virtual-Thread CAD Core
+item.rpsideas:optimized_cad_core.name=Optimized CAD Core
 
 item.rpsideas:unstable_battery.name=Unstable CAD Battery
 item.rpsideas:twinflow_battery.name=Hybrid Flow CAD Battery
