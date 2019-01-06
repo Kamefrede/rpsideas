@@ -32,10 +32,7 @@ public class PieceMacroCasterStrongAxisRaycast extends SpellPiece {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         Vector3 originVal = Vector3.fromEntity(context.caster).add(0, context.caster.getEyeHeight(), 0);
-        Vector3 look = new Vector3(context.caster.getLook(1F));
-        EnumFacing facing = EnumFacing.getFacingFromVector((float) look.x, (float) look.y, (float) look.z);
-        Vector3 rayVal = new Vector3(facing.getXOffset(), facing.getYOffset(), facing.getZOffset());
-
+        Vector3 rayVal = new Vector3(context.caster.getLook(1F));
         double maxLen = SpellHelpers.getBoundedNumber(this, context, maxDistance, SpellContext.MAX_DISTANCE);
 
         Vector3 end = originVal.copy().add(rayVal.copy().normalize().multiply(maxLen));
@@ -44,8 +41,8 @@ public class PieceMacroCasterStrongAxisRaycast extends SpellPiece {
         if (pos == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
 
-        EnumFacing sideHit = pos.sideHit;
-        return new Vector3(sideHit.getXOffset(), sideHit.getYOffset(), sideHit.getZOffset());
+        EnumFacing facing = pos.sideHit;
+        return new Vector3(facing.getXOffset(), facing.getYOffset(), facing.getZOffset());
     }
 
     @Override
