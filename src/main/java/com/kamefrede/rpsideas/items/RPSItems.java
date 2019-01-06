@@ -63,6 +63,8 @@ public class RPSItems {
     public static final ItemMod hyperthreadedCadCore = new ItemHyperthreadedCADCore();
     public static final ItemMod virtualthreadCadCore = new ItemVirtualThreadCADCore();
     public static final ItemMod optimizedCadCore = new ItemOptimizedCADCore();
+    public static final ItemMod psiCuffs = new ItemPsiCuffs();
+    public static final ItemMod psiCuffsKeys = new ItemPsiCuffKey();
 
     //public static final ItemMod sniperBullet = new ItemSniperSpellBullet();
     public static final ItemMod psimetalHoe = new ItemPsimetalHoe(RPSItemNames.PSIMETAL_HOE);

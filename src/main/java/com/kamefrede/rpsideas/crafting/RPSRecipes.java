@@ -35,6 +35,9 @@ public class RPSRecipes {
                 .setRegistryName(new ResourceLocation(RPSIdeas.MODID, RPSItemNames.LIQUID_COLORIZER)));
         event.getRegistry().register(new RecipeAttachBattlecaster()
                 .setRegistryName(new ResourceLocation(RPSIdeas.MODID, RPSItemNames.INTEGRATED_BATTLECASTER)));
+        event.getRegistry().register(new RecipeCuffKeyAttach()
+                .setRegistryName(new ResourceLocation(RPSIdeas.MODID, RPSItemNames.PSI_CUFFS)));
+
 
 
         trickRecipe("", Items.REDSTONE, new ItemStack(ModItems.material), new ItemStack(ModItems.cadAssembly));

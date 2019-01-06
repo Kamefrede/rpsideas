@@ -63,6 +63,15 @@ public class RPSEventHandler {
         }
     }
 
+    @SubscribeEvent
+    public static void cuffedCastEvent(PreSpellCastEvent event) {
+        if (event.getPlayerData().getCustomData().getBoolean("rpsideas:cuffed")) {
+            event.setCancellationMessage("rpsideas.cancellation.cuffed");
+            event.setCanceled(true);
+        }
+
+    }
+
 
     @SubscribeEvent
     public static void updateRegenRate(LivingEvent.LivingUpdateEvent e) {

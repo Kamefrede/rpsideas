@@ -374,6 +374,8 @@ item.rpsideas:ivory_overclocked_assembly.name=Ivory Overclocked Assembly
 item.rpsideas:hyperthreaded_cad_core.name=Hyperthreaded CAD Core
 item.rpsideas:virtual_thread_cad_core.name=Virtual-Thread CAD Core
 item.rpsideas:optimized_cad_core.name=Optimized CAD Core
+item.rpsideas:psi_cuffs.name=Psi-Cuffs
+item.rpsideas:psi_cuff_key.name=Psi-Cuffs Key
 
 item.rpsideas:unstable_battery.name=Unstable CAD Battery
 item.rpsideas:twinflow_battery.name=Hybrid Flow CAD Battery

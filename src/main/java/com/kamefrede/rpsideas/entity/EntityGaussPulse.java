@@ -255,7 +255,7 @@ public class EntityGaussPulse extends EntityThrowable implements ISpellImmune {
         PSI(ICADColorizer.DEFAULT_SPELL_COLOR, 2f, 100, false),
         DEPLETED(0xB87333, 8f, 25, false),
         AMMO(0xB87333, 8f, 25, true),
-        BLOOD(0xFF0000, 10f, 25, false);
+        BLOOD(0xFF0000, 10f, 100, false);
 
         public final int color;
         public final float damage;
