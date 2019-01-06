@@ -1,7 +1,7 @@
 language: java
 jdk: oraclejdk8
 before_install:
- - wget https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.12.2-14.23.3.2661/forge-1.12.2-14.23.5.2796-mdk.zip
+ - wget https://files.minecraftforge.net/maven/net/minecraftforge/forge/1.12.2-14.23.5.2796/forge-1.12.2-14.23.5.2796-mdk.zip
  - unzip -n forge-1.12.2-14.23.5.2796-mdk.zip
  - rm forge-1.12.2-14.23.5.2796-mdk.zip
 install: ./gradlew setupCiWorkspace
