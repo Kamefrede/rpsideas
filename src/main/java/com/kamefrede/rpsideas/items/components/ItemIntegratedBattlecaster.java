@@ -115,7 +115,10 @@ public class ItemIntegratedBattlecaster extends ItemMod {
                 if (!playerCad.isEmpty()) {
                     ItemStack bullet = socketable.getBulletInSocket(mainHand, socketable.getSelectedSlot(mainHand));
                     ItemCAD.cast(caster.getEntityWorld(), caster, data, bullet, playerCad, 5, 10, 0.05F,
-                            (SpellContext context) -> context.attackedEntity = affected);
+                            (SpellContext context) -> {
+                                context.tool = mainHand;
+                                context.attackedEntity = affected;
+                            });
                 }
             }
         }
