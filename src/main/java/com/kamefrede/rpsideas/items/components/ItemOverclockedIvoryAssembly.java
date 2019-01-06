@@ -50,7 +50,7 @@ public class ItemOverclockedIvoryAssembly extends ItemComponent implements IExtr
     @SideOnly(Side.CLIENT)
     @Override
     protected void addTooltipTags(Minecraft minecraft, @Nullable World world, KeyBinding sneak, ItemStack stack, List<String> tooltip, ITooltipFlag advanced) {
-        addTooltipTag(tooltip, false, RPSIdeas.MODID + ".extra.cooldown");
+        addTooltipTag(tooltip, false, RPSIdeas.MODID + ".extra.cooldown", cooldownFactor);
     }
 
     @Override

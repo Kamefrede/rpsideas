@@ -54,7 +54,7 @@ public class ItemUnderclockedIvoryAssembly extends ItemComponent implements IExt
 
     @Override
     public void registerStats() {
-        addStat(EnumCADStat.EFFICIENCY, 100);
+        addStat(EnumCADStat.EFFICIENCY, 75);
         addStat(EnumCADStat.POTENCY, 320);
     }
 

@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "rpsideas:items/ivory_overclocked_assembly"
+  }
+}
