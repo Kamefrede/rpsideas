@@ -8,6 +8,9 @@ import vazkii.psi.api.spell.param.ParamNumber;
 public class PieceMacroDefaultedVector extends SpellPiece {
 
     private SpellParam number;
+    private SpellParam x;
+    private SpellParam y;
+    private SpellParam z;
 
     public PieceMacroDefaultedVector(Spell spell) {
         super(spell);
@@ -16,6 +19,9 @@ public class PieceMacroDefaultedVector extends SpellPiece {
     @Override
     public void initParams() {
         addParam(number = new ParamNumber(SpellParam.GENERIC_NAME_NUMBER, SpellParam.BLUE, true, false));
+        addParam(x = new ParamNumber(SpellParam.GENERIC_NAME_X, SpellParam.BLUE, true, false));
+        addParam(y = new ParamNumber(SpellParam.GENERIC_NAME_Y, SpellParam.BLUE, true, false));
+        addParam(z = new ParamNumber(SpellParam.GENERIC_NAME_Z, SpellParam.BLUE, true, false));
     }
 
     @Override
@@ -26,7 +32,10 @@ public class PieceMacroDefaultedVector extends SpellPiece {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         double num = SpellHelpers.getNumber(this, context, number, 0.5);
-        return new Vector3(num, num, num);
+        double xVal = SpellHelpers.getNumber(this, context, x, num);
+        double yVal = SpellHelpers.getNumber(this, context, y, num);
+        double zVal = SpellHelpers.getNumber(this, context, z, num);
+        return new Vector3(xVal, yVal, zVal);
     }
 
     @Override
