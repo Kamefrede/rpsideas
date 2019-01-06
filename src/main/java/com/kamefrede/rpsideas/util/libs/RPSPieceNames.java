@@ -86,9 +86,9 @@ public class RPSPieceNames {
     public static final String TRICK_CONJURE_TEXT = "trick_conjure_text";
     public static final String TRICK_CONJURE_CIRCLE = "trick_conjure_circle";
     public static final String TRICK_SANS_UNDERTALE = "trick_sans_undertale";
-    public static final String MACRO_CASTER_AXIS_RAYCAST = "macro_caster_axis_raycast";
+    public static final String MACRO_CASTER_AXIS_RAYCAST = "macro_caster_raycast_axis";
     public static final String MACRO_CASTER_STRONG_RAYCAST = "macro_caster_strong_raycast";
-    public static final String MACRO_CASTER_STRONG_AXIS_RAYCAST = "macro_caster_strong_axis_raycast";
+    public static final String MACRO_CASTER_STRONG_AXIS_RAYCAST = "macro_caster_strong_raycast_axis";
 
     public static final String ALTERNATE_CONJURATION = RPSIdeas.MODID + ".redstone_conjuration";
     public static final String SECONDARY_VECTOR_OPERATORS = RPSIdeas.MODID + ".secondary_vectors";

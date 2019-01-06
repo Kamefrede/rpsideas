@@ -3,6 +3,7 @@ package com.kamefrede.rpsideas.spells.operator.vector;
 import com.kamefrede.rpsideas.spells.base.SpellParams;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import vazkii.psi.api.internal.Vector3;
@@ -39,7 +40,7 @@ public class PieceOperatorEntityRaycast extends PieceOperator {
         if (context.caster.world.isRemote) return null;
         if (ent == null || ent.isZero()) throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
         if (vec == null || vec.isZero()) throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        if (getFirstRaycastEntity(context, vec, ent) == null) {
+        if (getFirstRaycastEntity(context,vec, ent) == null) {
             throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
         } else return getFirstRaycastEntity(context, vec, ent);
 
@@ -49,8 +50,8 @@ public class PieceOperatorEntityRaycast extends PieceOperator {
     public Entity getFirstRaycastEntity(SpellContext context, Vector3 vector, Vector3 target) {
         double dist = 32;
         World world = context.caster.world;
-        Vec3d positionVector = new Vec3d(target.x, target.y, target.z);
-        Vec3d raycastVec = new Vec3d(vector.x * 32, vector.y * 32, vector.z * 32);
+        Vec3d positionVector = target.toVec3D();
+        Vec3d raycastVec = new Vec3d(vector.x * dist, vector.y * dist, vector.z * dist);
         Entity found = null;
 
 
@@ -60,8 +61,7 @@ public class PieceOperatorEntityRaycast extends PieceOperator {
 
         for (Entity ent1 : allEntities) {
             double d1 = ent1.getDistanceSq(positionVector.x, positionVector.y, positionVector.z);
-
-            if (d1 < dist * dist && (d0 == -1.0D || d1 < d0)) {
+            if (d1 <= dist * dist && (d0 == -1.0D || d1 < d0)) {
                 d0 = d1;
                 found = ent1;
             }
