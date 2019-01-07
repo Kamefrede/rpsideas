@@ -23,6 +23,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.ISocketable;
+import vazkii.psi.api.spell.ISpellContainer;
 import vazkii.psi.common.core.handler.ConfigHandler;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.core.handler.PsiSoundHandler;
@@ -39,7 +40,6 @@ public class ItemInlineCaster extends ItemMod implements IPsiAddonTool, IFlowCol
         super(RPSItemNames.INLINE_CASTER);
         setMaxStackSize(1);
     }
-
 
     @Nonnull
     @Override
@@ -63,7 +63,7 @@ public class ItemInlineCaster extends ItemMod implements IPsiAddonTool, IFlowCol
                 }
             } else {
                 //Cast a spell with the bullet.
-                ItemCAD.cast(world, player, data, bullet, cad, 40, 25, 0.5f, null);
+                ItemCAD.cast(world, player, data, bullet, cad, 40, 25, 0.5f, ctx -> ctx.castFrom = hand);
                 return new ActionResult<>(EnumActionResult.SUCCESS, held);
             }
         }
@@ -79,6 +79,23 @@ public class ItemInlineCaster extends ItemMod implements IPsiAddonTool, IFlowCol
     @Override
     public boolean requiresSneakForSpellSet(ItemStack stack) {
         return false;
+    }
+
+    @Override
+    public boolean isItemValid(ItemStack stack, int slot, ItemStack bullet) {
+        if (!this.isSocketSlotAvailable(stack, slot)) {
+            return false;
+        } else if (!bullet.isEmpty() && bullet.getItem() instanceof ISpellContainer) {
+            ISpellContainer container = (ISpellContainer) bullet.getItem();
+            return container.containsSpell(bullet);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean canLoopcast(ItemStack stack) {
+        return true;
     }
 
     @Override

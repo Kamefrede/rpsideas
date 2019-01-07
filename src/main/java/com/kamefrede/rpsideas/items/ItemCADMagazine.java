@@ -77,6 +77,12 @@ public class ItemCADMagazine extends ItemMod implements ISocketable, ICADCompone
         return 0;
     }
 
+    public static boolean isValid(ItemStack stack, CompiledSpell spell) {
+        int bandwidth = getBandwidth(stack);
+        int spellBandwidth = spell.metadata.stats.getOrDefault(EnumSpellStat.BANDWIDTH, 0);
+        return bandwidth == -1 || bandwidth >= spellBandwidth;
+    }
+
     @Override
     public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items) {
         if (isInCreativeTab(tab)) for (ItemStack stack : IngredientCADComponent.defaults(EnumCADComponent.SOCKET)) {
@@ -283,7 +289,24 @@ public class ItemCADMagazine extends ItemMod implements ISocketable, ICADCompone
         bullet.writeToNBT(cmp);
 
         ItemNBTHelper.setCompound(stack, name, cmp);
+    }
 
+    @Override
+    public boolean isItemValid(ItemStack stack, int slot, ItemStack bullet) {
+        if (!this.isSocketSlotAvailable(stack, slot)) {
+            return false;
+        } else if (!bullet.isEmpty() && bullet.getItem() instanceof ISpellContainer) {
+            ISpellContainer container = (ISpellContainer) bullet.getItem();
+            if (!container.containsSpell(bullet)) {
+                return false;
+            } else {
+                Spell spell = container.getSpell(bullet);
+                SpellCompiler cmp = new SpellCompiler(spell);
+                return isValid(stack, cmp.getCompiledSpell());
+            }
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -301,7 +324,7 @@ public class ItemCADMagazine extends ItemMod implements ISocketable, ICADCompone
         int slot = this.getSelectedSlot(stack);
         ItemStack bullet = this.getBulletInSocket(stack, slot);
         SpellCompiler cmp = new SpellCompiler(spell);
-        if (cmp.getCompiledSpell().metadata.stats.get(EnumSpellStat.BANDWIDTH) != null && cmp.getCompiledSpell().metadata.stats.get(EnumSpellStat.BANDWIDTH) > getBandwidth(stack)) {
+        if (isValid(stack, cmp.getCompiledSpell())) {
             if (!player.world.isRemote) {
                 player.sendStatusMessage(new TextComponentTranslation(RPSIdeas.MODID + ".misc.too_complex").setStyle(new Style().setColor(TextFormatting.RED)), false);
             }
