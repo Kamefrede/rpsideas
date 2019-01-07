@@ -10,7 +10,6 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import vazkii.psi.common.block.base.ModBlocks;
 import vazkii.psi.common.item.base.ModItems;
 
 /**
@@ -31,8 +30,6 @@ public class JEICompat implements IModPlugin {
     @Override
     public void register(IModRegistry registry) {
         helpers = registry.getJeiHelpers();
-
-        helpers.getIngredientBlacklist().addIngredientToBlacklist(new ItemStack(ModBlocks.conjured));
 
         registry.handleRecipes(TrickRecipe.class, TrickCraftingRecipeJEI::new, TrickCraftingCategory.INSTANCE.getUid());
         registry.addRecipes(RPSRecipes.trickRecipes, TrickCraftingCategory.INSTANCE.getUid());
