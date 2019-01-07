@@ -5,6 +5,8 @@ import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.util.math.RayTraceResult;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
+import vazkii.psi.api.spell.param.ParamNumber;
+import vazkii.psi.api.spell.param.ParamVector;
 
 public class PieceMacroCasterWeakRaycast extends SpellPiece {
     private SpellParam maxDistance;
@@ -17,6 +19,12 @@ public class PieceMacroCasterWeakRaycast extends SpellPiece {
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
         meta.addStat(EnumSpellStat.COMPLEXITY, 4);
     }
+    @Override
+    public void initParams() {
+        addParam(maxDistance = new ParamNumber(SpellParam.GENERIC_NAME_MAX, SpellParam.PURPLE, true, false));
+    }
+
+
 
     @Override
     public Object evaluate() {
