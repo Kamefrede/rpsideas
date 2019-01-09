@@ -132,5 +132,5 @@ Known bugs
 Thank yous
 ============
 * [PSI Taurus Silver Discord](http://discord.gg/vqg6qTH)
-* [wiresegal for PSIonic Upgrades and his work on PSIdeas](https://minecraft.curseforge.com/projects/psionic-upgrades)
+* [wiresegal for PSIonic Upgrades and their work on PSIdeas](https://minecraft.curseforge.com/projects/psionic-upgrades)
 * [Quat for updating PSIonic Upgrades to 1.12](https://github.com/quat1024/PSIonic-Upgrades)
