@@ -25,11 +25,11 @@ public class RPSRecipes {
     @SubscribeEvent
     public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
         event.getRegistry().register(new RecipeLiquidColorizer()
-                .setRegistryName(new ResourceLocation(RPSIdeas.MODID, RPSItemNames.LIQUID_COLORIZER)));
+                .setRegistryName(new ResourceLocation(RPSIdeas.MODID, "dye_liquid_colorizer")));
         event.getRegistry().register(new RecipeAttachBattlecaster()
-                .setRegistryName(new ResourceLocation(RPSIdeas.MODID, RPSItemNames.INTEGRATED_BATTLECASTER)));
+                .setRegistryName(new ResourceLocation(RPSIdeas.MODID, "attach_battlecaster")));
         event.getRegistry().register(new RecipeCuffKeyAttach()
-                .setRegistryName(new ResourceLocation(RPSIdeas.MODID, RPSItemNames.PSI_CUFFS)));
+                .setRegistryName(new ResourceLocation(RPSIdeas.MODID, "key_cuffs")));
 
 
 
