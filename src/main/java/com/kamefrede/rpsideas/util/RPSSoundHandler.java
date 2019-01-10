@@ -5,9 +5,7 @@ import com.kamefrede.rpsideas.RPSIdeas;
 import com.teamwizardry.librarianlib.features.base.ModSoundEvent;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.SoundEvent;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
 public class RPSSoundHandler {
@@ -21,9 +19,4 @@ public class RPSSoundHandler {
         return new ModSoundEvent(name);
     }
 
-    @SubscribeEvent
-    public static void registerSounds(RegistryEvent.Register<SoundEvent> e) {
-        e.getRegistry().register(MEGALOVANIA);
-        e.getRegistry().register(THWACK);
-    }
 }
