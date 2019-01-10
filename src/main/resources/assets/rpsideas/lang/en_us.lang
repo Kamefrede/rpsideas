@@ -175,10 +175,10 @@ psi.spellpiece.rpsideas.trick_conjure_text.desc=Conjures a holographic text at a
 psi.spellpiece.rpsideas.trick_conjure_circle.desc=Conjures a circle at the given position
 psi.spellpiece.rpsideas.macro_caster_raycast_axis.desc=A macro for doing a raycast with caster position and caster look
 psi.spellpiece.rpsideas.macro_caster_strong_raycast.desc=A macro for doing a strong raycast with caster position and caster look
-psi.spellpiece.rpsideas.macro_caster_strong_raycast_axis.desc=A macro for doing a strong raycast with caster position and caster look look
+psi.spellpiece.rpsideas.macro_caster_strong_raycast_axis.desc=A macro for doing a strong axis raycast with caster position and caster look
 psi.spellpiece.rpsideas.macro_defaulted_vector.desc=Uses the default number if any of the x,y,z are null or don't exist
 psi.spellpiece.rpsideas.macro_caster_weak_raycast.desc=A macro for doing a weak raycast with caster position and caster look
-psi.spellpiece.rpsideas.macro_caster_weak_raycast_axis.desc=A macro for doing a weak raycast with caster position and caster look
+psi.spellpiece.rpsideas.macro_caster_weak_raycast_axis.desc=A macro for doing a weak axis raycast with caster position and caster look
 psi.spellpiece.rpsideas.operator_weak_raycast.desc=Gets a raycast result, stopping at liquids (max 32)
 psi.spellpiece.rpsideas.operator_weak_raycast_axis.desc=Gets a raycast side, stopping at liquids (max 32)
 
