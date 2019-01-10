@@ -1,8 +1,6 @@
 package com.kamefrede.rpsideas;
 
 import com.kamefrede.rpsideas.blocks.RPSBlocks;
-import com.kamefrede.rpsideas.command.CommandPsiLearn;
-import com.kamefrede.rpsideas.command.CommandPsiUnlearn;
 import com.kamefrede.rpsideas.effect.RPSPotions;
 import com.kamefrede.rpsideas.entity.RPSEntities;
 import com.kamefrede.rpsideas.entity.botania.EntityPsiManaBurst;
@@ -26,7 +24,10 @@ import net.minecraftforge.common.util.ModFixs;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Optional;
-import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -126,11 +127,5 @@ public class RPSIdeas {
     }
 
     // Server Commands
-
-    @Mod.EventHandler
-    public void serverStart(FMLServerStartingEvent e) {
-        e.registerServerCommand(new CommandPsiLearn());
-        e.registerServerCommand(new CommandPsiUnlearn());
-    }
 
 }

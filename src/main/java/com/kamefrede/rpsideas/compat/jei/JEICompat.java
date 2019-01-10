@@ -1,15 +1,10 @@
 package com.kamefrede.rpsideas.compat.jei;
 
-import com.kamefrede.rpsideas.compat.jei.craftingTricks.TrickCraftingCategory;
-import com.kamefrede.rpsideas.compat.jei.craftingTricks.TrickCraftingRecipeJEI;
-import com.kamefrede.rpsideas.crafting.RPSRecipes;
-import com.kamefrede.rpsideas.crafting.trick.TrickRecipe;
 import com.kamefrede.rpsideas.items.RPSItems;
-import mezz.jei.api.*;
-import mezz.jei.api.recipe.IRecipeCategoryRegistration;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
+import mezz.jei.api.IJeiHelpers;
+import mezz.jei.api.IModPlugin;
+import mezz.jei.api.ISubtypeRegistry;
+import mezz.jei.api.JEIPlugin;
 import vazkii.psi.common.item.base.ModItems;
 
 /**
@@ -20,25 +15,6 @@ import vazkii.psi.common.item.base.ModItems;
 public class JEICompat implements IModPlugin {
 
     public static IJeiHelpers helpers;
-
-    @Override
-    public void registerCategories(IRecipeCategoryRegistration registry) {
-        helpers = registry.getJeiHelpers();
-        registry.addRecipeCategories(TrickCraftingCategory.INSTANCE);
-    }
-
-    @Override
-    public void register(IModRegistry registry) {
-        helpers = registry.getJeiHelpers();
-
-        registry.handleRecipes(TrickRecipe.class, TrickCraftingRecipeJEI::new, TrickCraftingCategory.INSTANCE.getUid());
-        registry.addRecipes(RPSRecipes.trickRecipes, TrickCraftingCategory.INSTANCE.getUid());
-
-        NonNullList<ItemStack> stacks = NonNullList.create();
-        ModItems.cad.getSubItems(CreativeTabs.SEARCH, stacks);
-        for (ItemStack stack : stacks)
-            registry.addRecipeCatalyst(stack, TrickCraftingCategory.INSTANCE.getUid());
-    }
 
     @Override
     public void registerItemSubtypes(ISubtypeRegistry subtypeRegistry) {
