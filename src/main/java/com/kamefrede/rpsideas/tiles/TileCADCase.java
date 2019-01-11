@@ -36,7 +36,7 @@ import javax.annotation.Nonnull;
 public class TileCADCase extends TileMod {
 
     @Module
-    private ModuleCapability<ItemStackHandler> inventory =
+    public ModuleCapability<ItemStackHandler> inventory =
             new ModuleInventory(new CaseTileHandler()).disallowSides(EnumFacing.UP,
                     EnumFacing.NORTH, EnumFacing.SOUTH, EnumFacing.EAST, EnumFacing.WEST);
 
