@@ -20,7 +20,6 @@ public class RPSEntities {
     private static int id = 0;
 
     public static void init() {
-        registerModEntity(EntitySniperProjectile.class, RPSEntityNames.ENTITY_SNIPER_BULLET, 256, 1, true);
         registerModEntity(EntityGaussPulse.class, RPSEntityNames.ENTITY_GAUSS_PULSE, 256, 10, true);
         registerModEntity(EntityPsireworkRocket.class, RPSEntityNames.ENTITY_PSI_FIREWORK, 64, 10, true);
         registerModEntity(EntityConjuredText.class, RPSEntityNames.ENTITY_CONJURED_TEXT, 64, 10, false);
