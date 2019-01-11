@@ -7,7 +7,7 @@ A PSI addon & a port of Psionic Upgrades
 
 Items
 ===========
-* Creative CAD Parts
+* Creative Suspension
 * Psimetal Hoe(And ebony/ivory variant)
 * Psimetal Shears(And ebony/ivory variant)
 * Psimetal Fishing Rod(And ebony/ivory variant)
@@ -28,14 +28,13 @@ Items
 * Hybrid Suspension Colorizer
 * Trigger Sensor
 * Psi Dampener (WIP)
+* Integrated Battlecaster
 
 
-Mod Integrations
+Mod Interactions
 ===========
 * Avaritia
 * Botania
-* JEI
-
 Spell Pieces
 ============
 * Trick: Conjure Block Direction (Conjures a block with a direction that the user chooses)
