@@ -13,6 +13,7 @@ import com.kamefrede.rpsideas.spells.base.RPSPieces;
 import com.kamefrede.rpsideas.util.RPSCreativeTab;
 import com.kamefrede.rpsideas.util.RPSDataFixer;
 import com.kamefrede.rpsideas.util.RPSKeybindHandler;
+import com.kamefrede.rpsideas.util.RPSSoundHandler;
 import com.teamwizardry.librarianlib.core.client.GlowingHandler;
 import com.teamwizardry.librarianlib.features.base.item.IGlowingItem;
 import net.minecraft.client.Minecraft;
@@ -82,6 +83,7 @@ public class RPSIdeas {
         new RPSItems();
         new RPSBlocks();
         new RPSPotions();
+        new RPSSoundHandler();
 
         RPSPieces.init();
         RPSEntities.init();
@@ -108,6 +110,13 @@ public class RPSIdeas {
     public void postInitBotania(FMLPostInitializationEvent event) {
         BotaniaAPI.blacklistEntityFromGravityRod(EntityPsiManaBurst.class);
     }
+
+    @Mod.EventHandler
+    @Optional.Method(modid = "rspcompat")
+    public void easterEggPreInit(FMLInitializationEvent event) {
+        LOGGER.info("Sure thing Reskillable PSI Compat!");
+    }
+
 
     @Mod.EventHandler
     @SideOnly(Side.CLIENT)
