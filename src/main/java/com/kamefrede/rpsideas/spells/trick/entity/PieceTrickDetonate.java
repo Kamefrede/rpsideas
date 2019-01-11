@@ -32,7 +32,7 @@ public class PieceTrickDetonate extends PieceTrick {
         super.addToMetadata(meta);
         double radiusVal = SpellHelpers.ensurePositiveOrZero(this, radius);
         meta.addStat(EnumSpellStat.POTENCY, (int) Math.min(radiusVal, 5));
-        meta.addStat(EnumSpellStat.COST, (int) (radiusVal * 5));
+        meta.addStat(EnumSpellStat.COST, (int) Math.ceil(radiusVal * 5));
 
         if (radiusVal == 0)
             meta.addStat(EnumSpellStat.COMPLEXITY, 1);
