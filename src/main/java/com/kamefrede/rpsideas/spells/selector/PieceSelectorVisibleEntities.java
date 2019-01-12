@@ -13,6 +13,7 @@ import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.piece.PieceSelector;
 import vazkii.psi.api.spell.wrapper.EntityListWrapper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Predicate;
@@ -45,7 +46,7 @@ public class PieceSelectorVisibleEntities extends PieceSelector {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (context.caster.world.isRemote) return null;
+        if (context.caster.world.isRemote) return new EntityListWrapper(new ArrayList<>());
         Entity entity = this.getParamValue(context, ent);
 
         double radiusVal = SpellHelpers.getBoundedNumber(this, context, radius, SpellContext.MAX_DISTANCE);
