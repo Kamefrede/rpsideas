@@ -15,6 +15,6 @@ public class OperatorMaxInput extends OperatorEnergy {
 
     @Override
     protected double result(World world, BlockPos pos, TileEntity tile, IEnergyStorage storage) {
-        return storage.receiveEnergy(storage.getMaxEnergyStored(), true);
+        return storage.receiveEnergy(storage.getMaxEnergyStored(), true) * 1.0;
     }
 }

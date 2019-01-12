@@ -14,6 +14,6 @@ public class OperatorMaxEnergyStored extends OperatorEnergy {
 
     @Override
     protected double result(World world, BlockPos pos, TileEntity tile, IEnergyStorage storage) {
-        return storage.getMaxEnergyStored();
+        return storage.getMaxEnergyStored() * 1.0;
     }
 }

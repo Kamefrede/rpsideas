@@ -30,7 +30,7 @@ public class PieceOperatorListSize extends PieceOperator {
         EntityListWrapper l = this.getParamValue(context, list);
         if (l == null)
             throw new SpellRuntimeException(SpellRuntimeExceptions.NULL_LIST);
-        return l.unwrap().size();
+        return l.unwrap().size() * 1.0;
     }
 
     @Override

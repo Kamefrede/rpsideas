@@ -14,6 +14,6 @@ public class OperatorCanReceiveEnergy extends OperatorEnergy {
 
     @Override
     protected double result(World world, BlockPos pos, TileEntity tile, IEnergyStorage storage) {
-        return storage.canReceive() ? 1 : 0;
+        return storage.canReceive() ? 1.0 : 0.0;
     }
 }

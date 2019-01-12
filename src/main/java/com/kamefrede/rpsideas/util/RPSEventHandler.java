@@ -68,6 +68,8 @@ public class RPSEventHandler {
         if (event.getPlayerData().getCustomData().getBoolean("rpsideas:cuffed")) {
             event.setCancellationMessage("rpsideas.cancellation.cuffed");
             event.setCanceled(true);
+            event.setCooldown(40);
+            event.getPlayer().getCooldownTracker().setCooldown(event.getCad().getItem(), 40);
         }
 
     }

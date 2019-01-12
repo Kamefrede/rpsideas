@@ -14,6 +14,6 @@ public class OperatorCanExtractEnergy extends OperatorEnergy {
 
     @Override
     protected double result(World world, BlockPos pos, TileEntity tile, IEnergyStorage storage) {
-        return storage.canExtract() ? 1 : 0;
+        return storage.canExtract() ? 1.0 : 0.0;
     }
 }
