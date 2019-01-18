@@ -38,6 +38,12 @@ public class ItemFlowTool extends ItemModTool implements IPsiAddonTool, IFlowCol
     private static final ToolMaterial mat = PsiAPI.PSIMETAL_TOOL_MATERIAL;
     private final boolean ebony;
 
+
+    private ItemFlowTool(String name, float attackDamage, float attackSpeed, String toolClass, boolean ebony) {
+        super(name, attackDamage, attackSpeed, mat, toolClass);
+        this.ebony = ebony;
+    }
+
     private ItemFlowTool(String name, String toolClass, boolean ebony) {
         super(name, mat, toolClass);
         this.ebony = ebony;
@@ -134,8 +140,7 @@ public class ItemFlowTool extends ItemModTool implements IPsiAddonTool, IFlowCol
 
     public static class Axe extends ItemFlowTool {
         public Axe(String name, boolean ebony) {
-            super(name, "axe", ebony);
-            this.attackDamage = 8.0F;
+            super(name, 8f - mat.getAttackDamage(), -3.1f, "axe", ebony);
         }
 
         @Override
