@@ -76,7 +76,7 @@ public class TrickSound extends PieceTrick {
 
         BlockPos pos = SpellHelpers.getBlockPos(this, context, position);
         double instrumentVal = this.getParamValue(context, instrument);
-        double volVal = SpellHelpers.getNumber(this, context, volume, 0);
+        double volVal = SpellHelpers.getNumber(this, context, volume, 1);
         double pitchVal = SpellHelpers.getNumber(this, context, pitch, 0);
 
         float f = (float) Math.pow(2, (pitchVal - 12) / 12.0);
