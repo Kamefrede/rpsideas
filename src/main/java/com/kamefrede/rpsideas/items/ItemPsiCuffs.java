@@ -1,5 +1,6 @@
 package com.kamefrede.rpsideas.items;
 
+import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
@@ -12,7 +13,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 
-public class ItemPsiCuffs extends ItemMod {
+public class ItemPsiCuffs extends ItemMod implements IFlowColorAcceptor {
 
     public ItemPsiCuffs() {
         super(RPSItemNames.PSI_CUFFS);

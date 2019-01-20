@@ -189,7 +189,7 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsiAddonT
         public String getEvent(ItemStack hemlet) {
             ItemStack sensor = getAttachedSensor(hemlet);
             if (!sensor.isEmpty() && sensor.getItem() instanceof IExosuitSensor) {
-                return ((IExosuitSensor) sensor.getItem()).getEventType(hemlet);
+                return ((IExosuitSensor) sensor.getItem()).getEventType(sensor);
             }
             return PsiArmorEvent.NONE;
         }

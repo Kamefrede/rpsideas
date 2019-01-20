@@ -53,7 +53,7 @@ public class PieceTrickParticleTrail extends PieceTrick {
 
         if (time > 2400) time = 2400;
 
-        time = time / 3;
+        time = time / 6;
 
         if (pos == null || dir == null || dir.isZero())
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
