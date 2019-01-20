@@ -5,6 +5,7 @@ import com.kamefrede.rpsideas.items.base.ICooldownAssembly;
 import com.kamefrede.rpsideas.items.base.IRegenerationBattery;
 import com.kamefrede.rpsideas.network.MessageCastOffHand;
 import com.kamefrede.rpsideas.network.MessageChangeSocketSlot;
+import com.kamefrede.rpsideas.network.MessageCuffSync;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import net.minecraft.client.Minecraft;
@@ -12,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -33,6 +35,7 @@ public class RPSEventHandler {
     public static final int DEFAULT_REGEN_RATE = 25;
     public static final String REGEN_KEY = "rpsideasRegen";
     public static final String REGEN_BEFORE_KEY = "rpsideasRegenBefore";
+    private static final String TAG_CUFFED = "rpsideas:cuffed";
 
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
@@ -72,6 +75,20 @@ public class RPSEventHandler {
             event.getPlayer().getCooldownTracker().setCooldown(event.getCad().getItem(), 40);
         }
 
+    }
+
+    @SubscribeEvent
+    public static void syncCuffedState(PlayerEvent.StartTracking event) {
+        if (event.getTarget() instanceof EntityPlayer) {
+            EntityPlayer target = (EntityPlayer) event.getTarget();
+            PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(target);
+            boolean cuffed = false;
+            if (data.getCustomData() != null && data.getCustomData().getBoolean(TAG_CUFFED)) {
+                cuffed = true;
+            }
+            PacketHandler.NETWORK.sendTo(new MessageCuffSync(target.getEntityId(), cuffed), (EntityPlayerMP) event.getEntityPlayer());
+
+        }
     }
 
 
