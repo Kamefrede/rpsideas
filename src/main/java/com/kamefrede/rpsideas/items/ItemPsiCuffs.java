@@ -6,12 +6,15 @@ import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
+import vazkii.arl.network.NetworkHandler;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
+import vazkii.psi.common.network.message.MessageDataSync;
 
 public class ItemPsiCuffs extends ItemMod implements IFlowColorAcceptor {
 
@@ -42,12 +45,15 @@ public class ItemPsiCuffs extends ItemMod implements IFlowColorAcceptor {
 
             EntityPlayer targetPlayer = (EntityPlayer) target;
             PlayerDataHandler.PlayerData data = PlayerDataHandler.get(targetPlayer);
-            if (!data.getCustomData().getBoolean(TAG_CUFFED)) {
+            if (data.getCustomData() != null && !data.getCustomData().getBoolean(TAG_CUFFED)) {
                 data.getCustomData().setBoolean(TAG_CUFFED, true);
                 if (!playerIn.world.isRemote) {
                     targetPlayer.getEntityData().setString(TAG_KEYNAME, keyName);
                 }
                 stack.shrink(1);
+                data.save();
+                if (targetPlayer instanceof EntityPlayerMP)
+                    NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP) targetPlayer);
                 return true;
             }
         }
