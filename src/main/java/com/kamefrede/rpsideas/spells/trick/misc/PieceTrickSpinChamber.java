@@ -4,6 +4,7 @@ import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
 import net.minecraft.item.ItemStack;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.EnumCADStat;
+import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.piece.PieceTrick;
@@ -35,7 +36,12 @@ public class PieceTrickSpinChamber extends PieceTrick {
         if (num == 0)
             return null;
 
-        if (!context.tool.isEmpty())
+        if (!context.tool.isEmpty() || context.castFrom == null || context.focalPoint != context.caster)
+            throw new SpellRuntimeException(SpellRuntimeExceptions.CAD);
+
+        ItemStack inHand = context.caster.getHeldItem(context.castFrom);
+
+        if (inHand.isEmpty() || !(inHand.getItem() instanceof ICAD))
             throw new SpellRuntimeException(SpellRuntimeExceptions.CAD);
 
         ItemStack stack = PsiAPI.getPlayerCAD(context.caster);
