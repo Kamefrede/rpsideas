@@ -108,8 +108,10 @@ public class ItemInlineCaster extends ItemMod implements IPsiAddonTool, IFlowCol
     @Override
     public void addInformation(ItemStack stack, World playerIn, List<String> tooltip, ITooltipFlag advanced) {
         TooltipHelper.tooltipIfShift(tooltip, () -> {
+            TooltipHelper.addDynamic(tooltip, getTranslationKey(stack) + ".desc");
             String componentName = TooltipHelper.local(ISocketable.getSocketedItemName(stack, "psimisc.none"));
             TooltipHelper.addToTooltip(tooltip, "psimisc.spellSelected", componentName);
+
         });
     }
 

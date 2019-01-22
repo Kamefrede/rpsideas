@@ -133,6 +133,7 @@ public class ItemCADMagazine extends ItemMod implements ISocketable, ICADCompone
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         TooltipHelper.tooltipIfShift(tooltip, () -> {
+            TooltipHelper.addDynamic(tooltip, getTranslationKey(stack) + ".desc");
                     String socketName = TooltipHelper.local(getSocket(stack).getDisplayName());
                     String line = TextFormatting.GREEN.toString() + TooltipHelper.local(EnumCADComponent.SOCKET.getName()) + TextFormatting.GRAY.toString() + ": " + socketName;
                     tooltip.add(line);

@@ -258,7 +258,7 @@ rpsideas.kb.switchslot10=Switch to 10th spell
 rpsideas.kb.switchslot11=Switch to 11th spell
 rpsideas.kb.switchslot12=Switch to 12th spell
 
-rpsideas.misc.psidust=Psidust Infusion
+
 
 tile.rpsideas:conjuredblock.name=Ethereal Conjured Block
 tile.rpsideas:conjured_pulsar_block.name=Conjured Pulsar Light Block
@@ -342,6 +342,15 @@ item.rpsideas:spell_bullet_sniper_active.name=Sniper Spell Bullet
 item.rpsideas:creative_colorizer.name=Creative CAD Suspension
 item.rpsideas:creative_colorizer.desc=This strange liquid perfects your CAD's stats.
 
+item.rpsideas:flash_ring.desc=&bCan be reprogrammed at any time by using it while holding %s.
+item.rpsideas:inline_caster.desc=&bStores an extra spell. Uses your main CAD's stats.
+item.rpsideas:gauss_rifle.desc=&bFires rounds that disable PSI casters.
+item.rpsideas:gauss_rifle.desc1=&bBullet items do more damage, but inflict less Psishock.
+item.rpsideas:psi_cuff_key.desc=&bUsed to unlock Psi Cuffs with the same name.
+item.rpsideas:psi_cuffs.desc=&bCraft with named Cuff keys to arm them.
+item.rpsideas:psi_cuffs.desc1=&bUse on another player while holding %s to prevent them from casting spells.
+item.rpsideas:magazine.desc=&bHolds an extra wheel of spells.
+item.rpsideas:magazine.desc1=&bUse while holding %s to swap your entire spell set, as long as it's compatible.
 item.rpsideas:battlecaster.name=Integrated Battlecaster
 item.rpsideas:battlecaster.desc=&bCraft this with a PSI tool to make it fire
 item.rpsideas:battlecaster.desc1=&bwhen you attack with it instead of use it.

@@ -8,8 +8,10 @@ import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.item.IGlowingItem;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
+import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import kotlin.jvm.functions.Function2;
 import net.minecraft.client.renderer.block.model.IBakedModel;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
@@ -29,6 +31,7 @@ import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.core.handler.PsiSoundHandler;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 
 public class ItemGaussRifle extends ItemMod implements IFlowColorAcceptor {
     protected ItemGaussRifle() {
@@ -67,6 +70,13 @@ public class ItemGaussRifle extends ItemMod implements IFlowColorAcceptor {
         };
     }
 
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addInformation(ItemStack stack, @javax.annotation.Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        TooltipHelper.tooltipIfShift(tooltip, () -> {
+            TooltipHelper.addDynamic(tooltip, getTranslationKey(stack) + ".desc");
+        });
+    }
 
     @Nonnull
     @Override

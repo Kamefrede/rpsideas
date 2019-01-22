@@ -9,6 +9,7 @@ import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -68,6 +69,9 @@ public class ItemFlashRing extends ItemMod implements ISpellContainer {
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced) {
+        TooltipHelper.tooltipIfShift(tooltip, () -> {
+            TooltipHelper.addDynamic(tooltip, getTranslationKey(stack) + ".desc", Minecraft.getMinecraft().gameSettings.keyBindSneak.getDisplayName());
+        });
         TooltipHelper.addToTooltip(tooltip, "psimisc.bulletCost", getCostModifier(stack) * 100.0);
     }
 

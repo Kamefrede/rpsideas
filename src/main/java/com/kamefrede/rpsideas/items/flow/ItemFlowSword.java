@@ -1,5 +1,6 @@
 package com.kamefrede.rpsideas.items.flow;
 
+import com.kamefrede.rpsideas.items.ItemPsimetalHoe;
 import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
 import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
 import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
@@ -20,7 +21,6 @@ import vazkii.psi.api.cad.ISocketable;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.item.ItemCAD;
 import vazkii.psi.common.item.base.ModItems;
-import vazkii.psi.common.item.tool.ItemPsimetalTool;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -55,7 +55,7 @@ public class ItemFlowSword extends ItemModSword implements IPsiAddonTool, IFlowC
 
     @Override
     public void onUpdate(ItemStack sword, World world, Entity entity, int itemSlot, boolean isSelected) {
-        ItemPsimetalTool.regen(sword, entity, isSelected);
+        ItemPsimetalHoe.regenPsi(sword, entity, isSelected);
     }
 
     @SideOnly(Side.CLIENT)

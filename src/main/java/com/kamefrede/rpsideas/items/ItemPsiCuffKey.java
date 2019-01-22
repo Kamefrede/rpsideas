@@ -2,6 +2,8 @@ package com.kamefrede.rpsideas.items;
 
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
+import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -10,9 +12,13 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.arl.network.NetworkHandler;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.network.message.MessageDataSync;
+
+import java.util.List;
 
 public class ItemPsiCuffKey extends ItemMod {
     public ItemPsiCuffKey() {
@@ -68,6 +74,14 @@ public class ItemPsiCuffKey extends ItemMod {
     @Override
     public boolean hasContainerItem(ItemStack stack) {
         return true;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addInformation(ItemStack stack, @javax.annotation.Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        TooltipHelper.tooltipIfShift(tooltip, () -> {
+            TooltipHelper.addDynamic(tooltip, getTranslationKey(stack) + ".desc");
+        });
     }
 
 }

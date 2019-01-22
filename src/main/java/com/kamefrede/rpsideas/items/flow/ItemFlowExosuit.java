@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.items.flow;
 
 import com.kamefrede.rpsideas.RPSIdeas;
+import com.kamefrede.rpsideas.items.ItemPsimetalHoe;
 import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
 import com.kamefrede.rpsideas.util.helpers.ClientHelpers;
 import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
@@ -35,7 +36,6 @@ import vazkii.psi.client.model.ModelPsimetalExosuit;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.item.ItemCAD;
 import vazkii.psi.common.item.base.ModItems;
-import vazkii.psi.common.item.tool.ItemPsimetalTool;
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -64,7 +64,7 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsiAddonT
 
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
-        ItemPsimetalTool.regen(itemStack, player, false);
+        ItemPsimetalHoe.regenPsi(itemStack, player, false);
     }
 
     public void cast(ItemStack stack, PsiArmorEvent event) {
