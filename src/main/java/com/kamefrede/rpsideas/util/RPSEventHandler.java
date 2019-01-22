@@ -12,8 +12,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -24,9 +27,11 @@ import vazkii.arl.network.NetworkHandler;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.ICAD;
-import vazkii.psi.api.spell.PreSpellCastEvent;
+import vazkii.psi.api.spell.*;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.network.message.MessageDataSync;
+
+import static vazkii.psi.common.item.ItemCAD.getRealCost;
 
 
 @Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
@@ -36,6 +41,60 @@ public class RPSEventHandler {
     public static final String REGEN_KEY = "rpsideasRegen";
     public static final String REGEN_BEFORE_KEY = "rpsideasRegenBefore";
     private static final String TAG_CUFFED = "rpsideas:cuffed";
+
+    public static boolean canCast(EntityPlayer player) {
+        if (!player.getHeldItemOffhand().isEmpty() && player.getHeldItemOffhand().getItem() instanceof ICAD) {
+            PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
+            ItemStack stack = player.getHeldItemOffhand();
+            ICAD cad = (ICAD) player.getHeldItemOffhand().getItem();
+            ItemStack bullet = cad.getBulletInSocket(stack, cad.getSelectedSlot(stack));
+            if (!data.overflowed && data.getAvailablePsi() > 0 && !bullet.isEmpty() && bullet.getItem() instanceof ISpellContainer) {
+                ISpellContainer spellContainer = (ISpellContainer) bullet.getItem();
+                if (spellContainer.containsSpell(bullet)) {
+                    Spell spell = spellContainer.getSpell(bullet);
+                    SpellContext context = new SpellContext().setPlayer(player).setSpell(spell);
+                    if (context.isValid()) {
+                        if (context.cspell.metadata.evaluateAgainst(stack)) {
+                            int cost = getRealCost(stack, bullet, context.cspell.metadata.stats.get(EnumSpellStat.COST));
+                            PreSpellCastEvent event = new PreSpellCastEvent(cost, 0, 0, 0, spell, context, player, data, stack, bullet);
+                            if (MinecraftForge.EVENT_BUS.post(event)) {
+                                return false;
+                            }
+                            cost = event.getCost();
+                            if (cost == 0)
+                                return true;
+                            else return cost > 0 && data.availablePsi > cost;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    @SideOnly(Side.CLIENT)
+    public static void offhandCastClickBlock(PlayerInteractEvent.LeftClickBlock event) {
+        RPSKeybind offhandbinding = RPSKeybindHandler.offhandCast;
+        if (offhandbinding.isPressed() && canCast(event.getEntityPlayer()))
+            event.setCanceled(true);
+    }
+
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    @SideOnly(Side.CLIENT)
+    public static void offhandClickClickEmtpty(PlayerInteractEvent.LeftClickEmpty event) {
+        RPSKeybind offhandbinding = RPSKeybindHandler.offhandCast;
+        if (offhandbinding.isPressed() && canCast(event.getEntityPlayer()))
+            event.setCanceled(true);
+    }
+
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    @SideOnly(Side.CLIENT)
+    public static void offhandAttackEnemy(AttackEntityEvent event) {
+        RPSKeybind offhandbinding = RPSKeybindHandler.offhandCast;
+        if (offhandbinding.isPressed() && canCast(event.getEntityPlayer()))
+            event.setCanceled(true);
+    }
 
     @SubscribeEvent
     @SideOnly(Side.CLIENT)
