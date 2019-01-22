@@ -86,7 +86,7 @@ public class ItemGaussRifle extends ItemMod implements IFlowColorAcceptor {
         ItemStack cad = PsiAPI.getPlayerCAD(playerIn);
 
         if (data == null || cad.isEmpty())
-            return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+            return new ActionResult<>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
         if (playerIn.capabilities.isCreativeMode || data.availablePsi > 0) {
             boolean wasEmpty = ammo.isEmpty();
             boolean noneLeft = false;
