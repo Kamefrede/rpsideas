@@ -42,6 +42,12 @@ public class PieceTrickDetonate extends PieceTrick {
     public Object execute(SpellContext context) throws SpellRuntimeException {
         double radiusVal = this.getParamValue(context, radius);
 
+        if (context.caster.world instanceof WorldServer) {
+            WorldServer server = (WorldServer) context.caster.world;
+            server.addScheduledTask(() ->
+                    PsiArmorEvent.post(new PsiArmorEvent(context.caster, ItemTriggerSensor.EVENT_TRIGGER)));
+        }
+
         if (radiusVal > 0) {
             Vector3 positionVal = Vector3.fromEntity(context.focalPoint);
             if (context.focalPoint instanceof EntityPlayer)
@@ -57,12 +63,6 @@ public class PieceTrickDetonate extends PieceTrick {
 
             for (EntitySpellCharge ent : list)
                 ent.doExplosion();
-        }
-
-        if (context.caster.world instanceof WorldServer) {
-            WorldServer server = (WorldServer) context.caster.world;
-            server.addScheduledTask(() ->
-                    PsiArmorEvent.post(new PsiArmorEvent(context.caster, ItemTriggerSensor.EVENT_TRIGGER)));
         }
 
         return null;
