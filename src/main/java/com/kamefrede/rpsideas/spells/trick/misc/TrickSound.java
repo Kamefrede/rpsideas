@@ -8,6 +8,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.param.ParamVector;
@@ -61,7 +62,7 @@ public class TrickSound extends PieceTrick {
         if (dVol < 0 || dVol > 1)
             throw new SpellCompilationException(SpellCompilationExceptions.VOLUME, x, y);
 
-        if (dIn < 0 || dIn > 10)
+        if (dIn < 0 || dIn >= SOUND_EVENTS.size())
             throw new SpellCompilationException(SpellCompilationExceptions.INSTRUMENTS, x, y);
 
         meta.addStat(EnumSpellStat.POTENCY, 4);
@@ -70,8 +71,6 @@ public class TrickSound extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-
-
         if (context.caster.world.isRemote) return null;
 
         BlockPos pos = SpellHelpers.getBlockPos(this, context, position);
@@ -79,8 +78,10 @@ public class TrickSound extends PieceTrick {
         double volVal = SpellHelpers.getNumber(this, context, volume, 1);
         double pitchVal = SpellHelpers.getNumber(this, context, pitch, 0);
 
+        int instrumentId = MathHelper.clamp((int) instrumentVal, 0, SOUND_EVENTS.size() - 1);
+
         float f = (float) Math.pow(2, (pitchVal - 12) / 12.0);
-        context.caster.world.playSound(null, pos, SOUND_EVENTS.get((int) instrumentVal), SoundCategory.RECORDS, (float) volVal, f);
+        context.caster.world.playSound(null, pos, SOUND_EVENTS.get(instrumentId), SoundCategory.RECORDS, (float) volVal, f);
         return null;
     }
 
