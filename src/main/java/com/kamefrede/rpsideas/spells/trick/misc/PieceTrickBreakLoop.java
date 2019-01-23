@@ -29,7 +29,7 @@ public class PieceTrickBreakLoop extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        double value = this.<Double>getParamValue(context, valueParam);
+        double value = SpellHelpers.getNumber(this, context, valueParam, 1);
 
         if (Math.abs(value) < 1.0) {
             if (context.focalPoint != context.caster) {

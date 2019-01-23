@@ -55,7 +55,7 @@ public class PieceTrickNumBroadcast extends PieceTrick {
         Vector3 positionVal = this.getParamValue(context, position);
         Double radiusVal = SpellHelpers.getBoundedNumber(this, context, radius, SpellContext.MAX_DISTANCE);
         double channelVal = SpellHelpers.getNumber(this, context, channel, 0);
-        double signalVal = this.getParamValue(context, signal);
+        double signalVal = SpellHelpers.getNumber(this, context, signal, 0);
 
         if (context.customData.get("rpsideas:BroadcastAny") != null)
             return null;

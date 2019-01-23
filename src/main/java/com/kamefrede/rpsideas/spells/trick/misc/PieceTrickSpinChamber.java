@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.spells.trick.misc;
 
 import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.item.ItemStack;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.EnumCADStat;
@@ -31,7 +32,7 @@ public class PieceTrickSpinChamber extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        double num = this.getParamValue(context, number);
+        double num = SpellHelpers.getNumber(this, context, number, 0);
 
         if (num == 0)
             return null;

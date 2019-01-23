@@ -1,5 +1,6 @@
 package com.kamefrede.rpsideas.spells.operator.math;
 
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellParam;
@@ -22,7 +23,7 @@ public class PieceOperatorSignum extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        double number = this.getParamValue(context, num);
+        double number = SpellHelpers.getNumber(this, context, num, 0);
         return Math.signum(number);
     }
 

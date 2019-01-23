@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.spells.operator.math;
 
 import com.kamefrede.rpsideas.spells.base.SpellParams;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellParam;
@@ -23,7 +24,7 @@ public class PieceOperatorToRadians extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        double n = this.getParamValue(context, num);
+        double n = SpellHelpers.getNumber(this, context, num, 0);
         return Math.toRadians(n);
     }
 

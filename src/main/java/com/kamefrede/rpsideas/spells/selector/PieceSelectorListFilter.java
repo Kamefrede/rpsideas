@@ -2,6 +2,7 @@ package com.kamefrede.rpsideas.spells.selector;
 
 import com.kamefrede.rpsideas.spells.base.SpellParams;
 import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.entity.Entity;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamEntityListWrapper;
@@ -33,7 +34,7 @@ public class PieceSelectorListFilter extends PieceSelector {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster.world.isRemote) return null;
-        double numVal = this.getParamValue(context, num);
+        double numVal = SpellHelpers.getNumber(this, context, num, 0);
         EntityListWrapper listVal = this.getParamValue(context, list);
         int val = (int) numVal;
         if (listVal == null || listVal.unwrap().isEmpty())

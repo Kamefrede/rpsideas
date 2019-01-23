@@ -48,7 +48,7 @@ public class PieceTrickSmeltBlockSequence extends PieceTrick {
 
         Vector3 positionVal = this.getParamValue(context, position);
         Vector3 targetVal = this.getParamValue(context, direction);
-        double maxBlocksVal = this.getParamValue(context, maxBlocks);
+        double maxBlocksVal = SpellHelpers.getNumber(this, context, maxBlocks, 0);
 
         if (positionVal == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);

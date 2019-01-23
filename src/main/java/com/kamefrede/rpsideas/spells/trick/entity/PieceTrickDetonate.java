@@ -40,7 +40,7 @@ public class PieceTrickDetonate extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        double radiusVal = this.getParamValue(context, radius);
+        double radiusVal = SpellHelpers.getNumber(this, context, radius, 0);
 
         if (context.caster.world instanceof WorldServer) {
             WorldServer server = (WorldServer) context.caster.world;

@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.spells.trick.block;
 
 import com.kamefrede.rpsideas.blocks.RPSBlocks;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import vazkii.psi.api.internal.Vector3;
@@ -40,7 +41,7 @@ public class PieceTrickConjureGravityBlockSequence extends PieceTrick {
     public Object execute(SpellContext context) throws SpellRuntimeException {
         Vector3 positionVal = this.getParamValue(context, position);
         Vector3 targetVal = this.getParamValue(context, target);
-        double maxBlocksVal = this.getParamValue(context, maxBlocks);
+        double maxBlocksVal = SpellHelpers.getNumber(this, context, maxBlocks, 0);
         Double timeVal = this.getParamValue(context, time);
 
         if (positionVal == null)

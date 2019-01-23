@@ -1,5 +1,6 @@
 package com.kamefrede.rpsideas.spells.trick.misc;
 
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.piece.PieceTrick;
@@ -28,7 +29,7 @@ public class PieceTrickSupressNextTrick extends PieceTrick {
     @Override
     @SuppressWarnings("unchecked")
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        double boolVal = this.getParamValue(context, target);
+        double boolVal = SpellHelpers.getNumber(this, context, target, 1f);
         if (Math.abs(boolVal) < 1) {
             Stack<CompiledSpell.Action> stack = (Stack<CompiledSpell.Action>) context.actions.clone();
 

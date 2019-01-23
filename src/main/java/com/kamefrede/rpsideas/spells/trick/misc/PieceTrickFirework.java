@@ -46,7 +46,7 @@ public class PieceTrickFirework extends PieceTrick {
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster.world.isRemote) return null;
         Vector3 positionVal = this.getParamValue(context, position);
-        double timeVal = this.getParamValue(context, time);
+        double timeVal = SpellHelpers.getNumber(this, context, time, 0);
 
         ItemStack cad = PsiAPI.getPlayerCAD(context.caster);
         ICAD icad = (ICAD) cad.getItem();

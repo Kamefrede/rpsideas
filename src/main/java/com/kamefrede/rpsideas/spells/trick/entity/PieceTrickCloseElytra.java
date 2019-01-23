@@ -1,7 +1,11 @@
 package com.kamefrede.rpsideas.spells.trick.entity;
 
 
-import vazkii.psi.api.spell.*;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import vazkii.psi.api.spell.Spell;
+import vazkii.psi.api.spell.SpellContext;
+import vazkii.psi.api.spell.SpellParam;
+import vazkii.psi.api.spell.SpellRuntimeException;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.piece.PieceTrick;
 
@@ -21,7 +25,7 @@ public class PieceTrickCloseElytra extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        double value = this.getParamValue(context, num);
+        double value = SpellHelpers.getNumber(this, context, num, 1);
         if (Math.abs(value) < 1.0) context.caster.setFlag(7, false);
 
         return false;

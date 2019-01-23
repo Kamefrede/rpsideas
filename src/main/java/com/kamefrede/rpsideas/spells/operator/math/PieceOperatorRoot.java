@@ -2,6 +2,7 @@ package com.kamefrede.rpsideas.spells.operator.math;
 
 import com.kamefrede.rpsideas.spells.base.SpellParams;
 import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellParam;
@@ -26,8 +27,8 @@ public class PieceOperatorRoot extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        double base = this.getParamValue(context, num);
-        double r = this.getParamValue(context, root);
+        double base = SpellHelpers.getNumber(this, context, num, 0);
+        double r = SpellHelpers.getNumber(this, context, root, 1);
         if (base < 0 && r % 2 != 0)
             throw new SpellRuntimeException(SpellRuntimeExceptions.EVEN_ROOT_NEGATIVE_NUMBER);
         return Math.pow(base, 1.0 / r);
