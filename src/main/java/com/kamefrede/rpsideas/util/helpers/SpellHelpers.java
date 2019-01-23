@@ -1,14 +1,17 @@
 package com.kamefrede.rpsideas.util.helpers;
 
+import com.google.common.util.concurrent.ListenableFutureTask;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
@@ -16,8 +19,15 @@ import vazkii.psi.common.spell.trick.block.PieceTrickBreakBlock;
 import vazkii.psi.common.spell.trick.block.PieceTrickPlaceBlock;
 
 import java.util.ConcurrentModificationException;
+import java.util.concurrent.Executors;
 
 public class SpellHelpers {
+    public static void scheduleTask(WorldServer server, Runnable task) {
+        MinecraftServer dedicated = server.getMinecraftServer();
+        if (dedicated != null)
+            dedicated.futureTaskQueue.add(ListenableFutureTask.create(Executors.callable(task)));
+    }
+
     public static void addAllParams(SpellPiece piece, SpellParam... params) {
         for (SpellParam param : params)
             piece.addParam(param);
