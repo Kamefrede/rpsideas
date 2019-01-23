@@ -225,6 +225,7 @@ rpsideas.spellparam.ray_end=Ray End
 rpsideas.spellparam.ray_start=Ray Start
 rpsideas.spellparam.text=Text
 rpsideas.spellparam.scale=Scale
+rpsideas.spellparam.punching_bag=Punching Bag
 psi.datatype.BlockProperties=Block Properties
 
 rpsideas.learn.usage=/psi-learn <group> [player]

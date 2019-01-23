@@ -23,4 +23,5 @@ public final class SpellParams {
     public static final String GENERIC_NAME_TEXT = "rpsideas.spellparam.text";
     public static final String GENERIC_NAME_SCALE = "rpsideas.spellparam.scale";
     public static final String GENERIC_NAME_DIRECTION = "psi.spellparam.direction";
+    public static final String GENERIC_NAME_PUNCHING_BAG = "rpsideas.spellparam.punching_bag";
 }

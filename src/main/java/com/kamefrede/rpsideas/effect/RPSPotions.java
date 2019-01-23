@@ -9,6 +9,8 @@ import net.minecraft.potion.PotionEffect;
 public class RPSPotions {
     public static final Potion psishock = new PotionPsishock();
     public static final Potion psipulse = new PotionPsipulse();
+    public static final Potion disablefollowrange = new PotionDisableFollowRange();
+    public static final Potion flashbang = new PotionFlashbang();
 
     public static final PotionTypeMod psishockType = new PotionTypeMod(RPSItemNames.PSISHOCK, new PotionEffect(psishock, 160));
     public static final PotionTypeMod psishockLongType = new PotionTypeMod(RPSItemNames.PSISHOCK_LONG, new PotionEffect(psishock, 240));

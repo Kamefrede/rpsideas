@@ -35,6 +35,8 @@ public class RPSItemNames {
 
 
     public static final String PSISHOCK = "psishock";
+    public static final String DISABLE_FOLLOW_RANGE = "disable_follow_range";
+    public static final String FLASHBANG = "flashbang";
     public static final String PSIPULSE = "psipulse";
     public static final String PSISHOCK_LONG = "psishock_long";
     public static final String PSISHOCK_STRONG = "psishock_strong";
