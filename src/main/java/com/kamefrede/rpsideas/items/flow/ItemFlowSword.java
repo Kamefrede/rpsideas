@@ -45,8 +45,12 @@ public class ItemFlowSword extends ItemModSword implements IPsiAddonTool, IFlowC
 
             if (data != null && !cad.isEmpty()) {
                 ItemStack bullet = getBulletInSocket(sword, getSelectedSlot(sword));
-                ItemCAD.cast(player.world, player, data, bullet, cad, 5, 10, 0.05f, spellContext ->
-                        spellContext.attackedEntity = target);
+                ItemCAD.cast(player.world, player, data, bullet, cad, 5, 10, 0.05f, spellContext -> {
+                            spellContext.attackedEntity = target;
+                            spellContext.tool = sword;
+                        }
+
+                );
             }
         }
 

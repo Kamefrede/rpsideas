@@ -57,7 +57,6 @@ public class ItemPsimetalRod extends ItemModRod implements IPsiAddonTool {
                 });
             }
         }
-
     }
 
     @SubscribeEvent
