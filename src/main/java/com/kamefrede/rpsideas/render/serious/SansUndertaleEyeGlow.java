@@ -1,7 +1,6 @@
 package com.kamefrede.rpsideas.render.serious;
 
 import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -31,8 +30,8 @@ public class SansUndertaleEyeGlow implements LayerRenderer<AbstractClientPlayer>
     public void doRenderLayer(@Nonnull AbstractClientPlayer player, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
         float r = 0, g = 255, b = 255;
         if (time == 0) {
-            PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(player);
-            if (data != null && data.getCustomData() != null && data.getCustomData().getInteger(TAG_SANS_UNDERTALE) > 0) {
+            PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
+            if (data.getCustomData() != null && data.getCustomData().getInteger(TAG_SANS_UNDERTALE) > 0) {
                 if (reset) {
                     data.getCustomData().setInteger(TAG_SANS_UNDERTALE, 0);
                     reset = false;

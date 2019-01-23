@@ -1,7 +1,6 @@
 package com.kamefrede.rpsideas.items;
 
 import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.block.state.IBlockState;
@@ -37,10 +36,10 @@ public class ItemPsimetalShears extends ItemMod implements IPsiAddonTool {
 
     private boolean castIf(boolean input, ItemStack itemstack, EntityPlayer player) {
         if (input) {
-            PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(player);
+            PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
             ItemStack playerCad = PsiAPI.getPlayerCAD(player);
 
-            if (data != null && !playerCad.isEmpty()) {
+            if (!playerCad.isEmpty()) {
                 ItemStack bullet = getBulletInSocket(itemstack, getSelectedSlot(itemstack));
                 ItemCAD.cast(player.world, player, data, bullet, playerCad, 5, 10, 0.05F, (SpellContext context) -> {
                     context.tool = itemstack;

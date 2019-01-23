@@ -1,7 +1,6 @@
 package com.kamefrede.rpsideas.render;
 
 import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -33,7 +32,7 @@ public class RenderPsiCuffs implements LayerRenderer<AbstractClientPlayer> {
 
     @Override
     public void doRenderLayer(@Nonnull AbstractClientPlayer entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-        PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(entitylivingbaseIn);
+        PlayerDataHandler.PlayerData data = PlayerDataHandler.get(entitylivingbaseIn);
         if (data.getCustomData() == null || !data.getCustomData().getBoolean(TAG_CUFFED))
             return;
         ItemStack cad = PsiAPI.getPlayerCAD(entitylivingbaseIn);

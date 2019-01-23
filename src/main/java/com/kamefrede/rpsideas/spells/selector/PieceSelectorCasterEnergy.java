@@ -1,6 +1,5 @@
 package com.kamefrede.rpsideas.spells.selector;
 
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellRuntimeException;
@@ -15,9 +14,7 @@ public class PieceSelectorCasterEnergy extends PieceSelector {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(context.caster);
-
-        if (data == null) return 0.0;
+        PlayerDataHandler.PlayerData data = PlayerDataHandler.get(context.caster);
         return 1.0 * data.availablePsi;
     }
 

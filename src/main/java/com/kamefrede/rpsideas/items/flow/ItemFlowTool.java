@@ -4,7 +4,6 @@ import com.kamefrede.rpsideas.items.ItemPsimetalHoe;
 import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
 import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
 import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.teamwizardry.librarianlib.features.base.item.ItemModTool;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.block.Block;
@@ -53,10 +52,10 @@ public class ItemFlowTool extends ItemModTool implements IPsiAddonTool, IFlowCol
     public boolean onBlockStartBreak(ItemStack stack, BlockPos pos, EntityPlayer player) {
         super.onBlockStartBreak(stack, pos, player);
 
-        PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(player);
+        PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
         ItemStack playerCad = PsiAPI.getPlayerCAD(player);
 
-        if (data != null && !playerCad.isEmpty()) {
+        if (!playerCad.isEmpty()) {
             ItemStack bullet = getBulletInSocket(stack, getSelectedSlot(stack));
             ItemCAD.cast(player.world, player, data, bullet, playerCad, 5, 10, 0.05f, spellContext -> {
                 spellContext.tool = stack;

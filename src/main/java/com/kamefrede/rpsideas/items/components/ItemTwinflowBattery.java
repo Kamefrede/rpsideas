@@ -3,7 +3,6 @@ package com.kamefrede.rpsideas.items.components;
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.base.IRegenerationBattery;
 import com.kamefrede.rpsideas.items.base.ItemComponent;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
@@ -48,14 +47,11 @@ public class ItemTwinflowBattery extends ItemComponent implements IRegenerationB
                     ItemStack battery = item.getComponentInSlot(cad, EnumCADComponent.BATTERY);
 
                     if (!battery.isEmpty() && battery.getItem() instanceof ItemTwinflowBattery) {
-                        PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(player);
-
-                        if (data != null) {
-                            int amountToDump = Math.min(data.totalPsi - data.availablePsi, item.getStoredPsi(cad));
-                            if (amountToDump > 0) {
-                                data.deductPsi(-amountToDump, 0, true);
-                                item.consumePsi(cad, amountToDump);
-                            }
+                        PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
+                        int amountToDump = Math.min(data.totalPsi - data.availablePsi, item.getStoredPsi(cad));
+                        if (amountToDump > 0) {
+                            data.deductPsi(-amountToDump, 0, true);
+                            item.consumePsi(cad, amountToDump);
                         }
                     }
                 }

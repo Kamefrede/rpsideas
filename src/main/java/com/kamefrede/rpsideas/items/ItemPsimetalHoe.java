@@ -2,7 +2,6 @@ package com.kamefrede.rpsideas.items;
 
 import com.google.common.collect.Multimap;
 import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
@@ -49,10 +48,10 @@ public class ItemPsimetalHoe extends ItemMod implements IPsiAddonTool {
     public static void regenPsi(ItemStack stack, Entity entityIn, boolean isSelected) {
         if (entityIn instanceof EntityPlayer && stack.getItemDamage() > 0 && !isSelected) {
             EntityPlayer player = (EntityPlayer) entityIn;
-            PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(player);
+            PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
             int regenTime = ItemNBTHelper.getInt(stack, TAG_REGEN_TIME, 0);
 
-            if (data != null && !data.overflowed && regenTime % 80 == 0 && (float) data.getAvailablePsi() / (float) data.getTotalPsi() > 0.5F) {
+            if (!data.overflowed && regenTime % 80 == 0 && (float) data.getAvailablePsi() / (float) data.getTotalPsi() > 0.5F) {
                 data.deductPsi(600, 5, true);
                 stack.setItemDamage(stack.getItemDamage() - 1);
             }
@@ -72,9 +71,9 @@ public class ItemPsimetalHoe extends ItemMod implements IPsiAddonTool {
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack stack = player.getHeldItem(hand);
         if (Items.IRON_HOE.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ) == EnumActionResult.SUCCESS) {
-            PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(player);
+            PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
             ItemStack playerCad = PsiAPI.getPlayerCAD(player);
-            if (data != null && !playerCad.isEmpty()) {
+            if (!playerCad.isEmpty()) {
                 ItemStack bullet = getBulletInSocket(stack, getSelectedSlot(stack));
                 ItemCAD.cast(player.world, player, data, bullet, playerCad, 5, 10, 0.05F, (SpellContext context) -> {
                     context.tool = stack;

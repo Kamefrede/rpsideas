@@ -47,8 +47,8 @@ public class PieceTrickSansUndertale extends PieceTrick {
         BlockPos pos = context.caster.getPosition();
 
         context.caster.world.playSound(null, pos, RPSSoundHandler.MEGALOVANIA, SoundCategory.RECORDS, (float) volVal, 1f);
-        PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(context.caster);
-        if (data != null && data.getCustomData() != null) {
+        PlayerDataHandler.PlayerData data = PlayerDataHandler.get(context.caster);
+        if (data.getCustomData() != null) {
             data.getCustomData().setInteger(TAG_SANS_UNDERTALE, 680);
             data.save();
             if (context.caster instanceof EntityPlayerMP)

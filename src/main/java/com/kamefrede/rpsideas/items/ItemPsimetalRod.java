@@ -3,7 +3,6 @@ package com.kamefrede.rpsideas.items;
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
 import com.kamefrede.rpsideas.items.base.ItemModRod;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -45,11 +44,11 @@ public class ItemPsimetalRod extends ItemModRod implements IPsiAddonTool {
     }
 
     public static void castSpell(EntityPlayer player, ItemStack stack, Vec3d pos) {
-        PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(player);
+        PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
         ItemStack playerCad = PsiAPI.getPlayerCAD(player);
         if (stack.getItem() instanceof ItemPsimetalRod) {
             ItemPsimetalRod rod = (ItemPsimetalRod) stack.getItem();
-            if (data != null && !playerCad.isEmpty()) {
+            if (!playerCad.isEmpty()) {
                 ItemStack bullet = rod.getBulletInSocket(stack, rod.getSelectedSlot(stack));
                 ItemCAD.cast(player.world, player, data, bullet, playerCad, 5, 10, 0.05F, (SpellContext context) -> {
                     context.tool = stack;
@@ -75,10 +74,10 @@ public class ItemPsimetalRod extends ItemModRod implements IPsiAddonTool {
 
         if (playerIn.fishEntity != null) {
             if (playerIn.fishEntity.caughtEntity instanceof EntityLivingBase) {
-                PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(playerIn);
+                PlayerDataHandler.PlayerData data = PlayerDataHandler.get(playerIn);
                 ItemStack playerCad = PsiAPI.getPlayerCAD(playerIn);
 
-                if (data != null && !playerCad.isEmpty()) {
+                if (!playerCad.isEmpty()) {
                     ItemStack bullet = getBulletInSocket(itemstack, getSelectedSlot(itemstack));
                     ItemCAD.cast(playerIn.world, playerIn, data, bullet, playerCad, 5, 10, 0.05F, (SpellContext context) -> {
                         context.tool = itemstack;

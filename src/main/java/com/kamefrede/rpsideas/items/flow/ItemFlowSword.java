@@ -4,7 +4,6 @@ import com.kamefrede.rpsideas.items.ItemPsimetalHoe;
 import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
 import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
 import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.teamwizardry.librarianlib.features.base.item.ItemModSword;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.client.util.ITooltipFlag;
@@ -40,10 +39,10 @@ public class ItemFlowSword extends ItemModSword implements IPsiAddonTool, IFlowC
         if (attacker instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) attacker;
 
-            PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(player);
+            PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
             ItemStack cad = PsiAPI.getPlayerCAD(player);
 
-            if (data != null && !cad.isEmpty()) {
+            if (!cad.isEmpty()) {
                 ItemStack bullet = getBulletInSocket(sword, getSelectedSlot(sword));
                 ItemCAD.cast(player.world, player, data, bullet, cad, 5, 10, 0.05f, spellContext -> {
                             spellContext.attackedEntity = target;

@@ -4,7 +4,6 @@ import com.kamefrede.rpsideas.entity.EntityGaussPulse;
 import com.kamefrede.rpsideas.util.helpers.ClientHelpers;
 import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
 import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.item.IGlowingItem;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
@@ -81,11 +80,11 @@ public class ItemGaussRifle extends ItemMod implements IFlowColorAcceptor {
     @Nonnull
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn) {
-        PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(playerIn);
+        PlayerDataHandler.PlayerData data = PlayerDataHandler.get(playerIn);
         ItemStack ammo = findAmmo(playerIn);
         ItemStack cad = PsiAPI.getPlayerCAD(playerIn);
 
-        if (data == null || cad.isEmpty())
+        if (cad.isEmpty())
             return new ActionResult<>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
         if (playerIn.capabilities.isCreativeMode || data.availablePsi > 0) {
             boolean wasEmpty = ammo.isEmpty();

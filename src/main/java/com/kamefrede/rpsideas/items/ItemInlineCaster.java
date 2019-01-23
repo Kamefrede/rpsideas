@@ -45,10 +45,10 @@ public class ItemInlineCaster extends ItemMod implements IPsiAddonTool, IFlowCol
     @Override
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
         ItemStack held = player.getHeldItem(hand);
-        PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(player);
+        PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
         ItemStack cad = PsiAPI.getPlayerCAD(player);
 
-        if (data != null && !cad.isEmpty()) {
+        if (!cad.isEmpty()) {
             ItemStack bullet = getBulletInSocket(held, getSelectedSlot(held));
             if (bullet.isEmpty()) {
                 if (ItemCAD.craft(player, new ItemStack(Items.REDSTONE), new ItemStack(ModItems.material, 1, 0))) {

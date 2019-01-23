@@ -42,9 +42,8 @@ public class PieceTrickBreakLoop extends PieceTrick {
                 } else
                     context.focalPoint.setDead();
             } else {
-                PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(context.caster);
-                if (data != null)
-                    data.stopLoopcast();
+                PlayerDataHandler.PlayerData data = PlayerDataHandler.get(context.caster);
+                data.stopLoopcast();
             }
 
             context.stopped = true;

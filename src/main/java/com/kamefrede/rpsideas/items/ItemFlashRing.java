@@ -3,7 +3,6 @@ package com.kamefrede.rpsideas.items;
 import com.google.common.collect.ImmutableSet;
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.gui.GuiHandler;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
@@ -49,10 +48,10 @@ public class ItemFlashRing extends ItemMod implements ISpellContainer {
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, @Nonnull EnumHand hand) {
         ItemStack held = player.getHeldItem(hand);
         if (!player.isSneaking() && containsSpell(held)) {
-            PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(player);
+            PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
             ItemStack cad = PsiAPI.getPlayerCAD(player);
             boolean did = false;
-            if (data != null && !cad.isEmpty()) {
+            if (!cad.isEmpty()) {
                 int cooldown = (int) (getCostModifier(held) * 15);
                 did = ItemCAD.cast(world, player, data, held, cad, cooldown, 25, 0.5f, null);
             }

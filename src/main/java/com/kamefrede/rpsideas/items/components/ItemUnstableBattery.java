@@ -3,7 +3,6 @@ package com.kamefrede.rpsideas.items.components;
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.base.IRegenerationBattery;
 import com.kamefrede.rpsideas.items.base.ItemComponent;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
@@ -46,9 +45,9 @@ public class ItemUnstableBattery extends ItemComponent implements IRegenerationB
 
         EntityPlayer player = (EntityPlayer) living;
         ItemStack cad = PsiAPI.getPlayerCAD(player);
-        PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(player);
+        PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
 
-        if (data != null && !cad.isEmpty()) {
+        if (!cad.isEmpty()) {
             ICAD icad = (ICAD) cad.getItem();
 
             ItemStack battery = icad.getComponentInSlot(cad, EnumCADComponent.BATTERY);

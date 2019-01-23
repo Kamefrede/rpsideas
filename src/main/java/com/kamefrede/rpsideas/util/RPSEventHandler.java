@@ -6,7 +6,6 @@ import com.kamefrede.rpsideas.items.base.IRegenerationBattery;
 import com.kamefrede.rpsideas.network.MessageCastOffHand;
 import com.kamefrede.rpsideas.network.MessageChangeSocketSlot;
 import com.kamefrede.rpsideas.network.MessageCuffSync;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -140,7 +139,7 @@ public class RPSEventHandler {
     public static void syncCuffedState(PlayerEvent.StartTracking event) {
         if (event.getTarget() instanceof EntityPlayer) {
             EntityPlayer target = (EntityPlayer) event.getTarget();
-            PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(target);
+            PlayerDataHandler.PlayerData data = PlayerDataHandler.get(target);
             boolean cuffed = false;
             if (data.getCustomData() != null && data.getCustomData().getBoolean(TAG_CUFFED)) {
                 cuffed = true;
@@ -156,8 +155,8 @@ public class RPSEventHandler {
         if (e.getEntityLiving() instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) e.getEntityLiving();
             ItemStack cad = PsiAPI.getPlayerCAD(player);
-            PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(player);
-            if (data != null && data.getCustomData() != null) {
+            PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
+            if (data.getCustomData() != null) {
 
                 int extraRegen = data.getCustomData().getInteger(REGEN_KEY);
                 data.getCustomData().setInteger(REGEN_BEFORE_KEY, data.regen);

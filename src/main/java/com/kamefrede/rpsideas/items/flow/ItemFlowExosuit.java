@@ -6,7 +6,6 @@ import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
 import com.kamefrede.rpsideas.util.helpers.ClientHelpers;
 import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
 import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.teamwizardry.librarianlib.features.base.item.ItemModArmor;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
@@ -68,10 +67,10 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsiAddonT
     }
 
     public void cast(ItemStack stack, PsiArmorEvent event) {
-        PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(event.getEntityPlayer());
+        PlayerDataHandler.PlayerData data = PlayerDataHandler.get(event.getEntityPlayer());
         ItemStack playerCad = PsiAPI.getPlayerCAD(event.getEntityPlayer());
 
-        if (data != null && !playerCad.isEmpty()) {
+        if (!playerCad.isEmpty()) {
             int timesCast = ItemNBTHelper.getInt(stack, TAG_TIMES_CAST, 0);
 
             ItemStack bullet = getBulletInSocket(stack, getSelectedSlot(stack));

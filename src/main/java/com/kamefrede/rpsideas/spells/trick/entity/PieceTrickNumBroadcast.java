@@ -95,7 +95,7 @@ public class PieceTrickNumBroadcast extends PieceTrick {
             for (Entity ent : list) {
                 EntityPlayer pl = (EntityPlayer) ent;
                 if (PsiAPI.getPlayerCAD(pl) != null && pl != null) {
-                    PlayerDataHandler.PlayerData temp = SpellHelpers.getPlayerData(pl);
+                    PlayerDataHandler.PlayerData temp = PlayerDataHandler.get(pl);
                     if (temp != null && temp.getCustomData() != null) {
                         temp.getCustomData().setDouble(channelKey, signalVal);
                         temp.save();
@@ -108,9 +108,7 @@ public class PieceTrickNumBroadcast extends PieceTrick {
     }
 
     private void writeSecurity(List<EntityPlayer> list, Integer secChannel, Double secSignal, EntityPlayer player, String playerKey, String channelKey, String signalKey, World world) {
-        PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(player);
-        if (data == null)
-            return;
+        PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
 
         if (data.getCustomData().hasKey(playerKey) && data.getCustomData().hasKey(channelKey) && data.getCustomData().hasKey(signalKey)) {
             NBTTagList list1 = (NBTTagList) data.getCustomData().getTag(playerKey);
@@ -121,8 +119,8 @@ public class PieceTrickNumBroadcast extends PieceTrick {
                 NBTTagCompound rcmp = (NBTTagCompound) cmp;
                 EntityPlayer pl = world.getPlayerEntityByUUID(Objects.requireNonNull(rcmp.getUniqueId(playerKey)));
                 if (pl != null) {
-                    PlayerDataHandler.PlayerData pldata = SpellHelpers.getPlayerData(pl);
-                    if (pldata != null && pldata.getCustomData() != null) {
+                    PlayerDataHandler.PlayerData pldata = PlayerDataHandler.get(pl);
+                    if (pldata.getCustomData() != null) {
                         if (pldata.getCustomData().hasKey(key) && pldata.getCustomData().getDouble(key) == signal) {
                             pldata.getCustomData().removeTag(key);
                             pldata.save();

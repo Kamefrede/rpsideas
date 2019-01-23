@@ -36,9 +36,9 @@ public class PieceSelectorTransmission extends PieceSelector {
 
         String key = "rpsideas:" + channel;
 
-        PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(context.caster);
+        PlayerDataHandler.PlayerData data = PlayerDataHandler.get(context.caster);
 
-        if (data != null && data.getCustomData() != null && data.getCustomData().hasKey(key)) {
+        if (data.getCustomData() != null && data.getCustomData().hasKey(key)) {
             return data.getCustomData().getDouble(key);
         }
 
