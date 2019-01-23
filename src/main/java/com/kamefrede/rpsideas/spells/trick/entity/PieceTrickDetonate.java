@@ -1,11 +1,9 @@
 package com.kamefrede.rpsideas.spells.trick.entity;
 
-import com.kamefrede.rpsideas.items.components.ItemTriggerSensor;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.WorldServer;
-import vazkii.psi.api.exosuit.PsiArmorEvent;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
@@ -13,6 +11,8 @@ import vazkii.psi.api.spell.piece.PieceTrick;
 import vazkii.psi.common.entity.EntitySpellCharge;
 
 import java.util.List;
+
+import static com.kamefrede.rpsideas.items.components.ItemTriggerSensor.firePlayerDetonation;
 
 public class PieceTrickDetonate extends PieceTrick {
 
@@ -44,8 +44,7 @@ public class PieceTrickDetonate extends PieceTrick {
 
         if (context.caster.world instanceof WorldServer) {
             WorldServer server = (WorldServer) context.caster.world;
-            SpellHelpers.scheduleTask(server, () ->
-                    PsiArmorEvent.post(new PsiArmorEvent(context.caster, ItemTriggerSensor.EVENT_TRIGGER)));
+            SpellHelpers.scheduleTask(server, () -> firePlayerDetonation(context.caster));
         }
 
         if (radiusVal > 0) {

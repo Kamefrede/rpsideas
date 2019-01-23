@@ -9,6 +9,7 @@ import kotlin.jvm.functions.Function2;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.WorldServer;
@@ -29,10 +30,23 @@ import java.util.List;
 @Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
 public class ItemTriggerSensor extends ItemMod implements IExosuitSensor, IItemColorProvider {
     public static final String EVENT_TRIGGER = RPSIdeas.MODID + ".event.spell_detonate";
+    public static final String TRIGGER_TICK = RPSIdeas.MODID + ":LastTriggeredDetonation";
 
     public ItemTriggerSensor() {
         super(RPSItemNames.TRIGGER_SENSOR);
         setMaxStackSize(1);
+    }
+
+    public static void firePlayerDetonation(EntityPlayer player) {
+        NBTTagCompound playerData = player.getEntityData();
+        long detonated = playerData.getLong(TRIGGER_TICK);
+        long worldTime = player.world.getTotalWorldTime();
+
+        if (detonated != worldTime) {
+            playerData.setLong(TRIGGER_TICK, worldTime);
+
+            PsiArmorEvent.post(new PsiArmorEvent(player, ItemTriggerSensor.EVENT_TRIGGER));
+        }
     }
 
     @SubscribeEvent(priority = EventPriority.LOW)
@@ -42,8 +56,7 @@ public class ItemTriggerSensor extends ItemMod implements IExosuitSensor, IItemC
         if (!stack.isEmpty() && stack.getItem() instanceof ItemDetonator) {
             if (player.world instanceof WorldServer) {
                 WorldServer server = (WorldServer) player.world;
-                server.addScheduledTask(() ->
-                        PsiArmorEvent.post(new PsiArmorEvent(player, ItemTriggerSensor.EVENT_TRIGGER)));
+                server.addScheduledTask(() -> firePlayerDetonation(player));
             }
 
             List<EntitySpellCharge> charges = player.world.getEntitiesWithinAABB(EntitySpellCharge.class, player.getEntityBoundingBox().grow(32, 32, 32));
