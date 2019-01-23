@@ -25,7 +25,7 @@ public class PieceOperatorAffectedByPotions extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (context.caster.world.isRemote) return null;
+        if (context.caster.world.isRemote) return 0.0;
         Entity entVal = this.getParamValue(context, entity);
         if (entVal == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);

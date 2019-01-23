@@ -29,7 +29,7 @@ public class PieceOperatorVisibleToEntity extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (context.caster.world.isRemote) return null;
+        if (context.caster.world.isRemote) return 0.0;
         Entity viewerEntity = this.getParamValue(context, viewer);
         Entity viewedEntity = this.getParamValue(context, viewed);
         if (viewerEntity == null || viewedEntity == null)

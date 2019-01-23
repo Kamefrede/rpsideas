@@ -61,7 +61,7 @@ public class PieceTrickFirework extends PieceTrick {
         EntityFireworkRocket rocket = new EntityPsireworkRocket(context.caster.world, positionVal.x, positionVal.y, positionVal.z, fireworkStack, colorizer);
         context.caster.world.spawnEntity(rocket);
 
-        return true;
+        return null;
     }
 
     public ItemStack generateFirework(int time) {

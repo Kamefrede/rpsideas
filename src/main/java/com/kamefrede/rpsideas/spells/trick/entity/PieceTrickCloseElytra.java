@@ -28,7 +28,7 @@ public class PieceTrickCloseElytra extends PieceTrick {
         double value = SpellHelpers.getNumber(this, context, num, 1);
         if (Math.abs(value) < 1.0) context.caster.setFlag(7, false);
 
-        return false;
+        return null;
     }
 
 }

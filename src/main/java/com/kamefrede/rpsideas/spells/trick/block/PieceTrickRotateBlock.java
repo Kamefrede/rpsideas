@@ -104,7 +104,7 @@ public class PieceTrickRotateBlock extends PieceTrick {
 
         EnumFacing facing = EnumFacing.getFacingFromVector((float) directionVal.x, (float) directionVal.y, (float) directionVal.z);
         rotateBlock(world, pos, facing);
-        return true;
+        return null;
 
     }
 }

@@ -27,7 +27,7 @@ public class PieceOperatorGetSignText extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (context.caster.world.isRemote) return null;
+        if (context.caster.world.isRemote) return "";
 
         BlockPos pos = SpellHelpers.getBlockPos(this, context, position);
         TileEntity sign = context.caster.world.getTileEntity(pos);

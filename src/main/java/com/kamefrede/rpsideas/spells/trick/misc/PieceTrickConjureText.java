@@ -71,6 +71,6 @@ public class PieceTrickConjureText extends PieceTrick {
             world.spawnEntity(conjuredText);
         }
 
-        return true;
+        return null;
     }
 }

@@ -15,8 +15,6 @@ public class PieceSelectorCasterEnergy extends PieceSelector {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (context.caster == null) return null;
-
         PlayerDataHandler.PlayerData data = SpellHelpers.getPlayerData(context.caster);
 
         if (data == null) return 0.0;

@@ -32,11 +32,11 @@ public class PieceTrickOpenElytra extends PieceTrick {
                 if (stack.getItem() instanceof ItemElytra) {
                     context.caster.setFlag(7, true);
 
-                    return true;
+                    return null;
                 }
             }
         }
 
-        return false;
+        return null;
     }
 }

@@ -81,7 +81,7 @@ public class TrickSound extends PieceTrick {
 
         float f = (float) Math.pow(2, (pitchVal - 12) / 12.0);
         context.caster.world.playSound(null, pos, SOUND_EVENTS.get((int) instrumentVal), SoundCategory.RECORDS, (float) volVal, f);
-        return true;
+        return null;
     }
 
 

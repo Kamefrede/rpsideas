@@ -54,6 +54,7 @@ public class PieceTrickSansUndertale extends PieceTrick {
             if (context.caster instanceof EntityPlayerMP)
                 NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP) context.caster);
         }
-        return super.execute(context);
+
+        return null;
     }
 }

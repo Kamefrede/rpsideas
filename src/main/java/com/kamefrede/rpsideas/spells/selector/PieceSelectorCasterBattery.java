@@ -17,7 +17,6 @@ public class PieceSelectorCasterBattery extends PieceSelector {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (context.caster == null) return null;
         ItemStack cad = PsiAPI.getPlayerCAD(context.caster);
         if (cad != null)
             return ((ICAD) cad.getItem()).getStatValue(cad, EnumCADStat.OVERFLOW) * 1.0;
