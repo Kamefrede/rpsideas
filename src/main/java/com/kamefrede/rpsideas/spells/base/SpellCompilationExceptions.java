@@ -10,4 +10,5 @@ public final class SpellCompilationExceptions {
     public static final String PITCH = "rpsideas.spellerror.pitch";
     public static final String VOLUME = "rpsideas.spellerror.volume";
     public static final String INSTRUMENTS = "rpsideas.spellerror.instruments";
+    public static final String RADIUS = "rpsideas.spellerror.radius";
 }

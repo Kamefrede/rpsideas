@@ -132,6 +132,7 @@ public class RPSPieces {
         register(PieceMacroCasterWeakRaycast.class, RPSPieceNames.MACRO_CASTER_WEAK_RAYCAST, RPSPieceNames.MACROS);
         register(PieceOperatorWeakRaycast.class, RPSPieceNames.PIECE_OPERATOR_WEAK_RAYCAST, RPSPieceNames.SECONDARY_VECTOR_OPERATORS);
         register(PieceOperatorWeakRaycastAxis.class, RPSPieceNames.PIECE_OPERATOR_WEAK_RAYCAST_AXIS, RPSPieceNames.SECONDARY_VECTOR_OPERATORS);
+        register(PieceTrickSilence.class, "silence", RPSPieceNames.VISUAL_AUDITIVE);
 
         new BotaniaCompatPieces().run();
     }
