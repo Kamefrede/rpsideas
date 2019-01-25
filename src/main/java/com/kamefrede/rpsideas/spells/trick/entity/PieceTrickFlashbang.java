@@ -19,7 +19,7 @@ public class PieceTrickFlashbang extends PieceTrickPotionBase {
 
     @Override
     public int getPotency(int power, int time) throws SpellCompilationException {
-        return super.getPotency(power, time) * 2;
+        return super.getPotency(power, time) * 3;
     }
 
 }

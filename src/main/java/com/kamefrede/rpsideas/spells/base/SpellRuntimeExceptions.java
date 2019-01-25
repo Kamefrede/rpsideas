@@ -13,4 +13,5 @@ public final class SpellRuntimeExceptions {
     public static final String NAN = "rpsideas.spellerror.nan";
     public static final String TEXT = "rpsideas.spellerror.text";
     public static final String COMPARATOR = "rpsideas.spellerror.comparator";
+    public static final String NOT_POSITIVE_AND_NON_ZERO = "rpsideas.spellerror.not_positive_and_non_zero";
 }
