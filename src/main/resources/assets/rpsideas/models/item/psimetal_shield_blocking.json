@@ -1,0 +1,17 @@
+{
+  "parent": "rpsideas:item/psimetal_shield",
+  "display": {
+    "firstperson_righthand": {
+      "rotation": [
+        0,
+        -45,
+        25
+      ],
+      "translation": [
+        -1,
+        1.75,
+        0
+      ]
+    }
+  }
+}

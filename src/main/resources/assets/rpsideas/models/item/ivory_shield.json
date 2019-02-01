@@ -1,0 +1,31 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "rpsideas:items/ivory_shield"
+  },
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "translation": [
+        1.95,
+        -1.25,
+        1
+      ],
+      "scale": [
+        0.75,
+        0.75,
+        0.75
+      ]
+    }
+  },
+  "overrides": {
+    "predicate": {
+      "blocking": 1
+    },
+    "model": "rpsideas:item/ivory_shield_blocking"
+  }
+}
