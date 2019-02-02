@@ -37,22 +37,17 @@ public class PieceTrickTillSequence extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 positionVal = this.getParamValue(context, position);
-        Vector3 targetVal = this.getParamValue(context, target);
+        Vector3 positionVal = SpellHelpers.getVector3(this, context, position, true, false);
+        Vector3 targetVal = SpellHelpers.getVector3(this, context, target, false, false);
         double maxBlocksVal = SpellHelpers.getNumber(this, context, maxBlocks, 0);
-
-        if (positionVal == null)
-            throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
 
         int len = (int) targetVal.mag();
         Vector3 targetNorm = targetVal.copy().normalize();
         for (int i = 0; i < Math.min(len, maxBlocksVal); i++) {
             Vector3 blockVec = positionVal.copy().add(targetNorm.copy().multiply(i));
 
-            if (!context.isInRadius(blockVec))
-                throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
-
             BlockPos pos = new BlockPos(blockVec.x, blockVec.y, blockVec.z);
+            SpellHelpers.isBlockPosInRadius(context, pos);
             PieceTrickTill.tillBlock(context.caster, context.caster.world, pos);
         }
 

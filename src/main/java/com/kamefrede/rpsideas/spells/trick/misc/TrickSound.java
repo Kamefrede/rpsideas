@@ -73,7 +73,7 @@ public class TrickSound extends PieceTrick {
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster.world.isRemote) return null;
 
-        BlockPos pos = SpellHelpers.getBlockPos(this, context, position);
+        BlockPos pos = SpellHelpers.getBlockPos(this, context, position, true, false);
         double instrumentVal = SpellHelpers.getNumber(this, context, instrument, 0);
         double volVal = SpellHelpers.getNumber(this, context, volume, 1);
         double pitchVal = SpellHelpers.getNumber(this, context, pitch, 0);

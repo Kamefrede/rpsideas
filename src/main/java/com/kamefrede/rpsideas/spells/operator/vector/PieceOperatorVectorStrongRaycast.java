@@ -37,11 +37,8 @@ public class PieceOperatorVectorStrongRaycast extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 originVal = this.getParamValue(context, origin);
-        Vector3 rayVal = this.getParamValue(context, ray);
-
-        if (originVal == null || rayVal == null)
-            throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
+        Vector3 originVal = SpellHelpers.getVector3(this, context, origin, false, false);
+        Vector3 rayVal = SpellHelpers.getVector3(this, context, ray, false, false);
 
         double maxLen = SpellHelpers.getBoundedNumber(this, context, maxParam, SpellContext.MAX_DISTANCE);
 

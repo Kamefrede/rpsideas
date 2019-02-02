@@ -42,7 +42,7 @@ public class PieceTrickTill extends PieceTrick {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
 
-        BlockPos pos = SpellHelpers.getBlockPos(this, context, position);
+        BlockPos pos = SpellHelpers.getBlockPos(this, context, position, true, false);
 
         return tillBlock(context.caster, context.caster.world, pos);
 

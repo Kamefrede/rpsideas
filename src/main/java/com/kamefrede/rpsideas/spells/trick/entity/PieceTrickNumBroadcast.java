@@ -52,7 +52,7 @@ public class PieceTrickNumBroadcast extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 positionVal = this.getParamValue(context, position);
+        Vector3 positionVal = SpellHelpers.getVector3(this, context, position, true, false);
         Double radiusVal = SpellHelpers.getBoundedNumber(this, context, radius, SpellContext.MAX_DISTANCE);
         double channelVal = SpellHelpers.getNumber(this, context, channel, 0);
         double signalVal = SpellHelpers.getNumber(this, context, signal, 0);
@@ -61,10 +61,6 @@ public class PieceTrickNumBroadcast extends PieceTrick {
             return null;
 
         context.customData.put("rpsideas:BroadcastAny", true);
-
-        if (!context.isInRadius(positionVal))
-            throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
-
 
         List<EntityPlayer> sec = new ArrayList<>();
 

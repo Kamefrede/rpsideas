@@ -51,27 +51,25 @@ public class PieceTrickConjureCircle extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 pos = this.getParamValue(context, position);
-        Vector3 dir = this.getParamValue(context, direction);
+        World world = context.caster.world;
+        if (world.isRemote)
+            return null;
+        Vector3 pos = SpellHelpers.getVector3(this, context, position, true, false);
+        Vector3 dir = SpellHelpers.getVector3(this, context, direction, false, false);
         double scl = SpellHelpers.getNumber(this, context, scale, 1);
         double maxTimeAlive = SpellHelpers.getNumber(this, context, time, 100);
 
-        if (pos == null)
-            throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        if (dir == null || dir.isZero())
+        if (dir.isZero())
             dir = new Vector3(0, 1, 0);
-        if (!context.isInRadius(pos))
-            throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
+
 
         ItemStack cad = PsiAPI.getPlayerCAD(context.caster);
         ItemStack colorizer = ((ICAD) cad.getItem()).getComponentInSlot(cad, EnumCADComponent.DYE);
 
-        World world = context.caster.world;
-        if (!world.isRemote) {
-            EntityFancyCircle circle = new EntityFancyCircle(world);
-            circle.setInfo(context.caster, colorizer, pos, (int) maxTimeAlive, (float) scl, dir.toVec3D().normalize());
-            circle.world.spawnEntity(circle);
-        }
+
+        EntityFancyCircle circle = new EntityFancyCircle(world);
+        circle.setInfo(context.caster, colorizer, pos, (int) maxTimeAlive, (float) scl, dir.toVec3D().normalize());
+        circle.world.spawnEntity(circle);
         return null;
     }
 }

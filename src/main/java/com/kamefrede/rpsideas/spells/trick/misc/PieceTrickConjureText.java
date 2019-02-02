@@ -44,6 +44,9 @@ public class PieceTrickConjureText extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
+        World world = context.caster.world;
+        if (world.isRemote)
+            return null;
         Vector3 pos = this.getParamValue(context, position);
         Object targetVal = this.getParamValue(context, text);
         double maxTimeAlive = SpellHelpers.getNumber(this, context, time, 3600);
@@ -64,12 +67,10 @@ public class PieceTrickConjureText extends PieceTrick {
         ItemStack cad = PsiAPI.getPlayerCAD(context.caster);
         ItemStack colorizer = ((ICAD) cad.getItem()).getComponentInSlot(cad, EnumCADComponent.DYE);
 
-        World world = context.caster.world;
-        if (!world.isRemote) {
-            EntityConjuredText conjuredText = new EntityConjuredText(world);
-            conjuredText.setInfo(context.caster, colorizer, text, pos, (int) maxTimeAlive);
-            world.spawnEntity(conjuredText);
-        }
+
+        EntityConjuredText conjuredText = new EntityConjuredText(world);
+        conjuredText.setInfo(context.caster, colorizer, text, pos, (int) maxTimeAlive);
+        world.spawnEntity(conjuredText);
 
         return null;
     }

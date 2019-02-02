@@ -8,7 +8,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellParam;
@@ -33,15 +32,9 @@ public class PieceOperatorGetBlockComparatorStrength extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 ax = this.getParamValue(context, axisParam);
-        BlockPos pos = SpellHelpers.getBlockPos(this, context, target);
+        BlockPos pos = SpellHelpers.getBlockPos(this, context, target, false, false);
 
-        if (ax == null)
-            throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        else if (!ax.isAxial())
-            throw new SpellRuntimeException(SpellRuntimeExceptions.NON_AXIAL_VECTOR);
-
-        EnumFacing whichWay = EnumFacing.getFacingFromVector((float) ax.x, (float) ax.y, (float) ax.z);
+        EnumFacing whichWay = SpellHelpers.getFacing(this, context, axisParam);
         if(whichWay == EnumFacing.UP || whichWay == EnumFacing.DOWN)
             throw new SpellRuntimeException(SpellRuntimeExceptions.COMPARATOR);
 

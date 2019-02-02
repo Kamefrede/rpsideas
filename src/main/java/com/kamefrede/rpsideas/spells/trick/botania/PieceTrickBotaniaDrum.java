@@ -1,8 +1,9 @@
 package com.kamefrede.rpsideas.spells.trick.botania;
 
+import com.kamefrede.rpsideas.spells.enabler.PieceComponentTrick;
 import com.kamefrede.rpsideas.spells.enabler.botania.EnumManaTier;
 import com.kamefrede.rpsideas.spells.enabler.botania.IManaTrick;
-import com.kamefrede.rpsideas.spells.enabler.PieceComponentTrick;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityCow;
@@ -17,7 +18,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
 import vazkii.botania.common.item.ItemGrassHorn;
 import vazkii.psi.api.PsiAPI;
-import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamVector;
 
@@ -56,19 +56,18 @@ public abstract class PieceTrickBotaniaDrum extends PieceComponentTrick implemen
 
     @Override
     public Object executeIfAllowed(SpellContext context) throws SpellRuntimeException {
-        Vector3 position = getParamValue(context, positionParam);
-        if (position == null) throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
+        BlockPos position = SpellHelpers.getBlockPos(this, context, positionParam, true, false);
 
         World world = context.caster.world;
 
         if (world.isRemote)
-            world.spawnParticle(EnumParticleTypes.NOTE, position.x + .5, position.y + 1.2, position.z + .5, 1 / 24d, 0, 0);
+            world.spawnParticle(EnumParticleTypes.NOTE, position.getX() + .5, position.getY() + 1.2, position.getZ() + .5, 1 / 24d, 0, 0);
         else {
             for (int i = 0; i < 10; i++)
-                world.playSound(null, position.toBlockPos(), SoundEvents.BLOCK_NOTE_BASEDRUM, SoundCategory.BLOCKS, 1f, 1f); //Bwaaaaaaaaaappppp
+                world.playSound(null, position, SoundEvents.BLOCK_NOTE_BASEDRUM, SoundCategory.BLOCKS, 1f, 1f); //Bwaaaaaaaaaappppp
         }
 
-        doEffect(context, position.toBlockPos());
+        doEffect(context, position);
 
         return null;
     }

@@ -1,7 +1,6 @@
 package com.kamefrede.rpsideas.spells.selector;
 
 import com.kamefrede.rpsideas.spells.base.SpellParams;
-import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -47,15 +46,11 @@ public class PieceSelectorVisibleEntities extends PieceSelector {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster.world.isRemote) return new EntityListWrapper(new ArrayList<>());
-        Entity entity = this.getParamValue(context, ent);
+        EntityLivingBase living = SpellHelpers.ensureNonnullandLivingBaseEntity(this, context, ent);
 
         double radiusVal = SpellHelpers.getBoundedNumber(this, context, radius, SpellContext.MAX_DISTANCE);
 
-        if (!(entity instanceof EntityLivingBase))
-            throw new SpellRuntimeException(SpellRuntimeExceptions.ENTITY_NOT_LIVING);
-
-        EntityLivingBase living = (EntityLivingBase) entity;
-        Vector3 pos = Vector3.fromEntity(entity);
+        Vector3 pos = Vector3.fromEntity(living);
         if (!context.isInRadius(pos))
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
         else {

@@ -1,12 +1,14 @@
 package com.kamefrede.rpsideas.util.helpers;
 
 import com.google.common.util.concurrent.ListenableFutureTask;
+import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
@@ -14,6 +16,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
+import vazkii.psi.api.spell.wrapper.EntityListWrapper;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.spell.trick.block.PieceTrickBreakBlock;
 import vazkii.psi.common.spell.trick.block.PieceTrickPlaceBlock;
@@ -69,11 +72,47 @@ public class SpellHelpers {
         return position.toBlockPos();
     }
 
-    public static void checkPos(SpellContext context, BlockPos pos) throws SpellRuntimeException {
-        if (pos == null)
+    public static Vector3 getVector3(SpellPiece piece, SpellContext context, SpellParam param, boolean check, boolean shouldBeAxial) throws SpellRuntimeException {
+        return checkPos(piece, context, param, check, shouldBeAxial);
+    }
+
+    public static Vector3 getVector3(SpellPiece piece, SpellContext context, SpellParam param, boolean nonnull, boolean check, boolean shouldBeAxial) throws SpellRuntimeException {
+        return checkPos(piece, context, param, nonnull, check, shouldBeAxial);
+    }
+
+    public static BlockPos getBlockPos(SpellPiece piece, SpellContext context, SpellParam param, boolean check, boolean shouldBeAxial) throws SpellRuntimeException {
+        return checkPos(piece, context, param, check, shouldBeAxial).toBlockPos();
+    }
+
+    public static BlockPos getBlockPos(SpellPiece piece, SpellContext context, SpellParam param, boolean nonnull, boolean check, boolean shouldBeAxial) throws SpellRuntimeException {
+        return checkPos(piece, context, param, nonnull, check, shouldBeAxial).toBlockPos();
+    }
+
+    public static Vector3 checkPos(SpellPiece piece, SpellContext context, SpellParam param, boolean check, boolean shouldBeAxial) throws SpellRuntimeException {
+        return checkPos(piece, context, param, true, check, shouldBeAxial);
+    }
+
+    public static Vector3 checkPos(SpellPiece piece, SpellContext context, SpellParam param, boolean nonnull, boolean check, boolean shouldBeAxial) throws SpellRuntimeException {
+        Vector3 position = piece.getParamValue(context, param);
+        if (nonnull && position == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        if (!isBlockPosInRadius(context, pos))
+        if (check && !context.isInRadius(position))
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
+        if (shouldBeAxial && !position.isAxial())
+            throw new SpellRuntimeException(SpellRuntimeExceptions.NON_AXIAL_VECTOR);
+        return position;
+    }
+
+    public static EnumFacing getFacing(SpellPiece piece, SpellContext context, SpellParam param) throws SpellRuntimeException {
+        Vector3 face = getVector3(piece, context, param, false, true);
+        return EnumFacing.getFacingFromVector((float) face.x, (float) face.y, (float) face.z);
+    }
+
+    public static EnumFacing getFacing(SpellPiece piece, SpellContext context, SpellParam param, EnumFacing def) throws SpellRuntimeException {
+        Vector3 face = getVector3(piece, context, param, true, false, true);
+        if (face == null)
+            return def;
+        return EnumFacing.getFacingFromVector((float) face.x, (float) face.y, (float) face.z);
     }
 
     public static boolean isBlockPosInRadius(SpellContext context, BlockPos pos) {
@@ -93,6 +132,35 @@ public class SpellHelpers {
         else
             return val;
     }
+
+    public static EntityListWrapper ensureNonullorEmptyList(SpellPiece piece, SpellContext context, SpellParam param) throws SpellRuntimeException {
+        EntityListWrapper list = piece.getParamValue(context, param);
+        if (list == null || list.unwrap().isEmpty())
+            throw new SpellRuntimeException(SpellRuntimeExceptions.NULL_LIST);
+        return list;
+    }
+
+    public static EntityListWrapper ensureNonnullList(SpellPiece piece, SpellContext context, SpellParam param) throws SpellRuntimeException {
+        EntityListWrapper list = piece.getParamValue(context, param);
+        if (list == null)
+            throw new SpellRuntimeException(SpellRuntimeExceptions.NULL_LIST);
+        return list;
+    }
+
+    public static Entity ensureNonnullEntity(SpellPiece piece, SpellContext context, SpellParam param) throws SpellRuntimeException {
+        Entity ent = piece.getParamValue(context, param);
+        if (ent == null)
+            throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
+        return ent;
+    }
+
+    public static EntityLivingBase ensureNonnullandLivingBaseEntity(SpellPiece piece, SpellContext context, SpellParam param) throws SpellRuntimeException {
+        Entity ent = ensureNonnullEntity(piece, context, param);
+        if (!(ent instanceof EntityLivingBase))
+            throw new SpellRuntimeException(SpellRuntimeExceptions.ENTITY_NOT_LIVING);
+        return (EntityLivingBase) ent;
+    }
+
 
     public static void placeBlockFromInventory(SpellContext context, BlockPos pos, boolean particles) {
         PieceTrickPlaceBlock.placeBlock(context.caster, context.caster.world, pos, context.targetSlot, particles);

@@ -35,9 +35,9 @@ public class PieceTrickTransplantAggro extends PieceTrick {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (!context.caster.world.isRemote) {
-            Entity ent = this.getParamValue(context, target);
-            Entity punching = this.getParamValue(context, bag);
-            if (ent == null && punching == null || !(ent instanceof EntityLiving || ent instanceof EntityTNTPrimed) || !(punching instanceof EntityLivingBase))
+            Entity ent = SpellHelpers.ensureNonnullEntity(this, context, target);
+            EntityLivingBase punching = SpellHelpers.ensureNonnullandLivingBaseEntity(this, context, bag);
+            if (!(ent instanceof EntityLiving || ent instanceof EntityTNTPrimed))
                 throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
             if (ent.isNonBoss() && !punching.isNonBoss())
                 throw new SpellRuntimeException(SpellRuntimeException.BOSS_IMMUNE);
@@ -48,8 +48,7 @@ public class PieceTrickTransplantAggro extends PieceTrick {
                 tnt.setFuse(0);
             } else {
                 EntityLiving living = (EntityLiving) ent;
-                EntityLivingBase punch = (EntityLivingBase) punching;
-                living.setAttackTarget(punch);
+                living.setAttackTarget(punching);
             }
         }
         return null;

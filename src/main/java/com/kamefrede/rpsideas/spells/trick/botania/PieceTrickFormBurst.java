@@ -57,23 +57,19 @@ public class PieceTrickFormBurst extends PieceComponentTrick implements IManaTri
 
     @Override
     public Object executeIfAllowed(SpellContext context) throws SpellRuntimeException {
-        Vector3 posVec = getParamValue(context, positionParam);
-        Vector3 rayVec = getParamValue(context, rayParam);
+        if (context.caster.world.isRemote)
+            return null;
 
-        if (posVec == null || rayVec == null)
-            throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        if (!context.isInRadius(posVec))
-            throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
+        Vector3 posVec = SpellHelpers.getVector3(this, context, positionParam, true, false);
+        Vector3 rayVec = SpellHelpers.getVector3(this, context, rayParam, false, false);
 
         EntityPlayer player = context.caster;
 
         EntityManaBurst burst = formBurst(posVec, rayVec, PsiAPI.getPlayerCAD(context.caster), context);
+        player.world.playSound(null, player.posX, player.posY, player.posZ, ModSounds.manaBlaster, SoundCategory.PLAYERS, .6f, 1f);
+        player.world.spawnEntity(burst);
+        PieceTrickAddMotion.addMotion(context, burst, rayVec, 4F);
 
-        if (!player.world.isRemote) {
-            player.world.playSound(null, player.posX, player.posY, player.posZ, ModSounds.manaBlaster, SoundCategory.PLAYERS, .6f, 1f);
-            player.world.spawnEntity(burst);
-            PieceTrickAddMotion.addMotion(context, burst, rayVec, 4F);
-        }
 
         return null;
     }

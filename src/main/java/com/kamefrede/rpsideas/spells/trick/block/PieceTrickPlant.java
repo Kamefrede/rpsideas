@@ -85,7 +85,7 @@ public class PieceTrickPlant extends PieceTrick {
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster.world.isRemote)
             return null;
-        BlockPos pos = SpellHelpers.getBlockPos(this, context, position);
+        BlockPos pos = SpellHelpers.getBlockPos(this, context, position, true, false);
 
         plantPlant(context.caster, context.caster.world, pos, context.getTargetSlot());
 

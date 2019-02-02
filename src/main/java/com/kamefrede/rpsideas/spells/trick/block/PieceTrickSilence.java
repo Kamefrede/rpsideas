@@ -46,13 +46,8 @@ public class PieceTrickSilence extends PieceTrick {
     public Object execute(SpellContext context) throws SpellRuntimeException {
         double vol = SpellHelpers.getNumber(this, context, volume, 0);
         double tim = Math.min(SpellHelpers.getNumber(this, context, time, 400), 4800);
-        double rad = SpellHelpers.getNumber(this, context, radius, 1);
-        Vector3 pos = this.getParamValue(context, position);
-
-        if (pos == null)
-            throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        if (!SpellHelpers.isBlockPosInRadius(context, pos.toBlockPos()))
-            throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
+        double rad = Math.max(SpellHelpers.getNumber(this, context, radius, 1), SpellContext.MAX_DISTANCE);
+        Vector3 pos = SpellHelpers.getVector3(this, context, position, true, false);
 
         if (!context.caster.world.isRemote)
             PacketHandler.NETWORK.sendToDimension(new MessageAddSilencedBlock((int) tim, context.caster.world.getWorldTime(), pos.toBlockPos(), (int) rad, (float) vol, context.caster.world.provider.getDimension()), context.caster.world.provider.getDimension());

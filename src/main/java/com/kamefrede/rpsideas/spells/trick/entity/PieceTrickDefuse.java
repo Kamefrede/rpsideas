@@ -38,8 +38,8 @@ public class PieceTrickDefuse extends PieceTrick {
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (!context.caster.world.isRemote) {
             double tim = SpellHelpers.getNumber(this, context, time, 1);
-            Entity ent = this.getParamValue(context, entity);
-            if (ent == null || !(ent instanceof EntityLivingBase || ent instanceof EntityTNTPrimed))
+            Entity ent = SpellHelpers.ensureNonnullEntity(this, context, entity);
+            if (!(ent instanceof EntityLivingBase || ent instanceof EntityTNTPrimed))
                 throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
             if (ent.isNonBoss())
                 throw new SpellRuntimeException(SpellRuntimeException.BOSS_IMMUNE);

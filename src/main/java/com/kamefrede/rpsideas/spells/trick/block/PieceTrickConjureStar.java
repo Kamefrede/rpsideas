@@ -3,6 +3,7 @@ package com.kamefrede.rpsideas.spells.trick.block;
 import com.kamefrede.rpsideas.blocks.RPSBlocks;
 import com.kamefrede.rpsideas.spells.base.SpellParams;
 import com.kamefrede.rpsideas.tiles.TileCracklingStar;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -49,13 +50,10 @@ public class PieceTrickConjureStar extends PieceTrick implements IPulsarConjurat
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster.world.isRemote) return null;
 
-        Vector3 rayVec = this.getParamValue(context, rayParam);
-        Vector3 positionVec = this.getParamValue(context, positionParam);
+        Vector3 rayVec = SpellHelpers.getVector3(this, context, rayParam, false, false);
+        Vector3 positionVec = SpellHelpers.getVector3(this, context, positionParam, true, false);
 
-        if (positionVec == null || rayVec == null)
-            throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-
-        if (!context.isInRadius(positionVec) || !context.isInRadius(positionVec.copy().add(rayVec)))
+        if (!context.isInRadius(positionVec.copy().add(rayVec)))
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
 
         conjurePulsar(context, positionParam, timeParam);

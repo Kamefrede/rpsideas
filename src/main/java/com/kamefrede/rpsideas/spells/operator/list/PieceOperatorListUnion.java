@@ -1,7 +1,7 @@
 package com.kamefrede.rpsideas.spells.operator.list;
 
 import com.kamefrede.rpsideas.spells.base.SpellParams;
-import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.entity.Entity;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
@@ -32,9 +32,8 @@ public class PieceOperatorListUnion extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        EntityListWrapper l1 = this.getParamValue(context, list1);
-        EntityListWrapper l2 = this.getParamValue(context, list2);
-        if (l1 == null || l2 == null) throw new SpellRuntimeException(SpellRuntimeExceptions.NULL_LIST);
+        EntityListWrapper l1 = SpellHelpers.ensureNonnullList(this, context, list1);
+        EntityListWrapper l2 = SpellHelpers.ensureNonnullList(this, context, list2);
 
         List<Entity> entities = new ArrayList<>(l1.unwrap());
         entities.addAll(l2.unwrap());

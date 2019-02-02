@@ -32,11 +32,10 @@ public class PieceOperatorVectorRotate extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 v = this.getParamValue(context, vector);
-        Vector3 a = this.getParamValue(context, axis);
+        Vector3 v = SpellHelpers.getVector3(this, context, vector, false, false);
+        Vector3 a = SpellHelpers.getVector3(this, context, axis, false, false);
         double an = SpellHelpers.getNumber(this, context, angle, 0);
-        if (v == null || axis == null)
-            throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
+
         return v.copy().rotate(an, a.copy());
     }
 

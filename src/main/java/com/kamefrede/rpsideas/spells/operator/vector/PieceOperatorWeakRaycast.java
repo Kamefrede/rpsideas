@@ -39,8 +39,8 @@ public class PieceOperatorWeakRaycast extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 originVal = this.getParamValue(context, origin);
-        Vector3 rayVal = this.getParamValue(context, ray);
+        Vector3 originVal = SpellHelpers.getVector3(this, context, origin, false, false);
+        Vector3 rayVal = SpellHelpers.getVector3(this, context, ray, false, false);
 
         if (originVal == null || rayVal == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);

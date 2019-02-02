@@ -2,7 +2,6 @@ package com.kamefrede.rpsideas.spells.trick.block;
 
 import com.google.common.collect.Maps;
 import com.kamefrede.rpsideas.spells.base.SpellParams;
-import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.EnumPushReaction;
@@ -54,33 +53,26 @@ public class PieceTrickMoveBlockSequence extends PieceTrick {
         if (context.caster.world.isRemote)
             return null;
 
-        Vector3 directionVal = this.getParamValue(context, direction);
-        Vector3 positionVal = this.getParamValue(context, position);
-        Vector3 targetVal = this.getParamValue(context, target);
-        Double maxBlocksVal = this.getParamValue(context, maxBlocks);
+        Vector3 directionVal = SpellHelpers.getVector3(this, context, direction, false, true);
+        Vector3 positionVal = SpellHelpers.getVector3(this, context, position, true, false);
+        Vector3 targetVal = SpellHelpers.getVector3(this, context, target, false, false);
+        Double maxBlocksVal = SpellHelpers.getNumber(this, context, maxBlocks, 0);
 
 
         Map<BlockPos, IBlockState> toSet = Maps.newHashMap();
 
-        if (positionVal == null)
-            throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        if (!context.isInRadius(positionVal))
-            throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
         int len = (int) targetVal.copy().mag();
 
         Vector3 directNorm = directionVal.copy().normalize();
         Vector3 targetNorm = targetVal.copy().normalize();
-        if (!directionVal.isAxial() || directionVal.isZero())
-            throw new SpellRuntimeException(SpellRuntimeExceptions.NON_AXIAL_VECTOR);
 
 
         for (int i = 0; i < Math.min(len, maxBlocksVal); i++) {
             Vector3 blockVec = positionVal.copy().add(targetNorm.copy().multiply(i));
-            if (!context.isInRadius(blockVec))
-                throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
 
             World world = context.caster.world;
             BlockPos pos = blockVec.toBlockPos();
+            SpellHelpers.isBlockPosInRadius(context, pos);
             IBlockState state = world.getBlockState(pos);
             Block block = state.getBlock();
             BlockEvent.BreakEvent event = new BlockEvent.BreakEvent(world, pos, state, context.caster);

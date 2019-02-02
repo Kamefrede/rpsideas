@@ -7,7 +7,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
-import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceOperator;
@@ -38,14 +37,7 @@ public abstract class OperatorEnergy extends PieceOperator {
 
         BlockPos pos = SpellHelpers.getBlockPos(this, context, position);
 
-        Vector3 axisVec = this.getParamValue(context, axis);
-        if (axisVec != null && !axisVec.isAxial())
-            throw new SpellRuntimeException(SpellRuntimeExceptions.NON_AXIAL_VECTOR);
-
-        EnumFacing facing = axisVec == null ? null : EnumFacing.getFacingFromVector(
-                (float) axisVec.x,
-                (float) axisVec.y,
-                (float) axisVec.z);
+        EnumFacing facing = SpellHelpers.getFacing(this, context, axis, null);
 
         World world = context.caster.world;
 

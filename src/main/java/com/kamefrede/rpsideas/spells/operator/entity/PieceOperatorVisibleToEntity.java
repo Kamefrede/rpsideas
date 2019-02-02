@@ -1,7 +1,7 @@
 package com.kamefrede.rpsideas.spells.operator.entity;
 
 import com.kamefrede.rpsideas.spells.base.SpellParams;
-import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import vazkii.psi.api.spell.Spell;
@@ -30,15 +30,11 @@ public class PieceOperatorVisibleToEntity extends PieceOperator {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster.world.isRemote) return 0.0;
-        Entity viewerEntity = this.getParamValue(context, viewer);
-        Entity viewedEntity = this.getParamValue(context, viewed);
-        if (viewerEntity == null || viewedEntity == null)
-            throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
+        EntityLivingBase viewerEntity = SpellHelpers.ensureNonnullandLivingBaseEntity(this, context, viewer);
+        Entity viewedEntity = SpellHelpers.ensureNonnullEntity(this, context, viewed);
 
-        if (viewerEntity instanceof EntityLivingBase)
-            return ((EntityLivingBase) viewerEntity).canEntityBeSeen(viewedEntity) ? 1.0 : 0.0;
+        return viewerEntity.canEntityBeSeen(viewedEntity) ? 1.0 : 0.0;
 
-        throw new SpellRuntimeException(SpellRuntimeExceptions.ENTITY_NOT_LIVING);
     }
 
     @Override

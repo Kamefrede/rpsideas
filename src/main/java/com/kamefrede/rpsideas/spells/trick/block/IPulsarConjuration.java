@@ -19,7 +19,7 @@ public interface IPulsarConjuration {
 
         SpellPiece piece = (SpellPiece) this;
 
-        BlockPos pos = SpellHelpers.getBlockPos(piece, context, positionParam);
+        BlockPos pos = SpellHelpers.getBlockPos(piece, context, positionParam, true, false);
 
         int time = (int) SpellHelpers.getNumber(piece, context, timeParam, 0);
         World world = context.caster.world;

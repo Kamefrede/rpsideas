@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.spells.operator.vector;
 
 import com.kamefrede.rpsideas.spells.base.SpellParams;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamVector;
@@ -26,7 +27,7 @@ public class PieceOperatorPlanarNormalVector extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 v = this.getParamValue(context, vector);
+        Vector3 v = SpellHelpers.getVector3(this, context, vector, false, false);
         return v.copy().rotate(Math.PI * 2 / 3, new Vector3(1, 1, 1));
     }
 

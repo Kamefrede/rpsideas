@@ -37,10 +37,8 @@ public class PieceSelectorListFilter extends PieceSelector {
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster.world.isRemote) return new EntityListWrapper(new ArrayList<>());
         double numVal = SpellHelpers.getNumber(this, context, num, 0);
-        EntityListWrapper listVal = this.getParamValue(context, list);
+        EntityListWrapper listVal = SpellHelpers.ensureNonullorEmptyList(this, context, list);
         int val = (int) numVal;
-        if (listVal == null || listVal.unwrap().isEmpty())
-            throw new SpellRuntimeException(SpellRuntimeExceptions.NULL_LIST);
 
         if (val >= 0 && val < listVal.unwrap().size())
             return listVal.unwrap().get(val);

@@ -1,7 +1,6 @@
 package com.kamefrede.rpsideas.spells.operator.entity;
 
-import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
-import net.minecraft.entity.Entity;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.entity.EntityLivingBase;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
@@ -26,14 +25,8 @@ public class PieceOperatorAffectedByPotions extends PieceOperator {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (context.caster.world.isRemote) return 0.0;
-        Entity entVal = this.getParamValue(context, entity);
-        if (entVal == null)
-            throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
-        else if (entVal instanceof EntityLivingBase)
-            return ((EntityLivingBase) entVal).getActivePotionEffects().size() > 0 ? 1.0 : 0.0;
-        else
-            throw new SpellRuntimeException(SpellRuntimeExceptions.ENTITY_NOT_LIVING);
-
+        EntityLivingBase ent = SpellHelpers.ensureNonnullandLivingBaseEntity(this, context, entity);
+        return ent.getActivePotionEffects().size() > 0 ? 1.0 : 0.0;
     }
 
     @Override

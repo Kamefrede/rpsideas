@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.spells.operator.vector;
 
 import com.kamefrede.rpsideas.spells.base.SpellParams;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
@@ -24,8 +25,7 @@ public class PieceOperatorVectorAbsolute extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 vector = this.getParamValue(context, vec);
-        if (vector == null) throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
+        Vector3 vector = SpellHelpers.getVector3(this, context, vec, false, false);
         return new Vector3(Math.abs(vector.x), Math.abs(vector.y), Math.abs(vector.z));
     }
 

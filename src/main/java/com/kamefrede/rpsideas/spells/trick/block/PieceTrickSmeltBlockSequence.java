@@ -46,23 +46,17 @@ public class PieceTrickSmeltBlockSequence extends PieceTrick {
         if (context.caster.world.isRemote)
             return null;
 
-        Vector3 positionVal = this.getParamValue(context, position);
-        Vector3 targetVal = this.getParamValue(context, direction);
+        Vector3 positionVal = SpellHelpers.getVector3(this, context, position, true, false);
+        Vector3 targetVal = SpellHelpers.getVector3(this, context, direction, false, false);
         double maxBlocksVal = SpellHelpers.getNumber(this, context, maxBlocks, 0);
-
-        if (positionVal == null)
-            throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-
 
         int len = (int) targetVal.mag();
         Vector3 targetNorm = targetVal.copy().normalize();
         for (int i = 0; i < Math.min(len, maxBlocksVal); i++) {
             Vector3 blockVec = positionVal.copy().add(targetNorm.copy().multiply(i));
 
-            if (!context.isInRadius(blockVec))
-                throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
-
             BlockPos pos = new BlockPos(blockVec.x, blockVec.y, blockVec.z);
+            SpellHelpers.isBlockPosInRadius(context, pos);
             if (!context.caster.world.isBlockModifiable(context.caster, pos))
                 continue;
 

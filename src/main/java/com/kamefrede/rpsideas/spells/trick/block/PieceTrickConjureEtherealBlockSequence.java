@@ -46,13 +46,10 @@ public class PieceTrickConjureEtherealBlockSequence extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 positionVal = this.getParamValue(context, position);
-        Vector3 targetVal = this.getParamValue(context, target);
+        Vector3 positionVal = SpellHelpers.getVector3(this, context, target, true, false);
+        Vector3 targetVal = SpellHelpers.getVector3(this, context, target, false, false);
         double maxBlocksVal = SpellHelpers.getNumber(this, context, maxBlocks, 0);
         Double timeVal = this.getParamValue(context, time);
-
-        if (positionVal == null)
-            throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
 
         int len = (int) targetVal.mag();
         Vector3 targetNorm = targetVal.copy().normalize();
@@ -60,8 +57,7 @@ public class PieceTrickConjureEtherealBlockSequence extends PieceTrick {
         for (int i = 0; i < Math.min(len, maxBlocksVal); i++) {
             Vector3 blockVec = positionVal.copy().add(targetNorm.copy().multiply(i));
 
-            if (!context.isInRadius(blockVec))
-                throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
+            SpellHelpers.isBlockPosInRadius(context, blockVec.toBlockPos());
 
             BlockPos pos = blockVec.toBlockPos();
             if (!context.caster.world.isBlockModifiable(context.caster, pos))

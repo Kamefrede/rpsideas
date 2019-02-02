@@ -42,10 +42,8 @@ public class PieceOperatorClosestToLine extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 rayStart = this.getParamValue(context, rayStartParam);
-        Vector3 rayEnd = this.getParamValue(context, rayEndParam);
-        if (rayStart == null || rayEnd == null)
-            throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
+        Vector3 rayStart = SpellHelpers.getVector3(this, context, rayStartParam, false, false);
+        Vector3 rayEnd = SpellHelpers.getVector3(this, context, rayEndParam, false, false);
 
         double maxLength = SpellHelpers.getBoundedNumber(this, context, length, SpellContext.MAX_DISTANCE);
 
