@@ -60,7 +60,7 @@ public abstract class PieceTrickBotaniaDrum extends PieceComponentTrick implemen
 
         World world = context.caster.world;
 
-        if (world.isRemote)
+        if (world.isRemote) // TODO wire pls check this one
             world.spawnParticle(EnumParticleTypes.NOTE, position.getX() + .5, position.getY() + 1.2, position.getZ() + .5, 1 / 24d, 0, 0);
         else {
             for (int i = 0; i < 10; i++)
@@ -126,7 +126,6 @@ public abstract class PieceTrickBotaniaDrum extends PieceComponentTrick implemen
         @Override
         public void doEffect(SpellContext context, BlockPos pos) {
             World world = context.caster.world;
-            if (world.isRemote) return;
 
             List<EntityLiving> nearbyLiving = world.getEntitiesWithinAABB(EntityLiving.class, RANGE_AABB.offset(pos));
             List<EntityLiving> nearbyShearables = new ArrayList<>(nearbyLiving.size());

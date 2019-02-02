@@ -28,8 +28,7 @@ public class PieceTrickConjureGravityBlock extends PieceTrick {
         Block block = state.getBlock();
         if (block.isAir(state, world, pos) || block.isReplaceable(world, pos)) {
             if (conjure) {
-                if (!world.isRemote)
-                    world.setBlockState(pos, RPSBlocks.conjuredGravityBlock.getDefaultState());
+                world.setBlockState(pos, RPSBlocks.conjuredGravityBlock.getDefaultState());
             }
         }
     }
@@ -65,7 +64,7 @@ public class PieceTrickConjureGravityBlock extends PieceTrick {
 
             state = context.caster.world.getBlockState(pos);
 
-            if (!context.caster.world.isRemote && state.getBlock() == RPSBlocks.conjuredGravityBlock)
+            if (state.getBlock() == RPSBlocks.conjuredGravityBlock)
                 PieceTrickConjureEtherealBlock.setColorAndTime(context, timeVal, pos, state);
         }
 

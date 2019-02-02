@@ -29,7 +29,6 @@ public class PieceOperatorVisibleToEntity extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (context.caster.world.isRemote) return 0.0;
         EntityLivingBase viewerEntity = SpellHelpers.ensureNonnullandLivingBaseEntity(this, context, viewer);
         Entity viewedEntity = SpellHelpers.ensureNonnullEntity(this, context, viewed);
 

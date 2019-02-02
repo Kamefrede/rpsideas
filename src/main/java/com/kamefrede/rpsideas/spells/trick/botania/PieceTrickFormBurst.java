@@ -57,8 +57,6 @@ public class PieceTrickFormBurst extends PieceComponentTrick implements IManaTri
 
     @Override
     public Object executeIfAllowed(SpellContext context) throws SpellRuntimeException {
-        if (context.caster.world.isRemote)
-            return null;
 
         Vector3 posVec = SpellHelpers.getVector3(this, context, positionParam, true, false);
         Vector3 rayVec = SpellHelpers.getVector3(this, context, rayParam, false, false);

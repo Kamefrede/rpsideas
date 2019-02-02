@@ -31,7 +31,6 @@ public class PieceTrickDebugSpamless extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (context.caster.world.isRemote) return null;
 
         Double numberVal = this.getParamValue(context, numParam);
         Object targetVal = getParamValue(context, targetParam);

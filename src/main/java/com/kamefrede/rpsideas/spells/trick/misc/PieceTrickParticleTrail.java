@@ -48,7 +48,6 @@ public class PieceTrickParticleTrail extends PieceTrick {
         Vector3 dir = SpellHelpers.getVector3(this, context, rayParam, false, false);
         double length = SpellHelpers.getNumber(this, context, lengthParam, 0);
         double time = Math.min(SpellHelpers.getNumber(this, context, timeParam, 20), 1200);
-        if (context.caster.world.isRemote) return null;
 
         if (time <= 0d) throw new SpellRuntimeException(SpellRuntimeExceptions.NOT_POSITIVE_AND_NON_ZERO);
 
@@ -61,8 +60,7 @@ public class PieceTrickParticleTrail extends PieceTrick {
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
         }
 
-        if (!context.caster.world.isRemote)
-            PacketHandler.NETWORK.sendToDimension(new MessageParticleTrail(pos.toVec3D(), dir.toVec3D(), length, (int) time, PsiAPI.getPlayerCAD(context.caster)), context.caster.world.provider.getDimension());
+        PacketHandler.NETWORK.sendToDimension(new MessageParticleTrail(pos.toVec3D(), dir.toVec3D(), length, (int) time, PsiAPI.getPlayerCAD(context.caster)), context.caster.world.provider.getDimension());
 
         return null;
     }

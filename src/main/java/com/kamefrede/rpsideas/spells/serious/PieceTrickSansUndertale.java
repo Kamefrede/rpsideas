@@ -42,7 +42,6 @@ public class PieceTrickSansUndertale extends PieceTrick {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
 
-        if (context.caster.world.isRemote) return null;
         double volVal = SpellHelpers.getNumber(this, context, volume, 0);
         BlockPos pos = context.caster.getPosition();
 

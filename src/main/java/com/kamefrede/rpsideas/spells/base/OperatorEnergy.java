@@ -33,7 +33,6 @@ public abstract class OperatorEnergy extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (context.caster.world.isRemote) return 0.0;
 
         BlockPos pos = SpellHelpers.getBlockPos(this, context, position);
 

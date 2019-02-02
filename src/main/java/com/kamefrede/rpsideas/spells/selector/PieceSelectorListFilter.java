@@ -10,8 +10,6 @@ import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.piece.PieceSelector;
 import vazkii.psi.api.spell.wrapper.EntityListWrapper;
 
-import java.util.ArrayList;
-
 public class PieceSelectorListFilter extends PieceSelector {
 
     private SpellParam list;
@@ -35,7 +33,6 @@ public class PieceSelectorListFilter extends PieceSelector {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (context.caster.world.isRemote) return new EntityListWrapper(new ArrayList<>());
         double numVal = SpellHelpers.getNumber(this, context, num, 0);
         EntityListWrapper listVal = SpellHelpers.ensureNonullorEmptyList(this, context, list);
         int val = (int) numVal;

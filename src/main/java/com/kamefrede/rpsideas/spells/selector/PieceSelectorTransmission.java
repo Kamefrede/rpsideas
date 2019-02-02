@@ -30,7 +30,6 @@ public class PieceSelectorTransmission extends PieceSelector {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (context.caster.world.isRemote) return 0.0;
         double channelVal = SpellHelpers.getNumber(this, context, channel, 0);
         int channel = (int) channelVal;
 

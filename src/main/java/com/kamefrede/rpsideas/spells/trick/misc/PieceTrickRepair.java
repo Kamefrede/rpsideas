@@ -22,7 +22,7 @@ public class PieceTrickRepair extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (!context.caster.world.isRemote) if (doRepair(context.tool))
+        if (doRepair(context.tool))
             doRepair(context.caster.inventory.getStackInSlot(context.getTargetSlot()));
         return null;
     }

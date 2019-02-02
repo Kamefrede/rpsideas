@@ -15,7 +15,6 @@ import vazkii.psi.api.spell.SpellRuntimeException;
  */
 public interface IPulsarConjuration {
     default void conjurePulsar(SpellContext context, SpellParam positionParam, SpellParam timeParam) throws SpellRuntimeException {
-        if (context.caster.world.isRemote) return;
 
         SpellPiece piece = (SpellPiece) this;
 

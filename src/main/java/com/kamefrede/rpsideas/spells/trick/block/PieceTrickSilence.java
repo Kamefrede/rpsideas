@@ -49,10 +49,7 @@ public class PieceTrickSilence extends PieceTrick {
         double rad = Math.max(SpellHelpers.getNumber(this, context, radius, 1), SpellContext.MAX_DISTANCE);
         Vector3 pos = SpellHelpers.getVector3(this, context, position, true, false);
 
-        if (!context.caster.world.isRemote)
-            PacketHandler.NETWORK.sendToDimension(new MessageAddSilencedBlock((int) tim, context.caster.world.getWorldTime(), pos.toBlockPos(), (int) rad, (float) vol, context.caster.world.provider.getDimension()), context.caster.world.provider.getDimension());
-
-
+        PacketHandler.NETWORK.sendToDimension(new MessageAddSilencedBlock((int) tim, context.caster.world.getWorldTime(), pos.toBlockPos(), (int) rad, (float) vol, context.caster.world.provider.getDimension()), context.caster.world.provider.getDimension());
         return null;
     }
 }

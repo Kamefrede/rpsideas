@@ -52,8 +52,6 @@ public class PieceTrickConjureCircle extends PieceTrick {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         World world = context.caster.world;
-        if (world.isRemote)
-            return null;
         Vector3 pos = SpellHelpers.getVector3(this, context, position, true, false);
         Vector3 dir = SpellHelpers.getVector3(this, context, direction, false, false);
         double scl = SpellHelpers.getNumber(this, context, scale, 1);

@@ -24,7 +24,6 @@ public class PieceOperatorAffectedByPotions extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (context.caster.world.isRemote) return 0.0;
         EntityLivingBase ent = SpellHelpers.ensureNonnullandLivingBaseEntity(this, context, entity);
         return ent.getActivePotionEffects().size() > 0 ? 1.0 : 0.0;
     }

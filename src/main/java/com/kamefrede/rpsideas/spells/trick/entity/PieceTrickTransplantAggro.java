@@ -34,22 +34,20 @@ public class PieceTrickTransplantAggro extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (!context.caster.world.isRemote) {
-            Entity ent = SpellHelpers.ensureNonnullEntity(this, context, target);
-            EntityLivingBase punching = SpellHelpers.ensureNonnullandLivingBaseEntity(this, context, bag);
-            if (!(ent instanceof EntityLiving || ent instanceof EntityTNTPrimed))
-                throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
-            if (ent.isNonBoss() && !punching.isNonBoss())
-                throw new SpellRuntimeException(SpellRuntimeException.BOSS_IMMUNE);
-            if (!SpellHelpers.isBlockPosInRadius(context, ent.getPosition()) && !SpellHelpers.isBlockPosInRadius(context, punching.getPosition()))
-                throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
-            if (ent instanceof EntityTNTPrimed) {
-                EntityTNTPrimed tnt = (EntityTNTPrimed) ent;
-                tnt.setFuse(0);
-            } else {
-                EntityLiving living = (EntityLiving) ent;
-                living.setAttackTarget(punching);
-            }
+        Entity ent = SpellHelpers.ensureNonnullEntity(this, context, target);
+        EntityLivingBase punching = SpellHelpers.ensureNonnullandLivingBaseEntity(this, context, bag);
+        if (!(ent instanceof EntityLiving || ent instanceof EntityTNTPrimed))
+            throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
+        if (ent.isNonBoss() && !punching.isNonBoss())
+            throw new SpellRuntimeException(SpellRuntimeException.BOSS_IMMUNE);
+        if (!SpellHelpers.isBlockPosInRadius(context, ent.getPosition()) && !SpellHelpers.isBlockPosInRadius(context, punching.getPosition()))
+            throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
+        if (ent instanceof EntityTNTPrimed) {
+            EntityTNTPrimed tnt = (EntityTNTPrimed) ent;
+            tnt.setFuse(0);
+        } else {
+            EntityLiving living = (EntityLiving) ent;
+            living.setAttackTarget(punching);
         }
         return null;
     }

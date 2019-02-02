@@ -14,7 +14,6 @@ public class PieceSelectorCasterEnergy extends PieceSelector {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (context.caster.world.isRemote) return 0.0;
         PlayerDataHandler.PlayerData data = PlayerDataHandler.get(context.caster);
         return 1.0 * data.availablePsi;
     }

@@ -48,7 +48,6 @@ public class PieceTrickConjureStar extends PieceTrick implements IPulsarConjurat
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (context.caster.world.isRemote) return null;
 
         Vector3 rayVec = SpellHelpers.getVector3(this, context, rayParam, false, false);
         Vector3 positionVec = SpellHelpers.getVector3(this, context, positionParam, true, false);

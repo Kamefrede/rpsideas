@@ -16,7 +16,6 @@ public class PieceSelectorSuccessCounter extends PieceSelector {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (context.caster.world.isRemote) return 0.0;
         if (!(context.tool.getItem() instanceof IPsiEventArmor))
             throw new SpellRuntimeException(SpellRuntimeExceptions.ARMOR);
         return ItemNBTHelper.getInt(context.tool, "timesCast", 0) * 1.0;

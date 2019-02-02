@@ -43,8 +43,6 @@ public class PieceTrickSmeltBlockSequence extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (context.caster.world.isRemote)
-            return null;
 
         Vector3 positionVal = SpellHelpers.getVector3(this, context, position, true, false);
         Vector3 targetVal = SpellHelpers.getVector3(this, context, direction, false, false);

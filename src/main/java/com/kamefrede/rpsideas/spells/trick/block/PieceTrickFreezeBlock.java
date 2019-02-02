@@ -67,8 +67,6 @@ public class PieceTrickFreezeBlock extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (context.caster.world.isRemote)
-            return null;
         BlockPos pos = SpellHelpers.getBlockPos(this, context, position);
 
         World world = context.caster.world;

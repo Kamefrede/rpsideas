@@ -83,7 +83,6 @@ public class PieceTrickRotateBlock extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (context.caster.world.isRemote) return null;
         Vector3 positionVal = this.getParamValue(context, position);
         Vector3 directionVal = this.getParamValue(context, direction);
 

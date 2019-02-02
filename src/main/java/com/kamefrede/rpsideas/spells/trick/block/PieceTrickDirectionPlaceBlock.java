@@ -38,8 +38,7 @@ public class PieceTrickDirectionPlaceBlock extends PieceTrick {
 
         if (block.isReplaceable(world, pos)) {
             if (conjure) {
-                if (!world.isRemote)
-                    world.setBlockState(pos, ModBlocks.conjured.getDefaultState());
+                world.setBlockState(pos, ModBlocks.conjured.getDefaultState());
             } else {
                 ItemStack stack = player.inventory.getStackInSlot(slot);
                 if (!stack.isEmpty() && stack.getItem() instanceof ItemBlock) {
@@ -47,12 +46,9 @@ public class PieceTrickDirectionPlaceBlock extends PieceTrick {
                     ItemBlock itemBlock = (ItemBlock) rem.getItem();
 
                     Block blockToPlace = Block.getBlockFromItem(rem.getItem());
-                    if (!world.isRemote) {
-
-                        IBlockState newState = blockToPlace.getStateForPlacement(world, pos, facing, 0,0,0, rem.getItemDamage(), player, player.getActiveHand());
-                        itemBlock.placeBlockAt(stack, player, world, pos, facing, 0, 0, 0, newState);
-                        PieceTrickRotateBlock.rotateBlock(world, pos, facing);
-                    }
+                    IBlockState newState = blockToPlace.getStateForPlacement(world, pos, facing, 0, 0, 0, rem.getItemDamage(), player, player.getActiveHand());
+                    itemBlock.placeBlockAt(stack, player, world, pos, facing, 0, 0, 0, newState);
+                    PieceTrickRotateBlock.rotateBlock(world, pos, facing);
 
                     if (player.capabilities.isCreativeMode) {
                         HUDHandler.setRemaining(rem, -1);
@@ -60,7 +56,7 @@ public class PieceTrickDirectionPlaceBlock extends PieceTrick {
                         HUDHandler.setRemaining(player, rem, null);
                     }
                 }
-                if (particles && !world.isRemote) {
+                if (particles) {
                     world.playEvent(2001, pos, Block.getStateId(world.getBlockState(pos)));
                 }
             }

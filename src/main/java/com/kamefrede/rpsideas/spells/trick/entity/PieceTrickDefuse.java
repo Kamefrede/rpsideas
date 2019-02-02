@@ -36,22 +36,20 @@ public class PieceTrickDefuse extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (!context.caster.world.isRemote) {
-            double tim = SpellHelpers.getNumber(this, context, time, 1);
-            Entity ent = SpellHelpers.ensureNonnullEntity(this, context, entity);
-            if (!(ent instanceof EntityLivingBase || ent instanceof EntityTNTPrimed))
-                throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
-            if (ent.isNonBoss())
-                throw new SpellRuntimeException(SpellRuntimeException.BOSS_IMMUNE);
-            if (!SpellHelpers.isBlockPosInRadius(context, ent.getPosition()))
-                throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
-            if (ent instanceof EntityTNTPrimed) {
-                EntityTNTPrimed tnt = (EntityTNTPrimed) ent;
-                tnt.setFuse(tnt.getFuse() + (int) tim);
-            } else {
-                EntityLivingBase livingBase = (EntityLivingBase) ent;
-                livingBase.addPotionEffect(new PotionEffect(RPSPotions.disablefollowrange, (int) tim));
-            }
+        double tim = SpellHelpers.getNumber(this, context, time, 1);
+        Entity ent = SpellHelpers.ensureNonnullEntity(this, context, entity);
+        if (!(ent instanceof EntityLivingBase || ent instanceof EntityTNTPrimed))
+            throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
+        if (ent.isNonBoss())
+            throw new SpellRuntimeException(SpellRuntimeException.BOSS_IMMUNE);
+        if (!SpellHelpers.isBlockPosInRadius(context, ent.getPosition()))
+            throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
+        if (ent instanceof EntityTNTPrimed) {
+            EntityTNTPrimed tnt = (EntityTNTPrimed) ent;
+            tnt.setFuse(tnt.getFuse() + (int) tim);
+        } else {
+            EntityLivingBase livingBase = (EntityLivingBase) ent;
+            livingBase.addPotionEffect(new PotionEffect(RPSPotions.disablefollowrange, (int) tim));
         }
         return null;
     }

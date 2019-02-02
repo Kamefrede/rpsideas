@@ -32,7 +32,7 @@ public class PieceTrickConjureEtherealBlock extends PieceTrick {
 
         IBlockState state = world.getBlockState(pos);
         Block block = state.getBlock();
-        if (block.isReplaceable(world, pos) && conjure && !world.isRemote)
+        if (block.isReplaceable(world, pos) && conjure)
             world.setBlockState(pos, RPSBlocks.conjuredEthereal.getDefaultState());
 
     }
@@ -83,7 +83,7 @@ public class PieceTrickConjureEtherealBlock extends PieceTrick {
 
             state = context.caster.world.getBlockState(pos);
 
-            if (!context.caster.world.isRemote && state.getBlock() == RPSBlocks.conjuredEthereal)
+            if (state.getBlock() == RPSBlocks.conjuredEthereal)
                 setColorAndTime(context, timeVal, pos, state);
         }
 
