@@ -55,7 +55,7 @@ public class ItemPsiCuffKey extends ItemMod {
 
     public static void removeKey(EntityPlayer cuffedPlayer, ItemStack key, String keyName) {
         PlayerDataHandler.PlayerData data = PlayerDataHandler.get(cuffedPlayer);
-        if (data.getCustomData() != null && data.getCustomData().getBoolean(TAG_CUFFED) && keyName.equals(cuffedPlayer.getEntityData().getString(TAG_KEYNAME))) {
+        if (data.getCustomData().getBoolean(TAG_CUFFED) && keyName.equals(cuffedPlayer.getEntityData().getString(TAG_KEYNAME))) {
             data.getCustomData().removeTag(TAG_CUFFED);
             if (!cuffedPlayer.world.isRemote) {
                 cuffedPlayer.getEntityData().removeTag(TAG_KEYNAME);

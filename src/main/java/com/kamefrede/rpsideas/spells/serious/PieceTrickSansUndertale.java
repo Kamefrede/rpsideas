@@ -47,12 +47,10 @@ public class PieceTrickSansUndertale extends PieceTrick {
 
         context.caster.world.playSound(null, pos, RPSSoundHandler.MEGALOVANIA, SoundCategory.RECORDS, (float) volVal, 1f);
         PlayerDataHandler.PlayerData data = PlayerDataHandler.get(context.caster);
-        if (data.getCustomData() != null) {
-            data.getCustomData().setInteger(TAG_SANS_UNDERTALE, 680);
-            data.save();
-            if (context.caster instanceof EntityPlayerMP)
-                NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP) context.caster);
-        }
+        data.getCustomData().setInteger(TAG_SANS_UNDERTALE, 680);
+        data.save();
+        if (context.caster instanceof EntityPlayerMP)
+            NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP) context.caster);
 
         return null;
     }

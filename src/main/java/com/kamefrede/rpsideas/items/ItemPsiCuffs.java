@@ -52,7 +52,7 @@ public class ItemPsiCuffs extends ItemMod implements IFlowColorAcceptor {
 
             EntityPlayer targetPlayer = (EntityPlayer) target;
             PlayerDataHandler.PlayerData data = PlayerDataHandler.get(targetPlayer);
-            if (data.getCustomData() != null && !data.getCustomData().getBoolean(TAG_CUFFED)) {
+            if (!data.getCustomData().getBoolean(TAG_CUFFED)) {
                 data.getCustomData().setBoolean(TAG_CUFFED, true);
                 if (!playerIn.world.isRemote) {
                     targetPlayer.getEntityData().setString(TAG_KEYNAME, keyName);

@@ -39,8 +39,7 @@ public class MessageCuffSync extends PacketBase {
         if (player instanceof EntityPlayer) {
             EntityPlayer target = (EntityPlayer) player;
             PlayerDataHandler.PlayerData data = PlayerDataHandler.get(target);
-            if (data.getCustomData() != null)
-                data.getCustomData().setBoolean(TAG_CUFFED, isCuffed);
+            data.getCustomData().setBoolean(TAG_CUFFED, isCuffed);
         }
     }
 

@@ -156,37 +156,35 @@ public class RPSEventHandler {
             EntityPlayer player = (EntityPlayer) e.getEntityLiving();
             ItemStack cad = PsiAPI.getPlayerCAD(player);
             PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
-            if (data.getCustomData() != null) {
 
-                int extraRegen = data.getCustomData().getInteger(REGEN_KEY);
-                data.getCustomData().setInteger(REGEN_BEFORE_KEY, data.regen);
+            int extraRegen = data.getCustomData().getInteger(REGEN_KEY);
+            data.getCustomData().setInteger(REGEN_BEFORE_KEY, data.regen);
 
-                int regenBefore = data.getCustomData().getInteger(REGEN_BEFORE_KEY);
-                if (regenBefore == 0) regenBefore = DEFAULT_REGEN_RATE;
+            int regenBefore = data.getCustomData().getInteger(REGEN_BEFORE_KEY);
+            if (regenBefore == 0) regenBefore = DEFAULT_REGEN_RATE;
 
-                int regenNow = DEFAULT_REGEN_RATE;
-                if (regenBefore != extraRegen + DEFAULT_REGEN_RATE)
-                    regenNow = regenBefore - extraRegen;
+            int regenNow = DEFAULT_REGEN_RATE;
+            if (regenBefore != extraRegen + DEFAULT_REGEN_RATE)
+                regenNow = regenBefore - extraRegen;
 
 
-                extraRegen = 0;
-                if (!cad.isEmpty()) {
-                    ICAD cadItem = (ICAD) cad.getItem();
-                    ItemStack battery = cadItem.getComponentInSlot(cad, EnumCADComponent.BATTERY);
-                    if (battery.getItem() instanceof IRegenerationBattery)
-                        extraRegen = ((IRegenerationBattery) battery.getItem()).getRegenerationValue(battery);
-                }
-
-                if (regenNow + extraRegen == data.regen)
-                    return;
-
-                data.getCustomData().setInteger(REGEN_KEY, extraRegen);
-                data.regen = Math.max(DEFAULT_REGEN_RATE, regenNow + extraRegen);
-
-                data.save();
-                if (player instanceof EntityPlayerMP)
-                    NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP) player);
+            extraRegen = 0;
+            if (!cad.isEmpty()) {
+                ICAD cadItem = (ICAD) cad.getItem();
+                ItemStack battery = cadItem.getComponentInSlot(cad, EnumCADComponent.BATTERY);
+                if (battery.getItem() instanceof IRegenerationBattery)
+                    extraRegen = ((IRegenerationBattery) battery.getItem()).getRegenerationValue(battery);
             }
+
+            if (regenNow + extraRegen == data.regen)
+                return;
+
+            data.getCustomData().setInteger(REGEN_KEY, extraRegen);
+            data.regen = Math.max(DEFAULT_REGEN_RATE, regenNow + extraRegen);
+
+            data.save();
+            if (player instanceof EntityPlayerMP)
+                NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP) player);
         }
     }
 

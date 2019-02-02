@@ -31,7 +31,7 @@ public class SansUndertaleEyeGlow implements LayerRenderer<AbstractClientPlayer>
         float r = 0, g = 255, b = 255;
         if (time == 0) {
             PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
-            if (data.getCustomData() != null && data.getCustomData().getInteger(TAG_SANS_UNDERTALE) > 0) {
+            if (data.getCustomData().getInteger(TAG_SANS_UNDERTALE) > 0) {
                 if (reset) {
                     data.getCustomData().setInteger(TAG_SANS_UNDERTALE, 0);
                     reset = false;

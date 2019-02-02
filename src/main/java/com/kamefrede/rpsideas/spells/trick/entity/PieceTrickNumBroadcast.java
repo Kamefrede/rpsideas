@@ -116,11 +116,9 @@ public class PieceTrickNumBroadcast extends PieceTrick {
                 EntityPlayer pl = world.getPlayerEntityByUUID(Objects.requireNonNull(rcmp.getUniqueId(playerKey)));
                 if (pl != null) {
                     PlayerDataHandler.PlayerData pldata = PlayerDataHandler.get(pl);
-                    if (pldata.getCustomData() != null) {
-                        if (pldata.getCustomData().hasKey(key) && pldata.getCustomData().getDouble(key) == signal) {
-                            pldata.getCustomData().removeTag(key);
-                            pldata.save();
-                        }
+                    if (pldata.getCustomData().hasKey(key) && pldata.getCustomData().getDouble(key) == signal) {
+                        pldata.getCustomData().removeTag(key);
+                        pldata.save();
                     }
                 }
             }
