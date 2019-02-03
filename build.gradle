@@ -82,7 +82,7 @@ repositories {
 }
 
 dependencies {
-    compile files ("libs/Psi-r1.1-68.jar")
+    compile files ("libs/Psi-r1.1-70.jar")
     compile files ("libs/AutoRegLib-1.3-24.jar")
     compile "vazkii.botania:Botania:${project.botania_version}"
     compile "com.teamwizardry.librarianlib:librarianlib-${project.mc_version}:$liblib_version-SNAPSHOT:deobf"
