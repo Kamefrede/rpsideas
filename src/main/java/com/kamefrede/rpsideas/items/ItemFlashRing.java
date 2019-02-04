@@ -69,7 +69,7 @@ public class ItemFlashRing extends ItemMod implements ISpellContainer {
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced) {
         TooltipHelper.tooltipIfShift(tooltip, () -> {
-            TooltipHelper.addDynamic(tooltip, getTranslationKey(stack) + ".desc", Minecraft.getMinecraft().gameSettings.keyBindSneak.getDisplayName());
+            TooltipHelper.addToTooltip(tooltip, getTranslationKey(stack) + ".desc", Minecraft.getMinecraft().gameSettings.keyBindSneak.getDisplayName());
         });
         TooltipHelper.addToTooltip(tooltip, "psimisc.bulletCost", getCostModifier(stack) * 100.0);
     }

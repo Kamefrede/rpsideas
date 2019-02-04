@@ -7,6 +7,7 @@ import com.kamefrede.rpsideas.items.base.ICADComponentAcceptor;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -133,7 +134,9 @@ public class ItemCADMagazine extends ItemMod implements ISocketable, ICADCompone
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         TooltipHelper.tooltipIfShift(tooltip, () -> {
-            TooltipHelper.addDynamic(tooltip, getTranslationKey(stack) + ".desc");
+            TooltipHelper.addToTooltip(tooltip, getTranslationKey(stack) + ".desc");
+            TooltipHelper.addToTooltip(tooltip, getTranslationKey(stack) + ".desc1", Minecraft.getMinecraft().gameSettings.keyBindSneak.getDisplayName());
+
                     String socketName = TooltipHelper.local(getSocket(stack).getDisplayName());
                     String line = TextFormatting.GREEN.toString() + TooltipHelper.local(EnumCADComponent.SOCKET.getName()) + TextFormatting.GRAY.toString() + ": " + socketName;
                     tooltip.add(line);
