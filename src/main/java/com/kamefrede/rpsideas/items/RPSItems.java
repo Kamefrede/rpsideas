@@ -74,6 +74,7 @@ public class RPSItems {
     public static final ItemMod gaussBullet = new ItemMod(RPSItemNames.ITEM_GAUSS_BULLET);
     public static final ItemMod cadMagazine = new ItemCADMagazine(RPSItemNames.SPELL_MAGAZINE);
     public static final ItemMod battlecaster = new ItemIntegratedBattlecaster();
+    public static final ItemMod keypad = new ItemKeypad();
     //public static final ItemMod braceletCad = new ItemBraceletCAD();
 
     static {

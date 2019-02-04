@@ -27,6 +27,7 @@ public class RPSItemNames {
     public static final String OPTIMIZED_CAD_CORE = "optimized_cad_core";
     public static final String HYPERTHREADED_CAD_CORE = "hyperthreaded_cad_core";
     public static final String VIRTUAL_THREAD_CAD_CORE = "virtual_thread_cad_core";
+    public static final String KEYPAD = "keypad";
     public static final String PSI_CUFFS = "psi_cuffs";
     public static final String PSI_CUFF_KEY = "psi_cuff_key";
     public static final String PSIMETAL_SHIELD = "psimetal_shield";
