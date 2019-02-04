@@ -10,8 +10,6 @@ import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceTrick;
 
-import static com.kamefrede.rpsideas.spells.trick.block.PieceTrickConjureEtherealBlockSequence.addBlocksVal;
-
 public class PieceTrickConjureGravityBlockSequence extends PieceTrick {
 
     private SpellParam position;
@@ -21,6 +19,13 @@ public class PieceTrickConjureGravityBlockSequence extends PieceTrick {
 
     public PieceTrickConjureGravityBlockSequence(Spell spell) {
         super(spell);
+    }
+
+    public static void addBlocksVal(SpellPiece piece, SpellParam maxBlocks, SpellMetadata data) throws SpellCompilationException {
+        double maxBlocksVal = SpellHelpers.ensurePositiveAndNonzero(piece, maxBlocks);
+
+        data.addStat(EnumSpellStat.COST, (int) (maxBlocksVal * 10));
+        data.addStat(EnumSpellStat.POTENCY, (int) (maxBlocksVal * 10));
     }
 
     @Override
