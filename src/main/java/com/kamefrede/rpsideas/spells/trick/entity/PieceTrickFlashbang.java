@@ -14,7 +14,7 @@ public class PieceTrickFlashbang extends PieceTrickPotionBase {
 
     @Override
     public Potion getPotion() {
-        return RPSPotions.flashbang;
+        return RPSPotions.flash;
     }
 
     @Override

@@ -25,13 +25,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
 @Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
 public class PotionFlashbang extends PotionMod {
 
-    //copypasta'd from shotguns and glitter
     //https://github.com/TeamWizardry/Shotguns-And-Glitter/blob/master/src/main/java/com/teamwizardry/shotgunsandglitter/common/potions/PotionFlash.java
 
     public float opacity = 0f;
@@ -41,7 +41,7 @@ public class PotionFlashbang extends PotionMod {
     public PotionFlashbang() {
         super(RPSItemNames.FLASHBANG, true, 0xffffff);
         registerPotionAttributeModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "c555d485-47c3-476b-984b-473ee53f9b1b", -0.15, 2);
-        registerPotionAttributeModifier(SharedMonsterAttributes.FOLLOW_RANGE, "c555d485-47c3-476b-984b-473ee53f9b1b", -1, 1);
+        registerPotionAttributeModifier(SharedMonsterAttributes.FOLLOW_RANGE, "0bbdd459-e5a7-4699-ba6b-27538a3a3f25", -0.9, 1);
     }
 
     @SideOnly(Side.CLIENT)
@@ -83,6 +83,7 @@ public class PotionFlashbang extends PotionMod {
         }
     }
 
+    @Nonnull
     @Override
     public List<ItemStack> getCurativeItems() {
         return new ArrayList<>();

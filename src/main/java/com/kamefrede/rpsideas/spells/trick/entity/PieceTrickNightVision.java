@@ -14,4 +14,9 @@ public class PieceTrickNightVision extends PieceTrickPotionBase {
     public Potion getPotion() {
         return MobEffects.NIGHT_VISION;
     }
+
+    @Override
+    public boolean hasPower() {
+        return false;
+    }
 }

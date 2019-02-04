@@ -49,7 +49,7 @@ public class PieceTrickDefuse extends PieceTrick {
             tnt.setFuse(tnt.getFuse() + (int) tim);
         } else {
             EntityLivingBase livingBase = (EntityLivingBase) ent;
-            livingBase.addPotionEffect(new PotionEffect(RPSPotions.disablefollowrange, (int) tim));
+            livingBase.addPotionEffect(new PotionEffect(RPSPotions.unseeing, (int) tim));
         }
         return null;
     }

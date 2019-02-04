@@ -34,7 +34,7 @@ public class PieceTrickConjureGravityBlockSequence extends PieceTrick {
     @Override
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
         super.addToMetadata(meta);
-        addBlocksVal(this, maxBlocks, meta);
+        addBlocksVal(this, maxBlocks, meta, 10, 10);
     }
 
     @Override

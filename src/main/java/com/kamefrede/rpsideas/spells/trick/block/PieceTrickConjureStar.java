@@ -44,6 +44,8 @@ public class PieceTrickConjureStar extends PieceTrick implements IPulsarConjurat
     @Override
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException, ArithmeticException {
         super.addToMetadata(meta);
+        meta.addStat(EnumSpellStat.POTENCY, 50);
+        meta.addStat(EnumSpellStat.COST, 200);
     }
 
     @Override

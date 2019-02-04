@@ -23,11 +23,11 @@ public class PieceTrickConjureEtherealBlockSequence extends PieceTrick {
         super(spell);
     }
 
-    public static void addBlocksVal(SpellPiece piece, SpellParam maxBlocks, SpellMetadata data) throws SpellCompilationException {
+    public static void addBlocksVal(SpellPiece piece, SpellParam maxBlocks, SpellMetadata data, double cost, double potency) throws SpellCompilationException {
         double maxBlocksVal = SpellHelpers.ensurePositiveAndNonzero(piece, maxBlocks);
 
-        data.addStat(EnumSpellStat.COST, (int) (maxBlocksVal * 20));
-        data.addStat(EnumSpellStat.POTENCY, (int) (maxBlocksVal * 15));
+        data.addStat(EnumSpellStat.COST, (int) (maxBlocksVal * cost));
+        data.addStat(EnumSpellStat.POTENCY, (int) (maxBlocksVal * potency));
     }
 
     @Override
@@ -41,7 +41,7 @@ public class PieceTrickConjureEtherealBlockSequence extends PieceTrick {
     @Override
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
         super.addToMetadata(meta);
-        addBlocksVal(this, maxBlocks, meta);
+        addBlocksVal(this, maxBlocks, meta, 20, 15);
     }
 
     @Override
