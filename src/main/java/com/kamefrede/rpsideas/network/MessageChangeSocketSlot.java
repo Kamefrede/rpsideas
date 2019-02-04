@@ -4,12 +4,11 @@ import com.kamefrede.rpsideas.items.ItemKeypad;
 import com.teamwizardry.librarianlib.features.autoregister.PacketRegister;
 import com.teamwizardry.librarianlib.features.network.PacketBase;
 import com.teamwizardry.librarianlib.features.saving.Save;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
-import vazkii.psi.api.PsiAPI;
-import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.api.cad.ISocketable;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 
@@ -34,39 +33,33 @@ public class MessageChangeSocketSlot extends PacketBase {
     @Override
     public void handle(@Nonnull MessageContext context) {
         EntityPlayerMP player = context.getServerHandler().player;
-        ItemStack stack = PsiAPI.getPlayerCAD(player);
         ItemStack mainhand = player.getHeldItemMainhand();
         ItemStack offhand = player.getHeldItemMainhand();
-        if (mainhand.getItem() instanceof ItemKeypad || offhand.getItem() instanceof ItemKeypad) {
-            if (slot <= 9) {
-                PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
-                data.getCustomData().setInteger(TAG_KEYPAD_DIGIT, slot);
-                data.save();
-                return;
-            }
-        } else if (mainhand.getItem() instanceof ISocketable || offhand.getItem() instanceof ISocketable) {
-            if (offhand.getItem() instanceof ISocketable && player.isSneaking()) {
-                setSlot((ISocketable) offhand.getItem(), slot, offhand);
-                PlayerDataHandler.get(player).stopLoopcast();
-                return;
-            }
-            ISocketable socketable = mainhand.getItem() instanceof ISocketable ? (ISocketable) mainhand.getItem() : (ISocketable) offhand.getItem();
-            ItemStack stack1 = mainhand.getItem() instanceof ISocketable ? mainhand : offhand;
-            setSlot(socketable, slot, stack1);
-            PlayerDataHandler.get(player).stopLoopcast();
-            return;
+        PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
+        boolean isSneaking = player.isSneaking();
 
-        } else if (!stack.isEmpty()) {
-            ICAD cad = (ICAD) stack.getItem();
-            if (cad.isSocketSlotAvailable(stack, slot))
-                cad.setSelectedSlot(stack, slot);
-        }
-        PlayerDataHandler.get(player).stopLoopcast();
+        if (isSneaking && offhand.getItem() instanceof ItemKeypad && slot <= 9)
+            setDigit(player, slot, TAG_KEYPAD_DIGIT, data);
+        if (!isSneaking && mainhand.getItem() instanceof ItemKeypad && slot <= 9)
+            setDigit(player, slot, TAG_KEYPAD_DIGIT, data);
+
+        if (isSneaking && offhand.getItem() instanceof ISocketable)
+            setSlot((ISocketable) offhand.getItem(), slot, offhand, data, player);
+        if (!isSneaking && mainhand.getItem() instanceof ISocketable)
+            setSlot((ISocketable) mainhand.getItem(), slot, mainhand, data, player);
 
     }
 
-    public void setSlot(ISocketable socketable, int slot, ItemStack stack) {
+    public void setSlot(ISocketable socketable, int slot, ItemStack stack, PlayerDataHandler.PlayerData data, EntityPlayer player) {
         if (socketable.isSocketSlotAvailable(stack, slot))
             socketable.setSelectedSlot(stack, slot);
+        if (data.loopcasting && data.loopcastHand != null)
+            if (stack == player.getHeldItem(data.loopcastHand))
+                data.stopLoopcast();
+    }
+
+    public void setDigit(EntityPlayer player, int slot, String tag, PlayerDataHandler.PlayerData data) {
+        data.getCustomData().setInteger(tag, slot);
+        data.save();
     }
 }
