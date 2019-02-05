@@ -25,6 +25,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.ICAD;
+import vazkii.psi.api.cad.IShowPsiBar;
+import vazkii.psi.api.internal.IPlayerData;
 import vazkii.psi.common.Psi;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.core.handler.PsiSoundHandler;
@@ -32,7 +34,7 @@ import vazkii.psi.common.core.handler.PsiSoundHandler;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class ItemGaussRifle extends ItemMod implements IFlowColorAcceptor {
+public class ItemGaussRifle extends ItemMod implements IFlowColorAcceptor, IShowPsiBar {
     protected ItemGaussRifle() {
         super(RPSItemNames.ITEM_GAUSS_RIFLE);
         setMaxStackSize(1);
@@ -48,6 +50,11 @@ public class ItemGaussRifle extends ItemMod implements IFlowColorAcceptor {
     @Override
     public boolean shouldDisableLightingForGlow(@NotNull ItemStack itemStack, @NotNull IBakedModel model) {
         return false;
+    }
+
+    @Override
+    public boolean shouldShow(ItemStack stack, IPlayerData data) {
+        return true;
     }
 
     @Nullable
