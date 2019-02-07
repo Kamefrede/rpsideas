@@ -1,7 +1,13 @@
 package com.kamefrede.rpsideas.spells.trick.misc;
 
+import com.kamefrede.rpsideas.network.MessageClairvoyance;
+import com.kamefrede.rpsideas.spells.base.SpellCompilationExceptions;
 import com.kamefrede.rpsideas.spells.base.SpellParams;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import com.teamwizardry.librarianlib.features.network.PacketHandler;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.math.Vec3d;
+import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.param.ParamVector;
@@ -27,14 +33,22 @@ public class PieceTrickClairvoyance extends PieceTrick {
     @Override
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException, ArithmeticException {
         super.addToMetadata(meta);
-        double voyanceTime = SpellHelpers.ensurePositiveAndNonzero(this, time, 0);
-        double voyanceDist = SpellHelpers.ensurePositiveAndNonzero(this, distance, 0);
-        meta.addStat(EnumSpellStat.COST, (int) (Math.pow(voyanceDist, 3) * ((voyanceTime / 20) * 150)));
-        meta.addStat(EnumSpellStat.POTENCY, (int) (Math.pow(voyanceDist, 2) * ((voyanceTime / 20) * 15)));
+        double time = SpellHelpers.ensurePositiveAndNonzero(this, this.time, 0);
+        double distance = SpellHelpers.ensurePositiveAndNonzero(this, this.distance, 0);
+        if (distance >= 32)
+            throw new SpellCompilationException(SpellCompilationExceptions.RADIUS);
+        meta.addStat(EnumSpellStat.COST, (int) (Math.pow(distance, 3) * ((time / 20) * 150)));
+        meta.addStat(EnumSpellStat.POTENCY, (int) (Math.pow(distance, 2) * ((time / 20) * 15)));
     }
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        return super.execute(context);
+        int time = (int) SpellHelpers.getNumber(this, context, this.time, 0);
+        Vector3 ray = SpellHelpers.getVector3(this, context, this.ray);
+        Vec3d trueRay = ray.multiply(SpellHelpers.getBoundedNumber(this, context, distance, SpellContext.MAX_DISTANCE)).toVec3D();
+
+        PacketHandler.NETWORK.sendTo(new MessageClairvoyance(time, trueRay), (EntityPlayerMP) context.caster);
+
+        return null;
     }
 }

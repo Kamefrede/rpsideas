@@ -42,6 +42,9 @@ import javax.annotation.Nullable;
 @Mod.EventBusSubscriber(value = Side.CLIENT, modid = RPSIdeas.MODID)
 public class EntityPlayerSeer extends AbstractClientPlayer {
 
+    public static Vec3d offsetVector = Vec3d.ZERO;
+    public static int timeLeft = 0;
+
     private final AbstractClientPlayer player;
     private final Vec3d offset;
 
@@ -82,11 +85,11 @@ public class EntityPlayerSeer extends AbstractClientPlayer {
     }
 
     public static boolean isClairvoyanceActive() {
-        return true; // todo
+        return timeLeft > 0 && offsetVector.lengthSquared() != 0;
     }
 
     public static Vec3d clairvoyanceVector() {
-        return new Vec3d(1, 0, 1); // todo
+        return offsetVector;
     }
 
     @SubscribeEvent
@@ -137,6 +140,12 @@ public class EntityPlayerSeer extends AbstractClientPlayer {
         GlStateManager.enableDepth();
         GlStateManager.color(1, 1, 1, 1);
         GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+    }
+
+    @SubscribeEvent
+    public static void preClientTick(TickEvent.ClientTickEvent event) {
+        if (event.phase == TickEvent.Phase.END && timeLeft > 0)
+            timeLeft--;
     }
 
     @SubscribeEvent

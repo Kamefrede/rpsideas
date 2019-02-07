@@ -3,6 +3,7 @@ package com.kamefrede.rpsideas.spells.base;
 
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.compat.botania.BotaniaCompatPieces;
+import com.kamefrede.rpsideas.spells.PieceCrossConnector;
 import com.kamefrede.rpsideas.spells.constant.PieceConstantTau;
 import com.kamefrede.rpsideas.spells.operator.PieceOperatorGetDamage;
 import com.kamefrede.rpsideas.spells.operator.PieceOperatorGetMetadata;
@@ -28,7 +29,9 @@ import com.kamefrede.rpsideas.util.libs.RPSPieceNames;
 import net.minecraft.util.ResourceLocation;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.spell.SpellPiece;
+import vazkii.psi.common.lib.LibMisc;
 import vazkii.psi.common.lib.LibPieceGroups;
+import vazkii.psi.common.lib.LibPieceNames;
 
 public class RPSPieces {
 
@@ -132,7 +135,10 @@ public class RPSPieces {
         register(PieceMacroCasterWeakRaycast.class, RPSPieceNames.MACRO_CASTER_WEAK_RAYCAST, RPSPieceNames.MACROS);
         register(PieceOperatorWeakRaycast.class, RPSPieceNames.PIECE_OPERATOR_WEAK_RAYCAST, RPSPieceNames.SECONDARY_VECTOR_OPERATORS);
         register(PieceOperatorWeakRaycastAxis.class, RPSPieceNames.PIECE_OPERATOR_WEAK_RAYCAST_AXIS, RPSPieceNames.SECONDARY_VECTOR_OPERATORS);
-        register(PieceTrickSilence.class, "silence", RPSPieceNames.VISUAL_AUDITIVE);
+        register(PieceTrickSilence.class, RPSPieceNames.TRICK_SILENCE, RPSPieceNames.VISUAL_AUDITIVE);
+
+        registerNoTexture(PieceCrossConnector.class, RPSPieceNames.CROSS_CONNECTOR, LibPieceGroups.FLOW_CONTROL);
+        registerTexture(RPSPieceNames.CROSS_CONNECTOR, LibMisc.MOD_ID, LibPieceNames.CONNECTOR);
 
         new BotaniaCompatPieces().run();
     }
@@ -144,7 +150,21 @@ public class RPSPieces {
     public static void register(Class<? extends SpellPiece> pieceClass, String name, String group, boolean main) {
         String key = RPSIdeas.MODID + "." + name;
         PsiAPI.registerSpellPiece(key, pieceClass);
-        PsiAPI.simpleSpellTextures.put(key, new ResourceLocation(RPSIdeas.MODID, "textures/spell/" + name + ".png"));
+        registerTexture(name, RPSIdeas.MODID, name);
         PsiAPI.addPieceToGroup(pieceClass, group, main);
+    }
+
+    public static void registerNoTexture(Class<? extends SpellPiece> pieceClass, String name, String group) {
+        registerNoTexture(pieceClass, name, group, false);
+    }
+
+    public static void registerNoTexture(Class<? extends SpellPiece> pieceClass, String name, String group, boolean main) {
+        PsiAPI.registerSpellPiece(RPSIdeas.MODID + "." + name, pieceClass);
+        PsiAPI.addPieceToGroup(pieceClass, group, main);
+    }
+
+    public static void registerTexture(String name, String modId, String texture) {
+        PsiAPI.simpleSpellTextures.put(RPSIdeas.MODID + "." + name, new ResourceLocation(modId, "textures/spell/" + texture + ".png"));
+
     }
 }

@@ -89,6 +89,9 @@ psi.spellpiece.rpsideas.macro_caster_weak_raycast_axis=Macro: Weak Axis Caster R
 psi.spellpiece.rpsideas.operator_weak_raycast=Operator: Vector Weak Raycast
 psi.spellpiece.rpsideas.operator_weak_raycast_axis=Operator: Vector Axis Weak Raycast
 
+psi.spellpiece.rpsideas.cross_connector=Cross Connector
+psi.spellpiece.rpsideas.cross_connector.desc=Can connect two paths
+
 
 
 psi.spellpiece.rpsideas.trick_conjure_ethereal_block.desc=Conjures an ethereal block at the given position
@@ -225,6 +228,10 @@ rpsideas.spellparam.ray_end=Ray End
 rpsideas.spellparam.ray_start=Ray Start
 rpsideas.spellparam.text=Text
 rpsideas.spellparam.scale=Scale
+rpsideas.spellparam.from1=From
+rpsideas.spellparam.from2=From
+rpsideas.spellparam.to1=To
+rpsideas.spellparam.to2=To
 rpsideas.spellparam.punching_bag=Punching Bag
 psi.datatype.BlockProperties=Block Properties
 
@@ -464,6 +471,7 @@ rpsideas.spelldesc.requires=Requires: %s
 rpsideas.spellerror.tricknotenabled=ERROR: Trick doesn't have an enabling component.
 rpsideas.spellerror.trickdisabled=ERROR: Trick's enabling component doesn't have its requirements met.
 rpsideas.spellerror.nomana=ERROR: Not enough mana.
+rpsideas.spellerror.radius=A distance parameter is out of range.
 
 entity.gauss_pulse.name=Gauss Pulse
 entity.sniper_bullet.name=Sniper Round

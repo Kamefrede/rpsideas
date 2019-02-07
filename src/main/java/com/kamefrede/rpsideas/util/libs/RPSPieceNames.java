@@ -94,6 +94,8 @@ public class RPSPieceNames {
     public static final String MACRO_CASTER_WEAK_AXIS_RAYCAST = "macro_caster_weak_raycast_axis";
     public static final String PIECE_OPERATOR_WEAK_RAYCAST = "operator_weak_raycast";
     public static final String PIECE_OPERATOR_WEAK_RAYCAST_AXIS = "operator_weak_raycast_axis";
+    public static final String TRICK_SILENCE = "silence";
+    public static final String CROSS_CONNECTOR = "cross_connector";
 
     public static final String ALTERNATE_CONJURATION = RPSIdeas.MODID + ".redstone_conjuration";
     public static final String SECONDARY_VECTOR_OPERATORS = RPSIdeas.MODID + ".secondary_vectors";

@@ -72,6 +72,10 @@ public class SpellHelpers {
         return position.toBlockPos();
     }
 
+    public static Vector3 getVector3(SpellPiece piece, SpellContext context, SpellParam param) throws SpellRuntimeException {
+        return checkPos(piece, context, param, false, false);
+    }
+
     public static Vector3 getVector3(SpellPiece piece, SpellContext context, SpellParam param, boolean check, boolean shouldBeAxial) throws SpellRuntimeException {
         return checkPos(piece, context, param, check, shouldBeAxial);
     }

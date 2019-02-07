@@ -33,12 +33,12 @@ public class PieceTrickSilence extends PieceTrick {
     @Override
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException, ArithmeticException {
         super.addToMetadata(meta);
+        SpellHelpers.ensurePositiveAndNonzero(this, time);
         double vol = SpellHelpers.ensurePositiveOrZero(this, volume);
-        double tim = SpellHelpers.ensurePositiveAndNonzero(this, time);
         double rad = SpellHelpers.ensurePositiveAndNonzero(this, radius);
-        if (vol < 0 || vol > 1)
+        if (vol > 1)
             throw new SpellCompilationException(SpellCompilationExceptions.VOLUME, x, y);
-        if (rad > 16 || rad < 0)
+        if (rad > 16)
             throw new SpellCompilationException(SpellCompilationExceptions.RADIUS, x, y);
     }
 
