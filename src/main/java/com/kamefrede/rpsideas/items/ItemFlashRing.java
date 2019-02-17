@@ -1,13 +1,10 @@
 package com.kamefrede.rpsideas.items;
 
-import com.google.common.collect.ImmutableSet;
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.gui.GuiHandler;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,7 +20,6 @@ import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.spell.ISpellContainer;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
-import vazkii.psi.common.core.handler.ConfigHandler;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.item.ItemCAD;
 import vazkii.psi.common.item.ItemSpellDrive;
@@ -31,7 +27,6 @@ import vazkii.psi.common.item.ItemSpellDrive;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Set;
 
 public class ItemFlashRing extends ItemMod implements ISpellContainer {
     public ItemFlashRing() {
@@ -51,10 +46,8 @@ public class ItemFlashRing extends ItemMod implements ISpellContainer {
             PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
             ItemStack cad = PsiAPI.getPlayerCAD(player);
             boolean did = false;
-            if (!cad.isEmpty()) {
-                int cooldown = (int) (getCostModifier(held) * 15);
-                did = ItemCAD.cast(world, player, data, held, cad, cooldown, 25, 0.5f, null);
-            }
+            if (!cad.isEmpty())
+                did = ItemCAD.cast(world, player, data, held, cad, 100, 25, 0.5f, null);
             return new ActionResult<>(did ? EnumActionResult.SUCCESS : EnumActionResult.PASS, held);
         } else if (player.isSneaking()) {
             if (world.isRemote)
@@ -110,7 +103,7 @@ public class ItemFlashRing extends ItemMod implements ISpellContainer {
 
     @Override
     public double getCostModifier(ItemStack stack) {
-        return 5d;
+        return 2;
     }
 
     @Override
@@ -134,20 +127,4 @@ public class ItemFlashRing extends ItemMod implements ISpellContainer {
         return stack.copy();
     }
 
-    @Override
-    public Set<String> getToolClasses(ItemStack stack) {
-        return ImmutableSet.of("pickaxe", "axe", "shovel");
-    }
-
-    @Override
-    public boolean canHarvestBlock(IBlockState state, ItemStack stack) {
-        Block block = state.getBlock();
-        int level = block.getHarvestLevel(state);
-        return getHarvestLevel(stack, "", null, null) >= level;
-    }
-
-    @Override
-    public int getHarvestLevel(ItemStack stack, String toolClass, @Nullable EntityPlayer player, @Nullable IBlockState blockState) {
-        return ConfigHandler.cadHarvestLevel;
-    }
 }

@@ -114,21 +114,4 @@ public class ItemInlineCaster extends ItemMod implements IPsiAddonTool, IFlowCol
 
         });
     }
-
-    @Override
-    public Set<String> getToolClasses(ItemStack stack) {
-        return ImmutableSet.of("pickaxe", "axe", "shovel");
-    }
-
-    @Override
-    public boolean canHarvestBlock(IBlockState state, ItemStack stack) {
-        Block block = state.getBlock();
-        int level = block.getHarvestLevel(state);
-        return getHarvestLevel(stack, "", null, null) >= level;
-    }
-
-    @Override
-    public int getHarvestLevel(ItemStack stack, String toolClass, @Nullable EntityPlayer player, @Nullable IBlockState blockState) {
-        return ConfigHandler.cadHarvestLevel;
-    }
 }
