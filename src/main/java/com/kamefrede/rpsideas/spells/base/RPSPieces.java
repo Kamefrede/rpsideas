@@ -141,9 +141,9 @@ public class RPSPieces {
         register(PieceOperatorAnd.class, RPSPieceNames.PIECE_OPERATOR_BIT_AND, RPSPieceNames.RADIX_NUMERICS);
         register(PieceOperatorOr.class, RPSPieceNames.PIECE_OPERATOR_BIT_OR, RPSPieceNames.RADIX_NUMERICS);
         register(PieceOperatorXor.class, RPSPieceNames.PIECE_OPERATOR_BIT_XOR, RPSPieceNames.RADIX_NUMERICS);
-        register(PieceOperatorLShift.class, RPSPieceNames.PIECE_OPERATOR_BIT_LSHR, RPSPieceNames.RADIX_NUMERICS);
-        register(PieceOperatorRShift.class, RPSPieceNames.PIECE_OPERATOR_BIT_RSHR, RPSPieceNames.RADIX_NUMERICS);
-        register(PieceOperatorLogicalRShift.class, RPSPieceNames.PIECE_OPERATOR_BIT_LOGIC_RSHR, RPSPieceNames.RADIX_NUMERICS);
+        register(PieceOperatorLShift.class, RPSPieceNames.PIECE_OPERATOR_BIT_SHL, RPSPieceNames.RADIX_NUMERICS);
+        register(PieceOperatorRShift.class, RPSPieceNames.PIECE_OPERATOR_BIT_SHR, RPSPieceNames.RADIX_NUMERICS);
+        register(PieceOperatorLogicalRShift.class, RPSPieceNames.PIECE_OPERATOR_BIT_LOGIC_SHR, RPSPieceNames.RADIX_NUMERICS);
         register(PieceOperatorSwizzle.class, RPSPieceNames.PIECE_OPERATOR_SWIZZLE, RPSPieceNames.RADIX_NUMERICS);
         register(PieceOperatorTruncate.class, RPSPieceNames.PIECE_OPERATOR_TRUNCATE, LibPieceGroups.NUMBERS_INTRO);
         register(PieceTrickLabelDebug.class, RPSPieceNames.PIECE_TRICK_LABELED_DEBUG, LibPieceGroups.MEMORY_MANAGEMENT);

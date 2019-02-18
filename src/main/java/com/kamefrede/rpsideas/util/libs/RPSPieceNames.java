@@ -103,9 +103,9 @@ public class RPSPieceNames {
     public static final String PIECE_OPERATOR_BIT_OR = "operator_bitwise_or";
     public static final String PIECE_OPERATOR_BIT_XOR = "operator_bitwise_xor";
     public static final String PIECE_OPERATOR_BIT_NOT = "operator_bitwise_not";
-    public static final String PIECE_OPERATOR_BIT_LSHR = "operator_bitwise_lshr";
-    public static final String PIECE_OPERATOR_BIT_RSHR = "operator_bitwise_rshr";
-    public static final String PIECE_OPERATOR_BIT_LOGIC_RSHR = "operator_bitwise_logic_rshr";
+    public static final String PIECE_OPERATOR_BIT_SHL = "operator_bitwise_shl";
+    public static final String PIECE_OPERATOR_BIT_SHR = "operator_bitwise_shr";
+    public static final String PIECE_OPERATOR_BIT_LOGIC_SHR = "operator_bitwise_logic_shr";
     public static final String PIECE_TRICK_LABELED_DEBUG = "trick_labeled_debug";
     public static final String PIECE_TRICK_LABELED_CHANNELED_DEBUG = "trick_labeled_channeled_debug";
 

@@ -95,9 +95,9 @@ psi.spellpiece.rpsideas.operator_bitwise_and=Operator: Bitwise AND
 psi.spellpiece.rpsideas.operator_bitwise_or=Operator: Bitwise OR
 psi.spellpiece.rpsideas.operator_bitwise_xor=Operator: Bitwise XOR
 psi.spellpiece.rpsideas.operator_bitwise_not=Operator: Bitwise NOT
-psi.spellpiece.rpsideas.operator_bitwise_lshr=Operator: Bitwise LSHR
-psi.spellpiece.rpsideas.operator_bitwise_rshr=Operator: Bitwise RSHR
-psi.spellpiece.rpsideas.operator_bitwise_logic_rshr=Operator: Bitwise Logical RSHR
+psi.spellpiece.rpsideas.operator_bitwise_shl=Operator: Bitwise SHL
+psi.spellpiece.rpsideas.operator_bitwise_shr=Operator: Bitwise SHR
+psi.spellpiece.rpsideas.operator_bitwise_logic_rshr=Operator: Bitwise LSHR
 psi.spellpiece.rpsideas.trick_labeled_debug=Trick: Labeled Debug
 psi.spellpiece.rpsideas.trick_labeled_channeled_debug=Trick: Labeled Channeled Debug
 
@@ -204,9 +204,9 @@ psi.spellpiece.rpsideas.operator_bitwise_and.desc=a & b (& c)
 psi.spellpiece.rpsideas.operator_bitwise_or.desc=a | b (| c)
 psi.spellpiece.rpsideas.operator_bitwise_xor.desc=a ^ b (^ c)
 psi.spellpiece.rpsideas.operator_bitwise_not.desc=! a
-psi.spellpiece.rpsideas.operator_bitwise_lshr.desc=a << b
-psi.spellpiece.rpsideas.operator_bitwise_rshr.desc=a >> b
-psi.spellpiece.rpsideas.operator_bitwise_logic_rshr.desc=a >>> b
+psi.spellpiece.rpsideas.operator_bitwise_shl.desc=a << b
+psi.spellpiece.rpsideas.operator_bitwise_shr.desc=a >> b
+psi.spellpiece.rpsideas.operator_bitwise_logic_shr.desc=a >>> b
 psi.spellpiece.rpsideas.trick_labeled_debug.desc=Prints out the target, labeled with the comment string
 psi.spellpiece.rpsideas.trick_labeled_channeled_debug.desc=Prints out the target labeled with the comment string, replacing any previous prints with the same label
 
@@ -479,7 +479,7 @@ psi.piecegroup.rpsideas.inter_cad=CAD Networking
 psi.piecegroup.rpsideas.inter_cad.desc=This group introduces a way for you to communicate with other CADs in the world. By using Trick: Broadcast and supplying a channel and signal value it will broadcast a number to everyone in radius of the position given.<br><br>This has some restrictions: It can only be used once per spellcast, and you can only broadcast one number at a time. If you broadcast one after another it will overwrite the previous one.
 
 psi.piecegroup.rpsideas.radix=Radix Numerics
-psi.piecegroup.rpsideas.radix.desc=This group concerns math with other radices than 10, such as octal, hexadecimal, or binary. Note that, for most applications, these operators truncate their inputs. You can't use fractions here.<br><br>The perceptive among you may have noticed the "Radix" input in Operator: Get Comment Value. A radix is, in simple terms, the base of your number. Base 10 has a radix of 10, binary has a radix of 2, and so on.<br><br>The first set of tools is bitwise operators. These all treat numbers as if they had radix 2, performing special operations on them. Operator: Bitwise NOT, the red piece of this group, will flip all bits in a number, turning 1 to 0 and 0 to 1, often flipping the number's sign as well. Bitwise AND will only set a bit if both inputs have that bit set. Bitwise OR will set a bit if any input is set. Bitwise XOR will set a bit if it's set in precisely one input. Bitwise LSHR will move all bits over to the left, effectively multiplying them by a power of two. Bitwise RSHR will move all bits over to the right, effectively dividing them by a power of two. Bitwise Logical RSHR will do the same, but will have different behavior involving negative numbers, effectively adding 2^31 - 1 to them before shifting.<br><br>Operator: Recompose Number is an operation called Swizzling, a common operation in computer graphics and information. The mask specifies the pieces of the number to take. For example, with the mask "01213" and the number "12345", the result will be composed of the specified digits: 0; the first digit, 5; the second digit, 4; the first digit, 5; the third digit, 3, resulting in 5453. Swizzling preserves the sign of the inputs, inverting it if the mask is negative. This can be done in other radices as well. For example, with a mask of "1042", a radix of 2, and a value of 9, or "1001" in binary, your output will be "1010" in binary, or 10. Swizzling is a very specific, but very powerful, mathematical tool.
+psi.piecegroup.rpsideas.radix.desc=This group concerns math with other radices than 10, such as octal, hexadecimal, or binary. Note that, for most applications, these operators truncate their inputs. You can't use fractions here.<br><br>The perceptive among you may have noticed the "Radix" input in Operator: Get Comment Value. A radix is, in simple terms, the base of your number. Base 10 has a radix of 10, binary has a radix of 2, and so on.<br><br>The first set of tools is bitwise operators. These all treat numbers as if they had radix 2, performing special operations on them. Operator: Bitwise NOT, the red piece of this group, will flip all bits in a number, turning 1 to 0 and 0 to 1, often flipping the number's sign as well. Bitwise AND will only set a bit if both inputs have that bit set. Bitwise OR will set a bit if any input is set. Bitwise XOR will set a bit if it's set in precisely one input. Bitwise SHL will move all bits over to the left, effectively multiplying them by a power of two. Bitwise SHR will move all bits over to the right, effectively dividing them by a power of two. Bitwise LSHR will do the same, but will have different behavior involving negative numbers, effectively adding 2^31 - 1 to them before shifting.<br><br>Operator: Recompose Number is an operation called Swizzling, a common operation in computer graphics and information. The mask specifies the pieces of the number to take. For example, with the mask "01213" and the number "12345", the result will be composed of the specified digits: 0; the first digit, 5; the second digit, 4; the first digit, 5; the third digit, 3, resulting in 5453. Swizzling preserves the sign of the inputs, inverting it if the mask is negative. This can be done in other radices as well. For example, with a mask of "1042", a radix of 2, and a value of 9, or "1001" in binary, your output will be "1010" in binary, or 10. Swizzling is a very specific, but very powerful, mathematical tool.
 
 rpsideas.spelldesc.requires=Requires: %s
 rpsideas.spellerror.tricknotenabled=ERROR: Trick doesn't have an enabling component.

@@ -22,10 +22,10 @@
       ]
     }
   },
-  "overrides": {
+  "overrides": [{
     "predicate": {
       "blocking": 1
     },
     "model": "rpsideas:item/ivory_shield_blocking"
-  }
+  }]
 }
