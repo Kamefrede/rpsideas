@@ -43,7 +43,7 @@ public class RPSPieces {
         PsiAPI.setGroupRequirements(RPSPieceNames.VISUAL_AUDITIVE, 21, LibPieceGroups.GREATER_INFUSION);
         PsiAPI.setGroupRequirements(RPSPieceNames.ADVANCED_LOOPCAST_CONTROL, 21, LibPieceGroups.FLOW_CONTROL);
         PsiAPI.setGroupRequirements(RPSPieceNames.INTER_CAD, 21, LibPieceGroups.MEMORY_MANAGEMENT);
-        PsiAPI.setGroupRequirements(RPSPieceNames.RADIX_NUMERICS, 25, LibPieceGroups.SECONDARY_OPERATORS, LibPieceGroups.FLOW_CONTROL, LibPieceGroups.GREATER_INFUSION);
+        PsiAPI.setGroupRequirements(RPSPieceNames.RADIX_NUMERICS, 25, LibPieceGroups.SECONDARY_OPERATORS, LibPieceGroups.MEMORY_MANAGEMENT, LibPieceGroups.GREATER_INFUSION);
 
         register(PieceTrickConjureEtherealBlock.class, RPSPieceNames.TRICK_CONJURE_ETHEREAL_BLOCK, LibPieceGroups.BLOCK_CONJURATION);
         register(PieceTrickConjureEtherealBlockSequence.class, RPSPieceNames.TRICK_CONJURE_ETHEREAL_BLOCK_SEQUENCE, LibPieceGroups.BLOCK_CONJURATION);
