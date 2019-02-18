@@ -88,6 +88,17 @@ psi.spellpiece.rpsideas.macro_caster_weak_raycast=Macro: Weak Caster Raycast
 psi.spellpiece.rpsideas.macro_caster_weak_raycast_axis=Macro: Weak Axis Caster Raycast
 psi.spellpiece.rpsideas.operator_weak_raycast=Operator: Vector Weak Raycast
 psi.spellpiece.rpsideas.operator_weak_raycast_axis=Operator: Vector Axis Weak Raycast
+psi.spellpiece.rpsideas.operator_swizzle=Operator: Recompose Number
+psi.spellpiece.rpsideas.operator_truncate=Operator: Truncate
+psi.spellpiece.rpsideas.operator_evaluate_comment=Operator: Evaluate Comment
+psi.spellpiece.rpsideas.operator_bitwise_and=Operator: Bitwise AND
+psi.spellpiece.rpsideas.operator_bitwise_or=Operator: Bitwise OR
+psi.spellpiece.rpsideas.operator_bitwise_xor=Operator: Bitwise XOR
+psi.spellpiece.rpsideas.operator_bitwise_not=Operator: Bitwise NOT
+psi.spellpiece.rpsideas.operator_bitwise_lshr=Operator: Bitwise LSHR
+psi.spellpiece.rpsideas.operator_bitwise_rshr=Operator: Bitwise RSHR
+psi.spellpiece.rpsideas.operator_bitwise_logic_rshr=Operator: Bitwise Logical RSHR
+
 
 psi.spellpiece.rpsideas.cross_connector=Cross Connector
 psi.spellpiece.rpsideas.cross_connector.desc=Can connect two paths
@@ -184,11 +195,22 @@ psi.spellpiece.rpsideas.macro_caster_weak_raycast.desc=A macro for doing a weak 
 psi.spellpiece.rpsideas.macro_caster_weak_raycast_axis.desc=A macro for doing a weak axis raycast with caster position and caster look
 psi.spellpiece.rpsideas.operator_weak_raycast.desc=Gets a raycast result, stopping at liquids (max 32)
 psi.spellpiece.rpsideas.operator_weak_raycast_axis.desc=Gets a raycast side, stopping at liquids (max 32)
+psi.spellpiece.rpsideas.operator_swizzle.desc=Reconstructs a number according to the pattern in the mask
+psi.spellpiece.rpsideas.operator_truncate.desc=Chops off the fractional component of a number
+psi.spellpiece.rpsideas.operator_evaluate_comment.desc=Evaluates a comment as a mathematical expression
+psi.spellpiece.rpsideas.operator_bitwise_and.desc=a & b (& c)
+psi.spellpiece.rpsideas.operator_bitwise_or.desc=a | b (| c)
+psi.spellpiece.rpsideas.operator_bitwise_xor.desc=a ^ b (^ c)
+psi.spellpiece.rpsideas.operator_bitwise_not.desc=! a
+psi.spellpiece.rpsideas.operator_bitwise_lshr.desc=a << b
+psi.spellpiece.rpsideas.operator_bitwise_rshr.desc=a >> b
+psi.spellpiece.rpsideas.operator_bitwise_logic_rshr.desc=a >>> b
 
 psi.datatype.String=String
 rpsideas.datatype.String=String
 rpsideas.datatype.BlockProperties=Properties
 rpsideas.spellerror.nthroot=ERROR: Even numbered roots can't accept negative numbers
+rpsideas.spellerror.invalid_base=ERROR: Cannot interpret bases below 2
 rpsideas.spellerror.length=ERROR: Lengths can't be negative
 rpsideas.spellerror.nonaxial=ERROR: Vector cannot be non-axial
 rpsideas.spellerror.outofbounds=ERROR: The provided index is not within the range of the list
@@ -209,6 +231,7 @@ rpsideas.spellerror.comparator=Comparators can only measure in the 4 cardinal di
 rpsideas.spellparam.root=Root
 rpsideas.spellparam.degree=Degrees
 rpsideas.spellparam.radian=Radians
+rpsideas.spellparam.mask=Mask
 rpsideas.spellparam.list=Entity List
 rpsideas.spellparam.vector=Vector
 rpsideas.spellparam.axis=Axis
@@ -234,22 +257,6 @@ rpsideas.spellparam.to1=To
 rpsideas.spellparam.to2=To
 rpsideas.spellparam.punching_bag=Punching Bag
 psi.datatype.BlockProperties=Block Properties
-
-rpsideas.learn.usage=/psi-learn <group> [player]
-rpsideas.learn.success=Successfully taught %s %s
-rpsideas.learn.success.all=Successfully taught %s all of Psi
-rpsideas.learn.should_not=%s already knows %s
-rpsideas.learn.players=%s isn't a player, only players can have Psi knowledge
-rpsideas.learn.not_a_group='%s' is not a valid Psi piece group
-rpsideas.learn.unknown=A CME has occurred. The cause is unknowable.
-
-rpsideas.unlearn.usage=/psi-unlearn <group> [player]
-rpsideas.unlearn.success=Successfully made %s forget %s
-rpsideas.unlearn.success.all=Successfully made %s forget all of Psi
-rpsideas.unlearn.should_not=%s doesn't know %s
-rpsideas.unlearn.players=%s isn't a player, only players can have Psi knowledge
-rpsideas.unlearn.not_a_group='%s' is not a valid Psi piece group
-rpsideas.unlearn.unknown=A CME has occurred. The cause is unknowable.
 
 key.category.rpsideas=Random PSIdeas
 rpsideas.kb.offhandcast=Use CAD in Off-Hand slot
@@ -462,10 +469,13 @@ psi.piecegroup.rpsideas.visual_auditive=Sight and Sound
 psi.piecegroup.rpsideas.visual_auditive.desc=This group introduces tricks that evoke visual or auditory sensations.<br><br>Various visual effects, such as Trick: Conjure Circle and Trick: Conjure Text can be found here.<br><br>Trick: Emit Note plays a sound at a given position. Its parameters are as follows:<br><br>Instrument: [0,10], corresponding to the following:<br>[0] Harp/Piano<br>[1] Bass Drum<br>[2] Snare Drum<br>[3] Clicks and Sticks<br>[4] Bass Guitar<br>[5] Flute<br>[6] Bell<br>[7] Guitar<br>[8] Chime<br>[9] Xylophone<br>[10] Strong Harp<br><br>Volume: (0,1]<br><br>Pitch: [0,24], controls what note the trick plays.
 
 psi.piecegroup.rpsideas.advanced_loopcast_control=Flow Control II
-psi.piecegroup.rpsideas.advanced_loopcast_control.desc=This group introduces various tricks and selectors to further enhance the flow control of both loopcast and spells.<br><br>The main piece of this group is Selector: Sucess Counter, which, when placed on a piece of armor, returns the amount of times a spell has been cast.<br><br>Trick: Spin Chamber takes an offset. If it is negative, it will select the previous bullet in the CAD. If the offset is positive, it will select the next bullet.
+psi.piecegroup.rpsideas.advanced_loopcast_control.desc=This group introduces various tricks and selectors to further enhance the flow control of both loopcast and spells.<br><br>The main piece of this group is Selector: Success Counter, which, when placed on a piece of armor, returns the amount of times a spell has been cast.<br><br>Trick: Spin Chamber takes an offset. If it is negative, it will select the previous bullet in the CAD. If the offset is positive, it will select the next bullet.
 
 psi.piecegroup.rpsideas.inter_cad=CAD Networking
 psi.piecegroup.rpsideas.inter_cad.desc=This group introduces a way for you to communicate with other CADs in the world. By using Trick: Broadcast and supplying a channel and signal value it will broadcast a number to everyone in radius of the position given.<br><br>This has some restrictions: It can only be used once per spellcast, and you can only broadcast one number at a time. If you broadcast one after another it will overwrite the previous one.
+
+psi.piecegroup.rpsideas.radix=Radix Numerics
+psi.piecegroup.rpsideas.radix.desc=This group concerns math with other radices than 10, such as octal, hexadecimal, or binary. Note that, for most applications, these operators truncate their inputs. You can't use fractions here.<br><br>The perceptive among you may have noticed the "Radix" input in Operator: Get Comment Value. A radix is, in simple terms, the base of your number. Base 10 has a radix of 10, binary has a radix of 2, and so on.<br><br>The first set of tools is bitwise operators. These all treat numbers as if they had radix 2, performing special operations on them. Operator: Bitwise NOT, the red piece of this group, will flip all bits in a number, turning 1 to 0 and 0 to 1, often flipping the number's sign as well. Bitwise AND will only set a bit if both inputs have that bit set. Bitwise OR will set a bit if any input is set. Bitwise XOR will set a bit if it's set in precisely one input. Bitwise LSHR will move all bits over to the left, effectively multiplying them by a power of two. Bitwise RSHR will move all bits over to the right, effectively dividing them by a power of two. Bitwise Logical RSHR will do the same, but will have different behavior involving negative numbers, effectively adding 2^31 - 1 to them before shifting.<br><br>Operator: Reconstruct Number is an operation called Swizzling, a common operation in computer graphics and information. The mask specifies the pieces of the number to take. For example, with the mask "01213" and the number "12345", the result will be composed of the specified digits: 0; the first digit, 5; the second digit, 4; the first digit, 5; the third digit, 3, resulting in 5453. Swizzling preserves the sign of the inputs, inverting it if the mask is negative. This can be done in other radices as well. For example, with a mask of "1042", a radix of 2, and a value of 9, or "1001" in binary, your output will be "1010" in binary, or 10. Swizzling is a very specific, but very powerful, mathematical tool.
 
 rpsideas.spelldesc.requires=Requires: %s
 rpsideas.spellerror.tricknotenabled=ERROR: Trick doesn't have an enabling component.

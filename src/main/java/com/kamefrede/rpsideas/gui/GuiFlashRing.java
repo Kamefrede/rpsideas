@@ -1,7 +1,7 @@
 package com.kamefrede.rpsideas.gui;
 
 import com.kamefrede.rpsideas.network.MessageFlashSync;
-import com.kamefrede.rpsideas.util.RPSProgrammerMethodHandles;
+import com.kamefrede.rpsideas.util.RPSMethodHandles;
 import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -22,14 +22,14 @@ public class GuiFlashRing extends GuiProgrammer {
         programmer.spell.uuid = UUID.randomUUID();
         PacketHandler.NETWORK.sendToServer(new MessageFlashSync(programmer.spell));
         onSelectedChanged();
-        RPSProgrammerMethodHandles.getSpellNameField(this).setFocused(nameOnly);
+        RPSMethodHandles.getSpellNameField(this).setFocused(nameOnly);
 
-        SpellCompiler compiler = RPSProgrammerMethodHandles.getSpellCompiler(this);
+        SpellCompiler compiler = RPSMethodHandles.getSpellCompiler(this);
 
         if (!nameOnly ||
                 (compiler.getError() != null && compiler.getError().equals(SpellCompilationException.NO_NAME)) ||
                 programmer.spell.name.isEmpty()) {
-            RPSProgrammerMethodHandles.setSpellCompiler(this, new SpellCompiler(programmer.spell));
+            RPSMethodHandles.setSpellCompiler(this, new SpellCompiler(programmer.spell));
         }
     }
 }

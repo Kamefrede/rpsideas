@@ -48,9 +48,18 @@ minecraft {
     serverJvmArgs += ["-Dfml.coreMods.load=com.teamwizardry.librarianlib.asm.LibLibCorePlugin"]
 }
 
+sourceSets {
+    main {
+        java {
+            srcDirs += "EvalEx/src/main/java"
+        }
+    }
+}
+
 idea {
     module {
         excludeDirs += [file("run"), file("out"), file("gradle"), file(".idea")]
+        generatedSourceDirs += file("EvalEx/src/main/java")
     }
 
     if (it.project != null)

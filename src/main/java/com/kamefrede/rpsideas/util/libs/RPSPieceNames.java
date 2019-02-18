@@ -96,6 +96,16 @@ public class RPSPieceNames {
     public static final String PIECE_OPERATOR_WEAK_RAYCAST_AXIS = "operator_weak_raycast_axis";
     public static final String TRICK_SILENCE = "silence";
     public static final String CROSS_CONNECTOR = "cross_connector";
+    public static final String PIECE_OPERATOR_SWIZZLE = "operator_swizzle";
+    public static final String PIECE_OPERATOR_TRUNCATE = "operator_truncate";
+    public static final String PIECE_OPERATOR_PARSE_COMMENT = "operator_evaluate_comment";
+    public static final String PIECE_OPERATOR_BIT_AND = "operator_bitwise_and";
+    public static final String PIECE_OPERATOR_BIT_OR = "operator_bitwise_or";
+    public static final String PIECE_OPERATOR_BIT_XOR = "operator_bitwise_xor";
+    public static final String PIECE_OPERATOR_BIT_NOT = "operator_bitwise_not";
+    public static final String PIECE_OPERATOR_BIT_LSHR = "operator_bitwise_lshr";
+    public static final String PIECE_OPERATOR_BIT_RSHR = "operator_bitwise_rshr";
+    public static final String PIECE_OPERATOR_BIT_LOGIC_RSHR = "operator_bitwise_logic_rshr";
 
     public static final String ALTERNATE_CONJURATION = RPSIdeas.MODID + ".redstone_conjuration";
     public static final String SECONDARY_VECTOR_OPERATORS = RPSIdeas.MODID + ".secondary_vectors";
@@ -104,6 +114,7 @@ public class RPSPieceNames {
     public static final String VISUAL_AUDITIVE = RPSIdeas.MODID + ".visual_auditive";
     public static final String ADVANCED_LOOPCAST_CONTROL = RPSIdeas.MODID + ".advanced_loopcast_control";
     public static final String INTER_CAD = RPSIdeas.MODID + ".inter_cad";
+    public static final String RADIX_NUMERICS = RPSIdeas.MODID + ".radix_numerics";
 
     public static final String MANA_PSIONICS = RPSIdeas.MODID + ".mana_psionics";
     public static final String MAKE_BURST = "make_mana_burst";

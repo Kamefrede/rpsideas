@@ -14,11 +14,10 @@ import com.kamefrede.rpsideas.spells.operator.list.PieceOperatorListExclusion;
 import com.kamefrede.rpsideas.spells.operator.list.PieceOperatorListIntersection;
 import com.kamefrede.rpsideas.spells.operator.list.PieceOperatorListSize;
 import com.kamefrede.rpsideas.spells.operator.list.PieceOperatorListUnion;
-import com.kamefrede.rpsideas.spells.operator.math.PieceOperatorRoot;
-import com.kamefrede.rpsideas.spells.operator.math.PieceOperatorSignum;
-import com.kamefrede.rpsideas.spells.operator.math.PieceOperatorToDegrees;
-import com.kamefrede.rpsideas.spells.operator.math.PieceOperatorToRadians;
+import com.kamefrede.rpsideas.spells.operator.math.*;
+import com.kamefrede.rpsideas.spells.operator.math.bitwise.*;
 import com.kamefrede.rpsideas.spells.operator.string.PieceOperatorGetComment;
+import com.kamefrede.rpsideas.spells.operator.string.PieceOperatorGetCommentExpression;
 import com.kamefrede.rpsideas.spells.operator.string.PieceOperatorGetCommentNumber;
 import com.kamefrede.rpsideas.spells.operator.vector.*;
 import com.kamefrede.rpsideas.spells.selector.*;
@@ -44,6 +43,7 @@ public class RPSPieces {
         PsiAPI.setGroupRequirements(RPSPieceNames.VISUAL_AUDITIVE, 21, LibPieceGroups.GREATER_INFUSION);
         PsiAPI.setGroupRequirements(RPSPieceNames.ADVANCED_LOOPCAST_CONTROL, 21, LibPieceGroups.FLOW_CONTROL);
         PsiAPI.setGroupRequirements(RPSPieceNames.INTER_CAD, 21, LibPieceGroups.MEMORY_MANAGEMENT);
+        PsiAPI.setGroupRequirements(RPSPieceNames.RADIX_NUMERICS, 25, LibPieceGroups.SECONDARY_OPERATORS, LibPieceGroups.FLOW_CONTROL, LibPieceGroups.GREATER_INFUSION);
 
         register(PieceTrickConjureEtherealBlock.class, RPSPieceNames.TRICK_CONJURE_ETHEREAL_BLOCK, LibPieceGroups.BLOCK_CONJURATION);
         register(PieceTrickConjureEtherealBlockSequence.class, RPSPieceNames.TRICK_CONJURE_ETHEREAL_BLOCK_SEQUENCE, LibPieceGroups.BLOCK_CONJURATION);
@@ -87,6 +87,7 @@ public class RPSPieces {
         register(PieceTrickMoveBlockSequence.class, RPSPieceNames.TRICK_MOVE_BLOCK_SEQUENCE, LibPieceGroups.BLOCK_MOVEMENT);
         register(PieceOperatorGetComment.class, RPSPieceNames.OPERATOR_GET_COMMENT, LibPieceGroups.MEMORY_MANAGEMENT);
         register(PieceOperatorGetCommentNumber.class, RPSPieceNames.OPERATOR_GET_COMMENT_NUMBER, LibPieceGroups.MEMORY_MANAGEMENT);
+        register(PieceOperatorGetCommentExpression.class, RPSPieceNames.PIECE_OPERATOR_PARSE_COMMENT, LibPieceGroups.MEMORY_MANAGEMENT);
         register(PieceSelectorGlowing.class, RPSPieceNames.SELECTOR_GLOWING, LibPieceGroups.ENTITIES_INTRO);
         register(PieceSelectorListFilter.class, RPSPieceNames.SELECTOR_LIST_FILTER, LibPieceGroups.ENTITIES_INTRO);
         register(PieceOperatorVisibleToEntity.class, RPSPieceNames.OPERATOR_IS_VISIBLE, LibPieceGroups.DETECTION_DYNAMICS);
@@ -136,6 +137,15 @@ public class RPSPieces {
         register(PieceOperatorWeakRaycast.class, RPSPieceNames.PIECE_OPERATOR_WEAK_RAYCAST, RPSPieceNames.SECONDARY_VECTOR_OPERATORS);
         register(PieceOperatorWeakRaycastAxis.class, RPSPieceNames.PIECE_OPERATOR_WEAK_RAYCAST_AXIS, RPSPieceNames.SECONDARY_VECTOR_OPERATORS);
         register(PieceTrickSilence.class, RPSPieceNames.TRICK_SILENCE, RPSPieceNames.VISUAL_AUDITIVE);
+        register(PieceOperatorNot.class, RPSPieceNames.PIECE_OPERATOR_BIT_NOT, RPSPieceNames.RADIX_NUMERICS, true);
+        register(PieceOperatorAnd.class, RPSPieceNames.PIECE_OPERATOR_BIT_AND, RPSPieceNames.RADIX_NUMERICS);
+        register(PieceOperatorOr.class, RPSPieceNames.PIECE_OPERATOR_BIT_OR, RPSPieceNames.RADIX_NUMERICS);
+        register(PieceOperatorXor.class, RPSPieceNames.PIECE_OPERATOR_BIT_XOR, RPSPieceNames.RADIX_NUMERICS);
+        register(PieceOperatorLShift.class, RPSPieceNames.PIECE_OPERATOR_BIT_LSHR, RPSPieceNames.RADIX_NUMERICS);
+        register(PieceOperatorRShift.class, RPSPieceNames.PIECE_OPERATOR_BIT_RSHR, RPSPieceNames.RADIX_NUMERICS);
+        register(PieceOperatorLogicalRShift.class, RPSPieceNames.PIECE_OPERATOR_BIT_LOGIC_RSHR, RPSPieceNames.RADIX_NUMERICS);
+        register(PieceOperatorSwizzle.class, RPSPieceNames.PIECE_OPERATOR_SWIZZLE, RPSPieceNames.RADIX_NUMERICS);
+        register(PieceOperatorTruncate.class, RPSPieceNames.PIECE_OPERATOR_TRUNCATE, LibPieceGroups.NUMBERS_INTRO);
 
         registerNoTexture(PieceCrossConnector.class, RPSPieceNames.CROSS_CONNECTOR, LibPieceGroups.FLOW_CONTROL);
         registerTexture(RPSPieceNames.CROSS_CONNECTOR, LibMisc.MOD_ID, LibPieceNames.CONNECTOR);
