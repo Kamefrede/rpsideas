@@ -106,6 +106,9 @@ public class RPSPieceNames {
     public static final String PIECE_OPERATOR_BIT_LSHR = "operator_bitwise_lshr";
     public static final String PIECE_OPERATOR_BIT_RSHR = "operator_bitwise_rshr";
     public static final String PIECE_OPERATOR_BIT_LOGIC_RSHR = "operator_bitwise_logic_rshr";
+    public static final String PIECE_TRICK_LABELED_DEBUG = "trick_labeled_debug";
+    public static final String PIECE_TRICK_LABELED_CHANNELED_DEBUG = "trick_labeled_channeled_debug";
+
 
     public static final String ALTERNATE_CONJURATION = RPSIdeas.MODID + ".redstone_conjuration";
     public static final String SECONDARY_VECTOR_OPERATORS = RPSIdeas.MODID + ".secondary_vectors";

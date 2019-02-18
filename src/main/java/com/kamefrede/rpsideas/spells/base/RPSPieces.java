@@ -146,6 +146,8 @@ public class RPSPieces {
         register(PieceOperatorLogicalRShift.class, RPSPieceNames.PIECE_OPERATOR_BIT_LOGIC_RSHR, RPSPieceNames.RADIX_NUMERICS);
         register(PieceOperatorSwizzle.class, RPSPieceNames.PIECE_OPERATOR_SWIZZLE, RPSPieceNames.RADIX_NUMERICS);
         register(PieceOperatorTruncate.class, RPSPieceNames.PIECE_OPERATOR_TRUNCATE, LibPieceGroups.NUMBERS_INTRO);
+        register(PieceTrickLabelDebug.class, RPSPieceNames.PIECE_TRICK_LABELED_DEBUG, LibPieceGroups.MEMORY_MANAGEMENT);
+        register(PieceTrickLabelDebugSpamless.class, RPSPieceNames.PIECE_TRICK_LABELED_CHANNELED_DEBUG, LibPieceGroups.MEMORY_MANAGEMENT);
 
         registerNoTexture(PieceCrossConnector.class, RPSPieceNames.CROSS_CONNECTOR, LibPieceGroups.FLOW_CONTROL);
         registerTexture(RPSPieceNames.CROSS_CONNECTOR, LibMisc.MOD_ID, LibPieceNames.CONNECTOR);

@@ -1,12 +1,17 @@
 package com.kamefrede.rpsideas.spells.operator.math.bitwise;
 
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.util.text.TextFormatting;
+import vazkii.psi.api.internal.TooltipHelper;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellParam;
 import vazkii.psi.api.spell.SpellRuntimeException;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.piece.PieceOperator;
+
+import java.util.List;
 
 /**
  * @author WireSegal
@@ -35,6 +40,20 @@ public class PieceOperatorAnd extends PieceOperator {
         int num3 = (int) SpellHelpers.getNumber(this, context, this.num3, -1);
 
         return (double) (num1 & num2 & num3);
+    }
+
+    @Override
+    public void addToTooltipAfterShift(List<String> tooltip) {
+        tooltip.add(TextFormatting.GRAY + I18n.format(this.getUnlocalizedDesc())); // Because & is used in desc
+        TooltipHelper.addToTooltip(tooltip, "");
+        String eval = this.getEvaluationTypeString();
+        TooltipHelper.addToTooltip(tooltip, "<- " + TextFormatting.GOLD + eval);
+
+        for (SpellParam param : this.paramSides.keySet()) {
+            String pName = TooltipHelper.local(param.name);
+            String pEval = param.getRequiredTypeString();
+            TooltipHelper.addToTooltip(tooltip, (param.canDisable ? "[->] " : " ->  ") + TextFormatting.YELLOW + pName + " [" + pEval + "]");
+        }
     }
 
     @Override

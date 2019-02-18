@@ -23,7 +23,7 @@ public class PieceOperatorTruncate extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        return (double) (int) SpellHelpers.getNumber(this, context, num, 0);
+        return (double) (long) SpellHelpers.getNumber(this, context, num, 0);
     }
 
     @Override

@@ -98,6 +98,8 @@ psi.spellpiece.rpsideas.operator_bitwise_not=Operator: Bitwise NOT
 psi.spellpiece.rpsideas.operator_bitwise_lshr=Operator: Bitwise LSHR
 psi.spellpiece.rpsideas.operator_bitwise_rshr=Operator: Bitwise RSHR
 psi.spellpiece.rpsideas.operator_bitwise_logic_rshr=Operator: Bitwise Logical RSHR
+psi.spellpiece.rpsideas.trick_labeled_debug=Trick: Labeled Debug
+psi.spellpiece.rpsideas.trick_labeled_channeled_debug=Trick: Labeled Channeled Debug
 
 
 psi.spellpiece.rpsideas.cross_connector=Cross Connector
@@ -205,6 +207,8 @@ psi.spellpiece.rpsideas.operator_bitwise_not.desc=! a
 psi.spellpiece.rpsideas.operator_bitwise_lshr.desc=a << b
 psi.spellpiece.rpsideas.operator_bitwise_rshr.desc=a >> b
 psi.spellpiece.rpsideas.operator_bitwise_logic_rshr.desc=a >>> b
+psi.spellpiece.rpsideas.trick_labeled_debug.desc=Prints out the target, labeled with the comment string
+psi.spellpiece.rpsideas.trick_labeled_channeled_debug.desc=Prints out the target labeled with the comment string, replacing any previous prints with the same label
 
 psi.datatype.String=String
 rpsideas.datatype.String=String
