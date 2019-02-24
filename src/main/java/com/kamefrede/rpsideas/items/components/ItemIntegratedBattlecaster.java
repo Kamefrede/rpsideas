@@ -71,7 +71,7 @@ public class ItemIntegratedBattlecaster extends ItemMod {
     @SideOnly(Side.CLIENT)
     public static void addTooltip(ItemTooltipEvent event) {
         if (hasBattlecaster(event.getItemStack()))
-            event.getToolTip().add(1, TooltipHelper.local(RPSIdeas.MODID + ".battlecaster_attached").replace("&", "§"));
+            event.getToolTip().add(1, TooltipHelper.local(RPSIdeas.MODID + ".battlecaster_attached").replace("&", "\u00a7"));
     }
 
     @SubscribeEvent

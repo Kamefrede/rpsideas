@@ -25,7 +25,7 @@ import vazkii.psi.common.item.ItemCAD;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-import static vazkii.psi.common.item.tool.ItemPsimetalTool.raytraceFromEntity;
+import static vazkii.psi.common.item.tool.IPsimetalTool.raytraceFromEntity;
 
 public class ItemPsimetalShears extends ItemMod implements IPsiAddonTool {
     public ItemPsimetalShears(String name) {

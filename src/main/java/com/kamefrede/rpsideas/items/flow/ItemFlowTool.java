@@ -1,7 +1,6 @@
 package com.kamefrede.rpsideas.items.flow;
 
 import com.kamefrede.rpsideas.items.ItemPsimetalHoe;
-import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
 import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
 import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
 import com.teamwizardry.librarianlib.features.base.item.ItemModTool;
@@ -28,12 +27,12 @@ import vazkii.psi.api.cad.ISocketable;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.item.ItemCAD;
 import vazkii.psi.common.item.base.ModItems;
-import vazkii.psi.common.item.tool.ItemPsimetalTool;
+import vazkii.psi.common.item.tool.IPsimetalTool;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class ItemFlowTool extends ItemModTool implements IPsiAddonTool, IFlowColorAcceptor {
+public class ItemFlowTool extends ItemModTool implements IFlowColorAcceptor, IPsimetalTool {
     private static final ToolMaterial mat = PsiAPI.PSIMETAL_TOOL_MATERIAL;
     private final boolean ebony;
 
@@ -59,7 +58,7 @@ public class ItemFlowTool extends ItemModTool implements IPsiAddonTool, IFlowCol
             ItemStack bullet = getBulletInSocket(stack, getSelectedSlot(stack));
             ItemCAD.cast(player.world, player, data, bullet, playerCad, 5, 10, 0.05f, spellContext -> {
                 spellContext.tool = stack;
-                spellContext.positionBroken = ItemPsimetalTool.raytraceFromEntity(player.world, player, false, 5.0);
+                spellContext.positionBroken = IPsimetalTool.raytraceFromEntity(player.world, player, false, 5.0);
             });
         }
 
@@ -89,6 +88,11 @@ public class ItemFlowTool extends ItemModTool implements IPsiAddonTool, IFlowCol
     public boolean onEntityItemUpdate(EntityItem ent) {
         FlowColorsHelper.clearColorizer(ent.getItem());
         return super.onEntityItemUpdate(ent);
+    }
+
+    @Override
+    public boolean requiresSneakForSpellSet(ItemStack stack) {
+        return false;
     }
 
 
