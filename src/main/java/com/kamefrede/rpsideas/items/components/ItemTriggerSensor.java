@@ -2,6 +2,7 @@ package com.kamefrede.rpsideas.items.components;
 
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.util.helpers.ClientHelpers;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.item.IItemColorProvider;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
@@ -12,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -26,6 +28,8 @@ import vazkii.psi.common.entity.EntitySpellCharge;
 import vazkii.psi.common.item.ItemDetonator;
 
 import java.util.List;
+
+import static vazkii.psi.api.spell.SpellContext.MAX_DISTANCE;
 
 @Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
 public class ItemTriggerSensor extends ItemMod implements IExosuitSensor, IItemColorProvider {
@@ -54,12 +58,20 @@ public class ItemTriggerSensor extends ItemMod implements IExosuitSensor, IItemC
         EntityPlayer player = ev.getEntityPlayer();
         ItemStack stack = ev.getItemStack();
         if (!stack.isEmpty() && stack.getItem() instanceof ItemDetonator) {
+            AxisAlignedBB boundingBox = player.getEntityBoundingBox().grow(32);
+
             if (player.world instanceof WorldServer) {
                 WorldServer server = (WorldServer) player.world;
-                server.addScheduledTask(() -> firePlayerDetonation(player));
+
+                List<EntityPlayer> players = player.world.getEntitiesWithinAABB(EntityPlayer.class, boundingBox,
+                        e -> e != null && e.getDistanceSq(player) < MAX_DISTANCE * MAX_DISTANCE);
+
+                for (EntityPlayer target : players)
+                    SpellHelpers.scheduleTask(server, () -> firePlayerDetonation(target));
             }
 
-            List<EntitySpellCharge> charges = player.world.getEntitiesWithinAABB(EntitySpellCharge.class, player.getEntityBoundingBox().grow(32, 32, 32));
+            List<EntitySpellCharge> charges = player.world.getEntitiesWithinAABB(EntitySpellCharge.class, boundingBox,
+                    e -> e != null && e.getDistanceSq(player) < MAX_DISTANCE * MAX_DISTANCE);
             if (charges.isEmpty()) {
                 if (!player.world.isRemote)
                     player.world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.UI_BUTTON_CLICK, SoundCategory.PLAYERS, 1F, 1F);

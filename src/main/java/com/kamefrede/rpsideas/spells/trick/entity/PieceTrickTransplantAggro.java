@@ -35,7 +35,7 @@ public class PieceTrickTransplantAggro extends PieceTrick {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         Entity ent = SpellHelpers.ensureNonnullEntity(this, context, target);
-        EntityLivingBase punching = SpellHelpers.ensureNonnullandLivingBaseEntity(this, context, bag);
+        EntityLivingBase punching = SpellHelpers.ensureNonnullAndLivingEntity(this, context, bag);
         if (!(ent instanceof EntityLiving || ent instanceof EntityTNTPrimed))
             throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
         if (ent.isNonBoss() && !punching.isNonBoss())

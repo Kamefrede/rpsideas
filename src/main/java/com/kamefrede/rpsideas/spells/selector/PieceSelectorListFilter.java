@@ -34,7 +34,7 @@ public class PieceSelectorListFilter extends PieceSelector {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         double numVal = SpellHelpers.getNumber(this, context, num, 0);
-        EntityListWrapper listVal = SpellHelpers.ensureNonullorEmptyList(this, context, list);
+        EntityListWrapper listVal = SpellHelpers.ensureNonnullOrEmptyList(this, context, list);
         int val = (int) numVal;
 
         if (val >= 0 && val < listVal.unwrap().size())

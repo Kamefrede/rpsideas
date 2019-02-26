@@ -6,7 +6,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
@@ -17,11 +16,9 @@ import net.minecraft.world.WorldServer;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.wrapper.EntityListWrapper;
-import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.spell.trick.block.PieceTrickBreakBlock;
 import vazkii.psi.common.spell.trick.block.PieceTrickPlaceBlock;
 
-import java.util.ConcurrentModificationException;
 import java.util.concurrent.Executors;
 
 public class SpellHelpers {
@@ -137,7 +134,7 @@ public class SpellHelpers {
             return val;
     }
 
-    public static EntityListWrapper ensureNonullorEmptyList(SpellPiece piece, SpellContext context, SpellParam param) throws SpellRuntimeException {
+    public static EntityListWrapper ensureNonnullOrEmptyList(SpellPiece piece, SpellContext context, SpellParam param) throws SpellRuntimeException {
         EntityListWrapper list = piece.getParamValue(context, param);
         if (list == null || list.unwrap().isEmpty())
             throw new SpellRuntimeException(SpellRuntimeExceptions.NULL_LIST);
@@ -158,7 +155,7 @@ public class SpellHelpers {
         return ent;
     }
 
-    public static EntityLivingBase ensureNonnullandLivingBaseEntity(SpellPiece piece, SpellContext context, SpellParam param) throws SpellRuntimeException {
+    public static EntityLivingBase ensureNonnullAndLivingEntity(SpellPiece piece, SpellContext context, SpellParam param) throws SpellRuntimeException {
         Entity ent = ensureNonnullEntity(piece, context, param);
         if (!(ent instanceof EntityLivingBase))
             throw new SpellRuntimeException(SpellRuntimeExceptions.ENTITY_NOT_LIVING);
@@ -207,12 +204,4 @@ public class SpellHelpers {
         return distanceSquared(a.posX, a.posY, a.posZ, b.posX, b.posY, b.posZ);
     }
 
-    public static PlayerDataHandler.PlayerData getPlayerData(EntityPlayer player) {
-        try {
-            return PlayerDataHandler.get(player);
-        } catch (ConcurrentModificationException ignored) {
-            // Sometimes the PlayerDataHandler will CME for no known reason.
-            return null;
-        }
-    }
 }

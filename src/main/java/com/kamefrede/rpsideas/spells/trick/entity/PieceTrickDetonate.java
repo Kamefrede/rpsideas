@@ -1,20 +1,21 @@
 package com.kamefrede.rpsideas.spells.trick.entity;
 
+import com.kamefrede.rpsideas.spells.enabler.styles.EnumAssemblyStyle;
+import com.kamefrede.rpsideas.spells.enabler.styles.PieceStyledTrick;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.WorldServer;
-import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
-import vazkii.psi.api.spell.piece.PieceTrick;
 import vazkii.psi.common.entity.EntitySpellCharge;
 
 import java.util.List;
 
 import static com.kamefrede.rpsideas.items.components.ItemTriggerSensor.firePlayerDetonation;
+import static vazkii.psi.api.spell.SpellContext.MAX_DISTANCE;
 
-public class PieceTrickDetonate extends PieceTrick {
+public class PieceTrickDetonate extends PieceStyledTrick {
 
     private SpellParam radius;
 
@@ -30,7 +31,7 @@ public class PieceTrickDetonate extends PieceTrick {
     @Override
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
         super.addToMetadata(meta);
-        double radiusVal = SpellHelpers.ensurePositiveOrZero(this, radius);
+        double radiusVal = Math.min(32, SpellHelpers.ensurePositiveOrZero(this, radius));
         meta.addStat(EnumSpellStat.POTENCY, (int) Math.min(radiusVal, 5));
         meta.addStat(EnumSpellStat.COST, (int) Math.ceil(radiusVal * 5));
 
@@ -39,28 +40,34 @@ public class PieceTrickDetonate extends PieceTrick {
     }
 
     @Override
+    public EnumAssemblyStyle style() {
+        return EnumAssemblyStyle.INFILTRATION;
+    }
+
+    @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        double radiusVal = SpellHelpers.getNumber(this, context, radius, 0);
+        double radiusVal = SpellHelpers.getBoundedNumber(this, context, radius, MAX_DISTANCE);
+        boolean canExceed = hasStyle(context);
+
+        AxisAlignedBB bb = context.focalPoint.getEntityBoundingBox().grow(radiusVal);
+
+        List<EntitySpellCharge> charges = context.focalPoint.world.getEntitiesWithinAABB(EntitySpellCharge.class, bb,
+                (EntitySpellCharge e) -> e != null && e != context.focalPoint &&
+                        (canExceed || e.getDistanceSq(context.caster) < MAX_DISTANCE * MAX_DISTANCE));
+
+        for (EntitySpellCharge ent : charges)
+            ent.doExplosion();
+
 
         if (context.caster.world instanceof WorldServer) {
             WorldServer server = (WorldServer) context.caster.world;
-            SpellHelpers.scheduleTask(server, () -> firePlayerDetonation(context.caster));
-        }
 
-        if (radiusVal > 0) {
-            Vector3 positionVal = Vector3.fromEntity(context.focalPoint);
-            if (context.focalPoint instanceof EntityPlayer)
-                positionVal.add(0, context.focalPoint.getEyeHeight(), 0);
+            List<EntityPlayer> players = context.focalPoint.world.getEntitiesWithinAABB(EntityPlayer.class, bb,
+                    (EntityPlayer e) -> e != null &&
+                            (canExceed || e.getDistanceSq(context.caster) < MAX_DISTANCE * MAX_DISTANCE));
 
-            SpellHelpers.isBlockPosInRadius(context, positionVal.toBlockPos());
-
-            AxisAlignedBB axis = new AxisAlignedBB(positionVal.x - radiusVal, positionVal.y - radiusVal, positionVal.z - radiusVal, positionVal.x + radiusVal, positionVal.y + radiusVal, positionVal.z + radiusVal);
-
-            List<EntitySpellCharge> list = context.focalPoint.world.getEntitiesWithinAABB(EntitySpellCharge.class, axis,
-                    (EntitySpellCharge e) -> e != null && e != context.focalPoint && context.isInRadius(e) && e.getThrower() == context.caster);
-
-            for (EntitySpellCharge ent : list)
-                ent.doExplosion();
+            for (EntityPlayer player : players)
+                SpellHelpers.scheduleTask(server, () -> firePlayerDetonation(player));
         }
 
         return null;

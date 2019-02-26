@@ -29,7 +29,7 @@ public class PieceOperatorVisibleToEntity extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        EntityLivingBase viewerEntity = SpellHelpers.ensureNonnullandLivingBaseEntity(this, context, viewer);
+        EntityLivingBase viewerEntity = SpellHelpers.ensureNonnullAndLivingEntity(this, context, viewer);
         Entity viewedEntity = SpellHelpers.ensureNonnullEntity(this, context, viewed);
 
         return viewerEntity.canEntityBeSeen(viewedEntity) ? 1.0 : 0.0;

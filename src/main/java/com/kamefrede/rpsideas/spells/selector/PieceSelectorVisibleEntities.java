@@ -44,7 +44,7 @@ public class PieceSelectorVisibleEntities extends PieceSelector {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        EntityLivingBase living = SpellHelpers.ensureNonnullandLivingBaseEntity(this, context, ent);
+        EntityLivingBase living = SpellHelpers.ensureNonnullAndLivingEntity(this, context, ent);
 
         double radiusVal = SpellHelpers.getBoundedNumber(this, context, radius, SpellContext.MAX_DISTANCE);
 

@@ -24,7 +24,7 @@ public class PieceOperatorAffectedByPotions extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        EntityLivingBase ent = SpellHelpers.ensureNonnullandLivingBaseEntity(this, context, entity);
+        EntityLivingBase ent = SpellHelpers.ensureNonnullAndLivingEntity(this, context, entity);
         return ent.getActivePotionEffects().size() > 0 ? 1.0 : 0.0;
     }
 
