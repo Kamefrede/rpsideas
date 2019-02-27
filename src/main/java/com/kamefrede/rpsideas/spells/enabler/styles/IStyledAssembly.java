@@ -15,5 +15,5 @@ public interface IStyledAssembly extends ICADAssembly, ICADComponent {
         return EnumCADComponent.ASSEMBLY;
     }
 
-    boolean enablesStyle(ItemStack stack, EnumAssemblyStyle style);
+    boolean enablesStyle(ItemStack cad, EnumAssemblyStyle style);
 }

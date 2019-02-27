@@ -5,6 +5,9 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import vazkii.psi.api.PsiAPI;
+import vazkii.psi.api.cad.EnumCADComponent;
+import vazkii.psi.api.cad.EnumCADStat;
+import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellParam;
 import vazkii.psi.api.spell.SpellPiece;
@@ -39,8 +42,18 @@ public interface IStyledPiece {
 
     default boolean hasStyle(SpellContext context) {
         ItemStack cad = PsiAPI.getPlayerCAD(context.caster);
-        return !cad.isEmpty() && cad.getItem() instanceof IStyledAssembly &&
-                ((IStyledAssembly) cad.getItem()).enablesStyle(cad, style());
+        if (cad.isEmpty())
+            return false;
+
+        ICAD cadItem = (ICAD) cad.getItem();
+
+        if (cadItem.getStatValue(cad, EnumCADStat.POTENCY) < 0)
+            return true;
+
+        ItemStack assembly = cadItem.getComponentInSlot(cad, EnumCADComponent.ASSEMBLY);
+
+        return !assembly.isEmpty() && assembly.getItem() instanceof IStyledAssembly &&
+                ((IStyledAssembly) assembly.getItem()).enablesStyle(cad, style());
     }
 
     EnumAssemblyStyle style();
