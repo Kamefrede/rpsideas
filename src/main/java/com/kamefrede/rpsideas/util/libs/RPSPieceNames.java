@@ -108,6 +108,8 @@ public class RPSPieceNames {
     public static final String PIECE_OPERATOR_BIT_LOGIC_SHR = "operator_bitwise_logic_shr";
     public static final String PIECE_TRICK_LABELED_DEBUG = "trick_labeled_debug";
     public static final String PIECE_TRICK_LABELED_CHANNELED_DEBUG = "trick_labeled_channeled_debug";
+    public static final String PIECE_TRICK_SLOT_MATCH = "trick_slot_match";
+    public static final String PIECE_TRICK_SLOT_CHANGE = "trick_slot_change";
 
 
     public static final String ALTERNATE_CONJURATION = RPSIdeas.MODID + ".redstone_conjuration";

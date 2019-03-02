@@ -26,6 +26,7 @@ public final class SpellParams {
     public static final String GENERIC_NAME_PUNCHING_BAG = "rpsideas.spellparam.punching_bag";
     public static final String GENERIC_NAME_MASK = "rpsideas.spellparam.mask";
     public static final String GENERIC_NAME_RADIX = "rpsideas.spellparam.radix";
+    public static final String GENERIC_NAME_SLOT = "rpsideas.spellparam.slot";
 
     public static final String CONNECTOR_NAME_FROM1 = "rpsideas.spellparam.from1";
     public static final String CONNECTOR_NAME_FROM2 = "rpsideas.spellparam.from2";

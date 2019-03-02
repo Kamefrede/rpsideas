@@ -11,4 +11,5 @@ public final class SpellCompilationExceptions {
     public static final String VOLUME = "rpsideas.spellerror.volume";
     public static final String INSTRUMENTS = "rpsideas.spellerror.instruments";
     public static final String RADIUS = "rpsideas.spellerror.radius";
+    public static final String SLOT = "rpsideas.spellerror.slot";
 }
