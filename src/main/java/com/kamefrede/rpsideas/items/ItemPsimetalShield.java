@@ -59,11 +59,10 @@ public class ItemPsimetalShield extends ItemModShield implements IPsiAddonTool {
     @Override
     public boolean onAxeBlocked(@NotNull ItemStack stack, @NotNull EntityPlayer player, @NotNull EntityLivingBase attacker, float amount, @NotNull DamageSource source) {
         PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
+        int psi = data.availablePsi;
         data.deductPsi(data.totalPsi / 4, 20, true);
-        if (data.availablePsi >= (data.totalPsi / 4))
-            return true;
+        return psi >= (data.totalPsi / 4);
 
-        return false;
     }
 
     @Override

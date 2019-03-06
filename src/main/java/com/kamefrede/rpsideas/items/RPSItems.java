@@ -65,7 +65,7 @@ public class RPSItems {
     public static final ItemMod optimizedCadCore = new ItemOptimizedCADCore();
     public static final ItemMod psiCuffs = new ItemPsiCuffs();
     public static final ItemMod psiCuffsKeys = new ItemPsiCuffKey();
-    // public static final ItemMod psimetalShield = new ItemPsimetalShield(RPSItemNames.PSIMETAL_SHIELD);
+    public static final ItemMod psimetalShield = new ItemPsimetalShield(RPSItemNames.PSIMETAL_SHIELD);
     // public static final ItemMod ivoryShield = new ItemFlowShield(RPSItemNames.IVORY_SHIELD);
     // public static final ItemMod ebonyShield = new ItemFlowShield(RPSItemNames.EBONY_SHIELD);
 
