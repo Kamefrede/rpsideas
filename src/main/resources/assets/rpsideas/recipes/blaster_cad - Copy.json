@@ -1,0 +1,25 @@
+{
+  "result": {
+    "item": "rpsideas:psi_cuff_key",
+    "count": 1
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " E ",
+    "BDB",
+    " E "
+  ],
+  "key": {
+    "E": {
+      "type": "forge:ore_dict",
+      "ore": "ingotEbony"
+    },
+    "D": {
+      "type": "forge:ore_dict",
+      "ore": "dustPsi"
+    },
+    "B": {
+      "item": "minecraft:iron_bars"
+    }
+  }
+}

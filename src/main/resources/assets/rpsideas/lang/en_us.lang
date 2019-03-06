@@ -97,9 +97,19 @@ psi.spellpiece.rpsideas.operator_bitwise_xor=Operator: Bitwise XOR
 psi.spellpiece.rpsideas.operator_bitwise_not=Operator: Bitwise NOT
 psi.spellpiece.rpsideas.operator_bitwise_shl=Operator: Bitwise SHL
 psi.spellpiece.rpsideas.operator_bitwise_shr=Operator: Bitwise SHR
-psi.spellpiece.rpsideas.operator_bitwise_logic_rshr=Operator: Bitwise LSHR
+psi.spellpiece.rpsideas.operator_bitwise_logic_shr=Operator: Bitwise LSHR
 psi.spellpiece.rpsideas.trick_labeled_debug=Trick: Labeled Debug
 psi.spellpiece.rpsideas.trick_labeled_channeled_debug=Trick: Labeled Channeled Debug
+psi.spellpiece.rpsideas.selector_keypad=Selector: Keypad Digit
+psi.spellpiece.rpsideas.trick_clairvoyance=Trick: Clairvoyance
+psi.spellpiece.rpsideas.trick_collapse_block_sequence=Trick: Collapse Block Sequence
+psi.spellpiece.rpsideas.trick_flashbang=Trick: Flashbang
+psi.spellpiece.rpsideas.trick_night_vision=Trick: Night Vision
+psi.spellpiece.rpsideas.trick_riot=Trick: Riot
+psi.spellpiece.rpsideas.trick_silence=Trick: Silence
+psi.spellpiece.rpsideas.trick_slot_match=Trick: Slot Match
+psi.spellpiece.rpsideas.trick_slot_change=Trick: Slot Change
+psi.spellpiece.rpsideas.trick_soothe=Trick: Soothe
 
 
 psi.spellpiece.rpsideas.cross_connector=Cross Connector
@@ -209,6 +219,16 @@ psi.spellpiece.rpsideas.operator_bitwise_shr.desc=a >> b
 psi.spellpiece.rpsideas.operator_bitwise_logic_shr.desc=a >>> b
 psi.spellpiece.rpsideas.trick_labeled_debug.desc=Prints out the target, labeled with the comment string
 psi.spellpiece.rpsideas.trick_labeled_channeled_debug.desc=Prints out the target labeled with the comment string, replacing any previous prints with the same label
+psi.spellpiece.rpsideas.selector_keypad.desc=Selects the last digit entered with the Keypad Item
+psi.spellpiece.rpsideas.trick_clairvoyance.desc=Dislocates the caster's camera by a set offset
+psi.spellpiece.rpsideas.trick_collapse_block_sequence.desc=Collapses a sequence of blocks, as if they were sand
+psi.spellpiece.rpsideas.trick_flashbang.desc=Temporarily dazes your enemies
+psi.spellpiece.rpsideas.trick_night_vision.desc=Applies a Night Vision effect
+psi.spellpiece.rpsideas.trick_riot.desc=Angers mobs and makes primed TNT explode
+psi.spellpiece.rpsideas.trick_silence.desc=Silences an area around a position temporarily
+psi.spellpiece.rpsideas.trick_slot_match.desc=Changes the building slot to match the block at the given position
+psi.spellpiece.rpsideas.trick_slot_change.desc=Changes the building slot to one of the 36 inventory slots.
+psi.spellpiece.rpsideas.trick_soothe.desc=Calms down mobs and delays a primed TNT explosion
 
 psi.datatype.String=String
 rpsideas.datatype.String=String
@@ -231,6 +251,8 @@ rpsideas.spellerror.scale=Scale must be between (0,4]
 rpsideas.spellerror.text=ERROR: Text must be 32 characters or less
 rpsideas.spellerror.nan_comment=Comment value is not a number
 rpsideas.spellerror.comparator=Comparators can only measure in the 4 cardinal directions
+rpsideas.spellerror.nodigit=No digit was inputted from the keypad
+rpsideas.spellerror.not_positive_and_non_zero=Number must be positive and above zero
 
 rpsideas.spellparam.root=Root
 rpsideas.spellparam.degree=Degrees
@@ -373,8 +395,12 @@ item.rpsideas:magazine.desc1=&bUse while holding %s to swap your entire spell se
 item.rpsideas:battlecaster.name=Integrated Battlecaster
 item.rpsideas:battlecaster.desc=&bCraft this with a PSI tool to make it fire
 item.rpsideas:battlecaster.desc1=&bwhen you attack with it instead of use it.
+item.rpsideas:keypad.desc=&bUse with the slot change keys to send a digit between 0-9 to the CAD
 rpsideas.battlecaster_attached=&bEvent Override&7: Melee
 
+item.rpsideas:overclocked_cad_assembly.name=Overclocked Ivory CAD Assembly
+item.rpsideas:underclocked_cad_assembly.name=Underclocked Ivory CAD Assembly
+item.rpsideas:keypad.name=Keypad
 item.rpsideas:bracelet_cad.name=Bracelet CAD
 item.rpsideas:psimetal_hoe.name=Psimetal Hoe
 item.rpsideas:ivory_pickaxe.name=Ivory Flowpick
@@ -478,8 +504,11 @@ psi.piecegroup.rpsideas.advanced_loopcast_control.desc=This group introduces var
 psi.piecegroup.rpsideas.inter_cad=CAD Networking
 psi.piecegroup.rpsideas.inter_cad.desc=This group introduces a way for you to communicate with other CADs in the world. By using Trick: Broadcast and supplying a channel and signal value it will broadcast a number to everyone in radius of the position given.<br><br>This has some restrictions: It can only be used once per spellcast, and you can only broadcast one number at a time. If you broadcast one after another it will overwrite the previous one.
 
-psi.piecegroup.rpsideas.radix=Radix Numerics
-psi.piecegroup.rpsideas.radix.desc=This group concerns math with other radices than 10, such as octal, hexadecimal, or binary. Note that, for most applications, these operators truncate their inputs. You can't use fractions here.<br><br>The perceptive among you may have noticed the "Radix" input in Operator: Get Comment Value. A radix is, in simple terms, the base of your number. Base 10 has a radix of 10, binary has a radix of 2, and so on.<br><br>The first set of tools is bitwise operators. These all treat numbers as if they had radix 2, performing special operations on them. Operator: Bitwise NOT, the red piece of this group, will flip all bits in a number, turning 1 to 0 and 0 to 1, often flipping the number's sign as well. Bitwise AND will only set a bit if both inputs have that bit set. Bitwise OR will set a bit if any input is set. Bitwise XOR will set a bit if it's set in precisely one input. Bitwise SHL will move all bits over to the left, effectively multiplying them by a power of two. Bitwise SHR will move all bits over to the right, effectively dividing them by a power of two. Bitwise LSHR will do the same, but will have different behavior involving negative numbers, effectively adding 2^31 - 1 to them before shifting.<br><br>Operator: Recompose Number is an operation called Swizzling, a common operation in computer graphics and information. The mask specifies the pieces of the number to take. For example, with the mask "01213" and the number "12345", the result will be composed of the specified digits: 0; the first digit, 5; the second digit, 4; the first digit, 5; the third digit, 3, resulting in 5453. Swizzling preserves the sign of the inputs, inverting it if the mask is negative. This can be done in other radices as well. For example, with a mask of "1042", a radix of 2, and a value of 9, or "1001" in binary, your output will be "1010" in binary, or 10. Swizzling is a very specific, but very powerful, mathematical tool.
+psi.piecegroup.rpsideas.radix_numerics=Radix Numerics
+psi.piecegroup.rpsideas.radix_numerics.desc=This group concerns math with other radices than 10, such as octal, hexadecimal, or binary. Note that, for most applications, these operators truncate their inputs. You can't use fractions here.<br><br>The perceptive among you may have noticed the "Radix" input in Operator: Get Comment Value. A radix is, in simple terms, the base of your number. Base 10 has a radix of 10, binary has a radix of 2, and so on.<br><br>The first set of tools is bitwise operators. These all treat numbers as if they had radix 2, performing special operations on them. Operator: Bitwise NOT, the red piece of this group, will flip all bits in a number, turning 1 to 0 and 0 to 1, often flipping the number's sign as well. Bitwise AND will only set a bit if both inputs have that bit set. Bitwise OR will set a bit if any input is set. Bitwise XOR will set a bit if it's set in precisely one input. Bitwise SHL will move all bits over to the left, effectively multiplying them by a power of two. Bitwise SHR will move all bits over to the right, effectively dividing them by a power of two. Bitwise LSHR will do the same, but will have different behavior involving negative numbers, effectively adding 2^31 - 1 to them before shifting.<br><br>Operator: Recompose Number is an operation called Swizzling, a common operation in computer graphics and information. The mask specifies the pieces of the number to take. For example, with the mask "01213" and the number "12345", the result will be composed of the specified digits: 0; the first digit, 5; the second digit, 4; the first digit, 5; the third digit, 3, resulting in 5453. Swizzling preserves the sign of the inputs, inverting it if the mask is negative. This can be done in other radices as well. For example, with a mask of "1042", a radix of 2, and a value of 9, or "1001" in binary, your output will be "1010" in binary, or 10. Swizzling is a very specific, but very powerful, mathematical tool.
+
+psi.piecegroup.rpsideas.living_manipulation=Living Manipulation
+psi.piecegroup.rpsideas.living_manipulation.desc=After mastering the art of reversing the Eidos you branch out in hopes to control other creatures.<br><br>This group introduces a way to control a living creature's emotions.<br><br>By pulling or pushing them you're able to calm them down or to anger them.
 
 rpsideas.spelldesc.enhanced=Enhanced by: %s
 rpsideas.spelldesc.requires=Requires: %s
@@ -487,6 +516,7 @@ rpsideas.spellerror.tricknotenabled=ERROR: Trick doesn't have an enabling compon
 rpsideas.spellerror.trickdisabled=ERROR: Trick's enabling component doesn't have its requirements met.
 rpsideas.spellerror.nomana=ERROR: Not enough mana.
 rpsideas.spellerror.radius=A distance parameter is out of range.
+rpsideas.spellerror.slot=Slot must be an integer between [0,35]
 
 rpsideas.style.infiltration=Infiltration-Style Assemblies
 rpsideas.style.grenadier=Grenadier-Style Assemblies

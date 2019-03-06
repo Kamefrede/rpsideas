@@ -44,6 +44,7 @@ public class RPSPieces {
         PsiAPI.setGroupRequirements(RPSPieceNames.ADVANCED_LOOPCAST_CONTROL, 21, LibPieceGroups.FLOW_CONTROL);
         PsiAPI.setGroupRequirements(RPSPieceNames.INTER_CAD, 21, LibPieceGroups.MEMORY_MANAGEMENT);
         PsiAPI.setGroupRequirements(RPSPieceNames.RADIX_NUMERICS, 25, LibPieceGroups.SECONDARY_OPERATORS, LibPieceGroups.MEMORY_MANAGEMENT, LibPieceGroups.GREATER_INFUSION);
+        PsiAPI.setGroupRequirements(RPSPieceNames.MANIPULATION, 25, LibPieceGroups.EIDOS_REVERSAL);
 
         register(PieceTrickConjureEtherealBlock.class, RPSPieceNames.TRICK_CONJURE_ETHEREAL_BLOCK, LibPieceGroups.BLOCK_CONJURATION);
         register(PieceTrickConjureEtherealBlockSequence.class, RPSPieceNames.TRICK_CONJURE_ETHEREAL_BLOCK_SEQUENCE, LibPieceGroups.BLOCK_CONJURATION);
@@ -127,7 +128,6 @@ public class RPSPieces {
         register(PieceOperatorClosestToLine.class, RPSPieceNames.OPERATOR_CLOSEST_TO_LINE, LibPieceGroups.SECONDARY_OPERATORS);
         register(PieceTrickConjureText.class, RPSPieceNames.TRICK_CONJURE_TEXT, RPSPieceNames.VISUAL_AUDITIVE);
         register(PieceTrickConjureCircle.class, RPSPieceNames.TRICK_CONJURE_CIRCLE, RPSPieceNames.VISUAL_AUDITIVE);
-        //   register(PieceTrickSansUndertale.class, RPSPieceNames.TRICK_SANS_UNDERTALE, RPSPieceNames.VISUAL_AUDITIVE);
         register(PieceMacroCasterAxisRaycast.class, RPSPieceNames.MACRO_CASTER_AXIS_RAYCAST, RPSPieceNames.MACROS);
         register(PieceMacroCasterStrongAxisRaycast.class, RPSPieceNames.MACRO_CASTER_STRONG_AXIS_RAYCAST, RPSPieceNames.MACROS);
         register(PieceMacroCasterStrongRaycast.class, RPSPieceNames.MACRO_CASTER_STRONG_RAYCAST, RPSPieceNames.MACROS);
@@ -148,6 +148,15 @@ public class RPSPieces {
         register(PieceOperatorTruncate.class, RPSPieceNames.PIECE_OPERATOR_TRUNCATE, LibPieceGroups.NUMBERS_INTRO);
         register(PieceTrickLabelDebug.class, RPSPieceNames.PIECE_TRICK_LABELED_DEBUG, LibPieceGroups.MEMORY_MANAGEMENT);
         register(PieceTrickLabelDebugSpamless.class, RPSPieceNames.PIECE_TRICK_LABELED_CHANNELED_DEBUG, LibPieceGroups.MEMORY_MANAGEMENT);
+        register(PieceTrickClairvoyance.class, RPSPieceNames.PIECE_TRICK_CLAIRVOYANCE, RPSPieceNames.MANIPULATION, true);
+        register(PieceTrickDefuse.class, RPSPieceNames.PIECE_TRICK_SOOTHE, RPSPieceNames.MANIPULATION);
+        register(PieceTrickFlashbang.class, RPSPieceNames.PIECE_TRICK_FLASHBANG, RPSPieceNames.MANIPULATION);
+        register(PieceTrickTransplantAggro.class, RPSPieceNames.PIECE_TRICK_RIOT, RPSPieceNames.MANIPULATION);
+        register(PieceTrickSlotChange.class, RPSPieceNames.PIECE_TRICK_SLOT_CHANGE, RPSPieceNames.ADVANCED_LOOPCAST_CONTROL);
+        register(PieceTrickSlotMatch.class, RPSPieceNames.PIECE_TRICK_SLOT_MATCH, RPSPieceNames.ADVANCED_LOOPCAST_CONTROL);
+        register(PieceSelectorKeypadDigit.class, RPSPieceNames.PIECE_SELECTOR_KEYPAD, RPSPieceNames.ADVANCED_LOOPCAST_CONTROL);
+        register(PieceTrickNightVision.class, RPSPieceNames.PIECE_TRICK_NIGHT_VISION, LibPieceGroups.POSITIVE_EFFECTS);
+        register(PieceTrickCollapseBlockSequence.class, RPSPieceNames.PIECE_TRICK_COLLAPSE_BLOCK_SEQUENCE, LibPieceGroups.BLOCK_WORKS);
 
         registerNoTexture(PieceCrossConnector.class, RPSPieceNames.CROSS_CONNECTOR, LibPieceGroups.FLOW_CONTROL);
         registerTexture(RPSPieceNames.CROSS_CONNECTOR, LibMisc.MOD_ID, LibPieceNames.CONNECTOR);

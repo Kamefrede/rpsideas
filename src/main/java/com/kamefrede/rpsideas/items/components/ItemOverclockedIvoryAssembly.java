@@ -25,7 +25,7 @@ import java.util.List;
 public class ItemOverclockedIvoryAssembly extends ItemComponent implements IExtraVariantHolder, ICooldownAssembly {
 
     public static final String[] CAD_MODELS = {
-            "cad_ivory_overclocked"
+            "ivory_overclocked_cad"
     };
 
     private static final double cooldownFactor = 1.2;
@@ -39,7 +39,7 @@ public class ItemOverclockedIvoryAssembly extends ItemComponent implements IExtr
     @SideOnly(Side.CLIENT)
     @Override
     public ModelResourceLocation getCADModel(ItemStack itemStack, ItemStack itemStack1) {
-        return new ModelResourceLocation(new ResourceLocation(RPSIdeas.MODID, "cad_ivory_overclocked"), "inventory");
+        return new ModelResourceLocation(new ResourceLocation(RPSIdeas.MODID, "ivory_overclocked_cad"), "inventory");
     }
 
     @Override

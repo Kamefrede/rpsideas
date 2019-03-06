@@ -3,7 +3,6 @@ package com.kamefrede.rpsideas.util.libs;
 
 public class RPSItemNames {
 
-    public static final String SNIPER_BULLET = "sniper_bullet";
     public static final String PSIMETAL_HOE = "psimetal_hoe";
     public static final String CAD_ASSEMBLY = "cad_assembly_mana_blaster";
     public static final String WIDE_SOCKET = "wide_socket";
@@ -22,8 +21,8 @@ public class RPSItemNames {
     public static final String SPELL_MAGAZINE = "magazine";
     public static final String BRACELET_CAD = "bracelet_cad";
     public static final String TRIGGER_SENSOR = "trigger_sensor";
-    public static final String IVORY_OVERCLOCKED_ASSEMBLY = "ivory_overclocked_assembly";
-    public static final String IVORY_UNDERCLOCKED_ASSEMBLY = "ivory_underclocked_assembly";
+    public static final String IVORY_OVERCLOCKED_ASSEMBLY = "overclocked_cad_assembly";
+    public static final String IVORY_UNDERCLOCKED_ASSEMBLY = "underclocked_cad_assembly";
     public static final String OPTIMIZED_CAD_CORE = "optimized_cad_core";
     public static final String HYPERTHREADED_CAD_CORE = "hyperthreaded_cad_core";
     public static final String VIRTUAL_THREAD_CAD_CORE = "virtual_thread_cad_core";

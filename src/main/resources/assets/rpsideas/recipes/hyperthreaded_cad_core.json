@@ -1,0 +1,25 @@
+{
+  "result": {
+    "item": "rpsideas:hyperthreaded_cad_core",
+    "count": 1
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " R ",
+    "GVG",
+    " R "
+  ],
+  "key": {
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "dustRedstone"
+    },
+    "V": {
+      "item": "rpsideas:virtual_thread_cad_core"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "ingotPsi"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "result": {
+    "item": "rpsideas:overclocked_cad_assembly"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "   ",
+    "III",
+    "IEE"
+  ],
+  "key": {
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIvoryPsi"
+    },
+    "E": {
+      "type": "forge:ore_dict",
+      "ore": "dustGlowstone"
+    }
+  }
+}

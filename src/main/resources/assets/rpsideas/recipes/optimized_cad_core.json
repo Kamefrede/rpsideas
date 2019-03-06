@@ -1,0 +1,26 @@
+{
+  "result": {
+    "item": "rpsideas:optimized_cad_core",
+    "count": 1
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " G ",
+    "RPR",
+    " G "
+  ],
+  "key": {
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "dustGlowstone"
+    },
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "ingotPsi"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "gemPsi"
+    }
+  }
+}

@@ -85,7 +85,6 @@ public class RPSPieceNames {
     public static final String OPERATOR_CLOSEST_TO_LINE = "operator_closest_to_line";
     public static final String TRICK_CONJURE_TEXT = "trick_conjure_text";
     public static final String TRICK_CONJURE_CIRCLE = "trick_conjure_circle";
-    public static final String TRICK_SANS_UNDERTALE = "trick_sans_undertale";
     public static final String MACRO_CASTER_AXIS_RAYCAST = "macro_caster_raycast_axis";
     public static final String MACRO_CASTER_STRONG_RAYCAST = "macro_caster_strong_raycast";
     public static final String MACRO_CASTER_STRONG_AXIS_RAYCAST = "macro_caster_strong_raycast_axis";
@@ -94,7 +93,7 @@ public class RPSPieceNames {
     public static final String MACRO_CASTER_WEAK_AXIS_RAYCAST = "macro_caster_weak_raycast_axis";
     public static final String PIECE_OPERATOR_WEAK_RAYCAST = "operator_weak_raycast";
     public static final String PIECE_OPERATOR_WEAK_RAYCAST_AXIS = "operator_weak_raycast_axis";
-    public static final String TRICK_SILENCE = "silence";
+    public static final String TRICK_SILENCE = "trick_silence";
     public static final String CROSS_CONNECTOR = "cross_connector";
     public static final String PIECE_OPERATOR_SWIZZLE = "operator_swizzle";
     public static final String PIECE_OPERATOR_TRUNCATE = "operator_truncate";
@@ -108,8 +107,16 @@ public class RPSPieceNames {
     public static final String PIECE_OPERATOR_BIT_LOGIC_SHR = "operator_bitwise_logic_shr";
     public static final String PIECE_TRICK_LABELED_DEBUG = "trick_labeled_debug";
     public static final String PIECE_TRICK_LABELED_CHANNELED_DEBUG = "trick_labeled_channeled_debug";
+    public static final String PIECE_TRICK_CLAIRVOYANCE = "trick_clairvoyance";
+    public static final String PIECE_TRICK_FLASHBANG = "trick_flashbang";
+    public static final String PIECE_TRICK_NIGHT_VISION = "trick_night_vision";
+    public static final String PIECE_TRICK_SOOTHE = "trick_soothe";
+    public static final String PIECE_TRICK_RIOT = "trick_riot";
+    public static final String PIECE_TRICK_SUCC = "trick_erase_liquid";
     public static final String PIECE_TRICK_SLOT_MATCH = "trick_slot_match";
     public static final String PIECE_TRICK_SLOT_CHANGE = "trick_slot_change";
+    public static final String PIECE_SELECTOR_KEYPAD = "selector_keypad";
+    public static final String PIECE_TRICK_COLLAPSE_BLOCK_SEQUENCE = "trick_collapse_block_sequence";
 
 
     public static final String ALTERNATE_CONJURATION = RPSIdeas.MODID + ".redstone_conjuration";
@@ -120,6 +127,7 @@ public class RPSPieceNames {
     public static final String ADVANCED_LOOPCAST_CONTROL = RPSIdeas.MODID + ".advanced_loopcast_control";
     public static final String INTER_CAD = RPSIdeas.MODID + ".inter_cad";
     public static final String RADIX_NUMERICS = RPSIdeas.MODID + ".radix_numerics";
+    public static final String MANIPULATION = RPSIdeas.MODID + ".living_manipulation";
 
     public static final String MANA_PSIONICS = RPSIdeas.MODID + ".mana_psionics";
     public static final String MAKE_BURST = "make_mana_burst";

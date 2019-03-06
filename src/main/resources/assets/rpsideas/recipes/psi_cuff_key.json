@@ -1,0 +1,26 @@
+{
+  "result": {
+    "item": "rpsideas:psi_cuff_key",
+    "count": 1
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "PPP",
+    "IDI",
+    "   "
+  ],
+  "key": {
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIvoryPsi"
+    },
+    "D": {
+      "type": "forge:ore_dict",
+      "ore": "dustPsi"
+    },
+    "P": {
+      "type": "forge:ore_dict",
+      "ore": "paper"
+    }
+  }
+}

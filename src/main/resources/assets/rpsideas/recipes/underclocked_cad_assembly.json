@@ -1,0 +1,22 @@
+{
+  "result": {
+    "item": "rpsideas:underclocked_cad_assembly",
+    "count": 1
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "   ",
+    "III",
+    "IEE"
+  ],
+  "key": {
+    "I": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIvoryPsi"
+    },
+    "E": {
+      "type": "forge:ore_dict",
+      "ore": "dustRedstone"
+    }
+  }
+}

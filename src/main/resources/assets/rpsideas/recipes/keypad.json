@@ -1,0 +1,28 @@
+{
+  "result": {
+    "item": "rpsideas:keypad"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " R ",
+    "GBG",
+    " E "
+  ],
+  "key": {
+    "E": {
+      "type": "forge:ore_dict",
+      "ore": "ingotEbonyPsi"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "blockGlass"
+    },
+    "R": {
+      "type": "forge:ore_dict",
+      "ore": "dustRedstone"
+    },
+    "B": {
+      "item": "minecraft:stone_button"
+    }
+  }
+}
