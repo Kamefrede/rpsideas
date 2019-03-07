@@ -57,13 +57,13 @@ public class PieceOperatorGetCommentNumber extends PieceOperator {
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
         super.addToMetadata(meta);
 
-        if (this.comment.isEmpty())
+        if (this.comment == null || this.comment.isEmpty())
             throw new SpellCompilationException(SpellCompilationExceptions.NAN_COMMENT, x, y);
     }
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (this.comment.isEmpty())
+        if (this.comment == null || this.comment.isEmpty())
             throw new SpellRuntimeException(SpellRuntimeExceptions.NAN);
 
         Double radixVal = getParamValue(context, base);
