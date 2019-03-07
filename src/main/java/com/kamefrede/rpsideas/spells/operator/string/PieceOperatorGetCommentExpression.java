@@ -34,7 +34,7 @@ public class PieceOperatorGetCommentExpression extends PieceOperator {
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
         meta.addStat(EnumSpellStat.COMPLEXITY, 2);
 
-        if (this.comment.isEmpty())
+        if (this.comment == null || this.comment.isEmpty())
             throw new SpellCompilationException(SpellCompilationExceptions.NAN_COMMENT, x, y);
         try {
             parseExpression(this.comment);
@@ -45,7 +45,7 @@ public class PieceOperatorGetCommentExpression extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (this.comment.isEmpty())
+        if (this.comment == null || this.comment.isEmpty())
             throw new SpellRuntimeException(SpellRuntimeExceptions.NAN);
 
         try {
@@ -58,7 +58,7 @@ public class PieceOperatorGetCommentExpression extends PieceOperator {
     @Override
     public void getTooltip(List<String> tooltip) {
         super.getTooltip(tooltip);
-        if (!this.comment.isEmpty()) {
+        if (this.comment != null && !this.comment.isEmpty()) {
             try {
                 double result = parseExpression(this.comment);
 
