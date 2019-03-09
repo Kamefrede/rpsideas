@@ -16,7 +16,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.HashSet;
 import java.util.Set;
 
-@SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
 public class RPSSilencerHandler {
     private static final Set<SilencedPosition> silencers = new HashSet<>();
@@ -33,6 +32,7 @@ public class RPSSilencerHandler {
         silencers.add(toAdd);
     }
 
+    @SideOnly(Side.CLIENT)
     public static void doSilenceItPlz(PlaySoundEvent event, Vec3d pos) {
         for (SilencedPosition silencer : silencers) {
             if (silencer.expiryDate() < Minecraft.getMinecraft().world.getWorldTime()) {
@@ -51,6 +51,7 @@ public class RPSSilencerHandler {
         }
     }
 
+    @SideOnly(Side.CLIENT)
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void muteSounds(PlaySoundEvent event) {
         if (Minecraft.getMinecraft().world != null && event.getResultSound() != null) {
