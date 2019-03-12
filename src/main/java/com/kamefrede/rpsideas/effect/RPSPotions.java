@@ -3,14 +3,14 @@ package com.kamefrede.rpsideas.effect;
 
 import com.kamefrede.rpsideas.effect.base.PotionTypeMod;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
-import net.minecraft.potion.Potion;
+import com.teamwizardry.librarianlib.features.base.PotionMod;
 import net.minecraft.potion.PotionEffect;
 
 public class RPSPotions {
-    public static final Potion psishock = new PotionPsishock();
-    public static final Potion psipulse = new PotionPsipulse();
-    public static final Potion unseeing = new PotionDisableFollowRange();
-    public static final Potion flash = new PotionFlashbang();
+    public static final PotionMod psishock = new PotionPsishock();
+    public static final PotionMod psipulse = new PotionPsipulse();
+    public static final PotionMod unseeing = new PotionDisableFollowRange();
+    public static final PotionFlashbang flash = new PotionFlashbang();
 
     public static final PotionTypeMod psishockType = new PotionTypeMod(RPSItemNames.PSISHOCK, new PotionEffect(psishock, 160));
     public static final PotionTypeMod psishockLongType = new PotionTypeMod(RPSItemNames.PSISHOCK_LONG, new PotionEffect(psishock, 240));

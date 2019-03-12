@@ -253,6 +253,9 @@ rpsideas.spellerror.nan_comment=Comment value is not a number
 rpsideas.spellerror.comparator=Comparators can only measure in the 4 cardinal directions
 rpsideas.spellerror.nodigit=No digit was inputted from the keypad
 rpsideas.spellerror.not_positive_and_non_zero=Number must be positive and above zero
+rpsideas.spellerror.radius=A distance parameter is out of range
+rpsideas.spellerror.slot=ERROR: Slot must be an integer between [0,35]
+rpsideas.spellerror.target_self=ERROR: Cannot set an entity to target itself
 
 rpsideas.spellparam.root=Root
 rpsideas.spellparam.degree=Degrees
@@ -282,6 +285,7 @@ rpsideas.spellparam.from2=From
 rpsideas.spellparam.to1=To
 rpsideas.spellparam.to2=To
 rpsideas.spellparam.punching_bag=Punching Bag
+rpsideas.spellparam.radix=Radix
 psi.datatype.BlockProperties=Block Properties
 
 key.category.rpsideas=Random PSIdeas
@@ -434,6 +438,8 @@ item.rpsideas:optimized_cad_core.name=Optimized CAD Core
 item.rpsideas:psi_cuffs.name=Psi-Cuffs
 item.rpsideas:psi_cuff_key.name=Psi-Cuffs Key
 
+rpsideas.cancellation.cuffed=Your cuffs interfered with the casting of the spell.
+
 item.rpsideas:unstable_battery.name=Unstable CAD Battery
 item.rpsideas:twinflow_battery.name=Hybrid Flow CAD Battery
 item.rpsideas:shielded_battery.name=Shielded CAD Battery
@@ -515,8 +521,6 @@ rpsideas.spelldesc.requires=Requires: %s
 rpsideas.spellerror.tricknotenabled=ERROR: Trick doesn't have an enabling component.
 rpsideas.spellerror.trickdisabled=ERROR: Trick's enabling component doesn't have its requirements met.
 rpsideas.spellerror.nomana=ERROR: Not enough mana.
-rpsideas.spellerror.radius=A distance parameter is out of range.
-rpsideas.spellerror.slot=Slot must be an integer between [0,35]
 
 rpsideas.style.infiltration=Infiltration-Style Assemblies
 rpsideas.style.grenadier=Grenadier-Style Assemblies

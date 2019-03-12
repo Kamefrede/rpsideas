@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.spells.trick.entity;
 
 import com.kamefrede.rpsideas.spells.base.SpellParams;
+import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -29,7 +30,7 @@ public class PieceTrickTransplantAggro extends PieceTrick {
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException, ArithmeticException {
         super.addToMetadata(meta);
         meta.addStat(EnumSpellStat.POTENCY, 70);
-        meta.addStat(EnumSpellStat.COST, (int) 1200);
+        meta.addStat(EnumSpellStat.COST, 1200);
     }
 
     @Override
@@ -38,8 +39,10 @@ public class PieceTrickTransplantAggro extends PieceTrick {
         EntityLivingBase punching = SpellHelpers.ensureNonnullAndLivingEntity(this, context, bag);
         if (!(ent instanceof EntityLiving || ent instanceof EntityTNTPrimed))
             throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
-        if (ent.isNonBoss() && !punching.isNonBoss())
+        if (!ent.isNonBoss() || !punching.isNonBoss())
             throw new SpellRuntimeException(SpellRuntimeException.BOSS_IMMUNE);
+        if (ent == punching)
+            throw new SpellRuntimeException(SpellRuntimeExceptions.TARGET_SELF);
         if (!SpellHelpers.isBlockPosInRadius(context, ent.getPosition()) && !SpellHelpers.isBlockPosInRadius(context, punching.getPosition()))
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
         if (ent instanceof EntityTNTPrimed) {

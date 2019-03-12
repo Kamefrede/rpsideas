@@ -20,10 +20,12 @@ import java.util.Set;
 public class RPSSilencerHandler {
     private static final Set<SilencedPosition> silencers = new HashSet<>();
 
+    @SideOnly(Side.CLIENT)
     public static void checkAndAdd(SilencedPosition toAdd) {
+        long worldTime = Minecraft.getMinecraft().world.getWorldTime();
+        silencers.removeIf(silencer -> silencer.expiryDate() < worldTime);
+
         for (SilencedPosition silencer : silencers) {
-            if (silencer.expiryDate() < Minecraft.getMinecraft().world.getWorldTime())
-                silencers.remove(silencer);
             if (silencer.getPosition() == toAdd.getPosition()) {
                 silencer.renew(toAdd.getTimestamp(), toAdd.getTime(), toAdd.getVolume(), toAdd.getRadius());
                 return;
@@ -34,16 +36,17 @@ public class RPSSilencerHandler {
 
     @SideOnly(Side.CLIENT)
     public static void doSilenceItPlz(PlaySoundEvent event, Vec3d pos) {
+        long worldTime = Minecraft.getMinecraft().world.getWorldTime();
+        silencers.removeIf(silencer -> silencer.expiryDate() < worldTime);
+
+        int dimension = Minecraft.getMinecraft().world.provider.getDimension();
+
         for (SilencedPosition silencer : silencers) {
-            if (silencer.expiryDate() < Minecraft.getMinecraft().world.getWorldTime()) {
-                silencers.remove(silencer);
-                continue;
-            }
             BlockPos silencerpos = silencer.getPosition();
             int radius = silencer.getRadius();
             AxisAlignedBB aabb = new AxisAlignedBB(silencerpos.getX() - radius, silencerpos.getY() - radius, silencerpos.getZ() - radius,
                     silencerpos.getX() + radius, silencerpos.getY() + radius, silencerpos.getZ() + radius);
-            if (aabb.contains(pos) && silencer.getVolume() != 1f && Minecraft.getMinecraft().world.provider.getDimension() == silencer.getDimension()) {
+            if (aabb.contains(pos) && silencer.getVolume() != 1 && dimension == silencer.getDimension()) {
                 ISound sound = event.getSound();
                 event.setResultSound(new SilencedSound(sound, silencer.getVolume()));
             }

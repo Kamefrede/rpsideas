@@ -8,6 +8,7 @@ import com.teamwizardry.librarianlib.features.saving.Save;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 
 @PacketRegister(Side.CLIENT)
@@ -45,6 +46,7 @@ public class MessageAddSilencedBlock extends PacketBase {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void handle(@NotNull MessageContext ctx) {
         RPSSilencerHandler.checkAndAdd(new SilencedPosition(time, timestamp, pos, volume, radius, dimension));
     }

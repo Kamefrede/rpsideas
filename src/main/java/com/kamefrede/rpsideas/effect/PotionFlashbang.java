@@ -46,11 +46,11 @@ public class PotionFlashbang extends PotionMod {
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
-    public void onClientTick(TickEvent.ClientTickEvent e) {
+    public static void onClientTick(TickEvent.ClientTickEvent e) {
         Minecraft minecraft = Minecraft.getMinecraft();
         EntityPlayer player = minecraft.player;
         if (player != null) {
-            PotionEffect effect = getEffect(player);
+            PotionEffect effect = RPSPotions.flash.getEffect(player);
             int amp = effect == null ? -1 : effect.getAmplifier();
             if (amp != -1) {
                 if (!player.getEntityData().hasKey("rpsideas:smooth"))
@@ -65,13 +65,13 @@ public class PotionFlashbang extends PotionMod {
 
             if (lastFlashState != amp) {
                 if (amp != -1) {
-                    BasicAnimation<PotionFlashbang> animation = new BasicAnimation<>(this, "opacity");
+                    BasicAnimation<PotionFlashbang> animation = new BasicAnimation<>(RPSPotions.flash, "opacity");
                     animation.setEasing(Easing.easeInQuint);
                     animation.setTo(0.5f + 0.5f * ((amp + 1) / 4.0));
                     animation.setDuration(5);
                     RPSAnimationHandler.animate(animation);
                 } else {
-                    BasicAnimation<PotionFlashbang> animation = new BasicAnimation<>(this, "opacity");
+                    BasicAnimation<PotionFlashbang> animation = new BasicAnimation<>(RPSPotions.flash, "opacity");
                     animation.setEasing(Easing.easeOutBack);
                     animation.setTo(0f);
                     animation.setDuration(20);
@@ -91,20 +91,20 @@ public class PotionFlashbang extends PotionMod {
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
-    public void playSound(PlaySoundEvent e) {
+    public static void playSound(PlaySoundEvent e) {
         Minecraft minecraft = Minecraft.getMinecraft();
         EntityPlayer player = minecraft.player;
-        if (player != null && hasEffect(player))
+        if (player != null && RPSPotions.flash.hasEffect(player))
             e.setResultSound(null);
     }
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
-    public void renderOverlayAndCancelSubtitles(RenderGameOverlayEvent.Pre e) {
+    public static void renderOverlayAndCancelSubtitles(RenderGameOverlayEvent.Pre e) {
         if (e.getType() == RenderGameOverlayEvent.ElementType.SUBTITLES)
             e.setCanceled(true);
         else if (e.getType() == RenderGameOverlayEvent.ElementType.ALL) {
-            opacity = Math.min(opacity, 1);
+            float opacity = Math.min(RPSPotions.flash.opacity, 1);
 
             if (opacity > 0) {
                 ScaledResolution res = e.getResolution();
