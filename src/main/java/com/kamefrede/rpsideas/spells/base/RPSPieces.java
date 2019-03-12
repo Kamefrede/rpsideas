@@ -144,6 +144,7 @@ public class RPSPieces {
         register(PieceOperatorLShift.class, RPSPieceNames.PIECE_OPERATOR_BIT_SHL, RPSPieceNames.RADIX_NUMERICS);
         register(PieceOperatorRShift.class, RPSPieceNames.PIECE_OPERATOR_BIT_SHR, RPSPieceNames.RADIX_NUMERICS);
         register(PieceOperatorLogicalRShift.class, RPSPieceNames.PIECE_OPERATOR_BIT_LOGIC_SHR, RPSPieceNames.RADIX_NUMERICS);
+        register(PieceOperatorVisualizeNumber.class, RPSPieceNames.PIECE_OPERATOR_VISUALIZE_NUMBER, RPSPieceNames.RADIX_NUMERICS);
         register(PieceOperatorSwizzle.class, RPSPieceNames.PIECE_OPERATOR_SWIZZLE, RPSPieceNames.RADIX_NUMERICS);
         register(PieceOperatorTruncate.class, RPSPieceNames.PIECE_OPERATOR_TRUNCATE, LibPieceGroups.SECONDARY_OPERATORS);
         register(PieceTrickLabelDebug.class, RPSPieceNames.PIECE_TRICK_LABELED_DEBUG, LibPieceGroups.MEMORY_MANAGEMENT);

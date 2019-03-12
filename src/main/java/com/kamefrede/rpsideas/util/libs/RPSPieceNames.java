@@ -105,6 +105,7 @@ public class RPSPieceNames {
     public static final String PIECE_OPERATOR_BIT_SHL = "operator_bitwise_shl";
     public static final String PIECE_OPERATOR_BIT_SHR = "operator_bitwise_shr";
     public static final String PIECE_OPERATOR_BIT_LOGIC_SHR = "operator_bitwise_logic_shr";
+    public static final String PIECE_OPERATOR_VISUALIZE_NUMBER = "operator_visualize_number";
     public static final String PIECE_TRICK_LABELED_DEBUG = "trick_labeled_debug";
     public static final String PIECE_TRICK_LABELED_CHANNELED_DEBUG = "trick_labeled_channeled_debug";
     public static final String PIECE_TRICK_CLAIRVOYANCE = "trick_clairvoyance";
