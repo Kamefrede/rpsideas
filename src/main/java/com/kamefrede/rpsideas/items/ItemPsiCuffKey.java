@@ -1,7 +1,9 @@
 package com.kamefrede.rpsideas.items;
 
+import com.kamefrede.rpsideas.network.MessageCuffSync;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
+import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
@@ -12,6 +14,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.arl.network.NetworkHandler;
@@ -48,9 +51,24 @@ public class ItemPsiCuffKey extends ItemMod {
             if (!stack.hasDisplayName())
                 return false;
             String keyName = stack.getDisplayName();
-            removeKey((EntityPlayer) target, stack, keyName);
+            removeKey((EntityPlayer) target, stack, keyName, playerIn);
         }
         return false;
+    }
+
+    public static void removeKey(EntityPlayer cuffedPlayer, ItemStack key, String keyName, EntityPlayer sync) {
+        PlayerDataHandler.PlayerData data = PlayerDataHandler.get(cuffedPlayer);
+        if (data.getCustomData().getBoolean(TAG_CUFFED) && keyName.equals(cuffedPlayer.getEntityData().getString(TAG_KEYNAME))) {
+            data.getCustomData().removeTag(TAG_CUFFED);
+            if (!cuffedPlayer.world.isRemote) {
+                cuffedPlayer.getEntityData().removeTag(TAG_KEYNAME);
+                PacketHandler.NETWORK.sendTo(new MessageCuffSync(cuffedPlayer.getEntityId(), false), (EntityPlayerMP) sync);
+            }
+            data.save();
+            if (cuffedPlayer instanceof EntityPlayerMP)
+                PacketHandler.NETWORK.sendTo(new MessageDataSync(data), (EntityPlayerMP) cuffedPlayer);
+
+        }
     }
 
     public static void removeKey(EntityPlayer cuffedPlayer, ItemStack key, String keyName) {
@@ -59,10 +77,12 @@ public class ItemPsiCuffKey extends ItemMod {
             data.getCustomData().removeTag(TAG_CUFFED);
             if (!cuffedPlayer.world.isRemote) {
                 cuffedPlayer.getEntityData().removeTag(TAG_KEYNAME);
+                PacketHandler.NETWORK.sendToAllAround(new MessageCuffSync(cuffedPlayer.getEntityId(), false), new NetworkRegistry.TargetPoint(cuffedPlayer.dimension, cuffedPlayer.posX, cuffedPlayer.posY, cuffedPlayer.posZ, 32));
             }
             data.save();
             if (cuffedPlayer instanceof EntityPlayerMP)
                 NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP) cuffedPlayer);
+
         }
     }
 

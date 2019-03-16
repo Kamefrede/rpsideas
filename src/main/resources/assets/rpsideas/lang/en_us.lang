@@ -259,6 +259,8 @@ rpsideas.spellerror.radius=A distance parameter is out of range
 rpsideas.spellerror.slot=ERROR: Slot must be an integer between [0,35]
 rpsideas.spellerror.target_self=ERROR: Cannot set an entity to target itself
 
+
+rpsideas.spellparam.slot=Slot
 rpsideas.spellparam.root=Root
 rpsideas.spellparam.degree=Degrees
 rpsideas.spellparam.radian=Radians
