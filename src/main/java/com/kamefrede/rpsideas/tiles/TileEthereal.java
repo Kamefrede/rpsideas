@@ -12,7 +12,6 @@ import org.jetbrains.annotations.NotNull;
 import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.common.Psi;
 
-import java.awt.*;
 import java.util.Arrays;
 
 @TileRegister(RPSBlockNames.CONJURED_ETHEREAL_BLOCK)
@@ -28,13 +27,13 @@ public class TileEthereal extends TileModTickable {
     @Override
     public void tick() {
         if (getWorld().isRemote) {
-            Color color = colorizer.isEmpty() ?
-                    new Color(ICADColorizer.DEFAULT_SPELL_COLOR) :
-                    Psi.proxy.getColorizerColor(colorizer);
+            int color = colorizer.isEmpty() ?
+                    ICADColorizer.DEFAULT_SPELL_COLOR :
+                    Psi.proxy.getColorForColorizer(colorizer);
 
-            float r = color.getRed() / 255F;
-            float g = color.getGreen() / 255F;
-            float b = color.getBlue() / 255F;
+            float r = ((color >> 16) & 0xFF) / 255f;
+            float g = ((color >> 8) & 0xFF) / 255f;
+            float b = (color & 0xFF) / 255f;
 
             IBlockState state = getWorld().getBlockState(getPos());
             state = state.getBlock().getActualState(state, getWorld(), getPos());

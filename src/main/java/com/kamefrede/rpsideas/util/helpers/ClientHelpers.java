@@ -48,6 +48,6 @@ public class ClientHelpers {
     public static int getFlowColor(ItemStack stack) {
         ItemStack colorizer = FlowColorsHelper.getColorizer(stack);
         if (colorizer.isEmpty()) return 0x000000;
-        else return Psi.proxy.getColorizerColor(colorizer).getRGB();
+        else return Psi.proxy.getColorForColorizer(colorizer);
     }
 }

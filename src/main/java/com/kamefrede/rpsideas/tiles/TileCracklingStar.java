@@ -10,7 +10,6 @@ import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.common.Psi;
 
-import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,13 +37,13 @@ public class TileCracklingStar extends TileModTickable {
     @Override
     public void tick() {
         if (world.isRemote) {
-            Color color = new Color(ICADColorizer.DEFAULT_SPELL_COLOR);
+            int color = ICADColorizer.DEFAULT_SPELL_COLOR;
             if (!colorizer.isEmpty())
-                color = Psi.proxy.getColorizerColor(colorizer);
+                color = Psi.proxy.getColorForColorizer(colorizer);
 
-            float red = color.getRed() / 255F;
-            float green = color.getGreen() / 255F;
-            float blue = color.getBlue() / 255F;
+            float red = ((color >> 16) & 0xFF) / 255f;
+            float green = ((color >> 8) & 0xFF) / 255f;
+            float blue = (color & 0xFF) / 255f;
 
 
             for (Vec3d ray : rays) {

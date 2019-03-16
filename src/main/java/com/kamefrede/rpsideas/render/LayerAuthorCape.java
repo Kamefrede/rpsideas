@@ -23,7 +23,6 @@ import vazkii.psi.api.PsiAPI;
 import vazkii.psi.common.Psi;
 
 import javax.annotation.Nonnull;
-import java.awt.*;
 import java.util.UUID;
 
 /**
@@ -67,10 +66,10 @@ public class LayerAuthorCape implements LayerRenderer<AbstractClientPlayer> {
         boolean hasCad = !cad.isEmpty();
         float r = 0, g = 0, b = 0;
         if (hasCad) {
-            Color color = Psi.proxy.getCADColor(cad);
-            r = color.getRed() / 255f;
-            g = color.getGreen() / 255f;
-            b = color.getBlue() / 255f;
+            int color = Psi.proxy.getColorForCAD(cad);
+            r = ((color >> 16) & 0xFF) / 255f;
+            g = ((color >> 8) & 0xFF) / 255f;
+            b = (color & 0xFF) / 255f;
         }
 
         doCapeRender(player, partialTicks, r, g, b, hasCad);

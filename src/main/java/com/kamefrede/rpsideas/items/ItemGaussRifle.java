@@ -67,7 +67,7 @@ public class ItemGaussRifle extends ItemMod implements IFlowColorAcceptor, IShow
                 if (colorizer.isEmpty())
                     return 0;
                 else
-                    return Psi.proxy.getColorizerColor(colorizer).getRGB();
+                    return Psi.proxy.getColorForColorizer(colorizer);
             } else if (tintIndex == 1) {
                 return ClientHelpers.pulseColor(0xB87333);
             }

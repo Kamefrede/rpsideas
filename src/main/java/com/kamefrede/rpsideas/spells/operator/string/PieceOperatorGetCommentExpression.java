@@ -2,11 +2,14 @@ package com.kamefrede.rpsideas.spells.operator.string;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.UncheckedExecutionException;
 import com.kamefrede.rpsideas.spells.base.SpellCompilationExceptions;
 import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
 import com.udojava.evalex.Expression;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
+import vazkii.arl.util.RenderHelper;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.piece.PieceOperator;
 
@@ -56,16 +59,28 @@ public class PieceOperatorGetCommentExpression extends PieceOperator {
     }
 
     @Override
-    public void getTooltip(List<String> tooltip) {
-        super.getTooltip(tooltip);
+    public void drawCommentText(int tooltipX, int tooltipY, List<String> commentText) {
+        super.drawCommentText(tooltipX, tooltipY, commentText);
         if (this.comment != null && !this.comment.isEmpty()) {
+            int maxSize = 0;
+            FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+            for (String line : commentText) {
+                int size = fontRenderer.getStringWidth(line);
+                if (size > maxSize)
+                    maxSize = size;
+            }
+
+            int xEnd = tooltipX + 8 + maxSize;
+            int yMiddle = tooltipY - 14 - commentText.size() * 5;
+
             try {
                 double result = parseExpression(this.comment);
 
                 String resString = Double.toString(result);
                 int index = resString.indexOf('.') + (result == (int) result ? 0 : 5);
-                tooltip.set(0, tooltip.get(0) + TextFormatting.WHITE + " (" +
-                        resString.substring(0, Math.min(index, resString.length())) + ")");
+                RenderHelper.renderTooltip(xEnd, yMiddle, Lists.newArrayList("= " +
+                        resString.substring(0, Math.min(index, resString.length()))),
+                        0x5000a0a0, 0xf0001e1e);
             } catch (Expression.ExpressionException | ExecutionException | UncheckedExecutionException ex) {
                 // NO-OP
             }

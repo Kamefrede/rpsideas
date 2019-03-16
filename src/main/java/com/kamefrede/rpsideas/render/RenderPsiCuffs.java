@@ -15,7 +15,6 @@ import vazkii.psi.common.Psi;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 
 import javax.annotation.Nonnull;
-import java.awt.*;
 
 @SideOnly(Side.CLIENT)
 public class RenderPsiCuffs implements LayerRenderer<AbstractClientPlayer> {
@@ -40,10 +39,10 @@ public class RenderPsiCuffs implements LayerRenderer<AbstractClientPlayer> {
         boolean hasCad = !cad.isEmpty();
         float r = 0, g = 0, b = 0;
         if (hasCad) {
-            Color color = Psi.proxy.getCADColor(cad);
-            r = color.getRed() / 255f;
-            g = color.getGreen() / 255f;
-            b = color.getBlue() / 255f;
+            int color = Psi.proxy.getColorForCAD(cad);
+            r = ((color >> 16) & 0xFF) / 255f;
+            g = ((color >> 8) & 0xFF) / 255f;
+            b = (color & 0xFF) / 255f;
         }
         doCuffsRender(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
         doCuffLightOverlay(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, r, g, b, hasCad);

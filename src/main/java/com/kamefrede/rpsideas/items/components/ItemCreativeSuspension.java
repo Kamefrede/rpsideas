@@ -8,17 +8,13 @@ import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.*;
-import vazkii.psi.common.core.handler.PlayerDataHandler;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -35,36 +31,16 @@ public class ItemCreativeSuspension extends ItemComponent implements ICADColoriz
         ICAD cadItem = (ICAD) cad.getItem();
         ItemStack colorizer = cadItem.getComponentInSlot(cad, EnumCADComponent.DYE);
         if (!colorizer.isEmpty() && colorizer.getItem() instanceof ItemCreativeSuspension)
-            event.setStatValue(getStatValue(event.getStat()));
+            event.setStatValue(-1);
         else {
             ItemStack assembly = cadItem.getComponentInSlot(cad, EnumCADComponent.ASSEMBLY);
             if (!assembly.isEmpty()) {
                 ICADComponent componentItem = (ICADComponent) assembly.getItem();
                 if (componentItem.getCADStatValue(assembly, EnumCADStat.POTENCY) == -1 &&
                         componentItem.getCADStatValue(assembly, EnumCADStat.EFFICIENCY) == -1)
-                    event.setStatValue(getStatValue(event.getStat()));
+                    event.setStatValue(-1);
             }
         }
-    }
-
-    @SubscribeEvent
-    public static void updatePlayer(TickEvent.PlayerTickEvent event) {
-        EntityPlayer player = event.player;
-        ItemStack cad = PsiAPI.getPlayerCAD(player);
-        if (!cad.isEmpty() && cad.getItem() instanceof ICAD) {
-            ICAD cadItem = (ICAD) cad.getItem();
-            int stat = cadItem.getStatValue(cad, EnumCADStat.OVERFLOW);
-            if (stat == -1) {
-                PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
-                data.availablePsi = data.getTotalPsi();
-            }
-        }
-    }
-
-    private static int getStatValue(EnumCADStat stat) {
-        if (stat == EnumCADStat.SOCKETS)
-            return 12;
-        return -1;
     }
 
     @Override

@@ -19,6 +19,7 @@ import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.EnumCADStat;
 import vazkii.psi.api.cad.ICAD;
+import vazkii.psi.api.cad.RegenPsiEvent;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 
 import javax.annotation.Nullable;
@@ -62,6 +63,12 @@ public class ItemTwinflowBattery extends ItemComponent implements IRegenerationB
     @Override
     public int getRegenerationValue(ItemStack stack) {
         return PSI_REGEN_BONUS;
+    }
+
+    @Override
+    public void alterRegenerationBehavior(ItemStack stack, RegenPsiEvent event) {
+        IRegenerationBattery.super.alterRegenerationBehavior(stack, event);
+        event.regenCadFirst(false);
     }
 
     @Override

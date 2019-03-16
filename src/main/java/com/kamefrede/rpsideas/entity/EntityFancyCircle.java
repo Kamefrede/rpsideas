@@ -119,7 +119,7 @@ public class EntityFancyCircle extends Entity implements ISpellImmune {
         int colorVal = ICADColorizer.DEFAULT_SPELL_COLOR;
         ItemStack colorizer = dataManager.get(COLORIZER_DATA);
         if (!colorizer.isEmpty() && colorizer.getItem() instanceof ICADColorizer)
-            colorVal = Psi.proxy.getColorizerColor(colorizer).getRGB();
+            colorVal = Psi.proxy.getColorForColorizer(colorizer);
         return colorVal;
     }
 

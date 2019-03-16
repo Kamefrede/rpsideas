@@ -12,7 +12,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -22,13 +21,11 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import vazkii.arl.network.NetworkHandler;
-import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.ICAD;
+import vazkii.psi.api.cad.RegenPsiEvent;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
-import vazkii.psi.common.network.message.MessageDataSync;
 
 import static vazkii.psi.common.item.ItemCAD.getRealCost;
 
@@ -149,42 +146,16 @@ public class RPSEventHandler {
         }
     }
 
-
     @SubscribeEvent
-    public static void updateRegenRate(LivingEvent.LivingUpdateEvent e) {
-        if (e.getEntityLiving() instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) e.getEntityLiving();
-            ItemStack cad = PsiAPI.getPlayerCAD(player);
-            PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
+    public static void modifyRegen(RegenPsiEvent e) {
+        ItemStack cad = e.getCad();
 
-            int extraRegen = data.getCustomData().getInteger(REGEN_KEY);
-            data.getCustomData().setInteger(REGEN_BEFORE_KEY, data.regen);
-
-            int regenBefore = data.getCustomData().getInteger(REGEN_BEFORE_KEY);
-            if (regenBefore == 0) regenBefore = DEFAULT_REGEN_RATE;
-
-            int regenNow = DEFAULT_REGEN_RATE;
-            if (regenBefore != extraRegen + DEFAULT_REGEN_RATE)
-                regenNow = regenBefore - extraRegen;
-
-
-            extraRegen = 0;
-            if (!cad.isEmpty()) {
-                ICAD cadItem = (ICAD) cad.getItem();
-                ItemStack battery = cadItem.getComponentInSlot(cad, EnumCADComponent.BATTERY);
-                if (battery.getItem() instanceof IRegenerationBattery)
-                    extraRegen = ((IRegenerationBattery) battery.getItem()).getRegenerationValue(battery);
-            }
-
-            if (regenNow + extraRegen == data.regen)
-                return;
-
-            data.getCustomData().setInteger(REGEN_KEY, extraRegen);
-            data.regen = Math.max(DEFAULT_REGEN_RATE, regenNow + extraRegen);
-
-            data.save();
-            if (player instanceof EntityPlayerMP)
-                NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP) player);
+        if (!cad.isEmpty()) {
+            ICAD cadItem = (ICAD) cad.getItem();
+            ItemStack batteryStack = cadItem.getComponentInSlot(cad, EnumCADComponent.BATTERY);
+            if (batteryStack.getItem() instanceof IRegenerationBattery)
+                ((IRegenerationBattery) batteryStack.getItem())
+                    .alterRegenerationBehavior(batteryStack, e);
         }
     }
 

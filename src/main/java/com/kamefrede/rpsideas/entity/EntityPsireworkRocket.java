@@ -63,7 +63,7 @@ public class EntityPsireworkRocket extends EntityFireworkRocket {
 
                 ItemStack fireworkItem = dataManager.get(FIREWORK_ITEM);
 
-                int color = Psi.proxy.getColorizerColor(colorizer).getRGB();
+                int color = Psi.proxy.getColorForColorizer(colorizer);
 
                 NBTTagCompound fireworks = ItemNBTHelper.getCompound(fireworkItem, "Fireworks");
                 if (fireworks != null) {

@@ -61,6 +61,6 @@ public class EntityPsiManaBurst extends EntityManaBurst {
         if (colorizer.isEmpty() || !(colorizer.getItem() instanceof ICADColorizer))
             return super.getColor();
 
-        return Psi.proxy.getColorizerColor(colorizer).getRGB();
+        return Psi.proxy.getColorForColorizer(colorizer);
     }
 }

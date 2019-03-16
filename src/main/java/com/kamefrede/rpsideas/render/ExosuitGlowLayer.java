@@ -34,7 +34,7 @@ public class ExosuitGlowLayer extends LayerBipedArmor {
 
     private static int getColorFromPlayer(EntityPlayer player) {
         ItemStack cad = PsiAPI.getPlayerCAD(player);
-        return cad.isEmpty() ? 0 : Psi.proxy.getCADColor(cad).getRGB();
+        return cad.isEmpty() ? 0 : Psi.proxy.getColorForCAD(cad);
     }
 
     @Override

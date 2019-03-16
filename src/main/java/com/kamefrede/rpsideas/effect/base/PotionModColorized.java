@@ -1,11 +1,13 @@
 package com.kamefrede.rpsideas.effect.base;
 
+import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.util.helpers.ClientHelpers;
 import com.teamwizardry.librarianlib.features.base.PotionMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.psi.api.PsiAPI;
@@ -15,6 +17,8 @@ import vazkii.psi.common.Psi;
 import javax.annotation.Nonnull;
 
 public class PotionModColorized extends PotionMod {
+
+    private final ResourceLocation resource = new ResourceLocation(RPSIdeas.MODID, "textures/gui/potions.png");
 
     protected PotionModColorized(String name, boolean badEffect, int color) {
         super(name, badEffect, color);
@@ -26,7 +30,8 @@ public class PotionModColorized extends PotionMod {
         int pulse = getPulsedColor();
         GlStateManager.color(((pulse >> 16) & 0xFF) / 255f, ((pulse >> 8) & 0xFF) / 255f, (pulse & 0xFF) / 255f, alpha);
 
-        super.renderHUDEffect(x, y, effect, mc, alpha);
+        mc.renderEngine.bindTexture(resource);
+        mc.ingameGUI.drawTexturedModalRect(x + 3, y + 3, getIconX() * 18, 198 + getIconY() * 18, 18, 18);
 
         GlStateManager.color(1f, 1f, 1f, 1f);
     }
@@ -47,7 +52,7 @@ public class PotionModColorized extends PotionMod {
     public int getPulsedColor() {
         int color = ICADColorizer.DEFAULT_SPELL_COLOR;
         ItemStack cad = PsiAPI.getPlayerCAD(Minecraft.getMinecraft().player);
-        if (!cad.isEmpty()) color = Psi.proxy.getCADColor(cad).getRGB();
+        if (!cad.isEmpty()) color = Psi.proxy.getColorForCAD(cad);
         return ClientHelpers.pulseColor(color);
     }
 }

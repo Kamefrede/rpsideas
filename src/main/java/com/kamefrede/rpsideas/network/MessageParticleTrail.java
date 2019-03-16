@@ -13,7 +13,6 @@ import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.common.Psi;
 
 import javax.annotation.Nonnull;
-import java.awt.*;
 
 @PacketRegister(Side.CLIENT)
 public class MessageParticleTrail extends PacketBase {
@@ -48,12 +47,12 @@ public class MessageParticleTrail extends PacketBase {
     public void handle(@Nonnull MessageContext context) {
         World world = LibrarianLib.PROXY.getClientPlayer().world;
 
-        Color color = new Color(ICADColorizer.DEFAULT_SPELL_COLOR);
-        if (!cad.isEmpty()) color = Psi.proxy.getCADColor(cad);
+        int color = ICADColorizer.DEFAULT_SPELL_COLOR;
+        if (!cad.isEmpty()) color = Psi.proxy.getColorForCAD(cad);
 
-        float red = color.getRed() / 255f;
-        float green = color.getGreen() / 255f;
-        float blue = color.getBlue() / 255f;
+        float red = ((color >> 16) & 0xFF) / 255f;
+        float green = ((color >> 8) & 0xFF) / 255f;
+        float blue = (color & 0xFF) / 255f;
 
         Vec3d ray = direction.normalize().scale(1f / STEPS_PER_UNIT);
         int steps = (int) (length * STEPS_PER_UNIT);
