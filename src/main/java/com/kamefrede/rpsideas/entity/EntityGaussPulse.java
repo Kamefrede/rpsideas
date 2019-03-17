@@ -195,7 +195,7 @@ public class EntityGaussPulse extends EntityThrowable implements ISpellImmune {
                     e != null && e != thrower && e.getPositionVector().squareDistanceTo(this.getPositionVector()) <= 25);
 
             List<EntityLivingBase> players = new ArrayList<>(list);
-            players.removeIf(entityLivingBase -> !(entityLivingBase instanceof EntityPlayer) /* && entityLivingBase.isPotionActive()*/);
+            players.removeIf(entityLivingBase -> !(entityLivingBase instanceof EntityPlayer) && entityLivingBase.isPotionActive(RPSPotions.psishock));
 
             if (list.size() > 0 || getAmmo() != AmmoStatus.AMMO) {
                 for (EntityLivingBase player : players)
