@@ -4,6 +4,7 @@ package com.kamefrede.rpsideas.spells.base;
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.compat.botania.BotaniaCompatPieces;
 import com.kamefrede.rpsideas.spells.PieceCrossConnector;
+import com.kamefrede.rpsideas.spells.PieceVectorCatch;
 import com.kamefrede.rpsideas.spells.constant.PieceConstantTau;
 import com.kamefrede.rpsideas.spells.operator.PieceOperatorGetDamage;
 import com.kamefrede.rpsideas.spells.operator.PieceOperatorGetMetadata;
@@ -158,6 +159,7 @@ public class RPSPieces {
         register(PieceSelectorKeypadDigit.class, RPSPieceNames.PIECE_SELECTOR_KEYPAD, RPSPieceNames.ADVANCED_LOOPCAST_CONTROL);
         register(PieceTrickNightVision.class, RPSPieceNames.PIECE_TRICK_NIGHT_VISION, LibPieceGroups.POSITIVE_EFFECTS);
         register(PieceTrickCollapseBlockSequence.class, RPSPieceNames.PIECE_TRICK_COLLAPSE_BLOCK_SEQUENCE, LibPieceGroups.BLOCK_WORKS);
+        register(PieceVectorCatch.class, RPSPieceNames.PIECE_VECTOR_CATCH, RPSPieceNames.SECONDARY_VECTOR_OPERATORS);
 
         registerNoTexture(PieceCrossConnector.class, RPSPieceNames.CROSS_CONNECTOR, LibPieceGroups.FLOW_CONTROL);
         registerTexture(RPSPieceNames.CROSS_CONNECTOR, LibMisc.MOD_ID, LibPieceNames.CONNECTOR);

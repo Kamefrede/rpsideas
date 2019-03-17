@@ -118,6 +118,7 @@ public class RPSPieceNames {
     public static final String PIECE_TRICK_SLOT_CHANGE = "trick_slot_change";
     public static final String PIECE_SELECTOR_KEYPAD = "selector_keypad";
     public static final String PIECE_TRICK_COLLAPSE_BLOCK_SEQUENCE = "trick_collapse_block_sequence";
+    public static final String PIECE_VECTOR_CATCH = "vector_suppress";
 
 
     public static final String ALTERNATE_CONJURATION = RPSIdeas.MODID + ".redstone_conjuration";
@@ -136,5 +137,4 @@ public class RPSPieceNames {
     public static final String CANOPY_DRUM = "drum_of_the_canopy";
     public static final String COVERING_HORN = "horn_of_the_covering";
     public static final String GATHERING_DRUM = "drum_of_the_gathering";
-
 }
