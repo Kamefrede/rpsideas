@@ -6,7 +6,9 @@ import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceOperator;
 
-public class PieceOperatorVectorFallback extends PieceOperator {
+import javax.annotation.Nonnull;
+
+public class PieceOperatorVectorFallback extends PieceOperator implements IErrorCatcher {
 
     private SpellParam vector;
     private SpellParam fallback;
@@ -41,5 +43,18 @@ public class PieceOperatorVectorFallback extends PieceOperator {
     @Override
     public Class<?> getEvaluationType() {
         return Vector3.class;
+    }
+
+    @Override
+    public boolean catchException(SpellPiece errorPiece, SpellContext context, SpellRuntimeException exception) {
+        SpellParam.Side side = paramSides.get(vector);
+        return errorPiece == spell.grid.getPieceAtSideSafely(x, y, side)
+                && errorPiece.getEvaluationType() == Vector3.class;
+    }
+
+    @Nonnull
+    @Override
+    public Object supplyReplacementValue(SpellPiece errorPiece, SpellContext context, SpellRuntimeException exception) {
+        return this.getParamValue(context, fallback);
     }
 }
