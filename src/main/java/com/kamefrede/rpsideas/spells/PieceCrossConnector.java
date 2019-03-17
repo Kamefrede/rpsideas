@@ -33,15 +33,15 @@ public class PieceCrossConnector extends SpellPiece implements IGenericRedirecto
         super(spell);
     }
 
-    private static final int LIGHT_GRAY = 0x909090;
-    private static final int DARK_GRAY = 0x606060;
+    private static final int LINE_ONE = 0xA0A0A0;
+    private static final int LINE_TWO = 0xA040FF;
 
     @Override
     public void initParams() {
-        addParam(in1 = new ParamAny(SpellParams.CONNECTOR_NAME_FROM1, LIGHT_GRAY, false));
-        addParam(out1 = new ParamAny(SpellParams.CONNECTOR_NAME_TO1, LIGHT_GRAY, false));
-        addParam(in2 = new ParamAny(SpellParams.CONNECTOR_NAME_FROM2, DARK_GRAY, false));
-        addParam(out2 = new ParamAny(SpellParams.CONNECTOR_NAME_TO2, DARK_GRAY, false));
+        addParam(in1 = new ParamAny(SpellParams.CONNECTOR_NAME_FROM1, LINE_ONE, false));
+        addParam(out1 = new ParamAny(SpellParams.CONNECTOR_NAME_TO1, LINE_ONE, false));
+        addParam(in2 = new ParamAny(SpellParams.CONNECTOR_NAME_FROM2, LINE_TWO, false));
+        addParam(out2 = new ParamAny(SpellParams.CONNECTOR_NAME_TO2, LINE_TWO, false));
     }
 
     @Override
@@ -81,15 +81,15 @@ public class PieceCrossConnector extends SpellPiece implements IGenericRedirecto
     @Override
     @SideOnly(Side.CLIENT)
     public void drawAdditional() {
-        drawSide(paramSides.get(in1), 0.8f);
-        drawSide(paramSides.get(out1), 0.8f);
+        drawSide(paramSides.get(in1), LINE_ONE);
+        drawSide(paramSides.get(out1), LINE_ONE);
 
-        drawSide(paramSides.get(in2), 0.4f);
-        drawSide(paramSides.get(out2), 0.4f);
+        drawSide(paramSides.get(in2), LINE_TWO);
+        drawSide(paramSides.get(out2), LINE_TWO);
     }
 
     @SideOnly(Side.CLIENT)
-    public void drawSide(SpellParam.Side side, float brightness) {
+    public void drawSide(SpellParam.Side side, int color) {
         if(side.isEnabled()) {
             Minecraft mc = Minecraft.getMinecraft();
             mc.renderEngine.bindTexture(LINES);
@@ -114,7 +114,11 @@ public class PieceCrossConnector extends SpellPiece implements IGenericRedirecto
             double maxU = minU + 0.5;
             double maxV = minV + 0.5;
 
-            GlStateManager.color(brightness, brightness, brightness);
+            float r = PsiRenderHelper.r(color) / 255f;
+            float g = PsiRenderHelper.g(color) / 255f;
+            float b = PsiRenderHelper.b(color) / 255f;
+
+            GlStateManager.color(r, g, b);
             BufferBuilder wr = Tessellator.getInstance().getBuffer();
             wr.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
             wr.pos(0, 16, 0).tex(minU, maxV).endVertex();
