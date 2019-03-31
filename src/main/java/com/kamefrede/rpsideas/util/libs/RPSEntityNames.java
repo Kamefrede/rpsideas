@@ -8,4 +8,5 @@ public class RPSEntityNames {
     public static final String ENTITY_PSI_FIREWORK = "psi_firework";
     public static final String ENTITY_CONJURED_TEXT = "entity_conjured_text";
     public static final String ENTITY_FANCY_CIRCLE = "entity_fancy_circle";
+    public static final String ENTITY_HAIL_PARTICLE = "entity_hail_particle";
 }

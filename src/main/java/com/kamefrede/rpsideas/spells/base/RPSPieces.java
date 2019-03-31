@@ -160,6 +160,7 @@ public class RPSPieces {
         register(PieceTrickNightVision.class, RPSPieceNames.PIECE_TRICK_NIGHT_VISION, LibPieceGroups.POSITIVE_EFFECTS);
         register(PieceTrickCollapseBlockSequence.class, RPSPieceNames.PIECE_TRICK_COLLAPSE_BLOCK_SEQUENCE, LibPieceGroups.BLOCK_WORKS);
         register(PieceVectorCatch.class, RPSPieceNames.PIECE_VECTOR_CATCH, RPSPieceNames.SECONDARY_VECTOR_OPERATORS);
+        register(PieceTrickConjureHail.class, RPSPieceNames.PIECE_TRICK_SUMMON_HAIL, RPSPieceNames.MANIPULATION);
 
         registerNoTexture(PieceCrossConnector.class, RPSPieceNames.CROSS_CONNECTOR, LibPieceGroups.FLOW_CONTROL);
         registerTexture(RPSPieceNames.CROSS_CONNECTOR, LibMisc.MOD_ID, LibPieceNames.CONNECTOR);

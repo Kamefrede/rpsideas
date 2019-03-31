@@ -113,7 +113,7 @@ public class RPSPieceNames {
     public static final String PIECE_TRICK_NIGHT_VISION = "trick_night_vision";
     public static final String PIECE_TRICK_SOOTHE = "trick_soothe";
     public static final String PIECE_TRICK_RIOT = "trick_riot";
-    public static final String PIECE_TRICK_SUCC = "trick_erase_liquid";
+    public static final String PIECE_TRICK_SUMMON_HAIL = "trick_summon_hail";
     public static final String PIECE_TRICK_SLOT_MATCH = "trick_slot_match";
     public static final String PIECE_TRICK_SLOT_CHANGE = "trick_slot_change";
     public static final String PIECE_SELECTOR_KEYPAD = "selector_keypad";

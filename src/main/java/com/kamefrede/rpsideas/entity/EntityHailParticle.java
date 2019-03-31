@@ -1,5 +1,9 @@
 package com.kamefrede.rpsideas.entity;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.kamefrede.rpsideas.network.MessageSparkleSphere;
+import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -9,28 +13,38 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.EntityDamageSourceIndirect;
+import net.minecraft.util.EntitySelectors;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import vazkii.psi.api.cad.ICADColorizer;
+import vazkii.psi.common.Psi;
+
+import java.util.List;
+
+import static com.teamwizardry.librarianlib.features.network.PacketExtensionKt.sendToAllAround;
 
 public class EntityHailParticle extends EntityThrowable {
 
     private static final DataParameter<String> CASTER_NAME = EntityDataManager.createKey(EntityHailParticle.class, DataSerializers.STRING);
     private static final DataParameter<Float> MASS = EntityDataManager.createKey(EntityHailParticle.class, DataSerializers.FLOAT);
     private static final DataParameter<Float> SIZE = EntityDataManager.createKey(EntityHailParticle.class, DataSerializers.FLOAT);
-    private static final DataParameter<ItemStack> COLORIZER_DATA = EntityDataManager.createKey(EntityFancyCircle.class, DataSerializers.ITEM_STACK);
+    private static final DataParameter<ItemStack> COLORIZER_DATA = EntityDataManager.createKey(EntityHailParticle.class, DataSerializers.ITEM_STACK);
 
     private static final String TAG_COLORIZER = "colorizer";
     private static final String TAG_TIME_ALIVE = "timeAlive";
     private static final String TAG_CASTER_NAME = "casterName";
     private static final String TAG_SIZE = "size";
     private static final String TAG_MASS = "mass";
-    private static final float drag = 0.02f;
+    private static final float drag = 0.01f;
     public int timeAlive;
 
 
     public EntityHailParticle(World worldIn) {
         super(worldIn);
+        setSize(1f, 1f);
     }
 
 
@@ -42,7 +56,9 @@ public class EntityHailParticle extends EntityThrowable {
         dataManager.set(COLORIZER_DATA, colorizer);
         dataManager.set(SIZE, size);
         dataManager.set(MASS, mass);
+        dataManager.set(CASTER_NAME, player.getName());
         this.thrower = player;
+        setSize(size, size);
     }
 
 
@@ -56,6 +72,20 @@ public class EntityHailParticle extends EntityThrowable {
             this.motionY *= drag;
             this.motionZ *= drag;
         }
+        Vec3d position = new Vec3d(posX, posY, posZ);
+        Vec3d projected = new Vec3d(posX + motionX, posY + motionY, posZ + motionZ);
+
+        RayTraceResult trace = world.rayTraceBlocks(position, projected, false, true, false);
+
+        if (trace != null)
+            projected = new Vec3d(trace.hitVec.x, trace.hitVec.y, trace.hitVec.z);
+        Entity entity = findEntityOnPath(position, projected);
+
+        if (trace != null)
+            onImpact(trace);
+
+        if (Math.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ) > getMeltingPoint())
+            setDead();
 
 
     }
@@ -71,6 +101,29 @@ public class EntityHailParticle extends EntityThrowable {
 
     }
 
+    protected Entity findEntityOnPath(Vec3d start, Vec3d end) {
+        Predicate<Entity> predicate = Predicates.and(EntitySelectors.NOT_SPECTATING, EntitySelectors.IS_ALIVE, Entity::canBeCollidedWith, (Entity e) -> e != this);
+
+        Entity entity = null;
+        List<Entity> list = world.getEntitiesInAABBexcluding(this, getEntityBoundingBox().expand(motionX, motionY, motionZ).grow(1.0), predicate);
+        double maxDistance = 0.0;
+
+        for (Entity onPath : list) {
+            AxisAlignedBB boundingBox = onPath.getEntityBoundingBox().grow(0.3);
+            RayTraceResult trace = boundingBox.calculateIntercept(start, end);
+
+            if (trace != null) {
+                double d1 = start.squareDistanceTo(trace.hitVec);
+
+                if (d1 < maxDistance || maxDistance == 0.0) {
+                    entity = onPath;
+                    maxDistance = d1;
+                }
+            }
+        }
+
+        return entity;
+    }
 
     @Override
     protected void entityInit() {
@@ -107,9 +160,6 @@ public class EntityHailParticle extends EntityThrowable {
         return (int) (600 * dataManager.get(MASS));
     }
 
-    public int getTimeAlive() {
-        return timeAlive;
-    }
 
     public float getSize() {
         return dataManager.get(SIZE);
@@ -118,10 +168,33 @@ public class EntityHailParticle extends EntityThrowable {
     @Override
     public void setDead() {
         super.setDead();
+        sendToAllAround(PacketHandler.NETWORK, new MessageSparkleSphere(getPositionVector(), EntityGaussPulse.AmmoStatus.PSI), world, getPositionVector(), 128.0);
     }
 
     public float getMass() {
         return dataManager.get(MASS);
+    }
+
+    public int getColor() {
+        int colorVal = ICADColorizer.DEFAULT_SPELL_COLOR;
+        ItemStack colorizer = dataManager.get(COLORIZER_DATA);
+        if (!colorizer.isEmpty() && colorizer.getItem() instanceof ICADColorizer)
+            colorVal = Psi.proxy.getColorForColorizer(colorizer);
+        return colorVal;
+    }
+
+    public double getMeltingPoint() {
+        return 300 * dataManager.get(SIZE);
+    }
+
+    @Override
+    protected boolean canTriggerWalking() {
+        return false;
+    }
+
+    @Override
+    public boolean canBeAttackedWithItem() {
+        return false;
     }
 
     @Override
