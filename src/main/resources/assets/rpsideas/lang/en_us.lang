@@ -112,7 +112,7 @@ psi.spellpiece.rpsideas.trick_silence=Trick: Silence
 psi.spellpiece.rpsideas.trick_slot_match=Trick: Slot Match
 psi.spellpiece.rpsideas.trick_slot_change=Trick: Slot Change
 psi.spellpiece.rpsideas.trick_soothe=Trick: Soothe
-
+psi.spellpiece.rpsideas.trick_summon_hail=Trick: Summon Hail
 
 psi.spellpiece.rpsideas.cross_connector=Cross Connector
 psi.spellpiece.rpsideas.cross_connector.desc=Can connect two paths
@@ -233,6 +233,7 @@ psi.spellpiece.rpsideas.trick_silence.desc=Silences an area around a position te
 psi.spellpiece.rpsideas.trick_slot_match.desc=Changes the building slot to match the block at the given position
 psi.spellpiece.rpsideas.trick_slot_change.desc=Changes the building slot to one of the 36 inventory slots.
 psi.spellpiece.rpsideas.trick_soothe.desc=Calms down mobs and delays a primed TNT explosion
+psi.spellpiece.rpsideas.trick_summon_hail=Summons a hail particle, the more power you use, the more damage it does
 
 psi.datatype.String=String
 rpsideas.datatype.String=String
@@ -251,17 +252,18 @@ rpsideas.spellerror.no_message=ERROR: CAD has not picked up a broadcasted messag
 rpsideas.spellerror.armor=ERROR: Selector only works in armor
 rpsideas.spellerror.cad=ERROR: Trick only works in a CAD
 rpsideas.spellerror.nan=ERROR: Not a number
-rpsideas.spellerror.scale=Scale must be between (0,4]
+rpsideas.spellerror.scale=ERROR: Scale must be between (0,4]
 rpsideas.spellerror.text=ERROR: Text must be 32 characters or less
-rpsideas.spellerror.nan_comment=Comment value is not a number
-rpsideas.spellerror.comparator=Comparators can only measure in the 4 cardinal directions
-rpsideas.spellerror.nodigit=No digit was inputted from the keypad
-rpsideas.spellerror.not_positive_and_non_zero=Number must be positive and above zero
-rpsideas.spellerror.radius=A distance parameter is out of range
+rpsideas.spellerror.nan_comment=ERROR: Comment value is not a number
+rpsideas.spellerror.comparator=ERROR: Comparators can only measure in the 4 cardinal directions
+rpsideas.spellerror.nodigit=ERROR: No digit was inputted from the keypad
+rpsideas.spellerror.not_positive_and_non_zero=ERROR: Number must be positive and above zero
+rpsideas.spellerror.radius=ERROR: A distance parameter is out of range
 rpsideas.spellerror.slot=ERROR: Slot must be an integer between [0,35]
 rpsideas.spellerror.target_self=ERROR: Cannot set an entity to target itself
+rpsideas.spellerror.power=ERROR: Power must be between (0,1]
 
-
+rpsideas.spellparam.power=Power
 rpsideas.spellparam.slot=Slot
 rpsideas.spellparam.root=Root
 rpsideas.spellparam.degree=Degrees
@@ -536,6 +538,7 @@ entity.gauss_pulse.name=Gauss Pulse
 entity.sniper_bullet.name=Sniper Round
 entity.psi_mana_burst.name=Psi Mana Burst
 entity.entity_fancy_circle.name=Conjured Circle
+entity.entity_hail_particle.name=Hail Particle
 
 rpsideas.potion.psishock=Psionic Shock
 rpsideas.potion.psipulse=Psionic Pulse
