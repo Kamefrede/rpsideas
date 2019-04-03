@@ -50,6 +50,7 @@ public class TileCADCase extends TileMod {
 
     private int dyeColor = -1; // Legacy
 
+    //TODO ask wire if this one should be changed
     public static boolean isAllowed(int slot, Item item) {
         return (slot == 0 && (item instanceof ICAD || item instanceof ItemGaussRifle)) ||
                 (slot == 1 && !(item instanceof ICAD) &&

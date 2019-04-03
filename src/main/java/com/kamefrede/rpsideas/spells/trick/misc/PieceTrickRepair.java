@@ -2,7 +2,7 @@ package com.kamefrede.rpsideas.spells.trick.misc;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import vazkii.psi.api.cad.ISocketable;
+import vazkii.psi.api.cad.ISocketableCapability;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.piece.PieceTrick;
 
@@ -31,7 +31,7 @@ public class PieceTrickRepair extends PieceTrick {
         if (stack.isEmpty())
             return true;
         Item item = stack.getItem();
-        if (item.isRepairable() && item.getDamage(stack) > 0 && item instanceof ISocketable)
+        if (item.isRepairable() && item.getDamage(stack) > 0 && ISocketableCapability.isSocketable(stack))
             item.setDamage(stack, item.getDamage(stack) - 1);
         return false;
     }

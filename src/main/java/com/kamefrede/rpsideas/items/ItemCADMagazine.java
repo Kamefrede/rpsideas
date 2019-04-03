@@ -174,9 +174,9 @@ public class ItemCADMagazine extends ItemMod implements ISocketable, ICADCompone
 
     @Nullable
     public String getSocketedItemName(ItemStack stack, int slot, @Nullable String fallback) {
-        if (!stack.isEmpty() && stack.getItem() instanceof ISocketable) {
-            ISocketable socketable = (ISocketable) stack.getItem();
-            ItemStack item = socketable.getBulletInSocket(stack, slot);
+        if (!stack.isEmpty() && ISocketableCapability.isSocketable(stack)) {
+            ISocketableCapability socketable = ISocketableCapability.socketable(stack);
+            ItemStack item = socketable.getBulletInSocket(slot);
             return item.isEmpty() ? fallback : item.getDisplayName();
         } else {
             return fallback;

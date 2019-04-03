@@ -9,7 +9,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
-import vazkii.psi.api.cad.ISocketable;
+import vazkii.psi.api.cad.ISocketableCapability;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 
 import javax.annotation.Nonnull;
@@ -43,16 +43,16 @@ public class MessageChangeSocketSlot extends PacketBase {
         if (!isSneaking && mainhand.getItem() instanceof ItemKeypad && slot <= 9)
             setDigit(player, slot, TAG_KEYPAD_DIGIT, data);
 
-        if (isSneaking && offhand.getItem() instanceof ISocketable)
-            setSlot((ISocketable) offhand.getItem(), slot, offhand, data, player);
-        if (!isSneaking && mainhand.getItem() instanceof ISocketable)
-            setSlot((ISocketable) mainhand.getItem(), slot, mainhand, data, player);
+        if (isSneaking && ISocketableCapability.isSocketable(offhand))
+            setSlot(ISocketableCapability.socketable(offhand), slot, offhand, data, player);
+        if (!isSneaking && ISocketableCapability.isSocketable(mainhand))
+            setSlot(ISocketableCapability.socketable(mainhand), slot, mainhand, data, player);
 
     }
 
-    public void setSlot(ISocketable socketable, int slot, ItemStack stack, PlayerDataHandler.PlayerData data, EntityPlayer player) {
-        if (socketable.isSocketSlotAvailable(stack, slot))
-            socketable.setSelectedSlot(stack, slot);
+    public void setSlot(ISocketableCapability socketable, int slot, ItemStack stack, PlayerDataHandler.PlayerData data, EntityPlayer player) {
+        if (socketable.isSocketSlotAvailable(slot))
+            socketable.setSelectedSlot(slot);
         if (data.loopcasting && data.loopcastHand != null)
             if (stack == player.getHeldItem(data.loopcastHand))
                 data.stopLoopcast();

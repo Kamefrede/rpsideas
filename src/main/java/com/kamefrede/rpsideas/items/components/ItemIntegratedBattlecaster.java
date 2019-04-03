@@ -22,7 +22,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.psi.api.PsiAPI;
-import vazkii.psi.api.cad.ISocketable;
+import vazkii.psi.api.cad.ISocketableCapability;
 import vazkii.psi.api.spell.PreSpellCastEvent;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
@@ -51,7 +51,7 @@ public class ItemIntegratedBattlecaster extends ItemMod {
 
     public static boolean canHaveBattlecaster(ItemStack stack) {
         return !stack.isEmpty() &&
-                stack.getItem() instanceof ISocketable &&
+                ISocketableCapability.isSocketable(stack) &&
                 stack.getItem().isDamageable() &&
                 !(stack.getItem() instanceof ItemSword) &&
                 !(stack.getItem() instanceof ItemArmor);
@@ -107,13 +107,13 @@ public class ItemIntegratedBattlecaster extends ItemMod {
             ItemStack mainHand = caster.getHeldItemMainhand();
 
             if (hasBattlecaster(mainHand)) {
-                ISocketable socketable = ((ISocketable) mainHand.getItem());
+                ISocketableCapability socketable = ISocketableCapability.socketable(mainHand);
 
                 PlayerDataHandler.PlayerData data = PlayerDataHandler.get(caster);
                 ItemStack playerCad = PsiAPI.getPlayerCAD(caster);
 
                 if (!playerCad.isEmpty()) {
-                    ItemStack bullet = socketable.getBulletInSocket(mainHand, socketable.getSelectedSlot(mainHand));
+                    ItemStack bullet = socketable.getBulletInSocket(socketable.getSelectedSlot());
                     ItemCAD.cast(caster.getEntityWorld(), caster, data, bullet, playerCad, 5, 10, 0.05F,
                             (SpellContext context) -> {
                                 context.tool = mainHand;

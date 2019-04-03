@@ -7,7 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
-import vazkii.psi.api.cad.ISocketable;
+import vazkii.psi.api.cad.ISocketableCapability;
 import vazkii.psi.api.spell.EnumSpellStat;
 import vazkii.psi.api.spell.ISpellContainer;
 import vazkii.psi.api.spell.Spell;
@@ -18,14 +18,14 @@ import javax.annotation.Nonnull;
 public class InventorySocketable implements IInventory {
 
     private final ItemStack stack;
-    private final ISocketable socketable;
+    private final ISocketableCapability socketable;
     private final int maxBandwidth;
 
     public InventorySocketable(ItemStack stack, int maxBandwidth) {
         this.stack = stack;
         this.maxBandwidth = maxBandwidth;
 
-        socketable = (ISocketable) stack.getItem();
+        socketable = ISocketableCapability.socketable(stack);
     }
 
     public InventorySocketable(ItemStack stack) {
@@ -64,14 +64,14 @@ public class InventorySocketable implements IInventory {
     @Nonnull
     @Override
     public ItemStack getStackInSlot(int index) {
-        return socketable.getBulletInSocket(stack, index);
+        return socketable.getBulletInSocket(index);
     }
 
     @Nonnull
     @Override
     public ItemStack decrStackSize(int index, int count) {
-        ItemStack bullet = socketable.getBulletInSocket(stack, index);
-        if (!bullet.isEmpty()) socketable.setBulletInSocket(stack, index, ItemStack.EMPTY);
+        ItemStack bullet = socketable.getBulletInSocket(index);
+        if (!bullet.isEmpty()) socketable.setBulletInSocket(index, ItemStack.EMPTY);
         return bullet;
     }
 
@@ -83,7 +83,7 @@ public class InventorySocketable implements IInventory {
 
     @Override
     public void setInventorySlotContents(int index, @Nonnull ItemStack bullet) {
-        socketable.setBulletInSocket(stack, index, bullet);
+        socketable.setBulletInSocket(index, bullet);
     }
 
     @Override

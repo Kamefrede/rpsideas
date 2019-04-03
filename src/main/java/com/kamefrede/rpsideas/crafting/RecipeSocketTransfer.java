@@ -14,7 +14,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
-import vazkii.psi.api.cad.ISocketable;
+import vazkii.psi.api.cad.ISocketableCapability;
 
 import javax.annotation.Nonnull;
 
@@ -33,7 +33,7 @@ public class RecipeSocketTransfer extends ShapelessRecipes {
         ItemStack stack = super.getCraftingResult(inv);
         for (int i = 0; i < inv.getSizeInventory(); i++) {
             ItemStack stackInSlot = inv.getStackInSlot(i);
-            if (!stackInSlot.isEmpty() && stackInSlot.getItem() instanceof ISocketable) {
+            if (!stackInSlot.isEmpty() && ISocketableCapability.isSocketable(stackInSlot)) {
                 NBTTagCompound compound = stackInSlot.getTagCompound();
                 if (compound != null)
                     compound = compound.copy();

@@ -93,6 +93,8 @@ repositories {
 }
 
 dependencies {
+    deobfCompile "slimeknights.mantle:Mantle:1.12-1.3.1.18"
+    deobfCompile "slimeknights:TConstruct:1.12-2.7.2.15"
     compile "vazkii.autoreglib:AutoRegLib:${project.arl_version}"
     deobfCompile "vazkii.psi:Psi:${project.psi_version}"
     compile "vazkii.botania:Botania:${project.botania_version}"
