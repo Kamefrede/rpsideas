@@ -54,27 +54,8 @@ public class PieceCrossConnector extends SpellPiece implements IGenericRedirecto
         return TooltipHelper.local("psi.datatype.Any");
     }
 
-    private boolean overlap(SpellParam.Side a, SpellParam.Side b) {
-        // No need to check b. All cases are already covered.
-        // If !b.isEnabled(), either: a != b, or !a.isEnabled().
-        return a.isEnabled() && a == b;
-    }
-
     @Override
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
-        SpellParam.Side i1 = paramSides.get(in1);
-        SpellParam.Side i2 = paramSides.get(in2);
-        SpellParam.Side o1 = paramSides.get(out1);
-        SpellParam.Side o2 = paramSides.get(out2);
-
-        if (overlap(i1, i2) ||
-                overlap(i1, o1) ||
-                overlap(i1, o2) ||
-                overlap(i2, o1) ||
-                overlap(i2, o2) ||
-                overlap(o1, o2))
-            throw new SpellCompilationException(SpellCompilationException.SAME_SIDE_PARAMS, x, y);
-
         meta.addStat(EnumSpellStat.COMPLEXITY, 1);
     }
 

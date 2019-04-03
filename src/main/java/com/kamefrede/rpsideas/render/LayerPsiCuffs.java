@@ -17,13 +17,13 @@ import vazkii.psi.common.core.handler.PlayerDataHandler;
 import javax.annotation.Nonnull;
 
 @SideOnly(Side.CLIENT)
-public class RenderPsiCuffs implements LayerRenderer<AbstractClientPlayer> {
+public class LayerPsiCuffs implements LayerRenderer<AbstractClientPlayer> {
 
     private static final ResourceLocation TEXTURE_CUFFS_LIGHT_OVERLAY = new ResourceLocation(RPSIdeas.MODID, "textures/model/cuffs_light_overlay.png");
     private static final ResourceLocation TEXTURE_CUFFS_OVERLAY = new ResourceLocation(RPSIdeas.MODID, "textures/model/cuffs_overlay.png");
     private final RenderPlayer renderPlayer;
 
-    public RenderPsiCuffs(RenderPlayer renderPlayer) {
+    public LayerPsiCuffs(RenderPlayer renderPlayer) {
         this.renderPlayer = renderPlayer;
     }
 

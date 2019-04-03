@@ -1,8 +1,6 @@
 package com.kamefrede.rpsideas.items.flow;
 
 import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.items.ItemPsimetalHoe;
-import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
 import com.kamefrede.rpsideas.util.helpers.ClientHelpers;
 import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
 import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
@@ -35,11 +33,12 @@ import vazkii.psi.client.model.ModelPsimetalExosuit;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.item.ItemCAD;
 import vazkii.psi.common.item.base.ModItems;
+import vazkii.psi.common.item.tool.IPsimetalTool;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public abstract class ItemFlowExosuit extends ItemModArmor implements IPsiAddonTool, IPsiEventArmor, IFlowColorAcceptor {
+public abstract class ItemFlowExosuit extends ItemModArmor implements IPsimetalTool, IPsiEventArmor, IFlowColorAcceptor {
     private static final String TAG_TIMES_CAST = "timesCast";
     @SideOnly(Side.CLIENT)
     private static ModelPsimetalExosuit[] models;
@@ -63,7 +62,7 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsiAddonT
 
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack) {
-        ItemPsimetalHoe.regenPsi(itemStack, player, false);
+        IPsimetalTool.regen(itemStack, player, false);
     }
 
     public void cast(ItemStack stack, PsiArmorEvent event) {
@@ -86,14 +85,19 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsiAddonT
     }
 
     @Override
+    public boolean requiresSneakForSpellSet(ItemStack stack) {
+        return false;
+    }
+
+    @Override
     public void setSelectedSlot(ItemStack stack, int slot) {
-        IPsiAddonTool.super.setSelectedSlot(stack, slot);
+        IPsimetalTool.super.setSelectedSlot(stack, slot);
         ItemNBTHelper.setInt(stack, TAG_TIMES_CAST, 0);
     }
 
     @Override
     public void setBulletInSocket(ItemStack stack, int slot, ItemStack bullet) {
-        IPsiAddonTool.super.setBulletInSocket(stack, slot, bullet);
+        IPsimetalTool.super.setBulletInSocket(stack, slot, bullet);
         ItemNBTHelper.setInt(stack, TAG_TIMES_CAST, 0);
     }
 

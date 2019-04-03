@@ -44,8 +44,8 @@ minecraft {
         clientRunArgs += ["--username", project.mc_username]
 
 
-    clientJvmArgs += ["-Dfml.coreMods.load=com.teamwizardry.librarianlib.asm.LibLibCorePlugin"]
-    serverJvmArgs += ["-Dfml.coreMods.load=com.teamwizardry.librarianlib.asm.LibLibCorePlugin"]
+    clientJvmArgs += ["-Dfml.coreMods.load=$core_plugin,com.teamwizardry.librarianlib.asm.LibLibCorePlugin"]
+    serverJvmArgs += ["-Dfml.coreMods.load=$core_plugin,com.teamwizardry.librarianlib.asm.LibLibCorePlugin"]
 }
 
 sourceSets {
@@ -76,7 +76,9 @@ tasks.withType(JavaCompile).all {
 
 jar {
     manifest {
-        attributes 'FMLAT': 'rps_at.cfg'
+        attributes 'FMLAT': 'rps_at.cfg',
+            'FMLCorePluginContainsFMLMod': true,
+            'FMLCorePlugin': core_plugin
     }
 }
 
