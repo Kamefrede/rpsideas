@@ -1,5 +1,6 @@
 package com.kamefrede.rpsideas.compat.tcon;
 
+import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -9,21 +10,24 @@ import slimeknights.tconstruct.library.modifiers.ModifierNBT;
 import slimeknights.tconstruct.library.utils.TinkerUtil;
 import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.api.cad.ISocketableCapability;
-import vazkii.psi.api.spell.ISpellContainer;
+import vazkii.psi.api.spell.ISpellAcceptor;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import static com.kamefrede.rpsideas.compat.tcon.RPSTconCompat.hasSocketeer;
+
 public class RPSTconCapabilitySocketable implements ISocketableCapability, ICapabilityProvider {
 
-    String TAG_REGEN_TIME = "regenTime";
-    String TAG_BULLET_PREFIX = "bullet";
-    String TAG_SELECTED_SLOT = "selectedSlot";
+    private static String TAG_REGEN_TIME = "regenTime";
+    private static String TAG_BULLET_PREFIX = "bullet";
+    private static String TAG_SELECTED_SLOT = "selectedSlot";
 
-    String identifier = "socketable";
+    private static String identifier = "socketable";
 
 
     private final ItemStack stack;
+
 
     public RPSTconCapabilitySocketable(ItemStack stack) {
         this.stack = stack;
@@ -32,19 +36,19 @@ public class RPSTconCapabilitySocketable implements ISocketableCapability, ICapa
     @Override
     @SuppressWarnings("ConstantConditions")
     public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-        return capability == ISocketableCapability.CAPABILITY;
+        return capability == ISocketableCapability.CAPABILITY && hasSocketeer(stack);
     }
 
     @Nullable
     @Override
     @SuppressWarnings("ConstantConditions")
     public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-        return capability == ISocketableCapability.CAPABILITY ? ISocketableCapability.CAPABILITY.cast(this) : null;
+        return capability == ISocketableCapability.CAPABILITY && hasSocketeer(stack) ? ISocketableCapability.CAPABILITY.cast(this) : null;
     }
 
     @Override
     public boolean isSocketSlotAvailable(int slot) {
-        return slot < getLevel(stack);
+        return slot < Math.min(getLevel(stack), 3);
     }
 
     @Override
@@ -56,7 +60,7 @@ public class RPSTconCapabilitySocketable implements ISocketableCapability, ICapa
     @Override
     public ItemStack getBulletInSocket(int slot) {
         String name = TAG_BULLET_PREFIX + slot;
-        NBTTagCompound tag = TinkerUtil.getModifierTag(stack, identifier);
+        NBTTagCompound tag = ItemNBTHelper.getCompound(stack, name);
         if (tag == null)
             return ItemStack.EMPTY;
 
@@ -71,18 +75,19 @@ public class RPSTconCapabilitySocketable implements ISocketableCapability, ICapa
         if (!bullet.isEmpty())
             bullet.writeToNBT(cmp);
 
-        TinkerUtil.getModifierTag(stack, identifier).setTag(name, cmp);
+
+        ItemNBTHelper.setCompound(stack, name, cmp);
 
     }
 
     @Override
     public int getSelectedSlot() {
-        return TinkerUtil.getModifierTag(stack, identifier).getInteger(TAG_SELECTED_SLOT);
+        return ItemNBTHelper.getInt(stack, TAG_SELECTED_SLOT, 0);
     }
 
     @Override
     public void setSelectedSlot(int slot) {
-        TinkerUtil.getModifierTag(stack, identifier).setInteger(TAG_SELECTED_SLOT, slot);
+        ItemNBTHelper.setInt(stack, TAG_SELECTED_SLOT, slot);
     }
 
     @Override
@@ -90,15 +95,12 @@ public class RPSTconCapabilitySocketable implements ISocketableCapability, ICapa
         if (!isSocketSlotAvailable(slot))
             return false;
 
-        if (bullet.isEmpty() || !(bullet.getItem() instanceof ISpellContainer))
+        if (bullet.isEmpty() || !ISpellAcceptor.hasSpell(bullet))
             return false;
 
-        ISpellContainer container = (ISpellContainer) bullet.getItem();
+        ISpellAcceptor container = ISpellAcceptor.acceptor(bullet);
 
-        if (!container.containsSpell(bullet))
-            return false;
-
-        return stack.getItem() instanceof ICAD || !container.isCADOnlyContainer(bullet);
+        return stack.getItem() instanceof ICAD || !container.isCADOnlyContainer();
     }
 
     @Override
@@ -106,13 +108,14 @@ public class RPSTconCapabilitySocketable implements ISocketableCapability, ICapa
         return false;
     }
 
-
     public int getLevel(ItemStack itemStack) {
-        return ModifierNBT.readTag(TinkerUtil.getModifierTag(itemStack, "socketable")).level - 1;
+        return ModifierNBT.readTag(TinkerUtil.getModifierTag(itemStack, "socketable")).level;
     }
 
     public int getLevel(NBTTagCompound modifierTag) {
         ModifierNBT.IntegerNBT data = ModifierNBT.readInteger(modifierTag);
-        return data.level - 1;
+        return data.level;
     }
+
+
 }

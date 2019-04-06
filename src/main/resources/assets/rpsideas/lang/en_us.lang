@@ -612,3 +612,8 @@ rpsideas.volumetric.tube.x=X-Axis Cylinder
 rpsideas.volumetric.tube.y=Y-Axis Cylinder
 rpsideas.volumetric.tube.z=Z-Axis Cylinder
 rpsideas.volumetric.rect=Box
+
+modifier.socketable.name=Psionic
+modifier.socketable.desc=§oMore than meets the eye!§r\nThis tool can be fitted with spell bullets which cast when you break a block, making it a powerful tool for any occasion.
+modifier.battlecaster.name=Aggressive Tactics
+modifier.battlecaster.desc=§oCombat magic... but not that kind.§r\nThis tool is built for fighting, casting its spells when it hits a mob instead of when it breaks a block.

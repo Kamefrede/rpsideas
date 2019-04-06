@@ -1,0 +1,15 @@
+{
+  "modifier": "socketable",
+  "text": [
+    {
+      "text": "Grants your tool unlimited power!!! Well, not really. Just adds a socket in the tool for you to put a PSI spell bullet in. Casts after a block break."
+    }
+  ],
+  "effects": [
+    "Tool casts a psi spell on block break",
+    "Each level corresponds to a spell socket"
+  ],
+  "demoTool": [
+    "tconstruct:pickaxe"
+  ]
+}

@@ -1,7 +1,6 @@
 package com.kamefrede.rpsideas;
 
 import com.kamefrede.rpsideas.blocks.RPSBlocks;
-import com.kamefrede.rpsideas.compat.tcon.RPSModSocketable;
 import com.kamefrede.rpsideas.compat.tcon.RPSTconCompat;
 import com.kamefrede.rpsideas.effect.RPSPotions;
 import com.kamefrede.rpsideas.entity.RPSEntities;
@@ -38,8 +37,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import slimeknights.tconstruct.library.TinkerRegistry;
-import slimeknights.tconstruct.library.modifiers.IModifier;
 import vazkii.botania.api.BotaniaAPI;
 import vazkii.psi.common.item.base.ModItems;
 
@@ -47,7 +44,7 @@ import java.util.List;
 import java.util.Map;
 
 
-@Mod(modid = RPSIdeas.MODID, name = RPSIdeas.NAME, version = RPSIdeas.VERSION, dependencies = "after:botania;after:tconstruct;required-after:psi@[r1.1-72,);required-after:librarianlib;required-after:forge@[14.23.5.2795,);", useMetadata = true)
+@Mod(modid = RPSIdeas.MODID, name = RPSIdeas.NAME, version = RPSIdeas.VERSION, dependencies = "after:botania;before:tconstruct;required-after:psi@[r1.1-72,);required-after:librarianlib;required-after:forge@[14.23.5.2795,);", useMetadata = true)
 public class RPSIdeas {
 
     public static final String MODID = "rpsideas";
@@ -81,25 +78,9 @@ public class RPSIdeas {
         }
     }
 
-    @Mod.EventHandler
-    public void postInitt(FMLPostInitializationEvent event) {
-        LOGGER.info("Starts here");
-        for (IModifier modifier : TinkerRegistry.getAllModifiers()) {
-            LOGGER.info(modifier.getIdentifier());
-        }
-    }
 
-    @Mod.EventHandler
-    public void preInitTcon(FMLPostInitializationEvent event) {
-        RPSTconCompat.modSocketable = new RPSModSocketable();
-        if (TinkerRegistry.getModifier("socketable") == null) {
-            TinkerRegistry.registerModifier((RPSModSocketable) RPSTconCompat.modSocketable);
-            ((RPSModSocketable) RPSTconCompat.modSocketable).addItem(RPSItems.wideBandSocket);
-        }
 
-    }
 
-    // Botania
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -116,6 +97,16 @@ public class RPSIdeas {
 
         NetworkRegistry.INSTANCE.registerGuiHandler(RPSIdeas.INSTANCE, new GuiHandler());
     }
+
+    //TConstruct
+
+    @Mod.EventHandler
+    @Optional.Method(modid = "tconstruct")
+    public void preInitTcon(FMLPostInitializationEvent event) {
+        RPSTconCompat.init();
+    }
+
+    // Botania
 
     @Mod.EventHandler
     @Optional.Method(modid = "botania")

@@ -1,0 +1,17 @@
+{
+  "modifier": "battlecaster",
+  "text": [
+    {
+      "text": "LEEEEEROYYYYYYYYYYYYYYYYYY JEEEEEEEEENKINS!! Makes the tool cast a spell on entity hit rather than on block break. (Sockets purchased separately)"
+    }
+  ],
+  "effects": [
+    "Removes the ability to cast spells on block break",
+    "Casts spells when the tool hits an entity instead",
+    "Requires the psionic modifier",
+    "Requires no modifier"
+  ],
+  "demoTool": [
+    "tconstruct:broadsword"
+  ]
+}

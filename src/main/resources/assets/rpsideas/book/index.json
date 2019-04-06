@@ -1,0 +1,12 @@
+[
+  {
+    "name": "modifiers",
+    "data": "sections/modifiers.json",
+    "module": "TinkerTools",
+    "icon": {
+      "item": {
+        "id": "minecraft:redstone"
+      }
+    }
+  }
+]

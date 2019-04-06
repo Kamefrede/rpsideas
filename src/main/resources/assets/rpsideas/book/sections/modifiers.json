@@ -1,0 +1,13 @@
+[
+  {
+    "type": "modifier",
+    "data": "modifiers/battlecaster.json"
+  },
+  {
+    "type": "modifier",
+    "data": "modifiers/socketable.json"
+  },
+  {
+    "type": "blank"
+  }
+]
