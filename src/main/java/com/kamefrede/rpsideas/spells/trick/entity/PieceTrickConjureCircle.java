@@ -29,7 +29,7 @@ public class PieceTrickConjureCircle extends PieceTrick {
     @Override
     public void initParams() {
         addParam(position = new ParamVector(SpellParam.GENERIC_NAME_POSITION, SpellParam.RED, false, false));
-        addParam(direction = new ParamVector(SpellParams.GENERIC_NAME_DIRECTION, SpellParam.CYAN, true, false));
+        addParam(direction = new ParamVector(SpellParams.GENERIC_NAME_DIRECTION, SpellParam.CYAN, true, true));
         addParam(time = new ParamNumber(SpellParam.GENERIC_NAME_TIME, SpellParam.BLUE, true, true));
         addParam(scale = new ParamNumber(SpellParams.GENERIC_NAME_SCALE, SpellParam.GREEN, true, true));
     }
@@ -57,7 +57,7 @@ public class PieceTrickConjureCircle extends PieceTrick {
         double scl = SpellHelpers.getNumber(this, context, scale, 1);
         double maxTimeAlive = SpellHelpers.getNumber(this, context, time, 100);
 
-        if (dir.isZero())
+        if (dir == null || dir.isZero())
             dir = new Vector3(0, 1, 0);
 
 
