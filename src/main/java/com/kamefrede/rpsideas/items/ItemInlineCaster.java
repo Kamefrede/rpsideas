@@ -1,6 +1,5 @@
 package com.kamefrede.rpsideas.items;
 
-import com.google.common.collect.ImmutableSet;
 import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
 import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
 import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
@@ -8,8 +7,6 @@ import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,17 +20,14 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.ISocketable;
-import vazkii.psi.api.spell.ISpellContainer;
-import vazkii.psi.common.core.handler.ConfigHandler;
+import vazkii.psi.api.spell.ISpellAcceptor;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.core.handler.PsiSoundHandler;
 import vazkii.psi.common.item.ItemCAD;
 import vazkii.psi.common.item.base.ModItems;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Set;
 
 public class ItemInlineCaster extends ItemMod implements IPsiAddonTool, IFlowColorAcceptor {
     public ItemInlineCaster() {
@@ -85,9 +79,9 @@ public class ItemInlineCaster extends ItemMod implements IPsiAddonTool, IFlowCol
     public boolean isItemValid(ItemStack stack, int slot, ItemStack bullet) {
         if (!this.isSocketSlotAvailable(stack, slot)) {
             return false;
-        } else if (!bullet.isEmpty() && bullet.getItem() instanceof ISpellContainer) {
-            ISpellContainer container = (ISpellContainer) bullet.getItem();
-            return container.containsSpell(bullet);
+        } else if (!bullet.isEmpty() && ISpellAcceptor.isContainer(bullet)) {
+            ISpellAcceptor acceptor = ISpellAcceptor.acceptor(bullet);
+            return acceptor.containsSpell();
         } else {
             return false;
         }

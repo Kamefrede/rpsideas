@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import vazkii.psi.api.cad.ISocketable;
+import vazkii.psi.api.spell.ISpellAcceptor;
 import vazkii.psi.api.spell.ISpellSettable;
 import vazkii.psi.api.spell.Spell;
 
@@ -59,8 +60,8 @@ public interface IPsiAddonTool extends ISocketable, ISpellSettable {
     default void setSpell(EntityPlayer player, ItemStack stack, Spell spell) {
         int slot = getSelectedSlot(stack);
         ItemStack bullet = getBulletInSocket(stack, slot);
-        if (!bullet.isEmpty() && bullet.getItem() instanceof ISpellSettable) {
-            ((ISpellSettable) bullet.getItem()).setSpell(player, bullet, spell);
+        if (!bullet.isEmpty() && ISpellAcceptor.isAcceptor(bullet)) {
+            ISpellAcceptor.acceptor(bullet).setSpell(player, spell);
             setBulletInSocket(stack, slot, bullet);
         }
     }

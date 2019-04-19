@@ -76,9 +76,9 @@ tasks.withType(JavaCompile).all {
 
 jar {
     manifest {
-        attributes 'FMLAT': 'rps_at.cfg',
-            'FMLCorePluginContainsFMLMod': true,
-            'FMLCorePlugin': core_plugin
+        attributes 'FMLAT': 'rps_at.cfg'
+        //    'FMLCorePluginContainsFMLMod': true,
+        //    'FMLCorePlugin': core_plugin
     }
 }
 

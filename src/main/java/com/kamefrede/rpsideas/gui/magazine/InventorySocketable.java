@@ -3,13 +3,12 @@ package com.kamefrede.rpsideas.gui.magazine;
 import com.kamefrede.rpsideas.util.helpers.IteratorSocketable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import vazkii.psi.api.cad.ISocketableCapability;
 import vazkii.psi.api.spell.EnumSpellStat;
-import vazkii.psi.api.spell.ISpellContainer;
+import vazkii.psi.api.spell.ISpellAcceptor;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.common.spell.SpellCompiler;
 
@@ -115,12 +114,11 @@ public class InventorySocketable implements IInventory {
     public boolean isItemValidForSlot(int index, @Nonnull ItemStack stack) {
         if (stack.isEmpty())
             return false;
-        Item item = stack.getItem();
-        if (!(item instanceof ISpellContainer)) return false;
+        if (!(ISpellAcceptor.isContainer(stack))) return false;
         if (maxBandwidth < 0)
             return true;
-        ISpellContainer container = (ISpellContainer) item;
-        Spell spell = container.getSpell(stack);
+        ISpellAcceptor acceptor = ISpellAcceptor.acceptor(stack);
+        Spell spell = acceptor.getSpell();
         SpellCompiler cmp = new SpellCompiler(spell);
         int bandwidth = cmp.getCompiledSpell().metadata.stats.get(EnumSpellStat.BANDWIDTH);
         return bandwidth <= maxBandwidth;

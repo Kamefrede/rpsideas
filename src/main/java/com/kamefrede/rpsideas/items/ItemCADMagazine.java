@@ -218,7 +218,7 @@ public class ItemCADMagazine extends ItemMod implements ISocketable, ICADCompone
                         if (!bullet.isEmpty()) {
                             if (socketsRequired < i + 1)
                                 socketsRequired = i + 1;
-                            CompiledSpell spell = new CompiledSpell(((ISpellContainer) bullet.getItem()).getSpell(bullet));
+                            CompiledSpell spell = new CompiledSpell(ISpellAcceptor.acceptor(bullet).getSpell());
                             int bandwidth = spell.metadata.stats.get(EnumSpellStat.BANDWIDTH);
                             if (bandwidthRequired < bandwidth)
                                 bandwidthRequired = bandwidth;
@@ -299,12 +299,12 @@ public class ItemCADMagazine extends ItemMod implements ISocketable, ICADCompone
     public boolean isItemValid(ItemStack stack, int slot, ItemStack bullet) {
         if (!this.isSocketSlotAvailable(stack, slot)) {
             return false;
-        } else if (!bullet.isEmpty() && bullet.getItem() instanceof ISpellContainer) {
-            ISpellContainer container = (ISpellContainer) bullet.getItem();
-            if (!container.containsSpell(bullet)) {
+        } else if (!bullet.isEmpty() && ISpellAcceptor.isContainer(bullet)) {
+            ISpellAcceptor acceptor = ISpellAcceptor.acceptor(bullet);
+            if (!acceptor.containsSpell()) {
                 return false;
             } else {
-                Spell spell = container.getSpell(bullet);
+                Spell spell = acceptor.getSpell();
                 SpellCompiler cmp = new SpellCompiler(spell);
                 return isValid(stack, cmp.getCompiledSpell());
             }
@@ -332,8 +332,8 @@ public class ItemCADMagazine extends ItemMod implements ISocketable, ICADCompone
             if (!player.world.isRemote) {
                 player.sendStatusMessage(new TextComponentTranslation(RPSIdeas.MODID + ".misc.too_complex").setStyle(new Style().setColor(TextFormatting.RED)), false);
             }
-        } else if (!bullet.isEmpty() && bullet.getItem() instanceof ISpellSettable) {
-            ((ISpellSettable) bullet.getItem()).setSpell(player, bullet, spell);
+        } else if (!bullet.isEmpty() && ISpellAcceptor.isAcceptor(bullet)) {
+            ISpellAcceptor.acceptor(bullet).setSpell(player, spell);
             this.setBulletInSocket(stack, slot, bullet);
         }
     }

@@ -14,7 +14,6 @@ import com.teamwizardry.librarianlib.features.saving.Save;
 import com.teamwizardry.librarianlib.features.tesr.TileRenderer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -25,9 +24,9 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.ItemStackHandler;
 import vazkii.psi.api.cad.ICAD;
-import vazkii.psi.api.cad.ISocketable;
+import vazkii.psi.api.cad.ISocketableCapability;
 import vazkii.psi.api.cad.ISocketableController;
-import vazkii.psi.api.spell.ISpellContainer;
+import vazkii.psi.api.spell.ISpellAcceptor;
 
 import javax.annotation.Nonnull;
 
@@ -50,13 +49,12 @@ public class TileCADCase extends TileMod {
 
     private int dyeColor = -1; // Legacy
 
-    //TODO ask wire if this one should be changed
-    public static boolean isAllowed(int slot, Item item) {
-        return (slot == 0 && (item instanceof ICAD || item instanceof ItemGaussRifle)) ||
-                (slot == 1 && !(item instanceof ICAD) &&
-                        (item instanceof ISpellContainer ||
-                                item instanceof ISocketable ||
-                                item instanceof ISocketableController));
+    public static boolean isAllowed(int slot, ItemStack stack) {
+        return (slot == 0 && (stack.getItem() instanceof ICAD || stack.getItem() instanceof ItemGaussRifle)) ||
+                (slot == 1 && !(stack.getItem() instanceof ICAD) &&
+                        (ISpellAcceptor.isContainer(stack) ||
+                                ISocketableCapability.isSocketable(stack) ||
+                                stack.getItem() instanceof ISocketableController));
     }
 
     private BlockCADCase getCaseBlock() {
@@ -184,7 +182,7 @@ public class TileCADCase extends TileMod {
 
         @Override
         protected int getStackLimit(int slot, @Nonnull ItemStack stack) {
-            return TileCADCase.isAllowed(slot, stack.getItem()) ? 1 : 0;
+            return TileCADCase.isAllowed(slot, stack) ? 1 : 0;
         }
 
         @Override

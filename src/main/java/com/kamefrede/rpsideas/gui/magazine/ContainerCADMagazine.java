@@ -8,7 +8,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import org.apache.commons.lang3.tuple.Pair;
 import vazkii.psi.api.PsiAPI;
-import vazkii.psi.api.spell.ISpellContainer;
+import vazkii.psi.api.spell.ISpellAcceptor;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -132,9 +132,9 @@ public class ContainerCADMagazine extends Container {
 
         @Override
         public boolean isItemValid(ItemStack stack) {
-            if (stack.getItem() instanceof ISpellContainer) {
-                ISpellContainer container = (ISpellContainer) stack.getItem();
-                if (container.containsSpell(stack) && isSlotEnabled()) {
+            if (ISpellAcceptor.isContainer(stack)) {
+                ISpellAcceptor acceptor = ISpellAcceptor.acceptor(stack);
+                if (acceptor.containsSpell() && isSlotEnabled()) {
                     boolean ret = socketable.isItemValidForSlot(getSlotIndex(), stack);
                     if (!ret && (!suppressNotify || notifyOnce) && player.world.isRemote) {
                         tooltipTime = 80;

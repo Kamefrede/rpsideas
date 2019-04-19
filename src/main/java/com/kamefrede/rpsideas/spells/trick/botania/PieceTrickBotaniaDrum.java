@@ -10,7 +10,6 @@ import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -60,12 +59,8 @@ public abstract class PieceTrickBotaniaDrum extends PieceComponentTrick implemen
 
         World world = context.caster.world;
 
-        if (world.isRemote) // TODO wire pls check this one
-            world.spawnParticle(EnumParticleTypes.NOTE, position.getX() + .5, position.getY() + 1.2, position.getZ() + .5, 1 / 24d, 0, 0);
-        else {
-            for (int i = 0; i < 10; i++)
-                world.playSound(null, position, SoundEvents.BLOCK_NOTE_BASEDRUM, SoundCategory.BLOCKS, 1f, 1f); //Bwaaaaaaaaaappppp
-        }
+        for (int i = 0; i < 10; i++)
+            world.playSound(null, position, SoundEvents.BLOCK_NOTE_BASEDRUM, SoundCategory.BLOCKS, 1f, 1f); //Bwaaaaaaaaaappppp
 
         doEffect(context, position);
 

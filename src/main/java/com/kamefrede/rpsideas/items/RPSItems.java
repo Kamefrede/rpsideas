@@ -76,7 +76,7 @@ public class RPSItems {
     public static final ItemMod battlecaster = new ItemIntegratedBattlecaster();
     public static final ItemMod keypad = new ItemKeypad();
 
-    public static final ItemMod elytra = new ItemPsiElytra("psimetal_elytra", 432);
+    //public static final ItemMod elytra = new ItemPsiElytra("psimetal_elytra", 432);
     //public static final ItemMod braceletCad = new ItemBraceletCAD();
 
     static {

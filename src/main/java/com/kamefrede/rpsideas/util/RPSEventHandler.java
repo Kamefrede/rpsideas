@@ -44,10 +44,10 @@ public class RPSEventHandler {
             ItemStack stack = player.getHeldItemOffhand();
             ICAD cad = (ICAD) player.getHeldItemOffhand().getItem();
             ItemStack bullet = cad.getBulletInSocket(stack, cad.getSelectedSlot(stack));
-            if (!data.overflowed && data.getAvailablePsi() > 0 && !bullet.isEmpty() && bullet.getItem() instanceof ISpellContainer) {
-                ISpellContainer spellContainer = (ISpellContainer) bullet.getItem();
-                if (spellContainer.containsSpell(bullet)) {
-                    Spell spell = spellContainer.getSpell(bullet);
+            if (!data.overflowed && data.getAvailablePsi() > 0 && !bullet.isEmpty() && ISpellAcceptor.isContainer(stack)) {
+                ISpellAcceptor acceptor = ISpellAcceptor.acceptor(stack);
+                if (acceptor.containsSpell()) {
+                    Spell spell = acceptor.getSpell();
                     SpellContext context = new SpellContext().setPlayer(player).setSpell(spell);
                     if (context.isValid()) {
                         if (context.cspell.metadata.evaluateAgainst(stack)) {

@@ -10,7 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import org.jetbrains.annotations.NotNull;
-import vazkii.psi.api.spell.ISpellContainer;
+import vazkii.psi.api.spell.ISpellAcceptor;
 import vazkii.psi.api.spell.Spell;
 
 import javax.annotation.Nonnull;
@@ -51,7 +51,7 @@ public class MessageFlashSync extends PacketBase {
         ItemStack flashRing = findFlashRing(context.getServerHandler().player);
         if (flashRing.isEmpty()) return;
 
-        ((ISpellContainer) flashRing.getItem()).setSpell(context.getServerHandler().player, flashRing, spell);
+        ISpellAcceptor.acceptor(flashRing).setSpell(context.getServerHandler().player, spell);
     }
 
     @Override

@@ -109,7 +109,7 @@ public class ItemCADCase extends ItemModBlock {
 
         @Override
         protected int getStackLimit(int slot, @Nonnull ItemStack stack) {
-            return TileCADCase.isAllowed(slot, stack.getItem()) ? 1 : 0;
+            return TileCADCase.isAllowed(slot, stack) ? 1 : 0;
         }
     }
 }
