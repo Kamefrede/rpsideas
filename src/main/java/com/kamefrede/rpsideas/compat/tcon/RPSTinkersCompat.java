@@ -6,11 +6,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.translation.I18n;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -27,14 +27,11 @@ import vazkii.arl.item.ItemMod;
 import vazkii.psi.api.cad.ISocketable;
 
 
-@Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
-public class RPSTconCompat {
+public class RPSTinkersCompat {
 
     public static Object modSocketable, modBattlecaster;
 
-    private static final ResourceLocation TCON_SOCKET = new ResourceLocation(RPSIdeas.MODID, "rpstconsocketable");
-    private static final ResourceLocation TCON_ACCEPTOR = new ResourceLocation(RPSIdeas.MODID, "rpstconacceptor");
-    private static final ResourceLocation TCON_BAR_DISPLAY = new ResourceLocation(RPSIdeas.MODID, "rpstconbardisplay");
+    private static final ResourceLocation TINKERS_SOCKETABLE_TOOL = new ResourceLocation(RPSIdeas.MODID, "rpstinkerssocketable");
 
     static {
         if (FMLCommonHandler.instance().getSide() == Side.CLIENT && Loader.isModLoaded("tconstruct")) {
@@ -44,8 +41,9 @@ public class RPSTconCompat {
 
     @Optional.Method(modid = "tconstruct")
     public static void init() {
-        modSocketable = new RPSModPsionic();
-        modBattlecaster = new RPSModAggressiveTactics();
+        modSocketable = new ModifierPsionic();
+        modBattlecaster = new ModifierBattlecaster();
+        MinecraftForge.EVENT_BUS.register(RPSTinkersCompat.class);
     }
 
 
@@ -53,9 +51,7 @@ public class RPSTconCompat {
     @Optional.Method(modid = "tconstruct")
     public static void attachItemCapabilities(AttachCapabilitiesEvent<ItemStack> event) {
         if (event.getObject().getItem() instanceof ITinkerable) {
-            event.addCapability(TCON_SOCKET, new RPSTconCapabilitySocketable(event.getObject()));
-            event.addCapability(TCON_ACCEPTOR, new RPSTconCapabilityAcceptor(event.getObject()));
-            event.addCapability(TCON_BAR_DISPLAY, new RPSTconCapabilityPsiBar(event.getObject()));
+            event.addCapability(TINKERS_SOCKETABLE_TOOL, new TinkersToolCapability(event.getObject()));
         }
 
     }
@@ -64,14 +60,14 @@ public class RPSTconCompat {
     @SideOnly(Side.CLIENT)
     @Optional.Method(modid = "tconstruct")
     public static void addTooltip(ItemTooltipEvent event) {
-        if (hasSocketeer(event.getItemStack())) {
+        if (isPsionic(event.getItemStack())) {
             String componentName = ItemMod.local(ISocketable.getSocketedItemName(event.getItemStack(), "psimisc.none"));
             TooltipHelper.addToTooltip(event.getToolTip(), "psimisc.spellSelected", componentName);
         }
     }
 
     @Optional.Method(modid = "tconstruct")
-    public static boolean hasSocketeer(ItemStack stack) {
+    public static boolean isPsionic(ItemStack stack) {
         for (IModifier modifiers : TinkerUtil.getModifiers(stack)) {
             if (modifiers.getIdentifier().equals("socketable")) {
                 return true;
@@ -81,7 +77,7 @@ public class RPSTconCompat {
     }
 
     @Optional.Method(modid = "tconstruct")
-    public boolean hasBattlecaster(ItemStack stack) {
+    public boolean isBattlecaster(ItemStack stack) {
         for (IModifier modifiers : TinkerUtil.getModifiers(stack)) {
             if (modifiers.getIdentifier().equals("battlecaster")) {
                 return true;

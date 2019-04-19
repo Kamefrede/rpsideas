@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.compat.tcon;
 
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -9,41 +10,105 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import slimeknights.tconstruct.library.modifiers.ModifierNBT;
 import slimeknights.tconstruct.library.utils.TinkerUtil;
 import vazkii.psi.api.cad.ICAD;
+import vazkii.psi.api.cad.IPsiBarDisplay;
 import vazkii.psi.api.cad.ISocketableCapability;
+import vazkii.psi.api.internal.IPlayerData;
 import vazkii.psi.api.spell.ISpellAcceptor;
+import vazkii.psi.api.spell.Spell;
+import vazkii.psi.api.spell.SpellContext;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import static com.kamefrede.rpsideas.compat.tcon.RPSTconCompat.hasSocketeer;
-
-public class RPSTconCapabilitySocketable implements ISocketableCapability, ICapabilityProvider {
-
-    private static String TAG_REGEN_TIME = "regenTime";
-    private static String TAG_BULLET_PREFIX = "bullet";
-    private static String TAG_SELECTED_SLOT = "selectedSlot";
-
-    private static String identifier = "socketable";
+import static com.kamefrede.rpsideas.compat.tcon.RPSTinkersCompat.isPsionic;
 
 
-    private final ItemStack stack;
+public class TinkersToolCapability implements ISpellAcceptor, ISocketableCapability, IPsiBarDisplay, ICapabilityProvider {
 
+    private static final String TAG_REGEN_TIME = "regenTime";
+    private static final String TAG_BULLET_PREFIX = "bullet";
+    private static final String TAG_SELECTED_SLOT = "selectedSlot";
 
-    public RPSTconCapabilitySocketable(ItemStack stack) {
+    private static final String identifier = "socketable";
+
+    public final ItemStack stack;
+
+    public TinkersToolCapability(ItemStack stack) {
         this.stack = stack;
-    }
-
-    @Override
-    @SuppressWarnings("ConstantConditions")
-    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-        return capability == ISocketableCapability.CAPABILITY && hasSocketeer(stack);
     }
 
     @Nullable
     @Override
-    @SuppressWarnings("ConstantConditions")
     public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-        return capability == ISocketableCapability.CAPABILITY && hasSocketeer(stack) ? ISocketableCapability.CAPABILITY.cast(this) : null;
+        if (isPsionic(stack)) {
+            if (capability == ISocketableCapability.CAPABILITY)
+                return ISocketableCapability.CAPABILITY.cast(this);
+            if (capability == IPsiBarDisplay.CAPABILITY)
+                return IPsiBarDisplay.CAPABILITY.cast(this);
+            if (capability == ISpellAcceptor.CAPABILITY)
+                return ISpellAcceptor.CAPABILITY.cast(this);
+        }
+        return null;
+
+
+    }
+
+    @Override
+    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+        return isPsionic(stack) && (capability == ISocketableCapability.CAPABILITY || capability == IPsiBarDisplay.CAPABILITY || capability == ISpellAcceptor.CAPABILITY);
+    }
+
+    @Override
+    public boolean shouldShow(IPlayerData data) {
+        return true;
+    }
+
+    @Override
+    public void setSpell(EntityPlayer player, Spell spell) {
+        ISocketableCapability socketable = ISocketableCapability.socketable(stack);
+        int slot = socketable.getSelectedSlot();
+        ItemStack bullet = socketable.getBulletInSocket(slot);
+        if (!bullet.isEmpty() && ISpellAcceptor.isAcceptor(bullet)) {
+            ISpellAcceptor.acceptor(bullet).setSpell(player, spell);
+            socketable.setBulletInSocket(slot, bullet);
+        }
+
+    }
+
+    @Override
+    public boolean castableFromSocket() {
+        return false;
+    }
+
+    @Nullable
+    @Override
+    public Spell getSpell() {
+        return null;
+    }
+
+    @Override
+    public boolean containsSpell() {
+        return false;
+    }
+
+    @Override
+    public void castSpell(SpellContext context) {
+
+    }
+
+    @Override
+    public double getCostModifier() {
+        return 1;
+    }
+
+    @Override
+    public boolean isCADOnlyContainer() {
+        return false;
+    }
+
+    @Override
+    public boolean requiresSneakForSpellSet() {
+        return false;
     }
 
     @Override
@@ -116,6 +181,4 @@ public class RPSTconCapabilitySocketable implements ISocketableCapability, ICapa
         ModifierNBT.IntegerNBT data = ModifierNBT.readInteger(modifierTag);
         return data.level;
     }
-
-
 }

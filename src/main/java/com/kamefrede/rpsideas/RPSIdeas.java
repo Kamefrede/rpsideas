@@ -1,7 +1,7 @@
 package com.kamefrede.rpsideas;
 
 import com.kamefrede.rpsideas.blocks.RPSBlocks;
-import com.kamefrede.rpsideas.compat.tcon.RPSTconCompat;
+import com.kamefrede.rpsideas.compat.tcon.RPSTinkersCompat;
 import com.kamefrede.rpsideas.effect.RPSPotions;
 import com.kamefrede.rpsideas.entity.RPSEntities;
 import com.kamefrede.rpsideas.entity.botania.EntityPsiManaBurst;
@@ -103,7 +103,7 @@ public class RPSIdeas {
     @Mod.EventHandler
     @Optional.Method(modid = "tconstruct")
     public void preInitTcon(FMLPostInitializationEvent event) {
-        RPSTconCompat.init();
+        RPSTinkersCompat.init();
     }
 
     // Botania

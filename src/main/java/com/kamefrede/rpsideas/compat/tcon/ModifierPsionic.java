@@ -21,11 +21,11 @@ import vazkii.psi.common.item.ItemCAD;
 import static com.kamefrede.rpsideas.items.components.ItemIntegratedBattlecaster.hasBattlecaster;
 import static vazkii.psi.common.item.tool.IPsimetalTool.raytraceFromEntity;
 
-public class RPSModPsionic extends ModifierTrait {
+public class ModifierPsionic extends ModifierTrait {
 
     protected static final int maxLevel = 3;
 
-    public RPSModPsionic() {
+    public ModifierPsionic() {
         super("socketable", 0x5752CC, maxLevel, 0);
         addRecipeMatch(new RecipeMatch.ItemCombination(1, new ItemStack(RPSItems.wideBandSocket)));
         addAspects(new ModifierAspect.CategoryAnyAspect(Category.HARVEST, Category.TOOL, Category.WEAPON, Category.AOE));

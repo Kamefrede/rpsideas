@@ -21,13 +21,13 @@ import vazkii.psi.common.item.ItemCAD;
 import java.util.Iterator;
 import java.util.List;
 
-public class RPSModAggressiveTactics extends AbstractTrait implements IModifierDisplay {
+public class ModifierBattlecaster extends AbstractTrait implements IModifierDisplay {
 
 
-    public RPSModAggressiveTactics() {
+    public ModifierBattlecaster() {
         super("battlecaster", 0xac5ae9);
         addRecipeMatch(new RecipeMatch.ItemCombination(1, new ItemStack(RPSItems.battlecaster)));
-        addAspects(new ModifierAspect.FreeModifierAspect(0), new ModifierAspect.CategoryAnyAspect(Category.HARVEST, Category.TOOL, Category.WEAPON, Category.AOE), new RPSTconCompat.RPSModifierAspect(TinkerRegistry.getModifier("socketable")));
+        addAspects(new ModifierAspect.FreeModifierAspect(0), new ModifierAspect.CategoryAnyAspect(Category.HARVEST, Category.TOOL, Category.WEAPON, Category.AOE), new RPSTinkersCompat.RPSModifierAspect(TinkerRegistry.getModifier("socketable")));
     }
 
     @Override
