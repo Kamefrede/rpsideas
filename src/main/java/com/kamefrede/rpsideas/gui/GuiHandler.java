@@ -70,7 +70,7 @@ public class GuiHandler implements IGuiHandler {
             }
             case GUI_FLASH_RING: {
                 ItemStack stack = getStack(player, ItemFlashRing.class);
-                if (!stack.isEmpty()) return new GuiFlashRing(player, stack);
+                if (!stack.isEmpty()) return new GuiFlashRing(stack);
             }
             case GUI_MAGAZINE: {
                 ItemStack stack = getStack(player, ItemCADMagazine.class);
