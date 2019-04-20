@@ -5,7 +5,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import slimeknights.mantle.util.RecipeMatch;
@@ -18,7 +17,7 @@ import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.item.ItemCAD;
 
-import static com.kamefrede.rpsideas.items.components.ItemIntegratedBattlecaster.hasBattlecaster;
+import static com.kamefrede.rpsideas.compat.tcon.RPSTinkersCompat.isBattlecaster;
 import static vazkii.psi.common.item.tool.IPsimetalTool.raytraceFromEntity;
 
 public class ModifierPsionic extends ModifierTrait {
@@ -32,19 +31,8 @@ public class ModifierPsionic extends ModifierTrait {
     }
 
     @Override
-    public void applyEffect(NBTTagCompound rootCompound, NBTTagCompound modifierTag) {
-        super.applyEffect(rootCompound, modifierTag);
-    }
-
-    @Override
-    public String getTooltip(NBTTagCompound modifierTag, boolean detailed) {
-        return super.getTooltip(modifierTag, detailed);
-    }
-
-    @Override
     public void afterBlockBreak(ItemStack tool, World world, IBlockState state, BlockPos pos, EntityLivingBase player, boolean wasEffective) {
-        super.afterBlockBreak(tool, world, state, pos, player, wasEffective);
-        if (!hasBattlecaster(tool)) {
+        if (!isBattlecaster(tool)) {
             EntityPlayer pl = (EntityPlayer) player;
             PlayerDataHandler.PlayerData data = PlayerDataHandler.get(pl);
             ItemStack playerCad = PsiAPI.getPlayerCAD(pl);

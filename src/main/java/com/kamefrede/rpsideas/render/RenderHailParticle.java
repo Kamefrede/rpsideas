@@ -55,7 +55,7 @@ public class RenderHailParticle extends Render<EntityHailParticle> {
         if (norm.length() > 0)
             GlStateManager.rotate((ClientTickHandler.getTicks() + partialTicks) * 50.0f, (float) norm.x, (float) norm.y, (float) norm.z);
 
-        double s = entity.getSize();
+        double s = entity.getSize() * 0.6;
         int color = entity.getColor();
         int r = (color >> 16) & 0xFF;
         int g = (color >> 8) & 0xFF;

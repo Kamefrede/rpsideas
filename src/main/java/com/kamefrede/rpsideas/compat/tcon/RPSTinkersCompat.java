@@ -77,7 +77,7 @@ public class RPSTinkersCompat {
     }
 
     @Optional.Method(modid = "tconstruct")
-    public boolean isBattlecaster(ItemStack stack) {
+    public static boolean isBattlecaster(ItemStack stack) {
         for (IModifier modifiers : TinkerUtil.getModifiers(stack)) {
             if (modifiers.getIdentifier().equals("battlecaster")) {
                 return true;

@@ -613,6 +613,7 @@ rpsideas.volumetric.tube.y=Y-Axis Cylinder
 rpsideas.volumetric.tube.z=Z-Axis Cylinder
 rpsideas.volumetric.rect=Box
 
+rpsideas.gui.error.no_socketable=You need at least one socket in this tool to apply the battlecaster
 modifier.socketable.name=Psionic
 modifier.socketable.desc=§oMore than meets the eye!§r\nThis tool can be fitted with spell bullets which cast when you break a block, making it a powerful tool for any occasion.
 modifier.battlecaster.name=Aggressive Tactics
