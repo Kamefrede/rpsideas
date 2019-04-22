@@ -22,6 +22,7 @@ import static com.teamwizardry.librarianlib.features.kotlin.CommonUtilMethods.wr
 public class MessageFlashSync extends PacketBase {
 
     private Spell spell;
+    private static final String TAG_SPELL = "spell";
 
     @SuppressWarnings("unused")
     public MessageFlashSync() {

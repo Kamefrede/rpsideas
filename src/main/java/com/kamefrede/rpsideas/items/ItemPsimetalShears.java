@@ -1,6 +1,5 @@
 package com.kamefrede.rpsideas.items;
 
-import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.block.state.IBlockState;
@@ -21,13 +20,14 @@ import vazkii.psi.api.cad.ISocketable;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.item.ItemCAD;
+import vazkii.psi.common.item.tool.IPsimetalTool;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 
 import static vazkii.psi.common.item.tool.IPsimetalTool.raytraceFromEntity;
 
-public class ItemPsimetalShears extends ItemMod implements IPsiAddonTool {
+public class ItemPsimetalShears extends ItemMod implements IPsimetalTool {
     public ItemPsimetalShears(String name) {
         super(name);
         setMaxStackSize(1);

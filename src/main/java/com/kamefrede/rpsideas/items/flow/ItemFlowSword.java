@@ -1,7 +1,6 @@
 package com.kamefrede.rpsideas.items.flow;
 
 import com.kamefrede.rpsideas.items.ItemPsimetalHoe;
-import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
 import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
 import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
 import com.teamwizardry.librarianlib.features.base.item.ItemModSword;
@@ -20,11 +19,12 @@ import vazkii.psi.api.cad.ISocketable;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.item.ItemCAD;
 import vazkii.psi.common.item.base.ModItems;
+import vazkii.psi.common.item.tool.IPsimetalTool;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class ItemFlowSword extends ItemModSword implements IPsiAddonTool, IFlowColorAcceptor {
+public class ItemFlowSword extends ItemModSword implements IPsimetalTool, IFlowColorAcceptor {
     private final boolean ebony;
 
     public ItemFlowSword(String name, boolean ebony) {
@@ -79,5 +79,10 @@ public class ItemFlowSword extends ItemModSword implements IPsiAddonTool, IFlowC
     public boolean onEntityItemUpdate(EntityItem ent) {
         FlowColorsHelper.clearColorizer(ent.getItem());
         return super.onEntityItemUpdate(ent);
+    }
+
+    @Override
+    public boolean requiresSneakForSpellSet(ItemStack stack) {
+        return false;
     }
 }

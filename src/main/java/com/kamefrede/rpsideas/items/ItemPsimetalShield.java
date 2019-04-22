@@ -1,6 +1,5 @@
 package com.kamefrede.rpsideas.items;
 
-import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
 import com.teamwizardry.librarianlib.features.base.item.ItemModShield;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.client.util.ITooltipFlag;
@@ -19,10 +18,11 @@ import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.ISocketable;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.item.ItemCAD;
+import vazkii.psi.common.item.tool.IPsimetalTool;
 
 import java.util.List;
 
-public class ItemPsimetalShield extends ItemModShield implements IPsiAddonTool {
+public class ItemPsimetalShield extends ItemModShield implements IPsimetalTool {
 
 
     public ItemPsimetalShield(@NotNull String name) {

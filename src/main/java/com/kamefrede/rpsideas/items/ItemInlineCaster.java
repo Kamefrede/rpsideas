@@ -1,6 +1,5 @@
 package com.kamefrede.rpsideas.items;
 
-import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
 import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
 import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
@@ -25,11 +24,12 @@ import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.core.handler.PsiSoundHandler;
 import vazkii.psi.common.item.ItemCAD;
 import vazkii.psi.common.item.base.ModItems;
+import vazkii.psi.common.item.tool.IPsimetalTool;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class ItemInlineCaster extends ItemMod implements IPsiAddonTool, IFlowColorAcceptor {
+public class ItemInlineCaster extends ItemMod implements IPsimetalTool, IFlowColorAcceptor {
     public ItemInlineCaster() {
         super(RPSItemNames.INLINE_CASTER);
         setMaxStackSize(1);

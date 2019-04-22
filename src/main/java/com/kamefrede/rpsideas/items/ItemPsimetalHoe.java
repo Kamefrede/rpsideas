@@ -1,7 +1,6 @@
 package com.kamefrede.rpsideas.items;
 
 import com.google.common.collect.Multimap;
-import com.kamefrede.rpsideas.items.base.IPsiAddonTool;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
@@ -30,11 +29,12 @@ import vazkii.psi.api.cad.ISocketable;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.item.ItemCAD;
+import vazkii.psi.common.item.tool.IPsimetalTool;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class ItemPsimetalHoe extends ItemMod implements IPsiAddonTool {
+public class ItemPsimetalHoe extends ItemMod implements IPsimetalTool {
     private static final String TAG_REGEN_TIME = "regenTime";
     private final float speed;
 
