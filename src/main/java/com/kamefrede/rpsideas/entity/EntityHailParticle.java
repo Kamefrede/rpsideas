@@ -30,35 +30,31 @@ public class EntityHailParticle extends EntityThrowable {
 
     private static final DataParameter<String> CASTER_NAME = EntityDataManager.createKey(EntityHailParticle.class, DataSerializers.STRING);
     private static final DataParameter<Float> MASS = EntityDataManager.createKey(EntityHailParticle.class, DataSerializers.FLOAT);
-    private static final DataParameter<Float> SIZE = EntityDataManager.createKey(EntityHailParticle.class, DataSerializers.FLOAT);
     private static final DataParameter<ItemStack> COLORIZER_DATA = EntityDataManager.createKey(EntityHailParticle.class, DataSerializers.ITEM_STACK);
 
     private static final String TAG_COLORIZER = "colorizer";
     private static final String TAG_TIME_ALIVE = "timeAlive";
     private static final String TAG_CASTER_NAME = "casterName";
-    private static final String TAG_SIZE = "size";
     private static final String TAG_MASS = "mass";
-    private static final float drag = 0.01f;
+    private static final float drag = 0.99f;
     public int timeAlive;
 
 
     public EntityHailParticle(World worldIn) {
         super(worldIn);
-        setSize(1f, 1f);
+        setSize(0.25f, 0.25f);
     }
 
 
-    public void createParticle(EntityPlayer player, ItemStack colorizer, BlockPos pos, float size, float mass) {
+    public void createParticle(EntityPlayer player, ItemStack colorizer, BlockPos pos, float mass) {
         World world = player.world;
         if (world.getBlockState(pos).causesSuffocation())
             this.setPosition(pos.getX(), pos.getY() + 1.5, pos.getZ());
         this.setPosition(pos.getX(), pos.getY() + 0.5, pos.getZ());
         dataManager.set(COLORIZER_DATA, colorizer);
-        dataManager.set(SIZE, size);
         dataManager.set(MASS, mass);
         dataManager.set(CASTER_NAME, player.getName());
         this.thrower = player;
-        setSize(size, size);
     }
 
 
@@ -67,7 +63,7 @@ public class EntityHailParticle extends EntityThrowable {
         super.onUpdate();
         if (timeAlive++ >= getMaxAlive())
             setDead();
-        if (this.motionX > 0 || this.motionZ > 0 || this.motionY > 0) {
+        if (this.motionX != 0 || this.motionZ != 0 || this.motionY != 0) {
             this.motionX *= drag;
             this.motionY *= drag;
             this.motionZ *= drag;
@@ -95,7 +91,7 @@ public class EntityHailParticle extends EntityThrowable {
         Entity entity = result.entityHit;
 
         if (entity != null) {
-            entity.attackEntityFrom(new EntityDamageSourceIndirect("arrow", this, thrower).setProjectile(), (float) Math.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ) * dataManager.get(MASS));
+            entity.attackEntityFrom(new EntityDamageSourceIndirect("arrow", this, thrower).setProjectile(), (float) Math.ceil(Math.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ) * dataManager.get(MASS)));
         }
         setDead();
 
@@ -130,13 +126,11 @@ public class EntityHailParticle extends EntityThrowable {
         dataManager.register(COLORIZER_DATA, ItemStack.EMPTY);
         dataManager.register(CASTER_NAME, "");
         dataManager.register(MASS, 0f);
-        dataManager.register(SIZE, 0f);
     }
 
     @Override
     public void readEntityFromNBT(NBTTagCompound compound) {
         dataManager.set(COLORIZER_DATA, new ItemStack(compound.getCompoundTag(TAG_COLORIZER)));
-        dataManager.set(SIZE, compound.getFloat(TAG_SIZE));
         dataManager.set(MASS, compound.getFloat(TAG_MASS));
         dataManager.set(CASTER_NAME, compound.getString(TAG_CASTER_NAME));
         this.timeAlive = compound.getInteger(TAG_TIME_ALIVE);
@@ -152,7 +146,6 @@ public class EntityHailParticle extends EntityThrowable {
         compound.setString(TAG_CASTER_NAME, dataManager.get(CASTER_NAME));
 
         compound.setFloat(TAG_MASS, dataManager.get(MASS));
-        compound.setFloat(TAG_SIZE, dataManager.get(SIZE));
         compound.setInteger(TAG_TIME_ALIVE, timeAlive);
     }
 
@@ -161,9 +154,6 @@ public class EntityHailParticle extends EntityThrowable {
     }
 
 
-    public float getSize() {
-        return dataManager.get(SIZE);
-    }
 
     @Override
     public void setDead() {
@@ -184,7 +174,7 @@ public class EntityHailParticle extends EntityThrowable {
     }
 
     public double getMeltingPoint() {
-        return 300 * dataManager.get(SIZE);
+        return 300;
     }
 
     @Override

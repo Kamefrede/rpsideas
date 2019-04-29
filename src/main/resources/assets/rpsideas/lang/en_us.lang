@@ -233,7 +233,7 @@ psi.spellpiece.rpsideas.trick_silence.desc=Silences an area around a position te
 psi.spellpiece.rpsideas.trick_slot_match.desc=Changes the building slot to match the block at the given position
 psi.spellpiece.rpsideas.trick_slot_change.desc=Changes the building slot to one of the 36 inventory slots.
 psi.spellpiece.rpsideas.trick_soothe.desc=Calms down mobs and delays a primed TNT explosion
-psi.spellpiece.rpsideas.trick_summon_hail=Summons a hail particle, the more power you use, the more damage it does
+psi.spellpiece.rpsideas.trick_summon_hail.desc=Summons a hail particle, the more power you use, the more damage it does
 
 psi.datatype.String=String
 rpsideas.datatype.String=String

@@ -28,9 +28,9 @@ public class PieceTrickConjureHail extends PieceTrick {
         super.addToMetadata(meta);
         double pwr = SpellHelpers.ensurePositiveAndNonzero(this, power);
         if (pwr > 1)
-            throw new SpellCompilationException(SpellCompilationExceptions.POWER);
-        meta.addStat(EnumSpellStat.COST, (int) (pwr * 500));
-        meta.addStat(EnumSpellStat.POTENCY, (int) (pwr * 40));
+            throw new SpellCompilationException(SpellCompilationExceptions.POWER, x, y);
+        meta.addStat(EnumSpellStat.COST, (int) (pwr * 300));
+        meta.addStat(EnumSpellStat.POTENCY, (int) (pwr * 15));
     }
 
     @Override
@@ -49,7 +49,7 @@ public class PieceTrickConjureHail extends PieceTrick {
         ItemStack colorizer = ((ICAD) cad.getItem()).getComponentInSlot(cad, EnumCADComponent.DYE);
 
         EntityHailParticle entity = new EntityHailParticle(context.caster.world);
-        entity.createParticle(context.caster, colorizer, pos, (float) pwr / 2, (float) (3 * pwr));
+        entity.createParticle(context.caster, colorizer, pos, (float) pwr);
         entity.world.spawnEntity(entity);
         return super.execute(context);
     }

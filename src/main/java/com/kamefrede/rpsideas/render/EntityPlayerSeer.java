@@ -28,7 +28,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.ICADColorizer;
-import vazkii.psi.client.core.helper.PsiRenderHelper;
+import vazkii.psi.api.internal.PsiRenderHelper;
 import vazkii.psi.common.Psi;
 
 import javax.annotation.Nonnull;

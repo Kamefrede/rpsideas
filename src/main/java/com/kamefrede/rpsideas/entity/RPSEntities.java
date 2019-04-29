@@ -25,7 +25,7 @@ public class RPSEntities {
         registerModEntity(EntityPsireworkRocket.class, RPSEntityNames.ENTITY_PSI_FIREWORK, 64, 10, true);
         registerModEntity(EntityConjuredText.class, RPSEntityNames.ENTITY_CONJURED_TEXT, 64, 10, false);
         registerModEntity(EntityFancyCircle.class, RPSEntityNames.ENTITY_FANCY_CIRCLE, 64, 10, false);
-        registerModEntity(EntityHailParticle.class, RPSEntityNames.ENTITY_HAIL_PARTICLE, 64, 10, true);
+        registerModEntity(EntityHailParticle.class, RPSEntityNames.ENTITY_HAIL_PARTICLE, 256, 10, true);
     }
 
     @SideOnly(Side.CLIENT)

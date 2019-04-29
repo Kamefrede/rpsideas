@@ -11,10 +11,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 import vazkii.psi.api.PsiAPI;
+import vazkii.psi.api.internal.PsiRenderHelper;
 import vazkii.psi.api.internal.TooltipHelper;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamAny;
-import vazkii.psi.client.core.helper.PsiRenderHelper;
 import vazkii.psi.common.lib.LibResources;
 
 /**

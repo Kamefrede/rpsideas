@@ -37,8 +37,8 @@ public class PieceTrickClairvoyance extends PieceTrick {
         double distance = SpellHelpers.ensurePositiveAndNonzero(this, this.distance, 0);
         if (distance >= 32)
             throw new SpellCompilationException(SpellCompilationExceptions.RADIUS);
-        meta.addStat(EnumSpellStat.COST, (int) (Math.pow(distance, 3) * ((time / 20) * 150)));
-        meta.addStat(EnumSpellStat.POTENCY, (int) (Math.pow(distance, 2) * ((time / 20) * 15)));
+        meta.addStat(EnumSpellStat.COST, (int) (Math.pow(distance, 2) * (time * 5)));
+        meta.addStat(EnumSpellStat.POTENCY, (int) (distance * (time * 1.5)));
     }
 
     @Override
