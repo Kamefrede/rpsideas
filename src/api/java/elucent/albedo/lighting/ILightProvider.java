@@ -32,5 +32,5 @@ import javax.annotation.Nullable;
 public interface ILightProvider {
 	@SideOnly(Side.CLIENT)
 	@Nullable
-	public Light provideLight();
+    Light provideLight();
 }

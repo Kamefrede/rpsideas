@@ -218,6 +218,7 @@ public class ItemCADMagazine extends ItemMod implements ISocketable, ICADCompone
                         if (!bullet.isEmpty()) {
                             if (socketsRequired < i + 1)
                                 socketsRequired = i + 1;
+
                             CompiledSpell spell = new CompiledSpell(ISpellAcceptor.acceptor(bullet).getSpell());
                             int bandwidth = spell.metadata.stats.get(EnumSpellStat.BANDWIDTH);
                             if (bandwidthRequired < bandwidth)

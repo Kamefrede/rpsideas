@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.render;
 
 import com.kamefrede.rpsideas.RPSIdeas;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
@@ -12,7 +13,6 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.inventory.ContainerPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -27,9 +27,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.psi.api.PsiAPI;
-import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.api.internal.PsiRenderHelper;
-import vazkii.psi.common.Psi;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -117,11 +115,7 @@ public class EntityPlayerSeer extends AbstractClientPlayer {
         GlStateManager.depthMask(false);
         GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.ZERO, GlStateManager.DestFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 
-        int color = ICADColorizer.DEFAULT_SPELL_COLOR;
-
-        ItemStack cadStack = PsiAPI.getPlayerCAD(mc.player);
-        if (!cadStack.isEmpty())
-            color = Psi.proxy.getColorForCAD(cadStack);
+        int color = SpellHelpers.getCADColor(PsiAPI.getPlayerCAD(mc.player));
 
         GlStateManager.color(PsiRenderHelper.r(color) / 255F,
                 PsiRenderHelper.g(color) / 255F,

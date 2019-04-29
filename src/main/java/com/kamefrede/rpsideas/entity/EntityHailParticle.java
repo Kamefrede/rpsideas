@@ -1,8 +1,7 @@
 package com.kamefrede.rpsideas.entity;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.kamefrede.rpsideas.network.MessageSparkleSphere;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,16 +12,12 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.EntityDamageSourceIndirect;
-import net.minecraft.util.EntitySelectors;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import vazkii.psi.api.cad.ICADColorizer;
-import vazkii.psi.common.Psi;
 
-import java.util.List;
+import javax.annotation.Nonnull;
 
 import static com.teamwizardry.librarianlib.features.network.PacketExtensionKt.sendToAllAround;
 
@@ -73,9 +68,9 @@ public class EntityHailParticle extends EntityThrowable {
 
         RayTraceResult trace = world.rayTraceBlocks(position, projected, false, true, false);
 
-        if (trace != null)
+     /*   if (trace != null)
             projected = new Vec3d(trace.hitVec.x, trace.hitVec.y, trace.hitVec.z);
-        Entity entity = findEntityOnPath(position, projected);
+        Entity entity = findEntityOnPath(position, projected);*/
 
         if (trace != null)
             onImpact(trace);
@@ -87,17 +82,24 @@ public class EntityHailParticle extends EntityThrowable {
     }
 
     @Override
-    protected void onImpact(RayTraceResult result) {
+    protected void onImpact(@Nonnull RayTraceResult result) {
         Entity entity = result.entityHit;
+        BlockPos pos = new BlockPos(result.hitVec.x, result.hitVec.y, result.hitVec.z);
 
         if (entity != null) {
             entity.attackEntityFrom(new EntityDamageSourceIndirect("magic", this, thrower).setProjectile(), (float) Math.ceil(Math.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ) * dataManager.get(MASS) * 7));
+            setDead();
+            return;
+        }
+        if (!world.getBlockState(pos).isSideSolid(world, pos, result.sideHit)) {
+            return;
         }
         setDead();
 
+
     }
 
-    protected Entity findEntityOnPath(Vec3d start, Vec3d end) {
+    /*protected Entity findEntityOnPath(Vec3d start, Vec3d end) {
         Predicate<Entity> predicate = Predicates.and(EntitySelectors.NOT_SPECTATING, EntitySelectors.IS_ALIVE, Entity::canBeCollidedWith, (Entity e) -> e != this);
 
         Entity entity = null;
@@ -119,7 +121,7 @@ public class EntityHailParticle extends EntityThrowable {
         }
 
         return entity;
-    }
+    }*/
 
     @Override
     protected void entityInit() {
@@ -166,12 +168,9 @@ public class EntityHailParticle extends EntityThrowable {
     }
 
     public int getColor() {
-        int colorVal = ICADColorizer.DEFAULT_SPELL_COLOR;
-        ItemStack colorizer = dataManager.get(COLORIZER_DATA);
-        if (!colorizer.isEmpty() && colorizer.getItem() instanceof ICADColorizer)
-            colorVal = Psi.proxy.getColorForColorizer(colorizer);
-        return colorVal;
+        return SpellHelpers.getColor(dataManager.get(COLORIZER_DATA));
     }
+
 
     public double getMeltingPoint() {
         return 300;

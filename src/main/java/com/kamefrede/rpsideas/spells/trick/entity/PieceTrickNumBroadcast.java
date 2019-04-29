@@ -92,10 +92,8 @@ public class PieceTrickNumBroadcast extends PieceTrick {
                 EntityPlayer pl = (EntityPlayer) ent;
                 if (PsiAPI.getPlayerCAD(pl) != null && pl != null) {
                     PlayerDataHandler.PlayerData temp = PlayerDataHandler.get(pl);
-                    if (temp != null && temp.getCustomData() != null) {
-                        temp.getCustomData().setDouble(channelKey, signalVal);
-                        temp.save();
-                    }
+                    temp.getCustomData().setDouble(channelKey, signalVal);
+                    temp.save();
                 }
             }
         }

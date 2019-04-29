@@ -14,6 +14,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.awt.*;
 
@@ -61,7 +62,7 @@ public class RenderConjuredText extends Render<EntityConjuredText> {
     }
 
     @Override
-    public void doRender(EntityConjuredText entity, double x, double y, double z, float entityYaw, float partialTicks) {
+    public void doRender(@Nonnull EntityConjuredText entity, double x, double y, double z, float entityYaw, float partialTicks) {
         EntityPlayer player = (EntityPlayer) this.renderManager.renderViewEntity;
         int maxDist = 64;
         double d3 = entity.getDistanceSq(player);
@@ -77,7 +78,7 @@ public class RenderConjuredText extends Render<EntityConjuredText> {
 
     @Nullable
     @Override
-    protected ResourceLocation getEntityTexture(EntityConjuredText entity) {
+    protected ResourceLocation getEntityTexture(@Nonnull EntityConjuredText entity) {
         return null;
     }
 }

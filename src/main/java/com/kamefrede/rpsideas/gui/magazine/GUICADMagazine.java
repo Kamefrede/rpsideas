@@ -67,7 +67,7 @@ public class GUICADMagazine extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         if (getTooltipTime() != 0) {
-            ArrayList<String> list = new ArrayList<String>();
+            ArrayList<String> list = new ArrayList<>();
             list.add(TextFormatting.RED.toString() + I18n.format(getTooltipText()));
             GuiUtils.drawHoveringText(list, -10, ySize / 2, width, height, xSize, Minecraft.getMinecraft().fontRenderer);
             decreaseTooltipTime(ClientTicker.ticksInGame - lastTick);

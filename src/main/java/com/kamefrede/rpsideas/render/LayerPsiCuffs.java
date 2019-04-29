@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.render;
 
 import com.kamefrede.rpsideas.RPSIdeas;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -40,9 +41,9 @@ public class LayerPsiCuffs implements LayerRenderer<AbstractClientPlayer> {
         float r = 0, g = 0, b = 0;
         if (hasCad) {
             int color = Psi.proxy.getColorForCAD(cad);
-            r = ((color >> 16) & 0xFF) / 255f;
-            g = ((color >> 8) & 0xFF) / 255f;
-            b = (color & 0xFF) / 255f;
+            r = SpellHelpers.getR(color);
+            g = SpellHelpers.getG(color);
+            b = SpellHelpers.getB(color);
         }
         doCuffsRender(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale);
         doCuffLightOverlay(entitylivingbaseIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scale, r, g, b, hasCad);

@@ -53,7 +53,7 @@ public class PieceTrickMoveBlockSequence extends PieceTrick {
         Vector3 directionVal = SpellHelpers.getVector3(this, context, direction, false, true);
         Vector3 positionVal = SpellHelpers.getVector3(this, context, position, true, false);
         Vector3 targetVal = SpellHelpers.getVector3(this, context, target, false, false);
-        Double maxBlocksVal = SpellHelpers.getNumber(this, context, maxBlocks, 0);
+        double maxBlocksVal = SpellHelpers.getNumber(this, context, maxBlocks, 0);
 
 
         Map<BlockPos, IBlockState> toSet = Maps.newHashMap();

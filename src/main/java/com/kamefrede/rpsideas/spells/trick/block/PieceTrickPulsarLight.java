@@ -1,6 +1,5 @@
 package com.kamefrede.rpsideas.spells.trick.block;
 
-import com.kamefrede.rpsideas.blocks.BlockPulsarLight;
 import com.kamefrede.rpsideas.blocks.RPSBlocks;
 import com.kamefrede.rpsideas.tiles.TileConjuredPulsar;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;

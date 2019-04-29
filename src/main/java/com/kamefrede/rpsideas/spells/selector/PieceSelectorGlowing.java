@@ -4,7 +4,6 @@ import com.google.common.base.Predicate;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.init.MobEffects;
-import net.minecraft.potion.PotionEffect;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.common.spell.selector.entity.PieceSelectorNearby;
 

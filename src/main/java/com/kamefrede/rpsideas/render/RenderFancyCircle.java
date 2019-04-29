@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import vazkii.psi.api.internal.PsiRenderHelper;
 import vazkii.psi.common.lib.LibResources;
 
 import javax.annotation.Nonnull;
@@ -60,9 +61,9 @@ public class RenderFancyCircle extends Render<EntityFancyCircle> {
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 0xf0, 0xf0);
 
 
-        int r = (color >> 16) & 0xFF;
-        int g = (color >> 8) & 0xFF;
-        int b = color & 0xFF;
+        int r = PsiRenderHelper.r(color);
+        int g = PsiRenderHelper.g(color);
+        int b = PsiRenderHelper.b(color);
 
         for (int i = 0; i < layers.length; i++) {
             int rValue = r;

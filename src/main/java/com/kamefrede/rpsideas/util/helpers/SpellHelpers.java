@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
@@ -13,9 +14,13 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import vazkii.psi.api.cad.ICAD;
+import vazkii.psi.api.cad.ICADColorizer;
+import vazkii.psi.api.internal.PsiRenderHelper;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.wrapper.EntityListWrapper;
+import vazkii.psi.common.Psi;
 import vazkii.psi.common.spell.trick.block.PieceTrickBreakBlock;
 import vazkii.psi.common.spell.trick.block.PieceTrickPlaceBlock;
 
@@ -202,6 +207,32 @@ public class SpellHelpers {
 
     public static double distanceSquared(Entity a, Entity b) {
         return distanceSquared(a.posX, a.posY, a.posZ, b.posX, b.posY, b.posZ);
+    }
+
+    public static int getColor(ItemStack stack) {
+        int colorVal = ICADColorizer.DEFAULT_SPELL_COLOR;
+        if (!stack.isEmpty() && stack.getItem() instanceof ICADColorizer)
+            colorVal = Psi.proxy.getColorForColorizer(stack);
+        return colorVal;
+    }
+
+    public static int getCADColor(ItemStack stack) {
+        int colorVal = ICADColorizer.DEFAULT_SPELL_COLOR;
+        if (!stack.isEmpty() && stack.getItem() instanceof ICAD)
+            colorVal = Psi.proxy.getColorForCAD(stack);
+        return colorVal;
+    }
+
+    public static float getR(int color) {
+        return PsiRenderHelper.r(color) / 255f;
+    }
+
+    public static float getG(int color) {
+        return PsiRenderHelper.g(color) / 255f;
+    }
+
+    public static float getB(int color) {
+        return PsiRenderHelper.b(color) / 255f;
     }
 
 }

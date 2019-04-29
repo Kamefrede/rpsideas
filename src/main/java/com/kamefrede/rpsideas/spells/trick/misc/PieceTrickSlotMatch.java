@@ -55,7 +55,7 @@ public class PieceTrickSlotMatch extends PieceTrick {
 
     private int getSlotFor(ItemStack stack, NonNullList<ItemStack> mainInventory) {
         for (int i = 0; i < mainInventory.size(); ++i) {
-            if (!((ItemStack) mainInventory.get(i)).isEmpty() && this.stackEqualExact(stack, mainInventory.get(i))) {
+            if (!mainInventory.get(i).isEmpty() && this.stackEqualExact(stack, mainInventory.get(i))) {
                 return i;
             }
         }

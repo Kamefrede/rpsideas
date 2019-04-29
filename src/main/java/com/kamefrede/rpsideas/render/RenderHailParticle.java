@@ -15,7 +15,9 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
+import vazkii.psi.api.internal.PsiRenderHelper;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 @SideOnly(Side.CLIENT)
@@ -28,13 +30,13 @@ public class RenderHailParticle extends Render<EntityHailParticle> {
 
     @Nullable
     @Override
-    protected ResourceLocation getEntityTexture(EntityHailParticle entity) {
+    protected ResourceLocation getEntityTexture(@Nonnull EntityHailParticle entity) {
         return null;
     }
 
 
     @Override
-    public void doRender(EntityHailParticle entity, double x, double y, double z, float entityYaw, float partialTicks) {
+    public void doRender(@Nonnull EntityHailParticle entity, double x, double y, double z, float entityYaw, float partialTicks) {
 
 
         GlStateManager.pushMatrix();
@@ -57,9 +59,9 @@ public class RenderHailParticle extends Render<EntityHailParticle> {
 
         double s = 0.25;
         int color = entity.getColor();
-        int r = (color >> 16) & 0xFF;
-        int g = (color >> 8) & 0xFF;
-        int b = color & 0xFF;
+        int r = PsiRenderHelper.r(color);
+        int g = PsiRenderHelper.g(color);
+        int b = PsiRenderHelper.b(color);
         // TOP
         buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
         buffer.pos(-s, s, -s).color(r, g, b, 255).endVertex();

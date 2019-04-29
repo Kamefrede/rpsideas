@@ -3,7 +3,6 @@ package com.kamefrede.rpsideas.crafting;
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.effect.RPSPotions;
 import com.kamefrede.rpsideas.util.RPSConfigHandler;
-import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.item.ItemStack;

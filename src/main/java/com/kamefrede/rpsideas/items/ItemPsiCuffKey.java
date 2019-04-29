@@ -21,6 +21,7 @@ import vazkii.arl.network.NetworkHandler;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.network.message.MessageDataSync;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
 public class ItemPsiCuffKey extends ItemMod {
@@ -32,12 +33,13 @@ public class ItemPsiCuffKey extends ItemMod {
     private static final String TAG_CUFFED = "rpsideas:cuffed";
     private static final String TAG_KEYNAME = "rpsideas:cuffKeyName";
 
+    @Nonnull
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn) {
         if (playerIn.isSneaking()) {
             ItemStack key = playerIn.getHeldItem(handIn);
             if (!key.hasDisplayName())
-                return new ActionResult<ItemStack>(EnumActionResult.FAIL, key);
+                return new ActionResult<>(EnumActionResult.FAIL, key);
             String keyName = key.getDisplayName();
             removeKey(playerIn, key, keyName);
         }
@@ -86,8 +88,9 @@ public class ItemPsiCuffKey extends ItemMod {
         }
     }
 
+    @Nonnull
     @Override
-    public ItemStack getContainerItem(ItemStack itemStack) {
+    public ItemStack getContainerItem(@Nonnull ItemStack itemStack) {
         return itemStack.copy();
     }
 

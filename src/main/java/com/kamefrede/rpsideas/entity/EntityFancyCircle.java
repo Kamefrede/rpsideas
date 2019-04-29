@@ -1,5 +1,6 @@
 package com.kamefrede.rpsideas.entity;
 
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -10,10 +11,8 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.ISpellImmune;
-import vazkii.psi.common.Psi;
 
 import javax.annotation.Nonnull;
 
@@ -116,11 +115,7 @@ public class EntityFancyCircle extends Entity implements ISpellImmune {
 
 
     public int getColor() {
-        int colorVal = ICADColorizer.DEFAULT_SPELL_COLOR;
-        ItemStack colorizer = dataManager.get(COLORIZER_DATA);
-        if (!colorizer.isEmpty() && colorizer.getItem() instanceof ICADColorizer)
-            colorVal = Psi.proxy.getColorForColorizer(colorizer);
-        return colorVal;
+        return SpellHelpers.getColor(dataManager.get(COLORIZER_DATA));
     }
 
     public int getLiveTime() {

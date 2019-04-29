@@ -1,12 +1,12 @@
 package com.kamefrede.rpsideas.tiles;
 
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.kamefrede.rpsideas.util.libs.RPSBlockNames;
 import com.teamwizardry.librarianlib.features.autoregister.TileRegister;
 import com.teamwizardry.librarianlib.features.base.block.tile.TileModTickable;
 import com.teamwizardry.librarianlib.features.saving.Save;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.Vec3d;
-import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.common.Psi;
 
@@ -37,13 +37,11 @@ public class TileCracklingStar extends TileModTickable {
     @Override
     public void tick() {
         if (world.isRemote) {
-            int color = ICADColorizer.DEFAULT_SPELL_COLOR;
-            if (!colorizer.isEmpty())
-                color = Psi.proxy.getColorForColorizer(colorizer);
+            int color = SpellHelpers.getColor(colorizer);
 
-            float red = ((color >> 16) & 0xFF) / 255f;
-            float green = ((color >> 8) & 0xFF) / 255f;
-            float blue = (color & 0xFF) / 255f;
+            float red = SpellHelpers.getR(color);
+            float green = SpellHelpers.getG(color);
+            float blue = SpellHelpers.getB(color);
 
 
             for (Vec3d ray : rays) {

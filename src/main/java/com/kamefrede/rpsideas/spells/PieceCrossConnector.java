@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.spells;
 
 import com.kamefrede.rpsideas.spells.base.SpellParams;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -95,9 +96,9 @@ public class PieceCrossConnector extends SpellPiece implements IGenericRedirecto
             double maxU = minU + 0.5;
             double maxV = minV + 0.5;
 
-            float r = PsiRenderHelper.r(color) / 255f;
-            float g = PsiRenderHelper.g(color) / 255f;
-            float b = PsiRenderHelper.b(color) / 255f;
+            float r = SpellHelpers.getR(color);
+            float g = SpellHelpers.getG(color);
+            float b = SpellHelpers.getB(color);
 
             GlStateManager.color(r, g, b);
             BufferBuilder wr = Tessellator.getInstance().getBuffer();

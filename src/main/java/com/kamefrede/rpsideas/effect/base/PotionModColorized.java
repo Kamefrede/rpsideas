@@ -2,17 +2,15 @@ package com.kamefrede.rpsideas.effect.base;
 
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.util.helpers.ClientHelpers;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.teamwizardry.librarianlib.features.base.PotionMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.psi.api.PsiAPI;
-import vazkii.psi.api.cad.ICADColorizer;
-import vazkii.psi.common.Psi;
 
 import javax.annotation.Nonnull;
 
@@ -50,9 +48,6 @@ public class PotionModColorized extends PotionMod {
 
     @SideOnly(Side.CLIENT)
     public int getPulsedColor() {
-        int color = ICADColorizer.DEFAULT_SPELL_COLOR;
-        ItemStack cad = PsiAPI.getPlayerCAD(Minecraft.getMinecraft().player);
-        if (!cad.isEmpty()) color = Psi.proxy.getColorForCAD(cad);
-        return ClientHelpers.pulseColor(color);
+        return ClientHelpers.pulseColor(SpellHelpers.getCADColor(PsiAPI.getPlayerCAD(Minecraft.getMinecraft().player)));
     }
 }

@@ -1,5 +1,6 @@
 package com.kamefrede.rpsideas.network;
 
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.teamwizardry.librarianlib.core.LibrarianLib;
 import com.teamwizardry.librarianlib.features.autoregister.PacketRegister;
 import com.teamwizardry.librarianlib.features.network.PacketBase;
@@ -9,7 +10,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
-import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.common.Psi;
 
 import javax.annotation.Nonnull;
@@ -47,12 +47,11 @@ public class MessageParticleTrail extends PacketBase {
     public void handle(@Nonnull MessageContext context) {
         World world = LibrarianLib.PROXY.getClientPlayer().world;
 
-        int color = ICADColorizer.DEFAULT_SPELL_COLOR;
-        if (!cad.isEmpty()) color = Psi.proxy.getColorForCAD(cad);
+        int color = SpellHelpers.getCADColor(cad);
 
-        float red = ((color >> 16) & 0xFF) / 255f;
-        float green = ((color >> 8) & 0xFF) / 255f;
-        float blue = (color & 0xFF) / 255f;
+        float red = SpellHelpers.getR(color);
+        float green = SpellHelpers.getG(color);
+        float blue = SpellHelpers.getB(color);
 
         Vec3d ray = direction.normalize().scale(1f / STEPS_PER_UNIT);
         int steps = (int) (length * STEPS_PER_UNIT);

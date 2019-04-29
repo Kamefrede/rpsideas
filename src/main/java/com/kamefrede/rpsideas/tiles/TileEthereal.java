@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.tiles;
 
 import com.kamefrede.rpsideas.blocks.BlockConjuredDirectional;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.kamefrede.rpsideas.util.libs.RPSBlockNames;
 import com.teamwizardry.librarianlib.features.autoregister.TileRegister;
 import com.teamwizardry.librarianlib.features.base.block.tile.TileModTickable;
@@ -9,7 +10,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import org.jetbrains.annotations.NotNull;
-import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.common.Psi;
 
 import java.util.Arrays;
@@ -27,13 +27,11 @@ public class TileEthereal extends TileModTickable {
     @Override
     public void tick() {
         if (getWorld().isRemote) {
-            int color = colorizer.isEmpty() ?
-                    ICADColorizer.DEFAULT_SPELL_COLOR :
-                    Psi.proxy.getColorForColorizer(colorizer);
+            int color = SpellHelpers.getColor(colorizer);
 
-            float r = ((color >> 16) & 0xFF) / 255f;
-            float g = ((color >> 8) & 0xFF) / 255f;
-            float b = (color & 0xFF) / 255f;
+            float r = SpellHelpers.getR(color);
+            float g = SpellHelpers.getG(color);
+            float b = SpellHelpers.getB(color);
 
             IBlockState state = getWorld().getBlockState(getPos());
             state = state.getBlock().getActualState(state, getWorld(), getPos());

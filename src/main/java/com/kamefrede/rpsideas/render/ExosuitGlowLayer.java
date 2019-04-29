@@ -2,6 +2,7 @@ package com.kamefrede.rpsideas.render;
 
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.flow.ItemFlowExosuit;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -66,9 +67,9 @@ public class ExosuitGlowLayer extends LayerBipedArmor {
                 this.renderer.bindTexture(RESOURCE);
                 int color = getColorFromPlayer(player);
                 if (color == 0) return;
-                float r = ((color >> 16) & 0xFF) / 255f;
-                float g = ((color >> 8) & 0xFF) / 255f;
-                float b = (color & 0xFF) / 255f;
+                float r = SpellHelpers.getR(color);
+                float g = SpellHelpers.getG(color);
+                float b = SpellHelpers.getB(color);
                 GlStateManager.disableLighting();
                 GlStateManager.color(r, g, b, 1f);
 

@@ -21,6 +21,7 @@ import vazkii.arl.network.NetworkHandler;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.network.message.MessageDataSync;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
 public class ItemPsiCuffs extends ItemMod implements IFlowColorAcceptor {
@@ -34,11 +35,12 @@ public class ItemPsiCuffs extends ItemMod implements IFlowColorAcceptor {
     private static final String TAG_KEYNAME = "rpsideas:cuffKeyName";
 
 
+    @Nonnull
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn) {
         if (playerIn.isSneaking() && ItemNBTHelper.getString(playerIn.getHeldItem(handIn), TAG_KEYNAME, null) != null) {
             ItemNBTHelper.removeEntry(playerIn.getHeldItem(handIn), TAG_KEYNAME);
-            return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+            return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
         }
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }
