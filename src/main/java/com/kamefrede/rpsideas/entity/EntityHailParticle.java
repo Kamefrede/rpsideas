@@ -91,7 +91,7 @@ public class EntityHailParticle extends EntityThrowable {
         Entity entity = result.entityHit;
 
         if (entity != null) {
-            entity.attackEntityFrom(new EntityDamageSourceIndirect("arrow", this, thrower).setProjectile(), (float) Math.ceil(Math.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ) * dataManager.get(MASS)));
+            entity.attackEntityFrom(new EntityDamageSourceIndirect("magic", this, thrower).setProjectile(), (float) Math.ceil(Math.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ) * dataManager.get(MASS) * 7));
         }
         setDead();
 
