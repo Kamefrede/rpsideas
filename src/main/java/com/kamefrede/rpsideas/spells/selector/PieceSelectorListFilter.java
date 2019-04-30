@@ -22,7 +22,7 @@ public class PieceSelectorListFilter extends PieceSelector {
     @Override
     public void initParams() {
         addParam(list = new ParamEntityListWrapper(SpellParams.GENERIC_NAME_LIST, SpellParam.CYAN, false, false));
-        addParam(num = new ParamNumber(SpellParam.GENERIC_NAME_NUMBER, SpellParam.PURPLE, false, true));
+        addParam(num = new ParamNumber(SpellParam.GENERIC_NAME_NUMBER, SpellParam.PURPLE, false, false));
     }
 
     @Override

@@ -16,6 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import vazkii.psi.api.internal.Vector3;
 
 import javax.annotation.Nonnull;
 
@@ -41,11 +42,9 @@ public class EntityHailParticle extends EntityThrowable {
     }
 
 
-    public void createParticle(EntityPlayer player, ItemStack colorizer, BlockPos pos, float mass) {
+    public void createParticle(EntityPlayer player, ItemStack colorizer, Vector3 pos, float mass) {
         World world = player.world;
-        if (world.getBlockState(pos).causesSuffocation())
-            this.setPosition(pos.getX(), pos.getY() + 1.5, pos.getZ());
-        this.setPosition(pos.getX(), pos.getY() + 0.5, pos.getZ());
+        this.setPosition(pos.x, pos.y, pos.z);
         dataManager.set(COLORIZER_DATA, colorizer);
         dataManager.set(MASS, mass);
         dataManager.set(CASTER_NAME, player.getName());
@@ -87,7 +86,7 @@ public class EntityHailParticle extends EntityThrowable {
         BlockPos pos = new BlockPos(result.hitVec.x, result.hitVec.y, result.hitVec.z);
 
         if (entity != null) {
-            entity.attackEntityFrom(new EntityDamageSourceIndirect("magic", this, thrower).setProjectile(), (float) Math.ceil(Math.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ) * dataManager.get(MASS) * 7));
+            entity.attackEntityFrom(new EntityDamageSourceIndirect("magic", this, thrower).setProjectile(), (float) Math.ceil(Math.sqrt(Math.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ)) * dataManager.get(MASS) * 7));
             setDead();
             return;
         }

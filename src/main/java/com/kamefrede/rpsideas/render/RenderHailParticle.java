@@ -2,10 +2,8 @@ package com.kamefrede.rpsideas.render;
 
 import com.kamefrede.rpsideas.entity.EntityHailParticle;
 import com.teamwizardry.librarianlib.core.client.ClientTickHandler;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -41,13 +39,9 @@ public class RenderHailParticle extends Render<EntityHailParticle> {
 
         GlStateManager.pushMatrix();
         GlStateManager.translate((float) x, (float) y, (float) z);
-        GlStateManager.enableRescaleNormal();
-        GlStateManager.disableCull();
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         GlStateManager.enableLighting();
-        GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-        RenderHelper.disableStandardItemLighting();
-        Minecraft.getMinecraft().entityRenderer.disableLightmap();
+
 
         Tessellator tess = Tessellator.getInstance();
         BufferBuilder buffer = tess.getBuffer();
@@ -110,7 +104,6 @@ public class RenderHailParticle extends Render<EntityHailParticle> {
         buffer.pos(-s, -s, s).color(r, g, b, 255).endVertex();
         tess.draw();
 
-        GlStateManager.disableRescaleNormal();
         GlStateManager.popMatrix();
 
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
