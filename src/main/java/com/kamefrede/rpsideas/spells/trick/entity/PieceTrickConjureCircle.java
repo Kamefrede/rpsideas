@@ -29,7 +29,7 @@ public class PieceTrickConjureCircle extends PieceTrick {
     @Override
     public void initParams() {
         addParam(position = new ParamVector(SpellParam.GENERIC_NAME_POSITION, SpellParam.RED, false, false));
-        addParam(direction = new ParamVector(SpellParams.GENERIC_NAME_DIRECTION, SpellParam.CYAN, true, true));
+        addParam(direction = new ParamVector(SpellParams.GENERIC_NAME_DIRECTION, SpellParam.CYAN, true, false));
         addParam(time = new ParamNumber(SpellParam.GENERIC_NAME_TIME, SpellParam.BLUE, true, true));
         addParam(scale = new ParamNumber(SpellParams.GENERIC_NAME_SCALE, SpellParam.GREEN, true, true));
     }
