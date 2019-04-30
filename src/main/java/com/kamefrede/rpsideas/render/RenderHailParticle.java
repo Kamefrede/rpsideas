@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.render;
 
 import com.kamefrede.rpsideas.entity.EntityHailParticle;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.teamwizardry.librarianlib.core.client.ClientTickHandler;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -13,7 +14,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
-import vazkii.psi.api.internal.PsiRenderHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -41,7 +41,8 @@ public class RenderHailParticle extends Render<EntityHailParticle> {
         GlStateManager.translate((float) x, (float) y, (float) z);
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         GlStateManager.enableLighting();
-
+        GlStateManager.disableTexture2D();
+        GlStateManager.disableCull();
 
         Tessellator tess = Tessellator.getInstance();
         BufferBuilder buffer = tess.getBuffer();
@@ -53,57 +54,29 @@ public class RenderHailParticle extends Render<EntityHailParticle> {
 
         double s = 0.25;
         int color = entity.getColor();
-        int r = PsiRenderHelper.r(color);
-        int g = PsiRenderHelper.g(color);
-        int b = PsiRenderHelper.b(color);
+
+        GlStateManager.color(SpellHelpers.getR(color), SpellHelpers.getG(color), SpellHelpers.getB(color));
         // TOP
-        buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
-        buffer.pos(-s, s, -s).color(r, g, b, 255).endVertex();
-        buffer.pos(-s, s, s).color(r, g, b, 255).endVertex();
-        buffer.pos(s, s, s).color(r, g, b, 255).endVertex();
-        buffer.pos(s, s, -s).color(r, g, b, 255).endVertex();
+        buffer.begin(GL11.GL_TRIANGLE_STRIP, DefaultVertexFormats.POSITION);
+        buffer.pos(-s, -s, -s).endVertex();
+        buffer.pos(-s, s, -s).endVertex();
+        buffer.pos(s, -s, -s).endVertex();
+        buffer.pos(s, s, -s).endVertex();
+        buffer.pos(s, s, s).endVertex();
+        buffer.pos(-s, s, -s).endVertex();
+        buffer.pos(-s, s, s).endVertex();
+        buffer.pos(-s, -s, s).endVertex();
+        buffer.pos(s, s, s).endVertex();
+        buffer.pos(s, -s, s).endVertex();
+        buffer.pos(s, -s, -s).endVertex();
+        buffer.pos(-s, -s, s).endVertex();
+        buffer.pos(-s, -s, -s).endVertex();
+        buffer.pos(-s, s, -s).endVertex();
         tess.draw();
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
-        // BOTTOM
-        buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
-        buffer.pos(-s, -s, -s).color(r, g, b, 255).endVertex();
-        buffer.pos(-s, -s, s).color(r, g, b, 255).endVertex();
-        buffer.pos(s, -s, s).color(r, g, b, 255).endVertex();
-        buffer.pos(s, -s, -s).color(r, g, b, 255).endVertex();
-        tess.draw();
-
-        // TO THE RIGHT
-        buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
-        buffer.pos(-s, -s, s).color(r, g, b, 255).endVertex();
-        buffer.pos(-s, s, s).color(r, g, b, 255).endVertex();
-        buffer.pos(s, s, s).color(r, g, b, 255).endVertex();
-        buffer.pos(s, -s, s).color(r, g, b, 255).endVertex();
-        tess.draw();
-
-        // TO THE LEFT
-        buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
-        buffer.pos(-s, -s, -s).color(r, g, b, 255).endVertex();
-        buffer.pos(-s, s, -s).color(r, g, b, 255).endVertex();
-        buffer.pos(s, s, -s).color(r, g, b, 255).endVertex();
-        buffer.pos(s, -s, -s).color(r, g, b, 255).endVertex();
-        tess.draw();
-
-        // FRONT
-        buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
-        buffer.pos(s, -s, -s).color(r, g, b, 255).endVertex();
-        buffer.pos(s, s, -s).color(r, g, b, 255).endVertex();
-        buffer.pos(s, s, s).color(r, g, b, 255).endVertex();
-        buffer.pos(s, -s, s).color(r, g, b, 255).endVertex();
-        tess.draw();
-
-        // BACK
-        buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
-        buffer.pos(-s, -s, -s).color(r, g, b, 255).endVertex();
-        buffer.pos(-s, s, -s).color(r, g, b, 255).endVertex();
-        buffer.pos(-s, s, s).color(r, g, b, 255).endVertex();
-        buffer.pos(-s, -s, s).color(r, g, b, 255).endVertex();
-        tess.draw();
-
+        GlStateManager.enableCull();
+        GlStateManager.enableTexture2D();
         GlStateManager.popMatrix();
 
         super.doRender(entity, x, y, z, entityYaw, partialTicks);

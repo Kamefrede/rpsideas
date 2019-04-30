@@ -151,7 +151,7 @@ public class EntityHailParticle extends EntityThrowable {
     }
 
     public int getMaxAlive() {
-        return (int) (600 * dataManager.get(MASS));
+        return 600;
     }
 
 
