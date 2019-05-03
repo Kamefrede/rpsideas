@@ -161,6 +161,7 @@ public class RPSPieces {
         register(PieceTrickCollapseBlockSequence.class, RPSPieceNames.PIECE_TRICK_COLLAPSE_BLOCK_SEQUENCE, LibPieceGroups.BLOCK_WORKS);
         register(PieceVectorCatch.class, RPSPieceNames.PIECE_VECTOR_CATCH, RPSPieceNames.SECONDARY_VECTOR_OPERATORS);
         register(PieceTrickConjureHail.class, RPSPieceNames.PIECE_TRICK_SUMMON_HAIL, RPSPieceNames.MANIPULATION);
+        register(PieceOperatorGetMiningLevel.class, RPSPieceNames.PIECE_OPERATOR_GET_MINING_LEVEL, RPSPieceNames.BLOCK_PROPERTIES);
 
         registerNoTexture(PieceCrossConnector.class, RPSPieceNames.CROSS_CONNECTOR, LibPieceGroups.FLOW_CONTROL);
         registerTexture(RPSPieceNames.CROSS_CONNECTOR, LibMisc.MOD_ID, LibPieceNames.CONNECTOR);

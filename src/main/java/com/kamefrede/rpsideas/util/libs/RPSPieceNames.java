@@ -119,6 +119,7 @@ public class RPSPieceNames {
     public static final String PIECE_SELECTOR_KEYPAD = "selector_keypad";
     public static final String PIECE_TRICK_COLLAPSE_BLOCK_SEQUENCE = "trick_collapse_block_sequence";
     public static final String PIECE_VECTOR_CATCH = "vector_suppress";
+    public static final String PIECE_OPERATOR_GET_MINING_LEVEL = "operator_get_mining_level";
 
 
     public static final String ALTERNATE_CONJURATION = RPSIdeas.MODID + ".redstone_conjuration";

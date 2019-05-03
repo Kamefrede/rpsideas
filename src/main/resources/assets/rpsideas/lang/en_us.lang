@@ -113,6 +113,7 @@ psi.spellpiece.rpsideas.trick_slot_match=Trick: Slot Match
 psi.spellpiece.rpsideas.trick_slot_change=Trick: Slot Change
 psi.spellpiece.rpsideas.trick_soothe=Trick: Soothe
 psi.spellpiece.rpsideas.trick_summon_hail=Trick: Summon Hail
+psi.spellpiece.rpsideas.operator_get_mining_level=Operator: Get Mining Level
 
 psi.spellpiece.rpsideas.cross_connector=Cross Connector
 psi.spellpiece.rpsideas.cross_connector.desc=Can connect two paths
@@ -234,6 +235,7 @@ psi.spellpiece.rpsideas.trick_slot_match.desc=Changes the building slot to match
 psi.spellpiece.rpsideas.trick_slot_change.desc=Changes the building slot to one of the 36 inventory slots.
 psi.spellpiece.rpsideas.trick_soothe.desc=Calms down mobs and delays a primed TNT explosion
 psi.spellpiece.rpsideas.trick_summon_hail.desc=Summons a hail particle, the more power you use, the more damage it does
+psi.spellpiece.rpsideas.operator_get_mining_level.desc=Gets the mining level of the block at the specified position
 
 psi.datatype.String=String
 rpsideas.datatype.String=String
