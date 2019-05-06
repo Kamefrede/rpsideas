@@ -34,7 +34,7 @@ public class PieceTrickConjureHail extends PieceTrick {
     public void initParams() {
         super.initParams();
         addParam(position = new ParamVector(SpellParam.GENERIC_NAME_POSITION, SpellParam.RED, false, false));
-        addParam(power = new ParamNumber(SpellParams.GENERIC_NAME_POWER, SpellParam.BLUE, false, false));
+        addParam(power = new ParamNumber(SpellParams.GENERIC_NAME_POWER, SpellParam.BLUE, false, true));
     }
 
     @Override
