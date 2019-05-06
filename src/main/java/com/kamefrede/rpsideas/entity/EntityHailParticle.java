@@ -176,7 +176,7 @@ public class EntityHailParticle extends EntityThrowable {
 
 
     public double getMeltingPoint() {
-        return 300;
+        return 75;
     }
 
     @Override
