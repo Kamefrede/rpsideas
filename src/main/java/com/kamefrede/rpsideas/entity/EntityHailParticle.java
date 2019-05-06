@@ -32,7 +32,8 @@ public class EntityHailParticle extends EntityThrowable {
     private static final String TAG_TIME_ALIVE = "timeAlive";
     private static final String TAG_CASTER_NAME = "casterName";
     private static final String TAG_MASS = "mass";
-    private static final float drag = 0.99f;
+    private static final float drag = 1.00f;
+    private static final float gravity = 0.05f;
     public int timeAlive;
 
 
@@ -62,6 +63,9 @@ public class EntityHailParticle extends EntityThrowable {
             this.motionY *= drag;
             this.motionZ *= drag;
         }
+
+        this.motionY -= gravity;
+
         Vec3d position = new Vec3d(posX, posY, posZ);
         Vec3d projected = new Vec3d(posX + motionX, posY + motionY, posZ + motionZ);
 
