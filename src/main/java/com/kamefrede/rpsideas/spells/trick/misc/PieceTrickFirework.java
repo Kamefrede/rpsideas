@@ -44,17 +44,12 @@ public class PieceTrickFirework extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 positionVal = this.getParamValue(context, position);
+        Vector3 positionVal = SpellHelpers.getVector3(this, context, position, true, true, false);
         double timeVal = SpellHelpers.getNumber(this, context, time, 0);
 
         ItemStack cad = PsiAPI.getPlayerCAD(context.caster);
         ICAD icad = (ICAD) cad.getItem();
         ItemStack colorizer = icad.getComponentInSlot(cad, EnumCADComponent.DYE);
-
-        if (positionVal == null)
-            throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        if (!context.isInRadius(positionVal))
-            throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
         ItemStack fireworkStack = generateFirework((int) timeVal);
 
         EntityFireworkRocket rocket = new EntityPsireworkRocket(context.caster.world, positionVal.x, positionVal.y, positionVal.z, fireworkStack, colorizer);

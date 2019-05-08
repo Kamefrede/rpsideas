@@ -53,7 +53,7 @@ public class PieceTrickConjureGravityBlock extends PieceTrick {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         BlockPos pos = SpellHelpers.getBlockPos(this, context, position, true, false);
-        Double timeVal = this.getParamValue(context, time);
+        double timeVal = SpellHelpers.getNumber(this, context, time, -1);
 
         if (!context.caster.world.isBlockModifiable(context.caster, pos))
             return null;

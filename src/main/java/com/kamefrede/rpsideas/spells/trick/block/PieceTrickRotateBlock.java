@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.spells.trick.block;
 
 import com.kamefrede.rpsideas.spells.base.SpellParams;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.BlockLog;
@@ -12,7 +13,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BlockEvent;
-import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceTrick;
@@ -83,14 +83,11 @@ public class PieceTrickRotateBlock extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 positionVal = this.getParamValue(context, position);
-        Vector3 directionVal = this.getParamValue(context, direction);
+        BlockPos pos = SpellHelpers.getBlockPos(this, context, position, true, true, false);
+        EnumFacing facing = SpellHelpers.getFacing(this, context, direction);
 
-        if (positionVal == null || directionVal == null)
-            throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
 
         World world = context.caster.world;
-        BlockPos pos = positionVal.toBlockPos();
         IBlockState state = world.getBlockState(pos);
 
         if (world.isAirBlock(pos)) return null;
@@ -101,7 +98,6 @@ public class PieceTrickRotateBlock extends PieceTrick {
             return null;
 
 
-        EnumFacing facing = EnumFacing.getFacingFromVector((float) directionVal.x, (float) directionVal.y, (float) directionVal.z);
         rotateBlock(world, pos, facing);
         return null;
 

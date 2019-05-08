@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.spells.operator.vector;
 
 import com.kamefrede.rpsideas.spells.base.SpellParams;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamVector;
@@ -29,11 +30,8 @@ public class PieceOperatorVectorFallback extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 vec = this.getParamValue(context, vector);
         Vector3 fall = this.getParamValue(context, fallback);
-        if (vec == null || vec.isZero()) {
-            return fall;
-        } else return vec;
+        return SpellHelpers.getDefaultedVector(this, context, vector, false, false, fall);
 
 
     }

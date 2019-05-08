@@ -1,5 +1,6 @@
 package com.kamefrede.rpsideas.spells.trick.misc;
 
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import vazkii.psi.api.spell.*;
@@ -32,7 +33,7 @@ public class PieceTrickDebugSpamless extends PieceTrick {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
 
-        Double numberVal = this.getParamValue(context, numParam);
+        double numberVal = SpellHelpers.getNumber(this, context, numParam, 0);
         Object targetVal = getParamValue(context, targetParam);
 
         int number = -1;
@@ -41,16 +42,14 @@ public class PieceTrickDebugSpamless extends PieceTrick {
         if (targetVal != null)
             s = targetVal.toString();
 
-        if (numberVal != null) {
-            String numStr = "" + numberVal;
-            if (numberVal - numberVal.intValue() == 0) {
-                int numInt = numberVal.intValue();
-                numStr = "" + numInt;
-                number = numInt;
-            }
-
-            s = TextFormatting.AQUA + "[" + numStr + "] " + TextFormatting.RESET + s;
+        String numStr = "" + numberVal;
+        if (numberVal - (int) numberVal == 0) {
+            int numInt = (int) numberVal;
+            numStr = "" + numInt;
+            number = numInt;
         }
+
+        s = TextFormatting.AQUA + "[" + numStr + "] " + TextFormatting.RESET + s;
 
         TextComponentString component = new TextComponentString(s);
         sendSpamlessMessage(context.caster, component, "rps spamless".hashCode() + number);

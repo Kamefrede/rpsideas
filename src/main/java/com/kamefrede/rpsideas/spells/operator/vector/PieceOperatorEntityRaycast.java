@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.spells.operator.vector;
 
 import com.kamefrede.rpsideas.spells.base.SpellParams;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
@@ -35,10 +36,8 @@ public class PieceOperatorEntityRaycast extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 ent = this.getParamValue(context, target);
-        Vector3 vec = this.getParamValue(context, vector);
-        if (ent == null || ent.isZero()) throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
-        if (vec == null || vec.isZero()) throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
+        Vector3 ent = SpellHelpers.getVector3(this, context, target, true, false, false);
+        Vector3 vec = SpellHelpers.getVector3(this, context, vector, true, false, false);
         if (getEntityLookedAt(ent.toVec3D(), vec.toVec3D(), context) == null) {
             throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
         } else return getEntityLookedAt(ent.toVec3D(), vec.toVec3D(), context);

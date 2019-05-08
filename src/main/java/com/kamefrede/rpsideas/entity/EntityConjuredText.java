@@ -36,7 +36,7 @@ public class EntityConjuredText extends Entity implements ISpellImmune {
     @Override
     public void onUpdate() {
         super.onUpdate();
-        if (!world.isRemote && timeAlive++ > dataManager.get(MAX_ALIVE))
+        if (!world.isRemote && timeAlive++ > getLiveTime())
             setDead();
     }
 
@@ -96,6 +96,10 @@ public class EntityConjuredText extends Entity implements ISpellImmune {
 
     public int getColor() {
         return SpellHelpers.getColor(dataManager.get(COLORIZER_DATA));
+    }
+
+    public int getLiveTime() {
+        return dataManager.get(MAX_ALIVE);
     }
 
     @Override

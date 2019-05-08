@@ -45,7 +45,7 @@ public class PieceTrickParticleTrail extends PieceTrick {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         Vector3 pos = SpellHelpers.getVector3(this, context, positionParam, true, false);
-        Vector3 dir = SpellHelpers.getVector3(this, context, rayParam, false, false);
+        Vector3 dir = SpellHelpers.getVector3(this, context, rayParam, true, false, false);
         double length = SpellHelpers.getNumber(this, context, lengthParam, 0);
         double time = Math.min(SpellHelpers.getNumber(this, context, timeParam, 20), 1200);
 
@@ -53,8 +53,6 @@ public class PieceTrickParticleTrail extends PieceTrick {
 
         time = time / 6;
 
-        if (dir.isZero())
-            throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
 
         if (!context.isInRadius(pos.copy().add(dir.copy().multiply(length)))) {
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);

@@ -100,13 +100,23 @@ public class SpellHelpers {
 
     public static Vector3 checkPos(SpellPiece piece, SpellContext context, SpellParam param, boolean nonnull, boolean check, boolean shouldBeAxial) throws SpellRuntimeException {
         Vector3 position = piece.getParamValue(context, param);
-        if (nonnull && position == null)
+        if (nonnull && (position == null || position.isZero()))
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
         if (check && !context.isInRadius(position))
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
         if (shouldBeAxial && !position.isAxial())
             throw new SpellRuntimeException(SpellRuntimeExceptions.NON_AXIAL_VECTOR);
         return position;
+    }
+
+    public static Vector3 getDefaultedVector(SpellPiece piece, SpellContext context, SpellParam param, boolean check, boolean shouldBeAxial, Vector3 def) throws SpellRuntimeException {
+        Vector3 position = piece.getParamValue(context, param);
+        if (position == null || position.isZero()) {
+            if (def == null || def.isZero())
+                throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
+            return def;
+        } else return checkPos(piece, context, param, false, check, shouldBeAxial);
+
     }
 
     public static EnumFacing getFacing(SpellPiece piece, SpellContext context, SpellParam param) throws SpellRuntimeException {

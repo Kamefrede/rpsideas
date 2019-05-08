@@ -33,9 +33,6 @@ import static vazkii.psi.common.item.ItemCAD.getRealCost;
 @Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
 public class RPSEventHandler {
 
-    public static final int DEFAULT_REGEN_RATE = 25;
-    public static final String REGEN_KEY = "rpsideasRegen";
-    public static final String REGEN_BEFORE_KEY = "rpsideasRegenBefore";
     private static final String TAG_CUFFED = "rpsideas:cuffed";
 
     public static boolean canCast(EntityPlayer player) {

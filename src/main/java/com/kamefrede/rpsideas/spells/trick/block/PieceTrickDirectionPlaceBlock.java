@@ -1,7 +1,7 @@
 package com.kamefrede.rpsideas.spells.trick.block;
 
 import com.kamefrede.rpsideas.spells.base.SpellParams;
-import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceTrick;
@@ -81,23 +80,8 @@ public class PieceTrickDirectionPlaceBlock extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 positionVal = this.getParamValue(context, position);
-        Vector3 directionVal = this.getParamValue(context, direction);
-
-        if (positionVal == null) throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-
-        if (directionVal == null || directionVal.isZero())
-            throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-
-        if (!directionVal.isAxial()) throw new SpellRuntimeException(SpellRuntimeExceptions.NON_AXIAL_VECTOR);
-
-        if (!context.isInRadius(positionVal))
-            throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
-
-        BlockPos pos = positionVal.toBlockPos();
-
-        EnumFacing facing = EnumFacing.getFacingFromVector((float) directionVal.x, (float) directionVal.y, (float) directionVal.z);
-
+        BlockPos pos = SpellHelpers.getBlockPos(this, context, position, true, true, false);
+        EnumFacing facing = SpellHelpers.getFacing(this, context, direction);
         placeBlock(context.caster, context.caster.world, pos, context.getTargetSlot(), false, false, facing);
 
         return null;

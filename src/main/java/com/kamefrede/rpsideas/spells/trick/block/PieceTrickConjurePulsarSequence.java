@@ -48,7 +48,7 @@ public class PieceTrickConjurePulsarSequence extends PieceTrick {
         Vector3 positionVec = SpellHelpers.getVector3(this, context, positionParam, true, false);
         Vector3 targetVec = SpellHelpers.getVector3(this, context, targetParam, false, false);
         double maxBlocks = SpellHelpers.getNumber(this, context, maxBlocksParam, 0);
-        Double time = this.getParamValue(context, timeParam);
+        double time = SpellHelpers.getNumber(this, context, timeParam, -1);
 
         int length = (int) Math.min(targetVec.mag(), maxBlocks);
         Vector3 normalizedDirection = targetVec.copy().normalize();

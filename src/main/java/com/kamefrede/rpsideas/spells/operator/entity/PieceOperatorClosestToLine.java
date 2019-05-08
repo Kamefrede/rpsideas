@@ -1,7 +1,6 @@
 package com.kamefrede.rpsideas.spells.operator.entity;
 
 import com.kamefrede.rpsideas.spells.base.SpellParams;
-import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
@@ -52,9 +51,7 @@ public class PieceOperatorClosestToLine extends PieceOperator {
         Vec3d ray = rayVector.normalize();
         double len = rayVector.length();
 
-        EntityListWrapper list = this.getParamValue(context, entList);
-        if (list == null)
-            throw new SpellRuntimeException(SpellRuntimeExceptions.NULL_LIST);
+        EntityListWrapper list = SpellHelpers.ensureNonnullOrEmptyList(this, context, entList);
 
         double minDistance = maxLength;
         Entity found = null;

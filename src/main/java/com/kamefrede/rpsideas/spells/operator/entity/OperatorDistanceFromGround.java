@@ -1,5 +1,6 @@
 package com.kamefrede.rpsideas.spells.operator.entity;
 
+import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
@@ -29,7 +30,7 @@ public class OperatorDistanceFromGround extends PieceOperator {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        Vector3 targetVal = this.getParamValue(context, target);
+        Vector3 targetVal = SpellHelpers.getVector3(this, context, target, true, false, false);
         if (targetVal == null)
             throw new SpellRuntimeException(SpellRuntimeException.NULL_TARGET);
 

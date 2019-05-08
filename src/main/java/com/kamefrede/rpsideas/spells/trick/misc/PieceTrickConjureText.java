@@ -45,16 +45,12 @@ public class PieceTrickConjureText extends PieceTrick {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         World world = context.caster.world;
-        Vector3 pos = this.getParamValue(context, position);
+        Vector3 pos = SpellHelpers.getVector3(this, context, position, true, true, false);
         Object targetVal = this.getParamValue(context, text);
-        double maxTimeAlive = SpellHelpers.getNumber(this, context, time, 3600);
-        if (pos == null) throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
-        if (!context.isInRadius(pos))
-            throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
+        double maxTimeAlive = SpellHelpers.getBoundedNumber(this, context, time, 3600);
 
         String text = Objects.toString(targetVal);
-        if (maxTimeAlive > 3600)
-            maxTimeAlive = 3600;
+
 
         if (text.length() > 32)
             throw new SpellRuntimeException(SpellRuntimeExceptions.TEXT);

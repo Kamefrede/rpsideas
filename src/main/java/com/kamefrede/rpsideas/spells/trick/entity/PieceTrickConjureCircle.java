@@ -52,13 +52,10 @@ public class PieceTrickConjureCircle extends PieceTrick {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         World world = context.caster.world;
-        Vector3 pos = SpellHelpers.getVector3(this, context, position, true, false);
-        Vector3 dir = SpellHelpers.getVector3(this, context, direction, false, false);
+        Vector3 pos = SpellHelpers.getVector3(this, context, position, true, true, false);
+        Vector3 dir = SpellHelpers.getDefaultedVector(this, context, direction, false, false, new Vector3(0, 1, 0));
         double scl = SpellHelpers.getNumber(this, context, scale, 1);
         double maxTimeAlive = SpellHelpers.getNumber(this, context, time, 100);
-
-        if (dir == null || dir.isZero())
-            dir = new Vector3(0, 1, 0);
 
 
         ItemStack cad = PsiAPI.getPlayerCAD(context.caster);
