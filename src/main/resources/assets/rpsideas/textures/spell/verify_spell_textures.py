@@ -238,6 +238,13 @@ if __name__ == "__main__":
     files = [f for f in os.listdir(os.getcwd()) if f.endswith(".png")]
     for file_name in files:
         img = cv2.imread(file_name, cv2.IMREAD_UNCHANGED)
+
+        was_gray = len(img.shape) == 2 or img.shape[2] == 1
+
+        if was_gray:
+            img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
+
+
         if img.shape[0] != 16 or img.shape[1] != 16:
             print(TXT_BOLD + "Searching: " + TXT_RESET + file_name)
             print(TXT_RED + TXT_BOLD + "Error: " + TXT_RESET + "Invalid dimensions")
@@ -267,6 +274,10 @@ if __name__ == "__main__":
                 errors = find_errors(img, shape)
                 soft_warnings = find_soft_warnings(img, shape)
                 warnings = find_warnings(img, shape)
+
+                if was_gray:
+                    warnings.append("Converted from grayscale")
+
                 if target_alpha_state and not alpha_state:
                     warnings.append("Added alpha channel")
                 elif not target_alpha_state and alpha_state:
