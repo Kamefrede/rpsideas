@@ -32,8 +32,16 @@ public class EntityHailParticle extends EntityThrowable {
     private static final String TAG_TIME_ALIVE = "timeAlive";
     private static final String TAG_CASTER_NAME = "casterName";
     private static final String TAG_MASS = "mass";
-    private static final float drag = 1.00f;
+    private static final float drag = 0.99f;
     private static final float gravity = 0.05f;
+
+    private static final float melt = 33f;
+    private static final float bonusMassMultiplier = 1f;
+    private static final float floatingMass = 0.75f;
+    private static final float gravityMass = 1f;
+
+    public int bonusMass;
+
     public int timeAlive;
 
 
@@ -58,13 +66,28 @@ public class EntityHailParticle extends EntityThrowable {
         super.onUpdate();
         if (timeAlive++ >= getMaxAlive())
             setDead();
-        if (this.motionX != 0 || this.motionZ != 0 || this.motionY != 0) {
-            this.motionX *= drag;
-            this.motionY *= drag;
-            this.motionZ *= drag;
-        }
 
-        this.motionY -= gravity;
+        bonusMass += 50 - (Math.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ) * melt);
+        bonusMass = Math.min(Math.max(bonusMass, 0), 1000);
+
+        float mass = getMass();
+        if (mass <= floatingMass) {
+            if (this.motionX != 0 || this.motionZ != 0 || this.motionY != 0) {
+                this.motionX *= drag;
+                this.motionY *= drag;
+                this.motionZ *= drag;
+            }
+        } else if (mass >= gravityMass) {
+            this.motionY -= dataManager.get(MASS)*gravity;
+        } else {
+            float ratio = Math.min(Math.max((mass - floatingMass) / (gravityMass - floatingMass), 0), 1);
+            if (this.motionX != 0 || this.motionZ != 0 || this.motionY != 0) {
+                this.motionX *= (drag + (1-drag) * ratio);
+                this.motionY *= (drag + (1-drag) * ratio);
+                this.motionZ *= (drag + (1-drag) * ratio);
+            }
+            this.motionY -= ratio*dataManager.get(MASS)*gravity;
+        }
 
         Vec3d position = new Vec3d(posX, posY, posZ);
         Vec3d projected = new Vec3d(posX + motionX, posY + motionY, posZ + motionZ);
@@ -167,7 +190,7 @@ public class EntityHailParticle extends EntityThrowable {
     }
 
     public float getMass() {
-        return dataManager.get(MASS);
+        return dataManager.get(MASS) + bonusMassMultiplier * bonusMass / 1000;
     }
 
     public int getColor() {
