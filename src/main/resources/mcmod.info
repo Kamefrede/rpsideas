@@ -11,6 +11,6 @@
   "credits": "The guys over at PSI: Taurus Silver discord and Vazkii, wiresegal for PSIonic Upgrades and Quat for porting PSIonic upgrades",
   "logoFile": "",
   "screenshots": [],
-  "dependencies": ["psi", "autoreglib", "ctm"]
+  "dependencies": ["psi", "librarianlib", "autoreglib"]
 }
 ]
