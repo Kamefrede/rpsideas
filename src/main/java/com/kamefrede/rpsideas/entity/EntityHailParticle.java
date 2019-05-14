@@ -32,13 +32,19 @@ public class EntityHailParticle extends EntityThrowable {
     private static final String TAG_TIME_ALIVE = "timeAlive";
     private static final String TAG_CASTER_NAME = "casterName";
     private static final String TAG_MASS = "mass";
+
     private static final float drag = 0.99f;
     private static final float gravity = 0.05f;
 
-    private static final float melt = 33f;
-    private static final float bonusMassMultiplier = 1f;
-    private static final float floatingMass = 0.75f;
-    private static final float gravityMass = 1f;
+    private static final float stableVelocity = 1.5f; //The velocity the particle can move at without losing bonus mass
+    private static final float gain = 50f; //Amount of bonus mass gained per tick
+    private static final float melt = 10f; //The amount of bonus mass lost per unit of velocity over
+
+    private static final float bonusMassAdditive = 1f; //Adds the equivalent of this mass to the equation for full bonus mass
+    private static final float bonusMassMultiplier = 1f; //Adds this to the damage multiplier for a fully grown particle
+
+    private static final float floatingMass = 0.75f; //Maximum mass at which a particle experiences no gravity
+    private static final float gravityMass = 1f; //Minimum mass at which there is only gravity influencing the projectile
 
     public int bonusMass;
 
@@ -64,10 +70,15 @@ public class EntityHailParticle extends EntityThrowable {
     @Override
     public void onUpdate() {
         super.onUpdate();
+        double velocityMagnitude = Math.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ);
+
         if (timeAlive++ >= getMaxAlive())
             setDead();
 
-        bonusMass += 50 - (Math.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ) * melt);
+        if (velocityMagnitude > getMeltingPoint())
+            setDead();
+
+        bonusMass += Math.max(gain * (1 - (velocityMagnitude / stableVelocity)), 0) - Math.max(melt * (velocityMagnitude - stableVelocity), 0);
         bonusMass = Math.min(Math.max(bonusMass, 0), 1000);
 
         float mass = getMass();
@@ -78,7 +89,7 @@ public class EntityHailParticle extends EntityThrowable {
                 this.motionZ *= drag;
             }
         } else if (mass >= gravityMass) {
-            this.motionY -= dataManager.get(MASS)*gravity;
+            this.motionY -= Math.min(Math.max(dataManager.get(MASS),0.5),2)*gravity;
         } else {
             float ratio = Math.min(Math.max((mass - floatingMass) / (gravityMass - floatingMass), 0), 1);
             if (this.motionX != 0 || this.motionZ != 0 || this.motionY != 0) {
@@ -86,7 +97,7 @@ public class EntityHailParticle extends EntityThrowable {
                 this.motionY *= (drag + (1-drag) * ratio);
                 this.motionZ *= (drag + (1-drag) * ratio);
             }
-            this.motionY -= ratio*dataManager.get(MASS)*gravity;
+            this.motionY -= ratio*Math.min(Math.max(dataManager.get(MASS),0.5),2)*gravity;
         }
 
         Vec3d position = new Vec3d(posX, posY, posZ);
@@ -101,19 +112,19 @@ public class EntityHailParticle extends EntityThrowable {
         if (trace != null)
             onImpact(trace);
 
-        if (Math.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ) > getMeltingPoint())
-            setDead();
 
 
     }
-
+    private float calculateDamage() {
+        return (float) Math.ceil(Math.sqrt(Math.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ)) * dataManager.get(MASS) * 7);
+    }
     @Override
     protected void onImpact(@Nonnull RayTraceResult result) {
         Entity entity = result.entityHit;
         BlockPos pos = new BlockPos(result.hitVec.x, result.hitVec.y, result.hitVec.z);
 
         if (entity != null) {
-            entity.attackEntityFrom(new EntityDamageSourceIndirect("magic", this, thrower).setProjectile(), (float) Math.ceil(Math.sqrt(Math.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ)) * dataManager.get(MASS) * 7));
+            entity.attackEntityFrom(new EntityDamageSourceIndirect("magic", this, thrower).setProjectile(), calculateDamage());
             setDead();
             return;
         }

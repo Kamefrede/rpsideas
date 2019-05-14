@@ -26,8 +26,8 @@ public class PieceTrickConjureHail extends PieceTrick {
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException, ArithmeticException {
         super.addToMetadata(meta);
         double pwr = SpellHelpers.ensurePositiveAndNonzero(this, power);
-        meta.addStat(EnumSpellStat.COST, (int) (Math.max(1, pwr) * pwr * 300));
-        meta.addStat(EnumSpellStat.POTENCY, (int) (Math.max(1, pwr) * pwr * 15));
+        meta.addStat(EnumSpellStat.COST, (int) (Math.max(1, pwr) * pwr * 250));
+        meta.addStat(EnumSpellStat.POTENCY, (int) (Math.max(1, pwr) * pwr * 20));
     }
 
     @Override
