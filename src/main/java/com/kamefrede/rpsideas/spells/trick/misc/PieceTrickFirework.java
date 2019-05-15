@@ -3,6 +3,7 @@ package com.kamefrede.rpsideas.spells.trick.misc;
 import com.kamefrede.rpsideas.entity.EntityPsireworkRocket;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
+import com.teamwizardry.librarianlib.features.helpers.NBTHelper;
 import net.minecraft.entity.item.EntityFireworkRocket;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -67,8 +68,8 @@ public class PieceTrickFirework extends PieceTrick {
         fireworks.setInteger("Flight", Math.max(-2, ((time - 10 - rdm.nextInt(6) - rdm.nextInt(7)) / 10)));
         fireworks.setTag("Explosions", new NBTTagList());
 
-        ItemNBTHelper.setCompound(stack, "Fireworks", fireworks);
-        ItemNBTHelper.setInt(stack, "LifeTime", time);
+        NBTHelper.setCompound(stack, "Fireworks", fireworks);
+        NBTHelper.setInt(stack, "LifeTime", time);
 
         return stack;
     }

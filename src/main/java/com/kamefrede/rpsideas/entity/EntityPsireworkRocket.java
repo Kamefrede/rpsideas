@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.entity;
 
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
+import com.teamwizardry.librarianlib.features.helpers.NBTHelper;
 import net.minecraft.entity.item.EntityFireworkRocket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -65,7 +66,7 @@ public class EntityPsireworkRocket extends EntityFireworkRocket {
 
                 int color = Psi.proxy.getColorForColorizer(colorizer);
 
-                NBTTagCompound fireworks = ItemNBTHelper.getCompound(fireworkItem, "Fireworks");
+                NBTTagCompound fireworks = NBTHelper.getCompound(fireworkItem, "Fireworks");
                 if (fireworks != null) {
 
                     NBTTagList explosions = fireworks.getTagList("Explosions", Constants.NBT.TAG_COMPOUND);
@@ -98,7 +99,7 @@ public class EntityPsireworkRocket extends EntityFireworkRocket {
 
                     fireworks.setTag("Explosions", explosions);
 
-                    ItemNBTHelper.setCompound(fireworkItem, "Fireworks", fireworks);
+                    NBTHelper.setCompound(fireworkItem, "Fireworks", fireworks);
                 }
             }
         }

@@ -6,6 +6,7 @@ import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
 import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
 import com.teamwizardry.librarianlib.features.base.item.ItemModArmor;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
+import com.teamwizardry.librarianlib.features.helpers.NBTHelper;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import kotlin.jvm.functions.Function2;
 import net.minecraft.client.model.ModelBiped;
@@ -70,7 +71,7 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsimetalT
         ItemStack playerCad = PsiAPI.getPlayerCAD(event.getEntityPlayer());
 
         if (!playerCad.isEmpty()) {
-            int timesCast = ItemNBTHelper.getInt(stack, TAG_TIMES_CAST, 0);
+            int timesCast = NBTHelper.getInt(stack, TAG_TIMES_CAST, 0);
 
             ItemStack bullet = getBulletInSocket(stack, getSelectedSlot(stack));
             ItemCAD.cast(event.getEntityPlayer().world, event.getEntityPlayer(), data, bullet, playerCad, getCastCooldown(stack), 0, getCastVolume(), (SpellContext context) -> {
@@ -80,7 +81,7 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsimetalT
                 context.loopcastIndex = timesCast;
             });
 
-            ItemNBTHelper.setInt(stack, TAG_TIMES_CAST, timesCast + 1);
+            NBTHelper.setInt(stack, TAG_TIMES_CAST, timesCast + 1);
         }
     }
 
@@ -92,13 +93,13 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsimetalT
     @Override
     public void setSelectedSlot(ItemStack stack, int slot) {
         IPsimetalTool.super.setSelectedSlot(stack, slot);
-        ItemNBTHelper.setInt(stack, TAG_TIMES_CAST, 0);
+        NBTHelper.setInt(stack, TAG_TIMES_CAST, 0);
     }
 
     @Override
     public void setBulletInSocket(ItemStack stack, int slot, ItemStack bullet) {
         IPsimetalTool.super.setBulletInSocket(stack, slot, bullet);
-        ItemNBTHelper.setInt(stack, TAG_TIMES_CAST, 0);
+        NBTHelper.setInt(stack, TAG_TIMES_CAST, 0);
     }
 
     @Override
@@ -207,13 +208,13 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsimetalT
 
         @Override
         public ItemStack getAttachedSensor(ItemStack helmet) {
-            NBTTagCompound compound = ItemNBTHelper.getCompound(helmet, "Sensor");
+            NBTTagCompound compound = NBTHelper.getCompound(helmet, "Sensor");
             return compound == null ? ItemStack.EMPTY : new ItemStack(compound);
         }
 
         @Override
         public void attachSensor(ItemStack helmet, ItemStack sensor) {
-            ItemNBTHelper.setCompound(helmet, "Sensor", sensor.serializeNBT());
+            NBTHelper.setCompound(helmet, "Sensor", sensor.serializeNBT());
         }
 
         @Override

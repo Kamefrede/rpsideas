@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.gui.magazine;
 
 import com.kamefrede.rpsideas.RPSIdeas;
+import com.teamwizardry.librarianlib.core.client.ClientTickHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -11,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.client.config.GuiUtils;
-import vazkii.arl.util.ClientTicker;
+
 
 import java.util.ArrayList;
 
@@ -70,8 +71,8 @@ public class GUICADMagazine extends GuiContainer {
             ArrayList<String> list = new ArrayList<>();
             list.add(TextFormatting.RED.toString() + I18n.format(getTooltipText()));
             GuiUtils.drawHoveringText(list, -10, ySize / 2, width, height, xSize, Minecraft.getMinecraft().fontRenderer);
-            decreaseTooltipTime(ClientTicker.ticksInGame - lastTick);
+            decreaseTooltipTime(ClientTickHandler.getTicksInGame() - lastTick);
         }
-        lastTick = ClientTicker.ticksInGame;
+        lastTick = ClientTickHandler.getTicksInGame();
     }
 }

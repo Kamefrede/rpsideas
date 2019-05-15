@@ -7,6 +7,7 @@ import com.kamefrede.rpsideas.items.base.ItemComponent;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.item.IItemColorProvider;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
+import com.teamwizardry.librarianlib.features.helpers.NBTHelper;
 import kotlin.jvm.functions.Function2;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
@@ -36,13 +37,13 @@ public class ItemLiquidColorizer extends ItemComponent implements ICADColorizer,
     public static int getColorFromStack(ItemStack stack) {
         if (!stack.hasTagCompound())
             return -1;
-        return ItemNBTHelper.getInt(stack, "color", -1);
+        return NBTHelper.getInt(stack, "color", -1);
     }
 
     public static ItemStack getInheriting(ItemStack stack) {
         if (!stack.hasTagCompound())
             return ItemStack.EMPTY;
-        NBTTagCompound cmp = ItemNBTHelper.getCompound(stack, "inheriting");
+        NBTTagCompound cmp = NBTHelper.getCompound(stack, "inheriting");
         if (cmp == null)
             return ItemStack.EMPTY;
         return new ItemStack(cmp);
@@ -50,11 +51,11 @@ public class ItemLiquidColorizer extends ItemComponent implements ICADColorizer,
 
     public static void setInheriting(ItemStack stack, ItemStack inheriting) {
         if (inheriting.isEmpty()) {
-            ItemNBTHelper.removeEntry(stack, "inheriting");
+            NBTHelper.removeNBTEntry(stack, "inheriting");
         } else {
             NBTTagCompound nbt = new NBTTagCompound();
             inheriting.writeToNBT(nbt);
-            ItemNBTHelper.setCompound(stack, "inheriting", nbt);
+            NBTHelper.setCompound(stack, "inheriting", nbt);
         }
     }
 

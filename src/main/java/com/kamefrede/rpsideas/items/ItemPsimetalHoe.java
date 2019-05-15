@@ -3,6 +3,7 @@ package com.kamefrede.rpsideas.items;
 import com.google.common.collect.Multimap;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
+import com.teamwizardry.librarianlib.features.helpers.NBTHelper;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
@@ -49,13 +50,13 @@ public class ItemPsimetalHoe extends ItemMod implements IPsimetalTool {
         if (entityIn instanceof EntityPlayer && stack.getItemDamage() > 0 && !isSelected) {
             EntityPlayer player = (EntityPlayer) entityIn;
             PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
-            int regenTime = ItemNBTHelper.getInt(stack, TAG_REGEN_TIME, 0);
+            int regenTime = NBTHelper.getInt(stack, TAG_REGEN_TIME, 0);
 
             if (!data.overflowed && regenTime % 80 == 0 && (float) data.getAvailablePsi() / (float) data.getTotalPsi() > 0.5F) {
                 data.deductPsi(600, 5, true);
                 stack.setItemDamage(stack.getItemDamage() - 1);
             }
-            ItemNBTHelper.setInt(stack, TAG_REGEN_TIME, regenTime + 1);
+            NBTHelper.setInt(stack, TAG_REGEN_TIME, regenTime + 1);
         }
     }
 

@@ -2,6 +2,7 @@ package com.kamefrede.rpsideas.crafting;
 
 import com.kamefrede.rpsideas.items.components.ItemLiquidColorizer;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
+import com.teamwizardry.librarianlib.features.helpers.NBTHelper;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
@@ -93,7 +94,7 @@ public class RecipeLiquidColorizer extends IForgeRegistryEntry.Impl<IRecipe> imp
             g /= colors;
             b /= colors;
             ItemStack ink = itemstack.copy();
-            ItemNBTHelper.setInt(ink, "color", new Color(r, g, b).getRGB());
+            NBTHelper.setInt(ink, "color", new Color(r, g, b).getRGB());
             return ink;
         }
     }

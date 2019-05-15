@@ -3,6 +3,7 @@ package com.kamefrede.rpsideas.crafting;
 import com.kamefrede.rpsideas.items.ItemPsiCuffKey;
 import com.kamefrede.rpsideas.items.ItemPsiCuffs;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
+import com.teamwizardry.librarianlib.features.helpers.NBTHelper;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -43,7 +44,7 @@ public class RecipeCuffKeyAttach extends IForgeRegistryEntry.Impl<IRecipe> imple
                 if (stack.getItem() instanceof ItemPsiCuffs) {
                     if (foundCuff)
                         return false;
-                    cuffHasKey = ItemNBTHelper.getString(stack, TAG_KEYNAME, null) != null;
+                    cuffHasKey = NBTHelper.getString(stack, TAG_KEYNAME) != null;
                     foundCuff = true;
                 } else if (stack.getItem() instanceof ItemPsiCuffKey) {
                     if (foundKey)
@@ -72,7 +73,7 @@ public class RecipeCuffKeyAttach extends IForgeRegistryEntry.Impl<IRecipe> imple
         if (cuffs.isEmpty()) return cuffs;
 
         ItemStack output = cuffs.copy();
-        ItemNBTHelper.setString(output, TAG_KEYNAME, key.getDisplayName());
+        NBTHelper.setString(output, TAG_KEYNAME, key.getDisplayName());
         return output;
     }
 }

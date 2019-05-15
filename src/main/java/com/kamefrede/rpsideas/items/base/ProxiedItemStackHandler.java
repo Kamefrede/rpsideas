@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.items.base;
 
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
+import com.teamwizardry.librarianlib.features.helpers.NBTHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -44,9 +45,9 @@ public class ProxiedItemStackHandler implements IItemHandler, IItemHandlerModifi
     }
 
     private NBTTagList getStackList() {
-        NBTTagList list = ItemNBTHelper.getList(stack, key, Constants.NBT.TAG_COMPOUND);
+        NBTTagList list = NBTHelper.getList(stack, key, Constants.NBT.TAG_COMPOUND);
         if (list == null)
-            ItemNBTHelper.setList(stack, key, list = new NBTTagList());
+            NBTHelper.setList(stack, key, list = new NBTTagList());
 
         while (list.tagCount() < size)
             list.appendTag(new NBTTagCompound());

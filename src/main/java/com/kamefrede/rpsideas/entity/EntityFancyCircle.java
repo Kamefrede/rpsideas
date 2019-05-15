@@ -25,6 +25,7 @@ public class EntityFancyCircle extends Entity implements ISpellImmune {
     private static final DataParameter<Float> FACING_X = EntityDataManager.createKey(EntityFancyCircle.class, DataSerializers.FLOAT);
     private static final DataParameter<Float> FACING_Y = EntityDataManager.createKey(EntityFancyCircle.class, DataSerializers.FLOAT);
     private static final DataParameter<Float> FACING_Z = EntityDataManager.createKey(EntityFancyCircle.class, DataSerializers.FLOAT);
+    public static final DataParameter<Integer> TIME_ALIVE = EntityDataManager.createKey(EntityFancyCircle.class, DataSerializers.VARINT);
 
     private static final String TAG_COLORIZER = "colorizer";
     private static final String TAG_TIME_ALIVE = "timeAlive";
@@ -34,7 +35,6 @@ public class EntityFancyCircle extends Entity implements ISpellImmune {
     private static final String TAG_FACING_X = "circleFacingX";
     private static final String TAG_FACING_Y = "circleFacingY";
     private static final String TAG_FACING_Z = "circleFacingZ";
-    public int timeAlive;
 
     public EntityFancyCircle(World world) {
         super(world);
@@ -43,8 +43,11 @@ public class EntityFancyCircle extends Entity implements ISpellImmune {
     @Override
     public void onUpdate() {
         super.onUpdate();
-        if (!world.isRemote && timeAlive++ > dataManager.get(MAX_ALIVE))
+        int timeAlive = getTimeAlive();
+        if (timeAlive > getLiveTime())
             setDead();
+
+        setTimeAlive(timeAlive + 1);
     }
 
 
@@ -56,6 +59,7 @@ public class EntityFancyCircle extends Entity implements ISpellImmune {
         dataManager.set(FACING_X, (float) vec.x);
         dataManager.set(FACING_Y, (float) vec.y);
         dataManager.set(FACING_Z, (float) vec.z);
+        dataManager.set(TIME_ALIVE, 0);
 
         this.setPositionAndRotation(pos.x, pos.y, pos.z, player.rotationYaw, player.rotationPitch);
     }
@@ -69,6 +73,7 @@ public class EntityFancyCircle extends Entity implements ISpellImmune {
         dataManager.register(FACING_X, 0f);
         dataManager.register(FACING_Y, 0f);
         dataManager.register(FACING_Z, 0f);
+        dataManager.register(TIME_ALIVE, 0);
     }
 
     @Override
@@ -88,7 +93,7 @@ public class EntityFancyCircle extends Entity implements ISpellImmune {
         tagCompound.setFloat(TAG_SCALE, dataManager.get(SCALE_DATA));
 
 
-        tagCompound.setInteger(TAG_TIME_ALIVE, timeAlive);
+        tagCompound.setInteger(TAG_TIME_ALIVE, getTimeAlive());
     }
 
     @Override
@@ -106,6 +111,7 @@ public class EntityFancyCircle extends Entity implements ISpellImmune {
         dataManager.set(FACING_X, xFacing * facingMod);
         dataManager.set(FACING_Y, yFacing * facingMod);
         dataManager.set(FACING_Z, zFacing * facingMod);
+        setTimeAlive(compound.getInteger(TAG_TIME_ALIVE));
     }
 
     @Override
@@ -124,6 +130,14 @@ public class EntityFancyCircle extends Entity implements ISpellImmune {
 
     public float getScale() {
         return dataManager.get(SCALE_DATA);
+    }
+
+    public int getTimeAlive() {
+        return dataManager.get(TIME_ALIVE);
+    }
+
+    public void setTimeAlive(int i) {
+        dataManager.set(TIME_ALIVE, i);
     }
 
     public Vec3d getDirectionVector() {

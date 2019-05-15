@@ -17,7 +17,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import vazkii.arl.network.NetworkHandler;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.network.message.MessageDataSync;
 
@@ -83,7 +82,7 @@ public class ItemPsiCuffKey extends ItemMod {
             }
             data.save();
             if (cuffedPlayer instanceof EntityPlayerMP)
-                NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP) cuffedPlayer);
+                PacketHandler.NETWORK.sendTo(new MessageDataSync(data), (EntityPlayerMP) cuffedPlayer);
 
         }
     }

@@ -4,6 +4,8 @@ import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
+import com.teamwizardry.librarianlib.features.helpers.NBTHelper;
+import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
@@ -17,7 +19,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import vazkii.arl.network.NetworkHandler;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.network.message.MessageDataSync;
 
@@ -38,8 +39,8 @@ public class ItemPsiCuffs extends ItemMod implements IFlowColorAcceptor {
     @Nonnull
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn) {
-        if (playerIn.isSneaking() && ItemNBTHelper.getString(playerIn.getHeldItem(handIn), TAG_KEYNAME, null) != null) {
-            ItemNBTHelper.removeEntry(playerIn.getHeldItem(handIn), TAG_KEYNAME);
+        if (playerIn.isSneaking() && NBTHelper.getString(playerIn.getHeldItem(handIn), TAG_KEYNAME) != null) {
+            NBTHelper.removeNBTEntry(playerIn.getHeldItem(handIn), TAG_KEYNAME);
             return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
         }
         return super.onItemRightClick(worldIn, playerIn, handIn);
@@ -48,7 +49,7 @@ public class ItemPsiCuffs extends ItemMod implements IFlowColorAcceptor {
     @Override
     public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer playerIn, EntityLivingBase target, EnumHand hand) {
         if (playerIn.isSneaking() && target instanceof EntityPlayer) {
-            String keyName = ItemNBTHelper.getString(stack, TAG_KEYNAME, null);
+            String keyName = NBTHelper.getString(stack, TAG_KEYNAME);
             if (keyName == null)
                 return false;
 
@@ -62,7 +63,7 @@ public class ItemPsiCuffs extends ItemMod implements IFlowColorAcceptor {
                 stack.shrink(1);
                 data.save();
                 if (targetPlayer instanceof EntityPlayerMP)
-                    NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP) targetPlayer);
+                    PacketHandler.NETWORK.sendTo(new MessageDataSync(data), (EntityPlayerMP) targetPlayer);
                 return true;
             }
         }
@@ -73,7 +74,7 @@ public class ItemPsiCuffs extends ItemMod implements IFlowColorAcceptor {
     @Override
     public void addInformation(ItemStack stack, @javax.annotation.Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         TooltipHelper.tooltipIfShift(tooltip, () -> {
-            if (ItemNBTHelper.getString(stack, TAG_KEYNAME, null) == null)
+            if (NBTHelper.getString(stack, TAG_KEYNAME) == null)
                 TooltipHelper.addToTooltip(tooltip, getTranslationKey(stack) + ".desc");
             else
                 TooltipHelper.addToTooltip(tooltip, getTranslationKey(stack) + ".desc1", Minecraft.getMinecraft().gameSettings.keyBindSneak.getDisplayName());

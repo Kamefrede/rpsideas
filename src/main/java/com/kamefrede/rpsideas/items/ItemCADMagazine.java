@@ -6,6 +6,7 @@ import com.kamefrede.rpsideas.gui.GuiHandler;
 import com.kamefrede.rpsideas.items.base.ICADComponentAcceptor;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
+import com.teamwizardry.librarianlib.features.helpers.NBTHelper;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
@@ -45,17 +46,17 @@ public class ItemCADMagazine extends ItemMod implements ISocketable, ICADCompone
     }
 
     public static ItemStack getSocket(ItemStack stack) {
-        NBTTagCompound nbt = ItemNBTHelper.getCompound(stack, "socket");
+        NBTTagCompound nbt = NBTHelper.getCompound(stack, "socket");
         return nbt == null ? new ItemStack(ModItems.cadSocket) : new ItemStack(nbt);
     }
 
     public static ItemStack setSocket(ItemStack stack, ItemStack socket) {
         if (socket.isEmpty()) {
-            ItemNBTHelper.removeEntry(stack, "socket");
+            NBTHelper.removeNBTEntry(stack, "socket");
         } else {
             NBTTagCompound nbt = new NBTTagCompound();
             socket.writeToNBT(nbt);
-            ItemNBTHelper.setCompound(stack, "socket", nbt);
+            NBTHelper.setCompound(stack, "socket", nbt);
         }
         return stack;
     }
@@ -283,7 +284,7 @@ public class ItemCADMagazine extends ItemMod implements ISocketable, ICADCompone
     @Override
     public ItemStack getBulletInSocket(ItemStack stack, int slot) {
         String name = "bullet" + slot;
-        NBTTagCompound cmp = ItemNBTHelper.getCompound(stack, name);
+        NBTTagCompound cmp = NBTHelper.getCompound(stack, name);
         return cmp == null ? ItemStack.EMPTY : new ItemStack(cmp);
     }
 
@@ -293,7 +294,7 @@ public class ItemCADMagazine extends ItemMod implements ISocketable, ICADCompone
         NBTTagCompound cmp = new NBTTagCompound();
         bullet.writeToNBT(cmp);
 
-        ItemNBTHelper.setCompound(stack, name, cmp);
+        NBTHelper.setCompound(stack, name, cmp);
     }
 
     @Override
@@ -316,12 +317,12 @@ public class ItemCADMagazine extends ItemMod implements ISocketable, ICADCompone
 
     @Override
     public int getSelectedSlot(ItemStack stack) {
-        return ItemNBTHelper.getInt(stack, "selectedSlot", 0);
+        return NBTHelper.getInt(stack, "selectedSlot", 0);
     }
 
     @Override
     public void setSelectedSlot(ItemStack stack, int slot) {
-        ItemNBTHelper.setInt(stack, "selectedSlot", 0);
+        NBTHelper.setInt(stack, "selectedSlot", 0);
     }
 
     @Override

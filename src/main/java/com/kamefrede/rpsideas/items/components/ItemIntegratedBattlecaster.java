@@ -4,6 +4,7 @@ import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
+import com.teamwizardry.librarianlib.features.helpers.NBTHelper;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
@@ -46,7 +47,7 @@ public class ItemIntegratedBattlecaster extends ItemMod {
 
     public static void setHasBattlecaster(ItemStack stack, boolean hasBattlecaster) {
         if (canHaveBattlecaster(stack))
-            ItemNBTHelper.setBoolean(stack, HAS_BATTLECASTER, hasBattlecaster);
+            NBTHelper.setBoolean(stack, HAS_BATTLECASTER, hasBattlecaster);
     }
 
     public static boolean canHaveBattlecaster(ItemStack stack) {
@@ -58,7 +59,7 @@ public class ItemIntegratedBattlecaster extends ItemMod {
     }
 
     public static boolean hasBattlecaster(ItemStack stack) {
-        return canHaveBattlecaster(stack) && ItemNBTHelper.getBoolean(stack, HAS_BATTLECASTER, false);
+        return canHaveBattlecaster(stack) && NBTHelper.getBoolean(stack, HAS_BATTLECASTER, false);
     }
 
     @Override

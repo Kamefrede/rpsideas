@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.compat.tcon;
 
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
+import com.teamwizardry.librarianlib.features.helpers.NBTHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -125,7 +126,7 @@ public class TinkersToolCapability implements ISpellAcceptor, ISocketableCapabil
     @Override
     public ItemStack getBulletInSocket(int slot) {
         String name = TAG_BULLET_PREFIX + slot;
-        NBTTagCompound tag = ItemNBTHelper.getCompound(stack, name);
+        NBTTagCompound tag = NBTHelper.getCompound(stack, name);
         if (tag == null)
             return ItemStack.EMPTY;
 
@@ -141,18 +142,18 @@ public class TinkersToolCapability implements ISpellAcceptor, ISocketableCapabil
             bullet.writeToNBT(cmp);
 
 
-        ItemNBTHelper.setCompound(stack, name, cmp);
+        NBTHelper.setCompound(stack, name, cmp);
 
     }
 
     @Override
     public int getSelectedSlot() {
-        return ItemNBTHelper.getInt(stack, TAG_SELECTED_SLOT, 0);
+        return NBTHelper.getInt(stack, TAG_SELECTED_SLOT, 0);
     }
 
     @Override
     public void setSelectedSlot(int slot) {
-        ItemNBTHelper.setInt(stack, TAG_SELECTED_SLOT, slot);
+        NBTHelper.setInt(stack, TAG_SELECTED_SLOT, slot);
     }
 
     @Override

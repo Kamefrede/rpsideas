@@ -2,6 +2,7 @@ package com.kamefrede.rpsideas.spells.selector;
 
 import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
+import com.teamwizardry.librarianlib.features.helpers.NBTHelper;
 import vazkii.psi.api.exosuit.IPsiEventArmor;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
@@ -18,7 +19,7 @@ public class PieceSelectorSuccessCounter extends PieceSelector {
     public Object execute(SpellContext context) throws SpellRuntimeException {
         if (!(context.tool.getItem() instanceof IPsiEventArmor))
             throw new SpellRuntimeException(SpellRuntimeExceptions.ARMOR);
-        return ItemNBTHelper.getInt(context.tool, "timesCast", 0) * 1.0;
+        return NBTHelper.getInt(context.tool, "timesCast", 0) * 1.0;
     }
 
     @Override

@@ -2,10 +2,10 @@ package com.kamefrede.rpsideas.compat.tcon;
 
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -23,7 +23,6 @@ import slimeknights.tconstruct.library.modifiers.TinkerGuiException;
 import slimeknights.tconstruct.library.tinkering.ITinkerable;
 import slimeknights.tconstruct.library.utils.TagUtil;
 import slimeknights.tconstruct.library.utils.TinkerUtil;
-import vazkii.arl.item.ItemMod;
 import vazkii.psi.api.cad.ISocketable;
 
 
@@ -61,7 +60,7 @@ public class RPSTinkersCompat {
     @Optional.Method(modid = "tconstruct")
     public static void addTooltip(ItemTooltipEvent event) {
         if (isPsionic(event.getItemStack())) {
-            String componentName = ItemMod.local(ISocketable.getSocketedItemName(event.getItemStack(), "psimisc.none"));
+            String componentName = I18n.format(ISocketable.getSocketedItemName(event.getItemStack(), "psimisc.none"));
             TooltipHelper.addToTooltip(event.getToolTip(), "psimisc.spellSelected", componentName);
         }
     }
@@ -98,7 +97,7 @@ public class RPSTinkersCompat {
         @Override
         public boolean canApply(ItemStack itemStack, ItemStack itemStack1) throws TinkerGuiException {
             if (!TinkerUtil.hasModifier(TagUtil.getTagSafe(itemStack), parent.getIdentifier())) {
-                String error = I18n.translateToLocal("rpsideas.gui.error.no_socketable");
+                String error = I18n.format("rpsideas.gui.error.no_socketable");
                 throw new TinkerGuiException(error);
             }
             return true;

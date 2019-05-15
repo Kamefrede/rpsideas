@@ -8,6 +8,7 @@ import com.kamefrede.rpsideas.util.helpers.ClientHelpers;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.item.IItemColorProvider;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
+import com.teamwizardry.librarianlib.features.helpers.NBTHelper;
 import kotlin.jvm.functions.Function2;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
@@ -46,7 +47,7 @@ public class ItemCyclicColorizer extends ItemComponent implements ICADColorizer,
     public static ItemStack getInheriting(ItemStack stack, boolean first) {
         if (!stack.hasTagCompound())
             return ItemStack.EMPTY;
-        NBTTagCompound cmp = ItemNBTHelper.getCompound(stack, first ? "first" : "last");
+        NBTTagCompound cmp = NBTHelper.getCompound(stack, first ? "first" : "last");
         if (cmp == null)
             return ItemStack.EMPTY;
         return new ItemStack(cmp);
@@ -55,11 +56,11 @@ public class ItemCyclicColorizer extends ItemComponent implements ICADColorizer,
     public static void setInheriting(ItemStack stack, ItemStack inheriting, boolean first) {
         String tag = first ? "first" : "last";
         if (inheriting.isEmpty()) {
-            ItemNBTHelper.removeEntry(stack, tag);
+            NBTHelper.removeNBTEntry(stack, tag);
         } else {
             NBTTagCompound nbt = new NBTTagCompound();
             inheriting.writeToNBT(nbt);
-            ItemNBTHelper.setCompound(stack, tag, nbt);
+            NBTHelper.setCompound(stack, tag, nbt);
         }
     }
 

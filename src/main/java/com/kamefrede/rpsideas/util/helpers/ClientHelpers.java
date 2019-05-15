@@ -1,8 +1,8 @@
 package com.kamefrede.rpsideas.util.helpers;
 
+import com.teamwizardry.librarianlib.core.client.ClientTickHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
-import vazkii.arl.util.ClientTicker;
 import vazkii.psi.common.Psi;
 
 public class ClientHelpers {
@@ -15,7 +15,7 @@ public class ClientHelpers {
     }
 
     public static int pulseColor(int source, float multiplier, float speed, int magnitude) {
-        int add = (int) (MathHelper.sin(ClientTicker.ticksInGame * speed) * magnitude);
+        int add = (int) (MathHelper.sin(ClientTickHandler.getTicksInGame() * speed) * magnitude);
         int red = (0xFF0000 & source) >> 16;
         int green = (0x00FF00 & source) >> 8;
         int blue = 0x0000FF & source;
@@ -26,7 +26,7 @@ public class ClientHelpers {
     }
 
     public static int slideColor(int color, int secondColor, float speed) {
-        float shift = (MathHelper.sin(ClientTicker.ticksInGame * speed) + 1) / 2;
+        float shift = (MathHelper.sin(ClientTickHandler.getTicksInGame() * speed) + 1) / 2;
         if (shift == 0)
             return color;
         else if (shift == 1)

@@ -3,6 +3,7 @@ package com.kamefrede.rpsideas.util.helpers;
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.RPSItems;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
+import com.teamwizardry.librarianlib.features.helpers.NBTHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -48,7 +49,7 @@ public class FlowColorsHelper {
     }
 
     public static void applyColorizer(ItemStack colorable, ItemStack colorizer) {
-        ItemNBTHelper.setCompound(colorable, TAG_FLOW_COLOR, colorizer.writeToNBT(new NBTTagCompound()));
+        NBTHelper.setCompound(colorable, TAG_FLOW_COLOR, colorizer.writeToNBT(new NBTTagCompound()));
     }
 
     public static void clearColorizer(EntityPlayer player) {
@@ -61,11 +62,11 @@ public class FlowColorsHelper {
     }
 
     public static void clearColorizer(ItemStack colorable) {
-        ItemNBTHelper.removeEntry(colorable, TAG_FLOW_COLOR);
+        NBTHelper.removeNBTEntry(colorable, TAG_FLOW_COLOR);
     }
 
     public static ItemStack getColorizer(ItemStack colorable) {
-        NBTTagCompound colorizer = ItemNBTHelper.getCompound(colorable, TAG_FLOW_COLOR);
+        NBTTagCompound colorizer = NBTHelper.getCompound(colorable, TAG_FLOW_COLOR);
         if (colorizer == null) return ItemStack.EMPTY;
         else return new ItemStack(colorizer);
     }

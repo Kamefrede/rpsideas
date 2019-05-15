@@ -4,10 +4,10 @@ import com.kamefrede.rpsideas.spells.base.SpellCompilationExceptions;
 import com.kamefrede.rpsideas.spells.base.SpellParams;
 import com.kamefrede.rpsideas.util.RPSSoundHandler;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
-import vazkii.arl.network.NetworkHandler;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.piece.PieceTrick;
@@ -50,7 +50,7 @@ public class PieceTrickSansUndertale extends PieceTrick {
         data.getCustomData().setInteger(TAG_SANS_UNDERTALE, 680);
         data.save();
         if (context.caster instanceof EntityPlayerMP)
-            NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP) context.caster);
+            PacketHandler.NETWORK.sendTo(new MessageDataSync(data), (EntityPlayerMP) context.caster);
 
         return null;
     }
