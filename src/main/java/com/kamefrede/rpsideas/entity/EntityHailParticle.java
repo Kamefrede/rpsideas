@@ -32,16 +32,28 @@ public class EntityHailParticle extends EntityThrowable {
     private static final String TAG_TIME_ALIVE = "timeAlive";
     private static final String TAG_CASTER_NAME = "casterName";
     private static final String TAG_MASS = "mass";
-    private static final float drag = 1.00f;
-    private static final float gravity = 0.05f;
-    public int timeAlive;
 
+    private static final float drag = 0.99f;
+    private static final float gravity = 0.03f;
+
+    private static final float stableVelocity = 1.5f; //The velocity the particle can move at without losing bonus mass
+    private static final float gain = 50f; //Amount of bonus mass gained per tick, out of 1000 total
+    private static final float melt = 5f; //The amount of bonus mass lost per unit of velocity over
+
+    private static final float bonusMassAdditive = 0.75f; //Adds the equivalent of this mass to the equation for full bonus mass
+    private static final float bonusMassMultiplier = 0.25f; //Adds this to the damage multiplier for a fully grown particle
+
+    private static final float floatingMass = 0.75f; //Maximum mass at which a particle experiences no gravity
+    private static final float gravityMass = 1f; //Minimum mass at which there is only gravity influencing the projectile
+
+    public int bonusMass;
+
+    public int timeAlive;
 
     public EntityHailParticle(World worldIn) {
         super(worldIn);
         setSize(0.25f, 0.25f);
     }
-
 
     public void createParticle(EntityPlayer player, ItemStack colorizer, Vector3 pos, float mass) {
         World world = player.world;
@@ -52,19 +64,38 @@ public class EntityHailParticle extends EntityThrowable {
         this.thrower = player;
     }
 
-
     @Override
     public void onUpdate() {
         super.onUpdate();
+        double velocityMagnitude = Math.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ);
+
         if (timeAlive++ >= getMaxAlive())
             setDead();
-        if (this.motionX != 0 || this.motionZ != 0 || this.motionY != 0) {
-            this.motionX *= drag;
-            this.motionY *= drag;
-            this.motionZ *= drag;
-        }
 
-        this.motionY -= gravity;
+        if (velocityMagnitude > getMeltingPoint())
+            setDead();
+
+        bonusMass += Math.max(gain * (1 - (velocityMagnitude / stableVelocity)), 0) - Math.max(melt * (velocityMagnitude - stableVelocity), 0);
+        bonusMass = Math.min(Math.max(bonusMass, 0), 1000);
+
+        float mass = getMass() + gravityMass * getBonusMassPercent() ;
+        if (mass <= floatingMass) {
+            if (this.motionX != 0 || this.motionZ != 0 || this.motionY != 0) {
+                this.motionX *= drag;
+                this.motionY *= drag;
+                this.motionZ *= drag;
+            }
+        } else if (mass >= gravityMass) {
+            this.motionY -= Math.min(Math.max(dataManager.get(MASS),0.5),2)*gravity;
+        } else {
+            float ratio = Math.min(Math.max((mass - floatingMass) / (gravityMass - floatingMass), 0), 1);
+            if (this.motionX != 0 || this.motionZ != 0 || this.motionY != 0) {
+                this.motionX *= (drag + (1-drag) * ratio);
+                this.motionY *= (drag + (1-drag) * ratio);
+                this.motionZ *= (drag + (1-drag) * ratio);
+            }
+            this.motionY -= ratio*Math.min(Math.max(dataManager.get(MASS),0.5),2)*gravity;
+        }
 
         Vec3d position = new Vec3d(posX, posY, posZ);
         Vec3d projected = new Vec3d(posX + motionX, posY + motionY, posZ + motionZ);
@@ -78,10 +109,13 @@ public class EntityHailParticle extends EntityThrowable {
         if (trace != null)
             onImpact(trace);
 
-        if (Math.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ) > getMeltingPoint())
-            setDead();
 
 
+    }
+
+    private float calculateDamage() {
+        double effectiveMass = getMass() * (1 + bonusMassMultiplier * getBonusMassPercent()) + bonusMassAdditive * getBonusMassPercent();
+        return (float) Math.ceil(Math.sqrt(Math.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ)) * Math.sqrt(effectiveMass) * 6.5) + 1;
     }
 
     @Override
@@ -90,7 +124,7 @@ public class EntityHailParticle extends EntityThrowable {
         BlockPos pos = new BlockPos(result.hitVec.x, result.hitVec.y, result.hitVec.z);
 
         if (entity != null) {
-            entity.attackEntityFrom(new EntityDamageSourceIndirect("magic", this, thrower).setProjectile(), (float) Math.ceil(Math.sqrt(Math.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ)) * dataManager.get(MASS) * 7));
+            entity.attackEntityFrom(new EntityDamageSourceIndirect("magic", this, thrower).setProjectile(), calculateDamage());
             setDead();
             return;
         }
@@ -158,8 +192,6 @@ public class EntityHailParticle extends EntityThrowable {
         return 600;
     }
 
-
-
     @Override
     public void setDead() {
         super.setDead();
@@ -170,10 +202,11 @@ public class EntityHailParticle extends EntityThrowable {
         return dataManager.get(MASS);
     }
 
+    private float getBonusMassPercent() { return bonusMass / 1000f; }
+
     public int getColor() {
         return SpellHelpers.getColor(dataManager.get(COLORIZER_DATA));
     }
-
 
     public double getMeltingPoint() {
         return 75;

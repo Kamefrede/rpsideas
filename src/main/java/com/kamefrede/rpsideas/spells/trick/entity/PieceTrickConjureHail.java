@@ -17,6 +17,7 @@ public class PieceTrickConjureHail extends PieceTrick {
 
     private SpellParam position;
     private SpellParam power;
+    private static final float powerMultiplier = 5f;
 
     public PieceTrickConjureHail(Spell spell) {
         super(spell);
@@ -26,8 +27,9 @@ public class PieceTrickConjureHail extends PieceTrick {
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException, ArithmeticException {
         super.addToMetadata(meta);
         double pwr = SpellHelpers.ensurePositiveAndNonzero(this, power);
-        meta.addStat(EnumSpellStat.COST, (int) (pwr * pwr * 300));
-        meta.addStat(EnumSpellStat.POTENCY, (int) (pwr * 15));
+        pwr /= powerMultiplier;
+        meta.addStat(EnumSpellStat.COST, (int) (Math.max(1, pwr) * pwr * 150));
+        meta.addStat(EnumSpellStat.POTENCY, (int) Math.ceil(Math.max(1,pwr) * pwr * 20));
     }
 
     @Override
@@ -40,6 +42,7 @@ public class PieceTrickConjureHail extends PieceTrick {
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
         double pwr = SpellHelpers.getNumber(this, context, power, 0.5);
+        pwr /= powerMultiplier;
         Vector3 pos = SpellHelpers.checkPos(this, context, position, true, true, false);
 
         ItemStack cad = PsiAPI.getPlayerCAD(context.caster);
