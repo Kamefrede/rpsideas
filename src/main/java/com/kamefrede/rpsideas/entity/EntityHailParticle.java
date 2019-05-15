@@ -115,7 +115,7 @@ public class EntityHailParticle extends EntityThrowable {
 
     private float calculateDamage() {
         double effectiveMass = getMass() * (1 + bonusMassMultiplier * getBonusMassPercent()) + bonusMassAdditive * getBonusMassPercent();
-        return (float) Math.ceil(Math.sqrt(Math.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ)) * effectiveMass * 6.5) + 1;
+        return (float) Math.ceil(Math.sqrt(Math.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ)) * Math.sqrt(effectiveMass) * 6.5) + 1;
     }
 
     @Override
@@ -203,7 +203,7 @@ public class EntityHailParticle extends EntityThrowable {
     }
 
     private float getBonusMassPercent() { return bonusMass / 1000f; }
-    
+
     public int getColor() {
         return SpellHelpers.getColor(dataManager.get(COLORIZER_DATA));
     }
