@@ -18,14 +18,10 @@ public class EntityConjuredText extends Entity implements ISpellImmune {
 
     private static final DataParameter<ItemStack> COLORIZER_DATA = EntityDataManager.createKey(EntityConjuredText.class, DataSerializers.ITEM_STACK);
     private static final DataParameter<String> TEXT_DATA = EntityDataManager.createKey(EntityConjuredText.class, DataSerializers.STRING);
-    private static final DataParameter<String> CASTER_NAME = EntityDataManager.createKey(EntityConjuredText.class, DataSerializers.STRING);
     private static final DataParameter<Integer> MAX_ALIVE = EntityDataManager.createKey(EntityConjuredText.class, DataSerializers.VARINT);
-    public static final DataParameter<Integer> TIME_ALIVE = EntityDataManager.createKey(EntityConjuredText.class, DataSerializers.VARINT);
 
     private static final String TAG_COLORIZER = "colorizer";
     private static final String TAG_TEXT = "text";
-    private static final String TAG_TIME_ALIVE = "timeAlive";
-    private static final String TAG_CASTER_NAME = "casterName";
     private static final String TAG_MAX_ALIVE = "maxAlive";
 
 
@@ -36,20 +32,16 @@ public class EntityConjuredText extends Entity implements ISpellImmune {
     @Override
     public void onUpdate() {
         super.onUpdate();
-        int timeAlive = getTimeAlive();
-        if (timeAlive > getLiveTime())
+        if (ticksExisted > getLiveTime())
             setDead();
 
-        setTimeAlive(timeAlive + 1);
     }
 
 
     public void setInfo(EntityPlayer player, ItemStack colorizer, String text, Vector3 pos, int maxAlive) {
         dataManager.set(COLORIZER_DATA, colorizer);
         dataManager.set(TEXT_DATA, text);
-        dataManager.set(CASTER_NAME, player.getName());
         dataManager.set(MAX_ALIVE, maxAlive);
-        dataManager.set(TIME_ALIVE, 0);
 
         this.setPositionAndRotation(pos.x, pos.y, pos.z, player.rotationYaw, player.rotationPitch);
     }
@@ -58,9 +50,7 @@ public class EntityConjuredText extends Entity implements ISpellImmune {
     protected void entityInit() {
         dataManager.register(COLORIZER_DATA, ItemStack.EMPTY);
         dataManager.register(TEXT_DATA, "");
-        dataManager.register(CASTER_NAME, "");
         dataManager.register(MAX_ALIVE, 0);
-        dataManager.register(TIME_ALIVE, 0);
     }
 
     @Override
@@ -70,24 +60,20 @@ public class EntityConjuredText extends Entity implements ISpellImmune {
         if (!colorizer.isEmpty())
             colorizer.writeToNBT(colorizerCmp);
         tagCompound.setTag(TAG_COLORIZER, colorizerCmp);
-        tagCompound.setString(TAG_CASTER_NAME, dataManager.get(CASTER_NAME));
 
 
         String text = dataManager.get(TEXT_DATA);
         tagCompound.setString(TAG_TEXT, text);
         tagCompound.setInteger(TAG_MAX_ALIVE, dataManager.get(MAX_ALIVE));
 
-        tagCompound.setInteger(TAG_TIME_ALIVE, getTimeAlive());
     }
 
     @Override
     protected void readEntityFromNBT(@Nonnull NBTTagCompound compound) {
         dataManager.set(COLORIZER_DATA, new ItemStack(compound.getCompoundTag(TAG_COLORIZER)));
-        dataManager.set(CASTER_NAME, compound.getString(TAG_CASTER_NAME));
         dataManager.set(TEXT_DATA, compound.getString(TAG_TEXT));
         dataManager.set(MAX_ALIVE, compound.getInteger(TAG_MAX_ALIVE));
 
-        setTimeAlive(compound.getInteger(TAG_TIME_ALIVE));
     }
 
     @Override
@@ -105,14 +91,6 @@ public class EntityConjuredText extends Entity implements ISpellImmune {
 
     public int getLiveTime() {
         return dataManager.get(MAX_ALIVE);
-    }
-
-    public int getTimeAlive() {
-        return dataManager.get(TIME_ALIVE);
-    }
-
-    public void setTimeAlive(int i) {
-        dataManager.set(TIME_ALIVE, i);
     }
 
     @Override

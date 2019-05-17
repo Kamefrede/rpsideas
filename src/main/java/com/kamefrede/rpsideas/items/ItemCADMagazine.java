@@ -25,7 +25,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import vazkii.arl.util.VanillaPacketDispatcher;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.*;
 import vazkii.psi.api.spell.*;
@@ -115,7 +114,7 @@ public class ItemCADMagazine extends ItemMod implements ISocketable, ICADCompone
                 }
                 ((TileProgrammer) tile).spell = spell;
                 ((TileProgrammer) tile).onSpellChanged();
-                VanillaPacketDispatcher.dispatchTEToNearbyPlayers(tile);
+                tile.markDirty();
                 return EnumActionResult.SUCCESS;
             } else {
                 if (!enabled || ((TileProgrammer) tile).playerLock.isEmpty() || ((TileProgrammer) tile).playerLock.equals(player.getName())) {
