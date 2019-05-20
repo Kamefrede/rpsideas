@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas.util;
 
 import com.kamefrede.rpsideas.RPSIdeas;
+import com.kamefrede.rpsideas.capability.CapabilityTriggerSensor;
 import com.kamefrede.rpsideas.items.base.ICooldownAssembly;
 import com.kamefrede.rpsideas.items.base.IRegenerationBattery;
 import com.kamefrede.rpsideas.network.MessageCastOffHand;
@@ -8,10 +9,13 @@ import com.kamefrede.rpsideas.network.MessageChangeSocketSlot;
 import com.kamefrede.rpsideas.network.MessageCuffSync;
 import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -34,6 +38,7 @@ import static vazkii.psi.common.item.ItemCAD.getRealCost;
 public class RPSEventHandler {
 
     private static final String TAG_CUFFED = "rpsideas:cuffed";
+    public static final ResourceLocation CAPABILITY_TRIGGER_SENSOR = new ResourceLocation(RPSIdeas.MODID, "capability_trigger_sensor");
 
     public static boolean canCast(EntityPlayer player) {
         if (!player.getHeldItemOffhand().isEmpty() && player.getHeldItemOffhand().getItem() instanceof ICAD) {
@@ -87,6 +92,12 @@ public class RPSEventHandler {
         RPSKeybind offhandbinding = RPSKeybindHandler.offhandCast;
         if (offhandbinding.isPressed() && canCast(event.getEntityPlayer()))
             event.setCanceled(true);
+    }
+
+    @SubscribeEvent
+    public static void attachTriggerCap(AttachCapabilitiesEvent<Entity> event){
+        if(event.getObject() instanceof EntityPlayer)
+            event.addCapability(CAPABILITY_TRIGGER_SENSOR, new CapabilityTriggerSensor((EntityPlayer)event.getObject()));
     }
 
     @SubscribeEvent

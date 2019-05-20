@@ -7,12 +7,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.WorldServer;
 import vazkii.psi.api.spell.*;
+import vazkii.psi.api.spell.detonator.IDetonationHandler;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.common.entity.EntitySpellCharge;
 
 import java.util.List;
 
-import static com.kamefrede.rpsideas.items.components.ItemTriggerSensor.firePlayerDetonation;
 import static vazkii.psi.api.spell.SpellContext.MAX_DISTANCE;
 
 public class PieceTrickDetonate extends PieceStyledTrick {
@@ -57,6 +57,7 @@ public class PieceTrickDetonate extends PieceStyledTrick {
 
         for (EntitySpellCharge ent : charges)
             ent.doExplosion();
+        IDetonationHandler.performDetonation(context.caster.world, context.caster);
 
 
         if (context.caster.world instanceof WorldServer) {
@@ -65,9 +66,6 @@ public class PieceTrickDetonate extends PieceStyledTrick {
             List<EntityPlayer> players = context.focalPoint.world.getEntitiesWithinAABB(EntityPlayer.class, bb,
                     (EntityPlayer e) -> e != null &&
                             (canExceed || e.getDistanceSq(context.caster) < MAX_DISTANCE * MAX_DISTANCE));
-
-            for (EntityPlayer player : players)
-                SpellHelpers.scheduleTask(server, () -> firePlayerDetonation(player));
         }
 
         return null;
