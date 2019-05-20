@@ -1,6 +1,5 @@
 package com.kamefrede.rpsideas.spells.operator.vector;
 
-import com.kamefrede.rpsideas.spells.base.SpellParams;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -25,8 +24,8 @@ public class PieceOperatorEntityRaycast extends PieceOperator {
 
     @Override
     public void initParams() {
-        addParam(target = new ParamVector(SpellParam.GENERIC_NAME_TARGET, SpellParam.RED, false, false));
-        addParam(vector = new ParamVector(SpellParams.GENERIC_NAME_VECTOR, SpellParam.BLUE, false, false));
+        addParam(target = new ParamVector(SpellParam.GENERIC_NAME_POSITION, SpellParam.RED, false, false));
+        addParam(vector = new ParamVector(SpellParam.GENERIC_NAME_RAY, SpellParam.BLUE, false, false));
     }
 
     @Override
