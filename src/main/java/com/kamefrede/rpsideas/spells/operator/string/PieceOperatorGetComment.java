@@ -1,8 +1,7 @@
 package com.kamefrede.rpsideas.spells.operator.string;
 
-import vazkii.psi.api.spell.Spell;
-import vazkii.psi.api.spell.SpellContext;
-import vazkii.psi.api.spell.SpellRuntimeException;
+import com.kamefrede.rpsideas.spells.base.SpellCompilationExceptions;
+import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.piece.PieceOperator;
 
 public class PieceOperatorGetComment extends PieceOperator {
@@ -12,9 +11,14 @@ public class PieceOperatorGetComment extends PieceOperator {
     }
 
     @Override
+    public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
+        if (this.comment == null || this.comment.isEmpty())
+            throw new SpellCompilationException(SpellCompilationExceptions.NAN_COMMENT, x, y);
+    }
+
+    @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        if (this.comment != null && !this.comment.isEmpty()) return comment;
-        return null;
+        return comment;
     }
 
     @Override

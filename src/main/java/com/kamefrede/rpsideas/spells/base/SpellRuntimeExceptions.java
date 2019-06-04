@@ -18,4 +18,5 @@ public final class SpellRuntimeExceptions {
     public static final String COMPARATOR = "rpsideas.spellerror.comparator";
     public static final String NOT_POSITIVE_AND_NON_ZERO = "rpsideas.spellerror.not_positive_and_non_zero";
     public static final String TARGET_SELF = "rpsideas.spellerror.target_self";
+    public static final String NULL_STRING = "rpsideas.spellerror.null_string";
 }

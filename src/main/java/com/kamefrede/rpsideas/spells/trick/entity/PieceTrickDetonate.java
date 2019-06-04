@@ -17,6 +17,8 @@ import static vazkii.psi.api.spell.SpellContext.MAX_DISTANCE;
 
 public class PieceTrickDetonate extends PieceStyledTrick {
 
+    //TODO CHANGE THIS TO NEW CODE
+
     private SpellParam radius;
 
     public PieceTrickDetonate(Spell spell) {

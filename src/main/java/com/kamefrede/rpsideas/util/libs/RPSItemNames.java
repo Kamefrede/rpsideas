@@ -32,6 +32,11 @@ public class RPSItemNames {
     public static final String PSIMETAL_SHIELD = "psimetal_shield";
     public static final String IVORY_SHIELD = "ivory_shield";
     public static final String EBONY_SHIELD = "ebony_shield";
+    public static final String LOST_MATRIX = "lost_matrix";
+    public static final String OCULUS_MATRIX = "oculus_matrix";
+    public static final String ENCODED_MATRIX = "encoded_matrix";
+    public static final String EBONY_OVERVOLTED_ASSEMBLY = "overvolted_cad_assembly";
+    public static final String EBONY_UNDERVOLTED_ASSEMBLY = "undervolted_cad_assembly";
 
 
     public static final String PSISHOCK = "psishock";

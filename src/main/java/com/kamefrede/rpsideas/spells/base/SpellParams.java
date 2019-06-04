@@ -28,6 +28,9 @@ public final class SpellParams {
     public static final String GENERIC_NAME_RADIX = "rpsideas.spellparam.radix";
     public static final String GENERIC_NAME_SLOT = "rpsideas.spellparam.slot";
     public static final String GENERIC_NAME_POWER = "rpsideas.spellparam.power";
+    public static final String GENERIC_NAME_PARAM1 = "rpsideas.spellparam.param1";
+    public static final String GENERIC_NAME_PARAM2 = "rpsideas.spellparam.param2";
+    public static final String GENERIC_NAME_PARAM3 = "rpsideas.spellparam.param3";
 
     public static final String CONNECTOR_NAME_FROM1 = "rpsideas.spellparam.from1";
     public static final String CONNECTOR_NAME_FROM2 = "rpsideas.spellparam.from2";
