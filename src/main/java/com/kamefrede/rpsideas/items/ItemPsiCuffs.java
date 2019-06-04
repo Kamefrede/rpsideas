@@ -1,5 +1,6 @@
 package com.kamefrede.rpsideas.items;
 
+import com.kamefrede.rpsideas.network.MessageCuffSync;
 import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
@@ -48,7 +49,7 @@ public class ItemPsiCuffs extends ItemMod implements IFlowColorAcceptor {
 
     @Override
     public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer playerIn, EntityLivingBase target, EnumHand hand) {
-        if (playerIn.isSneaking() && target instanceof EntityPlayer) {
+        if (target instanceof EntityPlayer) {
             String keyName = NBTHelper.getString(stack, TAG_KEYNAME);
             if (keyName == null)
                 return false;
@@ -60,6 +61,7 @@ public class ItemPsiCuffs extends ItemMod implements IFlowColorAcceptor {
                 if (!playerIn.world.isRemote) {
                     targetPlayer.getEntityData().setString(TAG_KEYNAME, keyName);
                 }
+                PacketHandler.NETWORK.sendToAll(new MessageCuffSync(targetPlayer.getEntityId(), true));
                 stack.shrink(1);
                 data.save();
                 if (targetPlayer instanceof EntityPlayerMP)

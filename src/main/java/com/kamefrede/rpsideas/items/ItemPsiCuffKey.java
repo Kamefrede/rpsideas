@@ -47,30 +47,16 @@ public class ItemPsiCuffKey extends ItemMod {
 
     @Override
     public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer playerIn, EntityLivingBase target, EnumHand hand) {
-        if (playerIn.isSneaking() && target instanceof EntityPlayer) {
+        if (target instanceof EntityPlayer) {
 
             if (!stack.hasDisplayName())
                 return false;
             String keyName = stack.getDisplayName();
-            removeKey((EntityPlayer) target, stack, keyName, playerIn);
+            removeKey((EntityPlayer) target, stack, keyName);
         }
         return false;
     }
 
-    public static void removeKey(EntityPlayer cuffedPlayer, ItemStack key, String keyName, EntityPlayer sync) {
-        PlayerDataHandler.PlayerData data = PlayerDataHandler.get(cuffedPlayer);
-        if (data.getCustomData().getBoolean(TAG_CUFFED) && keyName.equals(cuffedPlayer.getEntityData().getString(TAG_KEYNAME))) {
-            data.getCustomData().removeTag(TAG_CUFFED);
-            if (!cuffedPlayer.world.isRemote) {
-                cuffedPlayer.getEntityData().removeTag(TAG_KEYNAME);
-                PacketHandler.NETWORK.sendTo(new MessageCuffSync(cuffedPlayer.getEntityId(), false), (EntityPlayerMP) sync);
-            }
-            data.save();
-            if (cuffedPlayer instanceof EntityPlayerMP)
-                PacketHandler.NETWORK.sendTo(new MessageDataSync(data), (EntityPlayerMP) cuffedPlayer);
-
-        }
-    }
 
     public static void removeKey(EntityPlayer cuffedPlayer, ItemStack key, String keyName) {
         PlayerDataHandler.PlayerData data = PlayerDataHandler.get(cuffedPlayer);
@@ -78,7 +64,7 @@ public class ItemPsiCuffKey extends ItemMod {
             data.getCustomData().removeTag(TAG_CUFFED);
             if (!cuffedPlayer.world.isRemote) {
                 cuffedPlayer.getEntityData().removeTag(TAG_KEYNAME);
-                PacketHandler.NETWORK.sendToAllAround(new MessageCuffSync(cuffedPlayer.getEntityId(), false), new NetworkRegistry.TargetPoint(cuffedPlayer.dimension, cuffedPlayer.posX, cuffedPlayer.posY, cuffedPlayer.posZ, 32));
+                PacketHandler.NETWORK.sendToAll(new MessageCuffSync(cuffedPlayer.getEntityId(), false));
             }
             data.save();
             if (cuffedPlayer instanceof EntityPlayerMP)

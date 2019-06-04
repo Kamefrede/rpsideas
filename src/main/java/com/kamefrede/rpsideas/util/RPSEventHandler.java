@@ -155,6 +155,22 @@ public class RPSEventHandler {
     }
 
     @SubscribeEvent
+    public static void syncCuffedStateTwo(PlayerEvent.StopTracking event) {
+        if (event.getTarget() instanceof EntityPlayer) {
+            EntityPlayer target = (EntityPlayer) event.getTarget();
+            PlayerDataHandler.PlayerData data = PlayerDataHandler.get(target);
+            boolean cuffed = false;
+            if (data.getCustomData() != null && data.getCustomData().getBoolean(TAG_CUFFED)) {
+                cuffed = true;
+            }
+            PacketHandler.NETWORK.sendTo(new MessageCuffSync(target.getEntityId(), cuffed), (EntityPlayerMP) event.getEntityPlayer());
+        }
+    }
+
+
+
+
+    @SubscribeEvent
     public static void modifyRegen(RegenPsiEvent e) {
         ItemStack cad = e.getCad();
 
