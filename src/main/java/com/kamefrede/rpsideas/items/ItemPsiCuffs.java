@@ -5,6 +5,7 @@ import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.helpers.NBTHelper;
+import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
@@ -60,7 +61,7 @@ public class ItemPsiCuffs extends ItemMod implements IFlowColorAcceptor {
                 if (!playerIn.world.isRemote) {
                     targetPlayer.getEntityData().setString(TAG_KEYNAME, keyName);
                 }
-                NetworkHandler.INSTANCE.sendToAll(new MessageCuffSync(targetPlayer.getEntityId(), true));
+                PacketHandler.NETWORK.sendToAll(new MessageCuffSync(targetPlayer.getEntityId(), true));
                 stack.shrink(1);
                 data.save();
                 if (targetPlayer instanceof EntityPlayerMP)

@@ -2,6 +2,7 @@ package com.kamefrede.rpsideas.effect;
 
 import com.kamefrede.rpsideas.effect.base.PotionPsiChange;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
+import com.teamwizardry.librarianlib.features.base.PotionMod;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.PotionEffect;
 import vazkii.psi.api.cad.ICADColorizer;
@@ -16,14 +17,14 @@ public class PotionPsipulse extends PotionPsiChange {
 
     @Override
     public void performEffect(@Nonnull EntityLivingBase entity, int amplifier) {
-        PotionEffect shockEffect = getEffect(entity);
-        if (shockEffect != null) {
+        if (PotionMod.Companion.hasEffect(entity, RPSPotions.psishock)) {
+            PotionEffect shockEffect = Objects.requireNonNull(PotionMod.Companion.getEffect(entity, RPSPotions.psishock));
             PotionEffect thisEffect = Objects.requireNonNull(getEffect(entity));
             PotionEffect newEffect = new PotionEffect(RPSPotions.psishock,
                     shockEffect.getDuration() + thisEffect.getDuration(),
                     Math.min(shockEffect.getAmplifier() + thisEffect.getAmplifier() + 1, 127));
             shockEffect.combine(newEffect);
-            shockEffect.combine(new PotionEffect(this, 0, amplifier + 1));
+            entity.removeActivePotionEffect(RPSPotions.psipulse);
         } else
             super.performEffect(entity, amplifier);
     }

@@ -3,6 +3,7 @@ package com.kamefrede.rpsideas.items;
 import com.kamefrede.rpsideas.network.MessageCuffSync;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
+import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
@@ -63,7 +64,7 @@ public class ItemPsiCuffKey extends ItemMod {
             data.getCustomData().removeTag(TAG_CUFFED);
             if (!cuffedPlayer.world.isRemote) {
                 cuffedPlayer.getEntityData().removeTag(TAG_KEYNAME);
-                NetworkHandler.INSTANCE.sendToAll(new MessageCuffSync(cuffedPlayer.getEntityId(), false));
+                PacketHandler.NETWORK.sendToAll(new MessageCuffSync(cuffedPlayer.getEntityId(), false));
             }
             data.save();
             if (cuffedPlayer instanceof EntityPlayerMP)
