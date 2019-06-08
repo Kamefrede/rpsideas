@@ -4,8 +4,6 @@ import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.base.IRegenerationBattery;
 import com.kamefrede.rpsideas.items.base.ItemComponent;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
-import com.teamwizardry.librarianlib.features.network.PacketHandler;
-import com.teamwizardry.librarianlib.features.network.PacketHandlerKt;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.ITooltipFlag;
@@ -19,6 +17,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import vazkii.arl.network.NetworkHandler;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.EnumCADStat;
@@ -56,7 +55,7 @@ public class ItemUnstableBattery extends ItemComponent implements IRegenerationB
                 data.availablePsi = 0;
                 data.regenCooldown = 20;
                 data.save();
-                PacketHandler.NETWORK.sendTo(new MessageDataSync(data), (EntityPlayerMP) player);
+                NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP) player);
             }
         }
     }

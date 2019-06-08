@@ -3,7 +3,6 @@ package com.kamefrede.rpsideas.items;
 import com.kamefrede.rpsideas.network.MessageCuffSync;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
-import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,9 +13,9 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import vazkii.arl.network.NetworkHandler;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.network.message.MessageDataSync;
 
@@ -64,11 +63,11 @@ public class ItemPsiCuffKey extends ItemMod {
             data.getCustomData().removeTag(TAG_CUFFED);
             if (!cuffedPlayer.world.isRemote) {
                 cuffedPlayer.getEntityData().removeTag(TAG_KEYNAME);
-                PacketHandler.NETWORK.sendToAll(new MessageCuffSync(cuffedPlayer.getEntityId(), false));
+                NetworkHandler.INSTANCE.sendToAll(new MessageCuffSync(cuffedPlayer.getEntityId(), false));
             }
             data.save();
             if (cuffedPlayer instanceof EntityPlayerMP)
-                PacketHandler.NETWORK.sendTo(new MessageDataSync(data), (EntityPlayerMP) cuffedPlayer);
+                NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP) cuffedPlayer);
 
         }
     }

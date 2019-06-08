@@ -142,29 +142,25 @@ public class RPSEventHandler {
 
     @SubscribeEvent
     public static void syncCuffedState(PlayerEvent.StartTracking event) {
-        if (event.getTarget() instanceof EntityPlayer) {
-            EntityPlayer target = (EntityPlayer) event.getTarget();
+        syncCuffState(event.getTarget(), event.getEntityPlayer());
+    }
+
+    private static void syncCuffState(Entity target2, EntityPlayer entityPlayer) {
+        if (target2 instanceof EntityPlayer) {
+            EntityPlayer target = (EntityPlayer) target2;
             PlayerDataHandler.PlayerData data = PlayerDataHandler.get(target);
             boolean cuffed = false;
             if (data.getCustomData() != null && data.getCustomData().getBoolean(TAG_CUFFED)) {
                 cuffed = true;
             }
-            PacketHandler.NETWORK.sendTo(new MessageCuffSync(target.getEntityId(), cuffed), (EntityPlayerMP) event.getEntityPlayer());
+            PacketHandler.NETWORK.sendTo(new MessageCuffSync(target.getEntityId(), cuffed), (EntityPlayerMP) entityPlayer);
 
         }
     }
 
     @SubscribeEvent
     public static void syncCuffedStateTwo(PlayerEvent.StopTracking event) {
-        if (event.getTarget() instanceof EntityPlayer) {
-            EntityPlayer target = (EntityPlayer) event.getTarget();
-            PlayerDataHandler.PlayerData data = PlayerDataHandler.get(target);
-            boolean cuffed = false;
-            if (data.getCustomData() != null && data.getCustomData().getBoolean(TAG_CUFFED)) {
-                cuffed = true;
-            }
-            PacketHandler.NETWORK.sendTo(new MessageCuffSync(target.getEntityId(), cuffed), (EntityPlayerMP) event.getEntityPlayer());
-        }
+        syncCuffState(event.getTarget(), event.getEntityPlayer());
     }
 
 

@@ -1,10 +1,10 @@
 package com.kamefrede.rpsideas.effect.base;
 
-import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import vazkii.arl.network.NetworkHandler;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.EnumCADStat;
 import vazkii.psi.api.cad.ICAD;
@@ -39,7 +39,7 @@ public abstract class PotionPsiChange extends PotionModColorized {
                 data.availablePsi = Math.min(data.totalPsi, data.availablePsi + psi);
                 data.save();
                 if (sync && player.world.isRemote && player instanceof EntityPlayerMP)
-                    PacketHandler.NETWORK.sendTo(new MessageDataSync(data), (EntityPlayerMP) player);
+                    NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP) player);
             }
         }
     }

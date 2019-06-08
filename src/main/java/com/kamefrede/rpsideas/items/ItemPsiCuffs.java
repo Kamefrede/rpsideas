@@ -4,9 +4,7 @@ import com.kamefrede.rpsideas.network.MessageCuffSync;
 import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
 import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
-import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import com.teamwizardry.librarianlib.features.helpers.NBTHelper;
-import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
@@ -20,6 +18,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import vazkii.arl.network.NetworkHandler;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.network.message.MessageDataSync;
 
@@ -61,11 +60,11 @@ public class ItemPsiCuffs extends ItemMod implements IFlowColorAcceptor {
                 if (!playerIn.world.isRemote) {
                     targetPlayer.getEntityData().setString(TAG_KEYNAME, keyName);
                 }
-                PacketHandler.NETWORK.sendToAll(new MessageCuffSync(targetPlayer.getEntityId(), true));
+                NetworkHandler.INSTANCE.sendToAll(new MessageCuffSync(targetPlayer.getEntityId(), true));
                 stack.shrink(1);
                 data.save();
                 if (targetPlayer instanceof EntityPlayerMP)
-                    PacketHandler.NETWORK.sendTo(new MessageDataSync(data), (EntityPlayerMP) targetPlayer);
+                    NetworkHandler.INSTANCE.sendTo(new MessageDataSync(data), (EntityPlayerMP) targetPlayer);
                 return true;
             }
         }
