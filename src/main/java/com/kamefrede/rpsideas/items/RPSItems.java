@@ -67,7 +67,7 @@ public class RPSItems {
     public static final ItemMod psiCuffsKeys = new ItemPsiCuffKey();
     public static final ItemMod psimetalShield = new ItemPsimetalShield(RPSItemNames.PSIMETAL_SHIELD);
     // public static final ItemMod ivoryShield = new ItemFlowShield(RPSItemNames.IVORY_SHIELD);
-    // public static final ItemMod ebonyShield = new ItemFlowShield(RPSItemNames.EBONY_SHIELD);
+    public static final ItemMod ebonyShield = new ItemFlowShield(RPSItemNames.EBONY_SHIELD);
 
     public static final ItemMod psimetalHoe = new ItemPsimetalHoe(RPSItemNames.PSIMETAL_HOE);
     public static final ItemMod psimetalShears = new ItemPsimetalShears(RPSItemNames.PSIMETAL_SHEARS);
