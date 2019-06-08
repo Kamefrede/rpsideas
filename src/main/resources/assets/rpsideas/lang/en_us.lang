@@ -541,6 +541,7 @@ entity.sniper_bullet.name=Sniper Round
 entity.psi_mana_burst.name=Psi Mana Burst
 entity.entity_fancy_circle.name=Conjured Circle
 entity.entity_hail_particle.name=Hail Particle
+entity.entity_summoned_clone.name=Summoned Clone
 
 rpsideas.potion.psishock=Psionic Shock
 rpsideas.potion.psipulse=Psionic Pulse

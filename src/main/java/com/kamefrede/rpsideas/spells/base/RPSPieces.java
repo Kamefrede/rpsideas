@@ -165,6 +165,7 @@ public class RPSPieces {
 
         registerNoTexture(PieceCrossConnector.class, RPSPieceNames.CROSS_CONNECTOR, LibPieceGroups.FLOW_CONTROL);
         registerTexture(RPSPieceNames.CROSS_CONNECTOR, LibMisc.MOD_ID, LibPieceNames.CONNECTOR);
+        register(PieceTrickSummonClone.class, RPSPieceNames.PIECE_SUMMON_CLONE, LibPieceGroups.FLOW_CONTROL);
 
         new BotaniaCompatPieces().run();
     }

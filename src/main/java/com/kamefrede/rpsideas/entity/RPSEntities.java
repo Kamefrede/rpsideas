@@ -2,6 +2,7 @@ package com.kamefrede.rpsideas.entity;
 
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.entity.botania.EntityPsiManaBurst;
+import com.kamefrede.rpsideas.render.RenderClone;
 import com.kamefrede.rpsideas.render.RenderConjuredText;
 import com.kamefrede.rpsideas.render.RenderFancyCircle;
 import com.kamefrede.rpsideas.render.RenderHailParticle;
@@ -26,6 +27,7 @@ public class RPSEntities {
         registerModEntity(EntityConjuredText.class, RPSEntityNames.ENTITY_CONJURED_TEXT, 256, 10, false);
         registerModEntity(EntityFancyCircle.class, RPSEntityNames.ENTITY_FANCY_CIRCLE, 256, 64, false);
         registerModEntity(EntityHailParticle.class, RPSEntityNames.ENTITY_HAIL_PARTICLE, 256, 10, true);
+        registerModEntity(EntityClone.class, RPSEntityNames.ENTITY_SUMMONED_CLONE, 256, 10, false);
     }
 
     @SideOnly(Side.CLIENT)
@@ -35,6 +37,7 @@ public class RPSEntities {
         RenderingRegistry.registerEntityRenderingHandler(EntityConjuredText.class, RenderConjuredText::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityFancyCircle.class, RenderFancyCircle::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityHailParticle.class, RenderHailParticle::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityClone.class, RenderClone::new);
     }
 
     @Optional.Method(modid = "botania")

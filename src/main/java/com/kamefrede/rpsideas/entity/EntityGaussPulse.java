@@ -162,7 +162,7 @@ public class EntityGaussPulse extends EntityThrowable implements ISpellImmune {
             if (getAmmo() == AmmoStatus.AMMO)
                 setAmmoStatus(AmmoStatus.DEPLETED);
 
-            entityHit.attackEntityFrom(new EntityDamageSourceIndirect("arrow", this, thrower).setProjectile(), getAmmo().damage);
+            entityHit.attackEntityFrom(new EntityDamageSourceIndirect("magic", this, thrower).setProjectile(), getAmmo().damage);
 
             if (entityHit instanceof EntityLivingBase)
                 ((EntityLivingBase) entityHit).addPotionEffect(new PotionEffect(RPSPotions.psishock, getAmmo().shockDuration));
