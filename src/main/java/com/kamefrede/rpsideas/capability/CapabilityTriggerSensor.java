@@ -3,16 +3,13 @@ package com.kamefrede.rpsideas.capability;
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.items.components.ItemTriggerSensor;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import vazkii.psi.api.exosuit.ISensorHoldable;
 import vazkii.psi.api.exosuit.PsiArmorEvent;
 import vazkii.psi.api.spell.detonator.IDetonationHandler;
-import vazkii.psi.common.item.armor.ItemPsimetalExosuitHelmet;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -30,13 +27,13 @@ public class CapabilityTriggerSensor implements IDetonationHandler, ICapabilityP
 
     @Override
     public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-        return hasTriggerSensor(player) && capability == IDetonationHandler.CAPABILITY;
+        return capability == IDetonationHandler.CAPABILITY;
     }
 
     @Nullable
     @Override
     public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-        return hasTriggerSensor(player) && capability == IDetonationHandler.CAPABILITY ? IDetonationHandler.CAPABILITY.cast(this) : null;
+        return capability == IDetonationHandler.CAPABILITY ? IDetonationHandler.CAPABILITY.cast(this) : null;
     }
 
     @Override
@@ -52,14 +49,8 @@ public class CapabilityTriggerSensor implements IDetonationHandler, ICapabilityP
         }
     }
 
-    public boolean hasTriggerSensor(EntityPlayer player){
-        ItemStack helmet = player.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
-        if(helmet.isEmpty())
-            return false;
-        if(!(helmet.getItem() instanceof ISensorHoldable))
-            return false;
-        ISensorHoldable holdable = (ISensorHoldable) helmet.getItem();
-        return holdable.getAttachedSensor(helmet).getItem() instanceof ItemTriggerSensor;
-
+    @Override
+    public Vec3d objectLocus() {
+        return player.getPositionVector();
     }
 }

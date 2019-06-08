@@ -3,21 +3,13 @@ package com.kamefrede.rpsideas.spells.trick.entity;
 import com.kamefrede.rpsideas.spells.enabler.styles.EnumAssemblyStyle;
 import com.kamefrede.rpsideas.spells.enabler.styles.PieceStyledTrick;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.world.WorldServer;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.detonator.IDetonationHandler;
 import vazkii.psi.api.spell.param.ParamNumber;
-import vazkii.psi.common.entity.EntitySpellCharge;
-
-import java.util.List;
 
 import static vazkii.psi.api.spell.SpellContext.MAX_DISTANCE;
 
 public class PieceTrickDetonate extends PieceStyledTrick {
-
-    //TODO CHANGE THIS TO NEW CODE
 
     private SpellParam radius;
 
@@ -51,25 +43,12 @@ public class PieceTrickDetonate extends PieceStyledTrick {
         double radiusVal = SpellHelpers.getBoundedNumber(this, context, radius, MAX_DISTANCE);
         boolean canExceed = hasStyle(context);
 
-        AxisAlignedBB bb = context.focalPoint.getEntityBoundingBox().grow(radiusVal);
-
-        List<EntitySpellCharge> charges = context.focalPoint.world.getEntitiesWithinAABB(EntitySpellCharge.class, bb,
-                (EntitySpellCharge e) -> e != null && e != context.focalPoint &&
-                        (canExceed || e.getDistanceSq(context.caster) < MAX_DISTANCE * MAX_DISTANCE));
-
-        for (EntitySpellCharge ent : charges)
-            ent.doExplosion();
-        IDetonationHandler.performDetonation(context.caster.world, context.caster);
-
-
-        if (context.caster.world instanceof WorldServer) {
-            WorldServer server = (WorldServer) context.caster.world;
-
-            List<EntityPlayer> players = context.focalPoint.world.getEntitiesWithinAABB(EntityPlayer.class, bb,
-                    (EntityPlayer e) -> e != null &&
-                            (canExceed || e.getDistanceSq(context.caster) < MAX_DISTANCE * MAX_DISTANCE));
+        if (radiusVal == 0.0) {
+            IDetonationHandler.performDetonation(context.caster.world, context.caster, 0, entity -> entity == context.caster);
+            return null;
         }
-
+        IDetonationHandler.performDetonation(context.caster.world, context.caster, radiusVal, entity -> entity != null && IDetonationHandler.canBeDetonated(entity) &&
+                (canExceed || entity.getDistanceSq(context.caster) < MAX_DISTANCE * MAX_DISTANCE));
         return null;
     }
 }
