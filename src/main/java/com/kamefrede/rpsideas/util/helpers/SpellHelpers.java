@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.EnumFacing;
@@ -14,6 +15,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.api.cad.ICADColorizer;
 import vazkii.psi.api.internal.PsiRenderHelper;
@@ -243,6 +245,12 @@ public class SpellHelpers {
 
     public static float getB(int color) {
         return PsiRenderHelper.b(color) / 255f;
+    }
+
+    public static boolean hasComponent(ItemStack cad, EnumCADComponent component, Item check) {
+        ICAD icad = (ICAD) cad.getItem();
+        ItemStack comp = icad.getComponentInSlot(cad, component);
+        return !comp.isEmpty() && comp.getItem().getClass().isInstance(check);
     }
 
 }

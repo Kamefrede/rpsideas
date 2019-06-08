@@ -11,6 +11,9 @@ public class RPSPotions {
     public static final PotionMod psipulse = new PotionPsipulse();
     public static final PotionMod unseeing = new PotionDisableFollowRange();
     public static final PotionFlashbang flash = new PotionFlashbang();
+    public static final PotionMod burnout = new PotionBurnout();
+    public static final PotionMod affinity = new PotionAffinity();
+
 
     public static final PotionTypeMod psishockType = new PotionTypeMod(RPSItemNames.PSISHOCK, new PotionEffect(psishock, 160));
     public static final PotionTypeMod psishockLongType = new PotionTypeMod(RPSItemNames.PSISHOCK_LONG, new PotionEffect(psishock, 240));

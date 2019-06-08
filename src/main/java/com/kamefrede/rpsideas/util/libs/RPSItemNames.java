@@ -39,6 +39,8 @@ public class RPSItemNames {
     public static final String EBONY_UNDERVOLTED_ASSEMBLY = "undervolted_cad_assembly";
 
 
+    public static final String BURNOUT = "burnout";
+    public static final String AFFINITY = "affinity";
     public static final String PSISHOCK = "psishock";
     public static final String DISABLE_FOLLOW_RANGE = "unseeing";
     public static final String FLASHBANG = "flash";
