@@ -7,10 +7,7 @@ import com.kamefrede.rpsideas.entity.RPSEntities;
 import com.kamefrede.rpsideas.entity.botania.EntityPsiManaBurst;
 import com.kamefrede.rpsideas.gui.GuiHandler;
 import com.kamefrede.rpsideas.items.RPSItems;
-import com.kamefrede.rpsideas.render.ExosuitGlowLayer;
-import com.kamefrede.rpsideas.render.LayerAuthorCape;
-import com.kamefrede.rpsideas.render.LayerAuthorOccludeElytra;
-import com.kamefrede.rpsideas.render.LayerPsiCuffs;
+import com.kamefrede.rpsideas.render.*;
 import com.kamefrede.rpsideas.render.elytra.LayerCustomElytra;
 import com.kamefrede.rpsideas.spells.base.RPSPieces;
 import com.kamefrede.rpsideas.util.RPSCreativeTab;
@@ -44,7 +41,7 @@ import java.util.List;
 import java.util.Map;
 
 
-@Mod(modid = RPSIdeas.MODID, name = RPSIdeas.NAME, version = RPSIdeas.VERSION, dependencies = "after:botania;before:tconstruct;required-after:psi@[r1.1-76,);required-after:librarianlib@[4.18,);required-after:forge@[14.23.5.2795,);", useMetadata = true)
+@Mod(modid = RPSIdeas.MODID, name = RPSIdeas.NAME, version = RPSIdeas.VERSION, dependencies = "after:botania;before:tconstruct;required-after:psi@[r1.1-76,);required-after:librarianlib;required-after:forge@[14.23.5.2795,);", useMetadata = true)
 public class RPSIdeas {
 
     public static final String MODID = "rpsideas";
@@ -66,13 +63,16 @@ public class RPSIdeas {
             render.addLayer(new LayerAuthorCape(render));
             render.addLayer(new LayerCustomElytra(render));
             render.addLayer(new LayerPsiCuffs(render));
+            render.addLayer(new LayerAuthorCapeOthers(render));
             //   render.addLayer(new SansUndertaleEyeGlow(render));
 
             List<LayerRenderer<AbstractClientPlayer>> layers = render.layerRenderers;
             for (int i = 0; i < layers.size(); i++) {
                 LayerRenderer layer = layers.get(i);
-                if (layer instanceof LayerElytra)
+                if (layer instanceof LayerElytra) {
                     layers.set(i, new LayerAuthorOccludeElytra((LayerElytra) layer));
+                }
+
             }
 
         }
