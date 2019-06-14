@@ -1,11 +1,11 @@
 package com.kamefrede.rpsideas.items.flow;
 
 import com.kamefrede.rpsideas.RPSIdeas;
+import com.kamefrede.rpsideas.render.ModelFlowsuit;
 import com.kamefrede.rpsideas.util.helpers.ClientHelpers;
 import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
 import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
 import com.teamwizardry.librarianlib.features.base.item.ItemModArmor;
-import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import com.teamwizardry.librarianlib.features.helpers.NBTHelper;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import kotlin.jvm.functions.Function2;
@@ -30,7 +30,6 @@ import vazkii.psi.api.exosuit.IPsiEventArmor;
 import vazkii.psi.api.exosuit.ISensorHoldable;
 import vazkii.psi.api.exosuit.PsiArmorEvent;
 import vazkii.psi.api.spell.SpellContext;
-import vazkii.psi.client.model.ModelPsimetalExosuit;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.item.ItemCAD;
 import vazkii.psi.common.item.base.ModItems;
@@ -42,7 +41,7 @@ import java.util.List;
 public abstract class ItemFlowExosuit extends ItemModArmor implements IPsimetalTool, IPsiEventArmor, IFlowColorAcceptor {
     private static final String TAG_TIMES_CAST = "timesCast";
     @SideOnly(Side.CLIENT)
-    private static ModelPsimetalExosuit[] models;
+    private static ModelFlowsuit[] models;
     final boolean ebony;
 
 
@@ -52,11 +51,11 @@ public abstract class ItemFlowExosuit extends ItemModArmor implements IPsimetalT
     }
 
     @SideOnly(Side.CLIENT)
-    public static ModelPsimetalExosuit getModel(int index) {
+    public static ModelFlowsuit getModel(int index) {
         if (models == null) {
-            models = new ModelPsimetalExosuit[4];
+            models = new ModelFlowsuit[4];
             for (int i = 0; i < models.length; i++)
-                models[i] = new ModelPsimetalExosuit(i);
+                models[i] = new ModelFlowsuit(i);
         }
         return models[index];
     }
