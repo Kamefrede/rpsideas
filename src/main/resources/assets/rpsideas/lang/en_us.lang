@@ -119,6 +119,7 @@ psi.spellpiece.rpsideas.operator_max_entity_health=Operator: Max Entity Health
 psi.spellpiece.rpsideas.operator_string_join=Operator: String Join
 psi.spellpiece.rpsideas.operator_string_concatenate=Operator: String Concatenate
 psi.spellpiece.rpsideas.operator_comment_format=Operator: Comment Format
+psi.spellpiece.rpsideas.operator_vector_ruler_origin=Operator: Vector Ruler Origin
 
 psi.spellpiece.rpsideas.cross_connector=Cross Connector
 psi.spellpiece.rpsideas.cross_connector.desc=Can connect two paths
@@ -245,7 +246,8 @@ psi.spellpiece.rpsideas.operator_entity_health.desc=Gets an entity's current hea
 psi.spellpiece.rpsideas.operator_max_entity_health.desc=Gets an entity's current maximum health
 psi.spellpiece.rpsideas.operator_string_join.desc=Joins the two strings without a space in between
 psi.spellpiece.rpsideas.operator_string_concatenate.desc=Joins the two strings with a space in between
-psi.spellpiece.rpsideas.operator_comment_format=Formats the piece's comment replacing the \"%d"
+psi.spellpiece.rpsideas.operator_comment_format.desc=Formats the piece's comment replacing the \"%d"
+psi.spellpiece.rpsideas.operator_vector_ruler_origin.desc=Gets the origin point of the vector ruler
 
 psi.datatype.String=String
 rpsideas.datatype.String=String

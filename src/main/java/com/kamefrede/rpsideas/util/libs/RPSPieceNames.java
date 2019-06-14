@@ -126,6 +126,7 @@ public class RPSPieceNames {
     public static final String PIECE_COMMENT_FORMAT = "operator_comment_format";
     public static final String PIECE_STRING_JOIN = "operator_string_join";
     public static final String PIECE_STRING_CONCATENATE = "operator_string_concatenate";
+    public static final String OPERATOR_VECTOR_RULER_ORIGIN = "operator_vector_ruler_origin";
 
 
 

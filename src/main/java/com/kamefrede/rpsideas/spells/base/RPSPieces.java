@@ -165,6 +165,7 @@ public class RPSPieces {
         register(PieceOperatorCommentFormat.class, RPSPieceNames.PIECE_COMMENT_FORMAT, LibPieceGroups.MEMORY_MANAGEMENT);
         register(PieceOperatorStringConcatenate.class, RPSPieceNames.PIECE_STRING_CONCATENATE, LibPieceGroups.MEMORY_MANAGEMENT);
         register(PieceOperatorStringJoin.class, RPSPieceNames.PIECE_STRING_JOIN, LibPieceGroups.MEMORY_MANAGEMENT);
+        register(PieceOperatorVectorRulerOrigin.class, RPSPieceNames.OPERATOR_VECTOR_RULER_ORIGIN, RPSPieceNames.BLOCK_PROPERTIES);
 
         registerNoTexture(PieceCrossConnector.class, RPSPieceNames.CROSS_CONNECTOR, LibPieceGroups.FLOW_CONTROL);
         registerTexture(RPSPieceNames.CROSS_CONNECTOR, LibMisc.MOD_ID, LibPieceNames.CONNECTOR);
