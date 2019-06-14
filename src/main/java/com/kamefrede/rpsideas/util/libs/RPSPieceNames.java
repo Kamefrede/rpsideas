@@ -121,6 +121,12 @@ public class RPSPieceNames {
     public static final String PIECE_VECTOR_CATCH = "vector_suppress";
     public static final String PIECE_OPERATOR_GET_MINING_LEVEL = "operator_get_mining_level";
     public static final String PIECE_SUMMON_CLONE = "summon_clone";
+    public static final String PIECE_ENTITY_MAX_HEALTH = "operator_max_entity_health";
+    public static final String PIECE_ENTITY_HEALTH = "operator_entity_health";
+    public static final String PIECE_COMMENT_FORMAT = "operator_comment_format";
+    public static final String PIECE_STRING_JOIN = "operator_string_join";
+    public static final String PIECE_STRING_CONCATENATE = "operator_string_concatenate";
+
 
 
     public static final String ALTERNATE_CONJURATION = RPSIdeas.MODID + ".redstone_conjuration";

@@ -3,7 +3,7 @@
   "parent": "psi:item/_standard_cad",
   "textures": {
     "layer0": "psi:items/cad_ebony_psimetal",
-    "layer1": "psi:Twitch/Cad_Color"
+    "layer1": "psi:items/cad_color"
   },
   "elements": [
     {
@@ -626,7 +626,7 @@
             5
           ],
           "texture": "#layer1",
-          "tintindex": 0
+          "tintindex": 1
         },
         "east": {
           "uv": [
@@ -636,7 +636,7 @@
             5
           ],
           "texture": "#layer1",
-          "tintindex": 0
+          "tintindex": 1
         },
         "south": {
           "uv": [
@@ -646,7 +646,7 @@
             5
           ],
           "texture": "#layer1",
-          "tintindex": 0
+          "tintindex": 1
         },
         "west": {
           "uv": [
@@ -656,7 +656,7 @@
             5
           ],
           "texture": "#layer1",
-          "tintindex": 0
+          "tintindex": 1
         },
         "up": {
           "uv": [
@@ -666,7 +666,7 @@
             5
           ],
           "texture": "#layer1",
-          "tintindex": 0
+          "tintindex": 1
         },
         "down": {
           "uv": [
@@ -676,7 +676,7 @@
             5
           ],
           "texture": "#layer1",
-          "tintindex": 0
+          "tintindex": 1
         }
       }
     }

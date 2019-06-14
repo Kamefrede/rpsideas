@@ -5,7 +5,6 @@ import com.kamefrede.rpsideas.spells.base.SpellParams;
 import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
@@ -44,7 +43,6 @@ public class PieceTrickSummonClone extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        World world = context.caster.world;
         Vector3 pos = SpellHelpers.getVector3(this, context, position, true, true, false);
         Vec3d casLook = context.caster.getLookVec();
         Vector3 dir = SpellHelpers.getDefaultedVector(this, context, look, false, false, new Vector3(casLook.x, casLook.y, casLook.z));

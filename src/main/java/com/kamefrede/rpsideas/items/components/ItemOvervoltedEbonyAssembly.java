@@ -10,12 +10,17 @@ import com.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.IExtraVariantHolder;
 import com.teamwizardry.librarianlib.features.base.PotionMod;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -23,6 +28,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.EnumCADStat;
+import vazkii.psi.api.cad.ICAD;
+import vazkii.psi.api.cad.ICADAssembly;
 import vazkii.psi.api.spell.PreSpellCastEvent;
 import vazkii.psi.api.spell.SpellCastEvent;
 
@@ -31,12 +38,12 @@ import java.util.List;
 import java.util.Objects;
 
 @Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
-public class ItemOvervoltedEbonyAssembly extends ItemComponent implements IExtraVariantHolder {
+public class ItemOvervoltedEbonyAssembly extends ItemComponent implements IExtraVariantHolder, ICADAssembly {
     public ItemOvervoltedEbonyAssembly() {
         super(RPSItemNames.EBONY_OVERVOLTED_ASSEMBLY);
     }
 
-    public static final float burnoutFactor = 0.05f;
+    public static final float burnoutFactor = 0.005f;
 
     public static final String[] CAD_MODELS = {
             "ebony_overvolted_cad"
@@ -55,19 +62,16 @@ public class ItemOvervoltedEbonyAssembly extends ItemComponent implements IExtra
     }
 
     @Override
-    protected void addStat(EnumCADStat stat, int value) {
+    protected void registerStats() {
         addStat(EnumCADStat.EFFICIENCY,90);
         addStat(EnumCADStat.POTENCY, 420);
     }
+
 
     @SideOnly(Side.CLIENT)
     @Override
     protected void addTooltipTags(Minecraft minecraft, @Nullable World world, KeyBinding sneak, ItemStack stack, List<String> tooltip, ITooltipFlag advanced) {
         EntityPlayer player = Minecraft.getMinecraft().player;
-        if (PotionMod.Companion.hasEffect(player, RPSPotions.burnout)) {
-            PotionEffect burnoutEffect = Objects.requireNonNull(PotionMod.Companion.getEffect(player, RPSPotions.burnout));
-            addTooltipTag(tooltip, false, RPSIdeas.MODID + ".extra.burnout_active", burnoutFactor * burnoutEffect.getAmplifier() * 100);
-        }
         addTooltipTag(tooltip, false, RPSIdeas.MODID + ".extra.burnout", burnoutFactor * 100 );
     }
 
@@ -97,5 +101,28 @@ public class ItemOvervoltedEbonyAssembly extends ItemComponent implements IExtra
     }
 
 
+    @Override
+    public ModelResourceLocation getCADModel(ItemStack stack, ItemStack cad) {
+        return new ModelResourceLocation(new ResourceLocation(RPSIdeas.MODID, "ebony_overvolted_cad"), "inventory");
+    }
 
+    @SideOnly(Side.CLIENT)
+    @SubscribeEvent
+    public static void tooltip(ItemTooltipEvent e) {
+        ItemStack stack = e.getItemStack();
+        Item item = stack.getItem();
+        if (!(item instanceof ICAD)) return;
+        if (SpellHelpers.hasComponent(stack, EnumCADComponent.ASSEMBLY, RPSItems.overvoltedCadAssembly) && GuiScreen.isShiftKeyDown() && e.getEntityPlayer() != null) {
+            if (PotionMod.Companion.hasEffect(e.getEntityPlayer(), RPSPotions.burnout)) {
+                PotionEffect burnoutEffect = Objects.requireNonNull(PotionMod.Companion.getEffect(e.getEntityPlayer(), RPSPotions.burnout));
+                SpellHelpers.addTooltipTag(e.getToolTip(), false, RPSIdeas.MODID + ".extra.burnout_active", burnoutFactor * burnoutEffect.getAmplifier() * 100);
+                SpellHelpers.addTooltipTag(e.getToolTip(), false, RPSIdeas.MODID + ".explanation.burnout");
+                SpellHelpers.addTooltipTag(e.getToolTip(), false, RPSIdeas.MODID + ".explanation.burnout1");
+                return;
+            }
+            SpellHelpers.addTooltipTag(e.getToolTip(), false, RPSIdeas.MODID + ".extra.burnout", burnoutFactor * 100);
+            SpellHelpers.addTooltipTag(e.getToolTip(), false, RPSIdeas.MODID + ".explanation.burnout");
+            SpellHelpers.addTooltipTag(e.getToolTip(), false, RPSIdeas.MODID + ".explanation.burnout1");
+        }
+    }
 }

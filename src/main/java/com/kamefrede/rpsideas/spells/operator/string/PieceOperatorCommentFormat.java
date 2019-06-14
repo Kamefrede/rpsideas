@@ -26,7 +26,7 @@ public class PieceOperatorCommentFormat extends PieceOperator {
     @Override
     public void initParams() {
         addParam(param1 = new ParamAny(SpellParams.GENERIC_NAME_PARAM1, SpellParam.RED, false));
-        addParam(param2 = new ParamAny(SpellParams.GENERIC_NAME_PARAM1, SpellParam.BLUE, true));
+        addParam(param2 = new ParamAny(SpellParams.GENERIC_NAME_PARAM2, SpellParam.BLUE, true));
         addParam(param3 = new ParamAny(SpellParams.GENERIC_NAME_PARAM3, SpellParam.GREEN, true));
     }
 

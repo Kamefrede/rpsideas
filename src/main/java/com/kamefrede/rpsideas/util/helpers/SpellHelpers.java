@@ -1,9 +1,11 @@
 package com.kamefrede.rpsideas.util.helpers;
 
 import com.google.common.util.concurrent.ListenableFutureTask;
+import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
@@ -13,8 +15,11 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.api.cad.ICADColorizer;
@@ -26,6 +31,8 @@ import vazkii.psi.common.Psi;
 import vazkii.psi.common.spell.trick.block.PieceTrickBreakBlock;
 import vazkii.psi.common.spell.trick.block.PieceTrickPlaceBlock;
 
+import javax.annotation.Nonnull;
+import java.util.List;
 import java.util.concurrent.Executors;
 
 public class SpellHelpers {
@@ -251,6 +258,29 @@ public class SpellHelpers {
         ICAD icad = (ICAD) cad.getItem();
         ItemStack comp = icad.getComponentInSlot(cad, component);
         return !comp.isEmpty() && comp.getItem().getClass().isInstance(check);
+    }
+
+    @SideOnly(Side.CLIENT)
+    public static void addTooltipTagRaw(@Nonnull List<String> tooltip, TextFormatting color, String prefix, String rawValue) {
+        String nameFormatted = I18n.format(prefix);
+
+        tooltip.add(" " + color + nameFormatted + ": " + TextFormatting.GRAY + rawValue);
+    }
+
+    @SideOnly(Side.CLIENT)
+    public static void addTooltipTag(@Nonnull List<String> tooltip, TextFormatting color, String prefix, String key, Object... format) {
+        if (format == null) format = new String[0];
+        String descriptionFormatted = I18n.format(key, format);
+
+        addTooltipTagRaw(tooltip, color, prefix, descriptionFormatted);
+    }
+
+    @SideOnly(Side.CLIENT)
+    public static void addTooltipTag(List<String> tooltip, boolean positiveEffect, String descriptionTranslationKey, Object... descriptionFormatArgs) {
+        addTooltipTag(tooltip,
+                positiveEffect ? TextFormatting.AQUA : TextFormatting.RED,
+                RPSIdeas.MODID + ".cadstat." + (positiveEffect ? "extra" : "downside"),
+                descriptionTranslationKey, descriptionFormatArgs);
     }
 
 }

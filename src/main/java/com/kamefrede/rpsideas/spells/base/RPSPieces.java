@@ -17,9 +17,7 @@ import com.kamefrede.rpsideas.spells.operator.list.PieceOperatorListSize;
 import com.kamefrede.rpsideas.spells.operator.list.PieceOperatorListUnion;
 import com.kamefrede.rpsideas.spells.operator.math.*;
 import com.kamefrede.rpsideas.spells.operator.math.bitwise.*;
-import com.kamefrede.rpsideas.spells.operator.string.PieceOperatorGetComment;
-import com.kamefrede.rpsideas.spells.operator.string.PieceOperatorGetCommentExpression;
-import com.kamefrede.rpsideas.spells.operator.string.PieceOperatorGetCommentNumber;
+import com.kamefrede.rpsideas.spells.operator.string.*;
 import com.kamefrede.rpsideas.spells.operator.vector.*;
 import com.kamefrede.rpsideas.spells.selector.*;
 import com.kamefrede.rpsideas.spells.trick.block.*;
@@ -162,10 +160,15 @@ public class RPSPieces {
         register(PieceVectorCatch.class, RPSPieceNames.PIECE_VECTOR_CATCH, RPSPieceNames.SECONDARY_VECTOR_OPERATORS);
         register(PieceTrickConjureHail.class, RPSPieceNames.PIECE_TRICK_SUMMON_HAIL, RPSPieceNames.MANIPULATION);
         register(PieceOperatorGetMiningLevel.class, RPSPieceNames.PIECE_OPERATOR_GET_MINING_LEVEL, RPSPieceNames.BLOCK_PROPERTIES);
+        register(PieceOperatorEntityMaxHealth.class, RPSPieceNames.PIECE_ENTITY_MAX_HEALTH, RPSPieceNames.ADVANCED_LOOPCAST_CONTROL);
+        register(PieceOperatorEntityHealth.class, RPSPieceNames.PIECE_ENTITY_HEALTH, RPSPieceNames.ADVANCED_LOOPCAST_CONTROL);
+        register(PieceOperatorCommentFormat.class, RPSPieceNames.PIECE_COMMENT_FORMAT, LibPieceGroups.MEMORY_MANAGEMENT);
+        register(PieceOperatorStringConcatenate.class, RPSPieceNames.PIECE_STRING_CONCATENATE, LibPieceGroups.MEMORY_MANAGEMENT);
+        register(PieceOperatorStringJoin.class, RPSPieceNames.PIECE_STRING_JOIN, LibPieceGroups.MEMORY_MANAGEMENT);
 
         registerNoTexture(PieceCrossConnector.class, RPSPieceNames.CROSS_CONNECTOR, LibPieceGroups.FLOW_CONTROL);
         registerTexture(RPSPieceNames.CROSS_CONNECTOR, LibMisc.MOD_ID, LibPieceNames.CONNECTOR);
-        register(PieceTrickSummonClone.class, RPSPieceNames.PIECE_SUMMON_CLONE, LibPieceGroups.FLOW_CONTROL);
+        //register(PieceTrickSummonClone.class, RPSPieceNames.PIECE_SUMMON_CLONE, LibPieceGroups.FLOW_CONTROL);
 
         new BotaniaCompatPieces().run();
     }
