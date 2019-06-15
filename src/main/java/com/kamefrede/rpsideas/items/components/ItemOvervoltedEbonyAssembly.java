@@ -82,11 +82,11 @@ public class ItemOvervoltedEbonyAssembly extends ItemComponent implements IExtra
             if (PotionMod.Companion.hasEffect(event.player, RPSPotions.burnout)) {
                 PotionEffect burnoutEffect = Objects.requireNonNull(PotionMod.Companion.getEffect(event.player, RPSPotions.burnout));
                 PotionEffect newEffect = new PotionEffect(RPSPotions.burnout,
-                        burnoutEffect.getDuration() + 10,
+                        burnoutEffect.getDuration() + 10 * 20,
                         Math.min(burnoutEffect.getAmplifier() + 1, PotionBurnout.getMaxAmp()));
                 burnoutEffect.combine(newEffect);
             } else {
-                event.player.addPotionEffect(new PotionEffect(RPSPotions.burnout, 10, 1));
+                event.player.addPotionEffect(new PotionEffect(RPSPotions.burnout, 10 * 20, 1));
             }
         }
 

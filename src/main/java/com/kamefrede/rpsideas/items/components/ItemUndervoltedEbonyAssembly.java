@@ -94,11 +94,11 @@ public class ItemUndervoltedEbonyAssembly extends ItemComponent implements IExtr
             if (PotionMod.Companion.hasEffect(event.player, RPSPotions.affinity)) {
                 PotionEffect affinityEffect = Objects.requireNonNull(PotionMod.Companion.getEffect(event.player, RPSPotions.affinity));
                 PotionEffect newEffect = new PotionEffect(RPSPotions.affinity,
-                        affinityEffect.getDuration() + 15,
+                        affinityEffect.getDuration() + 15 * 20,
                         Math.min(affinityEffect.getAmplifier() + 1, PotionAffinity.getMaxAmp()));
                 affinityEffect.combine(newEffect);
             } else {
-                event.player.addPotionEffect(new PotionEffect(RPSPotions.affinity, 15, 1));
+                event.player.addPotionEffect(new PotionEffect(RPSPotions.affinity, 15 * 20, 1));
             }
         }
     }
