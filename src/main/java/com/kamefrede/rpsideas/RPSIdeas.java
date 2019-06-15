@@ -7,7 +7,10 @@ import com.kamefrede.rpsideas.entity.RPSEntities;
 import com.kamefrede.rpsideas.entity.botania.EntityPsiManaBurst;
 import com.kamefrede.rpsideas.gui.GuiHandler;
 import com.kamefrede.rpsideas.items.RPSItems;
-import com.kamefrede.rpsideas.render.*;
+import com.kamefrede.rpsideas.render.ExosuitGlowLayer;
+import com.kamefrede.rpsideas.render.LayerAuthorCape;
+import com.kamefrede.rpsideas.render.LayerAuthorOccludeElytra;
+import com.kamefrede.rpsideas.render.LayerPsiCuffs;
 import com.kamefrede.rpsideas.render.elytra.LayerCustomElytra;
 import com.kamefrede.rpsideas.spells.base.RPSPieces;
 import com.kamefrede.rpsideas.util.RPSCreativeTab;
@@ -63,7 +66,6 @@ public class RPSIdeas {
             render.addLayer(new LayerAuthorCape(render));
             render.addLayer(new LayerCustomElytra(render));
             render.addLayer(new LayerPsiCuffs(render));
-            render.addLayer(new LayerAuthorCapeOthers(render));
             //   render.addLayer(new SansUndertaleEyeGlow(render));
 
             List<LayerRenderer<AbstractClientPlayer>> layers = render.layerRenderers;
