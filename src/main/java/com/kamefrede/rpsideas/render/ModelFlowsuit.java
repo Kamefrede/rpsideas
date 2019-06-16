@@ -3,12 +3,14 @@ package com.kamefrede.rpsideas.render;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityArmorStand;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import vazkii.arl.item.ModelModArmor;
 import vazkii.arl.util.ClientTicker;
 
 import javax.annotation.Nonnull;
 
-
+@SideOnly(Side.CLIENT)
 public class ModelFlowsuit extends ModelModArmor {
     public final ModelRenderer helm;
     public final ModelRenderer armR;
