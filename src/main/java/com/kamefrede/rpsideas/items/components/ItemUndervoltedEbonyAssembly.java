@@ -117,7 +117,7 @@ public class ItemUndervoltedEbonyAssembly extends ItemComponent implements IExtr
         if (SpellHelpers.hasComponent(stack, EnumCADComponent.ASSEMBLY, RPSItems.undervoltedCadAssembly) && GuiScreen.isShiftKeyDown() && e.getEntityPlayer() != null) {
             if (PotionMod.Companion.hasEffect(e.getEntityPlayer(), RPSPotions.affinity)) {
                 PotionEffect burnoutEffect = Objects.requireNonNull(PotionMod.Companion.getEffect(e.getEntityPlayer(), RPSPotions.burnout));
-                SpellHelpers.addTooltipTag(e.getToolTip(), true, RPSIdeas.MODID + ".extra.affinity_active", affinityFactor * burnoutEffect.getAmplifier() * 100);
+                SpellHelpers.addTooltipTag(e.getToolTip(), true, RPSIdeas.MODID + ".extra.affinity_active", affinityFactor * (burnoutEffect.getAmplifier() + 1) * 100);
                 SpellHelpers.addTooltipTag(e.getToolTip(), true, RPSIdeas.MODID + ".explanation.affinity");
                 SpellHelpers.addTooltipTag(e.getToolTip(), true, RPSIdeas.MODID + ".explanation.affinity1");
                 return;

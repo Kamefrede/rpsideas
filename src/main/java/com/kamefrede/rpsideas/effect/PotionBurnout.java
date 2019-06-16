@@ -14,8 +14,11 @@ public class PotionBurnout extends PotionMod {
     }
 
     public static int getMaxAmp() {
-        return 5;
+        return 3;
     }
 
-
+    @Override
+    public boolean isReady(int duration, int amplifier) {
+        return true;
+    }
 }
