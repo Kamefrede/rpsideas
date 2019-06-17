@@ -572,8 +572,8 @@ entity.entity_summoned_clone.name=Summoned Clone
 
 rpsideas.potion.psishock=Psionic Shock
 rpsideas.potion.psipulse=Psionic Pulse
-rpsideas.potion.burnout=Psionic Burnout
-rpsideas.potion.affinity=Psionic Affinity
+rpsideas.potion.burnout=Toxic Psi
+rpsideas.potion.affinity=Intuition
 rpsideas.potion.unseeing=Unseeing
 rpsideas.potion.flash=Flashbang
 rpsideas.brew.psishock=Eidos Distortion
