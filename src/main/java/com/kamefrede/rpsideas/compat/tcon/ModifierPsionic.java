@@ -8,9 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import slimeknights.mantle.util.RecipeMatch;
-import slimeknights.tconstruct.library.modifiers.ModifierAspect;
 import slimeknights.tconstruct.library.modifiers.ModifierTrait;
-import slimeknights.tconstruct.library.tinkering.Category;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.ISocketableCapability;
 import vazkii.psi.api.spell.SpellContext;
@@ -27,7 +25,6 @@ public class ModifierPsionic extends ModifierTrait {
     public ModifierPsionic() {
         super("socketable", 0x5752CC, maxLevel, 0);
         addRecipeMatch(new RecipeMatch.ItemCombination(1, new ItemStack(RPSItems.wideBandSocket)));
-        addAspects(new ModifierAspect.CategoryAnyAspect(Category.HARVEST, Category.TOOL, Category.WEAPON, Category.AOE));
     }
 
     @Override

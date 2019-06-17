@@ -8,7 +8,6 @@ import slimeknights.mantle.util.RecipeMatch;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.modifiers.ModifierAspect;
 import slimeknights.tconstruct.library.modifiers.ModifierTrait;
-import slimeknights.tconstruct.library.tinkering.Category;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.cad.ISocketableCapability;
 import vazkii.psi.api.spell.SpellContext;
@@ -22,7 +21,7 @@ public class ModifierBattlecaster extends ModifierTrait {
         super("battlecaster", 0xac5ae9);
         addRecipeMatch(new RecipeMatch.ItemCombination(1, new ItemStack(RPSItems.battlecaster)));
         aspects.clear();
-        addAspects(new ModifierAspect.FreeModifierAspect(0), new ModifierAspect.CategoryAnyAspect(Category.HARVEST, Category.TOOL, Category.WEAPON, Category.AOE), new RPSTinkersCompat.RPSModifierAspect(TinkerRegistry.getModifier("socketable")));
+        addAspects(new ModifierAspect.FreeModifierAspect(0), new RPSTinkersCompat.RPSModifierAspect(TinkerRegistry.getModifier("socketable")));
     }
 
     @Override
