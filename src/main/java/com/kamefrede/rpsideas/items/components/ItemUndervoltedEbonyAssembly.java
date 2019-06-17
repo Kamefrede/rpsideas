@@ -31,7 +31,6 @@ import vazkii.psi.api.spell.SpellCastEvent;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Objects;
 
 @Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
 public class ItemUndervoltedEbonyAssembly extends ItemComponent implements IExtraVariantHolder, ICADAssembly {
@@ -71,8 +70,8 @@ public class ItemUndervoltedEbonyAssembly extends ItemComponent implements IExtr
 
     @SubscribeEvent
     public static void applyExtraEfficiency(PreSpellCastEvent event) {
-        if (PotionMod.Companion.hasEffect(event.getPlayer(), RPSPotions.affinity)) {
-            PotionEffect affinityEffect = Objects.requireNonNull(PotionMod.Companion.getEffect(event.getPlayer(), RPSPotions.affinity));
+        if (PotionMod.Companion.hasEffect(event.getPlayer(), RPSPotions.affinity) && PotionMod.Companion.getEffect(event.getPlayer(), RPSPotions.affinity) != null) {
+            PotionEffect affinityEffect = PotionMod.Companion.getEffect(event.getPlayer(), RPSPotions.affinity);
             event.setCost((int) Math.ceil(event.getCost() - event.getCost() * (affinityFactor * affinityEffect.getAmplifier())));
         }
     }
@@ -91,8 +90,8 @@ public class ItemUndervoltedEbonyAssembly extends ItemComponent implements IExtr
     @SubscribeEvent
     public static void onSpellCast(SpellCastEvent event) {
         if (SpellHelpers.hasComponent(event.cad, EnumCADComponent.ASSEMBLY, RPSItems.undervoltedCadAssembly)) {
-            if (PotionMod.Companion.hasEffect(event.player, RPSPotions.affinity)) {
-                PotionEffect affinityEffect = Objects.requireNonNull(PotionMod.Companion.getEffect(event.player, RPSPotions.affinity));
+            if (PotionMod.Companion.hasEffect(event.player, RPSPotions.affinity) && PotionMod.Companion.getEffect(event.player, RPSPotions.affinity) != null) {
+                PotionEffect affinityEffect = PotionMod.Companion.getEffect(event.player, RPSPotions.affinity);
                 PotionEffect newEffect = new PotionEffect(RPSPotions.affinity,
                         affinityEffect.getDuration() + 15 * 20,
                         Math.min(affinityEffect.getAmplifier() + 1, PotionAffinity.getMaxAmp()));
@@ -115,9 +114,9 @@ public class ItemUndervoltedEbonyAssembly extends ItemComponent implements IExtr
         Item item = stack.getItem();
         if (!(item instanceof ICAD)) return;
         if (SpellHelpers.hasComponent(stack, EnumCADComponent.ASSEMBLY, RPSItems.undervoltedCadAssembly) && GuiScreen.isShiftKeyDown() && e.getEntityPlayer() != null) {
-            if (PotionMod.Companion.hasEffect(e.getEntityPlayer(), RPSPotions.affinity)) {
-                PotionEffect burnoutEffect = Objects.requireNonNull(PotionMod.Companion.getEffect(e.getEntityPlayer(), RPSPotions.burnout));
-                SpellHelpers.addTooltipTag(e.getToolTip(), true, RPSIdeas.MODID + ".extra.affinity_active", affinityFactor * (burnoutEffect.getAmplifier() + 1) * 100);
+            if (PotionMod.Companion.hasEffect(e.getEntityPlayer(), RPSPotions.affinity) && PotionMod.Companion.getEffect(e.getEntityPlayer(), RPSPotions.affinity) != null) {
+                PotionEffect affinityEffect = PotionMod.Companion.getEffect(e.getEntityPlayer(), RPSPotions.affinity);
+                SpellHelpers.addTooltipTag(e.getToolTip(), true, RPSIdeas.MODID + ".extra.affinity_active", affinityFactor * (affinityEffect.getAmplifier() + 1) * 100);
                 SpellHelpers.addTooltipTag(e.getToolTip(), true, RPSIdeas.MODID + ".explanation.affinity");
                 SpellHelpers.addTooltipTag(e.getToolTip(), true, RPSIdeas.MODID + ".explanation.affinity1");
                 return;

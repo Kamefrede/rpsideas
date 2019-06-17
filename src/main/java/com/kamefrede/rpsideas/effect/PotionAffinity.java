@@ -6,8 +6,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.PotionEffect;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
-
 public class PotionAffinity extends PotionMod {
     public PotionAffinity() {
         super(RPSItemNames.AFFINITY, false, 0x1D6D9E);
@@ -15,9 +13,9 @@ public class PotionAffinity extends PotionMod {
 
     @Override
     public void performEffect(@NotNull EntityLivingBase entity, int amplifier) {
-        if (PotionMod.Companion.hasEffect(entity, RPSPotions.burnout)) {
-            PotionEffect shockEffect = Objects.requireNonNull(PotionMod.Companion.getEffect(entity, RPSPotions.burnout));
-            PotionEffect thisEffect = Objects.requireNonNull(getEffect(entity));
+        if (PotionMod.Companion.hasEffect(entity, RPSPotions.burnout) && PotionMod.Companion.getEffect(entity, RPSPotions.burnout) != null && getEffect(entity) != null) {
+            PotionEffect shockEffect = PotionMod.Companion.getEffect(entity, RPSPotions.burnout);
+            PotionEffect thisEffect = getEffect(entity);
             PotionEffect newEffect = new PotionEffect(RPSPotions.burnout,
                     shockEffect.getDuration() + thisEffect.getDuration(),
                     Math.min(shockEffect.getAmplifier() + thisEffect.getAmplifier() + 1, PotionBurnout.getMaxAmp()));
