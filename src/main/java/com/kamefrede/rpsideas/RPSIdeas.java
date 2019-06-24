@@ -1,6 +1,7 @@
 package com.kamefrede.rpsideas;
 
 import com.kamefrede.rpsideas.blocks.RPSBlocks;
+import com.kamefrede.rpsideas.command.CommandPsideasdump;
 import com.kamefrede.rpsideas.compat.tcon.RPSTinkersCompat;
 import com.kamefrede.rpsideas.effect.RPSPotions;
 import com.kamefrede.rpsideas.entity.RPSEntities;
@@ -28,10 +29,7 @@ import net.minecraftforge.common.util.ModFixs;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Optional;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLInterModComms;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -154,6 +152,10 @@ public class RPSIdeas {
         injectLayers(skinMap.get("slim"));
     }
 
-    // Server Commands
 
+    // Server Commands
+    @Mod.EventHandler
+    public void serverStartingEvent(FMLServerStartingEvent event) {
+        event.registerServerCommand(new CommandPsideasdump());
+    }
 }

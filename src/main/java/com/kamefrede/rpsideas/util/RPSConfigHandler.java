@@ -1,5 +1,4 @@
 package com.kamefrede.rpsideas.util;
-
 import com.kamefrede.rpsideas.RPSIdeas;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.fml.common.Mod;
@@ -30,4 +29,18 @@ public class RPSConfigHandler {
     @Config.Name("enableCreativeCAD")
     @Config.Comment("If Avaritia is present, should the creative CAD assembly be craftable?")
     public static boolean enableCreativeCAD = false;
+
+    @Config.Name("pieceBlacklist")
+    @Config.Comment("Run /psideas-dump to get a full list of registry name for the pieces" + "\n" +
+            "Note: Cannot be used to blacklist pieces that are required for the chapter" + "\n" +
+            "Format: operator_root, trick_till.")
+    public static String[] piecesBlacklist = {};
+
+    public static boolean isPieceBlacklisted(String id) {
+        if (piecesBlacklist.length == 0) return false;
+        for (String piece : piecesBlacklist)
+            if (piece.equals(id))
+                return true;
+        return false;
+    }
 }

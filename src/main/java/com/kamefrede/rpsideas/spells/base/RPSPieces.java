@@ -23,6 +23,7 @@ import com.kamefrede.rpsideas.spells.selector.*;
 import com.kamefrede.rpsideas.spells.trick.block.*;
 import com.kamefrede.rpsideas.spells.trick.entity.*;
 import com.kamefrede.rpsideas.spells.trick.misc.*;
+import com.kamefrede.rpsideas.util.RPSConfigHandler;
 import com.kamefrede.rpsideas.util.libs.RPSPieceNames;
 import net.minecraft.util.ResourceLocation;
 import vazkii.psi.api.PsiAPI;
@@ -180,6 +181,8 @@ public class RPSPieces {
 
     public static void register(Class<? extends SpellPiece> pieceClass, String name, String group, boolean main) {
         String key = RPSIdeas.MODID + "." + name;
+        if (!main && RPSConfigHandler.isPieceBlacklisted(name))
+            pieceClass = PieceDisabled.class;
         PsiAPI.registerSpellPiece(key, pieceClass);
         registerTexture(name, RPSIdeas.MODID, name);
         PsiAPI.addPieceToGroup(pieceClass, group, main);
@@ -190,6 +193,8 @@ public class RPSPieces {
     }
 
     public static void registerNoTexture(Class<? extends SpellPiece> pieceClass, String name, String group, boolean main) {
+        if (!main && RPSConfigHandler.isPieceBlacklisted(name))
+            pieceClass = PieceDisabled.class;
         PsiAPI.registerSpellPiece(RPSIdeas.MODID + "." + name, pieceClass);
         PsiAPI.addPieceToGroup(pieceClass, group, main);
     }
