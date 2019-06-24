@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -26,12 +27,15 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
+import vazkii.arl.network.NetworkHandler;
 import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.EnumCADStat;
 import vazkii.psi.api.cad.ICAD;
 import vazkii.psi.api.cad.ICADAssembly;
 import vazkii.psi.api.spell.PreSpellCastEvent;
 import vazkii.psi.api.spell.SpellCastEvent;
+import vazkii.psi.common.core.handler.PlayerDataHandler;
+import vazkii.psi.common.network.message.MessageDataSync;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -42,7 +46,10 @@ public class ItemOvervoltedEbonyAssembly extends ItemComponent implements IExtra
         super(RPSItemNames.EBONY_OVERVOLTED_ASSEMBLY);
     }
 
-    public static final float burnoutFactor = 0.005f;
+    public static final String TAG_OVERFLOW = "rpsAssemblyOverflow";
+    public static final String TAG_COOLDOWN = "rpsAssemblyCooldown";
+
+    public static final float burnoutFactor = 0.01f;
 
     public static final String[] CAD_MODELS = {
             "ebony_overvolted_cad"
@@ -63,7 +70,7 @@ public class ItemOvervoltedEbonyAssembly extends ItemComponent implements IExtra
     @Override
     protected void registerStats() {
         addStat(EnumCADStat.EFFICIENCY,90);
-        addStat(EnumCADStat.POTENCY, 420);
+        addStat(EnumCADStat.POTENCY, 470);
     }
 
 
@@ -79,9 +86,20 @@ public class ItemOvervoltedEbonyAssembly extends ItemComponent implements IExtra
     public static void addBurnout(SpellCastEvent event) {
         if (SpellHelpers.hasComponent(event.cad, EnumCADComponent.ASSEMBLY, RPSItems.overvoltedCadAssembly)) {
             if (PotionMod.Companion.hasEffect(event.player, RPSPotions.burnout) && PotionMod.Companion.getEffect(event.player, RPSPotions.burnout) != null) {
+                if (PlayerDataHandler.get(event.player).getCustomData().hasKey(TAG_OVERFLOW) || (PlayerDataHandler.get(event.player).getCustomData().hasKey(TAG_COOLDOWN)
+                        && PlayerDataHandler.get(event.player).getCustomData().getInteger(TAG_COOLDOWN) > 0))
+                    return;
                 PotionEffect burnoutEffect = PotionMod.Companion.getEffect(event.player, RPSPotions.burnout);
+                if (burnoutEffect.getDuration() >= 2400) {
+                    PlayerDataHandler.PlayerData playerData = PlayerDataHandler.get(event.player);
+                    playerData.getCustomData().setBoolean(TAG_OVERFLOW, true);
+                    playerData.save();
+                    if (event.player instanceof EntityPlayerMP)
+                        NetworkHandler.INSTANCE.sendTo(new MessageDataSync(playerData), (EntityPlayerMP) event.player);
+                    return;
+                }
                 PotionEffect newEffect = new PotionEffect(RPSPotions.burnout,
-                        burnoutEffect.getDuration() + 10 * 20,
+                        Math.min(burnoutEffect.getDuration() + 10 * 20, 2400),
                         Math.min(burnoutEffect.getAmplifier() + 1, PotionBurnout.getMaxAmp()));
                 burnoutEffect.combine(newEffect);
             } else {
@@ -93,7 +111,7 @@ public class ItemOvervoltedEbonyAssembly extends ItemComponent implements IExtra
 
     @SubscribeEvent
     public static void modifyCost(PreSpellCastEvent event) {
-        if (PotionMod.Companion.hasEffect(event.getPlayer(), RPSPotions.burnout) && PotionMod.Companion.getEffect(event.getPlayer(), RPSPotions.burnout) != null) {
+        if (PotionMod.Companion.hasEffect(event.getPlayer(), RPSPotions.burnout) && PotionMod.Companion.getEffect(event.getPlayer(), RPSPotions.burnout) != null && SpellHelpers.hasComponent(event.getCad(), EnumCADComponent.ASSEMBLY, RPSItems.overvoltedCadAssembly)) {
             PotionEffect burnoutEffect = PotionMod.Companion.getEffect(event.getPlayer(), RPSPotions.burnout);
             event.setCost((int) Math.ceil(event.getCost() + event.getCost() * (burnoutFactor * burnoutEffect.getAmplifier())));
         }

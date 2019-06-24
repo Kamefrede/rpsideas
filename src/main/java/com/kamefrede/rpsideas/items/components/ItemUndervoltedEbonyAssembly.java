@@ -14,6 +14,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -25,9 +26,12 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
+import vazkii.arl.network.NetworkHandler;
 import vazkii.psi.api.cad.*;
 import vazkii.psi.api.spell.PreSpellCastEvent;
 import vazkii.psi.api.spell.SpellCastEvent;
+import vazkii.psi.common.core.handler.PlayerDataHandler;
+import vazkii.psi.common.network.message.MessageDataSync;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -38,7 +42,10 @@ public class ItemUndervoltedEbonyAssembly extends ItemComponent implements IExtr
         super(RPSItemNames.EBONY_UNDERVOLTED_ASSEMBLY);
     }
 
-    public static final float affinityFactor = 0.005f;
+    public static final String TAG_OVERFLOW = "rpsAssemblyOverflow";
+    public static final String TAG_COOLDOWN = "rpsAssemblyCooldown";
+
+    public static final float affinityFactor = 0.01f;
 
     public static final String[] CAD_MODELS = {
             "ebony_undervolted_cad"
@@ -59,7 +66,7 @@ public class ItemUndervoltedEbonyAssembly extends ItemComponent implements IExtr
     @Override
     protected void registerStats() {
         addStat(EnumCADStat.EFFICIENCY,90);
-        addStat(EnumCADStat.POTENCY, 280);
+        addStat(EnumCADStat.POTENCY, 350);
     }
 
     @SideOnly(Side.CLIENT)
@@ -70,7 +77,7 @@ public class ItemUndervoltedEbonyAssembly extends ItemComponent implements IExtr
 
     @SubscribeEvent
     public static void applyExtraEfficiency(PreSpellCastEvent event) {
-        if (PotionMod.Companion.hasEffect(event.getPlayer(), RPSPotions.affinity) && PotionMod.Companion.getEffect(event.getPlayer(), RPSPotions.affinity) != null) {
+        if (PotionMod.Companion.hasEffect(event.getPlayer(), RPSPotions.affinity) && PotionMod.Companion.getEffect(event.getPlayer(), RPSPotions.affinity) != null && SpellHelpers.hasComponent(event.getCad(), EnumCADComponent.ASSEMBLY, RPSItems.undervoltedCadAssembly)) {
             PotionEffect affinityEffect = PotionMod.Companion.getEffect(event.getPlayer(), RPSPotions.affinity);
             event.setCost((int) Math.ceil(event.getCost() - event.getCost() * (affinityFactor * affinityEffect.getAmplifier())));
         }
@@ -91,11 +98,23 @@ public class ItemUndervoltedEbonyAssembly extends ItemComponent implements IExtr
     public static void onSpellCast(SpellCastEvent event) {
         if (SpellHelpers.hasComponent(event.cad, EnumCADComponent.ASSEMBLY, RPSItems.undervoltedCadAssembly)) {
             if (PotionMod.Companion.hasEffect(event.player, RPSPotions.affinity) && PotionMod.Companion.getEffect(event.player, RPSPotions.affinity) != null) {
+                if (PlayerDataHandler.get(event.player).getCustomData().hasKey(TAG_OVERFLOW) || (PlayerDataHandler.get(event.player).getCustomData().hasKey(TAG_COOLDOWN)
+                        && PlayerDataHandler.get(event.player).getCustomData().getInteger(TAG_COOLDOWN) > 0))
+                    return;
                 PotionEffect affinityEffect = PotionMod.Companion.getEffect(event.player, RPSPotions.affinity);
+                if (affinityEffect.getDuration() >= 2400) {
+                    PlayerDataHandler.PlayerData playerData = PlayerDataHandler.get(event.player);
+                    playerData.getCustomData().setBoolean(TAG_OVERFLOW, true);
+                    playerData.save();
+                    if (event.player instanceof EntityPlayerMP)
+                        NetworkHandler.INSTANCE.sendTo(new MessageDataSync(playerData), (EntityPlayerMP) event.player);
+                    return;
+                }
                 PotionEffect newEffect = new PotionEffect(RPSPotions.affinity,
-                        affinityEffect.getDuration() + 15 * 20,
+                        Math.max(affinityEffect.getDuration() + 15 * 20, 2400),
                         Math.min(affinityEffect.getAmplifier() + 1, PotionAffinity.getMaxAmp()));
                 affinityEffect.combine(newEffect);
+
             } else {
                 event.player.addPotionEffect(new PotionEffect(RPSPotions.affinity, 15 * 20, 1));
             }

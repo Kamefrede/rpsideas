@@ -255,6 +255,10 @@ public class SpellHelpers {
     }
 
     public static boolean hasComponent(ItemStack cad, EnumCADComponent component, Item check) {
+        if (cad == null || cad.isEmpty())
+            return false;
+        if (!(cad.getItem() instanceof ICAD))
+            return false;
         ICAD icad = (ICAD) cad.getItem();
         ItemStack comp = icad.getComponentInSlot(cad, component);
         return !comp.isEmpty() && comp.getItem().getClass().isInstance(check);
