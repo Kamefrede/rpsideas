@@ -29,7 +29,7 @@ public class PieceOperatorRoot extends PieceOperator {
     public Object execute(SpellContext context) throws SpellRuntimeException {
         double base = SpellHelpers.getNumber(this, context, num, 0);
         double r = SpellHelpers.getNumber(this, context, root, 1);
-        if (base < 0 && r % 2 != 0)
+        if (base < 0 && r % 2 == 0)
             throw new SpellRuntimeException(SpellRuntimeExceptions.EVEN_ROOT_NEGATIVE_NUMBER);
         return Math.pow(base, 1.0 / r);
 
