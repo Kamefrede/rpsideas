@@ -52,7 +52,7 @@ public class PieceSelectorVisibleEntities extends PieceSelector {
         if (!context.isInRadius(pos))
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
         else {
-            AxisAlignedBB axis = new AxisAlignedBB(pos.x, pos.y - radiusVal, pos.z - radiusVal, pos.x + radiusVal, pos.y + radiusVal, pos.z + radiusVal);
+            AxisAlignedBB axis = new AxisAlignedBB(pos.x - radiusVal, pos.y - radiusVal, pos.z - radiusVal, pos.x + radiusVal, pos.y + radiusVal, pos.z + radiusVal);
             Predicate<Entity> targetPredicate = this.getTargetPredicate();
             List<Entity> list = context.caster.world.getEntitiesWithinAABB(Entity.class, axis,
                     (e) -> e != null && targetPredicate.test(e) &&
