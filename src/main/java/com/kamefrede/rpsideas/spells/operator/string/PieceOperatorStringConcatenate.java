@@ -20,7 +20,7 @@ public class PieceOperatorStringConcatenate extends PieceOperator {
     @Override
     public void initParams() {
         addParam(param1 = new ParamAny(SpellParams.GENERIC_NAME_PARAM1, SpellParam.RED, false));
-        addParam(param2 = new ParamAny(SpellParams.GENERIC_NAME_PARAM1, SpellParam.BLUE, false));
+        addParam(param2 = new ParamAny(SpellParams.GENERIC_NAME_PARAM2, SpellParam.BLUE, false));
     }
 
     @Override
