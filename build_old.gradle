@@ -1,0 +1,132 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url = "https://files.minecraftforge.net/maven" }
+    }
+    dependencies {
+        classpath "net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kt_version"
+    }
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'kotlin'
+apply plugin: 'idea'
+apply plugin: 'java'
+
+version = mod_version
+group = mod_author + "." + mod_name
+archivesBaseName = mod_name
+
+ext.mod_name = mod_name.toLowerCase()
+ext.capitalized_name = mod_name.capitalize()
+ext.mod_fancy_name = project.hasProperty("mod_fancy_name") ? project.mod_fancy_name : ext.capitalized_name
+ext.mod_author = mod_author.toLowerCase()
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+minecraft {
+    version = project.mc_version + "-" + project.forge_version
+    mappings = project.mcp_version
+    runDir = "run"
+    useDepAts = true
+
+    replaceIn "RPSIdeas.java"
+    replaceIn "mcmod.info"
+
+    replace "%VERSION%", project.mod_version
+
+    if(project.hasProperty("mc_uuid"))
+        clientRunArgs += ["--uuid", project.mc_uuid]
+
+    if(project.hasProperty("mc_username"))
+        clientRunArgs += ["--username", project.mc_username]
+
+
+    clientJvmArgs += ["-Dfml.coreMods.load=$core_plugin,com.teamwizardry.librarianlib.asm.LibLibCorePlugin"]
+    serverJvmArgs += ["-Dfml.coreMods.load=$core_plugin,com.teamwizardry.librarianlib.asm.LibLibCorePlugin"]
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs += "EvalEx/src/main/java"
+        }
+    }
+}
+
+idea {
+    module {
+        excludeDirs += [file("run"), file("out"), file("gradle"), file(".idea")]
+        generatedSourceDirs += file("EvalEx/src/main/java")
+    }
+
+    if (it.project != null)
+        project {
+            jdkName = '1.8'
+            languageLevel = '1.8'
+        }
+}
+
+tasks.withType(JavaCompile).all {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+}
+
+jar {
+    manifest {
+        attributes 'FMLAT': 'rps_at.cfg'
+        //    'FMLCorePluginContainsFMLMod': true,
+        //    'FMLCorePlugin': core_plugin
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url = "http://dvs1.progwml6.com/files/maven" }
+    maven { url = "http://maven.bluexin.be/repository/snapshots/" }
+    maven { url = "http://maven.covers1624.net" }
+    maven { url = "http://maven.thiakil.com" }
+    maven { url = "https://maven.blamejared.com/" }
+
+}
+
+dependencies {
+    compile files("libs/Mantle-1.12-1.3.3.49.jar")
+    compile files("libs/TConstruct-1.12.2-2.9.1.65.jar")
+    compile "vazkii.autoreglib:AutoRegLib:${project.arl_version}"
+    deobfCompile "vazkii.psi:Psi:${project.psi_version}"
+    compile "vazkii.botania:Botania:${project.botania_version}"
+    deobfCompile "com.teamwizardry.librarianlib:librarianlib-${project.mc_version}:$liblib_version-SNAPSHOT"
+    compile "mezz.jei:jei_${project.mc_version}:$jei_version:api"
+    runtime "mezz.jei:jei_${project.mc_version}:$jei_version"
+    compile "com.azanor.baubles:Baubles:1.12-1.5.2"
+}
+
+processResources {
+    inputs.property "arl_version", project.arl_version
+    inputs.property "version", project.version
+    inputs.property "forge_version", project.forge_version
+    inputs.property "mc_version", project.mc_version
+    inputs.property "mod_id", project.mod_name
+    inputs.property "mod_name", project.mod_fancy_name
+    inputs.property "description", project.hasProperty("mod_description") ? project.mod_description : ""
+    inputs.property "author", project.mod_author
+
+    from(sourceSets.main.resources.srcDirs) {
+        include "mcmod.info", "pack.mcmeta"
+        expand "version": project.version,
+                "forge_version": project.forge_version,
+                "mc_version": project.mc_version,
+                "mod_id": project.mod_name,
+                "mod_name": project.hasProperty("mod_fancy_name") ? project.mod_fancy_name : project.mod_name,
+                "description": project.hasProperty("mod_description") ? project.mod_description : "",
+                "author": project.mod_author
+    }
+
+    from(sourceSets.main.resources.srcDirs) {
+        exclude "mcmod.info", "pack.mcmeta"
+    }
+}
+

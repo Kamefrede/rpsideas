@@ -1,7 +1,7 @@
 {
     "pack": {
-        "description": "${mod_name}",
-        "pack_format": 3,
-        "_comment":""
+        "description": "Random Psideas Resources",
+        "pack_format": 4,
+        "_comment": ""
     }
 }

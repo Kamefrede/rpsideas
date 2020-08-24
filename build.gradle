@@ -1,51 +1,172 @@
 buildscript {
     repositories {
+        maven { url = 'https://files.minecraftforge.net/maven' }
+        maven {
+            url "https://maven.tterrag.com/"
+        }
         jcenter()
-        maven { url = "https://files.minecraftforge.net/maven" }
+        mavenCentral()
+        mavenLocal()
+        maven { url = 'https://dist.creeper.host/Sponge/maven' }
     }
     dependencies {
-        classpath "net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kt_version"
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
+        classpath group: 'org.jetbrains.kotlin', name: 'kotlin-gradle-plugin', version: '1.4.0'
     }
 }
 
-apply plugin: 'net.minecraftforge.gradle.forge'
-apply plugin: 'kotlin'
+plugins {
+    id "com.diffplug.gradle.spotless" version "3.27.2"
+}
+
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'eclipse'
 apply plugin: 'idea'
-apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'pmd'
+apply plugin: 'kotlin'
+apply plugin: 'org.spongepowered.mixin'
 
-version = mod_version
-group = mod_author + "." + mod_name
-archivesBaseName = mod_name
+mixin {
+    add sourceSets.main, "psideas.refmap.json"
+}
 
-ext.mod_name = mod_name.toLowerCase()
-ext.capitalized_name = mod_name.capitalize()
-ext.mod_fancy_name = project.hasProperty("mod_fancy_name") ? project.mod_fancy_name : ext.capitalized_name
-ext.mod_author = mod_author.toLowerCase()
+ext.configFile = file('build.properties')
+ext.config = parseConfig(configFile)
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+def mc_version = "1.16.2"
+version = "${config.mod_version}"
+group = "xyz.kamefrede.${config.mod_name}"
+archivesBaseName = config.mod_name
+
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+
+if (System.getenv('BUILD_NUMBER') != null) {
+    version += "." + System.getenv('BUILD_NUMBER')
+}
 
 minecraft {
-    version = project.mc_version + "-" + project.forge_version
-    mappings = project.mcp_version
-    runDir = "run"
-    useDepAts = true
+    mappings channel: "snapshot", version: "20200801-mixed-1.16.1"
+    accessTransformer = file('src/main/resources/META-INF/rps_at.cfg')
 
-    replaceIn "RPSIdeas.java"
-    replaceIn "mcmod.info"
+    runs {
+        client {
+            properties 'forge.logging.console.level': 'debug'
+            properties 'fml.earlyprogresswindow': 'false'
+            properties 'mixin.env.disableRefMap': 'true'
+            workingDirectory project.file('run')
+            mods {
+                psideas {
+                    source sourceSets.main
+                }
+            }
+            args    '--username', '"' + config.mc_username + '"',
+                    '--uuid', '"' + config.mc_uuid + '"'
+        }
+        server {
+            properties 'forge.logging.console.level': 'debug'
+            properties 'mixin.env.disableRefMap': 'true'
+            workingDirectory project.file('run')
+            mods {
+                psideas {
+                    source sourceSets.main
+                }
+            }
+        }
+        data {
+            properties 'fml.earlyprogresswindow': 'false'
+            properties 'mixin.env.disableRefMap': 'true'
+            workingDirectory project.file('run')
+            forceExit false
+            mods {
+                psideas {
+                    source sourceSets.main
+                }
+            }
+            args '--mod', 'psideas', '--all',
+                    '--existing', '"' + file('src/main/resources/') + '"',
+                    '--existing', '"' + file('src/generated/resources/') + '"',
+                    '--output', '"' + file('src/generated/resources/') + '"'
+        }
+    }
+}
 
-    replace "%VERSION%", project.mod_version
+repositories {
+    maven {
+        // for Patchouli
+        name "blamejared"
+        url "http://maven.blamejared.com/"
+    }
+    maven {
+        name "curios"
+        url "https://maven.theillusivec4.top/"
+    }
+    maven {
+        // for JEI
+        name "promwml16"
+        url "http://dvs1.progwml6.com/files/maven"
+    }
+    maven {
+        //yarn2mcp
+        name "yarn2mcp"
+        url "https://maven.tterrag.com"
+    }
+}
 
-    if(project.hasProperty("mc_uuid"))
-        clientRunArgs += ["--uuid", project.mc_uuid]
+dependencies {
+    minecraft group: 'net.minecraftforge', name: 'forge', version: "${mc_version}-33.0.5"
 
-    if(project.hasProperty("mc_username"))
-        clientRunArgs += ["--username", project.mc_username]
+    annotationProcessor 'org.spongepowered:mixin:0.8'
+    annotationProcessor 'com.google.code.gson:gson:2.8.0'
+    annotationProcessor 'com.google.guava:guava:21.0'
+    annotationProcessor 'org.ow2.asm:asm-tree:7.2'
+    annotationProcessor 'org.ow2.asm:asm-commons:7.2'
+    annotationProcessor 'org.ow2.asm:asm-util:7.2'
+
+    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.16-40:api")
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16-40")
+
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.2-4.0.0.0:api")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.2-4.0.0.0")
+
+    compileOnly fg.deobf("vazkii.psi:Psi:1.16-84.255:api")
+    runtimeOnly fg.deobf("vazkii.psi:Psi:1.16-84.255")
+
+    runtimeOnly fg.deobf("top.theillusivec4.caelus:caelus:1.16.2-2.0.0.0")
+    compileOnly fg.deobf("top.theillusivec4.caelus:caelus:1.16.2-2.0.0.0")
+
+    compileOnly fg.deobf("mezz.jei:jei-1.16.2:7.1.0.11:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-1.16.2:7.1.0.11")
+
+}
+
+spotless {
+    enforceCheck = false // workaround around jenkins having wrong line endings in some files
+    // we explicitly check in github actions builds
+    java {
+        indentWithTabs()
+        licenseHeaderFile( 'spotless/license_template.txt')
+        eclipse().configFile 'spotless/eclipseformat.xml'
+        removeUnusedImports()
+        importOrderFile 'spotless/eclipse.importorder'
+    }
+}
+
+pmd {
+    toolVersion '6.22.0'
+    incrementalAnalysis.set(true)
+    ruleSets.clear()
+    ruleSetFiles = files("spotless/pmd-ruleset.xml")
+}
 
 
-    clientJvmArgs += ["-Dfml.coreMods.load=$core_plugin,com.teamwizardry.librarianlib.asm.LibLibCorePlugin"]
-    serverJvmArgs += ["-Dfml.coreMods.load=$core_plugin,com.teamwizardry.librarianlib.asm.LibLibCorePlugin"]
+task checkSyntax {
+    dependsOn spotlessJavaCheck, pmdMain
+}
+
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
 }
 
 sourceSets {
@@ -74,59 +195,74 @@ tasks.withType(JavaCompile).all {
     targetCompatibility = '1.8'
 }
 
-jar {
-    manifest {
-        attributes 'FMLAT': 'rps_at.cfg'
-        //    'FMLCorePluginContainsFMLMod': true,
-        //    'FMLCorePlugin': core_plugin
-    }
-}
-
-repositories {
-    mavenCentral()
-    maven { url = "http://dvs1.progwml6.com/files/maven" }
-    maven { url = "http://maven.bluexin.be/repository/snapshots/" }
-    maven { url = "http://maven.covers1624.net" }
-    maven { url = "http://maven.thiakil.com" }
-    maven { url = "https://maven.blamejared.com/" }
-
-}
-
-dependencies {
-    compile files("libs/Mantle-1.12-1.3.3.49.jar")
-    compile files("libs/TConstruct-1.12.2-2.9.1.65.jar")
-    compile "vazkii.autoreglib:AutoRegLib:${project.arl_version}"
-    deobfCompile "vazkii.psi:Psi:${project.psi_version}"
-    compile "vazkii.botania:Botania:${project.botania_version}"
-    deobfCompile "com.teamwizardry.librarianlib:librarianlib-${project.mc_version}:$liblib_version-SNAPSHOT"
-    compile "mezz.jei:jei_${project.mc_version}:$jei_version:api"
-    runtime "mezz.jei:jei_${project.mc_version}:$jei_version"
-    compile "com.azanor.baubles:Baubles:1.12-1.5.2"
-}
 
 processResources {
-    inputs.property "arl_version", project.arl_version
-    inputs.property "version", project.version
-    inputs.property "forge_version", project.forge_version
-    inputs.property "mc_version", project.mc_version
-    inputs.property "mod_id", project.mod_name
-    inputs.property "mod_name", project.mod_fancy_name
-    inputs.property "description", project.hasProperty("mod_description") ? project.mod_description : ""
-    inputs.property "author", project.mod_author
-
+    // replace stuff in mods.toml, nothing else
     from(sourceSets.main.resources.srcDirs) {
-        include "mcmod.info", "pack.mcmeta"
-        expand "version": project.version,
-                "forge_version": project.forge_version,
-                "mc_version": project.mc_version,
-                "mod_id": project.mod_name,
-                "mod_name": project.hasProperty("mod_fancy_name") ? project.mod_fancy_name : project.mod_name,
-                "description": project.hasProperty("mod_description") ? project.mod_description : "",
-                "author": project.mod_author
+        include 'META-INF/mods.toml'
+        // replace version and mcversion
+        expand 'version': project.version
     }
 
+    // copy everything else, thats not the mods.toml
     from(sourceSets.main.resources.srcDirs) {
-        exclude "mcmod.info", "pack.mcmeta"
+        exclude 'META-INF/mods.toml', '**/psd/**'
     }
 }
 
+task srcJar(type: Jar) {
+    from(sourceSets.main.java)
+    classifier = 'sources'
+}
+
+
+artifacts {
+    archives srcJar
+}
+
+def parseConfig(File config) {
+    if(config.exists()){
+        config.withReader {
+            def prop = new Properties()
+            prop.load(it)
+            return (new ConfigSlurper().parse(prop))
+        }
+    } else {
+        return null
+    }
+}
+
+
+jar {
+    //rename the default output, for some better... sanity with scipts
+    archiveName = "${baseName} ${version}.${extension}"
+
+    manifest {
+        attributes([
+                "Specification-Title": "${config.mod_name}",
+                "Specification-Vendor": "kamefrede",
+                "Specification-Version": "1", // We are version 1 of ourselves
+                "Implementation-Title": "${config.mod_name}",
+                "Implementation-Version": "${version}",
+                "Implementation-Vendor" :"kamefrede",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+                //"MixinConnector": "xyz.kamefrede.rpsideas.common.MixinConnector"
+        ])
+    }
+
+    exclude "**/*.bat"
+    exclude "**/*.psd"
+    exclude "**/*.exe"
+    exclude "**/unused"
+}
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "file://" + (System.getenv("local_maven") != null ? System.getenv("local_maven") : System.getenv("bamboo_local_maven")))
+        }
+    }
+}
+
+defaultTasks 'clean', 'runData', 'checkSyntax', 'build'

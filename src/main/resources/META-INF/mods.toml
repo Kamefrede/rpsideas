@@ -1,0 +1,36 @@
+modLoader="javafml"
+loaderVersion="[31,)"
+issueTrackerURL="https://github.com/Kamefrede/rpsideas"
+license="https://github.com/Kamefrede/rpsideas/LICENSE.MD"
+
+[[mods]]
+modId="rpsideas"
+displayName="Random Psideas"
+version="${version}"
+authors="Kamefrede, Wiresegal"
+credits='''
+The guys over at PSI: Taurus Silver discord and Vazkii, wiresegal for PSIonic Upgrades and Quat for porting PSIonic upgrades
+'''
+description='''
+Random useful additions to PSI!
+'''
+[[dependencies.rpsideas]]
+modId="patchouli"
+mandatory=true
+versionRange="[1.16-39,)"
+side="BOTH"
+
+
+[[dependencies.rpsideas]]
+modId="forge"
+mandatory=true
+versionRange="[33.0.5,)"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.rpsideas]]
+modId="psi"
+mandatory=true
+versionRange="[1.16-83,)"
+ordering="AFTER"
+side="BOTH"
