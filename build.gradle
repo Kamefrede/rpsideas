@@ -130,7 +130,7 @@ dependencies {
     compileOnly fg.deobf("vazkii.psi:Psi:1.16-84.255")
     runtimeOnly fg.deobf("vazkii.psi:Psi:1.16-84.255")
 
-    compileOnly fg.deobf("vazkii.botania:Botania:1.16.1-404-SNAPSHOT")
+    compileOnly fg.deobf("vazkii.botania:Botania:1.16.1-404-SNAPSHOT:api")
     runtimeOnly fg.deobf("vazkii.botania:Botania:1.16.1-404-SNAPSHOT")
 
     runtimeOnly fg.deobf("top.theillusivec4.caelus:caelus:FORGE-1.16.1-2.0-beta7")
