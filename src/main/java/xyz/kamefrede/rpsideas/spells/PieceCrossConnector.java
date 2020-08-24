@@ -1,7 +1,7 @@
-package com.kamefrede.rpsideas.spells;
+package xyz.kamefrede.rpsideas.spells;
 
-import com.kamefrede.rpsideas.spells.base.SpellParams;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.spells.base.SpellParams;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;

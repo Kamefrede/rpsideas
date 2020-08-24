@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.blocks;
+package xyz.kamefrede.rpsideas.blocks;
 
-import com.kamefrede.rpsideas.tiles.TileCracklingStar;
+import xyz.kamefrede.rpsideas.tiles.TileCracklingStar;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

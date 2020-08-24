@@ -1,7 +1,7 @@
-package com.kamefrede.rpsideas.capability;
+package xyz.kamefrede.rpsideas.capability;
 
-import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.items.components.ItemTriggerSensor;
+import xyz.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.items.components.ItemTriggerSensor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;

@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.util;
+package xyz.kamefrede.rpsideas.util;
 
-import com.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.RPSIdeas;
 import com.udojava.evalex.Expression;
 import com.udojava.evalex.LazyFunction;
 import org.apache.logging.log4j.Level;

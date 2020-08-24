@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.blocks;
+package xyz.kamefrede.rpsideas.blocks;
 
 import com.google.common.collect.Maps;
 import com.teamwizardry.librarianlib.features.base.block.tile.BlockModContainer;

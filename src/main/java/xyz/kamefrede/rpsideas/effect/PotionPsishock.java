@@ -1,7 +1,7 @@
-package com.kamefrede.rpsideas.effect;
+package xyz.kamefrede.rpsideas.effect;
 
-import com.kamefrede.rpsideas.effect.base.PotionPsiChange;
-import com.kamefrede.rpsideas.util.libs.RPSItemNames;
+import xyz.kamefrede.rpsideas.effect.base.PotionPsiChange;
+import xyz.kamefrede.rpsideas.util.libs.RPSItemNames;
 
 public class PotionPsishock extends PotionPsiChange {
     protected PotionPsishock() {

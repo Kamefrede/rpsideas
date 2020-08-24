@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.spells.operator.vector;
+package xyz.kamefrede.rpsideas.spells.operator.vector;
 
 import com.teamwizardry.librarianlib.features.helpers.NBTHelper;
 import net.minecraft.entity.player.EntityPlayer;

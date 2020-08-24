@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.items;
+package xyz.kamefrede.rpsideas.items;
 
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;

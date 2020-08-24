@@ -1,7 +1,7 @@
-package com.kamefrede.rpsideas.render;
+package xyz.kamefrede.rpsideas.render;
 
-import com.kamefrede.rpsideas.entity.EntityHailParticle;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.entity.EntityHailParticle;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.teamwizardry.librarianlib.core.client.ClientTickHandler;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;

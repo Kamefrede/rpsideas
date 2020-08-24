@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.compat.tcon;
+package xyz.kamefrede.rpsideas.compat.tcon;
 
-import com.kamefrede.rpsideas.items.RPSItems;
+import xyz.kamefrede.rpsideas.items.RPSItems;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,7 +15,7 @@ import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.common.core.handler.PlayerDataHandler;
 import vazkii.psi.common.item.ItemCAD;
 
-import static com.kamefrede.rpsideas.compat.tcon.RPSTinkersCompat.isBattlecaster;
+import static xyz.kamefrede.rpsideas.compat.tcon.RPSTinkersCompat.isBattlecaster;
 import static vazkii.psi.common.item.tool.IPsimetalTool.raytraceFromEntity;
 
 public class ModifierPsionic extends ModifierTrait {

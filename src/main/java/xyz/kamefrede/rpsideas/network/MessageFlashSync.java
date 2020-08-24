@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.network;
+package xyz.kamefrede.rpsideas.network;
 
-import com.kamefrede.rpsideas.items.ItemFlashRing;
+import xyz.kamefrede.rpsideas.items.ItemFlashRing;
 import com.teamwizardry.librarianlib.features.autoregister.PacketRegister;
 import com.teamwizardry.librarianlib.features.network.PacketBase;
 import io.netty.buffer.ByteBuf;

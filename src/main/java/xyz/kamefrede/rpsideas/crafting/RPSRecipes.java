@@ -1,8 +1,8 @@
-package com.kamefrede.rpsideas.crafting;
+package xyz.kamefrede.rpsideas.crafting;
 
-import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.effect.RPSPotions;
-import com.kamefrede.rpsideas.util.RPSConfigHandler;
+import xyz.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.effect.RPSPotions;
+import xyz.kamefrede.rpsideas.util.RPSConfigHandler;
 import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.item.ItemStack;

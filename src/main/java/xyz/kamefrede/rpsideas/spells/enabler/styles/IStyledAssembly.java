@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.spells.enabler.styles;
+package xyz.kamefrede.rpsideas.spells.enabler.styles;
 
 import net.minecraft.item.ItemStack;
 import vazkii.psi.api.cad.EnumCADComponent;

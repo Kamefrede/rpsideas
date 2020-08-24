@@ -1,7 +1,7 @@
-package com.kamefrede.rpsideas.spells.selector;
+package xyz.kamefrede.rpsideas.spells.selector;
 
-import com.kamefrede.rpsideas.spells.operator.vector.PieceOperatorWeakRaycast;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.spells.operator.vector.PieceOperatorWeakRaycast;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.util.math.RayTraceResult;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;

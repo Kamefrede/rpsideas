@@ -1,11 +1,11 @@
-package com.kamefrede.rpsideas.compat.botania;
+package xyz.kamefrede.rpsideas.compat.botania;
 
-import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.effect.RPSPotions;
-import com.kamefrede.rpsideas.effect.botania.RPSBrew;
-import com.kamefrede.rpsideas.items.components.botania.ItemBlasterAssembly;
-import com.kamefrede.rpsideas.util.RPSConfigHandler;
-import com.kamefrede.rpsideas.util.libs.RPSItemNames;
+import xyz.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.effect.RPSPotions;
+import xyz.kamefrede.rpsideas.effect.botania.RPSBrew;
+import xyz.kamefrede.rpsideas.items.components.botania.ItemBlasterAssembly;
+import xyz.kamefrede.rpsideas.util.RPSConfigHandler;
+import xyz.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

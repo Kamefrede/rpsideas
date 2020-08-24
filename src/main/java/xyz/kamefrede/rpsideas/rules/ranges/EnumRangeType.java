@@ -1,8 +1,8 @@
-package com.kamefrede.rpsideas.rules.ranges;
+package xyz.kamefrede.rpsideas.rules.ranges;
 
 import com.google.common.collect.Maps;
-import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.rules.ranges.base.IRange;
+import xyz.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.rules.ranges.base.IRange;
 
 import java.util.Map;
 import java.util.function.Supplier;

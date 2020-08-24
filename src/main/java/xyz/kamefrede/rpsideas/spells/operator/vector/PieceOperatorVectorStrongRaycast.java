@@ -1,7 +1,7 @@
-package com.kamefrede.rpsideas.spells.operator.vector;
+package xyz.kamefrede.rpsideas.spells.operator.vector;
 
-import com.kamefrede.rpsideas.spells.base.SpellParams;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.spells.base.SpellParams;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import vazkii.psi.api.internal.Vector3;

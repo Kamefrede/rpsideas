@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.effect;
+package xyz.kamefrede.rpsideas.effect;
 
-import com.kamefrede.rpsideas.util.libs.RPSItemNames;
+import xyz.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.PotionMod;
 import net.minecraft.entity.SharedMonsterAttributes;
 

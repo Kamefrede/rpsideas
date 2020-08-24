@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.items.base;
+package xyz.kamefrede.rpsideas.items.base;
 
 import vazkii.psi.api.cad.ICADComponent;
 

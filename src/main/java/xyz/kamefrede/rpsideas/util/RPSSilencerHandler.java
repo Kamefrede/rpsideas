@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.util;
+package xyz.kamefrede.rpsideas.util;
 
-import com.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.RPSIdeas;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.util.math.AxisAlignedBB;

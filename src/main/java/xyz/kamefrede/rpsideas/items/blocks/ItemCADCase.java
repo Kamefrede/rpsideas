@@ -1,14 +1,14 @@
-package com.kamefrede.rpsideas.items.blocks;
+package xyz.kamefrede.rpsideas.items.blocks;
 
-import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.blocks.BlockCADCase;
-import com.kamefrede.rpsideas.gui.GuiHandler;
-import com.kamefrede.rpsideas.items.base.ProxiedItemStackHandler;
-import com.kamefrede.rpsideas.tiles.TileCADCase;
-import com.kamefrede.rpsideas.util.RPSDataFixer;
-import com.kamefrede.rpsideas.util.RPSSoundHandler;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
-import com.kamefrede.rpsideas.util.libs.RPSBlockNames;
+import xyz.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.blocks.BlockCADCase;
+import xyz.kamefrede.rpsideas.gui.GuiHandler;
+import xyz.kamefrede.rpsideas.items.base.ProxiedItemStackHandler;
+import xyz.kamefrede.rpsideas.tiles.TileCADCase;
+import xyz.kamefrede.rpsideas.util.RPSDataFixer;
+import xyz.kamefrede.rpsideas.util.RPSSoundHandler;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.util.libs.RPSBlockNames;
 import com.teamwizardry.librarianlib.features.base.block.ItemModBlock;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

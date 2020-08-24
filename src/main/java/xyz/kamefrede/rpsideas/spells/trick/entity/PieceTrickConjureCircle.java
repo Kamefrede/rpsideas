@@ -1,9 +1,9 @@
-package com.kamefrede.rpsideas.spells.trick.entity;
+package xyz.kamefrede.rpsideas.spells.trick.entity;
 
-import com.kamefrede.rpsideas.entity.EntityFancyCircle;
-import com.kamefrede.rpsideas.spells.base.SpellCompilationExceptions;
-import com.kamefrede.rpsideas.spells.base.SpellParams;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.entity.EntityFancyCircle;
+import xyz.kamefrede.rpsideas.spells.base.SpellCompilationExceptions;
+import xyz.kamefrede.rpsideas.spells.base.SpellParams;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import vazkii.psi.api.PsiAPI;

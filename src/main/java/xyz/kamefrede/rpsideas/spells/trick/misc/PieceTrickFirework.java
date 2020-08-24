@@ -1,7 +1,7 @@
-package com.kamefrede.rpsideas.spells.trick.misc;
+package xyz.kamefrede.rpsideas.spells.trick.misc;
 
-import com.kamefrede.rpsideas.entity.EntityPsireworkRocket;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.entity.EntityPsireworkRocket;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import com.teamwizardry.librarianlib.features.helpers.NBTHelper;
 import net.minecraft.entity.item.EntityFireworkRocket;

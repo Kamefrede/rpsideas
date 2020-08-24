@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.spells.enabler;
+package xyz.kamefrede.rpsideas.spells.enabler;
 
 import net.minecraft.item.ItemStack;
 import vazkii.psi.api.cad.ICADComponent;

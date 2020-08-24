@@ -1,8 +1,8 @@
-package com.kamefrede.rpsideas.spells.operator.math;
+package xyz.kamefrede.rpsideas.spells.operator.math;
 
-import com.kamefrede.rpsideas.spells.base.SpellParams;
-import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.spells.base.SpellParams;
+import xyz.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellParam;

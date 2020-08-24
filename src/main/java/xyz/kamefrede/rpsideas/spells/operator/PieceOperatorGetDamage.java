@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.spells.operator;
+package xyz.kamefrede.rpsideas.spells.operator;
 
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.piece.PieceOperator;

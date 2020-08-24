@@ -1,9 +1,9 @@
-package com.kamefrede.rpsideas.items;
+package xyz.kamefrede.rpsideas.items;
 
-import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
-import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
-import com.kamefrede.rpsideas.util.libs.RPSItemNames;
+import xyz.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
+import xyz.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.client.util.ITooltipFlag;

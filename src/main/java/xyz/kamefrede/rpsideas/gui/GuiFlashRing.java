@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.gui;
+package xyz.kamefrede.rpsideas.gui;
 
-import com.kamefrede.rpsideas.network.MessageFlashSync;
+import xyz.kamefrede.rpsideas.network.MessageFlashSync;
 import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import net.minecraft.item.ItemStack;
 import vazkii.psi.api.spell.SpellCompilationException;

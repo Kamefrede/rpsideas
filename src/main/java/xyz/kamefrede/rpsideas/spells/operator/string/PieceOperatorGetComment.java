@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.spells.operator.string;
+package xyz.kamefrede.rpsideas.spells.operator.string;
 
-import com.kamefrede.rpsideas.spells.base.SpellCompilationExceptions;
+import xyz.kamefrede.rpsideas.spells.base.SpellCompilationExceptions;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.piece.PieceOperator;
 

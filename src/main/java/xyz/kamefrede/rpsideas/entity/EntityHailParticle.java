@@ -1,7 +1,7 @@
-package com.kamefrede.rpsideas.entity;
+package xyz.kamefrede.rpsideas.entity;
 
-import com.kamefrede.rpsideas.network.MessageSparkleSphere;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.network.MessageSparkleSphere;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,5 +1,5 @@
-package com.kamefrede.rpsideas.util;
-import com.kamefrede.rpsideas.RPSIdeas;
+package xyz.kamefrede.rpsideas.util;
+import xyz.kamefrede.rpsideas.RPSIdeas;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.fml.common.Mod;
 

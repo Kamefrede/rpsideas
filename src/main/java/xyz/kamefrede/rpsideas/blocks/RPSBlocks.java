@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.blocks;
+package xyz.kamefrede.rpsideas.blocks;
 
-import com.kamefrede.rpsideas.util.libs.RPSBlockNames;
+import xyz.kamefrede.rpsideas.util.libs.RPSBlockNames;
 import com.teamwizardry.librarianlib.features.base.block.BlockMod;
 import net.minecraft.item.EnumDyeColor;
 

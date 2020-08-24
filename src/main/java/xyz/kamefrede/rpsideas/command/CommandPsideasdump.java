@@ -1,7 +1,7 @@
-package com.kamefrede.rpsideas.command;
+package xyz.kamefrede.rpsideas.command;
 
-import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.util.RPSConfigHandler;
+import xyz.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.util.RPSConfigHandler;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;

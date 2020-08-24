@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.rules.ranges.base;
+package xyz.kamefrede.rpsideas.rules.ranges.base;
 
 import javax.annotation.Nonnull;
 import java.util.LinkedHashMap;

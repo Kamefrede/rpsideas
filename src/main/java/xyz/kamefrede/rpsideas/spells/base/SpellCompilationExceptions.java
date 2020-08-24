@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.spells.base;
+package xyz.kamefrede.rpsideas.spells.base;
 
 /**
  * @author WireSegal

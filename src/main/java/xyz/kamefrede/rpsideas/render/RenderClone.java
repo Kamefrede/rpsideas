@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.render;
+package xyz.kamefrede.rpsideas.render;
 
-import com.kamefrede.rpsideas.entity.EntityClone;
+import xyz.kamefrede.rpsideas.entity.EntityClone;
 import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;

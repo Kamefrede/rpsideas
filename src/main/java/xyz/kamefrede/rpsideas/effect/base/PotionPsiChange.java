@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.effect.base;
+package xyz.kamefrede.rpsideas.effect.base;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

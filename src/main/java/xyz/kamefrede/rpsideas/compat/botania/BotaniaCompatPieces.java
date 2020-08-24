@@ -1,9 +1,9 @@
-package com.kamefrede.rpsideas.compat.botania;
+package xyz.kamefrede.rpsideas.compat.botania;
 
-import com.kamefrede.rpsideas.spells.base.RPSPieces;
-import com.kamefrede.rpsideas.spells.trick.botania.PieceTrickBotaniaDrum;
-import com.kamefrede.rpsideas.spells.trick.botania.PieceTrickFormBurst;
-import com.kamefrede.rpsideas.util.libs.RPSPieceNames;
+import xyz.kamefrede.rpsideas.spells.base.RPSPieces;
+import xyz.kamefrede.rpsideas.spells.trick.botania.PieceTrickBotaniaDrum;
+import xyz.kamefrede.rpsideas.spells.trick.botania.PieceTrickFormBurst;
+import xyz.kamefrede.rpsideas.util.libs.RPSPieceNames;
 import net.minecraftforge.fml.common.Optional;
 import vazkii.psi.api.PsiAPI;
 import vazkii.psi.common.lib.LibPieceGroups;

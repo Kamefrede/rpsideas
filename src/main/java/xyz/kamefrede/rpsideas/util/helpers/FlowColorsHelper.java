@@ -1,7 +1,7 @@
-package com.kamefrede.rpsideas.util.helpers;
+package xyz.kamefrede.rpsideas.util.helpers;
 
-import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.items.RPSItems;
+import xyz.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.items.RPSItems;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import com.teamwizardry.librarianlib.features.helpers.NBTHelper;
 import net.minecraft.entity.EntityLivingBase;

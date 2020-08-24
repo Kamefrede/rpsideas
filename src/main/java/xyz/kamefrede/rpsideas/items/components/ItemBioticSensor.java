@@ -1,9 +1,9 @@
-package com.kamefrede.rpsideas.items.components;
+package xyz.kamefrede.rpsideas.items.components;
 
-import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.util.helpers.ClientHelpers;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
-import com.kamefrede.rpsideas.util.libs.RPSItemNames;
+import xyz.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.util.helpers.ClientHelpers;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.item.IItemColorProvider;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import kotlin.jvm.functions.Function2;

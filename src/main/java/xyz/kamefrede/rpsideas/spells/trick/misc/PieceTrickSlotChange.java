@@ -1,8 +1,8 @@
-package com.kamefrede.rpsideas.spells.trick.misc;
+package xyz.kamefrede.rpsideas.spells.trick.misc;
 
-import com.kamefrede.rpsideas.spells.base.SpellCompilationExceptions;
-import com.kamefrede.rpsideas.spells.base.SpellParams;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.spells.base.SpellCompilationExceptions;
+import xyz.kamefrede.rpsideas.spells.base.SpellParams;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.piece.PieceTrick;

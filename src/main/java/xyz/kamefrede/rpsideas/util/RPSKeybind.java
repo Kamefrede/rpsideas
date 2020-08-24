@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.util;
+package xyz.kamefrede.rpsideas.util;
 
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.fml.client.registry.ClientRegistry;

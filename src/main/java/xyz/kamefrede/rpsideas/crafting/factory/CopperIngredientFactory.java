@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.crafting.factory;
+package xyz.kamefrede.rpsideas.crafting.factory;
 
 import com.google.gson.JsonObject;
 import net.minecraft.item.crafting.Ingredient;

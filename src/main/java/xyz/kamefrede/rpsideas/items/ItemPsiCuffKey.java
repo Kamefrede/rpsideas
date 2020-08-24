@@ -1,7 +1,7 @@
-package com.kamefrede.rpsideas.items;
+package xyz.kamefrede.rpsideas.items;
 
-import com.kamefrede.rpsideas.network.MessageCuffSync;
-import com.kamefrede.rpsideas.util.libs.RPSItemNames;
+import xyz.kamefrede.rpsideas.network.MessageCuffSync;
+import xyz.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;

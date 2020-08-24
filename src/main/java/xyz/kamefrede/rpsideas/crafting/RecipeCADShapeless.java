@@ -1,10 +1,10 @@
-package com.kamefrede.rpsideas.crafting;
+package xyz.kamefrede.rpsideas.crafting;
 
 import com.google.common.collect.Maps;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import com.kamefrede.rpsideas.items.base.ICADComponentAcceptor;
+import xyz.kamefrede.rpsideas.items.base.ICADComponentAcceptor;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;

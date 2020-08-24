@@ -1,13 +1,13 @@
-package com.kamefrede.rpsideas.tiles;
+package xyz.kamefrede.rpsideas.tiles;
 
 import com.google.common.collect.Lists;
-import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.rules.ActionRule;
-import com.kamefrede.rpsideas.rules.EnumActionType;
-import com.kamefrede.rpsideas.rules.ISpellRule;
-import com.kamefrede.rpsideas.rules.TrickRule;
-import com.kamefrede.rpsideas.rules.ranges.base.IRange;
-import com.kamefrede.rpsideas.util.libs.RPSBlockNames;
+import xyz.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.rules.ActionRule;
+import xyz.kamefrede.rpsideas.rules.EnumActionType;
+import xyz.kamefrede.rpsideas.rules.ISpellRule;
+import xyz.kamefrede.rpsideas.rules.TrickRule;
+import xyz.kamefrede.rpsideas.rules.ranges.base.IRange;
+import xyz.kamefrede.rpsideas.util.libs.RPSBlockNames;
 import com.teamwizardry.librarianlib.features.autoregister.TileRegister;
 import com.teamwizardry.librarianlib.features.base.block.tile.TileMod;
 import net.minecraft.nbt.NBTTagCompound;

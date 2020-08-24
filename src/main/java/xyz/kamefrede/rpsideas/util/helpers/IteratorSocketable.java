@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.util.helpers;
+package xyz.kamefrede.rpsideas.util.helpers;
 
 import net.minecraft.item.ItemStack;
 import vazkii.psi.api.cad.ISocketableCapability;

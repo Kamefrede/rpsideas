@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.render.elytra;
+package xyz.kamefrede.rpsideas.render.elytra;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;

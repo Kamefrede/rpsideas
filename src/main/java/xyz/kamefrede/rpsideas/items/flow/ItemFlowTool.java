@@ -1,8 +1,8 @@
-package com.kamefrede.rpsideas.items.flow;
+package xyz.kamefrede.rpsideas.items.flow;
 
-import com.kamefrede.rpsideas.items.ItemPsimetalHoe;
-import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
-import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
+import xyz.kamefrede.rpsideas.items.ItemPsimetalHoe;
+import xyz.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
+import xyz.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
 import com.teamwizardry.librarianlib.features.base.item.ItemModTool;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.block.Block;

@@ -1,7 +1,7 @@
-package com.kamefrede.rpsideas.crafting.factory;
+package xyz.kamefrede.rpsideas.crafting.factory;
 
 import com.google.gson.JsonObject;
-import com.kamefrede.rpsideas.util.RPSConfigHandler;
+import xyz.kamefrede.rpsideas.util.RPSConfigHandler;
 import net.minecraft.util.JsonUtils;
 import net.minecraftforge.common.crafting.IConditionFactory;
 import net.minecraftforge.common.crafting.JsonContext;

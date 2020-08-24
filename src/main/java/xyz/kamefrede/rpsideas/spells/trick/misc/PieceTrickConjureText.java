@@ -1,9 +1,9 @@
-package com.kamefrede.rpsideas.spells.trick.misc;
+package xyz.kamefrede.rpsideas.spells.trick.misc;
 
-import com.kamefrede.rpsideas.entity.EntityConjuredText;
-import com.kamefrede.rpsideas.spells.base.SpellParams;
-import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.entity.EntityConjuredText;
+import xyz.kamefrede.rpsideas.spells.base.SpellParams;
+import xyz.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import vazkii.psi.api.PsiAPI;

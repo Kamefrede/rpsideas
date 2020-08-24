@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.spells.operator.block;
+package xyz.kamefrede.rpsideas.spells.operator.block;
 
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;

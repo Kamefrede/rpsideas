@@ -94,21 +94,18 @@ minecraft {
 
 repositories {
     maven {
-        // for Patchouli
-        name "blamejared"
+        name "vazkiismods"
         url "http://maven.blamejared.com/"
     }
     maven {
-        name "curios"
+        name "curiosncaelus"
         url "https://maven.theillusivec4.top/"
     }
     maven {
-        // for JEI
-        name "promwml16"
+        name "jei"
         url "http://dvs1.progwml6.com/files/maven"
     }
     maven {
-        //yarn2mcp
         name "yarn2mcp"
         url "https://maven.tterrag.com"
     }
@@ -130,11 +127,14 @@ dependencies {
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.2-4.0.0.0:api")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.16.2-4.0.0.0")
 
-    compileOnly fg.deobf("vazkii.psi:Psi:1.16-84.255:api")
+    compileOnly fg.deobf("vazkii.psi:Psi:1.16-84.255")
     runtimeOnly fg.deobf("vazkii.psi:Psi:1.16-84.255")
 
-    runtimeOnly fg.deobf("top.theillusivec4.caelus:caelus:1.16.2-2.0.0.0")
-    compileOnly fg.deobf("top.theillusivec4.caelus:caelus:1.16.2-2.0.0.0")
+    compileOnly fg.deobf("vazkii.botania:Botania:1.16.1-404-SNAPSHOT")
+    runtimeOnly fg.deobf("vazkii.botania:Botania:1.16.1-404-SNAPSHOT")
+
+    runtimeOnly fg.deobf("top.theillusivec4.caelus:caelus:FORGE-1.16.1-2.0-beta7")
+    compileOnly fg.deobf("top.theillusivec4.caelus:caelus:FORGE-1.16.1-2.0-beta7")
 
     compileOnly fg.deobf("mezz.jei:jei-1.16.2:7.1.0.11:api")
     runtimeOnly fg.deobf("mezz.jei:jei-1.16.2:7.1.0.11")
@@ -234,7 +234,6 @@ def parseConfig(File config) {
 
 
 jar {
-    //rename the default output, for some better... sanity with scipts
     archiveName = "${baseName} ${version}.${extension}"
 
     manifest {

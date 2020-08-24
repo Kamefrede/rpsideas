@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.crafting;
+package xyz.kamefrede.rpsideas.crafting;
 
-import com.kamefrede.rpsideas.items.components.ItemLiquidColorizer;
+import xyz.kamefrede.rpsideas.items.components.ItemLiquidColorizer;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import com.teamwizardry.librarianlib.features.helpers.NBTHelper;
 import net.minecraft.inventory.InventoryCrafting;

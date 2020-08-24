@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.crafting;
+package xyz.kamefrede.rpsideas.crafting;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;

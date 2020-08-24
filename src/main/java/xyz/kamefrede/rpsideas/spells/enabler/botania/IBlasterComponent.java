@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.spells.enabler.botania;
+package xyz.kamefrede.rpsideas.spells.enabler.botania;
 
-import com.kamefrede.rpsideas.spells.enabler.ITrickEnablerComponent;
+import xyz.kamefrede.rpsideas.spells.enabler.ITrickEnablerComponent;
 import net.minecraft.item.ItemStack;
 import vazkii.psi.api.cad.EnumCADComponent;
 import vazkii.psi.api.cad.ICADAssembly;

@@ -1,10 +1,10 @@
-package com.kamefrede.rpsideas.tiles;
+package xyz.kamefrede.rpsideas.tiles;
 
-import com.kamefrede.rpsideas.blocks.BlockCADCase;
-import com.kamefrede.rpsideas.blocks.RPSBlocks;
-import com.kamefrede.rpsideas.items.ItemGaussRifle;
-import com.kamefrede.rpsideas.render.RenderTileCADCase;
-import com.kamefrede.rpsideas.util.libs.RPSBlockNames;
+import xyz.kamefrede.rpsideas.blocks.BlockCADCase;
+import xyz.kamefrede.rpsideas.blocks.RPSBlocks;
+import xyz.kamefrede.rpsideas.items.ItemGaussRifle;
+import xyz.kamefrede.rpsideas.render.RenderTileCADCase;
+import xyz.kamefrede.rpsideas.util.libs.RPSBlockNames;
 import com.teamwizardry.librarianlib.features.autoregister.TileRegister;
 import com.teamwizardry.librarianlib.features.base.block.tile.TileMod;
 import com.teamwizardry.librarianlib.features.base.block.tile.module.ModuleCapability;

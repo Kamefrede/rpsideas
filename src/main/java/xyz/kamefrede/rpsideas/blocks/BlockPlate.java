@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.blocks;
+package xyz.kamefrede.rpsideas.blocks;
 
 import com.teamwizardry.librarianlib.features.base.block.BlockMod;
 import com.teamwizardry.librarianlib.features.base.block.IBlockColorProvider;

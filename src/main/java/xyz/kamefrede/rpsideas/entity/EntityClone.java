@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.entity;
+package xyz.kamefrede.rpsideas.entity;
 
-import com.kamefrede.rpsideas.util.GameProfileSerializer;
+import xyz.kamefrede.rpsideas.util.GameProfileSerializer;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
 import io.netty.buffer.ByteBuf;

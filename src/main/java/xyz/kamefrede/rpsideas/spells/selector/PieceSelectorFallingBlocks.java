@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.spells.selector;
+package xyz.kamefrede.rpsideas.spells.selector;
 
 import com.google.common.base.Predicate;
 import net.minecraft.entity.Entity;

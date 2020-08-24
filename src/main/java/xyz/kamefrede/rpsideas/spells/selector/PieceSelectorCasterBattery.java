@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.spells.selector;
+package xyz.kamefrede.rpsideas.spells.selector;
 
 import net.minecraft.item.ItemStack;
 import vazkii.psi.api.PsiAPI;

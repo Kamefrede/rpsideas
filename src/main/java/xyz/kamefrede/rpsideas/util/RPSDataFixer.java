@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.util;
+package xyz.kamefrede.rpsideas.util;
 
-import com.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.RPSIdeas;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.datafix.IFixType;
 import net.minecraft.util.datafix.IFixableData;

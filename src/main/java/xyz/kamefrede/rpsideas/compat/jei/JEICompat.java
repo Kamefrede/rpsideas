@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.compat.jei;
+package xyz.kamefrede.rpsideas.compat.jei;
 
-import com.kamefrede.rpsideas.items.RPSItems;
+import xyz.kamefrede.rpsideas.items.RPSItems;
 import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.ISubtypeRegistry;

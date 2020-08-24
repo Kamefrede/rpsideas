@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.render;
+package xyz.kamefrede.rpsideas.render;
 
-import com.kamefrede.rpsideas.entity.EntityConjuredText;
+import xyz.kamefrede.rpsideas.entity.EntityConjuredText;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.BufferBuilder;

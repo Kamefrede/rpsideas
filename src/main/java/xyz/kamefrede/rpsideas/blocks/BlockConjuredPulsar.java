@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.blocks;
+package xyz.kamefrede.rpsideas.blocks;
 
-import com.kamefrede.rpsideas.tiles.TileEthereal;
+import xyz.kamefrede.rpsideas.tiles.TileEthereal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;

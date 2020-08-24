@@ -1,7 +1,7 @@
-package com.kamefrede.rpsideas.util;
+package xyz.kamefrede.rpsideas.util;
 
 import com.google.common.base.Strings;
-import com.kamefrede.rpsideas.util.libs.IStreamSerializer;
+import xyz.kamefrede.rpsideas.util.libs.IStreamSerializer;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import com.mojang.authlib.properties.PropertyMap;

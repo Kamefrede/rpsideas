@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.spells.trick.entity;
+package xyz.kamefrede.rpsideas.spells.trick.entity;
 
-import com.kamefrede.rpsideas.effect.RPSPotions;
+import xyz.kamefrede.rpsideas.effect.RPSPotions;
 import net.minecraft.potion.Potion;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellCompilationException;

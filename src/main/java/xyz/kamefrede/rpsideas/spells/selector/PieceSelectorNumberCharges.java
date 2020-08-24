@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.spells.selector;
+package xyz.kamefrede.rpsideas.spells.selector;
 
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.AxisAlignedBB;
 import vazkii.psi.api.internal.Vector3;

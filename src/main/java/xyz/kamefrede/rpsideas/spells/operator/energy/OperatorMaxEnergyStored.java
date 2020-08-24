@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.spells.operator.energy;
+package xyz.kamefrede.rpsideas.spells.operator.energy;
 
-import com.kamefrede.rpsideas.spells.base.OperatorEnergy;
+import xyz.kamefrede.rpsideas.spells.base.OperatorEnergy;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

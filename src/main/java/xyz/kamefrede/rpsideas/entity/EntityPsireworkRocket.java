@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.entity;
+package xyz.kamefrede.rpsideas.entity;
 
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import com.teamwizardry.librarianlib.features.helpers.NBTHelper;

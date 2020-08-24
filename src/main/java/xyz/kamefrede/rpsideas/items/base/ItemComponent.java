@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.items.base;
+package xyz.kamefrede.rpsideas.items.base;
 
-import com.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.RPSIdeas;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.client.Minecraft;

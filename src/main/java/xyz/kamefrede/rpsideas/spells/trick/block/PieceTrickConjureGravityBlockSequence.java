@@ -1,7 +1,7 @@
-package com.kamefrede.rpsideas.spells.trick.block;
+package xyz.kamefrede.rpsideas.spells.trick.block;
 
-import com.kamefrede.rpsideas.blocks.RPSBlocks;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.blocks.RPSBlocks;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import vazkii.psi.api.internal.Vector3;
@@ -10,7 +10,7 @@ import vazkii.psi.api.spell.param.ParamNumber;
 import vazkii.psi.api.spell.param.ParamVector;
 import vazkii.psi.api.spell.piece.PieceTrick;
 
-import static com.kamefrede.rpsideas.spells.trick.block.PieceTrickConjureEtherealBlockSequence.addBlocksVal;
+import static xyz.kamefrede.rpsideas.spells.trick.block.PieceTrickConjureEtherealBlockSequence.addBlocksVal;
 
 public class PieceTrickConjureGravityBlockSequence extends PieceTrick {
 

@@ -1,8 +1,8 @@
-package com.kamefrede.rpsideas.effect;
+package xyz.kamefrede.rpsideas.effect;
 
 
-import com.kamefrede.rpsideas.effect.base.PotionTypeMod;
-import com.kamefrede.rpsideas.util.libs.RPSItemNames;
+import xyz.kamefrede.rpsideas.effect.base.PotionTypeMod;
+import xyz.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.PotionMod;
 import net.minecraft.potion.PotionEffect;
 

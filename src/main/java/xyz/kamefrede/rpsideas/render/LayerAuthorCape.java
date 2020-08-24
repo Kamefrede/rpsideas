@@ -1,8 +1,8 @@
-package com.kamefrede.rpsideas.render;
+package xyz.kamefrede.rpsideas.render;
 
-import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.items.RPSItems;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.items.RPSItems;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelElytra;
 import net.minecraft.client.renderer.GlStateManager;

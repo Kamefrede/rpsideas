@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.util.helpers;
+package xyz.kamefrede.rpsideas.util.helpers;
 
 import java.util.List;
 import java.util.function.Function;

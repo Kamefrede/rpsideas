@@ -1,9 +1,9 @@
-package com.kamefrede.rpsideas.crafting;
+package xyz.kamefrede.rpsideas.crafting;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import com.kamefrede.rpsideas.items.base.INoCraftingComponent;
+import xyz.kamefrede.rpsideas.items.base.INoCraftingComponent;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

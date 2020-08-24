@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.rules.ranges.base;
+package xyz.kamefrede.rpsideas.rules.ranges.base;
 
 import net.minecraft.nbt.NBTTagString;
 import net.minecraftforge.common.util.INBTSerializable;

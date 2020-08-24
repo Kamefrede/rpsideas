@@ -1,9 +1,9 @@
-package com.kamefrede.rpsideas.items.components;
+package xyz.kamefrede.rpsideas.items.components;
 
-import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.items.base.IRegenerationBattery;
-import com.kamefrede.rpsideas.items.base.ItemComponent;
-import com.kamefrede.rpsideas.util.libs.RPSItemNames;
+import xyz.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.items.base.IRegenerationBattery;
+import xyz.kamefrede.rpsideas.items.base.ItemComponent;
+import xyz.kamefrede.rpsideas.util.libs.RPSItemNames;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.util.ITooltipFlag;

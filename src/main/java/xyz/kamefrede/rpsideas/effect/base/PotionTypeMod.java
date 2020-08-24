@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.effect.base;
+package xyz.kamefrede.rpsideas.effect.base;
 
-import com.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.RPSIdeas;
 import com.teamwizardry.librarianlib.core.common.RegistrationHandler;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;

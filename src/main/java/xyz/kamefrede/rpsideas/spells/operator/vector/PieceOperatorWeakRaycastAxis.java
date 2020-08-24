@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.spells.operator.vector;
+package xyz.kamefrede.rpsideas.spells.operator.vector;
 
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.RayTraceResult;
 import vazkii.psi.api.internal.Vector3;

@@ -1,9 +1,9 @@
-package com.kamefrede.rpsideas.items;
+package xyz.kamefrede.rpsideas.items;
 
-import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.crafting.IngredientCADComponent;
-import com.kamefrede.rpsideas.gui.GuiHandler;
-import com.kamefrede.rpsideas.items.base.ICADComponentAcceptor;
+import xyz.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.crafting.IngredientCADComponent;
+import xyz.kamefrede.rpsideas.gui.GuiHandler;
+import xyz.kamefrede.rpsideas.items.base.ICADComponentAcceptor;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import com.teamwizardry.librarianlib.features.helpers.NBTHelper;

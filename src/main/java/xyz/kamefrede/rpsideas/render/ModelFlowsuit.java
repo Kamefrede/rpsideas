@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.render;
+package xyz.kamefrede.rpsideas.render;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;

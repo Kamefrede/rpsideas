@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.render.serious;
+package xyz.kamefrede.rpsideas.render.serious;
 
-import com.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.RPSIdeas;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;

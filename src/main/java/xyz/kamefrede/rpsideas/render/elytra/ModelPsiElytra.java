@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.render.elytra;
+package xyz.kamefrede.rpsideas.render.elytra;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.util.math.Vec3d;

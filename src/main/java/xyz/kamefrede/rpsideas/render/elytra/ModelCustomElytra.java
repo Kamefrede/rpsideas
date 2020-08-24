@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.render.elytra;
+package xyz.kamefrede.rpsideas.render.elytra;
 
 import com.google.common.collect.Lists;
 import com.teamwizardry.librarianlib.features.animator.Easing;

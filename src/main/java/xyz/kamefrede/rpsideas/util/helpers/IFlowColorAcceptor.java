@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.util.helpers;
+package xyz.kamefrede.rpsideas.util.helpers;
 
 import com.teamwizardry.librarianlib.features.base.item.IGlowingItem;
 import com.teamwizardry.librarianlib.features.base.item.IItemColorProvider;

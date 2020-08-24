@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.spells.enabler;
+package xyz.kamefrede.rpsideas.spells.enabler;
 
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;

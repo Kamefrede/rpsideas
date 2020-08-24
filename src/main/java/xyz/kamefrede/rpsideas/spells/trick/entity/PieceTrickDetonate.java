@@ -1,8 +1,8 @@
-package com.kamefrede.rpsideas.spells.trick.entity;
+package xyz.kamefrede.rpsideas.spells.trick.entity;
 
-import com.kamefrede.rpsideas.spells.enabler.styles.EnumAssemblyStyle;
-import com.kamefrede.rpsideas.spells.enabler.styles.PieceStyledTrick;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.spells.enabler.styles.EnumAssemblyStyle;
+import xyz.kamefrede.rpsideas.spells.enabler.styles.PieceStyledTrick;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.detonator.IDetonationHandler;
 import vazkii.psi.api.spell.param.ParamNumber;

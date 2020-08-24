@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.network;
+package xyz.kamefrede.rpsideas.network;
 
 import com.teamwizardry.librarianlib.features.autoregister.PacketRegister;
 import com.teamwizardry.librarianlib.features.network.PacketBase;

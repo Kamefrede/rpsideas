@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.gui.magazine;
+package xyz.kamefrede.rpsideas.gui.magazine;
 
-import com.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.RPSIdeas;
 import com.teamwizardry.librarianlib.core.client.ClientTickHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;

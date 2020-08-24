@@ -1,10 +1,10 @@
-package com.kamefrede.rpsideas.items.flow;
+package xyz.kamefrede.rpsideas.items.flow;
 
-import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.render.elytra.ICustomElytra;
-import com.kamefrede.rpsideas.render.elytra.ModelCustomElytra;
-import com.kamefrede.rpsideas.render.elytra.ModelElytraChestpiece;
-import com.kamefrede.rpsideas.render.elytra.ModelPsiElytra;
+import xyz.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.render.elytra.ICustomElytra;
+import xyz.kamefrede.rpsideas.render.elytra.ModelCustomElytra;
+import xyz.kamefrede.rpsideas.render.elytra.ModelElytraChestpiece;
+import xyz.kamefrede.rpsideas.render.elytra.ModelPsiElytra;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.client.model.ModelBiped;

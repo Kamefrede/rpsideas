@@ -1,7 +1,7 @@
-package com.kamefrede.rpsideas.crafting;
+package xyz.kamefrede.rpsideas.crafting;
 
-import com.kamefrede.rpsideas.items.RPSItems;
-import com.kamefrede.rpsideas.items.components.ItemIntegratedBattlecaster;
+import xyz.kamefrede.rpsideas.items.RPSItems;
+import xyz.kamefrede.rpsideas.items.components.ItemIntegratedBattlecaster;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -12,7 +12,7 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
 
-import static com.kamefrede.rpsideas.items.components.ItemIntegratedBattlecaster.*;
+import static xyz.kamefrede.rpsideas.items.components.ItemIntegratedBattlecaster.*;
 
 public class RecipeAttachBattlecaster extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 

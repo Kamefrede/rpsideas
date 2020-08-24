@@ -1,8 +1,8 @@
-package com.kamefrede.rpsideas.util.helpers;
+package xyz.kamefrede.rpsideas.util.helpers;
 
 import com.google.common.util.concurrent.ListenableFutureTask;
-import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
+import xyz.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;

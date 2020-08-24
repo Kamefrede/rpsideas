@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.spells.enabler;
+package xyz.kamefrede.rpsideas.spells.enabler;
 
-import com.kamefrede.rpsideas.spells.enabler.ITrickEnablerComponent.EnableResult;
+import xyz.kamefrede.rpsideas.spells.enabler.ITrickEnablerComponent.EnableResult;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;

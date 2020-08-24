@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.spells.operator.block;
+package xyz.kamefrede.rpsideas.spells.operator.block;
 
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntitySign;
 import net.minecraft.util.math.BlockPos;

@@ -1,7 +1,7 @@
-package com.kamefrede.rpsideas.tiles;
+package xyz.kamefrede.rpsideas.tiles;
 
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
-import com.kamefrede.rpsideas.util.libs.RPSBlockNames;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.util.libs.RPSBlockNames;
 import com.teamwizardry.librarianlib.features.autoregister.TileRegister;
 import com.teamwizardry.librarianlib.features.base.block.tile.TileModTickable;
 import com.teamwizardry.librarianlib.features.saving.Save;

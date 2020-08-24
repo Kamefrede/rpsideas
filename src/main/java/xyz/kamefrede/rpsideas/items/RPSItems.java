@@ -1,13 +1,13 @@
-package com.kamefrede.rpsideas.items;
+package xyz.kamefrede.rpsideas.items;
 
-import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.blocks.RPSBlocks;
-import com.kamefrede.rpsideas.compat.botania.BotaniaCompatItems;
-import com.kamefrede.rpsideas.items.base.ItemModRod;
-import com.kamefrede.rpsideas.items.components.*;
-import com.kamefrede.rpsideas.items.flow.*;
-import com.kamefrede.rpsideas.util.libs.RPSBlockNames;
-import com.kamefrede.rpsideas.util.libs.RPSItemNames;
+import xyz.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.blocks.RPSBlocks;
+import xyz.kamefrede.rpsideas.compat.botania.BotaniaCompatItems;
+import xyz.kamefrede.rpsideas.items.base.ItemModRod;
+import xyz.kamefrede.rpsideas.items.components.*;
+import xyz.kamefrede.rpsideas.items.flow.*;
+import xyz.kamefrede.rpsideas.util.libs.RPSBlockNames;
+import xyz.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;
 import com.teamwizardry.librarianlib.features.base.item.ItemModArmor;
 import com.teamwizardry.librarianlib.features.base.item.ItemModSword;

@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.spells.enabler.styles;
+package xyz.kamefrede.rpsideas.spells.enabler.styles;
 
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.piece.PieceTrick;

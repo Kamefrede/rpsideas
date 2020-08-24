@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.spells.selector;
+package xyz.kamefrede.rpsideas.spells.selector;
 
-import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
+import xyz.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import com.teamwizardry.librarianlib.features.helpers.NBTHelper;
 import vazkii.psi.api.exosuit.IPsiEventArmor;

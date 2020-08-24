@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.crafting;
+package xyz.kamefrede.rpsideas.crafting;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

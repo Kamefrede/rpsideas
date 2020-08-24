@@ -1,13 +1,13 @@
-package com.kamefrede.rpsideas.util;
+package xyz.kamefrede.rpsideas.util;
 
-import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.capability.CapabilityTriggerSensor;
-import com.kamefrede.rpsideas.effect.RPSPotions;
-import com.kamefrede.rpsideas.items.base.ICooldownAssembly;
-import com.kamefrede.rpsideas.items.base.IRegenerationBattery;
-import com.kamefrede.rpsideas.network.MessageCastOffHand;
-import com.kamefrede.rpsideas.network.MessageChangeSocketSlot;
-import com.kamefrede.rpsideas.network.MessageCuffSync;
+import xyz.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.capability.CapabilityTriggerSensor;
+import xyz.kamefrede.rpsideas.effect.RPSPotions;
+import xyz.kamefrede.rpsideas.items.base.ICooldownAssembly;
+import xyz.kamefrede.rpsideas.items.base.IRegenerationBattery;
+import xyz.kamefrede.rpsideas.network.MessageCastOffHand;
+import xyz.kamefrede.rpsideas.network.MessageChangeSocketSlot;
+import xyz.kamefrede.rpsideas.network.MessageCuffSync;
 import com.teamwizardry.librarianlib.features.base.PotionMod;
 import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import net.minecraft.client.Minecraft;

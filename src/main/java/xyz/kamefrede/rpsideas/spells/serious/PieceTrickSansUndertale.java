@@ -1,9 +1,9 @@
-package com.kamefrede.rpsideas.spells.serious;
+package xyz.kamefrede.rpsideas.spells.serious;
 
-import com.kamefrede.rpsideas.spells.base.SpellCompilationExceptions;
-import com.kamefrede.rpsideas.spells.base.SpellParams;
-import com.kamefrede.rpsideas.util.RPSSoundHandler;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.spells.base.SpellCompilationExceptions;
+import xyz.kamefrede.rpsideas.spells.base.SpellParams;
+import xyz.kamefrede.rpsideas.util.RPSSoundHandler;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;

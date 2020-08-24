@@ -1,11 +1,11 @@
-package com.kamefrede.rpsideas.spells.trick.botania;
+package xyz.kamefrede.rpsideas.spells.trick.botania;
 
-import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.entity.botania.EntityPsiManaBurst;
-import com.kamefrede.rpsideas.spells.base.SpellParams;
-import com.kamefrede.rpsideas.spells.enabler.PieceComponentTrick;
-import com.kamefrede.rpsideas.spells.enabler.botania.IManaTrick;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.entity.botania.EntityPsiManaBurst;
+import xyz.kamefrede.rpsideas.spells.base.SpellParams;
+import xyz.kamefrede.rpsideas.spells.enabler.PieceComponentTrick;
+import xyz.kamefrede.rpsideas.spells.enabler.botania.IManaTrick;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;

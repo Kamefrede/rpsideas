@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.spells.trick.misc;
+package xyz.kamefrede.rpsideas.spells.trick.misc;
 
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;

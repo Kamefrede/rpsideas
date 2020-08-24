@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.compat.tcon;
+package xyz.kamefrede.rpsideas.compat.tcon;
 
-import com.kamefrede.rpsideas.items.RPSItems;
+import xyz.kamefrede.rpsideas.items.RPSItems;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

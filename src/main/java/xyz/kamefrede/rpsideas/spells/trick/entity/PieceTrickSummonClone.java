@@ -1,8 +1,8 @@
-package com.kamefrede.rpsideas.spells.trick.entity;
+package xyz.kamefrede.rpsideas.spells.trick.entity;
 
-import com.kamefrede.rpsideas.entity.EntityClone;
-import com.kamefrede.rpsideas.spells.base.SpellParams;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.entity.EntityClone;
+import xyz.kamefrede.rpsideas.spells.base.SpellParams;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.util.math.Vec3d;
 import vazkii.psi.api.internal.Vector3;

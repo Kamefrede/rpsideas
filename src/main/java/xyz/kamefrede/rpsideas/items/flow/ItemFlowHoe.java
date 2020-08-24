@@ -1,7 +1,7 @@
-package com.kamefrede.rpsideas.items.flow;
+package xyz.kamefrede.rpsideas.items.flow;
 
-import com.kamefrede.rpsideas.items.ItemPsimetalHoe;
-import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
+import xyz.kamefrede.rpsideas.items.ItemPsimetalHoe;
+import xyz.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
 import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;

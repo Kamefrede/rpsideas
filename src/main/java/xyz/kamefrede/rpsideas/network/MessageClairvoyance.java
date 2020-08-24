@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.network;
+package xyz.kamefrede.rpsideas.network;
 
-import com.kamefrede.rpsideas.render.EntityPlayerSeer;
+import xyz.kamefrede.rpsideas.render.EntityPlayerSeer;
 import com.teamwizardry.librarianlib.features.autoregister.PacketRegister;
 import com.teamwizardry.librarianlib.features.network.PacketBase;
 import com.teamwizardry.librarianlib.features.saving.Save;

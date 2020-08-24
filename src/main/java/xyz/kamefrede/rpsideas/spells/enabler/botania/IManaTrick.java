@@ -1,7 +1,7 @@
-package com.kamefrede.rpsideas.spells.enabler.botania;
+package xyz.kamefrede.rpsideas.spells.enabler.botania;
 
-import com.kamefrede.rpsideas.spells.enabler.IComponentPiece;
-import com.kamefrede.rpsideas.spells.enabler.ITrickEnablerComponent;
+import xyz.kamefrede.rpsideas.spells.enabler.IComponentPiece;
+import xyz.kamefrede.rpsideas.spells.enabler.ITrickEnablerComponent;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Optional;
 import vazkii.botania.api.mana.ManaItemHandler;

@@ -1,11 +1,11 @@
-package com.kamefrede.rpsideas.spells.operator.string;
+package xyz.kamefrede.rpsideas.spells.operator.string;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.UncheckedExecutionException;
-import com.kamefrede.rpsideas.spells.base.SpellCompilationExceptions;
-import com.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
+import xyz.kamefrede.rpsideas.spells.base.SpellCompilationExceptions;
+import xyz.kamefrede.rpsideas.spells.base.SpellRuntimeExceptions;
 import com.udojava.evalex.Expression;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;

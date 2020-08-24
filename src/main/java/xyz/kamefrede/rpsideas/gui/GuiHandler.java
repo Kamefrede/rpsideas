@@ -1,12 +1,12 @@
-package com.kamefrede.rpsideas.gui;
+package xyz.kamefrede.rpsideas.gui;
 
-import com.kamefrede.rpsideas.gui.cadcase.ContainerCADCase;
-import com.kamefrede.rpsideas.gui.cadcase.GuiCADCase;
-import com.kamefrede.rpsideas.gui.magazine.ContainerCADMagazine;
-import com.kamefrede.rpsideas.gui.magazine.GUICADMagazine;
-import com.kamefrede.rpsideas.items.ItemCADMagazine;
-import com.kamefrede.rpsideas.items.ItemFlashRing;
-import com.kamefrede.rpsideas.items.blocks.ItemCADCase;
+import xyz.kamefrede.rpsideas.gui.cadcase.ContainerCADCase;
+import xyz.kamefrede.rpsideas.gui.cadcase.GuiCADCase;
+import xyz.kamefrede.rpsideas.gui.magazine.ContainerCADMagazine;
+import xyz.kamefrede.rpsideas.gui.magazine.GUICADMagazine;
+import xyz.kamefrede.rpsideas.items.ItemCADMagazine;
+import xyz.kamefrede.rpsideas.items.ItemFlashRing;
+import xyz.kamefrede.rpsideas.items.blocks.ItemCADCase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;

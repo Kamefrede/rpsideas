@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.compat.tcon;
+package xyz.kamefrede.rpsideas.compat.tcon;
 
-import com.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.RPSIdeas;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;

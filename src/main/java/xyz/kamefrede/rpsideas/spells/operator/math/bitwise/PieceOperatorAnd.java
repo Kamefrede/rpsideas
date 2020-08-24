@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.spells.operator.math.bitwise;
+package xyz.kamefrede.rpsideas.spells.operator.math.bitwise;
 
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextFormatting;
 import vazkii.psi.api.internal.TooltipHelper;

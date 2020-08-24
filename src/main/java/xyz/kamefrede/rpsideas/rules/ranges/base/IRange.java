@@ -1,7 +1,7 @@
-package com.kamefrede.rpsideas.rules.ranges.base;
+package xyz.kamefrede.rpsideas.rules.ranges.base;
 
-import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.rules.ranges.EnumRangeType;
+import xyz.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.rules.ranges.EnumRangeType;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.math.BlockPos;

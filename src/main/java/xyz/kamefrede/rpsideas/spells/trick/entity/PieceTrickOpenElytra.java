@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.spells.trick.entity;
+package xyz.kamefrede.rpsideas.spells.trick.entity;
 
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.item.ItemElytra;
 import net.minecraft.item.ItemStack;
 import vazkii.psi.api.spell.Spell;

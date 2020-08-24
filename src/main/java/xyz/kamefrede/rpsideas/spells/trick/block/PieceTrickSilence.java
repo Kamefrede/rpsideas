@@ -1,9 +1,9 @@
-package com.kamefrede.rpsideas.spells.trick.block;
+package xyz.kamefrede.rpsideas.spells.trick.block;
 
-import com.kamefrede.rpsideas.network.MessageAddSilencedBlock;
-import com.kamefrede.rpsideas.spells.base.SpellCompilationExceptions;
-import com.kamefrede.rpsideas.spells.base.SpellParams;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.network.MessageAddSilencedBlock;
+import xyz.kamefrede.rpsideas.spells.base.SpellCompilationExceptions;
+import xyz.kamefrede.rpsideas.spells.base.SpellParams;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;

@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.spells.base;
+package xyz.kamefrede.rpsideas.spells.base;
 
 public final class SpellParams {
     public static final String GENERIC_NAME_ROOT = "rpsideas.spellparam.root";

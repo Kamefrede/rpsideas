@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.entity.botania;
+package xyz.kamefrede.rpsideas.entity.botania;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

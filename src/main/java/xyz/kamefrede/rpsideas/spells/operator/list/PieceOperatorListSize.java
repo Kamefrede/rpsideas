@@ -1,7 +1,7 @@
-package com.kamefrede.rpsideas.spells.operator.list;
+package xyz.kamefrede.rpsideas.spells.operator.list;
 
-import com.kamefrede.rpsideas.spells.base.SpellParams;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.spells.base.SpellParams;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamEntityListWrapper;
 import vazkii.psi.api.spell.piece.PieceOperator;

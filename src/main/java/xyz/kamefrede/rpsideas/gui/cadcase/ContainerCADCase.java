@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.gui.cadcase;
+package xyz.kamefrede.rpsideas.gui.cadcase;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

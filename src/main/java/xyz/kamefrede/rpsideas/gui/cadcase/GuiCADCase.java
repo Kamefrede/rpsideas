@@ -1,7 +1,7 @@
-package com.kamefrede.rpsideas.gui.cadcase;
+package xyz.kamefrede.rpsideas.gui.cadcase;
 
-import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.blocks.BlockCADCase;
+import xyz.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.blocks.BlockCADCase;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;

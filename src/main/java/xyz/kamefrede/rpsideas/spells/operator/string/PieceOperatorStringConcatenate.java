@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.spells.operator.string;
+package xyz.kamefrede.rpsideas.spells.operator.string;
 
-import com.kamefrede.rpsideas.spells.base.SpellParams;
+import xyz.kamefrede.rpsideas.spells.base.SpellParams;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellParam;

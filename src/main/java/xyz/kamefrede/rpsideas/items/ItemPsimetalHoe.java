@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.items;
+package xyz.kamefrede.rpsideas.items;
 
 import com.google.common.collect.Multimap;
 import com.teamwizardry.librarianlib.features.base.item.ItemMod;

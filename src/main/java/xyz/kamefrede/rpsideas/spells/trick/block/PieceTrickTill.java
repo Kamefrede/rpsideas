@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.spells.trick.block;
+package xyz.kamefrede.rpsideas.spells.trick.block;
 
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.util.EnumActionResult;

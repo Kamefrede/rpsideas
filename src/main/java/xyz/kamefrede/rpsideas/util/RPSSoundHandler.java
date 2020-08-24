@@ -1,7 +1,7 @@
-package com.kamefrede.rpsideas.util;
+package xyz.kamefrede.rpsideas.util;
 
 
-import com.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.RPSIdeas;
 import com.teamwizardry.librarianlib.features.base.ModSoundEvent;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.SoundEvent;

@@ -1,8 +1,8 @@
-package com.kamefrede.rpsideas.blocks;
+package xyz.kamefrede.rpsideas.blocks;
 
-import com.kamefrede.rpsideas.items.blocks.ItemCADCase;
-import com.kamefrede.rpsideas.tiles.TileCADCase;
-import com.kamefrede.rpsideas.util.RPSSoundHandler;
+import xyz.kamefrede.rpsideas.items.blocks.ItemCADCase;
+import xyz.kamefrede.rpsideas.tiles.TileCADCase;
+import xyz.kamefrede.rpsideas.util.RPSSoundHandler;
 import com.teamwizardry.librarianlib.features.base.block.tile.BlockModContainer;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.block.Block;

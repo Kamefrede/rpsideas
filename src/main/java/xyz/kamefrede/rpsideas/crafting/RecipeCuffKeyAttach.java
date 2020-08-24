@@ -1,7 +1,7 @@
-package com.kamefrede.rpsideas.crafting;
+package xyz.kamefrede.rpsideas.crafting;
 
-import com.kamefrede.rpsideas.items.ItemPsiCuffKey;
-import com.kamefrede.rpsideas.items.ItemPsiCuffs;
+import xyz.kamefrede.rpsideas.items.ItemPsiCuffKey;
+import xyz.kamefrede.rpsideas.items.ItemPsiCuffs;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import com.teamwizardry.librarianlib.features.helpers.NBTHelper;
 import net.minecraft.inventory.InventoryCrafting;

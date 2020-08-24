@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.spells.operator.entity;
+package xyz.kamefrede.rpsideas.spells.operator.entity;
 
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.entity.EntityLivingBase;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;

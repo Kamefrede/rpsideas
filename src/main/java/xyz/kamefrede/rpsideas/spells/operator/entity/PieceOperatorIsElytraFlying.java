@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.spells.operator.entity;
+package xyz.kamefrede.rpsideas.spells.operator.entity;
 
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;

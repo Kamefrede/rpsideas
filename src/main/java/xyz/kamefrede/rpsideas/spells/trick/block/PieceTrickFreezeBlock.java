@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.spells.trick.block;
+package xyz.kamefrede.rpsideas.spells.trick.block;
 
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDynamicLiquid;
 import net.minecraft.block.BlockSnow;

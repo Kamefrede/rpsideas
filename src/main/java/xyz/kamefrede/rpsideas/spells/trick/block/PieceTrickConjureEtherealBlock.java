@@ -1,8 +1,8 @@
-package com.kamefrede.rpsideas.spells.trick.block;
+package xyz.kamefrede.rpsideas.spells.trick.block;
 
-import com.kamefrede.rpsideas.blocks.RPSBlocks;
-import com.kamefrede.rpsideas.tiles.TileEthereal;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.blocks.RPSBlocks;
+import xyz.kamefrede.rpsideas.tiles.TileEthereal;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

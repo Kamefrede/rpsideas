@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.util.libs;
+package xyz.kamefrede.rpsideas.util.libs;
 
 import net.minecraft.network.PacketBuffer;
 

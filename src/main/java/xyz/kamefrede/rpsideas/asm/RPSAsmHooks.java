@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.asm;
+package xyz.kamefrede.rpsideas.asm;
 
-import com.kamefrede.rpsideas.render.elytra.ICustomElytra;
+import xyz.kamefrede.rpsideas.render.elytra.ICustomElytra;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 

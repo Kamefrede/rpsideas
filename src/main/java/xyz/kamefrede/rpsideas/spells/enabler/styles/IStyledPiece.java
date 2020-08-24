@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.spells.enabler.styles;
+package xyz.kamefrede.rpsideas.spells.enabler.styles;
 
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;
 import net.minecraft.client.resources.I18n;

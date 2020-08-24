@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.rules.ranges;
+package xyz.kamefrede.rpsideas.rules.ranges;
 
-import com.kamefrede.rpsideas.rules.ranges.base.AbstractRange;
+import xyz.kamefrede.rpsideas.rules.ranges.base.AbstractRange;
 import net.minecraft.util.math.BlockPos;
 
 import javax.annotation.Nonnull;

@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.compat.tcon;
+package xyz.kamefrede.rpsideas.compat.tcon;
 
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import com.teamwizardry.librarianlib.features.helpers.NBTHelper;
@@ -21,7 +21,7 @@ import vazkii.psi.api.spell.SpellContext;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import static com.kamefrede.rpsideas.compat.tcon.RPSTinkersCompat.isPsionic;
+import static xyz.kamefrede.rpsideas.compat.tcon.RPSTinkersCompat.isPsionic;
 
 
 public class TinkersToolCapability implements ISpellAcceptor, ISocketableCapability, IPsiBarDisplay, ICapabilityProvider {

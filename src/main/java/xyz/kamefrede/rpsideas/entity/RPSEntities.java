@@ -1,12 +1,12 @@
-package com.kamefrede.rpsideas.entity;
+package xyz.kamefrede.rpsideas.entity;
 
-import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.entity.botania.EntityPsiManaBurst;
-import com.kamefrede.rpsideas.render.RenderClone;
-import com.kamefrede.rpsideas.render.RenderConjuredText;
-import com.kamefrede.rpsideas.render.RenderFancyCircle;
-import com.kamefrede.rpsideas.render.RenderHailParticle;
-import com.kamefrede.rpsideas.util.libs.RPSEntityNames;
+import xyz.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.entity.botania.EntityPsiManaBurst;
+import xyz.kamefrede.rpsideas.render.RenderClone;
+import xyz.kamefrede.rpsideas.render.RenderConjuredText;
+import xyz.kamefrede.rpsideas.render.RenderFancyCircle;
+import xyz.kamefrede.rpsideas.render.RenderHailParticle;
+import xyz.kamefrede.rpsideas.util.libs.RPSEntityNames;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.entity.Entity;

@@ -1,7 +1,7 @@
-package com.kamefrede.rpsideas.items.flow;
+package xyz.kamefrede.rpsideas.items.flow;
 
-import com.kamefrede.rpsideas.items.ItemPsimetalRod;
-import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
+import xyz.kamefrede.rpsideas.items.ItemPsimetalRod;
+import xyz.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
 
 /**
  * @author WireSegal

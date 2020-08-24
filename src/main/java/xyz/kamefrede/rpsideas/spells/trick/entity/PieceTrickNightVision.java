@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.spells.trick.entity;
+package xyz.kamefrede.rpsideas.spells.trick.entity;
 
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.Potion;

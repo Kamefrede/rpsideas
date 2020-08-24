@@ -1,8 +1,8 @@
-package com.kamefrede.rpsideas.entity;
+package xyz.kamefrede.rpsideas.entity;
 
-import com.kamefrede.rpsideas.effect.RPSPotions;
-import com.kamefrede.rpsideas.items.RPSItems;
-import com.kamefrede.rpsideas.network.MessageSparkleSphere;
+import xyz.kamefrede.rpsideas.effect.RPSPotions;
+import xyz.kamefrede.rpsideas.items.RPSItems;
+import xyz.kamefrede.rpsideas.network.MessageSparkleSphere;
 import com.teamwizardry.librarianlib.features.network.PacketHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

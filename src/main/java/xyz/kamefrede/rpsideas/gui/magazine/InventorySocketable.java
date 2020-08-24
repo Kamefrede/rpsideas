@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.gui.magazine;
+package xyz.kamefrede.rpsideas.gui.magazine;
 
-import com.kamefrede.rpsideas.util.helpers.IteratorSocketable;
+import xyz.kamefrede.rpsideas.util.helpers.IteratorSocketable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;

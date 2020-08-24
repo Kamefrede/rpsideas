@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.spells.constant;
+package xyz.kamefrede.rpsideas.spells.constant;
 
 import vazkii.psi.api.spell.*;
 

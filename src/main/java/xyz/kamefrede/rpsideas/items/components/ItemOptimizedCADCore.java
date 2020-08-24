@@ -1,8 +1,8 @@
-package com.kamefrede.rpsideas.items.components;
+package xyz.kamefrede.rpsideas.items.components;
 
-import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.items.base.ItemComponent;
-import com.kamefrede.rpsideas.util.libs.RPSItemNames;
+import xyz.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.items.base.ItemComponent;
+import xyz.kamefrede.rpsideas.util.libs.RPSItemNames;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 import vazkii.psi.api.cad.EnumCADComponent;

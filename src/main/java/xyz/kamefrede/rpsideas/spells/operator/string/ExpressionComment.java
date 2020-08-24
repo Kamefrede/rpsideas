@@ -1,7 +1,7 @@
-package com.kamefrede.rpsideas.spells.operator.string;
+package xyz.kamefrede.rpsideas.spells.operator.string;
 
-import com.kamefrede.rpsideas.util.RPSMethodHandles;
-import com.kamefrede.rpsideas.util.helpers.Selector;
+import xyz.kamefrede.rpsideas.util.RPSMethodHandles;
+import xyz.kamefrede.rpsideas.util.helpers.Selector;
 import com.udojava.evalex.Expression;
 
 import java.math.BigDecimal;

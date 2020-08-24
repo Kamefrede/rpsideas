@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.util.libs;
+package xyz.kamefrede.rpsideas.util.libs;
 
 public class RPSBlockNames {
 

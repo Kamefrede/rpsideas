@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.compat.botania;
+package xyz.kamefrede.rpsideas.compat.botania;
 
 /**
  * @author WireSegal

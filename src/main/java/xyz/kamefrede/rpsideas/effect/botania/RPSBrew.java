@@ -1,7 +1,7 @@
-package com.kamefrede.rpsideas.effect.botania;
+package xyz.kamefrede.rpsideas.effect.botania;
 
 import com.google.common.collect.Lists;
-import com.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.RPSIdeas;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionUtils;
 import vazkii.botania.api.BotaniaAPI;

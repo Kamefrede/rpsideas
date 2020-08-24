@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.spells.operator.math.bitwise;
+package xyz.kamefrede.rpsideas.spells.operator.math.bitwise;
 
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import vazkii.psi.api.spell.Spell;
 import vazkii.psi.api.spell.SpellContext;
 import vazkii.psi.api.spell.SpellParam;

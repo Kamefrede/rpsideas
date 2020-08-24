@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.asm;
+package xyz.kamefrede.rpsideas.asm;
 
 import net.minecraft.launchwrapper.IClassTransformer;
 import org.apache.logging.log4j.LogManager;

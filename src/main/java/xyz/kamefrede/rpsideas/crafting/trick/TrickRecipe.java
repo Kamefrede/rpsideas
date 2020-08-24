@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.crafting.trick;
+package xyz.kamefrede.rpsideas.crafting.trick;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;

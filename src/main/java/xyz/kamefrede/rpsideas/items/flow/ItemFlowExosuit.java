@@ -1,10 +1,10 @@
-package com.kamefrede.rpsideas.items.flow;
+package xyz.kamefrede.rpsideas.items.flow;
 
-import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.render.ModelFlowsuit;
-import com.kamefrede.rpsideas.util.helpers.ClientHelpers;
-import com.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
-import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
+import xyz.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.render.ModelFlowsuit;
+import xyz.kamefrede.rpsideas.util.helpers.ClientHelpers;
+import xyz.kamefrede.rpsideas.util.helpers.FlowColorsHelper;
+import xyz.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
 import com.teamwizardry.librarianlib.features.base.item.ItemModArmor;
 import com.teamwizardry.librarianlib.features.helpers.NBTHelper;
 import com.teamwizardry.librarianlib.features.utilities.client.TooltipHelper;

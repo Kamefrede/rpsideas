@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.blocks;
+package xyz.kamefrede.rpsideas.blocks;
 
-import com.kamefrede.rpsideas.tiles.TileConjuredPulsar;
+import xyz.kamefrede.rpsideas.tiles.TileConjuredPulsar;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;

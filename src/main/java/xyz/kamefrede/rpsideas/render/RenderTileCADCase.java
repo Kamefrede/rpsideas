@@ -1,7 +1,7 @@
-package com.kamefrede.rpsideas.render;
+package xyz.kamefrede.rpsideas.render;
 
-import com.kamefrede.rpsideas.blocks.BlockCADCase;
-import com.kamefrede.rpsideas.tiles.TileCADCase;
+import xyz.kamefrede.rpsideas.blocks.BlockCADCase;
+import xyz.kamefrede.rpsideas.tiles.TileCADCase;
 import com.teamwizardry.librarianlib.features.tesr.TileRenderHandler;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;

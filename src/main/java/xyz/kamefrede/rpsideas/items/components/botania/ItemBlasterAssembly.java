@@ -1,12 +1,12 @@
-package com.kamefrede.rpsideas.items.components.botania;
+package xyz.kamefrede.rpsideas.items.components.botania;
 
-import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.items.base.ItemComponent;
-import com.kamefrede.rpsideas.spells.enabler.botania.EnumManaTier;
-import com.kamefrede.rpsideas.spells.enabler.botania.IBlasterComponent;
-import com.kamefrede.rpsideas.spells.enabler.botania.IManaTrick;
-import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
-import com.kamefrede.rpsideas.util.libs.RPSItemNames;
+import xyz.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.items.base.ItemComponent;
+import xyz.kamefrede.rpsideas.spells.enabler.botania.EnumManaTier;
+import xyz.kamefrede.rpsideas.spells.enabler.botania.IBlasterComponent;
+import xyz.kamefrede.rpsideas.spells.enabler.botania.IManaTrick;
+import xyz.kamefrede.rpsideas.util.helpers.SpellHelpers;
+import xyz.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.IExtraVariantHolder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;

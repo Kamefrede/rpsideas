@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.compat.botania;
+package xyz.kamefrede.rpsideas.compat.botania;
 
 import com.google.gson.JsonObject;
 import net.minecraftforge.common.crafting.IConditionFactory;

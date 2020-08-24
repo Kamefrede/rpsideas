@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.items;
+package xyz.kamefrede.rpsideas.items;
 
-import com.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
+import xyz.kamefrede.rpsideas.util.helpers.IFlowColorAcceptor;
 
 
 public class ItemFlowShield extends ItemPsimetalShield implements IFlowColorAcceptor {

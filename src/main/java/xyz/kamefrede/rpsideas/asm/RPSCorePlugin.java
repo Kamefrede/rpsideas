@@ -1,13 +1,13 @@
-package com.kamefrede.rpsideas.asm;
+package xyz.kamefrede.rpsideas.asm;
 
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 
 import java.util.Map;
 
-//-Dfml.coreMods.load=com.kamefrede.rpsideas.asm.RPSCorePlugin
+//-Dfml.coreMods.load=xyz.kamefrede.rpsideas.asm.RPSCorePlugin
 
 @IFMLLoadingPlugin.Name("RPSIdeas Plugin")
-@IFMLLoadingPlugin.TransformerExclusions("com.kamefrede.rpsideas.asm")
+@IFMLLoadingPlugin.TransformerExclusions("xyz.kamefrede.rpsideas.asm")
 @IFMLLoadingPlugin.SortingIndex(1001) // After runtime deobfuscation
 public class RPSCorePlugin implements IFMLLoadingPlugin {
 
@@ -16,7 +16,7 @@ public class RPSCorePlugin implements IFMLLoadingPlugin {
     @Override
     public String[] getASMTransformerClass() {
         return new String[]{
-                "com.kamefrede.rpsideas.asm.RPSTransformer"
+                "xyz.kamefrede.rpsideas.asm.RPSTransformer"
         };
     }
 

@@ -1,10 +1,10 @@
-package com.kamefrede.rpsideas.items.components;
+package xyz.kamefrede.rpsideas.items.components;
 
-import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.items.RPSItems;
-import com.kamefrede.rpsideas.items.base.ICADComponentAcceptor;
-import com.kamefrede.rpsideas.items.base.ItemComponent;
-import com.kamefrede.rpsideas.util.libs.RPSItemNames;
+import xyz.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.items.RPSItems;
+import xyz.kamefrede.rpsideas.items.base.ICADComponentAcceptor;
+import xyz.kamefrede.rpsideas.items.base.ItemComponent;
+import xyz.kamefrede.rpsideas.util.libs.RPSItemNames;
 import com.teamwizardry.librarianlib.features.base.item.IItemColorProvider;
 import com.teamwizardry.librarianlib.features.helpers.ItemNBTHelper;
 import com.teamwizardry.librarianlib.features.helpers.NBTHelper;

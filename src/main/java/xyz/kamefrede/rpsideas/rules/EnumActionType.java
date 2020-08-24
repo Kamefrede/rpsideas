@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.rules;
+package xyz.kamefrede.rpsideas.rules;
 
 import com.google.common.collect.Maps;
 

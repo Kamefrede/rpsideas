@@ -1,7 +1,7 @@
-package com.kamefrede.rpsideas.gui.magazine;
+package xyz.kamefrede.rpsideas.gui.magazine;
 
-import com.kamefrede.rpsideas.RPSIdeas;
-import com.kamefrede.rpsideas.items.ItemCADMagazine;
+import xyz.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.items.ItemCADMagazine;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;

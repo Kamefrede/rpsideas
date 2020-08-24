@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.util.helpers;
+package xyz.kamefrede.rpsideas.util.helpers;
 
 import com.teamwizardry.librarianlib.core.client.ClientTickHandler;
 import net.minecraft.item.ItemStack;

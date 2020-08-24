@@ -1,4 +1,4 @@
-package com.kamefrede.rpsideas.util;
+package xyz.kamefrede.rpsideas.util;
 
 import net.minecraft.util.math.BlockPos;
 

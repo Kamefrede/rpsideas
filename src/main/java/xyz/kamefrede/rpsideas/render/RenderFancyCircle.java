@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.render;
+package xyz.kamefrede.rpsideas.render;
 
-import com.kamefrede.rpsideas.entity.EntityFancyCircle;
+import xyz.kamefrede.rpsideas.entity.EntityFancyCircle;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;

@@ -1,6 +1,6 @@
-package com.kamefrede.rpsideas.util.libs;
+package xyz.kamefrede.rpsideas.util.libs;
 
-import com.kamefrede.rpsideas.RPSIdeas;
+import xyz.kamefrede.rpsideas.RPSIdeas;
 
 public class RPSPieceNames {
 
