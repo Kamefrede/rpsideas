@@ -5,12 +5,18 @@ import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.BlockLog;
+import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.BlockPistonExtension;
+import net.minecraft.block.BlockSilverfish;
+import net.minecraft.block.material.EnumPushReaction;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.BlockStateLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BlockEvent;
 import vazkii.psi.api.spell.*;
@@ -37,7 +43,7 @@ public class PieceTrickRotateBlock extends PieceTrick {
                 Block block = state.getBlock();
                 if (prop.getValueClass() == BlockLog.EnumAxis.class) {
 
-                    if (!(block instanceof BlockBed) && !(block instanceof BlockPistonExtension)) {
+                    if (canRotate(block, state, world, pos)) {
                         IBlockState axState;
                         IProperty<BlockLog.EnumAxis> axisProp = (IProperty<BlockLog.EnumAxis>) prop;
                         axState = state.withProperty(axisProp, BlockLog.EnumAxis.fromFacingAxis(axis.getAxis()));
@@ -47,7 +53,7 @@ public class PieceTrickRotateBlock extends PieceTrick {
 
                     }
                 }
-                if (!(block instanceof BlockBed) && !(block instanceof BlockPistonExtension)) {
+                if (canRotate(block, state, world, pos)) {
                     IBlockState newState;
                     IProperty<EnumFacing> facingProperty = (IProperty<EnumFacing>) prop;
                     Collection<EnumFacing> validFacings = facingProperty.getAllowedValues();
@@ -101,5 +107,27 @@ public class PieceTrickRotateBlock extends PieceTrick {
         rotateBlock(world, pos, facing);
         return null;
 
+    }
+    
+    private static boolean canRotate(Block block, IBlockState blockStateIn, World worldIn, BlockPos pos ){
+    	if (blockStateIn.getMaterial() == Material.PISTON)
+        {
+    		if(block instanceof BlockPistonBase && !((Boolean)blockStateIn.getValue(BlockPistonBase.EXTENDED)).booleanValue())
+    			return true;
+    		else 
+    			return false;
+        }
+
+        if (blockStateIn.getBlockHardness(worldIn, pos) == -1.0F)
+        {
+            return false;
+        }
+
+        if (blockStateIn.getMaterial().getPushReaction() == EnumPushReaction.DESTROY)
+        {
+            return false;
+        }
+        return true;
+        
     }
 }

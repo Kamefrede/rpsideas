@@ -101,11 +101,10 @@ public class PotionFlashbang extends PotionMod {
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public static void renderOverlayAndCancelSubtitles(RenderGameOverlayEvent.Pre e) {
+    	float opacity = Math.min(RPSPotions.flash.opacity, 1);
         if (e.getType() == RenderGameOverlayEvent.ElementType.SUBTITLES)
-            e.setCanceled(true);
+            e.setCanceled(opacity > 0);
         else if (e.getType() == RenderGameOverlayEvent.ElementType.ALL) {
-            float opacity = Math.min(RPSPotions.flash.opacity, 1);
-
             if (opacity > 0) {
                 ScaledResolution res = e.getResolution();
                 double h = res.getScaledHeight();

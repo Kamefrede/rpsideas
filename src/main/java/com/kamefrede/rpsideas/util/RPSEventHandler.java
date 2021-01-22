@@ -142,7 +142,7 @@ public class RPSEventHandler {
 
     @SubscribeEvent
     public static void cuffedCastEvent(PreSpellCastEvent event) {
-        if (event.getPlayerData().getCustomData().getBoolean("rpsideas:cuffed") && !event.getPlayer().world.isRemote) {
+        if (event.getPlayerData().getCustomData() != null && event.getPlayerData().getCustomData().getBoolean("rpsideas:cuffed") && !event.getPlayer().world.isRemote) {
             event.setCancellationMessage("rpsideas.cancellation.cuffed");
             event.setCanceled(true);
             event.setCooldown(40);
