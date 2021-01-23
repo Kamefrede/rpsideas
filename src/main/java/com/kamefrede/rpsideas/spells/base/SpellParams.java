@@ -36,4 +36,5 @@ public final class SpellParams {
     public static final String CONNECTOR_NAME_FROM2 = "rpsideas.spellparam.from2";
     public static final String CONNECTOR_NAME_TO1 = "rpsideas.spellparam.to1";
     public static final String CONNECTOR_NAME_TO2 = "rpsideas.spellparam.to2";
+    public static final String CONNECTOR_NAME_tar = "rpsideas.spellparam.tar";
 }

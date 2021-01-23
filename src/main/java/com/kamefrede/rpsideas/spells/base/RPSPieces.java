@@ -4,6 +4,7 @@ package com.kamefrede.rpsideas.spells.base;
 import com.kamefrede.rpsideas.RPSIdeas;
 import com.kamefrede.rpsideas.compat.botania.BotaniaCompatPieces;
 import com.kamefrede.rpsideas.spells.PieceCrossConnector;
+import com.kamefrede.rpsideas.spells.PieceInOut;
 import com.kamefrede.rpsideas.spells.PieceVectorCatch;
 import com.kamefrede.rpsideas.spells.constant.PieceConstantTau;
 import com.kamefrede.rpsideas.spells.operator.PieceOperatorGetDamage;
@@ -170,6 +171,8 @@ public class RPSPieces {
 
         registerNoTexture(PieceCrossConnector.class, RPSPieceNames.CROSS_CONNECTOR, LibPieceGroups.FLOW_CONTROL);
         registerTexture(RPSPieceNames.CROSS_CONNECTOR, LibMisc.MOD_ID, LibPieceNames.CONNECTOR);
+        registerNoTexture(PieceInOut.class, RPSPieceNames.IN_OUT_CONNECTOR, LibPieceGroups.FLOW_CONTROL);
+        registerTexture(RPSPieceNames.IN_OUT_CONNECTOR, LibMisc.MOD_ID, LibPieceNames.CONNECTOR);
         //register(PieceTrickSummonClone.class, RPSPieceNames.PIECE_SUMMON_CLONE, LibPieceGroups.FLOW_CONTROL);
 
         new BotaniaCompatPieces().run();
