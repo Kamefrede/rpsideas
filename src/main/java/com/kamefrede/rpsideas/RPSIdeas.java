@@ -20,11 +20,13 @@ import com.kamefrede.rpsideas.util.RPSKeybindHandler;
 import com.kamefrede.rpsideas.util.RPSSoundHandler;
 import com.teamwizardry.librarianlib.core.client.GlowingHandler;
 import com.teamwizardry.librarianlib.features.base.item.IGlowingItem;
+import com.teamwizardry.librarianlib.features.base.item.IShieldItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerElytra;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ModFixs;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
@@ -41,7 +43,7 @@ import vazkii.psi.common.item.base.ModItems;
 import java.util.List;
 import java.util.Map;
 
-
+@Mod.EventBusSubscriber(modid = RPSIdeas.MODID)
 @Mod(modid = RPSIdeas.MODID, name = RPSIdeas.NAME, version = RPSIdeas.VERSION, dependencies = "after:botania;before:tconstruct;required-after:psi@[r1.1-76,);required-after:librarianlib;required-after:forge@[14.23.5.2795,);", useMetadata = true)
 public class RPSIdeas {
 
@@ -96,6 +98,7 @@ public class RPSIdeas {
         RPSEntities.init();
 
         NetworkRegistry.INSTANCE.registerGuiHandler(RPSIdeas.INSTANCE, new GuiHandler());
+        MinecraftForge.EVENT_BUS.register(IShieldItem.class);
     }
 
     //TConstruct
