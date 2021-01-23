@@ -40,7 +40,7 @@ public class PieceInOut extends SpellPiece implements IGenericRedirector {
     public void initParams() {
         addParam(in = new ParamAny(SpellParams.CONNECTOR_NAME_FROM1, LINE_ONE, false));
         addParam(out = new ParamAny(SpellParams.CONNECTOR_NAME_TO1, LINE_ONE, false));
-        addParam(tar = new ParamAny(SpellParams.CONNECTOR_NAME_FROM2, LINE_TWO, false));
+        addParam(tar = new ParamAny(SpellParams.CONNECTOR_NAME_tar, LINE_TWO, false));
     }
 
     @Override
