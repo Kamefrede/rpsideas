@@ -108,8 +108,12 @@ public class SpellHelpers {
     }
 
     public static Vector3 checkPos(SpellPiece piece, SpellContext context, SpellParam param, boolean nonnull, boolean check, boolean shouldBeAxial) throws SpellRuntimeException {
+    	return checkPos(piece, context, param, true, check, shouldBeAxial, false);
+    }
+    
+    public static Vector3 checkPos(SpellPiece piece, SpellContext context, SpellParam param, boolean nonnull, boolean check, boolean shouldBeAxial, boolean nonnZero) throws SpellRuntimeException {
         Vector3 position = piece.getParamValue(context, param);
-        if (nonnull && (position == null || position.isZero()))
+        if ((nonnull && (position == null)) || (nonnZero && position.isZero()))
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
         if (check && !context.isInRadius(position))
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
