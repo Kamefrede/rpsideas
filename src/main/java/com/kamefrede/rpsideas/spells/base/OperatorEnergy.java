@@ -36,7 +36,7 @@ public abstract class OperatorEnergy extends PieceOperator {
 
         BlockPos pos = SpellHelpers.getBlockPos(this, context, position);
 
-        EnumFacing facing = SpellHelpers.getFacing(this, context, axis, null);
+        EnumFacing facing = SpellHelpers.getFacing(this, context, axis, EnumFacing.getDirectionFromEntityLiving(context.caster.getPosition(), context.caster).getOpposite());
 
         World world = context.caster.world;
 
