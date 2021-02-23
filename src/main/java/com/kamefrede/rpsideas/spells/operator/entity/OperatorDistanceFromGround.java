@@ -39,17 +39,17 @@ public class OperatorDistanceFromGround extends PieceOperator {
 
         Chunk chunk = world.getChunk(pos);
         BlockPos pointer = new BlockPos(pos.getX(), Math.min(chunk.getTopFilledSegment() + 16, pos.getY()), pos.getZ());
+        
+        if (targetVal.y < 0)
+            throw new SpellRuntimeException(SpellRuntimeException.NEGATIVE_NUMBER);
+        else
+        	while (pointer.getY() >= 0) {
+        		pointer = pointer.down();
+        		IBlockState state = chunk.getBlockState(pointer);
 
-        while (pointer.getY() > 0) {
-            pointer = pointer.down();
-            IBlockState state = chunk.getBlockState(pointer);
-
-            if (state.getBlockFaceShape(world, pointer, EnumFacing.UP) == BlockFaceShape.SOLID)
-                break;
-        }
-
-        if (pointer.getY() <= 0)
-            throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
+        		if (state.getBlockFaceShape(world, pointer, EnumFacing.UP) == BlockFaceShape.SOLID)
+        			break;
+        	}
 
         return targetVal.y - (pointer.getY() + 1);
     }

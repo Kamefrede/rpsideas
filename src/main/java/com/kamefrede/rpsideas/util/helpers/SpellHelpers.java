@@ -94,6 +94,10 @@ public class SpellHelpers {
     public static Vector3 getVector3(SpellPiece piece, SpellContext context, SpellParam param, boolean nonnull, boolean check, boolean shouldBeAxial) throws SpellRuntimeException {
         return checkPos(piece, context, param, nonnull, check, shouldBeAxial);
     }
+    
+    public static Vector3 getVector3(SpellPiece piece, SpellContext context, SpellParam param, boolean nonnull, boolean check, boolean shouldBeAxial, boolean nonnZero) throws SpellRuntimeException {
+    	return checkPos(piece, context, param, nonnull, check, shouldBeAxial, nonnZero);
+    }
 
     public static BlockPos getBlockPos(SpellPiece piece, SpellContext context, SpellParam param, boolean check, boolean shouldBeAxial) throws SpellRuntimeException {
         return checkPos(piece, context, param, check, shouldBeAxial).toBlockPos();
@@ -101,6 +105,10 @@ public class SpellHelpers {
 
     public static BlockPos getBlockPos(SpellPiece piece, SpellContext context, SpellParam param, boolean nonnull, boolean check, boolean shouldBeAxial) throws SpellRuntimeException {
         return checkPos(piece, context, param, nonnull, check, shouldBeAxial).toBlockPos();
+    }
+    
+    public static BlockPos getBlockPos(SpellPiece piece, SpellContext context, SpellParam param, boolean nonnull, boolean check, boolean shouldBeAxial, boolean nonnZero) throws SpellRuntimeException {
+    	return checkPos(piece, context, param, nonnull, check, shouldBeAxial, nonnZero).toBlockPos();
     }
 
     public static Vector3 checkPos(SpellPiece piece, SpellContext context, SpellParam param, boolean check, boolean shouldBeAxial) throws SpellRuntimeException {
