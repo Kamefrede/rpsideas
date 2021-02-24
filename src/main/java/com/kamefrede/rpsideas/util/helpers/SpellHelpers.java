@@ -94,6 +94,10 @@ public class SpellHelpers {
     public static Vector3 getVector3(SpellPiece piece, SpellContext context, SpellParam param, boolean nonnull, boolean check, boolean shouldBeAxial) throws SpellRuntimeException {
         return checkPos(piece, context, param, nonnull, check, shouldBeAxial);
     }
+    
+    public static Vector3 getVector3(SpellPiece piece, SpellContext context, SpellParam param, boolean nonnull, boolean check, boolean shouldBeAxial, boolean nonnZero) throws SpellRuntimeException {
+    	return checkPos(piece, context, param, nonnull, check, shouldBeAxial, nonnZero);
+    }
 
     public static BlockPos getBlockPos(SpellPiece piece, SpellContext context, SpellParam param, boolean check, boolean shouldBeAxial) throws SpellRuntimeException {
         return checkPos(piece, context, param, check, shouldBeAxial).toBlockPos();
@@ -102,14 +106,22 @@ public class SpellHelpers {
     public static BlockPos getBlockPos(SpellPiece piece, SpellContext context, SpellParam param, boolean nonnull, boolean check, boolean shouldBeAxial) throws SpellRuntimeException {
         return checkPos(piece, context, param, nonnull, check, shouldBeAxial).toBlockPos();
     }
+    
+    public static BlockPos getBlockPos(SpellPiece piece, SpellContext context, SpellParam param, boolean nonnull, boolean check, boolean shouldBeAxial, boolean nonnZero) throws SpellRuntimeException {
+    	return checkPos(piece, context, param, nonnull, check, shouldBeAxial, nonnZero).toBlockPos();
+    }
 
     public static Vector3 checkPos(SpellPiece piece, SpellContext context, SpellParam param, boolean check, boolean shouldBeAxial) throws SpellRuntimeException {
         return checkPos(piece, context, param, true, check, shouldBeAxial);
     }
 
     public static Vector3 checkPos(SpellPiece piece, SpellContext context, SpellParam param, boolean nonnull, boolean check, boolean shouldBeAxial) throws SpellRuntimeException {
+    	return checkPos(piece, context, param, nonnull, check, shouldBeAxial, false);
+    }
+    
+    public static Vector3 checkPos(SpellPiece piece, SpellContext context, SpellParam param, boolean nonnull, boolean check, boolean shouldBeAxial, boolean nonnZero) throws SpellRuntimeException {
         Vector3 position = piece.getParamValue(context, param);
-        if (nonnull && (position == null || position.isZero()))
+        if ((nonnull && (position == null)) || (nonnZero && position.isZero()))
             throw new SpellRuntimeException(SpellRuntimeException.NULL_VECTOR);
         if (check && !context.isInRadius(position))
             throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
@@ -134,10 +146,18 @@ public class SpellHelpers {
     }
 
     public static EnumFacing getFacing(SpellPiece piece, SpellContext context, SpellParam param, EnumFacing def) throws SpellRuntimeException {
-        Vector3 face = getVector3(piece, context, param, true, false, true);
-        if (face == null)
-            return def;
-        return EnumFacing.getFacingFromVector((float) face.x, (float) face.y, (float) face.z);
+        try {
+        	Vector3 face = getVector3(piece, context, param, true, false, true);
+        	return EnumFacing.getFacingFromVector((float) face.x, (float) face.y, (float) face.z);
+        }
+        catch(SpellRuntimeException e){
+        	if(e.getMessage() != "psi.spellerror.nullvector")
+        		throw new SpellRuntimeException(e.getMessage());
+        	return def;
+        }
+       
+            
+        
     }
 
     public static boolean isBlockPosInRadius(SpellContext context, BlockPos pos) {

@@ -43,11 +43,11 @@ public class PieceTrickClairvoyance extends PieceTrick {
 
     @Override
     public Object execute(SpellContext context) throws SpellRuntimeException {
-        int time = (int) SpellHelpers.getNumber(this, context, this.time, 0);
+        double time = SpellHelpers.getNumber(this, context, this.time, 0);
         Vector3 ray = SpellHelpers.getVector3(this, context, this.ray).normalize();
         Vec3d trueRay = ray.multiply(SpellHelpers.getBoundedNumber(this, context, distance, SpellContext.MAX_DISTANCE)).toVec3D();
 
-        PacketHandler.NETWORK.sendTo(new MessageClairvoyance(time * 20, trueRay), (EntityPlayerMP) context.caster);
+        PacketHandler.NETWORK.sendTo(new MessageClairvoyance((int)(time * 20), trueRay), (EntityPlayerMP) context.caster);
 
         return null;
     }
