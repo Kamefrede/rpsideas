@@ -30,13 +30,13 @@ public class PieceOperatorClosestToLine extends PieceOperator {
         addParam(rayStartParam = new ParamVector(SpellParams.GENERIC_NAME_RAY_START, SpellParam.RED, false, false));
         addParam(rayEndParam = new ParamVector(SpellParams.GENERIC_NAME_RAY_END, SpellParam.BLUE, false, false));
         addParam(entList = new ParamEntityListWrapper(SpellParams.GENERIC_NAME_LIST, SpellParam.GREEN, false, false));
-        addParam(length = new ParamNumber(SpellParam.GENERIC_NAME_MAX, SpellParam.CYAN, true, true));
+//        addParam(length = new ParamNumber(SpellParam.GENERIC_NAME_MAX, SpellParam.CYAN, true, true));
     }
 
     @Override
     public void addToMetadata(SpellMetadata meta) throws SpellCompilationException {
         super.addToMetadata(meta);
-        SpellHelpers.ensurePositiveAndNonzero(this, length, SpellContext.MAX_DISTANCE);
+//        SpellHelpers.ensurePositiveAndNonzero(this, length, SpellContext.MAX_DISTANCE);
     }
 
     @Override
@@ -44,7 +44,8 @@ public class PieceOperatorClosestToLine extends PieceOperator {
         Vector3 rayStart = SpellHelpers.getVector3(this, context, rayStartParam, false, false);
         Vector3 rayEnd = SpellHelpers.getVector3(this, context, rayEndParam, false, false);
 
-        double maxLength = SpellHelpers.getBoundedNumber(this, context, length, SpellContext.MAX_DISTANCE);
+//        double maxLength = SpellHelpers.getBoundedNumber(this, context, length, SpellContext.MAX_DISTANCE);
+        double maxLength = MathHelper.clamp(Math.sqrt((rayStart.x - rayEnd.x) * (rayStart.x - rayEnd.x) + (rayStart.y - rayEnd.y) * (rayStart.y - rayEnd.y) + (rayStart.z - rayEnd.z) * (rayStart.z - rayEnd.z)), 0, SpellContext.MAX_DISTANCE);
 
         Vec3d origin = rayStart.toVec3D();
         Vec3d rayVector = rayEnd.toVec3D().subtract(origin);
