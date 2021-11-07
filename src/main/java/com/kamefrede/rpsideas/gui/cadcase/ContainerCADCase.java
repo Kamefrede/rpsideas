@@ -62,7 +62,7 @@ public class ContainerCADCase extends Container {
         playerArmorBegin = inventorySlots.size();
         for (EntityEquipmentSlot slot : EntityEquipmentSlot.values())
             if (slot.getSlotType() == EntityEquipmentSlot.Type.ARMOR)
-                addSlotToContainer(new Slot(playerInv, 39 - slot.getIndex(), xMin - 27, yMin + 18 * slot.getIndex()) {
+                addSlotToContainer(new Slot(playerInv, 36 + slot.getIndex(), xMin - 27, yMin + 18 * (3 - slot.getIndex())) {
                     @Override
                     public int getSlotStackLimit() {
                         return 1;
