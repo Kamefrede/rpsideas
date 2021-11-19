@@ -23,9 +23,12 @@ import com.teamwizardry.librarianlib.features.base.item.IGlowingItem;
 import com.teamwizardry.librarianlib.features.base.item.IShieldItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderArmorStand;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerElytra;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
+import net.minecraft.entity.item.EntityArmorStand;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ModFixs;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -80,8 +83,13 @@ public class RPSIdeas {
         }
     }
 
-
-
+    @SideOnly(Side.CLIENT)
+    private static void injectLayers(RenderArmorStand render) {
+        if (render != null) {
+            render.addLayer(new ExosuitGlowLayer(render));
+            render.addLayer(new LayerCustomElytra(render));
+        }
+    }
 
 
     @Mod.EventHandler
@@ -153,6 +161,8 @@ public class RPSIdeas {
         Map<String, RenderPlayer> skinMap = Minecraft.getMinecraft().getRenderManager().getSkinMap();
         injectLayers(skinMap.get("default"));
         injectLayers(skinMap.get("slim"));
+        Render<EntityArmorStand> entityRenderMap = Minecraft.getMinecraft().getRenderManager().getEntityClassRenderObject(EntityArmorStand.class);
+        injectLayers((RenderArmorStand)entityRenderMap);
     }
 
 
