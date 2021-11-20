@@ -1,0 +1,24 @@
+{
+  "result": {
+    "item": "rpsideas:psimetal_elytra"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "MMM",
+    "GEG",
+    "G G"
+  ],
+  "key": {
+    "M": {
+      "type": "forge:ore_dict",
+      "ore": "ingotPsi"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "gemPsi"
+    },
+    "E": {
+      "item": "minecraft:elytra"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "rpsideas:ivory_shield"
+  },
+  "type": "rpsideas:socket_transfer",
+  "ingredients": [
+    {
+      "item": "rpsideas:psimetal_shield"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "dustGlowstone"
+    },
+    {
+      "type": "forge:ore_dict",
+      "ore": "ingotIvoryPsi"
+    }
+  ]
+}

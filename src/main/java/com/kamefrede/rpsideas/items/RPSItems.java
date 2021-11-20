@@ -78,7 +78,7 @@ public class RPSItems {
     public static final ItemMod overvoltedCadAssembly = new ItemOvervoltedEbonyAssembly();
     public static final ItemMod undervoltedCadAssembly = new ItemUndervoltedEbonyAssembly();
 
-    public static final ItemMod elytra = new ItemPsiElytra(RPSItemNames.PSIMETAL_ELYTRA, 432);
+    //public static final ItemMod elytra = new ItemPsiElytra(RPSItemNames.PSIMETAL_ELYTRA, 432);
     //public static final ItemMod braceletCad = new ItemBraceletCAD();
 
     static {
