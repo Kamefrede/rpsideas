@@ -34,7 +34,7 @@ public class MessageChangeSocketSlot extends PacketBase {
     public void handle(@Nonnull MessageContext context) {
         EntityPlayerMP player = context.getServerHandler().player;
         ItemStack mainhand = player.getHeldItemMainhand();
-        ItemStack offhand = player.getHeldItemMainhand();
+        ItemStack offhand = player.getHeldItemOffhand();
         PlayerDataHandler.PlayerData data = PlayerDataHandler.get(player);
         boolean isSneaking = player.isSneaking();
 

@@ -29,6 +29,7 @@ public class RPSItemNames {
     public static final String KEYPAD = "keypad";
     public static final String PSI_CUFFS = "psi_cuffs";
     public static final String PSI_CUFF_KEY = "psi_cuff_key";
+    public static final String PSIMETAL_ELYTRA = "psimetal_elytra";
     public static final String PSIMETAL_SHIELD = "psimetal_shield";
     public static final String IVORY_SHIELD = "ivory_shield";
     public static final String EBONY_SHIELD = "ebony_shield";

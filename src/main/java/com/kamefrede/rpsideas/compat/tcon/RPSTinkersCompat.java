@@ -96,7 +96,7 @@ public class RPSTinkersCompat {
 
         @Override
         public boolean canApply(ItemStack itemStack, ItemStack itemStack1) throws TinkerGuiException {
-            if (!TinkerUtil.hasModifier(TagUtil.getTagSafe(itemStack), parent.getIdentifier())) {
+            if (!TinkerUtil.hasModifier(TagUtil.getTagSafe(itemStack), parent.getIdentifier()) && itemStack != itemStack1) {
                 String error = I18n.format("rpsideas.gui.error.no_socketable");
                 throw new TinkerGuiException(error);
             }

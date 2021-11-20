@@ -237,7 +237,7 @@ public class ItemCADMagazine extends ItemMod implements ISocketable, ICADCompone
 
                     boolean bandwidthMatch = magBandwidth < 0 || magBandwidth >= bandwidthRequired;
 
-                    if (cadSockets >= socketsRequired && magSockets >= socketsRequired && bandwidthMatch) {
+                    if ((cadSockets >= socketsRequired || cadSockets == -1) && (magSockets >= socketsRequired || magSockets == -1) && bandwidthMatch) {
                         NonNullList<ItemStack> tempInventory = NonNullList.create();
                         for (int i = 0; i < socketsRequired && isSocketSlotAvailable(mag, i); i++)
                             tempInventory.add(getBulletInSocket(mag, i));

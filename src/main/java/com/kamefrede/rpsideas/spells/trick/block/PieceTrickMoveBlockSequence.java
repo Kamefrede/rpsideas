@@ -6,11 +6,12 @@ import com.kamefrede.rpsideas.util.helpers.SpellHelpers;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BlockEvent;
+import vazkii.psi.api.PsiAPI;
 import vazkii.psi.api.internal.Vector3;
 import vazkii.psi.api.spell.*;
 import vazkii.psi.api.spell.param.ParamNumber;
@@ -53,7 +54,9 @@ public class PieceTrickMoveBlockSequence extends PieceTrick {
         Vector3 directionVal = SpellHelpers.getVector3(this, context, direction, false, true);
         Vector3 positionVal = SpellHelpers.getVector3(this, context, position, true, false);
         Vector3 targetVal = SpellHelpers.getVector3(this, context, target, false, false);
-        double maxBlocksVal = SpellHelpers.getNumber(this, context, maxBlocks, 0);
+        Double maxBlocksVal = SpellHelpers.getNumber(this, context, maxBlocks, 0);
+        
+        boolean radius = false;
 
 
         Map<BlockPos, IBlockState> toSet = Maps.newHashMap();
@@ -64,7 +67,7 @@ public class PieceTrickMoveBlockSequence extends PieceTrick {
         Vector3 targetNorm = targetVal.copy().normalize();
 
 
-        for (int i = 0; i < Math.min(len, maxBlocksVal); i++) {
+        for (int i = Math.min(len, maxBlocksVal.intValue()) -1; i >= 0; i--) {
             Vector3 blockVec = positionVal.copy().add(targetNorm.copy().multiply(i));
 
             World world = context.caster.world;
@@ -76,19 +79,25 @@ public class PieceTrickMoveBlockSequence extends PieceTrick {
 
             if (MinecraftForge.EVENT_BUS.post(event))
                 continue;
+            
+            if(!context.isInRadius(blockVec)) {
+            	radius = true;
+            	continue;
+            }
 
+            ItemStack tool = context.tool;
+    		if (tool.isEmpty())
+    			tool = PsiAPI.getPlayerCAD(context.caster);
 
-            if (world.getTileEntity(pos) != null ||
-                    state.getPushReaction() != EnumPushReaction.NORMAL ||
-                    !block.canSilkHarvest(world, pos, state, context.caster) ||
-                    state.getPlayerRelativeBlockHardness(context.caster, world, pos) <= 0 ||
-                    !ForgeHooks.canHarvestBlock(block, context.caster, world, pos))
+            if(world.getTileEntity(pos) != null || state.getPushReaction() != EnumPushReaction.NORMAL ||
+    				!block.canSilkHarvest(world, pos, state, context.caster) ||
+    				state.getPlayerRelativeBlockHardness(context.caster, world, pos) <= 0 ||
+    				!vazkii.psi.common.spell.trick.block.PieceTrickBreakBlock.canHarvestBlock(block, context.caster, world, pos, tool))
                 continue;
 
 
 
             BlockPos pushToPos = pos.add(directNorm.x, directNorm.y, directNorm.z);
-            BlockPos nextPos = pos.add(targetNorm.x, targetNorm.y, targetNorm.z);
             IBlockState pushToState = world.getBlockState(pushToPos);
 
             if (!world.isBlockModifiable(context.caster, pos) ||
@@ -96,11 +105,10 @@ public class PieceTrickMoveBlockSequence extends PieceTrick {
                 continue;
 
 
-            if (y > 256 || y < 1) continue;
+            if (pushToPos.getY() > 256 || pushToPos.getY() < 1) continue;
 
 
             if (world.isAirBlock(pushToPos) ||
-                    (nextPos.equals(pushToPos) && i + 1 < Math.min(len, maxBlocksVal)) ||
                     pushToState.getBlock().isReplaceable(world, pushToPos)) {
                 world.setBlockToAir(pos);
                 world.playEvent(2001, pos, Block.getStateId(state));
@@ -111,6 +119,8 @@ public class PieceTrickMoveBlockSequence extends PieceTrick {
         for (Map.Entry<BlockPos, IBlockState> pairToSet : toSet.entrySet())
             context.caster.world.setBlockState(pairToSet.getKey(), pairToSet.getValue());
 
+        if(radius)
+        	throw new SpellRuntimeException(SpellRuntimeException.OUTSIDE_RADIUS);
         return null;
     }
 }
